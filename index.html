@@ -2,335 +2,1592 @@
 <html lang="ne">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <meta name="theme-color" content="#0b0a14" />
-    <meta name="description" content="Astro Tiwari — सरल, व्यक्तिगत र संवेदनशील वैदिक ज्योतिष मार्गदर्शन।" />
-    <meta property="og:title" content="Astro Tiwari — तपाईंको भविष्य, तपाईंको रोजाइमा" />
-    <meta property="og:description" content="जन्मकुण्डली, विवाह मिलान र व्यक्तिगत ज्योतिषीय guidance का लागि Astro Tiwari सँग जोडिनुहोस्।" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+    <meta name="theme-color" content="#FAF8F5" />
+    <meta name="description" content="Astro Tiwari — सरल, व्यक्तिगत र संवेदनशील वैदिक ज्योतिष मार्गदर्शन। आफ्नो जन्मकुण्डली, विवाह, करियर र भविष्यको सही बाटो पहिल्याउनुहोस्।" />
+    <meta property="og:title" content="Astro Tiwari — वैदिक ज्योतिषमा स्पष्टता र शान्ति" />
+    <meta property="og:description" content="पंडित आयुष तिवारीबाट व्यक्तिगत जन्मकुण्डली विश्लेषण, विवाह मिलान र ग्रह शान्ति उपाय प्राप्त गर्नुहोस्।" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Astro Tiwari" />
-    <meta name="twitter:card" content="summary" />
+
+    <!-- Google Fonts for Sacred Vedic Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <title>Astro Tiwari — ज्योतिषमा स्पष्टता</title>
-    <script type="module" crossorigin src="/assets/index-ChgpL9kq.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DpdlmGVI.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <title>Astro Tiwari — वैदिक ज्योतिषमा स्पष्टता र मार्गदर्शन</title>
+    <link rel="stylesheet" href="/assets/style-tokens.css" />
+
     <style>
-      /* Quick Admin Portal access badge in bottom left */
-      .admin-corner-link {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        z-index: 999;
-        background: rgba(22, 17, 34, 0.9);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(216, 176, 106, 0.3);
-        color: #d8b06a;
-        padding: 8px 14px;
-        border-radius: 999px;
-        font-size: 11px;
+      /* --- Global Resets & Typography --- */
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        background-color: var(--color-bg-base);
+        color: var(--color-text-primary);
+        font-family: var(--font-sans);
+        line-height: 1.6;
+      }
+      a { text-decoration: none; color: inherit; }
+      button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+
+      /* --- Auspicious Top Announcement Bar --- */
+      .top-sacred-bar {
+        background: linear-gradient(90deg, #991B1B 0%, #B45309 50%, #991B1B 100%);
+        color: #FFFDF7;
+        font-size: 12px;
         font-weight: 600;
-        text-decoration: none;
+        padding: 6px 16px;
+        text-align: center;
+        letter-spacing: 0.3px;
         display: flex;
         align-items: center;
-        gap: 6px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-        transition: all 0.2s ease;
+        justify-content: center;
+        gap: 12px;
+        box-shadow: 0 2px 8px rgba(153, 27, 27, 0.15);
       }
-      .admin-corner-link:hover {
-        background: rgba(216, 176, 106, 0.2);
-        color: #fff;
-        border-color: #d8b06a;
-        transform: translateY(-2px);
+      .top-sacred-bar a {
+        color: #FEF3C7;
+        text-decoration: underline;
+        font-weight: 700;
       }
-      .pay-corner-link {
-        position: fixed;
-        bottom: 20px;
-        left: 140px;
-        z-index: 999;
-        background: #00875a;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        color: #fff;
+
+      /* --- Navigation Bar --- */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(250, 248, 245, 0.94);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(217, 119, 6, 0.15);
+        padding: 12px 24px;
+        transition: all 0.3s ease;
+      }
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand-emblem {
+        width: 44px;
+        height: 44px;
+        background: radial-gradient(circle, #F59E0B 0%, #D97706 70%, #B45309 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFF;
+        font-size: 22px;
+        font-family: var(--font-serif);
+        font-weight: 800;
+        box-shadow: 0 4px 15px rgba(217, 119, 6, 0.35);
+        border: 2px solid #FEF3C7;
+      }
+      .brand-title {
+        font-family: var(--font-serif);
+        font-size: 22px;
+        font-weight: 700;
+        color: #991B1B;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+      }
+      .brand-subtitle {
+        font-size: 11px;
+        color: var(--color-primary);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .nav-link {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-text-secondary);
+        transition: color 0.2s ease;
+      }
+      .nav-link:hover { color: var(--color-primary); }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn-nav-pay {
+        background: #FEF3C7;
+        color: #B45309;
+        border: 1px solid rgba(217, 119, 6, 0.3);
         padding: 8px 16px;
         border-radius: 999px;
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 700;
-        text-decoration: none;
         display: flex;
         align-items: center;
         gap: 6px;
-        box-shadow: 0 4px 15px rgba(0, 135, 90, 0.4);
         transition: all 0.2s ease;
       }
-      .pay-corner-link:hover {
-        background: #006644;
+      .btn-nav-pay:hover {
+        background: #FDE68A;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
+      }
+      .btn-primary-cta {
+        background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+        color: #FFF;
+        padding: 9px 20px;
+        border-radius: 999px;
+        font-size: 13.5px;
+        font-weight: 700;
+        box-shadow: 0 4px 16px rgba(217, 119, 6, 0.3);
+        transition: all 0.2s ease;
+      }
+      .btn-primary-cta:hover {
+        background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 135, 90, 0.55);
+        box-shadow: 0 6px 20px rgba(217, 119, 6, 0.4);
       }
 
-      /* Interactive Payment Amount Badges */
-      .payment-amounts {
-        cursor: pointer;
+      /* --- Hero Section (Sacred Light Vibes) --- */
+      .hero-section {
         position: relative;
+        padding: 60px 24px 70px;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 10%, rgba(254, 243, 199, 0.6) 0%, rgba(250, 248, 245, 0) 65%);
       }
-      .payment-amounts::after {
-        content: '👆 कुनै पनि प्याकेजमा क्लिक गरी तुरुन्त भुक्तानी गर्नुहोस्';
-        display: block;
-        grid-column: 1 / -1;
-        font-size: 11px;
-        color: #d8b06a;
+      .hero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #FEF3C7;
+        border: 1px solid rgba(217, 119, 6, 0.3);
+        color: #B45309;
+        font-size: 12.5px;
+        font-weight: 700;
+        padding: 5px 14px;
+        border-radius: 999px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(217, 119, 6, 0.08);
+      }
+      .hero-title {
+        font-family: var(--font-serif);
+        font-size: 46px;
+        font-weight: 800;
+        color: #1C1917;
+        line-height: 1.22;
+        margin-bottom: 18px;
+        letter-spacing: -0.01em;
+      }
+      .hero-title span {
+        color: #991B1B;
+        background: linear-gradient(135deg, #991B1B 0%, #D97706 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-description {
+        font-size: 16.5px;
+        color: var(--color-text-secondary);
+        line-height: 1.7;
+        margin-bottom: 28px;
+        max-width: 580px;
+      }
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+      }
+      .btn-hero-primary {
+        background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+        color: #FFF;
+        font-size: 15.5px;
+        font-weight: 700;
+        padding: 14px 28px;
+        border-radius: 999px;
+        box-shadow: 0 8px 24px rgba(217, 119, 6, 0.35);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.25s ease;
+      }
+      .btn-hero-primary:hover {
+        background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(217, 119, 6, 0.45);
+      }
+      .btn-hero-secondary {
+        background: #FFF;
+        color: #059669;
+        border: 1.5px solid #059669;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 13px 24px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 12px rgba(5, 150, 105, 0.08);
+        transition: all 0.25s ease;
+      }
+      .btn-hero-secondary:hover {
+        background: #ECFDF5;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(5, 150, 105, 0.15);
+      }
+      .hero-trust-row {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        font-size: 12.5px;
+        color: var(--color-text-muted);
+        font-weight: 600;
+      }
+      .hero-trust-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .hero-trust-item b {
+        color: #B45309;
+      }
+
+      /* Hero Visual / Astrologer Card */
+      .hero-visual-card {
+        background: #FFF;
+        border: 1px solid rgba(217, 119, 6, 0.22);
+        border-radius: 28px;
+        padding: 32px 28px;
+        box-shadow: 0 20px 50px rgba(180, 115, 30, 0.12);
+        position: relative;
         text-align: center;
-        margin-top: 8px;
-        opacity: 0.9;
-        font-weight: 500;
-        letter-spacing: 0.2px;
       }
-      .payment-amounts span {
-        cursor: pointer !important;
-        transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        position: relative;
-        user-select: none;
-        border: 1px solid rgba(216, 176, 106, 0.22) !important;
+      .hero-visual-card::before {
+        content: 'ॐ';
+        position: absolute;
+        top: -24px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 48px;
+        height: 48px;
+        background: radial-gradient(circle, #FEF3C7 0%, #FDE68A 100%);
+        border: 2px solid #D97706;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #991B1B;
+        font-family: var(--font-serif);
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
       }
-      .payment-amounts span:hover {
-        transform: translateY(-3px) scale(1.04);
-        background: rgba(216, 176, 106, 0.28) !important;
-        border-color: #d8b06a !important;
-        box-shadow: 0 6px 20px rgba(216, 176, 106, 0.45);
+      .astrologer-avatar-wrap {
+        width: 120px;
+        height: 120px;
+        margin: 16px auto 16px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #FFFBEB 0%, #FEF3C7 100%);
+        border: 3px solid #D97706;
+        padding: 5px;
+        box-shadow: 0 8px 25px rgba(217, 119, 6, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 54px;
       }
-      .payment-amounts span:active {
-        transform: translateY(0) scale(0.97);
+      .astrologer-name {
+        font-family: var(--font-serif);
+        font-size: 24px;
+        font-weight: 700;
+        color: #1C1917;
+        margin-bottom: 4px;
+      }
+      .astrologer-title {
+        font-size: 12.5px;
+        color: #B45309;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      .hero-floating-badges {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: left;
+      }
+      .floating-badge {
+        background: #FAF8F5;
+        border: 1px solid rgba(217, 119, 6, 0.16);
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--color-text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+      .floating-badge:hover {
+        transform: translateX(4px);
+        border-color: #D97706;
+      }
+      .floating-badge span { font-size: 16px; }
+
+      /* --- Section Header Utility --- */
+      .section-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 70px 24px;
+      }
+      .section-header {
+        text-align: center;
+        max-width: 680px;
+        margin: 0 auto 48px;
+      }
+      .section-pill {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        color: #B45309;
+        background: #FEF3C7;
+        border: 1px solid rgba(217, 119, 6, 0.25);
+        padding: 4px 14px;
+        border-radius: 999px;
+        margin-bottom: 10px;
+      }
+      .section-title {
+        font-family: var(--font-serif);
+        font-size: 34px;
+        font-weight: 800;
+        color: #1C1917;
+        line-height: 1.3;
+        margin-bottom: 12px;
+      }
+      .section-subtitle {
+        font-size: 15px;
+        color: var(--color-text-muted);
+        line-height: 1.6;
       }
 
-      .package-card {
-        cursor: pointer;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      /* --- 1. How It Works (४ सजिला चरणहरू) --- */
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
       }
-      .package-card:hover {
+      .step-card {
+        background: #FFF;
+        border: 1px solid rgba(217, 119, 6, 0.16);
+        border-radius: 20px;
+        padding: 28px 20px;
+        box-shadow: 0 6px 20px rgba(180, 115, 30, 0.05);
+        position: relative;
+        text-align: center;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      }
+      .step-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(180, 115, 30, 0.12);
+        border-color: #D97706;
+      }
+      .step-number {
+        position: absolute;
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 30px;
+        background: #D97706;
+        color: #FFF;
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 8px rgba(217, 119, 6, 0.3);
+      }
+      .step-icon {
+        width: 60px;
+        height: 60px;
+        margin: 10px auto 16px;
+        background: #FFFBEB;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        border: 1px solid #FDE68A;
+      }
+      .step-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1C1917;
+        margin-bottom: 8px;
+      }
+      .step-desc {
+        font-size: 12.5px;
+        color: var(--color-text-secondary);
+        line-height: 1.55;
+      }
+
+      /* --- 2. Packages & Pricing (Clean Light Cards) --- */
+      .packages-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px;
+        align-items: stretch;
+      }
+      .pkg-card {
+        background: #FFF;
+        border: 1.5px solid rgba(217, 119, 6, 0.18);
+        border-radius: 24px;
+        padding: 34px 28px 28px;
+        box-shadow: 0 8px 25px rgba(180, 115, 30, 0.06);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        transition: all 0.25s ease;
+        cursor: pointer;
+      }
+      .pkg-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(180, 115, 30, 0.14);
+        border-color: #D97706;
+      }
+      .pkg-card.featured {
+        border-color: #D97706;
+        background: linear-gradient(180deg, #FFFDF8 0%, #FFF 100%);
+        box-shadow: 0 12px 35px rgba(217, 119, 6, 0.18);
+        transform: scale(1.02);
+      }
+      .pkg-ribbon {
+        position: absolute;
+        top: -12px;
+        right: 24px;
+        background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+        color: #FFF;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 4px 14px;
+        border-radius: 999px;
+        letter-spacing: 0.3px;
+        box-shadow: 0 3px 10px rgba(217, 119, 6, 0.3);
+      }
+      .pkg-badge {
+        display: inline-block;
+        font-size: 11.5px;
+        font-weight: 700;
+        color: #B45309;
+        background: #FEF3C7;
+        padding: 4px 10px;
+        border-radius: 6px;
+        margin-bottom: 12px;
+      }
+      .pkg-name {
+        font-family: var(--font-serif);
+        font-size: 24px;
+        font-weight: 700;
+        color: #1C1917;
+        margin-bottom: 8px;
+      }
+      .pkg-desc {
+        font-size: 13px;
+        color: var(--color-text-muted);
+        margin-bottom: 20px;
+        line-height: 1.5;
+        min-height: 38px;
+      }
+      .pkg-price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        margin-bottom: 22px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid rgba(217, 119, 6, 0.12);
+      }
+      .pkg-price-amount {
+        font-family: var(--font-serif);
+        font-size: 38px;
+        font-weight: 800;
+        color: #991B1B;
+      }
+      .pkg-price-currency {
+        font-size: 13px;
+        color: var(--color-text-muted);
+        font-weight: 600;
+      }
+      .pkg-features {
+        list-style: none;
+        margin-bottom: 28px;
+        flex: 1;
+      }
+      .pkg-feature-item {
+        font-size: 13.5px;
+        color: var(--color-text-secondary);
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 11px;
+        line-height: 1.45;
+      }
+      .pkg-feature-item span {
+        color: #059669;
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .btn-select-plan {
+        width: 100%;
+        padding: 13px;
+        border-radius: 12px;
+        font-size: 14.5px;
+        font-weight: 700;
+        text-align: center;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .pkg-card:not(.featured) .btn-select-plan {
+        background: #FFFBEB;
+        color: #B45309;
+        border: 1px solid rgba(217, 119, 6, 0.3);
+      }
+      .pkg-card:not(.featured):hover .btn-select-plan {
+        background: #D97706;
+        color: #FFF;
+        border-color: #D97706;
+      }
+      .pkg-card.featured .btn-select-plan {
+        background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+        color: #FFF;
+        box-shadow: 0 4px 16px rgba(217, 119, 6, 0.3);
+      }
+      .pkg-card.featured:hover .btn-select-plan {
+        background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        transform: translateY(-1px);
+      }
+
+      /* --- 3. Fast Payment & QR Hub Card --- */
+      .qr-hub-section {
+        background: #FFFDF9;
+        border-top: 1px solid rgba(217, 119, 6, 0.14);
+        border-bottom: 1px solid rgba(217, 119, 6, 0.14);
+      }
+      .qr-hub-card {
+        background: #FFF;
+        border: 1.5px solid rgba(217, 119, 6, 0.25);
+        border-radius: 28px;
+        padding: 40px;
+        box-shadow: 0 16px 45px rgba(180, 115, 30, 0.08);
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      .qr-frame-box {
+        background: #FAF8F5;
+        border: 2px dashed rgba(217, 119, 6, 0.3);
+        border-radius: 20px;
+        padding: 24px;
+        text-align: center;
+        position: relative;
+      }
+      .qr-badge-esewa {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #059669;
+        color: #FFF;
+        font-size: 11.5px;
+        font-weight: 700;
+        padding: 4px 14px;
+        border-radius: 999px;
+        margin-bottom: 14px;
+      }
+      .qr-image {
+        width: 100%;
+        max-width: 220px;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+      .qr-image:hover { transform: scale(1.03); }
+      .qr-zoom-hint {
+        font-size: 11px;
+        color: var(--color-text-muted);
+        margin-top: 8px;
+      }
+
+      /* Interactive Payment Amounts Pills */
+      .payment-amounts-box {
+        margin: 20px 0;
+      }
+      .payment-amounts-label {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--color-text-secondary);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .payment-amounts-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .amt-pill-btn {
+        background: #FFFBEB;
+        border: 1.5px solid rgba(217, 119, 6, 0.28);
+        border-radius: 12px;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .amt-pill-btn:hover {
+        transform: translateY(-2px);
+        background: #FEF3C7;
+        border-color: #D97706;
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
+      }
+      .amt-pill-title {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--color-text-muted);
+      }
+      .amt-pill-val {
+        font-size: 15.5px;
+        font-weight: 800;
+        color: #991B1B;
+      }
+
+      .copy-id-row {
+        background: #FAF8F5;
+        border: 1px solid rgba(217, 119, 6, 0.18);
+        border-radius: 12px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .btn-copy {
+        background: #D97706;
+        color: #FFF;
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        transition: all 0.15s ease;
+      }
+      .btn-copy:hover { background: #B45309; }
+
+      /* --- 4. Astrological Services Grid --- */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .service-card {
+        background: #FFF;
+        border: 1px solid rgba(217, 119, 6, 0.16);
+        border-radius: 20px;
+        padding: 28px 24px;
+        box-shadow: 0 6px 20px rgba(180, 115, 30, 0.05);
+        transition: all 0.25s ease;
+      }
+      .service-card:hover {
         transform: translateY(-4px);
+        border-color: #D97706;
+        box-shadow: 0 12px 30px rgba(180, 115, 30, 0.12);
+      }
+      .service-icon {
+        width: 52px;
+        height: 52px;
+        background: #FEF3C7;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        margin-bottom: 16px;
+      }
+      .service-title {
+        font-family: var(--font-serif);
+        font-size: 19px;
+        font-weight: 700;
+        color: #1C1917;
+        margin-bottom: 8px;
+      }
+      .service-desc {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        line-height: 1.55;
+      }
+
+      /* --- 5. Customer Testimonials --- */
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .testimonial-card {
+        background: #FFF;
+        border: 1px solid rgba(217, 119, 6, 0.15);
+        border-radius: 20px;
+        padding: 26px;
+        box-shadow: 0 6px 20px rgba(180, 115, 30, 0.05);
+      }
+      .testi-stars {
+        color: #F59E0B;
+        font-size: 15px;
+        margin-bottom: 12px;
+      }
+      .testi-quote {
+        font-size: 13.5px;
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+        margin-bottom: 18px;
+        font-style: italic;
+      }
+      .testi-author {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .testi-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #FEF3C7;
+        color: #B45309;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+      }
+      .testi-name {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #1C1917;
+      }
+      .testi-loc {
+        font-size: 11.5px;
+        color: var(--color-text-muted);
+      }
+
+      /* --- 6. FAQ Accordion --- */
+      .faq-list {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .faq-item {
+        background: #FFF;
+        border: 1px solid rgba(217, 119, 6, 0.16);
+        border-radius: 14px;
+        overflow: hidden;
+        transition: border-color 0.2s ease;
+      }
+      .faq-question {
+        padding: 16px 20px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #1C1917;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        user-select: none;
+      }
+      .faq-question:hover { color: #D97706; }
+      .faq-answer {
+        padding: 0 20px 16px;
+        font-size: 13.5px;
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+        display: none;
+      }
+      .faq-item.active .faq-answer { display: block; }
+      .faq-item.active { border-color: #D97706; }
+      .faq-icon { transition: transform 0.2s ease; }
+      .faq-item.active .faq-icon { transform: rotate(180deg); color: #D97706; }
+
+      /* --- Footer --- */
+      .footer {
+        background: #1C1917;
+        color: #FAF8F5;
+        padding: 60px 24px 30px;
+        border-top: 3px solid #D97706;
+      }
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+      .footer-title {
+        font-family: var(--font-serif);
+        font-size: 22px;
+        font-weight: 700;
+        color: #FEF3C7;
+        margin-bottom: 12px;
+      }
+      .footer-desc {
+        font-size: 13px;
+        color: #A8A29E;
+        line-height: 1.6;
+        max-width: 360px;
+      }
+      .footer-heading {
+        font-size: 14px;
+        font-weight: 700;
+        color: #F59E0B;
+        margin-bottom: 14px;
+        letter-spacing: 0.3px;
+      }
+      .footer-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 13px;
+        color: #D6D3D1;
+      }
+      .footer-links a:hover { color: #FEF3C7; }
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        text-align: center;
+        font-size: 12px;
+        color: #78716C;
+      }
+
+      /* --- Floating Action Buttons --- */
+      .floating-wa-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 999;
+        background: #059669;
+        color: #FFF;
+        padding: 12px 20px;
+        border-radius: 999px;
+        box-shadow: 0 6px 25px rgba(5, 150, 105, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13.5px;
+        font-weight: 700;
+        transition: all 0.25s ease;
+      }
+      .floating-wa-btn:hover {
+        background: #047857;
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 8px 30px rgba(5, 150, 105, 0.55);
+      }
+      .floating-pay-btn {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        z-index: 999;
+        background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+        color: #FFF;
+        padding: 12px 22px;
+        border-radius: 999px;
+        box-shadow: 0 6px 25px rgba(217, 119, 6, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13.5px;
+        font-weight: 700;
+        transition: all 0.25s ease;
+      }
+      .floating-pay-btn:hover {
+        background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 8px 30px rgba(217, 119, 6, 0.55);
+      }
+
+      /* Responsive Breakpoints */
+      @media (max-width: 960px) {
+        .hero-container { grid-template-columns: 1fr; text-align: center; }
+        .hero-actions { justify-content: center; }
+        .hero-trust-row { justify-content: center; }
+        .hero-description { margin: 0 auto 28px; }
+        .steps-grid { grid-template-columns: repeat(2, 1fr); }
+        .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+        .pkg-card.featured { transform: none; }
+        .qr-hub-card { grid-template-columns: 1fr; }
+        .services-grid { grid-template-columns: repeat(2, 1fr); }
+        .testimonials-grid { grid-template-columns: 1fr; }
+        .footer-container { grid-template-columns: 1fr; }
+        .nav-links { display: none; }
+      }
+      @media (max-width: 600px) {
+        .hero-title { font-size: 32px; }
+        .steps-grid { grid-template-columns: 1fr; }
+        .services-grid { grid-template-columns: 1fr; }
+        .floating-pay-btn span.label-text { display: none; }
       }
     </style>
   </head>
   <body>
-    <div id="root"></div>
 
-    <!-- Quick Access Links -->
-    <a href="/admin" class="admin-corner-link" title="Astro Tiwari Admin Portal">
-      <span>🔐</span> Admin
-    </a>
-    <a href="/pay" class="pay-corner-link" title="Simple Payment System (Choose plan & Pay)">
-      <span>💳</span> Quick Pay & Upload Screenshot
+    <!-- 1. Auspicious Top Announcement Bar -->
+    <div class="top-sacred-bar">
+      <span>🕉️ ॐ नमो भगवते वासुदेवाय | प्रत्यक्ष कुण्डली विश्लेषण तथा व्यक्तिगत मार्गदर्शन</span>
+      <span>•</span>
+      <span>WhatsApp सहायता: <a href="https://wa.me/9779809192604" target="_blank">+९७७ ९८०९१९२६०४</a></span>
+    </div>
+
+    <!-- 2. Main Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="/" class="brand-logo">
+          <div class="brand-emblem">ॐ</div>
+          <div>
+            <div class="brand-title">Astro Tiwari</div>
+            <div class="brand-subtitle">पंडित आयुष तिवारी · वैदिक ज्योतिष</div>
+          </div>
+        </a>
+
+        <div class="nav-links">
+          <a href="#guide" class="nav-link">प्रक्रिया</a>
+          <a href="#packages" class="nav-link">प्याकेजहरू</a>
+          <a href="#payment-qr" class="nav-link">QR भुक्तानी</a>
+          <a href="#services" class="nav-link">सेवाहरू</a>
+          <a href="#reviews" class="nav-link">समीक्षाहरू</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </div>
+
+        <div class="nav-actions">
+          <a href="/pay" class="btn-nav-pay" title="Simple Payment System">
+            <span>💳</span> Quick Pay
+          </a>
+          <a href="/admin" class="btn-nav-pay" style="background:#FAF8F5; color:#78716C;" title="Admin Portal">
+            <span>🔐</span> Admin
+          </a>
+          <a href="#packages" class="btn-primary-cta">
+            परामर्श लिनुहोस् →
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 3. Hero Section (Sacred Light Vibes) -->
+    <section class="hero-section">
+      <div class="hero-container">
+        <!-- Left Hero Content -->
+        <div>
+          <div class="hero-badge">
+            <span>✨</span> प्रामाणिक वैदिक ज्योतिष तथा कुण्डली मार्गदर्शन
+          </div>
+
+          <h1 class="hero-title">
+            तपाईंको भविष्यको सही दिशा, <span>वैदिक ज्योतिषको उज्यालोमा</span>
+          </h1>
+
+          <p class="hero-description">
+            सरल, भरपर्दो र संवेदनशील व्यक्तिगत मार्गदर्शन। आफ्नो जन्मकुण्डली, विवाह मिलान, करियर, व्यापार र जीवनका हरेक उतारचढावको स्पष्ट समाधान पाउनुहोस्।
+          </p>
+
+          <div class="hero-actions">
+            <a href="#packages" class="btn-hero-primary">
+              <span>📦</span> आफ्नो प्याकेज रोज्नुहोस् (रु. २९९ बाट सुरु) →
+            </a>
+            <a href="https://wa.me/9779809192604?text=नमस्कार%20Astro%20Tiwari,%20मलाई%20ज्योतिषीय%20परामर्श%20चाहिएको%20थियो।" target="_blank" class="btn-hero-secondary">
+              <span>💬</span> WhatsApp मा कुरा गर्नुहोस्
+            </a>
+          </div>
+
+          <div class="hero-trust-row">
+            <div class="hero-trust-item">
+              <span>⭐</span> <b>४.९/५</b> (१०,०००+ सन्तुष्ट सेवाग्राही)
+            </div>
+            <span>•</span>
+            <div class="hero-trust-item">
+              <span>⚡</span> <b>२४ घण्टाभित्र</b> व्यक्तिगत रिपोर्ट
+            </div>
+            <span>•</span>
+            <div class="hero-trust-item">
+              <span>🔒</span> <b>१००% गोप्य</b> र सुरक्षित
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual Card -->
+        <div class="hero-visual-card">
+          <div class="astrologer-avatar-wrap">
+            🧘‍♂️
+          </div>
+          <h3 class="astrologer-name">पंडित आयुष तिवारी</h3>
+          <p class="astrologer-title">ज्योतिष तथा वास्तु विशेषज्ञ (१२+ वर्ष अनुभव)</p>
+
+          <div class="hero-floating-badges">
+            <div class="floating-badge">
+              <span>📜</span>
+              <div>
+                <div style="color:#1C1917; font-weight:700;">३०+ पेज महाभविष्यफल PDF</div>
+                <div style="font-size:11px; color:#78716C;">सम्पूर्ण कुण्डली तथा नवग्रह विश्लेषण</div>
+              </div>
+            </div>
+
+            <div class="floating-badge">
+              <span>🔮</span>
+              <div>
+                <div style="color:#1C1917; font-weight:700;">दशा तथा गोचर फल विश्लेषण</div>
+                <div style="font-size:11px; color:#78716C;">वर्तमान र आउँदो २ वर्षको समय चक्र</div>
+              </div>
+            </div>
+
+            <div class="floating-badge">
+              <span>🕉️</span>
+              <div>
+                <div style="color:#1C1917; font-weight:700;">सरल तथा प्रभावकारी वैदिक उपाय</div>
+                <div style="font-size:11px; color:#78716C;">दोष निवारण, रत्न तथा पूजा विधि</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Simple Visual Guide: कसरी सेवा लिने? (४ सजिला चरणहरू) -->
+    <section class="section-wrap" id="guide">
+      <div class="section-header">
+        <span class="section-pill">सरल प्रक्रिया</span>
+        <h2 class="section-title">कसरी सेवा लिने? (४ सजिला चरणहरू)</h2>
+        <p class="section-subtitle">
+          कुण्डली परामर्श लिन अत्यन्तै सहज छ। तलका चरणहरू पूरा गरी आजै आफ्नो मार्गदर्शन सुरक्षित गर्नुहोस्।
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-number">१</div>
+          <div class="step-icon">📦</div>
+          <h3 class="step-title">प्याकेज रोज्नुहोस्</h3>
+          <p class="step-desc">
+            Basic (रु. २९९), Standard (रु. ४९९) वा VIP (रु. १,०५५) मध्ये आफ्नो आवश्यकता अनुसार छान्नुहोस्।
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-number">२</div>
+          <div class="step-icon">📝</div>
+          <h3 class="step-title">कुण्डली स्क्यान वा विवरण</h3>
+          <p class="step-desc">
+            चिनाको फोटो अपलोड गर्दा <b>AI ले स्वतः विवरण</b> निकाल्छ, वा आफ्नो नाम, जन्म मिति, समय र स्थान भर्नुहोस्।
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-number">३</div>
+          <div class="step-icon">📲</div>
+          <h3 class="step-title">eSewa / QR भुक्तानी</h3>
+          <p class="step-desc">
+            eSewa, Khalti वा Mobile Banking बाट QR स्क्यान गरी रकम भुक्तानी गर्नुहोस् र स्क्रिनसट राख्नुहोस्।
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card">
+          <div class="step-number">४</div>
+          <div class="step-icon">🔮</div>
+          <h3 class="step-title">WhatsApp मा परामर्श</h3>
+          <p class="step-desc">
+            प्रमाणीकरणपछि २४ घण्टाभित्र WhatsApp मा विस्तृत कुण्डली विश्लेषण र व्यक्तिगत भ्वाइस नोट पाउनुहोस्।
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Packages & Pricing Section (Light & High-Converting) -->
+    <section class="section-wrap" id="packages" style="background:rgba(254, 243, 199, 0.2); border-radius:32px;">
+      <div class="section-header">
+        <span class="section-pill">मूल्य तथा प्याकेजहरू</span>
+        <h2 class="section-title">आफ्नो उपयुक्त प्याकेज छान्नुहोस्</h2>
+        <p class="section-subtitle">
+          कुनै पनि प्याकेजमा क्लिक गरी तुरुन्तै सिधै सुरक्षित भुक्तानी पृष्ठमा जानुहोस्।
+        </p>
+      </div>
+
+      <div class="packages-grid">
+        <!-- Plan 1: Basic -->
+        <div class="pkg-card" onclick="window.location.href='/pay?plan=basic'">
+          <div>
+            <span class="pkg-badge">सुरुवाती मार्गदर्शन</span>
+            <h3 class="pkg-name">Basic Package</h3>
+            <p class="pkg-desc">आफ्नो जन्मकुण्डली र मुख्य जिज्ञासा बुझ्न सुरु गर्नेहरूका लागि उपयुक्त।</p>
+
+            <div class="pkg-price-row">
+              <span class="pkg-price-amount">रु. २९९</span>
+              <span class="pkg-price-currency">/ एकपटक</span>
+            </div>
+
+            <ul class="pkg-features">
+              <li class="pkg-feature-item"><span>✓</span> सामान्य ग्रह दशा र गोचर विवरण</li>
+              <li class="pkg-feature-item"><span>✓</span> मुख्य १ देखि २ प्रश्नको स्पष्ट उत्तर</li>
+              <li class="pkg-feature-item"><span>✓</span> संक्षिप्त वैदिक उपाय तथा सुझाव</li>
+              <li class="pkg-feature-item"><span>✓</span> २४ घण्टाभित्र WhatsApp मा रिपोर्ट</li>
+            </ul>
+          </div>
+
+          <button class="btn-select-plan">
+            Basic रोज्नुहोस् (रु. २९९) →
+          </button>
+        </div>
+
+        <!-- Plan 2: Standard (Featured) -->
+        <div class="pkg-card featured" onclick="window.location.href='/pay?plan=standard'">
+          <span class="pkg-ribbon">⭐ सबैभन्दा लोकप्रिय</span>
+          <div>
+            <span class="pkg-badge" style="background:#D97706; color:#FFF;">सम्पूर्ण विश्लेषण</span>
+            <h3 class="pkg-name">Standard Package</h3>
+            <p class="pkg-desc">जीवनका सम्पूर्ण महत्वपूर्ण पक्षहरूको विस्तृत विश्लेषण र ३० पेज महाभविष्यफल।</p>
+
+            <div class="pkg-price-row">
+              <span class="pkg-price-amount">रु. ४९९</span>
+              <span class="pkg-price-currency">/ एकपटक</span>
+            </div>
+
+            <ul class="pkg-features">
+              <li class="pkg-feature-item"><span>✓</span> <b>३०+ पेजको महाभविष्यफल PDF रिपोर्ट</b></li>
+              <li class="pkg-feature-item"><span>✓</span> राशि, नवग्रह, नक्षत्र र भावफलको गहन विश्लेषण</li>
+              <li class="pkg-feature-item"><span>✓</span> करियर, जागिर, व्यापार तथा आर्थिक अवस्था</li>
+              <li class="pkg-feature-item"><span>✓</span> विवाह योग, सम्बन्ध तथा सन्तान फल</li>
+              <li class="pkg-feature-item"><span>✓</span> १ वर्षको दशा तथा गोचर फल विश्लेषण</li>
+              <li class="pkg-feature-item"><span>✓</span> स्वास्थ्य तथा व्यक्तिगत वैदिक उपाय</li>
+            </ul>
+          </div>
+
+          <button class="btn-select-plan">
+            Standard रोज्नुहोस् (रु. ४९९) →
+          </button>
+        </div>
+
+        <!-- Plan 3: VIP Premium -->
+        <div class="pkg-card" onclick="window.location.href='/pay?plan=vip'">
+          <div>
+            <span class="pkg-badge">VIP व्यक्तिगत परामर्श</span>
+            <h3 class="pkg-name">VIP Premium Package</h3>
+            <p class="pkg-desc">विस्तृत कुण्डली, २ वर्षको गोचर, विवाह मिलान तथा प्रत्यक्ष भ्वाइस परामर्श।</p>
+
+            <div class="pkg-price-row">
+              <span class="pkg-price-amount">रु. १,०५५</span>
+              <span class="pkg-price-currency">/ एकपटक</span>
+            </div>
+
+            <ul class="pkg-features">
+              <li class="pkg-feature-item"><span>✓</span> सम्पूर्ण Standard प्याकेजका सबै सुविधाहरू</li>
+              <li class="pkg-feature-item"><span>✓</span> <b>विवाह तथा गुण मिलान (Kundali Matching)</b></li>
+              <li class="pkg-feature-item"><span>✓</span> आउँदो २ वर्षको गहन गोचर तथा दशाफल</li>
+              <li class="pkg-feature-item"><span>✓</span> <b>पंडितजीसँग प्रत्यक्ष फोन/अडियो परामर्श</b></li>
+              <li class="pkg-feature-item"><span>✓</span> विशेष पूजा, रत्न धारण तथा ग्रह शान्ति उपाय</li>
+              <li class="pkg-feature-item"><span>✓</span> प्राथमिकताका साथ तत्काल समाधान</li>
+            </ul>
+          </div>
+
+          <button class="btn-select-plan">
+            VIP रोज्नुहोस् (रु. १,०५५) →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Direct eSewa QR Payment & Quick Verification Hub -->
+    <section class="section-wrap qr-hub-section" id="payment-qr">
+      <div class="qr-hub-card">
+        <!-- QR Code Display Box -->
+        <div class="qr-frame-box">
+          <div class="qr-badge-esewa">
+            <span>&check;</span> Official eSewa Payment QR
+          </div>
+
+          <img 
+            src="/assets/qr-CZ91xS65.png" 
+            alt="Astro Tiwari eSewa QR Code" 
+            class="qr-image" 
+            id="main-qr-img" 
+            title="क्लिक गरी ठूलो बनाएर हेर्नुहोस्"
+          />
+
+          <p class="qr-zoom-hint">🔍 फोटोमा क्लिक गरी जुम गर्नुहोस्</p>
+        </div>
+
+        <!-- Payment Details & Instant Pills -->
+        <div>
+          <span class="section-pill">तुरुन्त भुक्तानी</span>
+          <h2 style="font-family:var(--font-serif); font-size:28px; font-weight:700; color:#1C1917; margin-bottom:8px;">
+            eSewa वा Mobile Banking बाट स्क्यान गर्नुहोस्
+          </h2>
+          <p style="font-size:13.5px; color:var(--color-text-secondary); line-height:1.6; margin-bottom:18px;">
+            तलका कुनै पनि प्याकेजमा क्लिक गरी आफ्नो विवरण भर्नुहोस् वा सिधै eSewa ID मा रकम पठाउनुहोस्।
+          </p>
+
+          <!-- 1-Click Copy eSewa ID -->
+          <div class="copy-id-row">
+            <div>
+              <div style="font-size:11px; color:#78716C; font-weight:600;">eSewa ID / Phone:</div>
+              <div style="font-size:16px; font-weight:800; color:#1C1917; letter-spacing:0.5px;">9809192604</div>
+              <div style="font-size:11.5px; color:#059669; font-weight:600;">नाम: Ayush Tiwari</div>
+            </div>
+            <button class="btn-copy" id="copy-qr-id-btn">
+              Copy Number
+            </button>
+          </div>
+
+          <!-- Interactive Pills (Direct 1-Click to Pay) -->
+          <div class="payment-amounts-box">
+            <div class="payment-amounts-label">
+              <span>👆</span> प्याकेज रोज्न र सिधै भुक्तानी गर्न क्लिक गर्नुहोस्:
+            </div>
+
+            <div class="payment-amounts-grid payment-amounts">
+              <div class="amt-pill-btn" onclick="window.location.href='/pay?plan=basic'" title="Basic Package रोज्नुहोस्">
+                <span class="amt-pill-title">Basic</span>
+                <span class="amt-pill-val">रु. २९९</span>
+              </div>
+
+              <div class="amt-pill-btn" onclick="window.location.href='/pay?plan=standard'" style="border-color:#D97706; background:#FEF3C7;" title="Standard Package रोज्नुहोस्">
+                <span class="amt-pill-title" style="color:#B45309; font-weight:700;">Standard ★</span>
+                <span class="amt-pill-val">रु. ४९९</span>
+              </div>
+
+              <div class="amt-pill-btn" onclick="window.location.href='/pay?plan=vip'" title="VIP Premium Package रोज्नुहोस्">
+                <span class="amt-pill-title">VIP</span>
+                <span class="amt-pill-val">रु. १,०५५</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="/pay" class="btn-hero-primary" style="width:100%; justify-content:center; padding:12px 20px;">
+            <span>💳</span> विवरण भर्नुहोस् र रसिद अपलोड गर्नुहोस् →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Astrological Services Grid -->
+    <section class="section-wrap" id="services">
+      <div class="section-header">
+        <span class="section-pill">ज्योतिषीय सेवाहरू</span>
+        <h2 class="section-title">हाम्रा प्रमुख वैदिक परामर्श सेवाहरू</h2>
+        <p class="section-subtitle">
+          वैदिक ज्योतिषका सिद्धान्तमा आधारित भएर तपाईंको जीवनका हरेक पक्षमा सटिक विश्लेषण र मार्गदर्शन प्रदान गरिन्छ।
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">📜</div>
+          <h3 class="service-title">जन्मकुण्डली निर्माण तथा विश्लेषण</h3>
+          <p class="service-desc">
+            तपाईंको जन्म मिति, समय र स्थानको आधारमा सूक्ष्म कुण्डली निर्माण गरी १२ भाव, नवग्रह र नक्षत्रको पूर्ण फलादेश।
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">💍</div>
+          <h3 class="service-title">विवाह तथा गुण मिलान</h3>
+          <p class="service-desc">
+            ३६ गुण मिलान, मङ्गल दोष (माङ्गलिक), नाडी दोष र दाम्पत्य जीवनको सुमधुरताको विस्तृत अध्ययन तथा उपाय।
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">💼</div>
+          <h3 class="service-title">करियर, जागिर तथा व्यापार</h3>
+          <p class="service-desc">
+            सरकारी जागिर, पदोन्नति, निजी क्षेत्र वा कुन व्यवसाय तपाईंको भाग्य अनुकूल छ भन्ने स्पष्ट मार्गदर्शन।
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">✈️</div>
+          <h3 class="service-title">विदेश यात्रा तथा उच्च शिक्षा</h3>
+          <p class="service-desc">
+            विदेश यात्राको उत्तम समय, भिसा योग, स्थायी बसोबास (PR) र अध्ययनमा सफलताका सम्भावनाहरूको विश्लेषण।
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🌿</div>
+          <h3 class="service-title">स्वास्थ्य, आयु तथा आरोग्यता</h3>
+          <p class="service-desc">
+            कुण्डलीका छैठौं र आठौं भावका आधारमा सम्भावित स्वास्थ्य समस्याहरू र त्यसबाट जोगिने वैदिक तथा प्राकृतिक उपाय।
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🕉️</div>
+          <h3 class="service-title">ग्रह शान्ति, रत्न तथा वैदिक उपाय</h3>
+          <p class="service-desc">
+            कमजोर ग्रहलाई बलवान् बनाउन उपयुक्त रत्न, रुद्राक्ष, मन्त्र जप, दान र सरल घरेलु पूजा विधिको परामर्श।
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Testimonials & Real Customer Experiences -->
+    <section class="section-wrap" id="reviews" style="background:rgba(250, 248, 245, 0.7);">
+      <div class="section-header">
+        <span class="section-pill">ग्राहक समीक्षा</span>
+        <h2 class="section-title">सन्तुष्ट ग्राहकहरूको अनुभव</h2>
+        <p class="section-subtitle">
+          १०,००० भन्दा बढी ग्राहकहरूले Astro Tiwari को मार्गदर्शनबाट आफ्नो जीवनमा स्पष्टता र शान्ति पाएका छन्।
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            "पंडितजीले मेरो करियर र जागिर परिवर्तनको बारेमा भन्नुभएको कुरा दुरुस्तै मिल्यो। उहाँले कुनै अनावश्यक डर नदेखाई निकै सरल उपाय दिनुभयो।"
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar">R</div>
+            <div>
+              <div class="testi-name">रोशन श्रेष्ठ</div>
+              <div class="testi-loc">काठमाडौं, नेपाल</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            "चिनाको फोटो पठाएको केही घण्टामै ३० पेजको महाभविष्यफल र अडियो व्याख्या प्राप्त भयो। यति स्पष्ट र भरपर्दो सेवा पहिलो पटक अनुभव गरेँ।"
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar">P</div>
+            <div>
+              <div class="testi-name">प्रमिला पौडेल</div>
+              <div class="testi-loc">पोखरा, नेपाल</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            "हाम्रो विवाहको गुण मिलान र मांगलिक दोषको विषयमा पंडितजीले दिनुभएको स्पष्ट सल्लाहले हामीलाई ठूलो मानसिक शान्ति मिल्यो। धेरै धेरै धन्यवाद।"
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div>
+              <div class="testi-name">सुरेश थापा</div>
+              <div class="testi-loc">बुटवल, नेपाल</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Interactive FAQ Accordion -->
+    <section class="section-wrap" id="faq">
+      <div class="section-header">
+        <span class="section-pill">प्रायः सोधिने प्रश्नहरू</span>
+        <h2 class="section-title">तपाईंका जिज्ञासा र स्पष्ट उत्तर</h2>
+        <p class="section-subtitle">
+          सेवा लिनुअघि मनमा लाग्न सक्ने सामान्य प्रश्नहरूको जवाफ यहाँ दिइएको छ।
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <div class="faq-question">
+            <span>१. भुक्तानी गरेपछि कुण्डली परामर्श कहिले र कसरी पाइन्छ?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            भुक्तानी पुष्टि भएको २४ घण्टाभित्र तपाईंले दिनुभएको WhatsApp नम्बरमा विस्तृत कुण्डली विश्लेषण PDF रिपोर्ट र पंडितजीको व्यक्तिगत भ्वाइस नोट पठाइनेछ।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>२. यदि मसँग चिना वा कुण्डलीको फोटो छैन भने के गर्ने?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            चिनाको फोटो नभए पनि केही फरक पर्दैन। तपाईंले आफ्नो पूरा नाम, जन्म मिति (वि.सं. वा ई.सं.), जन्म समय (बिहान/बेलुका) र जन्म स्थान भरे पुग्छ।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>३. के मेरो जन्म विवरण र व्यक्तिगत कुराहरू गोप्य रहन्छन्?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            हजुर, १००% पूर्ण रूपमा सुरक्षित र गोप्य रहन्छ। तपाईंको व्यक्तिगत जानकारी केवल कुण्डली विश्लेषणका लागि मात्र प्रयोग हुन्छ।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>४. के विदेशबाट पनि भुक्तानी र परामर्श लिन सकिन्छ?</span>
+            <span class="faq-icon">▼</span>
+          </div>
+          <div class="faq-answer">
+            सकिन्छ। विदेशमा रहनुहुने नेपालीहरूले नेपालमा रहेका आफन्तको eSewa, Mobile Banking वा अन्तर्राष्ट्रिय रेमिट्यान्स मार्फत भुक्तानी गरी WhatsApp मा सिधै परामर्श लिन सक्नुहुन्छ।
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div>
+          <div class="brand-logo" style="margin-bottom:14px;">
+            <div class="brand-emblem" style="width:38px; height:38px; font-size:18px;">ॐ</div>
+            <div class="footer-title" style="margin-bottom:0;">Astro Tiwari</div>
+          </div>
+          <p class="footer-desc">
+            सरल, भरपर्दो र संवेदनशील वैदिक ज्योतिष मार्गदर्शन। आफ्नो जन्मकुण्डली, विवाह, करियर र जीवनका हरेक उतारचढावमा सही बाटो पहिल्याउनुहोस्।
+          </p>
+          <div style="margin-top:16px; font-size:13px; color:#FEF3C7;">
+            📍 काठमाडौं, नेपाल | 📞 ९८०९१९२६०४
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">द्रुत लिङ्कहरू</h4>
+          <ul class="footer-links">
+            <li><a href="#guide">कसरी सेवा लिने?</a></li>
+            <li><a href="#packages">प्याकेज तथा शुल्क</a></li>
+            <li><a href="#payment-qr">eSewa QR भुक्तानी</a></li>
+            <li><a href="#services">ज्योतिषीय सेवाहरू</a></li>
+            <li><a href="#faq">प्रायः सोधिने प्रश्नहरू</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">परामर्श तथा सहयोग</h4>
+          <ul class="footer-links">
+            <li><a href="/pay">अनलाइन पेमेन्ट तथा रसिद अपलोड</a></li>
+            <li><a href="https://wa.me/9779809192604" target="_blank">WhatsApp मा सम्पर्क</a></li>
+            <li><a href="/admin">कर्मचारी / एडमिन पोर्टल</a></li>
+            <li style="margin-top:10px; color:#A8A29E; font-size:11.5px;">
+              समय: बिहान ७:०० देखि साँझ ८:०० बजेसम्म
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Astro Tiwari. सर्वाधिकार सुरक्षित। वैदिक ज्योतिष परम्परामा आधारित मार्गदर्शन।</p>
+      </div>
+    </footer>
+
+    <!-- 11. Floating Action Buttons (Accessible on all screens) -->
+    <a href="https://wa.me/9779809192604?text=नमस्कार%20Astro%20Tiwari,%20मलाई%20ज्योतिषीय%20परामर्श%20चाहिएको%20थियो।" target="_blank" class="floating-wa-btn" title="WhatsApp मा कुरा गर्नुहोस्">
+      <span>💬</span> WhatsApp
     </a>
 
-    <!-- Interactive Scripts: QR Lightbox & Form Submission Capture -->
+    <a href="/pay" class="floating-pay-btn" title="Quick Pay & Upload Screenshot">
+      <span>💳</span> <span class="label-text">Quick Pay (रु. २९९ / ४९९ / १०५५)</span>
+    </a>
+
+    <!-- Interactive Scripts: QR Lightbox, Copy, Accordion, Event Delegation -->
     <script>
-      // Move Packages section to top right after Hero
-      function placePackagesAtTop() {
-        const packages = document.getElementById('packages');
-        if (!packages) return;
-        const main = document.querySelector('main') || document.querySelector('#root > div');
-        if (!main) return;
-
-        const hero = main.querySelector('.cosmic-card')?.closest('section') || main.querySelector('section');
-        if (hero && hero !== packages && packages.previousElementSibling !== hero) {
-          hero.after(packages);
-        }
+      // 1. Copy eSewa Number
+      const copyBtn = document.getElementById('copy-qr-id-btn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText('9809192604').then(() => {
+            copyBtn.textContent = 'Copied! ✓';
+            copyBtn.style.background = '#059669';
+            setTimeout(() => {
+              copyBtn.textContent = 'Copy Number';
+              copyBtn.style.background = '#D97706';
+            }, 2000);
+          });
+        });
       }
 
-      // Wire payment amounts and package buttons directly to 3-step checkout
-      document.addEventListener('click', function(e) {
-        // 1. Check if user clicked on payment amounts pill (Basic रु. २९९, Standard रु. ४९९, VIP रु. १,०५५)
-        const amtSpan = e.target.closest('.payment-amounts span');
-        if (amtSpan) {
-          e.preventDefault();
-          e.stopPropagation();
-          const parent = amtSpan.parentElement;
-          const idx = parent ? Array.from(parent.children).indexOf(amtSpan) : -1;
-          const txt = (amtSpan.innerText || '').toLowerCase();
-          
-          let plan = 'standard';
-          if (idx === 0 || txt.includes('basic') || txt.includes('२९९') || txt.includes('299')) {
-            plan = 'basic';
-          } else if (idx === 2 || txt.includes('vip') || txt.includes('१०५५') || txt.includes('1055') || txt.includes('१,०५५')) {
-            plan = 'vip';
-          } else {
-            plan = 'standard';
-          }
-          window.location.href = `/pay?plan=${plan}`;
-          return;
-        }
+      // 2. FAQ Accordion Toggle
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.querySelector('.faq-question').addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+          if (!isActive) item.classList.add('active');
+        });
+      });
 
-        // Click on .payment-amounts container directly
-        const amtContainer = e.target.closest('.payment-amounts');
-        if (amtContainer) {
-          e.preventDefault();
-          e.stopPropagation();
-          window.location.href = '/pay?plan=standard';
-          return;
-        }
-
-        // 2. Check if user clicked on package card button or the package card itself
-        const btn = e.target.closest('.package-button, button');
-        const card = e.target.closest('.package-card');
-        if (btn || card) {
-          const el = btn || card;
-          const txt = (el.innerText || el.className || '').toLowerCase();
-          if (txt.includes('basic') || txt.includes('२९९') || txt.includes('299')) {
-            e.preventDefault();
-            e.stopPropagation();
-            window.location.href = '/pay?plan=basic';
-            return;
-          } else if (txt.includes('vip') || txt.includes('१०५५') || txt.includes('1055') || txt.includes('१,०५५')) {
-            e.preventDefault();
-            e.stopPropagation();
-            window.location.href = '/pay?plan=vip';
-            return;
-          } else if (txt.includes('standard') || txt.includes('४९९') || txt.includes('499')) {
-            e.preventDefault();
-            e.stopPropagation();
-            window.location.href = '/pay?plan=standard';
-            return;
-          }
-        }
-      }, true);
-
-      const topObserver = new MutationObserver(placePackagesAtTop);
-      topObserver.observe(document.body, { childList: true, subtree: true });
-
-      // 1. QR Code Click-to-Zoom Lightbox
-      document.addEventListener('click', function(e) {
-        const img = e.target.closest('.qr-payment-wrap img, .qr-frame img, img[alt*="eSewa"]');
-        if (!img) return;
-
-        let modal = document.getElementById('qr-modal-overlay');
-        if (!modal) {
-          modal = document.createElement('div');
-          modal.id = 'qr-modal-overlay';
-          modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(11,10,20,0.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity 0.25s ease;cursor:pointer;';
-          
-          modal.innerHTML = `
-            <div style="background:#fff;border-radius:1.5rem;padding:24px 20px 20px;max-width:360px;width:100%;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,0.6);position:relative;transform:scale(0.92);transition:transform 0.25s ease;cursor:default;" onclick="event.stopPropagation()">
-              <button id="qr-modal-close" aria-label="Close" style="position:absolute;top:14px;right:14px;background:#f3eef6;border:none;width:32px;height:32px;border-radius:50%;font-size:20px;line-height:1;cursor:pointer;color:#45394d;display:flex;align-items:center;justify-content:center;">&times;</button>
-              
-              <div style="margin-bottom:12px;">
-                <span style="background:#1f8f5a;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:0.02em;">eSewa Payment QR</span>
+      // 3. QR Lightbox on Click
+      const qrImg = document.getElementById('main-qr-img');
+      if (qrImg) {
+        qrImg.addEventListener('click', () => {
+          let modal = document.getElementById('qr-modal-overlay');
+          if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'qr-modal-overlay';
+            modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(28,25,23,0.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity 0.25s ease;cursor:pointer;';
+            modal.innerHTML = `
+              <div style="background:#FFF;border-radius:24px;padding:28px 24px;max-width:360px;width:100%;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,0.4);position:relative;transform:scale(0.92);transition:transform 0.25s ease;cursor:default;" onclick="event.stopPropagation()">
+                <button id="qr-modal-close" style="position:absolute;top:14px;right:14px;background:#F5F5F4;border:none;width:32px;height:32px;border-radius:50%;font-size:20px;line-height:1;cursor:pointer;color:#44403C;">&times;</button>
+                <div style="background:#059669;color:#FFF;font-size:11.5px;font-weight:700;padding:4px 14px;border-radius:999px;display:inline-block;margin-bottom:14px;">eSewa Official QR</div>
+                <img src="${qrImg.src}" alt="eSewa QR" style="width:100%;max-width:260px;height:auto;border-radius:12px;margin:0 auto 14px;display:block;" />
+                <div style="font-size:16px;font-weight:800;color:#1C1917;">Ayush Tiwari · 9809192604</div>
+                <p style="font-size:12px;color:#78716C;margin-top:6px;">eSewa बाट QR स्क्यान गरी रु. २९९ / ४९९ / १०५५ पठाउनुहोस्।</p>
               </div>
-              
-              <img src="${img.src}" alt="eSewa QR Large" style="width:100%;max-width:280px;height:auto;border-radius:0.75rem;display:block;margin:0 auto 14px;box-shadow:0 4px 16px rgba(0,0,0,0.08);"/>
-              
-              <div style="margin-bottom:14px;">
-                <div style="font-size:17px;font-weight:700;color:#221b27;">Ayush Tiwari</div>
-                <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;">
-                  <span style="font-size:15px;color:#5a4f61;font-weight:600;letter-spacing:0.5px;">9809192604</span>
-                  <button id="copy-esewa-btn" style="background:#f4ecdf;color:#a8794f;border:1px solid #d9be9e;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.15s ease;">Copy</button>
-                </div>
-              </div>
-              
-              <p style="font-size:11.5px;color:#7b6d81;margin:0;line-height:1.5;">
-                eSewa app बाट scan गर्नुहोस् वा सिधै eSewa ID मा रकम पठाउनुहोस्।
-              </p>
-            </div>
-          `;
-          document.body.appendChild(modal);
-
-          modal.addEventListener('click', function(evt) {
-            modal.style.opacity = '0';
-            modal.firstElementChild.style.transform = 'scale(0.92)';
-            setTimeout(() => modal.remove(), 250);
-          });
-
-          modal.querySelector('#qr-modal-close').addEventListener('click', function() {
-            modal.style.opacity = '0';
-            modal.firstElementChild.style.transform = 'scale(0.92)';
-            setTimeout(() => modal.remove(), 250);
-          });
-
-          const copyBtn = modal.querySelector('#copy-esewa-btn');
-          copyBtn.addEventListener('click', function() {
-            navigator.clipboard.writeText('9809192604').then(() => {
-              copyBtn.textContent = 'Copied! ✓';
-              copyBtn.style.background = '#1f8f5a';
-              copyBtn.style.color = '#fff';
-              setTimeout(() => {
-                copyBtn.textContent = 'Copy';
-                copyBtn.style.background = '#f4ecdf';
-                copyBtn.style.color = '#a8794f';
-              }, 2000);
+            `;
+            document.body.appendChild(modal);
+            modal.addEventListener('click', () => {
+              modal.style.opacity = '0';
+              setTimeout(() => modal.remove(), 250);
             });
+            modal.querySelector('#qr-modal-close').addEventListener('click', () => {
+              modal.style.opacity = '0';
+              setTimeout(() => modal.remove(), 250);
+            });
+          }
+          requestAnimationFrame(() => {
+            modal.style.opacity = '1';
+            modal.firstElementChild.style.transform = 'scale(1)';
           });
-        }
-
-        requestAnimationFrame(() => {
-          modal.style.opacity = '1';
-          modal.firstElementChild.style.transform = 'scale(1)';
         });
-      });
-
-      // 2. Automatically save consultation submissions to Admin Portal
-      let latestPaymentBase64 = '';
-      let latestKundaliBase64 = '';
-
-      // Track file inputs when selected
-      document.addEventListener('change', function(e) {
-        if (e.target.type === 'file' && e.target.files && e.target.files[0]) {
-          const file = e.target.files[0];
-          const reader = new FileReader();
-          reader.onload = function(evt) {
-            const dataUrl = evt.target.result;
-            // Identify if payment screenshot or kundali
-            const name = (e.target.name || '').toLowerCase();
-            const accept = (e.target.accept || '').toLowerCase();
-            const form = e.target.closest('form');
-            const isPayment = name.includes('payment') || (form && form.innerText.includes('Payment screenshot'));
-            
-            if (isPayment || e.target.id?.includes('payment') || latestKundaliBase64) {
-              latestPaymentBase64 = dataUrl;
-            } else {
-              latestKundaliBase64 = dataUrl;
-            }
-          };
-          reader.readAsDataURL(file);
-        }
-      });
-
-      // Intercept booking form submission
-      document.addEventListener('submit', function(e) {
-        const form = e.target.closest('.booking-form, form');
-        if (!form || form.id === 'login-form' || form.classList.contains('boss-code-form')) return;
-
-        const fd = new FormData(form);
-        const name = String(fd.get('name') || '').trim();
-        const phone = String(fd.get('phone') || '').trim();
-        if (!name && !phone) return;
-
-        const payload = {
-          name: name,
-          phone: phone,
-          gender: String(fd.get('gender') || ''),
-          dob_bs: String(fd.get('dob_bs') || ''),
-          dob_ad: String(fd.get('dob_ad') || ''),
-          birth_hour: String(fd.get('birth_hour') || ''),
-          birth_minute: String(fd.get('birth_minute') || ''),
-          birth_period: String(fd.get('birth_period') || ''),
-          birth_place: String(fd.get('birth_place') || ''),
-          package: String(fd.get('topic') || 'Standard Package (रु. ४९९)'),
-          message: String(fd.get('message') || ''),
-          rectification: String(fd.get('rectification') || ''),
-          paymentScreenshotBase64: latestPaymentBase64,
-          kundaliPhotoBase64: latestKundaliBase64
-        };
-
-        fetch('/api/submissions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }).then(res => res.json()).then(res => {
-          console.log('[Admin Sync] Consultation saved for admin review:', res.id);
-        }).catch(err => {
-          console.error('[Admin Sync Error]', err);
-        });
-      }, true);
+      }
     </script>
   </body>
 </html>

@@ -1,0 +1,106 @@
+/* ==========================================================================
+   Astro Tiwari — Sacred Vedic Light Theme Tokens & Base Utility System
+   "Good Vibes" Aesthetic: Warm Ivory, Radiant Saffron Gold, Vedic Crimson, Deep Charcoal
+   ========================================================================== */
+
+:root {
+  /* Surface & Backgrounds */
+  --color-bg-base: #FAF8F5;          /* Warm sacred ivory */
+  --color-bg-alt: #F4EFE6;           /* Soft temple sand */
+  --color-bg-card: #FFFFFF;          /* Pure luminous white */
+  --color-bg-card-hover: #FCFBF9;    /* Gentle warm white */
+  --color-bg-glass: rgba(255, 255, 255, 0.88);
+
+  /* Primary Brand: Saffron & Sacred Gold */
+  --color-primary: #D97706;          /* Sacred saffron */
+  --color-primary-hover: #B45309;    /* Deep saffron */
+  --color-primary-light: #FEF3C7;    /* Saffron dawn */
+  --color-primary-border: rgba(217, 119, 6, 0.22);
+  --color-primary-glow: rgba(217, 119, 6, 0.15);
+
+  /* Secondary Accent: Vedic Maroon & Amber */
+  --color-vedic-red: #991B1B;        /* Auspicious Kumkum/Sindoor */
+  --color-vedic-red-light: #FEE2E2;
+  --color-gold: #CA8A04;             /* Temple gold */
+  --color-gold-light: #FEF9C3;
+  --color-gold-dark: #854D0E;
+
+  /* Status Colors */
+  --color-success: #059669;          /* eSewa green / verified */
+  --color-success-light: #D1FAE5;
+  --color-warning: #D97706;
+  --color-danger: #DC2626;
+
+  /* Typography */
+  --color-text-primary: #1C1917;    /* Deep warm charcoal */
+  --color-text-secondary: #44403C;  /* Warm slate */
+  --color-text-muted: #78716C;      /* Muted incense grey */
+  --color-text-light: #A8A29E;
+
+  /* Borders & Shadows */
+  --border-subtle: 1px solid rgba(217, 119, 6, 0.14);
+  --border-card: 1px solid rgba(217, 119, 6, 0.18);
+  --border-active: 1.5px solid #D97706;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(180, 115, 30, 0.04);
+  --shadow-md: 0 8px 24px rgba(180, 115, 30, 0.08);
+  --shadow-lg: 0 16px 40px rgba(180, 115, 30, 0.12);
+  --shadow-glow: 0 0 35px rgba(217, 119, 6, 0.2);
+
+  /* Fonts */
+  --font-serif: 'Noto Serif Devanagari', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Noto Sans Devanagari', 'DM Sans', 'Outfit', system-ui, sans-serif;
+}
+
+/* Base Body Styles */
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-image: 
+    radial-gradient(circle at 12% 10%, rgba(217, 119, 6, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 88% 30%, rgba(153, 27, 27, 0.03) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(217, 119, 6, 0.04) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Sacred Glow Elements */
+.sacred-glow {
+  position: relative;
+}
+.sacred-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.4), rgba(153, 27, 27, 0.2), rgba(217, 119, 6, 0.4));
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+/* High-Converting Glassmorphic Light Card */
+.light-card {
+  background: var(--color-bg-card);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.light-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(217, 119, 6, 0.35);
+}
+
+/* Subtle Sacred Mandala Background Watermark */
+.mandala-bg {
+  background-image: radial-gradient(rgba(217, 119, 6, 0.08) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}

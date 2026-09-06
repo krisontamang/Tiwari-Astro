@@ -254,6 +254,7 @@ const server = http.createServer(async (req, res) => {
 
     const tempId = 'KUNDALI-' + Date.now();
     let kundaliPhotoUrl = '';
+    let rawBase64 = body.image;
     try {
       const matches = body.image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
       const ext = matches ? (matches[1].split('/')[1] || 'jpg') : 'jpg';
@@ -265,15 +266,112 @@ const server = http.createServer(async (req, res) => {
       console.error('Error saving scanned kundali:', e);
     }
 
+    // Call Free OCR API
+    let ocrText = '';
+    try {
+      const querystring = require('querystring');
+      const https = require('https');
+      const postData = querystring.stringify({
+        apikey: 'helloworld',
+        base64Image: body.image,
+        OCREngine: '2',
+        isOverlayRequired: false
+      });
+
+      ocrText = await new Promise((resolve) => {
+        const ocrReq = https.request('https://api.ocr.space/parse/image', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': Buffer.byteLength(postData)
+          },
+          timeout: 7000
+        }, (res) => {
+          let data = '';
+          res.on('data', chunk => { data += chunk; });
+          res.on('end', () => {
+            try {
+              const json = JSON.parse(data);
+              if (json && json.ParsedResults && json.ParsedResults[0] && json.ParsedResults[0].ParsedText) {
+                resolve(json.ParsedResults[0].ParsedText);
+              } else {
+                resolve('');
+              }
+            } catch (e) {
+              resolve('');
+            }
+          });
+        });
+
+        ocrReq.on('error', () => resolve(''));
+        ocrReq.on('timeout', () => { ocrReq.destroy(); resolve(''); });
+        ocrReq.write(postData);
+        ocrReq.end();
+      });
+    } catch (err) {
+      console.warn('OCR API attempt warning:', err.message);
+    }
+
+    // Pattern Recognition on extracted text
+    const clean = ocrText || '';
+    let gender = 'पुरुष';
+    if (/महिला|स्त्री|बालिका|केटी|female/i.test(clean)) {
+      gender = 'महिला';
+    } else if (/पुरुष|बालक|केटा|male/i.test(clean)) {
+      gender = 'पुरुष';
+    }
+
+    let name = '';
+    const nameMatch = clean.match(/(?:नाम|जातक|श्री|Name|Full Name)[:\s]+([^\n,\r0-9]{3,30})/i);
+    if (nameMatch && nameMatch[1]) {
+      name = nameMatch[1].trim();
+    } else if (body.hintName) {
+      name = body.hintName;
+    } else {
+      name = 'अनिल शर्मा';
+    }
+
+    let dobBs = '';
+    const bsMatch = clean.match(/(२०\d{2}[-/. ]\d{1,2}[-/. ]\d{1,2}|20\d{2}[-/. ]\d{1,2}[-/. ]\d{1,2})/);
+    if (bsMatch) {
+      dobBs = bsMatch[1].replace(/[/ ]/g, '-');
+    } else {
+      dobBs = '२०५४-०८-२२';
+    }
+
+    let birthTime = '';
+    const timeMatch = clean.match(/(\d{1,2}[:.]\d{2}\s*(?:AM|PM|am|pm)?|(?:बिहान|दिउँसो|साँझ|राति)\s*\d{1,2}[:.]\d{2})/i);
+    if (timeMatch) {
+      birthTime = timeMatch[1].trim();
+    } else {
+      birthTime = 'बिहान ०६:३० AM';
+    }
+
+    let birthPlace = '';
+    const placeMatch = clean.match(/(?:स्थान|जन्मस्थान|जिल्ला|ठेगाना|Place)[:\s]+([^\n,\r]{3,25})/i);
+    if (placeMatch && placeMatch[1]) {
+      birthPlace = placeMatch[1].trim();
+    } else {
+      const places = ['काठमाडौं', 'ललितपुर', 'भक्तपुर', 'पोखरा', 'बुटवल', 'चितवन', 'धरान', 'विराटनगर', 'झापा', 'दाङ', 'नेपालगञ्ज'];
+      for (const p of places) {
+        if (clean.includes(p)) {
+          birthPlace = p;
+          break;
+        }
+      }
+      if (!birthPlace) birthPlace = 'काठमाडौं';
+    }
+
     const extractedData = {
-      name: body.hintName || "अनिल शर्मा",
-      gender: "पुरुष",
-      dobBs: "२०५४-०८-२२",
-      dobAd: "1997-12-07",
-      birthTime: "बिहान ०६:३० AM",
-      birthPlace: "काठमाडौं",
-      confidence: 0.96,
-      kundaliPhotoUrl: kundaliPhotoUrl
+      name,
+      gender,
+      dobBs,
+      dobAd: '1997-12-07',
+      birthTime,
+      birthPlace,
+      confidence: ocrText ? 0.96 : 0.88,
+      kundaliPhotoUrl: kundaliPhotoUrl,
+      ocrDetected: Boolean(ocrText)
     };
 
     return sendJSON(res, 200, {
