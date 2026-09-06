@@ -1115,8 +1115,20 @@
                   </span>
                 </div>
 
-                <div class="pkg-pill">
-                  📦 ${escapeHtml(item.package || 'Standard')} — <b>रु. ${item.amount || '499'}</b>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+                  <div class="pkg-pill" style="margin-bottom:0;">
+                    📦 ${escapeHtml(item.package || 'Standard')} — <b>रु. ${item.amount || '499'}</b>
+                  </div>
+                  ${item.transactionId ? `
+                    <div style="background:#fef3c7; color:#92400e; border:1px solid #fde68a; font-size:11px; font-weight:700; padding:3px 9px; border-radius:6px;">
+                      🔑 Trx ID: <b>${escapeHtml(item.transactionId)}</b>
+                    </div>
+                  ` : ''}
+                  ${item.orderId ? `
+                    <div style="background:rgba(255,255,255,0.06); color:#ad9eb2; border:1px solid rgba(255,255,255,0.1); font-size:10.5px; font-weight:600; padding:3px 8px; border-radius:6px;">
+                      #${escapeHtml(item.orderId)}
+                    </div>
+                  ` : ''}
                 </div>
 
                 <div class="details-grid">
@@ -1128,6 +1140,12 @@
                     <span>लिङ्ग:</span>
                     <strong>${escapeHtml(item.gender || 'नखुलेको')}</strong>
                   </div>
+                  ${item.email ? `
+                  <div class="detail-item">
+                    <span>इमेल ठेगाना:</span>
+                    <strong>${escapeHtml(item.email)}</strong>
+                  </div>
+                  ` : ''}
                   <div class="detail-item">
                     <span>जन्म मिति (वि.सं.):</span>
                     <strong>${escapeHtml(item.dobBs || '—')}</strong>

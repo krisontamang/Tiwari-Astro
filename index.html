@@ -23,11 +23,11 @@
         bottom: 20px;
         left: 20px;
         z-index: 999;
-        background: rgba(22, 17, 34, 0.85);
+        background: rgba(22, 17, 34, 0.9);
         backdrop-filter: blur(8px);
         border: 1px solid rgba(216, 176, 106, 0.3);
         color: #d8b06a;
-        padding: 7px 14px;
+        padding: 8px 14px;
         border-radius: 999px;
         font-size: 11px;
         font-weight: 600;
@@ -44,14 +44,41 @@
         border-color: #d8b06a;
         transform: translateY(-2px);
       }
+      .pay-corner-link {
+        position: fixed;
+        bottom: 20px;
+        left: 140px;
+        z-index: 999;
+        background: #00875a;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 4px 15px rgba(0, 135, 90, 0.4);
+        transition: all 0.2s ease;
+      }
+      .pay-corner-link:hover {
+        background: #006644;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 135, 90, 0.55);
+      }
     </style>
   </head>
   <body>
     <div id="root"></div>
 
-    <!-- Admin Link -->
+    <!-- Quick Access Links -->
     <a href="/admin" class="admin-corner-link" title="Astro Tiwari Admin Portal">
-      <span>🔐</span> Admin Portal
+      <span>🔐</span> Admin
+    </a>
+    <a href="/pay" class="pay-corner-link" title="Simple Payment System (Choose plan & Pay)">
+      <span>💳</span> Quick Pay & Upload Screenshot
     </a>
 
     <!-- Interactive Scripts: QR Lightbox & Form Submission Capture -->

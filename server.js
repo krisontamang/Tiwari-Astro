@@ -292,10 +292,13 @@ const server = http.createServer(async (req, res) => {
     }
 
     const newSubmission = {
-      id,
+      id: body.orderId || id,
+      orderId: body.orderId || ('AT-' + Date.now().toString().slice(-6)),
+      transactionId: body.transactionId || '',
       createdAt: new Date().toISOString(),
       name: body.name || 'Anonymous',
       phone: body.phone || '',
+      email: body.email || '',
       gender: body.gender || '',
       dobBs: body.dobBs || body.dob_bs || '',
       dobAd: body.dobAd || body.dob_ad || '',
@@ -303,7 +306,7 @@ const server = http.createServer(async (req, res) => {
       birthPeriod: body.birth_period || '',
       birthPlace: body.birthPlace || body.birth_place || '',
       package: pkg || 'Standard Package (रु. ४९९)',
-      amount,
+      amount: Number(body.amount) || amount,
       message: body.message || '',
       rectification: body.rectification || '',
       paymentScreenshotUrl: paymentScreenshotUrl || body.paymentScreenshotUrl || '',
@@ -318,7 +321,7 @@ const server = http.createServer(async (req, res) => {
     submissions.unshift(newSubmission);
     writeSubmissions(submissions);
 
-    console.log(`[Submission] New customer submission: ${newSubmission.name} (${newSubmission.phone}), Package: ${newSubmission.package}`);
+    console.log(`[Submission] New customer submission: ${newSubmission.name} (${newSubmission.phone}), Package: ${newSubmission.package}, Trx: ${newSubmission.transactionId}`);
     return sendJSON(res, 200, { success: true, id, submission: newSubmission });
   }
 
@@ -335,6 +338,16 @@ const server = http.createServer(async (req, res) => {
     } else {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('File not found');
+      return;
+    }
+  }
+
+  // --- Route /pay or /checkout to pay/index.html ---
+  if (pathname === '/pay' || pathname === '/pay/' || pathname.startsWith('/pay/') || pathname === '/checkout' || pathname === '/checkout/') {
+    const payPath = path.join(PUBLIC_DIR, 'pay', 'index.html');
+    if (fs.existsSync(payPath)) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
+      fs.createReadStream(payPath).pipe(res);
       return;
     }
   }

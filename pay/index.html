@@ -1,0 +1,1381 @@
+<!doctype html>
+<html lang="ne">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Astro Tiwari — Simple & Fast Payment (योजना छान्नुहोस् र भुक्तानी गर्नुहोस्)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg-body: #0c0a16;
+        --bg-card: #ffffff;
+        --text-dark: #1e1b24;
+        --text-gray: #645a6c;
+        --text-muted: #968a9e;
+        --green: #00875a;
+        --green-hover: #006644;
+        --green-light: #e3fcef;
+        --border-color: #e2e8f0;
+        --gold: #d8b06a;
+        --gold-bg: #fff8eb;
+        --gold-border: #fedc97;
+        --gold-dark: #b88636;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        background-color: var(--bg-body);
+        font-family: 'DM Sans', 'Outfit', sans-serif;
+        color: var(--text-dark);
+        min-height: 100vh;
+        padding: 30px 16px 60px;
+        background-image: 
+          radial-gradient(circle at 10% 10%, rgba(216, 176, 106, 0.08) 0%, transparent 40%),
+          radial-gradient(circle at 90% 90%, rgba(0, 135, 90, 0.06) 0%, transparent 40%);
+      }
+
+      /* Container */
+      .checkout-wrapper {
+        max-width: 680px;
+        margin: 0 auto;
+      }
+
+      /* Top Brand Bar */
+      .brand-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding: 0 4px;
+      }
+      .brand-header a {
+        color: var(--gold);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .brand-header a:hover { color: #fff; }
+      .brand-title {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Main Card */
+      .checkout-card {
+        background: var(--bg-card);
+        border-radius: 1.5rem;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+        padding: 32px 30px;
+        position: relative;
+      }
+
+      /* Header Info Row */
+      .cart-info-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--green);
+        margin-bottom: 22px;
+      }
+      .cart-info-row a {
+        color: var(--text-gray);
+        font-size: 12.5px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /* Stepper Indicator */
+      .stepper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 28px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .step-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--text-muted);
+      }
+      .step-item.active {
+        color: var(--text-dark);
+      }
+      .step-item.completed {
+        color: var(--green);
+      }
+      .step-num {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #e2e8f0;
+        color: #64748b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .step-item.active .step-num {
+        background: var(--text-dark);
+        color: #fff;
+      }
+      .step-item.completed .step-num {
+        background: var(--green);
+        color: #fff;
+      }
+      .step-line {
+        flex: 1;
+        height: 2px;
+        background: #e2e8f0;
+        margin: 0 12px;
+      }
+      .step-line.active {
+        background: var(--green);
+      }
+
+      /* --- Step 1: Plans Grid --- */
+      .section-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .plans-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .plan-option {
+        border: 2px solid var(--border-color);
+        border-radius: 1rem;
+        padding: 18px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .plan-option:hover {
+        border-color: #cbd5e1;
+        background: #fafafa;
+      }
+      .plan-option.selected {
+        border-color: var(--green);
+        background: #f0fdf4;
+      }
+      .plan-radio {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid #cbd5e1;
+        margin-right: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .plan-option.selected .plan-radio {
+        border-color: var(--green);
+      }
+      .plan-option.selected .plan-radio::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+      .plan-left {
+        display: flex;
+        align-items: center;
+      }
+      .plan-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 2px;
+      }
+      .plan-desc {
+        font-size: 12px;
+        color: var(--text-gray);
+      }
+      .plan-price {
+        text-align: right;
+      }
+      .plan-amount {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+      .badge-pop {
+        background: #ffedd5;
+        color: #c2410c;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 999px;
+        margin-left: 6px;
+        text-transform: uppercase;
+      }
+
+      /* --- Step 2: Details Form --- */
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .form-group.full-width {
+        grid-column: 1 / -1;
+      }
+      .form-group label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+      .form-input {
+        background: #fff;
+        border: 1px solid #cbd5e1;
+        border-radius: 0.75rem;
+        padding: 12px 14px;
+        font-size: 14px;
+        color: var(--text-dark);
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .form-input:focus {
+        border-color: var(--green);
+        box-shadow: 0 0 0 3px rgba(0, 135, 90, 0.12);
+      }
+      .form-help {
+        font-size: 11.5px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+      .autofill-badge {
+        background: #e6fffa;
+        color: #047481;
+        border: 1px solid #b2f5ea;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      /* Accordion for custom notes */
+      .accordion-toggle {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-dark);
+        cursor: pointer;
+        padding: 12px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        user-select: none;
+      }
+      .accordion-content {
+        display: none;
+        padding-bottom: 14px;
+      }
+      .accordion-content.open {
+        display: block;
+      }
+
+      /* Buttons Row */
+      .action-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 24px;
+      }
+      .btn-back {
+        background: #fff;
+        border: 1px solid #cbd5e1;
+        color: var(--text-dark);
+        border-radius: 0.75rem;
+        padding: 14px 24px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn-back:hover {
+        background: #f8fafc;
+      }
+      .btn-continue {
+        flex: 1;
+        background: var(--green);
+        border: none;
+        color: #fff;
+        border-radius: 0.75rem;
+        padding: 14px 24px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 4px 15px rgba(0, 135, 90, 0.25);
+      }
+      .btn-continue:hover {
+        background: var(--green-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(0, 135, 90, 0.35);
+      }
+
+      /* --- Step 3: Payment Section (Matching Screenshot 2) --- */
+      .payment-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+      }
+      .payment-title-left {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-dark);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .timer-badge {
+        background: #fef3c7;
+        color: #92400e;
+        border: 1px solid #fde68a;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .payment-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .pay-tab {
+        flex: 1;
+        background: #f8fafc;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 10px 12px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--text-gray);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .pay-tab.active {
+        background: var(--green);
+        color: #fff;
+        border-color: var(--green);
+      }
+
+      /* QR Display Box */
+      .qr-display-card {
+        border: 2px solid #a7f3d0;
+        background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%);
+        border-radius: 1.25rem;
+        padding: 24px;
+        text-align: center;
+        margin-bottom: 14px;
+      }
+      .qr-image-frame {
+        background: #fff;
+        border-radius: 1rem;
+        max-width: 260px;
+        margin: 0 auto 12px;
+        padding: 10px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+      .qr-image-frame img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 0.6rem;
+      }
+      .qr-caption {
+        font-size: 12.5px;
+        color: var(--text-gray);
+        font-weight: 500;
+      }
+
+      /* Exact Amount Banner */
+      .amount-banner {
+        background: var(--green-light);
+        border: 1px solid #bbf7d0;
+        border-radius: 1rem;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      .amount-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--green);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+      }
+      .amount-val {
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--green);
+      }
+      .btn-copy {
+        background: #fff;
+        border: 1px solid #cbd5e1;
+        border-radius: 0.5rem;
+        padding: 6px 14px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--text-dark);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .btn-copy:hover {
+        background: #f1f5f9;
+      }
+
+      /* Info Rows (Recipient & Remarks) */
+      .info-card {
+        border: 1px solid var(--border-color);
+        border-radius: 0.85rem;
+        padding: 12px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      .info-card-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        display: block;
+        margin-bottom: 2px;
+      }
+      .info-card-val {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+      .info-card-sub {
+        font-size: 11px;
+        color: var(--text-gray);
+      }
+
+      /* Paid Upload Proof Button */
+      .btn-upload-proof {
+        width: 100%;
+        background: var(--green);
+        color: #fff;
+        border: none;
+        border-radius: 0.85rem;
+        padding: 16px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        box-shadow: 0 4px 15px rgba(0, 135, 90, 0.25);
+        margin-top: 14px;
+      }
+      .btn-upload-proof:hover {
+        background: var(--green-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(0, 135, 90, 0.35);
+      }
+      .btn-upload-proof-sub {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 8px;
+      }
+
+      /* --- Step 4: Upload Modal (Matching Screenshot 3) --- */
+      #proof-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 12, 24, 0.82);
+        backdrop-filter: blur(6px);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      .modal-box {
+        background: #fff;
+        border-radius: 1.5rem;
+        max-width: 500px;
+        width: 100%;
+        padding: 24px;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+        position: relative;
+        animation: modalSlide 0.25s ease-out;
+      }
+      @keyframes modalSlide {
+        from { transform: scale(0.94); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+      .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+      }
+      .modal-order-tag {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--text-gray);
+      }
+      .shield-icon {
+        width: 28px;
+        height: 28px;
+        background: #fef3c7;
+        color: #d97706;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+      .modal-close {
+        background: #f1f5f9;
+        border: none;
+        color: #475569;
+        width: 32px;
+        height: 32px;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Dashed Yellow Dropzone */
+      .dropzone {
+        border: 2px dashed #fcd34d;
+        background: #fffbeb;
+        border-radius: 1rem;
+        padding: 28px 20px;
+        text-align: center;
+        cursor: pointer;
+        margin-bottom: 16px;
+        transition: all 0.2s ease;
+        position: relative;
+      }
+      .dropzone:hover, .dropzone.dragover {
+        background: #fef3c7;
+        border-color: #f59e0b;
+      }
+      .upload-icon-circle {
+        width: 44px;
+        height: 44px;
+        background: #fef3c7;
+        color: #d97706;
+        border-radius: 50%;
+        margin: 0 auto 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
+      .dropzone-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 4px;
+      }
+      .dropzone-sub {
+        font-size: 12px;
+        color: var(--text-gray);
+      }
+      .kbd-tag {
+        background: #1e293b;
+        color: #fff;
+        border-radius: 4px;
+        padding: 1px 5px;
+        font-size: 10.5px;
+        font-weight: 600;
+      }
+      .preview-image-wrap {
+        display: none;
+        position: relative;
+        margin-top: 10px;
+      }
+      .preview-image-wrap img {
+        max-width: 100%;
+        max-height: 180px;
+        border-radius: 0.5rem;
+        border: 1px solid #cbd5e1;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      .btn-remove-img {
+        position: absolute;
+        top: -8px;
+        right: 15%;
+        background: #ef4444;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      /* Reference ID Input */
+      .ref-input-group {
+        margin-bottom: 16px;
+      }
+      .ref-input-group label {
+        display: block;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--text-gray);
+        margin-bottom: 6px;
+      }
+      .ref-input {
+        width: 100%;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 0.6rem;
+        padding: 12px 14px;
+        font-size: 14px;
+        color: #fff;
+        outline: none;
+      }
+      .ref-input:focus {
+        border-color: var(--green);
+      }
+
+      /* Payable Amount Dark Banner */
+      .modal-amount-banner {
+        background: #1e293b;
+        border-radius: 0.75rem;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+        font-size: 13.5px;
+        margin-bottom: 20px;
+      }
+      .badge-exact {
+        background: #0f766e;
+        color: #5eead4;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+
+      /* Modal Buttons */
+      .modal-buttons {
+        display: flex;
+        gap: 12px;
+      }
+      .btn-modal-cancel {
+        flex: 1;
+        background: #1e293b;
+        color: #fff;
+        border: none;
+        border-radius: 0.75rem;
+        padding: 12px;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .btn-modal-cancel:hover {
+        background: #334155;
+      }
+      .btn-modal-submit {
+        flex: 1.5;
+        background: linear-gradient(135deg, #fcd34d, #f59e0b);
+        color: #78350f;
+        border: none;
+        border-radius: 0.75rem;
+        padding: 12px;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .btn-modal-submit:hover {
+        background: linear-gradient(135deg, #fde68a, #d97706);
+      }
+
+      /* --- Step 5: Success View --- */
+      #success-view {
+        display: none;
+        text-align: center;
+        padding: 30px 10px;
+      }
+      .success-icon {
+        width: 72px;
+        height: 72px;
+        background: #dcfce7;
+        color: #15803d;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+        margin: 0 auto 16px;
+      }
+      .success-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+      }
+      .success-desc {
+        font-size: 13.5px;
+        color: var(--text-gray);
+        max-width: 440px;
+        margin: 0 auto 24px;
+        line-height: 1.6;
+      }
+      .success-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-whatsapp-success {
+        background: #00875a;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 0.75rem;
+        padding: 14px 22px;
+        font-size: 14px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 15px rgba(0, 135, 90, 0.25);
+      }
+      .btn-whatsapp-success:hover {
+        background: #006644;
+      }
+      .btn-home-success {
+        background: #fff;
+        border: 1px solid #cbd5e1;
+        color: var(--text-dark);
+        text-decoration: none;
+        border-radius: 0.75rem;
+        padding: 14px 22px;
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+      }
+      .btn-home-success:hover {
+        background: #f8fafc;
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 560px) {
+        .checkout-card { padding: 22px 18px; }
+        .form-grid { grid-template-columns: 1fr; }
+        .amount-val { font-size: 22px; }
+        .modal-box { padding: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="checkout-wrapper">
+      <!-- Top Brand Row -->
+      <div class="brand-header">
+        <div class="brand-title">
+          <span>🕉️</span> Astro Tiwari
+        </div>
+        <a href="/">
+          ← Back to Homepage
+        </a>
+      </div>
+
+      <!-- Main Checkout Card -->
+      <div class="checkout-card" id="main-checkout-card">
+        <!-- Top Cart Info -->
+        <div class="cart-info-row">
+          <span id="cart-item-title">🛒 1 Consultation Package Selected</span>
+          <a onclick="goToStep(1)" id="change-plan-link">Change plan</a>
+        </div>
+
+        <!-- Stepper -->
+        <div class="stepper">
+          <div class="step-item" id="step-nav-1">
+            <span class="step-num">1</span> Plan
+          </div>
+          <div class="step-line" id="line-1"></div>
+          <div class="step-item" id="step-nav-2">
+            <span class="step-num">2</span> Details
+          </div>
+          <div class="step-line" id="line-2"></div>
+          <div class="step-item" id="step-nav-3">
+            <span class="step-num">3</span> Payment
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 1: CHOOSE PLANS -->
+        <!-- ============================================================== -->
+        <div id="step-1-view">
+          <div class="section-title">
+            <span>आफ्नो प्याकेज छान्नुहोस् (Select a Plan)</span>
+          </div>
+
+          <div class="plans-grid">
+            <!-- Plan 1: Basic -->
+            <div class="plan-option" onclick="selectPlan('Basic Package', 299, 'सामान्य ग्रह दशा र सामान्य प्रश्नोत्तर')">
+              <div class="plan-left">
+                <div class="plan-radio"></div>
+                <div>
+                  <div class="plan-name">Basic Package</div>
+                  <div class="plan-desc">सामान्य ग्रहदशा, मुख्य प्रश्नको उत्तर र छोटो मार्गदर्शन।</div>
+                </div>
+              </div>
+              <div class="plan-price">
+                <div class="plan-amount">NPR 299</div>
+                <div style="font-size:11px; color:var(--text-muted);">रु. २९९/-</div>
+              </div>
+            </div>
+
+            <!-- Plan 2: Standard (Recommended) -->
+            <div class="plan-option selected" onclick="selectPlan('Standard Package', 499, 'पूर्ण जन्मकुण्डली विश्लेषण, करियर तथा सम्बन्ध')">
+              <div class="plan-left">
+                <div class="plan-radio"></div>
+                <div>
+                  <div class="plan-name">
+                    Standard Package <span class="badge-pop">Recommended</span>
+                  </div>
+                  <div class="plan-desc">पूर्ण जन्मकुण्डली, करियर, विवाह तथा स्वास्थ्यको गहन विश्लेषण।</div>
+                </div>
+              </div>
+              <div class="plan-price">
+                <div class="plan-amount" style="color:var(--green);">NPR 499</div>
+                <div style="font-size:11px; color:var(--text-muted);">रु. ४९९/-</div>
+              </div>
+            </div>
+
+            <!-- Plan 3: VIP Premium -->
+            <div class="plan-option" onclick="selectPlan('VIP Premium Package', 1055, 'विस्तृत कुण्डली, वार्षिक दशाफल तथा व्यक्तिगत उपाय')">
+              <div class="plan-left">
+                <div class="plan-radio"></div>
+                <div>
+                  <div class="plan-name">VIP Premium Package</div>
+                  <div class="plan-desc">सम्पूर्ण कुण्डली, विवाह मिलान, २ वर्षको गोचर फल तथा विशेष उपाय।</div>
+                </div>
+              </div>
+              <div class="plan-price">
+                <div class="plan-amount">NPR 1,055</div>
+                <div style="font-size:11px; color:var(--text-muted);">रु. १,०५५/-</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-continue" onclick="goToStep(2)">
+            Continue to Details &rarr;
+          </button>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 2: CUSTOMER DETAILS (Matching Screenshot 1) -->
+        <!-- ============================================================== -->
+        <div id="step-2-view" style="display:none;">
+          <div class="section-title">
+            <span>Your details</span>
+            <span class="autofill-badge">&check; Ready</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="cust-name">Full name *</label>
+              <input type="text" id="cust-name" class="form-input" placeholder="तपाईंको पूरा नाम (e.g. Ramesh Thapa)" required />
+            </div>
+
+            <div class="form-group">
+              <label for="cust-phone">WhatsApp or phone *</label>
+              <input type="tel" id="cust-phone" class="form-input" placeholder="+977 98XXXXXXXX" required />
+            </div>
+
+            <div class="form-group full-width">
+              <label for="cust-email">Email Address <span style="color:var(--text-muted); font-weight:normal;">(For account & delivery notification)</span></label>
+              <input type="email" id="cust-email" class="form-input" placeholder="example@gmail.com" />
+              <div class="form-help">Credentials and consultation report will be sent directly to this email or WhatsApp.</div>
+            </div>
+          </div>
+
+          <!-- Optional Details Accordion -->
+          <div class="accordion-toggle" onclick="toggleAccordion()">
+            <span id="accordion-arrow">&gt;</span>
+            <span>Add birth details & consultation notes (optional)</span>
+          </div>
+          <div class="accordion-content" id="accordion-body">
+            <div class="form-grid" style="margin-top:8px;">
+              <div class="form-group">
+                <label>जन्म मिति (Date of Birth)</label>
+                <input type="text" id="cust-dob" class="form-input" placeholder="२०५४/०८/२२ वा YYYY-MM-DD" />
+              </div>
+              <div class="form-group">
+                <label>जन्म समय र स्थान (Time & Place)</label>
+                <input type="text" id="cust-time-place" class="form-input" placeholder="बिहान ०६:३० AM, काठमाडौं" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>थप सन्देश वा सोध्न चाहेका प्रश्नहरू (Notes / Questions)</label>
+              <textarea id="cust-notes" class="form-input" rows="2" placeholder="करियर, विवाह, वा स्वास्थ्य सम्बन्धी केही विशेष प्रश्न..."></textarea>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn-back" onclick="goToStep(1)">Back</button>
+            <button class="btn-continue" onclick="proceedToPayment()">
+              Continue to payment &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 3: PAYMENT DETAILS (Matching Screenshot 2) -->
+        <!-- ============================================================== -->
+        <div id="step-3-view" style="display:none;">
+          <div class="payment-top-row">
+            <div class="payment-title-left">
+              <span>📱</span>
+              <span>Scan & Pay with Mobile Banking / Wallet</span>
+            </div>
+            <div class="timer-badge">
+              <span>⏱</span>
+              <span id="countdown-timer">09:45</span>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="payment-tabs">
+            <div class="pay-tab active" onclick="setTab(this, 'esewa')">
+              <span>✉</span> eSewa QR
+            </div>
+            <div class="pay-tab" onclick="setTab(this, 'fonepay')">
+              <span>⊞</span> FonePay / Bank QR
+            </div>
+            <div class="pay-tab" onclick="setTab(this, 'bank')">
+              <span>🏛</span> Bank Transfer
+            </div>
+          </div>
+
+          <!-- QR Card -->
+          <div class="qr-display-card">
+            <div class="qr-image-frame">
+              <img src="/manus-storage/eSewa_My_QR_9809192604_1788636795054_2026-09-06_01_18_15_45f0b9e9.jpg" alt="eSewa QR Code" id="display-qr-img" />
+            </div>
+            <div class="qr-caption" id="qr-caption-text">
+              Scan with eSewa, Khalti, or any Nepal bank app
+            </div>
+          </div>
+
+          <!-- Exact Amount Banner -->
+          <div class="amount-banner">
+            <div>
+              <div class="amount-label">EXACT AMOUNT TO PAY</div>
+              <div class="amount-val" id="pay-amount-display">NPR 499</div>
+            </div>
+            <button class="btn-copy" onclick="copyText(selectedPlan.amount, this)">
+              <span>📋</span> Copy
+            </button>
+          </div>
+
+          <!-- Recipient Phone / Wallet ID -->
+          <div class="info-card">
+            <div>
+              <span class="info-card-label">Recipient Phone / Wallet ID</span>
+              <div class="info-card-val">9809192604</div>
+              <div class="info-card-sub">(Ayush Tiwari · Astro Tiwari)</div>
+            </div>
+            <button class="btn-copy" onclick="copyText('9809192604', this)">
+              <span>📋</span> Copy
+            </button>
+          </div>
+
+          <!-- Remarks / Note to Enter -->
+          <div class="info-card">
+            <div>
+              <span class="info-card-label">Remarks / Note to Enter</span>
+              <div class="info-card-val" id="order-ref-display">AT-260906-63912</div>
+            </div>
+            <button class="btn-copy" onclick="copyText(orderRef, this)">
+              <span>📋</span> Copy
+            </button>
+          </div>
+
+          <!-- Big Upload Proof Button -->
+          <button class="btn-upload-proof" onclick="openProofModal()">
+            <span>⬆</span> I Have Paid — Upload Payment Proof
+          </button>
+          <div class="btn-upload-proof-sub">
+            Attach payment screenshot or enter transaction reference
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 5: SUCCESS STATE -->
+        <!-- ============================================================== -->
+        <div id="success-view">
+          <div class="success-icon">&check;</div>
+          <h2 class="success-title">Payment Submitted for Verification!</h2>
+          <p class="success-desc">
+            तपाईंको भुक्तानी रसिद Astro Tiwari मा प्राप्त भएको छ। Admin ले प्रमाणीकरण (Verification) गर्नासाथ तपाईंको कुण्डली परामर्श सुरु हुनेछ।
+          </p>
+
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:1rem; padding:16px; margin-bottom:24px; text-align:left; max-width:440px; margin-left:auto; margin-right:auto;">
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:4px;">Order Details</div>
+            <div style="display:flex; justify-content:space-between; font-size:13.5px; font-weight:700; margin-bottom:4px;">
+              <span id="succ-name">—</span>
+              <span style="color:var(--green);" id="succ-amount">NPR 499</span>
+            </div>
+            <div style="font-size:12px; color:var(--text-gray);">
+              Order Ref: <b id="succ-ref">AT-...</b> · Package: <span id="succ-plan">Standard</span>
+            </div>
+          </div>
+
+          <div class="success-actions">
+            <a href="#" target="_blank" rel="noreferrer" id="succ-wa-btn" class="btn-whatsapp-success">
+              <span>💬</span> Send reference to WhatsApp
+            </a>
+            <a href="/" class="btn-home-success">
+              Back to Home
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 4. UPLOAD PAYMENT PROOF MODAL (Matching Screenshot 3) -->
+    <!-- ============================================================== -->
+    <div id="proof-modal">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div class="modal-order-tag">
+            <div class="shield-icon">&#128737;</div>
+            <div>
+              Order <b id="modal-order-tag">#AT-260906-63912</b> · Payable: <b style="color:#d97706;" id="modal-payable-tag">NPR 499</b>
+            </div>
+          </div>
+          <button class="modal-close" onclick="closeProofModal()">&times;</button>
+        </div>
+
+        <!-- Dashed Dropzone -->
+        <div class="dropzone" id="dropzone" onclick="document.getElementById('file-input').click()">
+          <input type="file" id="file-input" accept="image/*" style="display:none;" onchange="handleFile(this.files[0])" />
+          <div class="upload-icon-circle">&#8682;</div>
+          <div class="dropzone-title">Drop screenshot here or click to browse</div>
+          <div class="dropzone-sub">
+            eSewa, Khalti, or Mobile Banking receipt (or press <span class="kbd-tag">Ctrl+V</span> to paste)
+          </div>
+          <div style="font-size:10.5px; color:var(--text-muted); margin-top:6px;">JPG, PNG, WebP accepted</div>
+
+          <!-- Preview -->
+          <div class="preview-image-wrap" id="preview-wrap">
+            <img src="" id="preview-img" alt="Payment Proof" />
+            <button class="btn-remove-img" onclick="removeImage(event)">&times;</button>
+          </div>
+        </div>
+
+        <!-- Transaction ID -->
+        <div class="ref-input-group">
+          <label for="trx-id-input">Transaction / Reference ID <span style="color:#ef4444;">*</span></label>
+          <input type="text" id="trx-id-input" class="ref-input" placeholder="e.g. 9X2L81920 or eSewa / FonePay Ref ID" />
+        </div>
+
+        <!-- Amount Banner inside Modal -->
+        <div class="modal-amount-banner">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span>📱</span> Payable Amount
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <b id="modal-amount-bold">NPR 499</b>
+            <span class="badge-exact">Exact</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="modal-buttons">
+          <button class="btn-modal-cancel" onclick="closeProofModal()">Cancel</button>
+          <button class="btn-modal-submit" id="btn-submit-proof" onclick="submitProof()">
+            <span>&check;</span> Submit for Verification
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- LOGIC SCRIPT -->
+    <!-- ============================================================== -->
+    <script>
+      let selectedPlan = { name: 'Standard Package', amount: 499, desc: 'पूर्ण जन्मकुण्डली विश्लेषण, करियर तथा सम्बन्ध' };
+      let orderRef = 'AT-' + Math.floor(100000 + Math.random() * 900000);
+      let paymentScreenshotBase64 = '';
+      let timerSeconds = 585; // 09:45
+
+      // Countdown Timer
+      setInterval(() => {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+          const s = (timerSeconds % 60).toString().padStart(2, '0');
+          const el = document.getElementById('countdown-timer');
+          if (el) el.textContent = `${m}:${s}`;
+        }
+      }, 1000);
+
+      // Plan Selection
+      function selectPlan(name, amount, desc) {
+        selectedPlan = { name, amount, desc };
+        document.querySelectorAll('.plan-option').forEach(el => el.classList.remove('selected'));
+        event.currentTarget.classList.add('selected');
+        updateUI();
+      }
+
+      function updateUI() {
+        document.getElementById('cart-item-title').textContent = `🛒 ${selectedPlan.name} (NPR ${selectedPlan.amount})`;
+        document.getElementById('pay-amount-display').textContent = `NPR ${selectedPlan.amount}`;
+        document.getElementById('modal-payable-tag').textContent = `NPR ${selectedPlan.amount}`;
+        document.getElementById('modal-amount-bold').textContent = `NPR ${selectedPlan.amount}`;
+        document.getElementById('order-ref-display').textContent = orderRef;
+        document.getElementById('modal-order-tag').textContent = '#' + orderRef;
+      }
+
+      // Step Navigation
+      function goToStep(step) {
+        document.getElementById('step-1-view').style.display = step === 1 ? 'block' : 'none';
+        document.getElementById('step-2-view').style.display = step === 2 ? 'block' : 'none';
+        document.getElementById('step-3-view').style.display = step === 3 ? 'block' : 'none';
+        document.getElementById('success-view').style.display = 'none';
+
+        // Update Stepper
+        const s1 = document.getElementById('step-nav-1');
+        const s2 = document.getElementById('step-nav-2');
+        const s3 = document.getElementById('step-nav-3');
+        const l1 = document.getElementById('line-1');
+        const l2 = document.getElementById('line-2');
+
+        s1.className = 'step-item ' + (step === 1 ? 'active' : 'completed');
+        s2.className = 'step-item ' + (step === 2 ? 'active' : step > 2 ? 'completed' : '');
+        s3.className = 'step-item ' + (step === 3 ? 'active' : '');
+        l1.className = 'step-line ' + (step > 1 ? 'active' : '');
+        l2.className = 'step-line ' + (step > 2 ? 'active' : '');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function proceedToPayment() {
+        const name = document.getElementById('cust-name').value.trim();
+        const phone = document.getElementById('cust-phone').value.trim();
+        if (!name) {
+          alert('कृपया आफ्नो पूरा नाम भर्नुहोस्। (Please enter your name)');
+          document.getElementById('cust-name').focus();
+          return;
+        }
+        if (!phone) {
+          alert('कृपया सम्पर्क नम्बर वा WhatsApp नम्बर भर्नुहोस्। (Please enter phone/WhatsApp)');
+          document.getElementById('cust-phone').focus();
+          return;
+        }
+        goToStep(3);
+      }
+
+      function toggleAccordion() {
+        const body = document.getElementById('accordion-body');
+        const arrow = document.getElementById('accordion-arrow');
+        body.classList.toggle('open');
+        arrow.innerHTML = body.classList.contains('open') ? '&or;' : '&gt;';
+      }
+
+      // Tabs
+      function setTab(btn, type) {
+        document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        const caption = document.getElementById('qr-caption-text');
+        if (type === 'esewa') {
+          caption.textContent = 'Scan with eSewa, Khalti, or any Nepal bank app';
+        } else if (type === 'fonepay') {
+          caption.textContent = 'Scan via FonePay, NIC Asia, Nabil or Global IME app';
+        } else {
+          caption.textContent = 'Bank Transfer: Account Name: Ayush Tiwari · 9809192604';
+        }
+      }
+
+      // Copy Helper
+      function copyText(val, btn) {
+        navigator.clipboard.writeText(String(val)).then(() => {
+          const original = btn.innerHTML;
+          btn.innerHTML = '<span>&check;</span> Copied!';
+          btn.style.color = 'var(--green)';
+          setTimeout(() => {
+            btn.innerHTML = original;
+            btn.style.color = '';
+          }, 2000);
+        });
+      }
+
+      // Modal Handling
+      function openProofModal() {
+        document.getElementById('proof-modal').style.display = 'flex';
+      }
+      function closeProofModal() {
+        document.getElementById('proof-modal').style.display = 'none';
+      }
+
+      // File & Clipboard Handling
+      function handleFile(file) {
+        if (!file || !file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          paymentScreenshotBase64 = e.target.result;
+          document.getElementById('preview-img').src = paymentScreenshotBase64;
+          document.getElementById('preview-wrap').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function removeImage(e) {
+        e.stopPropagation();
+        paymentScreenshotBase64 = '';
+        document.getElementById('preview-wrap').style.display = 'none';
+        document.getElementById('file-input').value = '';
+      }
+
+      // Paste from clipboard (Ctrl+V)
+      window.addEventListener('paste', (e) => {
+        if (document.getElementById('proof-modal').style.display === 'flex') {
+          const items = (e.clipboardData || window.clipboardData).items;
+          for (let item of items) {
+            if (item.type.indexOf('image') !== -1) {
+              const file = item.getAsFile();
+              handleFile(file);
+              break;
+            }
+          }
+        }
+      });
+
+      // Submit Proof
+      async function submitProof() {
+        const trxId = document.getElementById('trx-id-input').value.trim();
+        if (!paymentScreenshotBase64 && !trxId) {
+          alert('कृपया Payment Screenshot अपलोड गर्नुहोस् वा Transaction ID लेख्नुहोस्।');
+          return;
+        }
+
+        const submitBtn = document.getElementById('btn-submit-proof');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'पठाउँदैछ... ⏳';
+
+        const name = document.getElementById('cust-name').value.trim();
+        const phone = document.getElementById('cust-phone').value.trim();
+        const email = document.getElementById('cust-email').value.trim();
+        const dob = document.getElementById('cust-dob').value.trim();
+        const timePlace = document.getElementById('cust-time-place').value.trim();
+        const notes = document.getElementById('cust-notes').value.trim();
+
+        const payload = {
+          orderId: orderRef,
+          name: name || 'Customer',
+          phone: phone,
+          email: email,
+          package: `${selectedPlan.name} (रु. ${selectedPlan.amount})`,
+          amount: selectedPlan.amount,
+          transactionId: trxId,
+          dobBs: dob,
+          birthTime: timePlace,
+          message: notes ? `${notes} (Trx: ${trxId})` : `Trx: ${trxId}`,
+          paymentScreenshotBase64: paymentScreenshotBase64
+        };
+
+        try {
+          const res = await fetch('/api/submissions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+
+          // Show Success View
+          closeProofModal();
+          document.getElementById('step-1-view').style.display = 'none';
+          document.getElementById('step-2-view').style.display = 'none';
+          document.getElementById('step-3-view').style.display = 'none';
+          document.getElementById('success-view').style.display = 'block';
+
+          document.getElementById('succ-name').textContent = name;
+          document.getElementById('succ-amount').textContent = `NPR ${selectedPlan.amount}`;
+          document.getElementById('succ-ref').textContent = orderRef;
+          document.getElementById('succ-plan').textContent = selectedPlan.name;
+
+          // Configure WhatsApp Button
+          const waText = encodeURIComponent(
+            `नमस्कार Astro Tiwari, मैले ${selectedPlan.name} (NPR ${selectedPlan.amount}) को भुक्तानी गरेको छु।\n` +
+            `Order Ref: #${orderRef}\n` +
+            (trxId ? `Transaction ID: ${trxId}\n` : '') +
+            `नाम: ${name}\nसम्पर्क: ${phone}\n` +
+            `कृपया प्रमाणीकरण (verify) गरी कुण्डली परामर्श सुरु गरिदिनुहोला।`
+          );
+          document.getElementById('succ-wa-btn').href = `https://wa.me/9779809192604?text=${waText}`;
+
+        } catch (err) {
+          alert('सर्भरमा पठाउन समस्या भयो। कृपया फेरि प्रयास गर्नुहोस्।');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>&check;</span> Submit for Verification';
+        }
+      }
+
+      // Initialize
+      updateUI();
+    </script>
+  </body>
+</html>
