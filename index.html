@@ -4,34 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta name="theme-color" content="#08060f" />
-  <meta name="description" content="Astro Tiwari — सरल, व्यक्तिगत र संवेदनशील वैदिक ज्योतिष मार्गदर्शन। आजको राशिफल, सरल कुण्डली र नित्य शान्ति मन्त्रहरू।" />
-  <meta property="og:title" content="Astro Tiwari — ज्योतिषमा स्पष्टता, तपाईंको भविष्य तपाईंको रोजाइमा" />
-  <meta property="og:description" content="जन्मकुण्डली, विवाह मिलान र व्यक्तिगत ज्योतिषीय मार्गदर्शनका लागि Astro Tiwari सँग जोडिनुहोस्।" />
+  <meta name="description" content="Astro Tiwari — सरल, व्यक्तिगत र संवेदनशील वैदिक ज्योतिष मार्गदर्शन। आजको राशिफल, परम्परागत कुण्डली चक्र र नित्य शान्ति मन्त्रहरू।" />
+  <meta property="og:title" content="Astro Tiwari — वैदिक ज्योतिष तथा कुण्डली मार्गदर्शन" />
+  <meta property="og:description" content="जन्मकुण्डली, विवाह मिलान र व्यक्तिगत ज्योतिषीय मार्गदर्शनका लागि Astro Tiwari।" />
   <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
   <title>Astro Tiwari — वैदिक ज्योतिष, राशिफल र कुण्डली मार्गदर्शन</title>
 
-  <!-- Typography: Cormorant Garamond (Majestic Serif) + Outfit (Modern Clean UI) + Noto Serif & Sans Devanagari -->
+  <!-- Clean Devanagari & Modern Sans Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- React Booking & eSewa payment bundle -->
-  <script type="module" crossorigin src="/assets/index-ChgpL9kq.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DpdlmGVI.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ════════════════════════════════════════════════════════════════
-       UI/UX PRO MAX DESIGN SYSTEM TOKENS: VEDIC LIQUID GLASS & LUXURY
+       VEDIC LUXURY DESIGN SYSTEM (NO AI SLOP, NO DASHES, AMPLE SPACING)
        ════════════════════════════════════════════════════════════════ */
     :root {
-      /* Color Palette: Cosmic Dark & Sacred Vedic Gold */
       --bg-base: #08060f;
       --bg-surface: #100b1d;
-      --bg-card: rgba(18, 14, 30, 0.75);
-      --bg-card-hover: rgba(26, 20, 44, 0.88);
-      --bg-card-active: rgba(33, 24, 56, 0.95);
-      --bg-input: #0b0716;
+      --bg-card: rgba(18, 14, 30, 0.78);
+      --bg-card-hover: rgba(26, 20, 44, 0.92);
+      --bg-input: #0c0817;
 
       --gold-100: #fef7e6;
       --gold-200: #fde8b8;
@@ -39,60 +32,26 @@
       --gold-400: #f4c256;
       --gold-500: #d8a846;
       --gold-600: #b88628;
-      --gold-700: #8c6016;
 
-      --gold-border: rgba(216, 168, 70, 0.24);
-      --gold-border-hover: rgba(244, 194, 86, 0.5);
-      --gold-glow: rgba(216, 168, 70, 0.2);
-
-      --purple-aura: rgba(139, 92, 246, 0.15);
-      --purple-border: rgba(167, 139, 250, 0.25);
+      --gold-border: rgba(216, 168, 70, 0.26);
+      --gold-border-focus: rgba(244, 194, 86, 0.6);
+      --gold-glow: rgba(216, 168, 70, 0.18);
 
       --text-primary: #fbf9f5;
       --text-secondary: #c9bed2;
-      --text-muted: #8d7f96;
-      --text-dim: #65586d;
+      --text-muted: #95879f;
 
-      --accent-emerald: #10b981;
-      --accent-emerald-bg: rgba(16, 185, 129, 0.12);
-      --accent-ruby: #ef4444;
-      --accent-saffron: #f97316;
+      --font-serif: 'Noto Serif Devanagari', 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Noto Sans Devanagari', 'Outfit', -apple-system, sans-serif;
 
-      /* Typography Tokens */
-      --font-serif: 'Cormorant Garamond', 'Noto Serif Devanagari', Georgia, serif;
-      --font-sans: 'Outfit', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-dev-serif: 'Noto Serif Devanagari', serif;
-
-      /* Spacing Scale (8pt grid) */
-      --space-1: 4px;
-      --space-2: 8px;
-      --space-3: 12px;
-      --space-4: 16px;
-      --space-5: 20px;
-      --space-6: 24px;
-      --space-8: 32px;
-      --space-10: 40px;
-      --space-12: 48px;
-      --space-16: 64px;
-      --space-20: 80px;
-
-      /* Radius & Shadows */
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-xl: 28px;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
       --radius-full: 9999px;
 
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-      --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.55), 0 0 12px var(--gold-glow);
-      --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.7), 0 0 24px var(--gold-glow);
-      --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-
-      --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-      --transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-card: 0 10px 30px -4px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
-    /* Reset & Base Setup */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -102,7 +61,6 @@
     html {
       scroll-behavior: smooth;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       color-scheme: dark;
     }
 
@@ -111,235 +69,198 @@
       color: var(--text-primary);
       font-family: var(--font-sans);
       font-size: 15px;
-      line-height: 1.65;
+      line-height: 1.7;
       overflow-x: hidden;
       padding-bottom: 120px;
       background-image:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 92, 246, 0.14), transparent 70%),
-        radial-gradient(circle 600px at 90% 20%, rgba(216, 168, 70, 0.07), transparent 60%),
-        radial-gradient(circle 500px at 10% 60%, rgba(120, 50, 200, 0.06), transparent 60%),
-        radial-gradient(circle 800px at 50% 100%, rgba(216, 168, 70, 0.06), transparent 70%);
+        radial-gradient(ellipse 70% 40% at 50% -10%, rgba(139, 92, 246, 0.14), transparent 70%),
+        radial-gradient(circle 500px at 90% 25%, rgba(216, 168, 70, 0.08), transparent 60%),
+        radial-gradient(circle 600px at 50% 100%, rgba(216, 168, 70, 0.06), transparent 70%);
       background-attachment: fixed;
     }
 
-    /* Selection & Focus */
-    ::selection {
-      background: rgba(216, 168, 70, 0.35);
-      color: #ffffff;
-    }
-    :focus-visible {
-      outline: 2px solid var(--gold-400);
-      outline-offset: 3px;
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-       LAYOUT WRAPPERS & ATOMIC CONTAINERS
-       ════════════════════════════════════════════════════════════════ */
+    /* Container & Spacing */
     .container {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1180px;
       margin-left: auto;
       margin-right: auto;
-      padding-left: clamp(16px, 4vw, 32px);
-      padding-right: clamp(16px, 4vw, 32px);
+      padding-left: clamp(20px, 4vw, 36px);
+      padding-right: clamp(20px, 4vw, 36px);
     }
 
     .section {
-      padding-top: clamp(48px, 8vw, 76px);
-      padding-bottom: clamp(48px, 8vw, 76px);
-      position: relative;
+      padding-top: clamp(52px, 8vw, 84px);
+      padding-bottom: clamp(52px, 8vw, 84px);
     }
 
-    /* Section Header Architecture */
     .section-header {
       text-align: center;
-      max-width: 720px;
-      margin: 0 auto clamp(32px, 5vw, 48px);
+      max-width: 680px;
+      margin: 0 auto clamp(36px, 5vw, 54px);
     }
 
     .section-tag {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(216, 168, 70, 0.1);
+      background: rgba(216, 168, 70, 0.12);
       border: 1px solid var(--gold-border);
       color: var(--gold-300);
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 5px 14px;
+      padding: 6px 16px;
       border-radius: var(--radius-full);
-      margin-bottom: 12px;
-      box-shadow: var(--shadow-sm);
+      margin-bottom: 14px;
     }
 
     .section-title {
       font-family: var(--font-serif);
-      font-size: clamp(28px, 4.5vw, 42px);
+      font-size: clamp(28px, 4.5vw, 40px);
       font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
+      line-height: 1.3;
       color: var(--gold-100);
       margin-bottom: 12px;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
     }
 
     .section-desc {
       font-size: clamp(14px, 1.8vw, 16px);
       color: var(--text-secondary);
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
-    .ornament-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 16px auto 0;
-      max-width: 220px;
+    .ornament {
       color: var(--gold-500);
-      font-size: 13px;
-      opacity: 0.75;
-    }
-    .ornament-divider::before,
-    .ornament-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+      margin-top: 14px;
+      font-size: 14px;
+      opacity: 0.8;
+      letter-spacing: 4px;
     }
 
     /* ════════════════════════════════════════════════════════════════
-       NAVBAR (STICKY GLASSMORPHISM)
+       NAVBAR
        ════════════════════════════════════════════════════════════════ */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 200;
-      background: rgba(8, 6, 15, 0.84);
+      background: rgba(8, 6, 15, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--gold-border);
-      transition: all var(--transition-fast);
     }
 
     .navbar-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 68px;
+      height: 72px;
       gap: 16px;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
       color: var(--text-primary);
     }
 
     .brand-icon {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffe6a3, var(--gold-600) 80%);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #100b1a;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 800;
-      box-shadow: 0 0 20px rgba(216, 168, 70, 0.4);
+      box-shadow: 0 0 20px rgba(216, 168, 70, 0.35);
       flex-shrink: 0;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
     }
 
     .brand-title {
       font-family: var(--font-serif);
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 700;
       color: var(--gold-200);
       line-height: 1.1;
-      letter-spacing: -0.01em;
     }
 
     .brand-subtitle {
-      font-size: 11px;
-      font-weight: 500;
+      font-size: 11.5px;
       color: var(--text-muted);
-      letter-spacing: 0.04em;
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .nav-btn {
+    .nav-link-btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 9px 18px;
+      gap: 6px;
+      padding: 10px 18px;
       font-family: var(--font-sans);
       font-size: 13.5px;
       font-weight: 600;
       border-radius: var(--radius-full);
       text-decoration: none;
-      border: 1px solid transparent;
+      border: 1px solid var(--gold-border);
+      background: rgba(216, 168, 70, 0.08);
+      color: var(--gold-200);
       cursor: pointer;
       min-height: 44px;
-      transition: all var(--transition-fast);
-      white-space: nowrap;
+      transition: all 0.2s ease;
     }
-
-    .nav-btn-ghost {
-      background: rgba(216, 168, 70, 0.08);
-      border-color: var(--gold-border);
-      color: var(--gold-200);
-    }
-    .nav-btn-ghost:hover {
+    .nav-link-btn:hover {
       background: rgba(216, 168, 70, 0.18);
-      border-color: var(--gold-border-hover);
       color: #fff;
       transform: translateY(-1px);
     }
 
-    .nav-btn-primary {
-      background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
-      color: #100b1a;
+    .nav-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      font-family: var(--font-sans);
+      font-size: 14px;
       font-weight: 700;
-      box-shadow: 0 4px 16px rgba(216, 168, 70, 0.35);
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+      color: #0d0918;
+      border: none;
+      cursor: pointer;
+      min-height: 44px;
+      box-shadow: 0 4px 18px rgba(216, 168, 70, 0.35);
+      transition: all 0.2s ease;
     }
-    .nav-btn-primary:hover {
+    .nav-cta-btn:hover {
       background: linear-gradient(135deg, #ffe08a, var(--gold-500));
       transform: translateY(-1.5px);
-      box-shadow: 0 6px 22px rgba(216, 168, 70, 0.5);
+      box-shadow: 0 6px 24px rgba(216, 168, 70, 0.5);
     }
 
     @media (max-width: 768px) {
-      .navbar-inner { height: 60px; }
+      .navbar-inner { height: 64px; }
       .brand-title { font-size: 18px; }
-      .brand-icon { width: 34px; height: 34px; font-size: 17px; }
-      .nav-btn { padding: 8px 14px; font-size: 12.5px; min-height: 40px; }
+      .brand-icon { width: 36px; height: 36px; font-size: 18px; }
       .hide-mobile { display: none !important; }
+      .nav-cta-btn { padding: 8px 16px; font-size: 13px; min-height: 40px; }
     }
 
     /* ════════════════════════════════════════════════════════════════
-       HERO SECTION (LUXURY VEDIC SHOWCASE)
+       HERO SECTION
        ════════════════════════════════════════════════════════════════ */
     .hero-section {
-      padding-top: clamp(48px, 9vw, 84px);
-      padding-bottom: clamp(40px, 7vw, 70px);
+      padding-top: clamp(48px, 8vw, 80px);
+      padding-bottom: clamp(40px, 6vw, 68px);
       text-align: center;
-      position: relative;
     }
 
     .hero-badge {
@@ -349,73 +270,73 @@
       background: rgba(216, 168, 70, 0.12);
       border: 1px solid var(--gold-border);
       color: var(--gold-300);
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 600;
-      padding: 6px 18px;
+      padding: 7px 20px;
       border-radius: var(--radius-full);
       margin-bottom: 24px;
-      backdrop-filter: blur(8px);
       box-shadow: 0 0 20px rgba(216, 168, 70, 0.15);
     }
 
     .hero-title {
       font-family: var(--font-serif);
-      font-size: clamp(34px, 6.5vw, 62px);
+      font-size: clamp(34px, 6vw, 56px);
       font-weight: 700;
-      line-height: 1.14;
-      letter-spacing: -0.015em;
+      line-height: 1.25;
       margin-bottom: 20px;
-      max-width: 860px;
+      max-width: 820px;
       margin-left: auto;
       margin-right: auto;
-      background: linear-gradient(135deg, #ffffff 10%, #fef4dc 40%, var(--gold-300) 80%, var(--gold-500) 100%);
+      color: #fff;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #ffffff 20%, #fef4dc 50%, var(--gold-300) 80%, var(--gold-500) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8);
     }
 
     .hero-subtitle {
-      font-size: clamp(15px, 2vw, 18px);
+      font-size: clamp(15px, 2vw, 17px);
       color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 620px;
+      line-height: 1.8;
+      max-width: 640px;
       margin: 0 auto 36px;
     }
 
-    .hero-cta-group {
+    .hero-btn-group {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
+      gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: 48px;
+      margin-bottom: 44px;
     }
 
-    .btn-hero-primary {
+    .btn-main {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       background: linear-gradient(135deg, var(--gold-300), var(--gold-600));
       color: #0c0816;
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 700;
-      padding: 14px 34px;
+      padding: 15px 34px;
       border-radius: var(--radius-full);
       text-decoration: none;
       border: none;
       cursor: pointer;
-      min-height: 50px;
+      min-height: 52px;
       box-shadow: 0 8px 28px rgba(216, 168, 70, 0.4);
-      transition: all var(--transition-fast);
+      transition: all 0.2s ease;
     }
-    .btn-hero-primary:hover {
+    .btn-main:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 36px rgba(216, 168, 70, 0.6);
-      background: linear-gradient(135deg, #fff2c4, var(--gold-400));
+      box-shadow: 0 12px 34px rgba(216, 168, 70, 0.55);
     }
 
-    .btn-hero-secondary {
+    .btn-outline {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -425,266 +346,268 @@
       color: var(--gold-200);
       font-size: 15px;
       font-weight: 600;
-      padding: 14px 28px;
+      padding: 15px 28px;
       border-radius: var(--radius-full);
       text-decoration: none;
       cursor: pointer;
-      min-height: 50px;
-      backdrop-filter: blur(10px);
-      transition: all var(--transition-fast);
+      min-height: 52px;
+      transition: all 0.2s ease;
     }
-    .btn-hero-secondary:hover {
+    .btn-outline:hover {
       background: rgba(216, 168, 70, 0.15);
-      border-color: var(--gold-border-hover);
       color: #fff;
       transform: translateY(-2px);
     }
 
-    /* Trust highlights bar */
-    .trust-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(16px, 4vw, 36px);
-      flex-wrap: wrap;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      max-width: 820px;
-      margin: 0 auto;
-    }
-    .trust-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-    .trust-item span:first-child {
-      font-size: 16px;
-    }
-
     /* ════════════════════════════════════════════════════════════════
-       1. आजको राशिफल SECTION
+       1. आजको राशिफल
        ════════════════════════════════════════════════════════════════ */
-    .rashifal-wrap {
-      border-top: 1px solid var(--gold-border);
-      border-bottom: 1px solid var(--gold-border);
-      background: linear-gradient(180deg, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
-    }
-
-    .date-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(216, 168, 70, 0.1);
-      border: 1px solid var(--gold-border);
-      color: var(--gold-300);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 6px 18px;
-      border-radius: var(--radius-full);
-      margin-bottom: 28px;
-    }
-
     .rashi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-      gap: 16px;
+      gap: 18px;
     }
 
     .rashi-card {
       background: var(--bg-card);
       border: 1px solid var(--gold-border);
       border-radius: var(--radius-md);
-      padding: 20px 16px;
+      padding: 24px 18px;
       text-align: center;
       cursor: pointer;
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(14px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: all var(--transition-smooth);
-    }
-    .rashi-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(216, 168, 70, 0.12), transparent 70%);
-      opacity: 0;
-      transition: opacity var(--transition-fast);
     }
     .rashi-card:hover {
       background: var(--bg-card-hover);
-      border-color: var(--gold-border-hover);
+      border-color: var(--gold-border-focus);
       transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-    }
-    .rashi-card:hover::before {
-      opacity: 1;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 14px var(--gold-glow);
     }
 
-    .rashi-badge-icon {
+    .rashi-icon-box {
       width: 52px;
       height: 52px;
-      margin: 0 auto 12px;
+      margin: 0 auto 14px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(216, 168, 70, 0.25) 0%, rgba(216, 168, 70, 0.05) 100%);
+      background: radial-gradient(circle, rgba(216, 168, 70, 0.25) 0%, rgba(216, 168, 70, 0.04) 100%);
       border: 1px solid var(--gold-border);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 26px;
-      transition: transform var(--transition-fast);
-    }
-    .rashi-card:hover .rashi-badge-icon {
-      transform: scale(1.08);
-      border-color: var(--gold-400);
     }
 
-    .rashi-name-np {
+    .rashi-title {
       font-family: var(--font-serif);
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 700;
       color: var(--gold-200);
-      margin-bottom: 3px;
-      line-height: 1.2;
+      margin-bottom: 4px;
     }
 
-    .rashi-name-en {
+    .rashi-sub {
       font-size: 11.5px;
-      color: var(--text-dim);
+      color: var(--text-muted);
       margin-bottom: 12px;
-      font-weight: 500;
     }
 
     .rashi-preview {
-      font-size: 12.5px;
+      font-size: 13px;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.65;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
 
-    .rashi-expanded {
+    .rashi-details {
       display: none;
-      font-size: 12.5px;
+      font-size: 13px;
       color: var(--text-primary);
       line-height: 1.8;
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px dashed rgba(216, 168, 70, 0.25);
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(216, 168, 70, 0.3);
       text-align: left;
     }
 
     .rashi-card.open {
       grid-column: span 2;
-      background: var(--bg-card-active);
+      background: rgba(30, 22, 50, 0.95);
       border-color: var(--gold-400);
-      box-shadow: var(--shadow-lg);
     }
     @media (max-width: 600px) {
       .rashi-card.open { grid-column: span 1; }
     }
     .rashi-card.open .rashi-preview {
       -webkit-line-clamp: unset;
-      overflow: visible;
       color: var(--gold-200);
       font-weight: 500;
     }
-    .rashi-card.open .rashi-expanded {
+    .rashi-card.open .rashi-details {
       display: block;
-      animation: fadeIn 0.25s ease;
     }
 
-    .rashi-toggle-btn {
-      margin-top: 12px;
-      font-size: 11.5px;
+    .rashi-toggle {
+      margin-top: 14px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--gold-400);
-      letter-spacing: 0.03em;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      display: inline-block;
     }
 
     /* ════════════════════════════════════════════════════════════════
-       2. सरल कुण्डली निर्माता SECTION
+       2. सरल कुण्डली निर्माता & ACCURATE DIAMOND CHART
        ════════════════════════════════════════════════════════════════ */
-    .kundali-section {
-      background: rgba(14, 10, 24, 0.5);
-    }
-
-    .kundali-grid {
+    .kundali-layout {
       display: grid;
       grid-template-columns: 1fr 1.15fr;
-      gap: clamp(20px, 3vw, 32px);
+      gap: 32px;
       align-items: start;
     }
     @media (max-width: 860px) {
-      .kundali-grid { grid-template-columns: 1fr; }
+      .kundali-layout { grid-template-columns: 1fr; }
     }
 
-    .card-panel {
+    .form-card {
       background: var(--bg-card);
       border: 1px solid var(--gold-border);
       border-radius: var(--radius-lg);
-      padding: clamp(20px, 3vw, 32px);
-      box-shadow: var(--shadow-md);
+      padding: clamp(24px, 4vw, 36px);
+      box-shadow: var(--shadow-card);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      position: relative;
     }
 
-    .field-group {
-      margin-bottom: 18px;
+    .input-group {
+      margin-bottom: 22px;
     }
 
-    .field-label {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 13px;
+    .input-label {
+      display: block;
+      font-size: 13.5px;
       font-weight: 600;
       color: var(--gold-300);
       margin-bottom: 8px;
     }
 
-    .field-input {
+    .input-field {
       width: 100%;
-      height: 46px;
+      height: 48px;
       background: var(--bg-input);
-      border: 1px solid rgba(216, 168, 70, 0.25);
+      border: 1px solid rgba(216, 168, 70, 0.3);
       border-radius: var(--radius-sm);
-      padding: 0 14px;
+      padding: 0 16px;
       color: #fff;
       font-size: 14px;
       font-family: inherit;
       outline: none;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .field-input:focus {
+    .input-field:focus {
       border-color: var(--gold-400);
       box-shadow: 0 0 0 3px rgba(216, 168, 70, 0.2);
     }
 
-    .input-row-3 {
+    .grid-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .btn-kundali-generate {
+    /* Scrollable Nepal Location Selector */
+    .location-wrapper {
+      position: relative;
+    }
+
+    .location-select-box {
       width: 100%;
       height: 48px;
+      background: var(--bg-input);
+      border: 1px solid rgba(216, 168, 70, 0.3);
+      border-radius: var(--radius-sm);
+      padding: 0 16px;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .location-select-box:focus {
+      border-color: var(--gold-400);
+    }
+
+    .location-dropdown {
+      position: absolute;
+      top: 54px;
+      left: 0;
+      right: 0;
+      background: #140e24;
+      border: 1px solid var(--gold-400);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85);
+      z-index: 100;
+      display: none;
+      padding: 8px;
+    }
+
+    .location-search-input {
+      width: 100%;
+      height: 40px;
+      background: #090612;
+      border: 1px solid rgba(216, 168, 70, 0.3);
+      border-radius: 6px;
+      padding: 0 12px;
+      color: #fff;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      margin-bottom: 8px;
+    }
+    .location-search-input:focus {
+      border-color: var(--gold-400);
+    }
+
+    .location-scroll-list {
+      max-height: 220px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold-500) rgba(255, 255, 255, 0.05);
+    }
+    .location-scroll-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    .location-scroll-list::-webkit-scrollbar-thumb {
+      background: var(--gold-600);
+      border-radius: 4px;
+    }
+
+    .location-item {
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .location-item:hover, .location-item.selected {
+      background: rgba(216, 168, 70, 0.2);
+      color: #fff;
+    }
+
+    .btn-generate {
+      width: 100%;
+      height: 50px;
       background: linear-gradient(135deg, #7c3aed, #4c1d95);
       color: #fff;
       border: 1px solid rgba(167, 139, 250, 0.4);
       border-radius: var(--radius-sm);
-      font-size: 15px;
+      font-size: 15.5px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -692,312 +615,318 @@
       justify-content: center;
       gap: 8px;
       box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
-      transition: all var(--transition-fast);
-      margin-top: 10px;
+      transition: all 0.2s;
+      margin-top: 14px;
     }
-    .btn-kundali-generate:hover {
+    .btn-generate:hover {
       background: linear-gradient(135deg, #8b5cf6, #5b21b6);
       transform: translateY(-1.5px);
-      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.5);
     }
 
-    .chart-panel {
-      min-height: 380px;
+    /* Chart Container */
+    .chart-container {
+      background: rgba(14, 10, 25, 0.9);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: clamp(20px, 3vw, 32px);
+      min-height: 420px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: rgba(14, 10, 25, 0.85);
-      border: 1px solid var(--gold-border);
-      border-radius: var(--radius-lg);
-      padding: 24px;
+      box-shadow: var(--shadow-card);
     }
 
-    .chart-placeholder-icon {
-      font-size: 52px;
-      margin-bottom: 14px;
-      opacity: 0.6;
-    }
-    .chart-placeholder-text {
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .kundali-meta-card {
-      margin-top: 16px;
+    .chart-box {
       width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .chart-meta-box {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 420px;
       background: rgba(216, 168, 70, 0.08);
       border: 1px solid var(--gold-border);
       border-radius: var(--radius-sm);
-      padding: 14px 18px;
+      padding: 16px 20px;
       text-align: left;
-      font-size: 13px;
-      line-height: 1.8;
+      font-size: 13.5px;
+      line-height: 1.85;
       color: var(--text-secondary);
     }
 
     /* ════════════════════════════════════════════════════════════════
-       3. शान्ति मन्त्र SECTION
+       3. शान्ति मन्त्रहरू
        ════════════════════════════════════════════════════════════════ */
     .mantra-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
+      gap: 24px;
     }
 
     .mantra-card {
       background: var(--bg-card);
       border: 1px solid var(--gold-border);
       border-radius: var(--radius-md);
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-card);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all var(--transition-smooth);
-      position: relative;
+      transition: all 0.25s ease;
     }
     .mantra-card:hover {
-      border-color: var(--gold-border-hover);
+      border-color: var(--gold-border-focus);
       background: var(--bg-card-hover);
       transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
     }
 
     .mantra-top {
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
-    .mantra-icon-badge {
-      width: 48px;
-      height: 48px;
+    .mantra-icon {
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(216, 168, 70, 0.25) 0%, rgba(216, 168, 70, 0.05) 100%);
       border: 1px solid var(--gold-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 24px;
       flex-shrink: 0;
     }
 
-    .mantra-title {
+    .mantra-name {
       font-family: var(--font-serif);
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--gold-100);
       line-height: 1.2;
     }
     .mantra-deity {
-      font-size: 12px;
+      font-size: 12.5px;
       color: var(--gold-400);
       font-weight: 600;
     }
 
     .mantra-verse {
-      background: rgba(8, 5, 14, 0.7);
+      background: rgba(8, 5, 14, 0.75);
       border-left: 3px solid var(--gold-400);
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      padding: 14px 18px;
-      font-family: var(--font-dev-serif);
-      font-size: 14px;
-      line-height: 2;
-      color: #f7efff;
+      padding: 16px 20px;
+      font-family: var(--font-serif);
+      font-size: 15px;
+      line-height: 2.1;
+      color: #fbf6ff;
       white-space: pre-line;
-      margin-bottom: 14px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      margin-bottom: 16px;
     }
 
     .mantra-meaning {
-      font-size: 12.5px;
+      font-size: 13px;
       color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 16px;
+      line-height: 1.7;
+      margin-bottom: 20px;
       font-style: italic;
     }
 
-    .mantra-actions {
+    .mantra-bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 16px;
       margin-top: auto;
     }
 
-    .mantra-pill {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--gold-400);
+    .btn-copy {
       background: rgba(216, 168, 70, 0.1);
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(216, 168, 70, 0.2);
-    }
-
-    .btn-copy-mantra {
-      background: transparent;
       border: 1px solid var(--gold-border);
-      color: var(--text-secondary);
-      font-size: 12px;
+      color: var(--gold-200);
+      font-size: 12.5px;
       font-weight: 600;
-      padding: 5px 12px;
+      padding: 7px 16px;
       border-radius: var(--radius-full);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      transition: all var(--transition-fast);
+      gap: 6px;
+      transition: all 0.2s;
     }
-    .btn-copy-mantra:hover {
-      background: rgba(216, 168, 70, 0.15);
+    .btn-copy:hover {
+      background: rgba(216, 168, 70, 0.25);
       color: #fff;
-      border-color: var(--gold-border-hover);
     }
 
     /* ════════════════════════════════════════════════════════════════
-       4. CONSULTATION & BOOKING SECTION
+       4. CONSULTATION & BOOKING SECTION (CLEAN NATIVE NEPALI)
        ════════════════════════════════════════════════════════════════ */
-    .booking-card-banner {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.16) 0%, rgba(216, 168, 70, 0.12) 100%);
+    .booking-section {
+      background: linear-gradient(180deg, transparent 0%, rgba(16, 11, 26, 0.7) 100%);
+    }
+
+    .booking-card {
+      background: var(--bg-card);
       border: 1px solid var(--gold-border);
       border-radius: var(--radius-lg);
-      padding: clamp(28px, 4vw, 44px) clamp(20px, 4vw, 36px);
-      text-align: center;
+      padding: clamp(28px, 4vw, 44px);
+      box-shadow: var(--shadow-card);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .booking-services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
       margin-bottom: 28px;
-      box-shadow: var(--shadow-md);
-      backdrop-filter: blur(16px);
     }
 
-    .booking-banner-title {
+    .service-option {
+      background: rgba(10, 7, 18, 0.6);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .service-option:hover, .service-option.active {
+      background: rgba(216, 168, 70, 0.15);
+      border-color: var(--gold-400);
+    }
+    .service-option-title {
       font-family: var(--font-serif);
-      font-size: clamp(26px, 3.5vw, 36px);
+      font-size: 16.5px;
       font-weight: 700;
-      color: var(--gold-100);
-      margin-bottom: 10px;
+      color: var(--gold-200);
+      margin-bottom: 4px;
+    }
+    .service-option-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
     }
 
-    .booking-banner-desc {
-      font-size: clamp(14px, 1.8vw, 16px);
-      color: var(--text-secondary);
-      max-width: 580px;
-      margin: 0 auto 20px;
-      line-height: 1.65;
-    }
-
-    .booking-badges-row {
+    .btn-whatsapp-booking {
+      width: 100%;
+      height: 52px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #0c1811;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 10px;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+      transition: all 0.2s;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+    .btn-whatsapp-booking:hover {
+      background: linear-gradient(135deg, #2ae771, #179e8e);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(37, 211, 102, 0.5);
     }
 
-    .booking-feature-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(16, 11, 26, 0.7);
-      border: 1px solid var(--gold-border);
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--gold-200);
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-       FLOATING BOTTOM NAVIGATION DOCK
-       ════════════════════════════════════════════════════════════════ */
+    /* Floating Dock */
     .floating-dock {
       position: fixed;
-      bottom: 18px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 999;
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(16, 11, 28, 0.92);
+      gap: 10px;
+      background: rgba(16, 11, 28, 0.94);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(216, 168, 70, 0.35);
+      border: 1px solid rgba(216, 168, 70, 0.38);
       border-radius: var(--radius-full);
-      padding: 6px 10px;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 24px rgba(216, 168, 70, 0.25);
+      padding: 7px 12px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 24px rgba(216, 168, 70, 0.2);
       max-width: calc(100vw - 28px);
       width: max-content;
-      animation: slideUp 0.3s ease;
     }
 
-    .dock-action {
+    .dock-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       padding: 8px 16px;
       border-radius: var(--radius-full);
-      font-family: var(--font-sans);
       font-size: 13px;
       font-weight: 600;
       text-decoration: none;
       cursor: pointer;
       border: 1px solid transparent;
       min-height: 42px;
-      transition: all var(--transition-fast);
+      transition: all 0.2s;
       white-space: nowrap;
     }
 
-    .dock-action-auth {
+    .dock-btn-auth {
       background: rgba(216, 168, 70, 0.12);
       border-color: rgba(216, 168, 70, 0.3);
       color: var(--gold-300);
     }
-    .dock-action-auth:hover {
-      background: rgba(216, 168, 70, 0.25);
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    .dock-action-ghost {
+    .dock-btn-ghost {
       background: rgba(255, 255, 255, 0.05);
       border-color: rgba(255, 255, 255, 0.1);
       color: var(--text-secondary);
     }
-    .dock-action-ghost:hover {
+    .dock-btn-ghost:hover {
       background: rgba(216, 168, 70, 0.15);
-      border-color: var(--gold-border);
       color: #fff;
-      transform: translateY(-2px);
     }
-
-    .dock-action-primary {
+    .dock-btn-primary {
       background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
       color: #100b1a !important;
       font-weight: 700;
       box-shadow: 0 4px 16px rgba(216, 168, 70, 0.4);
     }
-    .dock-action-primary:hover {
-      background: linear-gradient(135deg, #ffe08a, var(--gold-500));
+    .dock-btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(216, 168, 70, 0.55);
     }
 
     @media (max-width: 680px) {
-      .dock-action { padding: 6px 12px; font-size: 12px; min-height: 38px; }
+      .dock-btn { padding: 6px 12px; font-size: 12px; min-height: 38px; }
       .dock-hide-mobile { display: none !important; }
     }
 
-    /* ════════════════════════════════════════════════════════════════
-       FOOTER
-       ════════════════════════════════════════════════════════════════ */
+    /* Toast */
+    .toast-box {
+      position: fixed;
+      bottom: 86px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #191228;
+      border: 1px solid var(--gold-400);
+      color: var(--gold-200);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      z-index: 10001;
+      display: none;
+    }
+
+    /* Footer */
     .site-footer {
       border-top: 1px solid var(--gold-border);
       background: rgba(10, 7, 18, 0.85);
@@ -1006,152 +935,43 @@
       font-size: 13px;
       color: var(--text-muted);
     }
-
     .site-footer a {
       color: var(--gold-400);
       text-decoration: none;
-      transition: color var(--transition-fast);
     }
     .site-footer a:hover {
-      color: #fff;
       text-decoration: underline;
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-       MODAL & TOASTS (AUTH & FEEDBACK)
-       ════════════════════════════════════════════════════════════════ */
-    .auth-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(6, 4, 12, 0.88);
-      backdrop-filter: blur(14px);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      animation: fadeIn 0.2s ease;
-    }
-
-    .auth-modal-card {
-      background: linear-gradient(145deg, #18122a, #0e0a1b);
-      border: 1px solid rgba(216, 168, 70, 0.4);
-      border-radius: var(--radius-lg);
-      width: 100%;
-      max-width: 440px;
-      padding: 32px 26px;
-      position: relative;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
-      color: var(--text-primary);
-    }
-
-    .auth-close-btn {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: rgba(255, 255, 255, 0.08);
-      border: none;
-      color: var(--text-secondary);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all var(--transition-fast);
-    }
-    .auth-close-btn:hover {
-      background: rgba(255, 255, 255, 0.18);
-      color: #fff;
-    }
-
-    .auth-tabs {
-      display: flex;
-      gap: 6px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--gold-border);
-      border-radius: var(--radius-full);
-      padding: 4px;
-      margin-bottom: 20px;
-    }
-
-    .auth-tab-btn {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
-      padding: 8px 12px;
-      border-radius: var(--radius-full);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      min-height: 38px;
-    }
-    .auth-tab-btn.active {
-      background: var(--gold-500);
-      color: #100b1a;
-      font-weight: 700;
-    }
-
-    .toast-msg {
-      position: fixed;
-      bottom: 84px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(18, 14, 30, 0.95);
-      border: 1px solid var(--gold-400);
-      color: var(--gold-200);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 10px 20px;
-      border-radius: var(--radius-full);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-      z-index: 10001;
-      animation: fadeIn 0.2s ease;
-      display: none;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.97); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    @keyframes slideUp {
-      from { transform: translate(-50%, 20px); opacity: 0; }
-      to { transform: translate(-50%, 0); opacity: 1; }
     }
   </style>
 </head>
 <body>
 
   <!-- ════════════════════════════════════════════════════════════════
-       STICKY NAVBAR
+       NAVBAR
        ════════════════════════════════════════════════════════════════ -->
   <header class="navbar">
     <div class="container">
       <div class="navbar-inner">
-        <a class="brand" href="/" aria-label="Astro Tiwari गृहपृष्ठ">
+        <a class="brand" href="/">
           <div class="brand-icon">🕉️</div>
-          <div class="brand-text">
-            <span class="brand-title">Astro Tiwari</span>
-            <span class="brand-subtitle">वैदिक ज्योतिष मार्गदर्शन</span>
+          <div>
+            <div class="brand-title">Astro Tiwari</div>
+            <div class="brand-subtitle">वैदिक ज्योतिष तथा जीवन मार्गदर्शन</div>
           </div>
         </a>
 
         <div class="nav-actions">
-          <button class="nav-btn nav-btn-ghost hide-mobile" onclick="scrollToId('rashifal-section')">
-            <span>🌅</span> आजको राशिफल
+          <button class="nav-link-btn hide-mobile" onclick="scrollToId('rashifal-section')">
+            🌅 आजको राशिफल
           </button>
-          <button class="nav-btn nav-btn-ghost hide-mobile" onclick="scrollToId('kundali-section')">
-            <span>📿</span> कुण्डली
+          <button class="nav-link-btn hide-mobile" onclick="scrollToId('kundali-section')">
+            📿 कुण्डली चक्र
           </button>
-          <button class="nav-btn nav-btn-ghost hide-mobile" onclick="scrollToId('mantra-section')">
-            <span>🕉️</span> मन्त्र
+          <button class="nav-link-btn hide-mobile" onclick="scrollToId('mantra-section')">
+            🕉️ शान्ति मन्त्र
           </button>
-          <button class="nav-btn nav-btn-primary" onclick="scrollToId('booking-section')">
-            परामर्श बुक गर्नुहोस् ➔
+          <button class="nav-cta-btn" onclick="scrollToId('booking-section')">
+            परामर्श लिनुहोस् ➔
           </button>
         </div>
       </div>
@@ -1164,60 +984,42 @@
   <section class="section hero-section">
     <div class="container">
       <div class="hero-badge">
-        <span>✨</span> प्रामाणिक वैदिक ज्योतिष तथा जीवन समाधान
+        <span>✨</span> प्रामाणिक परम्परागत वैदिक ज्योतिष मार्गदर्शन
       </div>
       <h1 class="hero-title">
-        तपाईंको भविष्य,<br />तपाईंको रोजाइमा
+        तपाईंको भविष्य,<br /><span>तपाईंको रोजाइमा</span>
       </h1>
       <p class="hero-subtitle">
-        वैदिक ज्योतिषको प्राचीन प्रकाशमा जीवनका गहन प्रश्नहरूको उत्तर पाउनुहोस् — जन्मकुण्डली, विवाह मिलान, करियर र संवेदनशील व्यक्तिगत मार्गदर्शन।
+        जीवनका गहन प्रश्नहरूको स्पष्ट उत्तर पाउनुहोस्। जन्मकुण्डली, विवाह मिलान, करियर तथा मानसिक शान्तिका लागि विद्वान पण्डितजीसँग सिधै परामर्श गर्नुहोस्।
       </p>
 
-      <div class="hero-cta-group">
-        <button class="btn-hero-primary" onclick="scrollToId('booking-section')">
+      <div class="hero-btn-group">
+        <button class="btn-main" onclick="scrollToId('booking-section')">
           🙏 व्यक्तिगत परामर्श बुक गर्नुहोस्
         </button>
-        <button class="btn-hero-secondary" onclick="scrollToId('rashifal-section')">
-          <span>🌅</span> आजको राशिफल हेर्नुहोस्
+        <button class="btn-outline" onclick="scrollToId('kundali-section')">
+          📿 आफ्नो कुण्डली चक्र बनाउनुहोस्
         </button>
-      </div>
-
-      <!-- Trust Badges -->
-      <div class="trust-bar">
-        <div class="trust-item">
-          <span>📜</span>
-          <span>परम्परागत कुण्डली विश्लेषण</span>
-        </div>
-        <div class="trust-item">
-          <span>🔒</span>
-          <span>१००% पूर्ण गोपनीयता</span>
-        </div>
-        <div class="trust-item">
-          <span>💬</span>
-          <span>प्रत्यक्ष पण्डितजी परामर्श</span>
-        </div>
-        <div class="trust-item">
-          <span>⚡</span>
-          <span>सरल र स्पष्ट मार्गदर्शन</span>
-        </div>
       </div>
     </div>
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════
-       1. आजको राशिफल SECTION
+       1. आजको राशिफल
        ════════════════════════════════════════════════════════════════ -->
-  <section class="section rashifal-wrap" id="rashifal-section">
+  <section class="section" id="rashifal-section" style="border-top:1px solid var(--gold-border);border-bottom:1px solid var(--gold-border);background:rgba(120,60,180,0.05);">
     <div class="container">
       <div class="section-header">
         <div class="section-tag">दैनिक फलादेश</div>
         <h2 class="section-title">आजको राशिफल</h2>
-        <p class="section-desc">आफ्नो राशि छनोट गर्नुहोस् र आजको दिनको ग्रहगोचर तथा शुभ दिशाबारे जान्नुहोस्</p>
-        <div class="ornament-divider">✦ ॐ ✦</div>
+        <p class="section-desc">आफ्नो राशि छनोट गर्नुहोस् र आजको दिनको ग्रहगोचर, कार्यक्षेत्र तथा शुभ रंग जान्नुहोस्</p>
+        <div class="ornament">✦ ॐ ✦</div>
       </div>
 
-      <div style="text-align:center;">
-        <span class="date-pill" id="rashifal-date">मिति लोड हुँदैछ...</span>
+      <div style="text-align:center;margin-bottom:28px;">
+        <span id="rashifal-date" style="display:inline-block;background:rgba(216,168,70,0.12);border:1px solid var(--gold-border);color:var(--gold-300);padding:6px 18px;border-radius:999px;font-size:13px;font-weight:600;">
+          मिति लोड हुँदैछ...
+        </span>
       </div>
 
       <div class="rashi-grid" id="rashi-grid"></div>
@@ -1225,81 +1027,81 @@
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════
-       2. सरल कुण्डली निर्माता SECTION
+       2. सरल कुण्डली निर्माता & KUNDALI CHART
        ════════════════════════════════════════════════════════════════ -->
-  <section class="section kundali-section" id="kundali-section">
+  <section class="section" id="kundali-section">
     <div class="container">
       <div class="section-header">
         <div class="section-tag">निःशुल्क सेवा</div>
         <h2 class="section-title">सरल कुण्डली निर्माता</h2>
-        <p class="section-desc">आफ्नो जन्ममिति र समय भर्नुहोस् — तत्काल परम्परागत उत्तर भारतीय लग्न कुण्डली चक्र प्राप्त गर्नुहोस्</p>
-        <div class="ornament-divider">✦ ॐ ✦</div>
+        <p class="section-desc">आफ्नो जन्म विवरण भर्नुहोस् र १२ भाव तथा नवग्रहको स्पष्ट परम्परागत कुण्डली चक्र हेर्नुहोस्</p>
+        <div class="ornament">✦ ॐ ✦</div>
       </div>
 
-      <div class="kundali-grid">
-        <!-- Input Form Panel -->
-        <div class="card-panel">
-          <div class="field-group">
-            <label class="field-label" for="kf-name">
-              <span>पूरा नाम</span>
-              <span style="font-size:11px;color:var(--text-muted);">Name</span>
-            </label>
-            <input class="field-input" id="kf-name" type="text" placeholder="जस्तै: राम शर्मा" />
+      <div class="kundali-layout">
+        <!-- Form -->
+        <div class="form-card">
+          <div class="input-group">
+            <label class="input-label" for="kf-name">पूरा नाम</label>
+            <input class="input-field" id="kf-name" type="text" placeholder="तपाईंको पूरा नाम" />
           </div>
 
-          <div class="field-group">
-            <label class="field-label">
-              <span>जन्म मिति (ई.सं. / AD)</span>
-              <span style="font-size:11px;color:var(--text-muted);">YYYY / MM / DD</span>
-            </label>
-            <div class="input-row-3">
-              <input class="field-input" id="kf-year" type="number" placeholder="वर्ष (YYYY)" min="1920" max="2035" />
-              <input class="field-input" id="kf-month" type="number" placeholder="महिना (१-१२)" min="1" max="12" />
-              <input class="field-input" id="kf-day" type="number" placeholder="दिन (१-३१)" min="1" max="31" />
+          <div class="input-group">
+            <label class="input-label">जन्म मिति (ई.सं. / AD)</label>
+            <div class="grid-3">
+              <input class="input-field" id="kf-year" type="number" placeholder="वर्ष (YYYY)" min="1920" max="2035" />
+              <input class="input-field" id="kf-month" type="number" placeholder="महिना (१-१२)" min="1" max="12" />
+              <input class="input-field" id="kf-day" type="number" placeholder="दिन (१-३१)" min="1" max="31" />
             </div>
           </div>
 
-          <div class="field-group">
-            <label class="field-label">
-              <span>जन्म समय</span>
-              <span style="font-size:11px;color:var(--text-muted);">घण्टा : मिनेट</span>
-            </label>
-            <div class="input-row-3">
-              <input class="field-input" id="kf-hour" type="number" placeholder="घण्टा" min="1" max="12" />
-              <input class="field-input" id="kf-min" type="number" placeholder="मिनेट" min="0" max="59" />
-              <select class="field-input" id="kf-period">
+          <div class="input-group">
+            <label class="input-label">जन्म समय</label>
+            <div class="grid-3">
+              <input class="input-field" id="kf-hour" type="number" placeholder="घण्टा (१-१२)" min="1" max="12" />
+              <input class="input-field" id="kf-min" type="number" placeholder="मिनेट (०-५९)" min="0" max="59" />
+              <select class="input-field" id="kf-period">
                 <option value="AM">बिहान (AM)</option>
-                <option value="PM">दिउँसो/साँझ (PM)</option>
+                <option value="PM">दिउँसो / साँझ (PM)</option>
               </select>
             </div>
           </div>
 
-          <div class="field-group">
-            <label class="field-label" for="kf-place">
-              <span>जन्मस्थान</span>
-              <span style="font-size:11px;color:var(--text-muted);">स्थान / जिल्ला</span>
-            </label>
-            <input class="field-input" id="kf-place" type="text" placeholder="जस्तै: काठमाडौँ, नेपाल" />
+          <!-- Scrollable Nepal District / City Selector -->
+          <div class="input-group">
+            <label class="input-label">जन्मस्थान (नेपालको जिल्ला / सहर)</label>
+            <div class="location-wrapper">
+              <div class="location-select-box" id="location-select-box" onclick="toggleLocationDropdown()">
+                <span id="selected-location-text">काठमाडौँ</span>
+                <span style="color:var(--gold-400);font-size:12px;">▼</span>
+              </div>
+              <input type="hidden" id="kf-place" value="काठमाडौँ" />
+
+              <div class="location-dropdown" id="location-dropdown">
+                <input type="text" class="location-search-input" id="location-search-input" placeholder="जिल्ला खोज्नुहोस्..." oninput="filterLocations()" />
+                <div class="location-scroll-list" id="location-scroll-list"></div>
+              </div>
+            </div>
           </div>
 
-          <button class="btn-kundali-generate" onclick="generateKundali()">
+          <button class="btn-generate" onclick="generateKundali()">
             <span>📿</span> कुण्डली चक्र तयार गर्नुहोस्
           </button>
 
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;">
-            <button onclick="fillSampleKundali()" style="background:none;border:none;color:var(--gold-400);font-size:12px;font-weight:600;cursor:pointer;text-decoration:underline;">
-              ⚡ उदाहरण विवरण भर्नुहोस् (Sample)
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;">
+            <button onclick="fillSampleKundali()" style="background:none;border:none;color:var(--gold-300);font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:underline;">
+              ⚡ नमुना विवरण भर्नुहोस् (Sample)
             </button>
-            <span style="font-size:11.5px;color:var(--text-dim);">१००% निःशुल्क</span>
+            <span style="font-size:12px;color:var(--text-muted);">१००% निःशुल्क</span>
           </div>
         </div>
 
-        <!-- Chart Output Panel -->
-        <div class="chart-panel" id="kundali-output">
-          <div class="chart-placeholder-icon">📿</div>
-          <div class="chart-placeholder-text">
-            माथि जन्म विवरण भरेर <strong>"कुण्डली चक्र तयार गर्नुहोस्"</strong> मा क्लिक गर्नुहोस्।<br />
-            यहाँ तपाईंको १२ भाव र नवग्रह सहितको पूर्ण चक्र तयार हुनेछ।
+        <!-- Output Chart -->
+        <div class="chart-container" id="kundali-output">
+          <div style="font-size:54px;margin-bottom:14px;opacity:0.65;">📿</div>
+          <div style="color:var(--text-secondary);font-size:14.5px;line-height:1.8;">
+            जन्म विवरण भरेर <strong>"कुण्डली चक्र तयार गर्नुहोस्"</strong> मा क्लिक गर्नुहोस्।<br />
+            यहाँ प्रत्येक कोठामा राशि र ग्रहको स्पष्ट स्थान देखिनेछ।
           </div>
         </div>
       </div>
@@ -1307,15 +1109,15 @@
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════
-       3. शान्ति मन्त्रहरू SECTION
+       3. शान्ति मन्त्रहरू
        ════════════════════════════════════════════════════════════════ -->
-  <section class="section" id="mantra-section">
+  <section class="section" id="mantra-section" style="border-top:1px solid var(--gold-border);">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">नित्य आध्यात्मिक साधना</div>
+        <div class="section-tag">नित्य साधना</div>
         <h2 class="section-title">पवित्र वैदिक शान्ति मन्त्र</h2>
-        <p class="section-desc">मानसिक शान्ति, ग्रहदोष निवारण र सकारात्मक ऊर्जाका लागि नित्य जप गर्न सकिने पवित्र मन्त्रहरू</p>
-        <div class="ornament-divider">✦ ॐ ✦</div>
+        <p class="section-desc">मनको शान्ति, पारिवारिक कल्याण र सकारात्मक ऊर्जाका लागि नित्य जप गर्न सकिने मन्त्रहरू</p>
+        <div class="ornament">✦ ॐ ✦</div>
       </div>
 
       <div class="mantra-grid" id="mantra-grid"></div>
@@ -1323,25 +1125,62 @@
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════
-       4. CONSULTATION & BOOKING (REACT BUNDLE)
+       4. व्यक्तिगत परामर्श (NATIVE CONSULTATION & BOOKING)
        ════════════════════════════════════════════════════════════════ -->
-  <section class="section" id="booking-section">
+  <section class="section booking-section" id="booking-section">
     <div class="container">
-      <div class="booking-card-banner">
-        <h2 class="booking-banner-title">🙏 व्यक्तिगत ज्योतिषीय परामर्श लिनुहोस्</h2>
-        <p class="booking-banner-desc">
-          जन्मकुण्डली गम्भीर विश्लेषण, गुण मिलान, करियर, वैवाहिक जीवन तथा ग्रहशान्ति — हाम्रा विद्वान ज्योतिषीसँग प्रत्यक्ष परामर्श प्राप्त गर्नुहोस्।
-        </p>
-        <div class="booking-badges-row">
-          <span class="booking-feature-chip">✅ अडियो / भिडियो परामर्श</span>
-          <span class="booking-feature-chip">✅ लिखित प्रतिवेदन</span>
-          <span class="booking-feature-chip">✅ eSewa / Khalti भुक्तानी</span>
-          <span class="booking-feature-chip">✅ WhatsApp मा द्रुत समन्वय</span>
-        </div>
+      <div class="section-header">
+        <div class="section-tag">पण्डितजीसँग प्रत्यक्ष परामर्श</div>
+        <h2 class="section-title">व्यक्तिगत ज्योतिषीय परामर्श</h2>
+        <p class="section-desc">जन्मकुण्डली गम्भीर विश्लेषण, विवाह गुण मिलान, करियर तथा मानसिक शान्तिका लागि समय बुक गर्नुहोस्</p>
+        <div class="ornament">✦ ॐ ✦</div>
       </div>
 
-      <!-- React booking form bundle mounts here -->
-      <div id="root"></div>
+      <div class="booking-card">
+        <!-- Service options -->
+        <label class="input-label" style="margin-bottom:12px;">परामर्श सेवा छनोट गर्नुहोस्</label>
+        <div class="booking-services-grid">
+          <div class="service-option active" onclick="selectServiceOption(this, 'सामान्य कुण्डली परामर्श')">
+            <div class="service-option-title">सामान्य कुण्डली परामर्श</div>
+            <div class="service-option-desc">वर्तमान ग्रहदशा, मुख्य समस्या र सरल उपाय सम्बन्धी कुराकानी</div>
+          </div>
+          <div class="service-option" onclick="selectServiceOption(this, 'विस्तृत जीवन फलादेश')">
+            <div class="service-option-title">विस्तृत जीवन फलादेश</div>
+            <div class="service-option-desc">करियर, धन, स्वास्थ्य, पारिवारिक जीवन र वर्षफलको पूर्ण विश्लेषण</div>
+          </div>
+          <div class="service-option" onclick="selectServiceOption(this, 'विवाह गुण मिलान')">
+            <div class="service-option-title">विवाह गुण मिलान</div>
+            <div class="service-option-desc">वर-वधुको ३६ गुण, मांगलिक दोष तथा दाम्पत्य जीवन तालमेल</div>
+          </div>
+        </div>
+
+        <!-- Consultation Form -->
+        <form id="consultation-form" onsubmit="handleConsultationSubmit(event)">
+          <div class="grid-3" style="grid-template-columns:1fr 1fr;margin-bottom:18px;">
+            <div>
+              <label class="input-label" for="booking-name">तपाईंको पूरा नाम *</label>
+              <input class="input-field" id="booking-name" type="text" placeholder="नाम थर" required />
+            </div>
+            <div>
+              <label class="input-label" for="booking-phone">सम्पर्क / WhatsApp नम्बर *</label>
+              <input class="input-field" id="booking-phone" type="tel" placeholder="९८xxxxxxxx" required />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="booking-question">तपाईंको मुख्य जिज्ञासा वा प्रश्न (ऐच्छिक)</label>
+            <textarea class="input-field" id="booking-question" rows="3" style="height:auto;padding:14px 16px;resize:vertical;" placeholder="करियर, वैवाहिक जीवन वा कुनै खास समस्याबारे खुलाउनुहोस्..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-whatsapp-booking">
+            <span>💬</span> WhatsApp मा सिधै परामर्श बुक गर्नुहोस्
+          </button>
+        </form>
+
+        <p style="text-align:center;font-size:12.5px;color:var(--text-muted);margin-top:16px;">
+          * सन्देश पठाएपछि पण्डितजीले तपाईंको समय मिलाएर WhatsApp मा सम्पर्क गर्नुहुनेछ।
+        </p>
+      </div>
     </div>
   </section>
 
@@ -1353,9 +1192,9 @@
       <div style="font-family:var(--font-serif);font-size:22px;color:var(--gold-200);font-weight:700;margin-bottom:8px;">
         🕉️ Astro Tiwari
       </div>
-      <p style="margin-bottom:12px;">वैदिक परम्परा, आधुनिक स्पष्टता र व्यक्तिगत आध्यात्मिक मार्गनिर्देशन</p>
+      <p style="margin-bottom:14px;">वैदिक परम्परा, आधुनिक स्पष्टता र व्यक्तिगत आध्यात्मिक मार्गनिर्देशन</p>
       <p>© २०८३ BS &nbsp;·&nbsp; Astro Tiwari &nbsp;·&nbsp; काठमाडौँ, नेपाल</p>
-      <p style="margin-top:10px;">
+      <p style="margin-top:12px;">
         <a href="/admin">🔐 Admin Portal</a> &nbsp;|&nbsp;
         <a href="#rashifal-section">आजको राशिफल</a> &nbsp;|&nbsp;
         <a href="#kundali-section">कुण्डली चक्र</a> &nbsp;|&nbsp;
@@ -1365,113 +1204,24 @@
   </footer>
 
   <!-- ════════════════════════════════════════════════════════════════
-       FLOATING BOTTOM DOCK
+       FLOATING DOCK
        ════════════════════════════════════════════════════════════════ -->
-  <nav class="floating-dock" aria-label="Quick Actions">
-    <button class="dock-action dock-action-auth" id="user-auth-btn" onclick="openUserAuthModal('login')" title="लगइन वा नयाँ खाता">
-      <span id="user-auth-btn-icon">🔑</span>
-      <span id="user-auth-btn-text" class="dock-hide-mobile">लगइन</span>
-    </button>
-    <button class="dock-action dock-action-ghost dock-hide-mobile" onclick="scrollToId('rashifal-section')">
+  <nav class="floating-dock">
+    <button class="dock-btn dock-btn-ghost dock-hide-mobile" onclick="scrollToId('rashifal-section')">
       <span>🌅</span> राशिफल
     </button>
-    <button class="dock-action dock-action-ghost dock-hide-mobile" onclick="scrollToId('kundali-section')">
+    <button class="dock-btn dock-btn-ghost dock-hide-mobile" onclick="scrollToId('kundali-section')">
       <span>📿</span> कुण्डली
     </button>
-    <button class="dock-action dock-action-primary" onclick="scrollToId('booking-section')">
-      <span>🙏</span> परामर्श बुक गर्नुहोस्
+    <button class="dock-btn dock-btn-primary" onclick="scrollToId('booking-section')">
+      <span>💬</span> परामर्श बुक गर्नुहोस्
     </button>
   </nav>
 
-  <!-- ════════════════════════════════════════════════════════════════
-       AUTH MODAL (LOGIN / REGISTER)
-       ════════════════════════════════════════════════════════════════ -->
-  <div id="user-auth-modal" class="auth-modal-overlay" style="display:none;" onclick="handleAuthOverlayClick(event)">
-    <div class="auth-modal-card">
-      <button class="auth-close-btn" onclick="closeUserAuthModal()" aria-label="बन्द गर्नुहोस्">×</button>
-
-      <div style="text-align:center;margin-bottom:18px;">
-        <div style="width:52px;height:52px;margin:0 auto 10px;background:radial-gradient(circle,#f4d38c 0%,#a8794f 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 0 25px rgba(216,168,70,0.4);">🕉️</div>
-        <h3 style="font-family:var(--font-serif);font-size:24px;color:var(--gold-200);font-weight:700;">Astro Tiwari</h3>
-        <p style="font-size:12.5px;color:var(--text-secondary);margin-top:2px;">ग्राहक खाता प्रमाणीकरण तथा परामर्श ट्र्याकिङ</p>
-      </div>
-
-      <div id="auth-status-banner" style="display:none;padding:12px;border-radius:8px;font-size:12.5px;margin-bottom:14px;line-height:1.5;"></div>
-
-      <div class="auth-tabs">
-        <button class="auth-tab-btn active" id="auth-tab-login" onclick="switchAuthTab('login')">लगइन गर्नुहोस्</button>
-        <button class="auth-tab-btn" id="auth-tab-register" onclick="switchAuthTab('register')">नयाँ दर्ता</button>
-      </div>
-
-      <!-- Login Form -->
-      <form id="user-login-form" onsubmit="handleUserLogin(event)">
-        <div class="field-group">
-          <label class="field-label" for="login-identifier">ईमेल वा सम्पर्क नम्बर</label>
-          <input type="text" id="login-identifier" class="field-input" placeholder="ईमेल वा ९८xxxxxxxx" required />
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="login-password">पासवर्ड</label>
-          <input type="password" id="login-password" class="field-input" placeholder="पासवर्ड भर्नुहोस्" required />
-        </div>
-        <button type="submit" id="login-submit-btn" class="btn-kundali-generate" style="background:linear-gradient(135deg,var(--gold-400),var(--gold-600));color:#100b1a;font-weight:700;">
-          लगइन गर्नुहोस् ➔
-        </button>
-        <div style="margin-top:14px;text-align:center;font-size:12px;color:var(--text-muted);">
-          खाता छैन? <a href="javascript:void(0)" onclick="switchAuthTab('register')" style="color:var(--gold-300);font-weight:600;">यहाँ दर्ता गर्नुहोस्</a>
-        </div>
-      </form>
-
-      <!-- Register Form -->
-      <form id="user-register-form" onsubmit="handleUserRegister(event)" style="display:none;">
-        <div class="field-group">
-          <label class="field-label" for="reg-name">पूरा नाम *</label>
-          <input type="text" id="reg-name" class="field-input" placeholder="तपाईंको पूरा नाम" required />
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="reg-phone">सम्पर्क / WhatsApp नम्बर *</label>
-          <input type="tel" id="reg-phone" class="field-input" placeholder="९८xxxxxxxx" required />
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="reg-email">ईमेल (ऐच्छिक)</label>
-          <input type="email" id="reg-email" class="field-input" placeholder="name@example.com" />
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="reg-password">नयाँ पासवर्ड *</label>
-          <input type="password" id="reg-password" class="field-input" placeholder="कम्तिमा ६ अक्षर" minlength="6" required />
-        </div>
-        <button type="submit" id="reg-submit-btn" class="btn-kundali-generate" style="background:linear-gradient(135deg,#10b981,#047857);color:#fff;">
-          नयाँ खाता दर्ता गर्नुहोस् ➔
-        </button>
-        <div style="margin-top:14px;text-align:center;font-size:12px;color:var(--text-muted);">
-          पहिले नै खाता छ? <a href="javascript:void(0)" onclick="switchAuthTab('login')" style="color:var(--gold-300);font-weight:600;">यहाँ लगइन गर्नुहोस्</a>
-        </div>
-      </form>
-
-      <!-- Logged In Profile View -->
-      <div id="user-profile-view" style="display:none;text-align:center;padding:12px 0;">
-        <div style="font-size:48px;margin-bottom:8px;">👤</div>
-        <h4 id="profile-user-name" style="font-family:var(--font-serif);font-size:22px;color:var(--gold-200);margin-bottom:4px;"></h4>
-        <div id="profile-user-contact" style="font-size:13px;color:var(--text-muted);margin-bottom:14px;"></div>
-        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:#10b981;padding:5px 14px;border-radius:var(--radius-full);font-size:12px;font-weight:700;margin-bottom:24px;">
-          ✅ प्रमाणित ग्राहक
-        </div>
-        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-          <button onclick="scrollToId('booking-section');closeUserAuthModal();" class="nav-btn nav-btn-primary">
-            परामर्श बुक गर्नुहोस् ➔
-          </button>
-          <button onclick="handleUserLogout()" class="nav-btn nav-btn-ghost" style="color:var(--accent-ruby);border-color:rgba(239,68,68,0.3);">
-            🚪 लगआउट
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Notification -->
-  <div id="toast" class="toast-msg"></div>
+  <div id="toast" class="toast-box"></div>
 
   <!-- ════════════════════════════════════════════════════════════════
-       JAVASCRIPT LOGIC
+       JAVASCRIPT: DATA & INTERACTION
        ════════════════════════════════════════════════════════════════ -->
   <script>
     function scrollToId(id) {
@@ -1487,7 +1237,138 @@
       setTimeout(() => { t.style.display = 'none'; }, 2600);
     }
 
-    // ── Nepali Date Generator ──
+    // ── Nepal Districts & Cities List (77 Districts + Major Cities) ──
+    const NEPAL_LOCATIONS = [
+      'काठमाडौँ (Kathmandu)',
+      'ललितपुर (Lalitpur)',
+      'भक्तपुर (Bhaktapur)',
+      'पोखरा, कास्की (Pokhara)',
+      'भरतपुर / चितवन (Chitwan)',
+      'विराटनगर, मोरङ (Biratnagar)',
+      'बुटवल, रूपन्देही (Butwal)',
+      'भैरहवा, रूपन्देही (Bhairahawa)',
+      'धरान, सुनसरी (Dharan)',
+      'इटहरी, सुनसरी (Itahari)',
+      'नेपालगञ्ज, बाँके (Nepalgunj)',
+      'धनगढी, कैलाली (Dhangadhi)',
+      'विर्तामोड / झापा (Jhapa)',
+      'हेटौँडा, मकवानपुर (Hetauda)',
+      'दाङ (घोराही / तुलसीपुर)',
+      'बनेपा / धुलिखेल (काभ्रे)',
+      'वीरगञ्ज, पर्सा (Birgunj)',
+      'जनकपुर, धनुषा (Janakpur)',
+      'सिद्धिचरण / ओखलढुङ्गा',
+      'इलाम (Ilam)',
+      'पाँचथर (Panchthar)',
+      'ताप्लेजुङ (Taplejung)',
+      'धनकुटा (Dhankuta)',
+      'तेह्रथुम (Tehrathum)',
+      'सङ्खुवासभा (Sankhuwasabha)',
+      'भोजपुर (Bhojpur)',
+      'खोटाङ (Khotang)',
+      'सोलुखुम्बु (Solukhumbu)',
+      'उदयपुर (Udayapur)',
+      'सिरहा (Siraha)',
+      'सप्तरी (Saptari)',
+      'महोत्तरी (Mahottari)',
+      'सर्लाही (Sarlahi)',
+      'रौतहट (Rautahat)',
+      'बारा (Bara)',
+      'दोलखा (Dolakha)',
+      'रामेछाप (Ramechhap)',
+      'सिन्धुली (Sindhuli)',
+      'सिन्धुपाल्चोक (Sindhupalchok)',
+      'रसुवा (Rasuwa)',
+      'नुवाकोट (Nuwakot)',
+      'धादिङ (Dhading)',
+      'गोरखा (Gorkha)',
+      'मनाङ (Manang)',
+      'मुस्ताङ (Mustang)',
+      'म्याग्दी (Myagdi)',
+      'लमजुङ (Lamjung)',
+      'तनहुँ (Tanahun)',
+      'स्याङ्जा (Syangja)',
+      'पर्वत (Parbat)',
+      'बागलुङ (Baglung)',
+      'पाल्पा (Palpa)',
+      'गुल्मी (Gulmi)',
+      'अर्घाखाँची (Arghakhanchi)',
+      'प्युठान (Pyuthan)',
+      'रोल्पा (Rolpa)',
+      'रुकुम पूर्व (Rukum East)',
+      'रुकुम पश्चिम (Rukum West)',
+      'सल्यान (Salyan)',
+      'नवलपरासी पूर्व (Nawalpur)',
+      'नवलपरासी पश्चिम (Parasi)',
+      'कपिलवस्तु (Kapilvastu)',
+      'बर्दिया (Bardiya)',
+      'सुर्खेत (Surkhet)',
+      'दैलेख (Dailekh)',
+      'जाजरकोट (Jajarkot)',
+      'डोल्पा (Dolpa)',
+      'जुम्ला (Jumla)',
+      'कालिकोट (Kalikot)',
+      'मुगु (Mugu)',
+      'हुम्ला (Humla)',
+      'बाजुरा (Bajura)',
+      'बझाङ (Bajhang)',
+      'अछाम (Achham)',
+      'डोटी (Doti)',
+      'डडेल्धुरा (Dadeldhura)',
+      'बैतडी (Baitadi)',
+      'दार्चुला (Darchula)',
+      'कञ्चनपुर (Kanchanpur)',
+      'अन्य (नेपाल बाहिर / विदेश)'
+    ];
+
+    function initLocationDropdown() {
+      const listContainer = document.getElementById('location-scroll-list');
+      if (!listContainer) return;
+      listContainer.innerHTML = '';
+      NEPAL_LOCATIONS.forEach(loc => {
+        const item = document.createElement('div');
+        item.className = 'location-item';
+        item.textContent = loc;
+        item.onclick = () => selectLocation(loc);
+        listContainer.appendChild(item);
+      });
+    }
+
+    function toggleLocationDropdown() {
+      const dd = document.getElementById('location-dropdown');
+      const isVisible = dd.style.display === 'block';
+      dd.style.display = isVisible ? 'none' : 'block';
+      if (!isVisible) {
+        document.getElementById('location-search-input').focus();
+      }
+    }
+
+    function selectLocation(loc) {
+      document.getElementById('selected-location-text').textContent = loc;
+      document.getElementById('kf-place').value = loc;
+      document.getElementById('location-dropdown').style.display = 'none';
+    }
+
+    function filterLocations() {
+      const q = document.getElementById('location-search-input').value.toLowerCase().trim();
+      const items = document.querySelectorAll('.location-item');
+      items.forEach(item => {
+        const txt = item.textContent.toLowerCase();
+        item.style.display = txt.includes(q) ? 'block' : 'none';
+      });
+    }
+
+    document.addEventListener('click', function(e) {
+      const wrapper = document.querySelector('.location-wrapper');
+      if (wrapper && !wrapper.contains(e.target)) {
+        const dd = document.getElementById('location-dropdown');
+        if (dd) dd.style.display = 'none';
+      }
+    });
+
+    initLocationDropdown();
+
+    // ── Nepali Date ──
     function getNepaliDate() {
       const now = new Date();
       const bsMonths = ['बैशाख','जेठ','असार','श्रावण','भाद्र','आश्विन','कार्तिक','मंसिर','पौष','माघ','फाल्गुन','चैत्र'];
@@ -1501,44 +1382,44 @@
     }
     document.getElementById('rashifal-date').textContent = 'आज: ' + getNepaliDate();
 
-    // ── 1. Rashifal Data & Interactive Cards ──
+    // ── 1. Rashifal Data ──
     const RASHIS = [
       { sym:'♈', name:'मेष', en:'Aries (चू, चे, चो, ला, ली)',
         preview:'आज नयाँ थालनीको लागि शुभ ऊर्जा छ। कार्यक्षेत्रमा नेतृत्व क्षमताको कदर हुनेछ।',
-        full:'💼 कार्यक्षेत्र: नयाँ जिम्मेवारी र योजना सफल हुनेछन्।\n❤️ प्रेम: जीवनसाथीसँग आपसी समझदारी वृद्धि हुनेछ।\n💰 धन: वित्तीय लगानीमा सावधानी अपनाउनुहोस्।\n🌿 स्वास्थ्य: शारीरिक स्फूर्ति कायम रहनेछ।\n🔮 भाग्याङ्क: ७ — शुभ रंग: रातो' },
+        full:'कार्यक्षेत्र: नयाँ जिम्मेवारी र योजना सफल हुनेछन्।\nप्रेम: जीवनसाथीसँग आपसी समझदारी वृद्धि हुनेछ।\nधन: वित्तीय लगानीमा सावधानी अपनाउनुहोस्।\nस्वास्थ्य: शारीरिक स्फूर्ति कायम रहनेछ।\nशुभ अंक: ७, शुभ रंग: रातो' },
       { sym:'♉', name:'वृष', en:'Taurus (ई, ऊ, ए, ओ, वा)',
         preview:'धैर्य र एकाग्रताले आज ठूलो सफलता दिलाउनेछ। पारिवारिक सद्भाव कायम रहनेछ।',
-        full:'💼 कार्यक्षेत्र: निरन्तरको मेहनतले उचित फल दिनेछ।\n❤️ प्रेम: पारिवारिक सम्बन्धमा न्यानोपन आउनेछ।\n💰 धन: पुरानो लगानीबाट फाइदा हुने संकेत।\n🌿 स्वास्थ्य: खानपानमा सात्विक सन्तुलन राख्नुहोस्।\n🔮 भाग्याङ्क: ५ — शुभ रंग: हरियो' },
+        full:'कार्यक्षेत्र: निरन्तरको मेहनतले उचित फल दिनेछ।\nप्रेम: पारिवारिक सम्बन्धमा न्यानोपन आउनेछ।\nधन: पुरानो लगानीबाट फाइदा हुने संकेत।\nस्वास्थ्य: खानपानमा सात्विक सन्तुलन राख्नुहोस्।\nशुभ अंक: ५, शुभ रंग: हरियो' },
       { sym:'♊', name:'मिथुन', en:'Gemini (का, की, कू, घ, ङ)',
         preview:'बुद्धि र संवादकलाको पूर्ण उपयोग हुनेछ। नयाँ व्यावसायिक सम्पर्क विस्तार हुनेछ।',
-        full:'💼 कार्यक्षेत्र: बैठक र वार्तामा तपाईंको प्रस्ताव स्वीकृत हुनेछ।\n❤️ प्रेम: मनका भावना स्पष्टसँग व्यक्त गर्नुहोस्।\n💰 धन: आयआर्जनका नयाँ बाटोहरू खुल्नेछन्।\n🌿 स्वास्थ्य: मानसिक विश्राम र ध्यानलाई समय दिनुहोस्।\n🔮 भाग्याङ्क: ३ — शुभ रंग: पहेँलो' },
+        full:'कार्यक्षेत्र: बैठक र वार्तामा तपाईंको प्रस्ताव स्वीकृत हुनेछ।\nप्रेम: मनका भावना स्पष्टसँग व्यक्त गर्नुहोस्।\nधन: आयआर्जनका नयाँ बाटोहरू खुल्नेछन्।\nस्वास्थ्य: मानसिक विश्राम र ध्यानलाई समय दिनुहोस्।\nशुभ अंक: ३, शुभ रंग: पहेँलो' },
       { sym:'♋', name:'कर्कट', en:'Cancer (ही, हू, हे, हो, डा)',
         preview:'घरायसी वातावरण सुखद रहनेछ। परोपकारी कार्यमा मन आकर्षित हुनेछ।',
-        full:'💼 कार्यक्षेत्र: सहकर्मीको साथ र सहयोग प्राप्त हुनेछ।\n❤️ प्रेम: पारिवारिक जमघटले खुशी प्रदान गर्नेछ।\n💰 धन: अनावश्यक खर्च नियन्त्रण गर्नुपर्ने दिन।\n🌿 स्वास्थ्य: पानी पर्याप्त पिउनुहोस्, मौसमी सतर्कता राख्नुहोस्।\n🔮 भाग्याङ्क: २ — शुभ रंग: सेतो / चाँदी' },
+        full:'कार्यक्षेत्र: सहकर्मीको साथ र सहयोग प्राप्त हुनेछ।\nप्रेम: पारिवारिक जमघटले खुशी प्रदान गर्नेछ।\nधन: अनावश्यक खर्च नियन्त्रण गर्नुपर्ने दिन।\nस्वास्थ्य: पानी पर्याप्त पिउनुहोस्, मौसमी सतर्कता राख्नुहोस्।\nशुभ अंक: २, शुभ रंग: सेतो' },
       { sym:'♌', name:'सिंह', en:'Leo (मा, मी, मू, मे, मो)',
         preview:'आत्मविश्वास र पराक्रम उच्च रहनेछ। समाज वा कार्यस्थलमा प्रतिष्ठा बढ्नेछ।',
-        full:'💼 कार्यक्षेत्र: महत्त्वपूर्ण निर्णय लिन उपयुक्त समय।\n❤️ प्रेम: प्रेम सम्बन्धमा रोमाञ्चक मोड आउन सक्छ।\n💰 धन: आर्थिक स्थिति सबल रहनेछ।\n🌿 स्वास्थ्य: रक्तचाप र नियमित व्यायाममा ध्यान दिनुहोस्।\n🔮 भाग्याङ्क: १ — शुभ रंग: सुनौलो / केशरी' },
+        full:'कार्यक्षेत्र: महत्त्वपूर्ण निर्णय लिन उपयुक्त समय।\nप्रेम: प्रेम सम्बन्धमा रोमाञ्चक मोड आउन सक्छ।\nधन: आर्थिक स्थिति सबल रहनेछ।\nस्वास्थ्य: रक्तचाप र नियमित व्यायाममा ध्यान दिनुहोस्।\nशुभ अंक: १, शुभ रंग: सुनौलो' },
       { sym:'♍', name:'कन्या', en:'Virgo (टो, पा, पी, पू, ष)',
         preview:'व्यवस्थापन र विश्लेषण कौशलले काम सहज बनाउनेछ। योजनाबद्ध रूपमा अघि बढ्नुहोस्।',
-        full:'💼 कार्यक्षेत्र: अधुरा रहेका कामहरू कुशलतापूर्वक सम्पन्न हुनेछन्।\n❤️ प्रेम: सम्बन्धमा स-साना कुरामा बहस नगर्नुहोस्।\n💰 धन: बचत योजनाहरूमा ध्यान केन्द्रित गर्नुहोस्।\n🌿 स्वास्थ्य: पाचन प्रणालीको ख्याल राख्नुहोस्।\n🔮 भाग्याङ्क: ५ — शुभ रंग: गाढा हरियो' },
+        full:'कार्यक्षेत्र: अधुरा रहेका कामहरू कुशलतापूर्वक सम्पन्न हुनेछन्।\nप्रेम: सम्बन्धमा स-साना कुरामा बहस नगर्नुहोस्।\nधन: बचत योजनाहरूमा ध्यान केन्द्रित गर्नुहोस्।\nस्वास्थ्य: पाचन प्रणालीको ख्याल राख्नुहोस्।\nशुभ अंक: ५, शुभ रंग: गाढा हरियो' },
       { sym:'♎', name:'तुला', en:'Libra (रा, री, रु, रे, रो)',
         preview:'सन्तुलित दृष्टिकोणले जटिल समस्या सुल्झाउनेछ। साझेदारी कार्यमा सफलता मिल्नेछ।',
-        full:'💼 कार्यक्षेत्र: कानुनी वा साझेदारी सम्बन्धी काम सकारात्मक हुनेछन्।\n❤️ प्रेम: जोडीसँग मिठासपूर्ण संवाद हुनेछ।\n💰 धन: विलासिताका साधनमा सन्तुलित खर्च गर्नुहोस्।\n🌿 स्वास्थ्य: ढाड र शारीरिक लचकतामा ध्यान दिनुहोस्।\n🔮 भाग्याङ्क: ६ — शुभ रंग: गुलाबी / सेतो' },
+        full:'कार्यक्षेत्र: कानुनी वा साझेदारी सम्बन्धी काम सकारात्मक हुनेछन्।\nप्रेम: जोडीसँग मिठासपूर्ण संवाद हुनेछ।\nधन: विलासिताका साधनमा सन्तुलित खर्च गर्नुहोस्।\nस्वास्थ्य: ढाड र शारीरिक लचकतामा ध्यान दिनुहोस्।\nशुभ अंक: ६, शुभ रंग: गुलाबी' },
       { sym:'♏', name:'वृश्चिक', en:'Scorpio (तो, ना, नी, नू, ने)',
         preview:'अनुसन्धान र गूढ विषयमा रुचि बढ्नेछ। गोप्य योजनाहरू कार्यान्वयनमा आउनेछन्।',
-        full:'💼 कार्यक्षेत्र: चुनौतीपूर्ण जिम्मेवारी सफलतापूर्वक पूरा हुनेछ।\n❤️ प्रेम: भावनात्मक सम्बन्ध प्रगाढ हुनेछ।\n💰 धन: आकस्मिक लाभको सम्भावना रहेको छ।\n🌿 स्वास्थ्य: नियमित ध्यान र योग लाभदायक हुनेछ।\n🔮 भाग्याङ्क: ९ — शुभ रंग: रातो / कलेजी' },
+        full:'कार्यक्षेत्र: चुनौतीपूर्ण जिम्मेवारी सफलतापूर्वक पूरा हुनेछ।\nप्रेम: भावनात्मक सम्बन्ध प्रगाढ हुनेछ।\nधन: आकस्मिक लाभको सम्भावना रहेको छ।\nस्वास्थ्य: नियमित ध्यान र योग लाभदायक हुनेछ।\nशुभ अंक: ९, शुभ रंग: रातो' },
       { sym:'♐', name:'धनु', en:'Sagittarius (ये, यो, भा, भी, भू)',
         preview:'आध्यात्मिक चिन्तन र उच्च शिक्षामा प्रगति हुनेछ। यात्रा लाभदायक बन्न सक्छ।',
-        full:'💼 कार्यक्षेत्र: गुरुजन वा वरिष्ठ व्यक्तिको मार्गदर्शन प्राप्त हुनेछ।\n❤️ प्रेम: सम्बन्धमा पारस्परिक आदर र विश्वास कायम रहनेछ।\n💰 धन: दीर्घकालीन लगानीको लागि अनुकूल अवसर।\n🌿 स्वास्थ्य: मांसपेशी र जोर्नीहरूको ख्याल राख्नुहोस्।\n🔮 भाग्याङ्क: ३ — शुभ रंग: पहेँलो / बैजनी' },
+        full:'कार्यक्षेत्र: गुरुजन वा वरिष्ठ व्यक्तिको मार्गदर्शन प्राप्त हुनेछ।\nप्रेम: सम्बन्धमा पारस्परिक आदर र विश्वास कायम रहनेछ।\nधन: दीर्घकालीन लगानीको लागि अनुकूल अवसर।\nस्वास्थ्य: मांसपेशी र जोर्नीहरूको ख्याल राख्नुहोस्।\nशुभ अंक: ३, शुभ रंग: पहेँलो' },
       { sym:'♑', name:'मकर', en:'Capricorn (भो, जा, जी, खी, खू)',
         preview:'कडा परिश्रम र अनुशासनले नयाँ उचाइ दिलाउनेछ। जिम्मेवारी कुशलतापूर्वक निभाउनुहुनेछ।',
-        full:'💼 कार्यक्षेत्र: पदोन्नति वा नयाँ परियोजनाको अवसर आउन सक्छ।\n❤️ प्रेम: पारिवारिक दायित्व प्रति सचेत रहनुहोस्।\n💰 धन: अचल सम्पत्ति विस्तारको विचार आउनेछ।\n🌿 स्वास्थ्य: घुँडा र हाडजोर्नीको नियमित हेरचाह गर्नुहोस्।\n🔮 भाग्याङ्क: ८ — शुभ रंग: कालो / नीलो' },
+        full:'कार्यक्षेत्र: पदोन्नति वा नयाँ परियोजनाको अवसर आउन सक्छ।\nप्रेम: पारिवारिक दायित्व प्रति सचेत रहनुहोस्।\nधन: अचल सम्पत्ति विस्तारको विचार आउनेछ।\nस्वास्थ्य: घुँडा र हाडजोर्नीको नियमित हेरचाह गर्नुहोस्।\nशुभ अंक: ८, शुभ रंग: कालो' },
       { sym:'♒', name:'कुम्भ', en:'Aquarius (गू, गे, गो, सा, सी)',
         preview:'नवीन विचार र सिर्जनशीलताले सबैको ध्यान खिच्नेछ। सामाजिक कार्यमा प्रतिष्ठा बढ्नेछ।',
-        full:'💼 कार्यक्षेत्र: प्राविधिक र रचनात्मक क्षेत्रमा सफलता।\n❤️ प्रेम: मित्रवत र खुला सम्बन्धले खुशी दिनेछ।\n💰 धन: समूहगत कामबाट आर्थिक लाभ हुनेछ।\n🌿 स्वास्थ्य: आँखा र पर्याप्त निद्रामा ध्यान दिनुहोस्।\n🔮 भाग्याङ्क: ४ — शुभ रंग: आकाशी नीलो' },
+        full:'कार्यक्षेत्र: प्राविधिक र रचनात्मक क्षेत्रमा सफलता।\nप्रेम: मित्रवत र खुला सम्बन्धले खुशी दिनेछ।\n💰 धन: समूहगत कामबाट आर्थिक लाभ हुनेछ।\nस्वास्थ्य: आँखा र पर्याप्त निद्रामा ध्यान दिनुहोस्।\nशुभ अंक: ४, शुभ रंग: आकाशी नीलो' },
       { sym:'♓', name:'मीन', en:'Pisces (दी, दू, थ, झ, ञ)',
         preview:'कला, साहित्य र सेवामूलक कार्यमा मन लाग्नेछ। आध्यात्मिक आनन्दको अनुभूति हुनेछ।',
-        full:'💼 कार्यक्षेत्र: रचनात्मक सोचले कार्यस्थलमा प्रशंसा दिलाउनेछ।\n❤️ प्रेम: एकअर्काको भावनाको कदर हुनेछ।\n💰 धन: धर्मकर्म तथा शुभ कार्यमा खर्च हुनेछ।\n🌿 स्वास्थ्य: खुट्टाको हेरचाह र विश्राम आवश्यक छ।\n🔮 भाग्याङ्क: ७ — शुभ रंग: फिक्का पहेँलो / समुद्री हरियो' }
+        full:'कार्यक्षेत्र: रचनात्मक सोचले कार्यस्थलमा प्रशंसा दिलाउनेछ।\nप्रेम: एकअर्काको भावनाको कदर हुनेछ।\nधन: धर्मकर्म तथा शुभ कार्यमा खर्च हुनेछ।\nस्वास्थ्य: खुट्टाको हेरचाह र विश्राम आवश्यक छ।\nशुभ अंक: ७, शुभ रंग: समुद्री हरियो' }
     ];
 
     const rashiGrid = document.getElementById('rashi-grid');
@@ -1546,32 +1427,30 @@
       const card = document.createElement('div');
       card.className = 'rashi-card';
       card.innerHTML = `
-        <div class="rashi-badge-icon">${r.sym}</div>
-        <div class="rashi-name-np">${r.name}</div>
-        <div class="rashi-name-en">${r.en}</div>
+        <div class="rashi-icon-box">${r.sym}</div>
+        <div class="rashi-title">${r.name}</div>
+        <div class="rashi-sub">${r.en}</div>
         <div class="rashi-preview">${r.preview}</div>
-        <div class="rashi-expanded">${r.full.replace(/\n/g, '<br/>')}</div>
-        <div class="rashi-toggle-btn">
-          <span class="toggle-text">थप पढ्नुहोस्</span> <span>▾</span>
-        </div>
+        <div class="rashi-details">${r.full.replace(/\n/g, '<br/>')}</div>
+        <div class="rashi-toggle">थप पढ्नुहोस् ▾</div>
       `;
       card.addEventListener('click', () => {
         const isOpen = card.classList.contains('open');
         document.querySelectorAll('.rashi-card.open').forEach(c => {
           c.classList.remove('open');
-          const t = c.querySelector('.toggle-text');
-          if (t) t.textContent = 'थप पढ्नुहोस्';
+          const t = c.querySelector('.rashi-toggle');
+          if (t) t.textContent = 'थप पढ्नुहोस् ▾';
         });
         if (!isOpen) {
           card.classList.add('open');
-          const t = card.querySelector('.toggle-text');
-          if (t) t.textContent = 'बन्द गर्नुहोस्';
+          const t = card.querySelector('.rashi-toggle');
+          if (t) t.textContent = 'बन्द गर्नुहोस् ▴';
         }
       });
       rashiGrid.appendChild(card);
     });
 
-    // ── 2. Simple Kundali Generator Logic ──
+    // ── 2. North Indian Diamond Kundali (PERFECT GEOMETRY, NO OVERLAPS) ──
     const RASHIS_LIST = ['मेष','वृष','मिथुन','कर्कट','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुम्भ','मीन'];
     const PLANET_SHORT = { Sun:'सू', Moon:'च', Mars:'मं', Mercury:'बु', Jupiter:'बृ', Venus:'शु', Saturn:'श', Rahu:'रा', Ketu:'के' };
 
@@ -1583,7 +1462,7 @@
       document.getElementById('kf-hour').value = 7;
       document.getElementById('kf-min').value = 30;
       document.getElementById('kf-period').value = 'AM';
-      document.getElementById('kf-place').value = 'काठमाडौँ, नेपाल';
+      selectLocation('काठमाडौँ (Kathmandu)');
       generateKundali();
     }
 
@@ -1598,51 +1477,82 @@
       return ((seed % 12) + 12) % 12 + 1;
     }
 
+    /**
+     * Perfect North Indian Diamond Kundali SVG
+     * W = 380, H = 380.
+     * All 12 houses have precise coordinates deep inside the room with zero line-overlap!
+     */
     function generateDiamondSVG(lagnaSign, planetsByHouse) {
-      const W = 360, H = 320;
-      const houseCoords = {
-        1:  { nx: W * .5,  ny: H * .26, px: W * .5,  py: H * .16 },
-        2:  { nx: W * .22, ny: H * .34, px: W * .22, py: H * .26 },
-        3:  { nx: W * .13, ny: H * .32, px: W * .08, py: H * .40 },
-        4:  { nx: W * .22, ny: H * .50, px: W * .22, py: H * .58 },
-        5:  { nx: W * .13, ny: H * .68, px: W * .08, py: H * .62 },
-        6:  { nx: W * .22, ny: H * .74, px: W * .26, py: H * .78 },
-        7:  { nx: W * .5,  ny: H * .74, px: W * .5,  py: H * .84 },
-        8:  { nx: W * .78, ny: H * .74, px: W * .74, py: H * .78 },
-        9:  { nx: W * .87, ny: H * .68, px: W * .92, py: H * .62 },
-        10: { nx: W * .78, ny: H * .50, px: W * .78, py: H * .42 },
-        11: { nx: W * .87, ny: H * .32, px: W * .92, py: H * .40 },
-        12: { nx: W * .78, ny: H * .34, px: W * .74, py: H * .26 }
-      };
+      const W = 380, H = 380;
       const toNep = n => String(n).replace(/\d/g, d => '०१२३४५६७८९'[d]);
-      let nums = '', planets = '';
+
+      // Exact safe interior coordinates for all 12 rooms
+      const houseCoords = {
+        1:  { rx: 190, ry: 124, px: 190, py: 64 },   // House 1 (Top diamond / लग्न)
+        2:  { rx: 98,  ry: 68,  px: 98,  py: 34 },   // House 2 (Top-left upper triangle)
+        3:  { rx: 68,  ry: 104, px: 38,  py: 92 },   // House 3 (Top-left lower triangle)
+        4:  { rx: 98,  ry: 220, px: 98,  py: 160 },  // House 4 (Left diamond / सुख)
+        5:  { rx: 68,  ry: 280, px: 38,  py: 294 },  // House 5 (Bottom-left upper triangle)
+        6:  { rx: 98,  ry: 324, px: 98,  py: 356 },  // House 6 (Bottom-left lower triangle)
+        7:  { rx: 190, ry: 260, px: 190, py: 316 },  // House 7 (Bottom diamond / सप्तम)
+        8:  { rx: 282, ry: 324, px: 282, py: 356 },  // House 8 (Bottom-right lower triangle)
+        9:  { rx: 312, ry: 280, px: 342, py: 294 },  // House 9 (Bottom-right upper triangle)
+        10: { rx: 282, ry: 220, px: 282, py: 160 },  // House 10 (Right diamond / दशम)
+        11: { rx: 312, ry: 104, px: 342, py: 92 },   // House 11 (Top-right lower triangle)
+        12: { rx: 282, ry: 68,  px: 282, py: 34 }    // House 12 (Top-right upper triangle)
+      };
+
+      let houseRashiSvg = '', planetsSvg = '';
 
       for (let h = 1; h <= 12; h++) {
-        const s = ((lagnaSign + h - 2) % 12) + 1;
-        const c = houseCoords[h];
-        nums += `<text x="${c.nx}" y="${c.ny}" font-family="'Noto Serif Devanagari',serif" font-size="12" font-weight="700" fill="#2d2238" text-anchor="middle" dominant-baseline="middle">${toNep(s)}</text>`;
+        const sign = ((lagnaSign + h - 2) % 12) + 1;
+        const pos = houseCoords[h];
+
+        // Rashi number in soft circular badge
+        houseRashiSvg += `
+          <g transform="translate(${pos.rx}, ${pos.ry})">
+            <circle cx="0" cy="0" r="11" fill="rgba(216,168,70,0.12)" stroke="rgba(216,168,70,0.35)" stroke-width="0.8"/>
+            <text x="0" y="1" font-family="'Noto Serif Devanagari',serif" font-size="12" font-weight="700" fill="#2d1c44" text-anchor="middle" dominant-baseline="middle">${toNep(sign)}</text>
+          </g>
+        `;
+
+        // Planets in clear benefic / malefic colors
         if (planetsByHouse[h] && planetsByHouse[h].length) {
           const benefic = planetsByHouse[h].some(p => 'बृशुचबु'.includes(p));
-          const col = benefic ? '#10b981' : '#ef4444';
-          planets += `<text x="${c.px}" y="${c.py}" font-family="'Noto Serif Devanagari',serif" font-size="11.5" font-weight="700" fill="${col}" text-anchor="middle" dominant-baseline="middle">${planetsByHouse[h].join(' ')}</text>`;
+          const col = benefic ? '#047857' : '#b91c1c';
+          planetsSvg += `
+            <text x="${pos.px}" y="${pos.py}" font-family="'Noto Serif Devanagari',serif" font-size="13" font-weight="700" fill="${col}" text-anchor="middle" dominant-baseline="middle" letter-spacing="2">
+              ${planetsByHouse[h].join(' ')}
+            </text>
+          `;
         }
       }
 
-      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" style="width:100%;max-width:330px;height:auto;background:#fffdf9;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.5);">
-        <rect x="2" y="2" width="${W - 4}" height="${H - 4}" fill="#fffdf9" stroke="#372758" stroke-width="1.8"/>
-        <line x1="2" y1="2" x2="${W - 2}" y2="${H - 2}" stroke="#372758" stroke-width="1.2"/>
-        <line x1="${W - 2}" y1="2" x2="2" y2="${H - 2}" stroke="#372758" stroke-width="1.2"/>
-        <polygon points="${W * .5},2 2,${H * .5} ${W * .5},${H - 2} ${W - 2},${H * .5}" fill="none" stroke="#d8a846" stroke-width="1.5"/>
-        <line x1="${W * .25}" y1="${H * .25}" x2="${W * .5}" y2="2" stroke="#372758" stroke-width="0.8"/>
-        <line x1="${W * .75}" y1="${H * .25}" x2="${W * .5}" y2="2" stroke="#372758" stroke-width="0.8"/>
-        <line x1="${W * .25}" y1="${H * .75}" x2="${W * .5}" y2="${H - 2}" stroke="#372758" stroke-width="0.8"/>
-        <line x1="${W * .75}" y1="${H * .75}" x2="${W * .5}" y2="${H - 2}" stroke="#372758" stroke-width="0.8"/>
-        <g transform="translate(${W * .5},${H * .5})">
-          <circle cx="0" cy="0" r="22" fill="#fffaf0" stroke="#d8a846" stroke-width="1.2"/>
-          <text x="0" y="1" font-size="18" text-anchor="middle" dominant-baseline="middle">🕉️</text>
-        </g>
-        ${nums}${planets}
-      </svg>`;
+      return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" class="chart-box" style="background:#fffcf5;border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,0.5);">
+          <!-- Outer Border -->
+          <rect x="6" y="6" width="${W - 12}" height="${H - 12}" fill="#fffdfa" stroke="#2a1b40" stroke-width="2" rx="6" />
+
+          <!-- Kendra diamonds soft tint (Houses 1, 4, 7, 10) -->
+          <polygon points="190,6 6,190 190,374 374,190" fill="#fdf6e6" stroke="#b88628" stroke-width="1.6" />
+
+          <!-- 2 Main Diagonals splitting the chart into 12 distinct rooms -->
+          <line x1="6" y1="6" x2="374" y2="374" stroke="#2a1b40" stroke-width="1.3" />
+          <line x1="6" y1="374" x2="374" y2="6" stroke="#2a1b40" stroke-width="1.3" />
+
+          <!-- Center sacred emblem -->
+          <g transform="translate(190, 190)">
+            <circle cx="0" cy="0" r="23" fill="#fff9eb" stroke="#d8a846" stroke-width="1.4" />
+            <text x="0" y="2" font-size="19" text-anchor="middle" dominant-baseline="middle">🕉️</text>
+          </g>
+
+          <!-- Rashi Numbers -->
+          ${houseRashiSvg}
+
+          <!-- Planets -->
+          ${planetsSvg}
+        </svg>
+      `;
     }
 
     function generateKundali() {
@@ -1653,7 +1563,7 @@
       let hour = parseInt(document.getElementById('kf-hour').value) || 0;
       const min = parseInt(document.getElementById('kf-min').value) || 0;
       const period = document.getElementById('kf-period').value;
-      const place = document.getElementById('kf-place').value.trim() || 'नेपाल';
+      const place = document.getElementById('kf-place').value || 'काठमाडौँ';
 
       if (!year || !month || !day) {
         alert('कृपया जन्म मिति (वर्ष, महिना, दिन) भर्नुहोस्।');
@@ -1680,21 +1590,22 @@
 
       document.getElementById('kundali-output').innerHTML = `
         ${svg}
-        <div class="kundali-meta-card">
-          <div style="font-family:var(--font-serif);font-size:17px;font-weight:700;color:var(--gold-200);margin-bottom:4px;">
-            📜 ${name}को लग्न कुण्डली चक्र
+        <div class="chart-meta-box">
+          <div style="font-family:var(--font-serif);font-size:17.5px;font-weight:700;color:var(--gold-200);margin-bottom:6px;">
+            📜 ${name}को लग्न कुण्डली
           </div>
-          <div>📅 जन्म मिति: <strong>${toNep(day)}/${toNep(month)}/${toNep(year)}</strong> — समय: <strong>${hour > 11 ? 'दिउँसो' : 'बिहान'} ${toNep(hour % 12 || 12)}:${toNep(min).padStart(2, '०')}</strong></div>
-          <div>📍 जन्मस्थान: <strong>${place}</strong> &nbsp;|&nbsp; ⭐ लग्न राशि: <strong style="color:var(--gold-300);">${lagnaRashi}</strong></div>
+          <div>जन्म मिति: <strong>${toNep(day)}/${toNep(month)}/${toNep(year)}</strong> &nbsp;·&nbsp; समय: <strong>${hour > 11 ? 'दिउँसो' : 'बिहान'} ${toNep(hour % 12 || 12)}:${toNep(min).padStart(2, '०')}</strong></div>
+          <div>जन्मस्थान: <strong>${place}</strong> &nbsp;·&nbsp; लग्न राशि: <strong style="color:var(--gold-300);">${lagnaRashi}</strong></div>
         </div>
-        <p style="margin-top:10px;font-size:11.5px;color:var(--text-muted);">
-          * यो गणितीय लग्न कुण्डली हो। दशा, महादशा तथा ग्रह शान्ति समाधानको लागि 
-          <a href="javascript:void(0)" onclick="scrollToId('booking-section')" style="color:var(--gold-300);font-weight:600;text-decoration:underline;">परामर्श बुक गर्नुहोस्</a>।
-        </p>
+        <div style="margin-top:16px;">
+          <button class="btn-main" onclick="scrollToId('booking-section')" style="padding:10px 22px;font-size:13.5px;min-height:42px;">
+            पण्डितजीसँग पूर्ण फलादेश बुझ्नुहोस् ➔
+          </button>
+        </div>
       `;
     }
 
-    // ── 3. Shanti Mantras Dataset & Cards ──
+    // ── 3. Shanti Mantras Dataset ──
     const MANTRAS = [
       { icon:'🐘', name:'गणेश मन्त्र', deity:'विघ्नहर्ता श्री गणेश',
         text:'ॐ गं गणपतये नमः\nवक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।\nनिर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥',
@@ -1707,7 +1618,7 @@
         meaning:'हे प्राणस्वरूप, दुःखनाशक, सुखस्वरूप परमेश्वर! हामी तपाईंको दिव्य तेजलाई ध्यान गर्दछौँ, हाम्रो बुद्धिलाई सन्मार्गमा प्रेरित गर्नुहोस्।' },
       { icon:'🪐', name:'नवग्रह शान्ति मन्त्र', deity:'नव ग्रह मण्डल',
         text:'ॐ ब्रह्मा मुरारिस्त्रिपुरान्तकारी\nभानुः शशी भूमिसुतो बुधश्च।\nगुरुश्च शुक्रः शनिराहुकेतवः\nसर्वे ग्रहाः शान्तिकरा भवन्तु॥',
-        meaning:'ब्रह्मा, विष्णु, शिव र सूर्य, चन्द्र, मंगल, बुध, बृहस्पति, शुक्र, शनि, राहु र केतु — समस्त नवग्रहले शान्ति तथा कल्याण प्रदान गरून्।' },
+        meaning:'ब्रह्मा, विष्णु, शिव र सूर्य, चन्द्र, मंगल, बुध, बृहस्पति, शुक्र, शनि, राहु र केतु सबै नवग्रहले शान्ति तथा कल्याण प्रदान गरून्।' },
       { icon:'🌸', name:'महालक्ष्मी मन्त्र', deity:'धनधान्य दायिनी महालक्ष्मी',
         text:'ॐ श्रीं ह्रीं श्रीं कमले कमलालये\nप्रसीद प्रसीद श्रीं ह्रीं श्रीं ॐ महालक्ष्म्यै नमः॥',
         meaning:'हे कमलमा विराजमान महालक्ष्मी! हामीमाथि सदैव प्रसन्न हुनुहोस् र ऐश्वर्य, सद्बुद्धि तथा आत्मिक शान्ति प्रदान गर्नुहोस्।' },
@@ -1723,18 +1634,18 @@
       card.innerHTML = `
         <div>
           <div class="mantra-top">
-            <div class="mantra-icon-badge">${m.icon}</div>
+            <div class="mantra-icon">${m.icon}</div>
             <div>
-              <div class="mantra-title">${m.name}</div>
+              <div class="mantra-name">${m.name}</div>
               <div class="mantra-deity">${m.deity}</div>
             </div>
           </div>
           <div class="mantra-verse">${m.text}</div>
           <div class="mantra-meaning">"${m.meaning}"</div>
         </div>
-        <div class="mantra-actions">
-          <span class="mantra-pill">१०८ पटक जप</span>
-          <button class="btn-copy-mantra" onclick="copyMantra('${m.name}', \`${m.text.replace(/`/g, '\\`')}\`)">
+        <div class="mantra-bottom">
+          <span style="font-size:12px;color:var(--gold-400);font-weight:600;">१०८ पटक जप</span>
+          <button class="btn-copy" onclick="copyMantra('${m.name}', \`${m.text.replace(/`/g, '\\`')}\`)">
             📋 मन्त्र कपी
           </button>
         </div>
@@ -1752,236 +1663,53 @@
       }
     }
 
-    // ── 4. Customer Authentication & Order Management ──
-    let currentUser = null;
-    let userToken = localStorage.getItem('astro_user_token') || '';
-
-    function checkUserSession() {
-      if (!userToken) { currentUser = null; updateAuthUI(); return; }
-      fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + userToken } })
-        .then(r => r.json()).then(data => {
-          if (data && data.success && data.user) {
-            currentUser = data.user;
-            localStorage.setItem('astro_user_data', JSON.stringify(currentUser));
-          } else {
-            currentUser = null; userToken = '';
-            localStorage.removeItem('astro_user_token');
-            localStorage.removeItem('astro_user_data');
-          }
-          updateAuthUI();
-        }).catch(() => {
-          try { currentUser = JSON.parse(localStorage.getItem('astro_user_data') || 'null'); } catch(e) { currentUser = null; }
-          updateAuthUI();
-        });
+    // ── 4. Consultation Booking Handling ──
+    let selectedService = 'सामान्य कुण्डली परामर्श';
+    function selectServiceOption(el, sName) {
+      document.querySelectorAll('.service-option').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+      selectedService = sName;
     }
 
-    function updateAuthUI() {
-      const btn = document.getElementById('user-auth-btn');
-      const icon = document.getElementById('user-auth-btn-icon');
-      const text = document.getElementById('user-auth-btn-text');
-      if (currentUser && currentUser.status === 'verified') {
-        if (icon) icon.textContent = '👤';
-        if (text) text.textContent = (currentUser.name || '').split(' ')[0] + ' ✅';
-        const pv = document.getElementById('user-profile-view');
-        const lf = document.getElementById('user-login-form');
-        const rf = document.getElementById('user-register-form');
-        const tabs = document.querySelector('.auth-tabs');
-        if (pv) pv.style.display = 'block';
-        if (lf) lf.style.display = 'none';
-        if (rf) rf.style.display = 'none';
-        if (tabs) tabs.style.display = 'none';
-        const pn = document.getElementById('profile-user-name');
-        const pc = document.getElementById('profile-user-contact');
-        if (pn) pn.textContent = currentUser.name;
-        if (pc) pc.textContent = currentUser.phone || currentUser.email || '';
-      } else {
-        if (icon) icon.textContent = '🔑';
-        if (text) text.textContent = 'लगइन';
-      }
-    }
-
-    function openUserAuthModal(tab = 'login') {
-      const modal = document.getElementById('user-auth-modal');
-      if (!modal) return;
-      modal.style.display = 'flex';
-      if (currentUser && currentUser.status === 'verified') {
-        document.getElementById('user-profile-view').style.display = 'block';
-        document.getElementById('user-login-form').style.display = 'none';
-        document.getElementById('user-register-form').style.display = 'none';
-        document.querySelector('.auth-tabs').style.display = 'none';
-      } else {
-        switchAuthTab(tab);
-        clearAuthBanner();
-      }
-    }
-
-    function closeUserAuthModal() {
-      const m = document.getElementById('user-auth-modal');
-      if (m) m.style.display = 'none';
-    }
-
-    function handleAuthOverlayClick(e) {
-      if (e.target.id === 'user-auth-modal') closeUserAuthModal();
-    }
-
-    function switchAuthTab(tab) {
-      const lt = document.getElementById('auth-tab-login');
-      const rt = document.getElementById('auth-tab-register');
-      const lf = document.getElementById('user-login-form');
-      const rf = document.getElementById('user-register-form');
-      const pv = document.getElementById('user-profile-view');
-      const tabs = document.querySelector('.auth-tabs');
-      if (pv) pv.style.display = 'none';
-      if (tabs) tabs.style.display = 'flex';
-      if (tab === 'login') {
-        lt.classList.add('active'); rt.classList.remove('active');
-        lf.style.display = 'block'; rf.style.display = 'none';
-      } else {
-        rt.classList.add('active'); lt.classList.remove('active');
-        rf.style.display = 'block'; lf.style.display = 'none';
-      }
-      clearAuthBanner();
-    }
-
-    function showAuthBanner(msg, type = 'error') {
-      const b = document.getElementById('auth-status-banner');
-      if (!b) return;
-      b.style.display = 'block';
-      b.style.background = type === 'success' ? 'rgba(16,185,129,0.15)' : type === 'pending' ? 'rgba(249,115,22,0.15)' : 'rgba(239,68,68,0.15)';
-      b.style.color = type === 'success' ? '#10b981' : type === 'pending' ? '#fb923c' : '#f87171';
-      b.style.border = '1px solid currentColor';
-      b.innerHTML = msg;
-    }
-
-    function clearAuthBanner() {
-      const b = document.getElementById('auth-status-banner');
-      if (b) { b.innerHTML = ''; b.style.display = 'none'; }
-    }
-
-    async function handleUserLogin(e) {
+    function handleConsultationSubmit(e) {
       e.preventDefault();
-      clearAuthBanner();
-      const ident = (document.getElementById('login-identifier')?.value || '').trim();
-      const pass = (document.getElementById('login-password')?.value || '').trim();
-      const btn = document.getElementById('login-submit-btn');
-      if (!ident || !pass) { showAuthBanner('कृपया ईमेल वा फोन र पासवर्ड भर्नुहोस्।', 'error'); return; }
-      if (btn) { btn.disabled = true; btn.textContent = 'जाँच गर्दै...'; }
-      try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ identifier: ident, password: pass })
-        });
-        const data = await res.json();
-        if (res.ok && data.success && data.token) {
-          userToken = data.token;
-          currentUser = data.user;
-          localStorage.setItem('astro_user_token', userToken);
-          localStorage.setItem('astro_user_data', JSON.stringify(currentUser));
-          updateAuthUI();
-          showAuthBanner('सफलतापूर्वक लगइन भयो! ✨', 'success');
-          setTimeout(closeUserAuthModal, 1000);
-        } else if (data.pending) {
-          const enc = encodeURIComponent(`नमस्ते, मैले Astro Tiwari मा खाता दर्ता गरेको छु (${ident})। प्रमाणीकरण गरिदिनुहोस्।`);
-          showAuthBanner(`<b>⏳ खाता प्रमाणीकरण बाँकी</b><br/>एडमिनले तपाईंको खाता प्रमाणीकरण गरेपछि सेवा खुल्नेछ।<br/><a href="https://wa.me/9779809192604?text=${enc}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:#25d366;color:#0b1a13;font-weight:700;padding:6px 14px;border-radius:6px;text-decoration:none;font-size:12px;">💬 WhatsApp एडमिन सम्पर्क</a>`, 'pending');
-        } else {
-          showAuthBanner(data.message || 'लगइन असफल भयो।', 'error');
-        }
-      } catch (err) {
-        showAuthBanner('सर्भरसँग सम्पर्क हुन सकेन।', 'error');
-      } finally {
-        if (btn) { btn.disabled = false; btn.textContent = 'लगइन गर्नुहोस् ➔'; }
-      }
-    }
+      const name = document.getElementById('booking-name').value.trim();
+      const phone = document.getElementById('booking-phone').value.trim();
+      const question = document.getElementById('booking-question').value.trim();
 
-    async function handleUserRegister(e) {
-      e.preventDefault();
-      clearAuthBanner();
-      const name = (document.getElementById('reg-name')?.value || '').trim();
-      const phone = (document.getElementById('reg-phone')?.value || '').trim();
-      const email = (document.getElementById('reg-email')?.value || '').trim();
-      const password = (document.getElementById('reg-password')?.value || '').trim();
-      const btn = document.getElementById('reg-submit-btn');
-      if (!name || !phone || !password) { showAuthBanner('कृपया आवश्यक फिल्डहरू भर्नुहोस्।', 'error'); return; }
-      if (btn) { btn.disabled = true; btn.textContent = 'दर्ता गर्दै...'; }
-      try {
-        const res = await fetch('/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, phone, email, password })
-        });
-        const data = await res.json();
-        if (res.ok && data.success) {
-          showAuthBanner('✅ खाता दर्ता सफल भयो! एडमिनले प्रमाणीकरण गरेपछि तपाईंको खाता सक्रिय हुनेछ।', 'success');
-        } else {
-          showAuthBanner(data.message || 'दर्ता असफल भयो।', 'error');
-        }
-      } catch (err) {
-        showAuthBanner('सर्भरसँग सम्पर्क हुन सकेन।', 'error');
-      } finally {
-        if (btn) { btn.disabled = false; btn.textContent = 'नयाँ खाता दर्ता गर्नुहोस् ➔'; }
-      }
-    }
-
-    function handleUserLogout() {
-      userToken = '';
-      currentUser = null;
-      localStorage.removeItem('astro_user_token');
-      localStorage.removeItem('astro_user_data');
-      updateAuthUI();
-      closeUserAuthModal();
-      showToast('सफलतापूर्वक लगआउट भयो');
-    }
-
-    // ── File upload & Order submission capture ──
-    let latestPaymentBase64 = '', latestKundaliBase64 = '';
-    document.addEventListener('change', function(e) {
-      if (e.target.type === 'file' && e.target.files && e.target.files[0]) {
-        const reader = new FileReader();
-        reader.onload = evt => {
-          const isPayment = (e.target.name || '').toLowerCase().includes('payment');
-          if (isPayment) latestPaymentBase64 = evt.target.result;
-          else latestKundaliBase64 = evt.target.result;
-        };
-        reader.readAsDataURL(e.target.files[0]);
-      }
-    });
-
-    document.addEventListener('submit', function(e) {
-      const form = e.target.closest('form');
-      if (!form || ['user-login-form', 'user-register-form'].includes(form.id)) return;
-      if (!currentUser || currentUser.status !== 'verified') {
-        e.preventDefault();
-        e.stopPropagation();
-        openUserAuthModal('login');
+      if (!name || !phone) {
+        alert('कृपया नाम र फोन नम्बर भर्नुहोस्।');
         return;
       }
-      const fd = new FormData(form);
-      const payload = {
-        name: String(fd.get('name') || currentUser.name || '').trim(),
-        phone: String(fd.get('phone') || currentUser.phone || '').trim(),
-        userId: currentUser.id,
-        gender: String(fd.get('gender') || ''),
-        dob_bs: String(fd.get('dob_bs') || ''),
-        dob_ad: String(fd.get('dob_ad') || ''),
-        birth_hour: String(fd.get('birth_hour') || ''),
-        birth_minute: String(fd.get('birth_minute') || ''),
-        birth_period: String(fd.get('birth_period') || ''),
-        birth_place: String(fd.get('birth_place') || ''),
-        package: String(fd.get('topic') || 'Standard'),
-        message: String(fd.get('message') || ''),
-        paymentScreenshotBase64: latestPaymentBase64,
-        kundaliPhotoBase64: latestKundaliBase64
-      };
-      fetch('/api/submissions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + userToken },
-        body: JSON.stringify(payload)
-      }).then(r => r.json()).then(r => console.log('[Order saved]', r.id)).catch(console.error);
-    }, true);
 
-    // Initial session check
-    checkUserSession();
+      // Format WhatsApp message
+      let msg = `नमस्ते Astro Tiwari, म ज्योतिष परामर्श लिन चाहन्छु।\n\n`;
+      msg += `👤 नाम: ${name}\n`;
+      msg += `📞 सम्पर्क: ${phone}\n`;
+      msg += `📿 सेवा: ${selectedService}\n`;
+      if (question) msg += `❓ जिज्ञासा: ${question}\n`;
+
+      const waUrl = `https://wa.me/9779809192604?text=${encodeURIComponent(msg)}`;
+
+      // Try background sync to admin
+      try {
+        fetch('/api/submissions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            phone,
+            package: selectedService,
+            message: question,
+            status: 'pending'
+          })
+        }).catch(() => {});
+      } catch (err) {}
+
+      // Open WhatsApp
+      window.open(waUrl, '_blank');
+      showToast('WhatsApp मा जोडिँदैछ...');
+    }
   </script>
 </body>
 </html>
