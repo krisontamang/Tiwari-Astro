@@ -16,12 +16,47 @@
     <title>Astro Tiwari — ज्योतिषमा स्पष्टता</title>
     <script type="module" crossorigin src="/assets/index-ChgpL9kq.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-DpdlmGVI.css">
+    <style>
+      /* Quick Admin Portal access badge in bottom left */
+      .admin-corner-link {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 999;
+        background: rgba(22, 17, 34, 0.85);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(216, 176, 106, 0.3);
+        color: #d8b06a;
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        transition: all 0.2s ease;
+      }
+      .admin-corner-link:hover {
+        background: rgba(216, 176, 106, 0.2);
+        color: #fff;
+        border-color: #d8b06a;
+        transform: translateY(-2px);
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
 
+    <!-- Admin Link -->
+    <a href="/admin" class="admin-corner-link" title="Astro Tiwari Admin Portal">
+      <span>🔐</span> Admin Portal
+    </a>
+
+    <!-- Interactive Scripts: QR Lightbox & Form Submission Capture -->
     <script>
-      // Interactive QR click-to-zoom & copy eSewa ID
+      // 1. QR Code Click-to-Zoom Lightbox
       document.addEventListener('click', function(e) {
         const img = e.target.closest('.qr-payment-wrap img, .qr-frame img, img[alt*="eSewa"]');
         if (!img) return;
@@ -89,6 +124,71 @@
           modal.firstElementChild.style.transform = 'scale(1)';
         });
       });
+
+      // 2. Automatically save consultation submissions to Admin Portal
+      let latestPaymentBase64 = '';
+      let latestKundaliBase64 = '';
+
+      // Track file inputs when selected
+      document.addEventListener('change', function(e) {
+        if (e.target.type === 'file' && e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            const dataUrl = evt.target.result;
+            // Identify if payment screenshot or kundali
+            const name = (e.target.name || '').toLowerCase();
+            const accept = (e.target.accept || '').toLowerCase();
+            const form = e.target.closest('form');
+            const isPayment = name.includes('payment') || (form && form.innerText.includes('Payment screenshot'));
+            
+            if (isPayment || e.target.id?.includes('payment') || latestKundaliBase64) {
+              latestPaymentBase64 = dataUrl;
+            } else {
+              latestKundaliBase64 = dataUrl;
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Intercept booking form submission
+      document.addEventListener('submit', function(e) {
+        const form = e.target.closest('.booking-form, form');
+        if (!form || form.id === 'login-form' || form.classList.contains('boss-code-form')) return;
+
+        const fd = new FormData(form);
+        const name = String(fd.get('name') || '').trim();
+        const phone = String(fd.get('phone') || '').trim();
+        if (!name && !phone) return;
+
+        const payload = {
+          name: name,
+          phone: phone,
+          gender: String(fd.get('gender') || ''),
+          dob_bs: String(fd.get('dob_bs') || ''),
+          dob_ad: String(fd.get('dob_ad') || ''),
+          birth_hour: String(fd.get('birth_hour') || ''),
+          birth_minute: String(fd.get('birth_minute') || ''),
+          birth_period: String(fd.get('birth_period') || ''),
+          birth_place: String(fd.get('birth_place') || ''),
+          package: String(fd.get('topic') || 'Standard Package (रु. ४९९)'),
+          message: String(fd.get('message') || ''),
+          rectification: String(fd.get('rectification') || ''),
+          paymentScreenshotBase64: latestPaymentBase64,
+          kundaliPhotoBase64: latestKundaliBase64
+        };
+
+        fetch('/api/submissions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(res => res.json()).then(res => {
+          console.log('[Admin Sync] Consultation saved for admin review:', res.id);
+        }).catch(err => {
+          console.error('[Admin Sync Error]', err);
+        });
+      }, true);
     </script>
   </body>
 </html>

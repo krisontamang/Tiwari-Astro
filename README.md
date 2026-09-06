@@ -2,11 +2,31 @@
 
 A modern, responsive Vedic Astrology consultation web application built with React 19, Tailwind CSS, and Devanagari typography.
 
-## 🚀 Local Deployment Status
+## 🚀 Live & Local Status
 
-The application is currently running locally:
-- **Local URL**: [http://localhost:3000](http://localhost:3000)
-- **Network URL**: [http://127.0.0.1:3000](http://127.0.0.1:3000)
+- **Public Site**: [http://localhost:3000](http://localhost:3000)
+- **Admin Portal**: [http://localhost:3000/admin](http://localhost:3000/admin)
+
+---
+
+## 🔐 Admin Portal Credentials
+
+- **URL**: [http://localhost:3000/admin](http://localhost:3000/admin)
+- **Email**: `bensartiwari@gmail.com`
+- **Password**: `Astro@369`
+
+### Admin Features:
+1. **Payment Verification**:
+   - Inspect customer eSewa payment screenshots in high-resolution lightbox.
+   - 1-click **Verify Payment** (`प्रमाणित गर्नुहोस्`) button.
+   - Rejection and note-taking options.
+2. **Customer & Kundali Management**:
+   - View customer birth details (Date of birth in BS & AD, birth time with AM/PM & Nepali period, birth place).
+   - View uploaded Kundali photos.
+   - Filter by status: *All*, *Pending Verification*, *Verified*, *Rejected*.
+   - Direct 1-click WhatsApp customer message with pre-filled confirmation text.
+3. **Financial KPIs**:
+   - Total requests, pending queue, verified clients count, and total confirmed NPR revenue.
 
 ---
 
@@ -29,35 +49,17 @@ $env:PORT="8080"; node server.js
 ## 📁 Project Structure
 
 ```
-├── index.html            # Main HTML entry mounting React application
-├── server.js              # Node.js HTTP server + static file serving + mock tRPC APIs
+├── index.html            # Main HTML entry mounting React application & submission bridge
+├── server.js              # Node.js HTTP server + static serving + Admin & tRPC APIs
 ├── package.json           # Project metadata and run scripts
+├── admin/
+│   └── index.html         # Complete Admin Dashboard with login & payment verification
+├── data/
+│   └── submissions.json   # Persistent database of customer consultation requests
+├── uploads/               # Customer uploaded payment screenshots & Kundali photos
 ├── assets/
 │   ├── index-ChgpL9kq.js  # React frontend application bundle
 │   ├── index-DpdlmGVI.css # Stylesheet with Tailwind & typography
 │   └── eSewa_QR.jpg       # eSewa QR payment code
-├── manus-storage/         # Static storage for QR codes & uploaded media
-│   └── eSewa_My_QR_9809192604_1788636795054_2026-09-06_01_18_15_45f0b9e9.jpg
-└── extracted_data/        # Extracted source references, text dictionaries & analysis
+└── manus-storage/         # Static storage for QR codes & media
 ```
-
----
-
-## ✨ Features Included
-
-1. **Vedic Astrology Services**:
-   - 01 / Clarity: जन्मकुण्डली विश्लेषण (Birth Chart Analysis)
-   - 02 / Connection: विवाह मिलान (Matchmaking)
-   - 03 / Timing: करियर तथा व्यवसाय (Career & Business Guidance)
-2. **Pricing Packages**:
-   - Basic Package (रु. २९९/-)
-   - Standard Package (रु. ४९९/-)
-   - VIP Premium (रु. १,०५५/-)
-3. **Interactive Consultation & Booking Form**:
-   - Dual Nepali Calendar picker (Bikram Sambat वि.सं. & Anno Domini ई.सं.)
-   - Time of birth with Nepali time period selection (AM/PM, बिहान, दिउँसो, बेलुका, राति)
-   - Birth time rectification event log
-   - Kundali photo upload with auto-extract
-   - eSewa QR code scan & payment screenshot upload
-   - Astrologer **Boss Mode** (`*3*6*9`) with private review note panel
-   - Structured WhatsApp message dispatch (`+977 9809192604`)

@@ -1,0 +1,1381 @@
+<!doctype html>
+<html lang="ne">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Astro Tiwari — Admin Portal (प्रमाणीकरण)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg-dark: #0b0a14;
+        --bg-card: #151122;
+        --bg-card-hover: #1b162b;
+        --gold: #d8b06a;
+        --gold-light: #f4d38c;
+        --gold-border: rgba(216, 176, 106, 0.28);
+        --text-primary: #f9f4ec;
+        --text-secondary: #ad9eb2;
+        --text-muted: #796c80;
+        --accent-green: #1f8f5a;
+        --accent-green-light: #2ecc71;
+        --accent-red: #e74c3c;
+        --accent-amber: #e67e22;
+        --font-serif: 'Cormorant Garamond', 'Noto Serif Devanagari', serif;
+        --font-sans: 'DM Sans', 'Outfit', sans-serif;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        background-color: var(--bg-dark);
+        color: var(--text-primary);
+        font-family: var(--font-sans);
+        min-height: 100vh;
+        line-height: 1.5;
+        background-image: 
+          radial-gradient(circle at 15% 15%, rgba(216, 176, 106, 0.07) 0%, transparent 40%),
+          radial-gradient(circle at 85% 85%, rgba(120, 60, 180, 0.06) 0%, transparent 45%);
+      }
+
+      /* Transitions */
+      a, button { transition: all 0.2s ease; }
+
+      /* --- Login Screen --- */
+      #login-view {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .login-card {
+        background: linear-gradient(145deg, #181326, #100d1c);
+        border: 1px solid var(--gold-border);
+        border-radius: 1.5rem;
+        width: 100%;
+        max-width: 420px;
+        padding: 40px 32px;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .login-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; height: 3px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      }
+      .logo-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 16px;
+        background: radial-gradient(circle, #f4d38c 0%, #a8794f 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 35px rgba(216, 176, 106, 0.4);
+        color: #1a1221;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .login-title {
+        font-family: var(--font-serif);
+        font-size: 28px;
+        color: var(--text-primary);
+        letter-spacing: -0.02em;
+        margin-bottom: 6px;
+      }
+      .login-subtitle {
+        color: var(--text-secondary);
+        font-size: 13px;
+        margin-bottom: 28px;
+      }
+      .form-group {
+        text-align: left;
+        margin-bottom: 18px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 6px;
+        letter-spacing: 0.02em;
+      }
+      .form-input {
+        width: 100%;
+        background: #0f0b1a;
+        border: 1px solid rgba(216, 176, 106, 0.2);
+        border-radius: 0.75rem;
+        padding: 12px 16px;
+        color: #fff;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .form-input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(216, 176, 106, 0.15);
+      }
+      .login-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #d8b06a, #b88840);
+        color: #140e1b;
+        font-weight: 700;
+        font-size: 15px;
+        border: none;
+        border-radius: 0.75rem;
+        padding: 14px;
+        margin-top: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 4px 20px rgba(216, 176, 106, 0.25);
+      }
+      .login-btn:hover {
+        background: linear-gradient(135deg, #e8c482, #c89548);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 25px rgba(216, 176, 106, 0.35);
+      }
+      .login-hint {
+        margin-top: 22px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px dashed rgba(216, 176, 106, 0.2);
+        border-radius: 0.75rem;
+        font-size: 11.5px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .login-hint b {
+        color: var(--gold-light);
+      }
+
+      /* --- Dashboard Header --- */
+      #dashboard-view { display: none; }
+      .navbar {
+        background: rgba(16, 13, 26, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 14px 24px;
+      }
+      .nav-container {
+        max-width: 1300px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+      .brand-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand-title {
+        font-family: var(--font-serif);
+        font-size: 22px;
+        color: var(--text-primary);
+        font-weight: 700;
+      }
+      .brand-badge {
+        background: rgba(216, 176, 106, 0.15);
+        border: 1px solid var(--gold-border);
+        color: var(--gold);
+        font-size: 10.5px;
+        font-weight: 700;
+        padding: 3px 9px;
+        border-radius: 999px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .user-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+      .user-dot {
+        width: 8px; height: 8px;
+        background: var(--accent-green-light);
+        border-radius: 50%;
+        box-shadow: 0 0 8px var(--accent-green-light);
+      }
+      .btn-ghost {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: var(--text-secondary);
+        padding: 6px 14px;
+        border-radius: 0.6rem;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* --- Main Container --- */
+      .main-content {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 28px 24px 60px;
+      }
+
+      /* --- Stats Grid --- */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      .stat-card {
+        background: var(--bg-card);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 1.25rem;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .stat-card.pending-card {
+        border-color: rgba(230, 126, 34, 0.4);
+        background: linear-gradient(145deg, #22161b, #151122);
+      }
+      .stat-card.verified-card {
+        border-color: rgba(31, 143, 90, 0.4);
+        background: linear-gradient(145deg, #13241b, #151122);
+      }
+      .stat-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 6px;
+      }
+      .stat-value {
+        font-family: var(--font-serif);
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--text-primary);
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+      .stat-sub {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      /* --- Filter & Controls Bar --- */
+      .controls-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 24px;
+        background: var(--bg-card);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 1rem;
+        padding: 14px 18px;
+      }
+      .filter-tabs {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .tab-btn {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--text-secondary);
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .tab-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+      }
+      .tab-btn.active {
+        background: var(--gold);
+        color: #120e18;
+        border-color: var(--gold);
+        font-weight: 700;
+      }
+      .search-box {
+        position: relative;
+        min-width: 260px;
+      }
+      .search-input {
+        width: 100%;
+        background: #0d0a17;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.6rem;
+        padding: 8px 14px 8px 34px;
+        color: #fff;
+        font-size: 13px;
+        outline: none;
+      }
+      .search-input:focus {
+        border-color: var(--gold);
+      }
+      .search-icon {
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+
+      /* --- Submissions Cards --- */
+      .submissions-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .sub-card {
+        background: var(--bg-card);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1.35rem;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 2fr 1.2fr 1.4fr;
+        gap: 24px;
+        align-items: start;
+        transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      }
+      .sub-card:hover {
+        border-color: rgba(216, 176, 106, 0.35);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      }
+      .sub-card.is-pending {
+        border-left: 4px solid var(--accent-amber);
+      }
+      .sub-card.is-verified {
+        border-left: 4px solid var(--accent-green);
+      }
+      .sub-card.is-rejected {
+        border-left: 4px solid var(--accent-red);
+      }
+
+      /* Column 1: Client Info */
+      .client-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .client-name {
+        font-family: var(--font-serif);
+        font-size: 24px;
+        color: #fff;
+        font-weight: 700;
+      }
+      .badge {
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      .badge-pending {
+        background: rgba(230, 126, 34, 0.15);
+        color: #f39c12;
+        border: 1px solid rgba(230, 126, 34, 0.35);
+      }
+      .badge-verified {
+        background: rgba(31, 143, 90, 0.2);
+        color: #2ecc71;
+        border: 1px solid rgba(46, 204, 113, 0.4);
+      }
+      .badge-rejected {
+        background: rgba(231, 76, 60, 0.2);
+        color: #e74c3c;
+        border: 1px solid rgba(231, 76, 60, 0.4);
+      }
+      .pkg-pill {
+        display: inline-block;
+        background: rgba(216, 176, 106, 0.12);
+        border: 1px solid var(--gold-border);
+        color: var(--gold-light);
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 6px;
+        margin-bottom: 14px;
+      }
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px 14px;
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+      .detail-item span {
+        color: var(--text-muted);
+        display: block;
+        font-size: 10.5px;
+      }
+      .detail-item strong {
+        color: var(--text-secondary);
+        font-weight: 600;
+      }
+      .client-message {
+        background: rgba(255, 255, 255, 0.03);
+        border-left: 2px solid var(--gold);
+        padding: 8px 12px;
+        border-radius: 0 6px 6px 0;
+        font-size: 12px;
+        color: #d2c6d4;
+        margin-top: 10px;
+        font-style: italic;
+      }
+
+      /* Column 2: Payment Screenshot Box */
+      .screenshot-box {
+        background: #0e0a19;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        padding: 14px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .screenshot-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--gold);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .thumb-wrap {
+        width: 100%;
+        max-width: 170px;
+        aspect-ratio: 1296/2022;
+        background: #fff;
+        border-radius: 0.6rem;
+        padding: 5px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .thumb-wrap:hover {
+        transform: scale(1.04);
+        box-shadow: 0 8px 25px rgba(216, 176, 106, 0.35);
+      }
+      .thumb-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+      .thumb-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .thumb-wrap:hover .thumb-overlay { opacity: 1; }
+      .screenshot-hint {
+        font-size: 10.5px;
+        color: var(--text-muted);
+        margin-top: 8px;
+      }
+
+      /* Column 3: Verification & Actions */
+      .action-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .btn-verify {
+        background: linear-gradient(135deg, #1f8f5a, #166c43);
+        color: #fff;
+        border: none;
+        border-radius: 0.75rem;
+        padding: 12px 16px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 4px 15px rgba(31, 143, 90, 0.3);
+      }
+      .btn-verify:hover {
+        background: linear-gradient(135deg, #24a869, #1a7d4e);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(31, 143, 90, 0.45);
+      }
+      .btn-whatsapp {
+        background: #128c7e;
+        color: #fff;
+        border: none;
+        border-radius: 0.75rem;
+        padding: 10px 16px;
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .btn-whatsapp:hover {
+        background: #25d366;
+        color: #0b1a13;
+      }
+      .btn-reject {
+        background: rgba(231, 76, 60, 0.15);
+        color: #e74c3c;
+        border: 1px solid rgba(231, 76, 60, 0.3);
+        border-radius: 0.6rem;
+        padding: 8px 12px;
+        font-size: 11.5px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn-reject:hover {
+        background: rgba(231, 76, 60, 0.25);
+      }
+      .admin-note-area {
+        width: 100%;
+        background: #0d0a17;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.6rem;
+        padding: 8px 10px;
+        color: #ddd;
+        font-size: 11.5px;
+        resize: vertical;
+        font-family: inherit;
+        outline: none;
+      }
+      .admin-note-area:focus {
+        border-color: var(--gold);
+      }
+      .verified-stamp {
+        background: rgba(31, 143, 90, 0.15);
+        border: 1px solid rgba(46, 204, 113, 0.35);
+        border-radius: 0.6rem;
+        padding: 8px 10px;
+        font-size: 11px;
+        color: #a2e8bc;
+      }
+
+      /* --- Image Lightbox Modal --- */
+      #lightbox-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(9, 7, 16, 0.92);
+        backdrop-filter: blur(10px);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .lightbox-content {
+        background: #161124;
+        border: 1px solid var(--gold-border);
+        border-radius: 1.5rem;
+        max-width: 540px;
+        width: 100%;
+        max-height: 92vh;
+        overflow-y: auto;
+        padding: 24px;
+        position: relative;
+        text-align: center;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+      }
+      .lightbox-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: rgba(255, 255, 255, 0.08);
+        border: none;
+        color: #fff;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .lightbox-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .lightbox-img {
+        max-width: 100%;
+        max-height: 56vh;
+        object-fit: contain;
+        background: #fff;
+        border-radius: 0.8rem;
+        padding: 8px;
+        margin: 14px auto;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      }
+
+      /* Empty State */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        background: var(--bg-card);
+        border: 1px dashed rgba(255, 255, 255, 0.1);
+        border-radius: 1.5rem;
+      }
+      .empty-icon { font-size: 40px; margin-bottom: 12px; }
+      .empty-title { font-size: 18px; color: var(--text-primary); margin-bottom: 6px; }
+      .empty-sub { font-size: 13px; color: var(--text-muted); }
+
+      /* Toast Notification */
+      #toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: #181226;
+        border: 1px solid var(--gold);
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        font-size: 13px;
+        z-index: 10000;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      #toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* Responsive */
+      @media (max-width: 960px) {
+        .sub-card {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+        .screenshot-box {
+          flex-direction: row;
+          justify-content: space-around;
+          text-align: left;
+        }
+        .thumb-wrap {
+          max-width: 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ============================================================== -->
+    <!-- 1. LOGIN SCREEN -->
+    <!-- ============================================================== -->
+    <div id="login-view">
+      <div class="login-card">
+        <div class="logo-icon">🕉️</div>
+        <h1 class="login-title">Astro Tiwari</h1>
+        <p class="login-subtitle">Admin Portal — ग्राहक भुक्तानी तथा कुण्डली प्रमाणीकरण</p>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label for="admin-email">Email Address</label>
+            <input 
+              type="email" 
+              id="admin-email" 
+              class="form-input" 
+              value="bensartiwari@gmail.com" 
+              required 
+              placeholder="bensartiwari@gmail.com"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="admin-password">Password</label>
+            <input 
+              type="password" 
+              id="admin-password" 
+              class="form-input" 
+              value="Astro@369" 
+              required 
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button type="submit" id="login-submit-btn" class="login-btn">
+            <span>सुरक्षित लगइन गर्नुहोस्</span>
+            <span id="login-spinner" style="display:none;">⏳</span>
+          </button>
+        </form>
+
+        <div class="login-hint">
+          <b>🔐 Authorized Credentials:</b><br />
+          Email: <b>bensartiwari@gmail.com</b><br />
+          Password: <b>Astro@369</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 2. DASHBOARD SCREEN -->
+    <!-- ============================================================== -->
+    <div id="dashboard-view">
+      <header class="navbar">
+        <div class="nav-container">
+          <div class="brand-wrap">
+            <span style="font-size: 24px;">🕉️</span>
+            <span class="brand-title">Astro Tiwari</span>
+            <span class="brand-badge">Admin Dashboard</span>
+          </div>
+
+          <div class="nav-actions">
+            <div class="user-pill">
+              <span class="user-dot"></span>
+              <span id="admin-user-display">bensartiwari@gmail.com</span>
+            </div>
+            <a href="/" target="_blank" class="btn-ghost">
+              🌐 Live Site
+            </a>
+            <button id="logout-btn" class="btn-ghost" style="color:#e74c3c; border-color: rgba(231,76,60,0.3);">
+              Logout
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <!-- Stats Row -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">कुल अनुरोधहरू (Total Submissions)</div>
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-sub">परामर्शका लागि प्राप्त फारमहरू</div>
+          </div>
+
+          <div class="stat-card pending-card">
+            <div class="stat-label" style="color: #f39c12;">⏳ प्रमाणीकरण बाँकी (Pending)</div>
+            <div class="stat-value" style="color: #f39c12;" id="stat-pending">0</div>
+            <div class="stat-sub">eSewa screenshot जाँच गर्नुपर्ने</div>
+          </div>
+
+          <div class="stat-card verified-card">
+            <div class="stat-label" style="color: #2ecc71;">✅ प्रमाणित भुक्तानी (Verified)</div>
+            <div class="stat-value" style="color: #2ecc71;" id="stat-verified">0</div>
+            <div class="stat-sub">स्वीकृत तथा परामर्श सुरु भएका</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label" style="color: var(--gold-light);">💰 प्रमाणित आम्दानी (Revenue)</div>
+            <div class="stat-value" style="color: var(--gold-light);" id="stat-revenue">रु. ०</div>
+            <div class="stat-sub">सफल eSewa भुक्तानी कुल रकम</div>
+          </div>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="controls-bar">
+          <div class="filter-tabs">
+            <button class="tab-btn active" data-filter="all">सबै (<span id="count-all">0</span>)</button>
+            <button class="tab-btn" data-filter="pending">⏳ बाँकी (<span id="count-pending">0</span>)</button>
+            <button class="tab-btn" data-filter="verified">✅ प्रमाणित (<span id="count-verified">0</span>)</button>
+            <button class="tab-btn" data-filter="rejected">❌ अस्वीकृत (<span id="count-rejected">0</span>)</button>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="search-input" class="search-input" placeholder="ग्राहकको नाम वा फोन खोज्नुहोस्..." />
+            </div>
+            <button id="refresh-btn" class="btn-ghost" title="Refresh">🔄 Refresh</button>
+          </div>
+        </div>
+
+        <!-- Submissions List Container -->
+        <div id="submissions-container" class="submissions-list">
+          <!-- Populated by JavaScript -->
+        </div>
+      </main>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 3. PAYMENT LIGHTBOX MODAL -->
+    <!-- ============================================================== -->
+    <div id="lightbox-modal">
+      <div class="lightbox-content">
+        <button class="lightbox-close" id="lightbox-close-btn">&times;</button>
+        <div style="font-family: var(--font-serif); font-size: 20px; color: var(--gold);" id="lightbox-title">
+          Payment Screenshot
+        </div>
+        <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;" id="lightbox-sub">
+          eSewa भुक्तानी रसिद जाँच गर्नुहोस्
+        </div>
+
+        <img src="" alt="Full Payment Screenshot" id="lightbox-img" class="lightbox-img" />
+
+        <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-top:16px;">
+          <a href="" download="payment-screenshot.jpg" id="lightbox-download-btn" class="btn-ghost">
+            ⬇️ डाउनलोड गर्नुहोस्
+          </a>
+          <button id="lightbox-verify-btn" class="btn-verify" style="padding: 8px 18px;">
+            ✅ भुक्तानी प्रमाणित गर्नुहोस्
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Component -->
+    <div id="toast">
+      <span id="toast-icon">✅</span>
+      <span id="toast-msg">सन्देश</span>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- JAVASCRIPT LOGIC -->
+    <!-- ============================================================== -->
+    <script>
+      const AUTH_TOKEN_KEY = 'astro_admin_token';
+      let currentSubmissions = [];
+      let activeFilter = 'all';
+      let activeLightboxId = null;
+
+      // DOM Elements
+      const loginView = document.getElementById('login-view');
+      const dashboardView = document.getElementById('dashboard-view');
+      const loginForm = document.getElementById('login-form');
+      const emailInput = document.getElementById('admin-email');
+      const passwordInput = document.getElementById('admin-password');
+      const logoutBtn = document.getElementById('logout-btn');
+      const submissionsContainer = document.getElementById('submissions-container');
+      const searchInput = document.getElementById('search-input');
+      const refreshBtn = document.getElementById('refresh-btn');
+      const toast = document.getElementById('toast');
+
+      // Lightbox Elements
+      const lightboxModal = document.getElementById('lightbox-modal');
+      const lightboxCloseBtn = document.getElementById('lightbox-close-btn');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxTitle = document.getElementById('lightbox-title');
+      const lightboxSub = document.getElementById('lightbox-sub');
+      const lightboxDownloadBtn = document.getElementById('lightbox-download-btn');
+      const lightboxVerifyBtn = document.getElementById('lightbox-verify-btn');
+
+      function showToast(msg, icon = '✅') {
+        document.getElementById('toast-icon').textContent = icon;
+        document.getElementById('toast-msg').textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3500);
+      }
+
+      function getToken() {
+        return localStorage.getItem(AUTH_TOKEN_KEY);
+      }
+
+      // Check Authentication on Page Load
+      async function initAuth() {
+        const token = getToken();
+        if (!token) {
+          showLogin();
+          return;
+        }
+
+        try {
+          const res = await fetch('/api/admin/check-auth', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const data = await res.json();
+          if (data.authenticated) {
+            showDashboard();
+            loadSubmissions();
+          } else {
+            showLogin();
+          }
+        } catch (e) {
+          showLogin();
+        }
+      }
+
+      function showLogin() {
+        loginView.style.display = 'flex';
+        dashboardView.style.display = 'none';
+      }
+
+      function showDashboard() {
+        loginView.style.display = 'none';
+        dashboardView.style.display = 'block';
+      }
+
+      // Handle Login
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+        const btn = document.getElementById('login-submit-btn');
+
+        btn.disabled = true;
+        document.getElementById('login-spinner').style.display = 'inline';
+
+        try {
+          const res = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+          const data = await res.json();
+
+          if (data.success && data.token) {
+            localStorage.setItem(AUTH_TOKEN_KEY, data.token);
+            showToast('लगइन सफल भयो! स्वागत छ Bensar Tiwari जी।');
+            showDashboard();
+            loadSubmissions();
+          } else {
+            showToast(data.message || 'लगइन असफल भयो', '❌');
+          }
+        } catch (err) {
+          showToast('सर्भरसँग सम्पर्क हुन सकेन', '❌');
+        } finally {
+          btn.disabled = false;
+          document.getElementById('login-spinner').style.display = 'none';
+        }
+      });
+
+      // Handle Logout
+      logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+        showToast('लगआउट सफल भयो', '👋');
+        showLogin();
+      });
+
+      // Fetch Submissions
+      async function loadSubmissions() {
+        const token = getToken();
+        if (!token) return;
+
+        try {
+          const res = await fetch('/api/admin/submissions', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const data = await res.json();
+          if (data.success) {
+            currentSubmissions = data.submissions || [];
+            updateStats();
+            renderSubmissions();
+          } else if (res.status === 401) {
+            showLogin();
+          }
+        } catch (e) {
+          console.error('Error fetching submissions:', e);
+        }
+      }
+
+      refreshBtn.addEventListener('click', () => {
+        loadSubmissions();
+        showToast('डाटा रिफ्रेस गरियो');
+      });
+
+      // Update KPIs
+      function updateStats() {
+        const total = currentSubmissions.length;
+        const pending = currentSubmissions.filter(s => s.status === 'pending').length;
+        const verified = currentSubmissions.filter(s => s.status === 'verified').length;
+        const rejected = currentSubmissions.filter(s => s.status === 'rejected').length;
+
+        const revenue = currentSubmissions
+          .filter(s => s.status === 'verified')
+          .reduce((sum, s) => sum + (Number(s.amount) || 0), 0);
+
+        document.getElementById('stat-total').textContent = total;
+        document.getElementById('stat-pending').textContent = pending;
+        document.getElementById('stat-verified').textContent = verified;
+        document.getElementById('stat-revenue').textContent = `रु. ${revenue.toLocaleString('ne-NP')}`;
+
+        document.getElementById('count-all').textContent = total;
+        document.getElementById('count-pending').textContent = pending;
+        document.getElementById('count-verified').textContent = verified;
+        document.getElementById('count-rejected').textContent = rejected;
+      }
+
+      // Filter Tabs
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeFilter = btn.dataset.filter;
+          renderSubmissions();
+        });
+      });
+
+      // Search
+      searchInput.addEventListener('input', () => {
+        renderSubmissions();
+      });
+
+      // Render Submissions Cards
+      function renderSubmissions() {
+        const query = searchInput.value.trim().toLowerCase();
+        let list = currentSubmissions.filter(s => {
+          if (activeFilter !== 'all' && s.status !== activeFilter) return false;
+          if (query) {
+            const matchName = (s.name || '').toLowerCase().includes(query);
+            const matchPhone = (s.phone || '').includes(query);
+            const matchPkg = (s.package || '').toLowerCase().includes(query);
+            return matchName || matchPhone || matchPkg;
+          }
+          return true;
+        });
+
+        if (list.length === 0) {
+          submissionsContainer.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon">📭</div>
+              <div class="empty-title">कुनै पनि रेकर्ड फेला परेन</div>
+              <div class="empty-sub">छनोट गरिएको फिल्टर वा खोजीमा कुनै ग्राहक भेटिएन।</div>
+            </div>
+          `;
+          return;
+        }
+
+        submissionsContainer.innerHTML = list.map(item => {
+          const isPending = item.status === 'pending';
+          const isVerified = item.status === 'verified';
+          const isRejected = item.status === 'rejected';
+
+          const formattedDate = new Date(item.createdAt).toLocaleString('ne-NP', {
+            year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+          });
+
+          // Pre-fill WhatsApp message
+          const waMessage = encodeURIComponent(
+            `नमस्कार ${item.name} जी, Astro Tiwari बाट सम्पर्क गर्दैछौं।\nतपाईंको परामर्श अनुरोध (Package: ${item.package}) प्राप्त भयो।\n` +
+            (isVerified 
+              ? `तपाईंको भुक्तानी प्रमाणित भएको छ। हामी छिट्टै तपाईंको कुण्डली विश्लेषण पठाउँदैछौं।`
+              : `कृपया eSewa मा भुक्तानी गरेको screenshot पठाइदिनुहोला।`)
+          );
+
+          const waUrl = item.phone ? `https://wa.me/977${item.phone.replace(/[^0-9]/g, '').slice(-10)}?text=${waMessage}` : '#';
+
+          return `
+            <div class="sub-card is-${item.status}" id="card-${item.id}">
+              <!-- Col 1: Client & Birth Info -->
+              <div>
+                <div class="client-header">
+                  <span class="client-name">${escapeHtml(item.name)}</span>
+                  <span class="badge badge-${item.status}">
+                    ${isPending ? '⏳ पर्खाइमा' : isVerified ? '✅ प्रमाणित' : '❌ अस्वीकृत'}
+                  </span>
+                </div>
+
+                <div class="pkg-pill">
+                  📦 ${escapeHtml(item.package || 'Standard')} — <b>रु. ${item.amount || '499'}</b>
+                </div>
+
+                <div class="details-grid">
+                  <div class="detail-item">
+                    <span>सम्पर्क नम्बर:</span>
+                    <strong>${escapeHtml(item.phone || 'छैन')}</strong>
+                  </div>
+                  <div class="detail-item">
+                    <span>लिङ्ग:</span>
+                    <strong>${escapeHtml(item.gender || 'नखुलेको')}</strong>
+                  </div>
+                  <div class="detail-item">
+                    <span>जन्म मिति (वि.सं.):</span>
+                    <strong>${escapeHtml(item.dobBs || '—')}</strong>
+                  </div>
+                  <div class="detail-item">
+                    <span>जन्म मिति (ई.सं.):</span>
+                    <strong>${escapeHtml(item.dobAd || '—')}</strong>
+                  </div>
+                  <div class="detail-item">
+                    <span>जन्म समय:</span>
+                    <strong>${escapeHtml(item.birthTime || '—')} ${escapeHtml(item.birthPeriod || '')}</strong>
+                  </div>
+                  <div class="detail-item">
+                    <span>जन्म स्थान:</span>
+                    <strong>${escapeHtml(item.birthPlace || '—')}</strong>
+                  </div>
+                </div>
+
+                ${item.message ? `
+                  <div class="client-message">
+                    " ${escapeHtml(item.message)} "
+                  </div>
+                ` : ''}
+
+                ${item.rectification ? `
+                  <div style="font-size:11px; color:#ad9eb2; margin-top:6px;">
+                    🎯 <b>Rectification Events:</b> ${escapeHtml(item.rectification)}
+                  </div>
+                ` : ''}
+
+                <div style="font-size:10.5px; color:var(--text-muted); margin-top:10px;">
+                  अनुरोध मिति: ${formattedDate}
+                </div>
+              </div>
+
+              <!-- Col 2: Payment Screenshot Inspection -->
+              <div class="screenshot-box">
+                <div class="screenshot-label">
+                  📸 Payment Screenshot
+                </div>
+
+                ${item.paymentScreenshotUrl ? `
+                  <div class="thumb-wrap" onclick="openLightbox('${item.id}', '${item.paymentScreenshotUrl}', '${escapeHtml(item.name)}', '${item.amount}')">
+                    <img src="${item.paymentScreenshotUrl}" alt="Payment Screenshot" />
+                    <div class="thumb-overlay">🔍 Click to Zoom</div>
+                  </div>
+                  <div class="screenshot-hint">
+                    eSewa ID: <b>9809192604</b><br />नाम: <b>Ayush Tiwari</b>
+                  </div>
+                ` : `
+                  <div style="padding: 30px 10px; color: var(--text-muted); font-size: 12px;">
+                    🚫 Screenshot अपलोड भएको छैन
+                  </div>
+                `}
+
+                ${item.kundaliPhotoUrl ? `
+                  <div style="margin-top: 14px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 10px; width: 100%;">
+                    <div style="font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 6px;">📜 Kundali Photo</div>
+                    <div class="thumb-wrap" style="aspect-ratio: 1/1; max-width: 100px; margin: 0 auto;" onclick="openLightbox('${item.id}', '${item.kundaliPhotoUrl}', 'Kundali Photo: ${escapeHtml(item.name)}', '')">
+                      <img src="${item.kundaliPhotoUrl}" alt="Kundali Photo" />
+                      <div class="thumb-overlay">🔍 हेर्नुहोस्</div>
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Col 3: Actions & Verification -->
+              <div class="action-panel">
+                ${!isVerified ? `
+                  <button class="btn-verify" onclick="verifySubmission('${item.id}')">
+                    <span>✅ Verify Payment (प्रमाणित गर्नुहोस्)</span>
+                  </button>
+                ` : `
+                  <div class="verified-stamp">
+                    <b>✅ भुक्तानी प्रमाणित भइसकेको छ</b>
+                    <div style="font-size: 10px; color: #87cca2; margin-top: 2px;">
+                      प्रमाणित गर्ने: ${escapeHtml(item.verifiedBy || 'Admin')}<br />
+                      मिति: ${item.verifiedAt ? new Date(item.verifiedAt).toLocaleString('ne-NP') : '—'}
+                    </div>
+                  </div>
+                `}
+
+                <a href="${waUrl}" target="_blank" rel="noreferrer" class="btn-whatsapp">
+                  💬 WhatsApp मा ग्राहकलाई खबर गर्नुहोस्
+                </a>
+
+                <div style="margin-top: 4px;">
+                  <label style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px;">
+                    📝 Admin Private Note:
+                  </label>
+                  <textarea 
+                    class="admin-note-area" 
+                    rows="2" 
+                    placeholder="जस्तै: eSewa Trx ID मिलेको..." 
+                    onchange="updateNote('${item.id}', this.value)"
+                  >${escapeHtml(item.adminNote || '')}</textarea>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
+                  ${!isRejected ? `
+                    <button class="btn-reject" onclick="rejectSubmission('${item.id}')">
+                      ❌ Reject (अस्वीकार)
+                    </button>
+                  ` : `
+                    <span style="font-size:11px; color:var(--accent-red);">अस्वीकृत गरिएको</span>
+                  `}
+
+                  <button class="btn-ghost" style="color:var(--text-muted); font-size:11px; padding:4px 8px;" onclick="deleteSubmission('${item.id}')">
+                    🗑️ मेटाउनुहोस्
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Verify Submission Action
+      async function verifySubmission(id) {
+        const token = getToken();
+        if (!token) return;
+
+        try {
+          const res = await fetch(`/api/admin/submissions/${id}/verify`, {
+            method: 'POST',
+            headers: { 
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ adminNote: 'Admin द्वारा eSewa भुक्तानी प्रमाणित भयो।' })
+          });
+          const data = await res.json();
+          if (data.success) {
+            showToast('भुक्तानी सफलतापूर्वक प्रमाणित भयो! ✅');
+            if (activeLightboxId === id) closeLightbox();
+            loadSubmissions();
+          } else {
+            showToast(data.message || 'प्रमाणित गर्न सकिएन', '❌');
+          }
+        } catch (e) {
+          showToast('त्रुटि भयो', '❌');
+        }
+      }
+
+      // Reject Action
+      async function rejectSubmission(id) {
+        if (!confirm('के तपाईं यो भुक्तानी अस्वीकार गर्न निश्चित हुनुहुन्छ?')) return;
+        const token = getToken();
+        if (!token) return;
+
+        try {
+          const res = await fetch(`/api/admin/submissions/${id}/reject`, {
+            method: 'POST',
+            headers: { 
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          });
+          const data = await res.json();
+          if (data.success) {
+            showToast('अनुरोध अस्वीकार गरियो', '⚠️');
+            loadSubmissions();
+          }
+        } catch (e) {
+          showToast('त्रुटि भयो', '❌');
+        }
+      }
+
+      // Update Note
+      async function updateNote(id, note) {
+        const token = getToken();
+        if (!token) return;
+
+        try {
+          await fetch(`/api/admin/submissions/${id}/note`, {
+            method: 'POST',
+            headers: { 
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ adminNote: note })
+          });
+          showToast('Note सुरक्षित भयो');
+        } catch (e) {}
+      }
+
+      // Delete Submission
+      async function deleteSubmission(id) {
+        if (!confirm('के तपाईं यो रेकर्ड मेटाउन चाहनुहुन्छ?')) return;
+        const token = getToken();
+        if (!token) return;
+
+        try {
+          const res = await fetch(`/api/admin/submissions/${id}/delete`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const data = await res.json();
+          if (data.success) {
+            showToast('रेकर्ड मेटाइयो');
+            loadSubmissions();
+          }
+        } catch (e) {
+          showToast('त्रुटि भयो', '❌');
+        }
+      }
+
+      // Lightbox Functions
+      function openLightbox(id, imgUrl, name, amount) {
+        activeLightboxId = id;
+        lightboxImg.src = imgUrl;
+        lightboxDownloadBtn.href = imgUrl;
+        lightboxTitle.textContent = `Payment Screenshot: ${name}`;
+        lightboxSub.textContent = amount ? `रकम: रु. ${amount} | eSewa ID: 9809192604` : '';
+        
+        const item = currentSubmissions.find(s => s.id === id);
+        if (item && item.status === 'verified') {
+          lightboxVerifyBtn.style.display = 'none';
+        } else {
+          lightboxVerifyBtn.style.display = 'inline-flex';
+          lightboxVerifyBtn.onclick = () => verifySubmission(id);
+        }
+
+        lightboxModal.style.display = 'flex';
+      }
+
+      function closeLightbox() {
+        lightboxModal.style.display = 'none';
+        activeLightboxId = null;
+      }
+
+      lightboxCloseBtn.addEventListener('click', closeLightbox);
+      lightboxModal.addEventListener('click', (e) => {
+        if (e.target === lightboxModal) closeLightbox();
+      });
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      // Start application
+      initAuth();
+    </script>
+  </body>
+</html>
