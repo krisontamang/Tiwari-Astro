@@ -1193,53 +1193,6 @@ async function handleRequest(req, res) {
     return sendJSON(res, 200, mcpResponse);
   }
 
-  // --- API: Vedic Netra Suite (वैदिक नेत्र) ---
-  if (pathname === '/api/netra/sample' && req.method === 'GET') {
-    return sendJSON(res, 200, { success: true, data: jyotishSarathiService.getPresetSarathiSample() });
-  }
-
-  if (pathname.startsWith('/api/netra/submission/') && req.method === 'GET') {
-    const subId = pathname.split('/').pop();
-    const submissions = readSubmissions();
-    const sub = submissions.find(s => s.id === subId || s.orderId === subId);
-    if (!sub) {
-      return sendJSON(res, 404, { success: false, message: 'Submission not found' });
-    }
-    const sample = jyotishSarathiService.getPresetSarathiSample();
-    sample.meta.customerName = sub.name || 'ग्राहक कुण्डली';
-    sample.meta.dobBs = sub.dobBs || sub.dobAd || sample.meta.dobBs;
-    sample.meta.time = (sub.birthTime || '17:21') + (sub.birthPeriod ? ' ' + sub.birthPeriod : '');
-    sample.meta.place = sub.birthPlace || 'Kathmandu';
-    sample.avakahada.name = sub.name || sample.avakahada.name;
-    return sendJSON(res, 200, { success: true, data: sample });
-  }
-
-  if (pathname === '/api/netra/calculate' && req.method === 'POST') {
-    const payload = await parseJSONBody(req) || {};
-    const sample = jyotishSarathiService.getPresetSarathiSample();
-    if (payload.name) sample.meta.customerName = payload.name;
-    if (payload.dobBs) sample.meta.dobBs = payload.dobBs;
-    if (payload.dobAd) sample.meta.dobAd = payload.dobAd;
-    if (payload.birthTime) sample.meta.time = payload.birthTime;
-    if (payload.birthPlace) sample.meta.place = payload.birthPlace;
-    if (payload.name) sample.avakahada.name = payload.name;
-    return sendJSON(res, 200, { success: true, data: sample });
-  }
-
-  if (pathname === '/api/netra/mantras' && req.method === 'GET') {
-    return sendJSON(res, 200, { success: true, data: mantrasData });
-  }
-
-  if (pathname === '/api/netra/milan' && req.method === 'POST') {
-    const body = await parseJSONBody(req) || {};
-    const boyNak = Number(body.boyNakshatra || 6); // default Ardra
-    const boyRashi = Number(body.boyRashi || 3); // Gemini
-    const girlNak = Number(body.girlNakshatra || 14); // Chitra
-    const girlRashi = Number(body.girlRashi || 7); // Libra
-    const milanRes = (poruthamService.calculate10Poruthams || poruthamService.calculatePoruthams)(girlNak, boyNak, girlRashi, boyRashi);
-    return sendJSON(res, 200, { success: true, ...milanRes });
-  }
-
   // --- API: Nepali Patro, Panchanga & Hamro Patro Suite (sushilldhakal/nepali-calendar, khumnath/nepdate, milancodess/hamro-patro-scraper) ---
   if (pathname === '/api/patro/today' && req.method === 'GET') {
     const todayData = await nepaliPatroService.getTodayPatro();
@@ -1813,16 +1766,7 @@ async function handleRequest(req, res) {
     return;
   }
 
-  // --- Route /netra to netra/index.html (Vedic Netra) ---
-  if (pathname === '/netra' || pathname === '/netra/' || pathname.startsWith('/netra/') ||
-      pathname === '/vedic-netra' || pathname === '/vedic-netra/' || pathname.startsWith('/vedic-netra/')) {
-    const netraPath = path.join(PUBLIC_DIR, 'netra', 'index.html');
-    if (fs.existsSync(netraPath)) {
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
-      fs.createReadStream(netraPath).pipe(res);
-      return;
-    }
-  }
+  // /netra route removed — directory deleted
 
   // --- Route /admin to admin/index.html ---
   if (pathname === '/admin' || pathname === '/admin/' || pathname.startsWith('/admin/')) {

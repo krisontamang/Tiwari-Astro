@@ -1,1499 +1,993 @@
 <!doctype html>
 <html lang="ne">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <meta name="theme-color" content="#0b0a14" />
-    <meta name="description" content="Astro Tiwari — सरल, व्यक्तिगत र संवेदनशील वैदिक ज्योतिष मार्गदर्शन।" />
-    <meta property="og:title" content="Astro Tiwari — तपाईंको भविष्य, तपाईंको रोजाइमा" />
-    <meta property="og:description" content="जन्मकुण्डली, विवाह मिलान र व्यक्तिगत ज्योतिषीय guidance का लागि Astro Tiwari सँग जोडिनुहोस्।" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Astro Tiwari" />
-    <meta name="twitter:card" content="summary" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script>
-      // Single Page URL normalizer: If opened on /pay, /404, or sub-path, normalize to '/' so Wouter stays on Home
-      (function() {
-        if (typeof window !== 'undefined' && window.location.pathname !== '/') {
-          var p = window.location.pathname;
-          if (!p.startsWith('/admin') && !p.startsWith('/api') && !p.startsWith('/uploads')) {
-            var search = window.location.search || '';
-            var hash = window.location.hash || '';
-            window.history.replaceState(null, '', '/' + search + hash);
-          }
-        }
-      })();
-    </script>
-    <title>Astro Tiwari — ज्योतिषमा स्पष्टता</title>
-    <script type="module" crossorigin src="/assets/index-ChgpL9kq.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DpdlmGVI.css">
-    <style>
-      /* Fix overlap issue: Ensure body content never gets covered by floating controls */
-      body {
-        padding-bottom: 110px !important;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta name="theme-color" content="#0b0a14" />
+  <meta name="description" content="Astro Tiwari — सरल, व्यक्तिगत र संवेदनशील वैदिक ज्योतिष मार्गदर्शन।" />
+  <meta property="og:title" content="Astro Tiwari — तपाईंको भविष्य, तपाईंको रोजाइमा" />
+  <meta property="og:description" content="जन्मकुण्डली, विवाह मिलान र व्यक्तिगत ज्योतिषीय guidance का लागि Astro Tiwari सँग जोडिनुहोस्।" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <title>Astro Tiwari — ज्योतिषमा स्पष्टता</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-      /* Clean Experience / Process Section Override */
-      #process,
-      section#process {
-        display: none !important;
-      }
+  <!-- Load existing React booking bundle (handles packages + form + eSewa payment) -->
+  <script type="module" crossorigin src="/assets/index-ChgpL9kq.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DpdlmGVI.css">
 
-      /* Unified Floating Cosmic Action Dock (No Overlaps on Any Screen) */
-      .floating-bottom-dock {
-        position: fixed;
-        bottom: 16px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 999;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(18, 13, 34, 0.94);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(216, 176, 106, 0.38);
-        border-radius: 999px;
-        padding: 6px 12px;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75), 0 0 25px rgba(216, 176, 106, 0.2);
-        max-width: calc(100vw - 24px);
-        width: max-content;
-      }
+  <style>
+    :root {
+      --bg: #0b0a14;
+      --card: #151122;
+      --card2: #1a1530;
+      --gold: #d8b06a;
+      --gold-l: #f4d38c;
+      --gold-b: rgba(216,176,106,0.28);
+      --text: #f9f4ec;
+      --muted: #ad9eb2;
+      --dim: #796c80;
+      --green: #1f8f5a;
+      --serif: 'Cormorant Garamond','Noto Serif Devanagari',serif;
+      --sans: 'DM Sans','Noto Sans Devanagari',sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:var(--sans);
+      line-height:1.6;
+      overflow-x:hidden;
+      padding-bottom:110px;
+    }
 
-      .dock-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 14px;
-        border-radius: 999px;
-        font-size: 12.5px;
-        font-weight: 600;
-        text-decoration: none;
-        cursor: pointer;
-        border: none;
-        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        white-space: nowrap;
-      }
+    /* ── Navbar ── */
+    .navbar{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 24px;
+      background:rgba(11,10,20,0.92);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--gold-b);
+      position:sticky;top:0;z-index:100;
+    }
+    .navbar-brand{
+      font-family:var(--serif);
+      font-size:22px;font-weight:700;
+      color:var(--gold-l);
+      text-decoration:none;
+      display:flex;align-items:center;gap:8px;
+    }
+    .navbar-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+    .nav-pill{
+      padding:7px 16px;border-radius:999px;font-size:13px;font-weight:600;
+      text-decoration:none;border:none;cursor:pointer;transition:all .2s;
+    }
+    .nav-pill-gold{
+      background:linear-gradient(135deg,#d97706,#b45309);
+      color:#fff;box-shadow:0 4px 14px rgba(217,119,6,.35);
+    }
+    .nav-pill-gold:hover{background:linear-gradient(135deg,#f59e0b,#d97706);transform:translateY(-1px);}
+    .nav-pill-ghost{
+      background:rgba(216,176,106,.1);border:1px solid var(--gold-b);color:var(--gold);
+    }
+    .nav-pill-ghost:hover{background:rgba(216,176,106,.2);}
 
-      .dock-btn-chat {
-        background: linear-gradient(135deg, #2b1f47, #19122c);
-        border: 1px solid rgba(216, 176, 106, 0.45);
-        color: #f4d38c;
-      }
-      .dock-btn-chat:hover {
-        background: linear-gradient(135deg, #3c2966, #22173f);
-        border-color: #d8b06a;
-        color: #fff;
-        transform: translateY(-2px);
-      }
+    /* ── Hero ── */
+    .hero{
+      text-align:center;padding:60px 24px 40px;
+      background:radial-gradient(ellipse at 50% 0%,rgba(120,60,180,.18) 0%,transparent 65%);
+    }
+    .hero-icon{font-size:52px;margin-bottom:16px;display:block;}
+    .hero-title{
+      font-family:var(--serif);
+      font-size:clamp(32px,6vw,56px);
+      font-weight:700;
+      background:linear-gradient(135deg,var(--gold-l),var(--gold));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      line-height:1.15;margin-bottom:14px;
+    }
+    .hero-sub{
+      font-size:16px;color:var(--muted);max-width:540px;margin:0 auto 28px;line-height:1.7;
+    }
+    .hero-cta{
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,#d97706,#b45309);
+      color:#fff;font-weight:700;font-size:15px;
+      padding:14px 32px;border-radius:999px;text-decoration:none;
+      box-shadow:0 6px 20px rgba(217,119,6,.4);
+      transition:all .2s;border:none;cursor:pointer;
+    }
+    .hero-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(217,119,6,.55);}
 
-      .dock-btn-pay {
-        background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
-        border: 1px solid rgba(255, 255, 255, 0.22);
-        color: #ffffff !important;
-        font-weight: 700;
-        box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
-        text-decoration: none;
-      }
-      .dock-btn-pay:hover {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(217, 119, 6, 0.5);
-        color: #ffffff !important;
-      }
+    /* ── Section wrapper ── */
+    .section{padding:48px 16px;}
+    .section-inner{max-width:1100px;margin:0 auto;}
+    .section-title{
+      font-family:var(--serif);
+      font-size:clamp(24px,4vw,34px);
+      font-weight:700;color:var(--gold-l);
+      margin-bottom:6px;text-align:center;
+    }
+    .section-sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:32px;}
+    .section-divider{
+      width:60px;height:2px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      margin:10px auto 28px;
+    }
 
-      /* Floating WhatsApp Button - Moved upward above bottom floating dock */
-      .floating-whatsapp {
-        bottom: 84px !important;
-        right: 24px !important;
-        z-index: 998 !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 4px 15px rgba(31, 143, 90, 0.4) !important;
-      }
+    /* ══════════════════════════════════
+       1.  आजको राशिफल
+    ══════════════════════════════════ */
+    .rashifal-section{
+      background:linear-gradient(180deg,rgba(120,60,180,.1) 0%,transparent 100%);
+      border-top:1px solid var(--gold-b);
+      border-bottom:1px solid var(--gold-b);
+    }
+    .rashi-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+      gap:12px;
+    }
+    .rashi-card{
+      background:var(--card);
+      border:1px solid var(--gold-b);
+      border-radius:14px;
+      padding:16px 12px;
+      text-align:center;
+      cursor:pointer;
+      transition:all .25s cubic-bezier(.16,1,.3,1);
+      position:relative;overflow:hidden;
+    }
+    .rashi-card::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(216,176,106,.07),transparent);
+      opacity:0;transition:opacity .25s;
+    }
+    .rashi-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 24px rgba(216,176,106,.18);}
+    .rashi-card:hover::before{opacity:1;}
+    .rashi-symbol{font-size:30px;margin-bottom:8px;}
+    .rashi-name{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--gold-l);margin-bottom:2px;}
+    .rashi-en{font-size:11px;color:var(--dim);margin-bottom:8px;}
+    .rashi-preview{font-size:11.5px;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+    .rashi-expanded{display:none;font-size:12px;color:#c8bcd0;line-height:1.6;margin-top:8px;text-align:left;}
+    .rashi-card.open .rashi-preview{-webkit-line-clamp:unset;overflow:visible;}
+    .rashi-card.open .rashi-expanded{display:block;}
+    .rashi-date-badge{
+      display:inline-block;
+      background:rgba(216,176,106,.12);border:1px solid var(--gold-b);
+      color:var(--gold);font-size:11px;font-weight:600;
+      padding:3px 10px;border-radius:999px;margin-bottom:20px;
+    }
 
-      .dock-btn-auth {
-        background: rgba(216, 176, 106, 0.14);
-        border: 1px solid rgba(216, 176, 106, 0.35);
-        color: #f4d38c;
-      }
-      .dock-btn-auth:hover {
-        background: rgba(216, 176, 106, 0.28);
-        color: #fff;
-        transform: translateY(-2px);
-      }
-      .dock-btn-auth.verified-user-pill {
-        background: rgba(46, 204, 113, 0.15);
-        border-color: rgba(46, 204, 113, 0.4);
-        color: #2ecc71;
-      }
+    /* ══════════════════════════════════
+       2.  सरल कुण्डली निर्माता
+    ══════════════════════════════════ */
+    .kundali-section{background:var(--card);}
+    .kundali-wrap{
+      display:grid;grid-template-columns:1fr 1fr;gap:24px;
+      align-items:start;
+    }
+    @media(max-width:720px){.kundali-wrap{grid-template-columns:1fr;}}
+    .kundali-form-box{
+      background:var(--card2);border:1px solid var(--gold-b);
+      border-radius:16px;padding:24px;
+    }
+    .kf-label{display:block;font-size:12px;font-weight:600;color:var(--gold);margin-bottom:5px;}
+    .kf-input{
+      width:100%;background:#0d0918;border:1px solid rgba(216,176,106,.22);
+      border-radius:10px;padding:10px 14px;color:#fff;font-size:13px;
+      font-family:inherit;outline:none;margin-bottom:14px;
+    }
+    .kf-input:focus{border-color:var(--gold);}
+    .kf-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+    .kf-btn{
+      width:100%;background:linear-gradient(135deg,#7c3aed,#4c1d95);
+      color:#fff;border:none;border-radius:10px;
+      padding:12px;font-size:14px;font-weight:700;cursor:pointer;
+      transition:all .2s;margin-top:4px;
+    }
+    .kf-btn:hover{opacity:.88;transform:translateY(-1px);}
+    .kundali-chart-box{
+      background:var(--card2);border:1px solid var(--gold-b);
+      border-radius:16px;padding:20px;text-align:center;
+      min-height:320px;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+    }
+    .kundali-chart-box svg{width:100%;max-width:320px;height:auto;}
+    .kundali-placeholder{color:var(--dim);font-size:13px;line-height:1.7;}
+    .kundali-meta{
+      margin-top:14px;font-size:12px;color:var(--muted);
+      background:rgba(216,176,106,.07);border:1px solid var(--gold-b);
+      border-radius:8px;padding:10px 14px;text-align:left;line-height:1.7;
+      width:100%;
+    }
+    .kundali-disclaimer{
+      margin-top:10px;font-size:11px;color:var(--dim);line-height:1.5;
+    }
 
-      .dock-btn-admin {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        color: #ad9eb2;
-        padding: 8px 11px;
-      }
-      .dock-btn-admin:hover {
-        background: rgba(255, 255, 255, 0.12);
-        color: #fff;
-        transform: translateY(-2px);
-      }
+    /* ══════════════════════════════════
+       3.  शान्ति मन्त्र
+    ══════════════════════════════════ */
+    .mantra-section{border-top:1px solid var(--gold-b);}
+    .mantra-grid{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:16px;
+    }
+    .mantra-card{
+      background:var(--card);border:1px solid var(--gold-b);
+      border-radius:14px;padding:20px;
+      transition:border-color .2s,box-shadow .2s;
+    }
+    .mantra-card:hover{border-color:var(--gold);box-shadow:0 6px 20px rgba(216,176,106,.12);}
+    .mantra-icon{font-size:26px;margin-bottom:10px;}
+    .mantra-name{
+      font-family:var(--serif);font-size:17px;font-weight:700;
+      color:var(--gold-l);margin-bottom:4px;
+    }
+    .mantra-deity{font-size:11px;color:var(--dim);margin-bottom:12px;}
+    .mantra-text{
+      background:rgba(0,0,0,.3);border-left:3px solid var(--gold);
+      border-radius:0 8px 8px 0;padding:12px 14px;
+      font-family:'Noto Serif Devanagari',serif;
+      font-size:13.5px;line-height:1.9;color:#e8dff0;
+      white-space:pre-line;
+    }
+    .mantra-meaning{
+      margin-top:10px;font-size:12px;color:var(--muted);line-height:1.6;
+      font-style:italic;
+    }
 
-      .dock-btn-sarathi {
-        background: linear-gradient(135deg, #7c3aed, #4c1d95);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        color: #ffffff !important;
-        font-weight: 700;
-        box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
-        text-decoration: none;
-      }
-      .dock-btn-sarathi:hover {
-        background: linear-gradient(135deg, #8b5cf6, #5b21b6);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(124, 58, 237, 0.5);
-        color: #ffffff !important;
-      }
+    /* ── Booking CTA banner ── */
+    .booking-banner{
+      background:linear-gradient(135deg,rgba(120,60,180,.2),rgba(217,119,6,.15));
+      border:1px solid var(--gold-b);border-radius:20px;
+      padding:36px 24px;text-align:center;
+    }
+    .booking-banner h2{font-family:var(--serif);font-size:28px;color:var(--gold-l);margin-bottom:8px;}
+    .booking-banner p{color:var(--muted);font-size:14px;margin-bottom:22px;max-width:480px;margin-left:auto;margin-right:auto;}
 
-      @media (max-width: 680px) {
-        .floating-bottom-dock {
-          bottom: 10px;
-          padding: 5px 8px;
-          gap: 6px;
-        }
-        .dock-btn {
-          padding: 6px 10px;
-          font-size: 11.5px;
-          gap: 4px;
-        }
-        .dock-hide-mobile {
-          display: none;
-        }
-        .floating-whatsapp {
-          bottom: 74px !important;
-          right: 14px !important;
-          padding: 10px 14px !important;
-        }
-      }
+    /* ── Footer ── */
+    .footer{
+      padding:28px 24px;border-top:1px solid var(--gold-b);
+      text-align:center;font-size:12px;color:var(--dim);
+    }
+    .footer a{color:var(--gold);text-decoration:none;}
 
-      /* User Auth & Verification Modal Styles */
-      .auth-modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(8, 6, 15, 0.88);
-        backdrop-filter: blur(12px);
-        z-index: 10000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 16px;
-        animation: authFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      @keyframes authFadeIn {
-        from { opacity: 0; transform: scale(0.96); }
-        to { opacity: 1; transform: scale(1); }
-      }
-      .auth-modal-card {
-        background: linear-gradient(145deg, #18122c, #100b1d);
-        border: 1px solid rgba(216, 176, 106, 0.4);
-        border-radius: 1.5rem;
-        width: 100%;
-        max-width: 440px;
-        padding: 30px 24px;
-        position: relative;
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(216, 176, 106, 0.18);
-        color: #f9f4ec;
-      }
-      .auth-close-btn {
-        position: absolute;
-        top: 14px;
-        right: 14px;
-        background: rgba(255, 255, 255, 0.08);
-        border: none;
-        color: #ad9eb2;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        font-size: 20px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .auth-close-btn:hover {
-        background: rgba(255, 255, 255, 0.18);
-        color: #fff;
-      }
-      .auth-header {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .auth-logo-badge {
-        width: 48px;
-        height: 48px;
-        margin: 0 auto 10px;
-        background: radial-gradient(circle, #f4d38c 0%, #a8794f 100%);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        box-shadow: 0 0 25px rgba(216, 176, 106, 0.35);
-      }
-      .auth-title {
-        font-family: 'Cormorant Garamond', 'Noto Serif Devanagari', serif;
-        font-size: 24px;
-        font-weight: 700;
-        color: #f4d38c;
-        margin-bottom: 4px;
-      }
-      .auth-subtitle {
-        font-size: 12px;
-        color: #ad9eb2;
-        line-height: 1.4;
-      }
-      .auth-tabs {
-        display: flex;
-        gap: 6px;
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(216, 176, 106, 0.2);
-        border-radius: 999px;
-        padding: 4px;
-        margin-bottom: 18px;
-      }
-      .auth-tab-btn {
-        flex: 1;
-        background: transparent;
-        border: none;
-        color: #ad9eb2;
-        padding: 8px 12px;
-        border-radius: 999px;
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-        text-align: center;
-      }
-      .auth-tab-btn.active {
-        background: #d8b06a;
-        color: #120d22;
-        font-weight: 700;
-      }
-      .auth-field-group {
-        margin-bottom: 14px;
-        text-align: left;
-      }
-      .auth-field-group label {
-        display: block;
-        font-size: 11.5px;
-        font-weight: 600;
-        color: #d8b06a;
-        margin-bottom: 5px;
-      }
-      .auth-input {
-        width: 100%;
-        background: #0d0918;
-        border: 1px solid rgba(216, 176, 106, 0.25);
-        border-radius: 0.75rem;
-        padding: 10px 14px;
-        color: #fff;
-        font-size: 13px;
-        outline: none;
-        transition: border-color 0.2s;
-        box-sizing: border-box;
-      }
-      .auth-input:focus {
-        border-color: #d8b06a;
-        box-shadow: 0 0 10px rgba(216, 176, 106, 0.25);
-      }
-      .auth-submit-btn {
-        width: 100%;
-        background: linear-gradient(135deg, #d8b06a, #b88840);
-        border: none;
-        border-radius: 0.75rem;
-        padding: 11px 16px;
-        color: #120e18;
-        font-weight: 700;
-        font-size: 13.5px;
-        cursor: pointer;
-        transition: all 0.2s;
-        box-shadow: 0 4px 15px rgba(216, 176, 106, 0.35);
-      }
-      .auth-submit-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 20px rgba(216, 176, 106, 0.5);
-      }
-      .auth-status-box {
-        padding: 10px 14px;
-        border-radius: 0.75rem;
-        font-size: 12px;
-        line-height: 1.45;
-        margin-bottom: 16px;
-        display: none;
-      }
-      .auth-status-box.error {
-        background: rgba(231, 76, 60, 0.15);
-        border: 1px solid rgba(231, 76, 60, 0.4);
-        color: #f1948a;
-      }
-      .auth-status-box.success {
-        background: rgba(46, 204, 113, 0.15);
-        border: 1px solid rgba(46, 204, 113, 0.4);
-        color: #a2e8bc;
-      }
-      .auth-status-box.pending {
-        background: rgba(230, 126, 34, 0.15);
-        border: 1px solid rgba(230, 126, 34, 0.45);
-        color: #f8c471;
-      }
-      .auth-notice-box {
-        background: rgba(216, 176, 106, 0.08);
-        border: 1px solid rgba(216, 176, 106, 0.25);
-        border-radius: 0.75rem;
-        padding: 8px 12px;
-        font-size: 11.5px;
-        color: #f4d38c;
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        margin-bottom: 14px;
-        line-height: 1.4;
-      }
+    /* ── Floating dock ── */
+    .floating-bottom-dock{
+      position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+      z-index:999;display:flex;align-items:center;gap:8px;
+      background:rgba(18,13,34,.94);backdrop-filter:blur(16px);
+      border:1px solid rgba(216,176,106,.38);border-radius:999px;
+      padding:6px 12px;
+      box-shadow:0 12px 40px rgba(0,0,0,.75),0 0 25px rgba(216,176,106,.2);
+      max-width:calc(100vw - 24px);width:max-content;
+    }
+    .dock-btn{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:8px 14px;border-radius:999px;font-size:12.5px;font-weight:600;
+      text-decoration:none;cursor:pointer;border:none;
+      transition:all .2s cubic-bezier(.16,1,.3,1);white-space:nowrap;
+    }
+    .dock-btn-pay{
+      background:linear-gradient(135deg,#d97706,#b45309);color:#fff !important;
+      font-weight:700;box-shadow:0 4px 14px rgba(217,119,6,.35);
+    }
+    .dock-btn-pay:hover{background:linear-gradient(135deg,#f59e0b,#d97706);transform:translateY(-2px);}
+    .dock-btn-ghost{
+      background:rgba(216,176,106,.1);border:1px solid rgba(216,176,106,.35);color:var(--gold);
+    }
+    .dock-btn-ghost:hover{background:rgba(216,176,106,.22);transform:translateY(-2px);}
+    .dock-btn-auth{
+      background:rgba(216,176,106,.14);border:1px solid rgba(216,176,106,.35);color:var(--gold);
+    }
+    .dock-btn-auth:hover{background:rgba(216,176,106,.28);transform:translateY(-2px);}
+    @media(max-width:680px){
+      .dock-btn{padding:6px 10px;font-size:11.5px;}
+      .dock-hide-mobile{display:none;}
+    }
 
-      /* Interactive Payment Amount Badges */
-      .payment-amounts {
-        cursor: pointer;
-        position: relative;
-      }
-      .payment-amounts::after {
-        content: '👆 कुनै पनि प्याकेजमा क्लिक गरी तुरुन्त भुक्तानी गर्नुहोस्';
-        display: block;
-        grid-column: 1 / -1;
-        font-size: 11px;
-        color: #d8b06a;
-        text-align: center;
-        margin-top: 8px;
-        opacity: 0.9;
-        font-weight: 500;
-        letter-spacing: 0.2px;
-      }
-      .payment-amounts span {
-        cursor: pointer !important;
-        transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        position: relative;
-        user-select: none;
-        border: 1px solid rgba(216, 176, 106, 0.22) !important;
-      }
-      .payment-amounts span:hover {
-        transform: translateY(-3px) scale(1.04);
-        background: rgba(216, 176, 106, 0.28) !important;
-        border-color: #d8b06a !important;
-        box-shadow: 0 6px 20px rgba(216, 176, 106, 0.45);
-      }
-      .payment-amounts span:active {
-        transform: translateY(0) scale(0.97);
-      }
+    /* ── Auth modal (preserved) ── */
+    .auth-modal-overlay{
+      position:fixed;inset:0;background:rgba(8,6,15,.88);
+      backdrop-filter:blur(12px);z-index:10000;
+      display:flex;align-items:center;justify-content:center;
+      padding:16px;animation:authFade .25s ease;
+    }
+    @keyframes authFade{from{opacity:0;transform:scale(.96);}to{opacity:1;transform:scale(1);}}
+    .auth-modal-card{
+      background:linear-gradient(145deg,#18122c,#100b1d);
+      border:1px solid rgba(216,176,106,.4);border-radius:1.5rem;
+      width:100%;max-width:440px;padding:30px 24px;
+      position:relative;box-shadow:0 25px 60px rgba(0,0,0,.85);color:var(--text);
+    }
+    .auth-close-btn{
+      position:absolute;top:14px;right:14px;background:rgba(255,255,255,.08);
+      border:none;color:var(--muted);width:32px;height:32px;border-radius:50%;
+      font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    }
+    .auth-close-btn:hover{background:rgba(255,255,255,.18);color:#fff;}
+    .auth-logo-badge{
+      width:48px;height:48px;margin:0 auto 10px;
+      background:radial-gradient(circle,#f4d38c 0%,#a8794f 100%);
+      border-radius:50%;display:flex;align-items:center;justify-content:center;
+      font-size:22px;box-shadow:0 0 25px rgba(216,176,106,.35);
+    }
+    .auth-title{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--gold);margin-bottom:4px;text-align:center;}
+    .auth-subtitle{font-size:12px;color:var(--muted);line-height:1.4;text-align:center;margin-bottom:16px;}
+    .auth-tabs{
+      display:flex;gap:6px;background:rgba(0,0,0,.3);
+      border:1px solid rgba(216,176,106,.2);border-radius:999px;
+      padding:4px;margin-bottom:18px;
+    }
+    .auth-tab-btn{
+      flex:1;background:transparent;border:none;color:var(--muted);
+      padding:8px 12px;border-radius:999px;font-size:12px;font-weight:600;
+      cursor:pointer;transition:all .2s;
+    }
+    .auth-tab-btn.active{background:var(--gold);color:#120d22;font-weight:700;}
+    .auth-field-group{margin-bottom:14px;text-align:left;}
+    .auth-field-group label{display:block;font-size:11.5px;font-weight:600;color:var(--gold);margin-bottom:5px;}
+    .auth-input{
+      width:100%;background:#0d0918;border:1px solid rgba(216,176,106,.25);
+      border-radius:.75rem;padding:10px 14px;color:#fff;font-size:13px;
+      outline:none;font-family:inherit;transition:border .2s;
+    }
+    .auth-input:focus{border-color:var(--gold);}
+    .auth-submit-btn{
+      width:100%;background:linear-gradient(135deg,var(--gold),#a8794f);
+      border:none;color:#120d22;font-weight:700;font-size:14px;
+      padding:12px;border-radius:1rem;cursor:pointer;transition:all .2s;
+    }
+    .auth-submit-btn:hover{opacity:.9;transform:translateY(-1px);}
+    .auth-status-box{
+      border-radius:.75rem;padding:10px 14px;font-size:12.5px;margin-bottom:12px;line-height:1.5;
+    }
+    .auth-status-box.error{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#f5a7a0;}
+    .auth-status-box.success{background:rgba(31,143,90,.1);border:1px solid rgba(46,204,113,.3);color:#a2e8bc;}
+    .auth-status-box.pending{background:rgba(230,126,34,.1);border:1px solid rgba(230,126,34,.3);color:#f5c899;}
+  </style>
+</head>
+<body>
 
-      .package-card {
-        cursor: pointer;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-      }
-      .package-card:hover {
-        transform: translateY(-4px);
-      }
-
-      /* Chat Pulse Animation */
-      .chat-pulse {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #2ecc71;
-        box-shadow: 0 0 10px #2ecc71;
-        animation: chatPulseAnim 2s infinite;
-      }
-      @keyframes chatPulseAnim {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.5; transform: scale(1.3); }
-      }
-
-      /* Chat Window */
-      .chat-modal-window {
-        position: fixed;
-        bottom: 78px;
-        right: 20px;
-        width: 360px;
-        max-width: calc(100vw - 32px);
-        height: 520px;
-        max-height: calc(100vh - 100px);
-        background: #120d22;
-        border: 1px solid rgba(216, 176, 106, 0.35);
-        border-radius: 1.25rem;
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(216, 176, 106, 0.15);
-        z-index: 9999;
-        display: none;
-        flex-direction: column;
-        overflow: hidden;
-        backdrop-filter: blur(14px);
-        animation: chatWindowPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      @keyframes chatWindowPop {
-        from { opacity: 0; transform: translateY(20px) scale(0.96); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-      }
-      .chat-window-header {
-        background: linear-gradient(90deg, #18122c, #100b1d);
-        border-bottom: 1px solid rgba(216, 176, 106, 0.2);
-        padding: 12px 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .chat-header-avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background: radial-gradient(circle, #f4d38c, #a8794f);
-        color: #160f22;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .chat-window-close {
-        background: transparent;
-        border: none;
-        color: #a395a8;
-        font-size: 22px;
-        cursor: pointer;
-        line-height: 1;
-        padding: 4px;
-        border-radius: 50%;
-      }
-      .chat-window-close:hover { color: #fff; }
-
-      .chat-chips-scroll {
-        display: flex;
-        gap: 6px;
-        padding: 8px 12px;
-        overflow-x: auto;
-        background: rgba(0,0,0,0.25);
-        border-bottom: 1px solid rgba(255,255,255,0.04);
-        scrollbar-width: none;
-      }
-      .chat-chips-scroll::-webkit-scrollbar { display: none; }
-      .chat-chip {
-        background: rgba(216, 176, 106, 0.1);
-        border: 1px solid rgba(216, 176, 106, 0.25);
-        color: #f4d38c;
-        padding: 4px 10px;
-        border-radius: 999px;
-        font-size: 11px;
-        white-space: nowrap;
-        cursor: pointer;
-        transition: all 0.18s;
-      }
-      .chat-chip:hover {
-        background: #d8b06a;
-        color: #120e18;
-      }
-
-      .chat-messages-area {
-        flex: 1;
-        padding: 14px 12px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        font-size: 12.5px;
-        line-height: 1.45;
-      }
-      .chat-bubble {
-        max-width: 86%;
-        padding: 9px 13px;
-        border-radius: 1rem;
-        word-break: break-word;
-      }
-      .bot-bubble {
-        background: #1c1530;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        color: #f1ecf5;
-        align-self: flex-start;
-        border-bottom-left-radius: 0.25rem;
-      }
-      .user-bubble {
-        background: linear-gradient(135deg, #d8b06a, #b88840);
-        color: #120e18;
-        font-weight: 600;
-        align-self: flex-end;
-        border-bottom-right-radius: 0.25rem;
-      }
-      .chat-input-row {
-        padding: 10px;
-        background: #17112b;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-      .chat-input-field {
-        flex: 1;
-        background: #0d0918;
-        border: 1px solid rgba(216, 176, 106, 0.25);
-        border-radius: 999px;
-        padding: 8px 14px;
-        color: #fff;
-        font-size: 12.5px;
-        outline: none;
-      }
-      .chat-input-field:focus {
-        border-color: #d8b06a;
-      }
-      .chat-send-action {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #d8b06a, #b88840);
-        border: none;
-        color: #120e18;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 14px;
-      }
-      .chat-send-action:hover {
-        transform: scale(1.05);
-      }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-
-    <!-- Unified Non-Overlapping Floating Cosmic Action Dock -->
-    <div id="floating-bottom-dock" class="floating-bottom-dock">
-      <button id="astro-chat-btn" class="dock-btn dock-btn-chat" onclick="handleChatButtonClick()" title="AI ज्योतिष सल्लाहकार">
-        <span class="chat-pulse"></span>
-        <span>🕉️ AI सल्लाहकार</span>
-      </button>
-
-      <a href="/pay" class="dock-btn dock-btn-pay" title="तुरुन्त अनलाइन भुक्तानी (Quick Pay)">
-        <span>💳 Quick Pay</span>
-        <span class="dock-hide-mobile">&nbsp;(रु. २९९ / ४९९ / १०५५)</span>
-      </a>
-
-      <button id="user-auth-btn" class="dock-btn dock-btn-auth" onclick="openUserAuthModal()" title="प्रयोगकर्ता लगइन / दर्ता">
-        <span id="user-auth-btn-icon">🔑</span>
-        <span id="user-auth-btn-text">लगइन / दर्ता</span>
-      </button>
-
-      <a href="/sarathi" class="dock-btn dock-btn-sarathi" title="ज्योतिष सारथी सफ्टवेयर खोल्नुहोस्">
-        <span>🪐 सारथी</span>
-      </a>
-
-      <a href="/admin" class="dock-btn dock-btn-admin" title="Admin Portal">
-        <span>🔐 Admin</span>
-      </a>
+  <!-- ── Navbar ── -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="/">🕉️ Astro Tiwari</a>
+    <div class="navbar-links">
+      <button class="nav-pill nav-pill-ghost dock-hide-mobile" onclick="document.getElementById('rashifal-section').scrollIntoView({behavior:'smooth'})">🌅 राशिफल</button>
+      <button class="nav-pill nav-pill-ghost dock-hide-mobile" onclick="document.getElementById('kundali-section').scrollIntoView({behavior:'smooth'})">📿 कुण्डली</button>
+      <button class="nav-pill nav-pill-ghost dock-hide-mobile" onclick="document.getElementById('mantra-section').scrollIntoView({behavior:'smooth'})">🕉️ मन्त्र</button>
+      <button class="nav-pill nav-pill-gold" onclick="document.getElementById('booking-section').scrollIntoView({behavior:'smooth'})">परामर्श बुक गर्नुहोस् ➔</button>
     </div>
+  </nav>
 
-    <!-- Cosmic AI Chat Drawer / Window -->
-    <div id="astro-chat-window" class="chat-modal-window">
-      <div class="chat-window-header">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <div class="chat-header-avatar">🕉️</div>
-          <div>
-            <div style="font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: #f4d38c; line-height: 1.2;">
-              Astro Tiwari AI
-            </div>
-            <div style="font-size: 10.5px; color: #a2e8bc; display: flex; align-items: center; gap: 4px;">
-              <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #2ecc71;"></span>
-              वैदिक पराशर प्रणाली सक्रिय
-            </div>
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <span class="hero-icon">🌟</span>
+    <h1 class="hero-title">तपाईंको भविष्य,<br/>तपाईंको रोजाइमा</h1>
+    <p class="hero-sub">वैदिक ज्योतिषको माध्यमले जीवनका प्रश्नहरूको उत्तर पाउनुहोस् — जन्मकुण्डली, विवाह मिलान र व्यक्तिगत परामर्श।</p>
+    <button class="hero-cta" onclick="document.getElementById('booking-section').scrollIntoView({behavior:'smooth'})">
+      🙏 अहिले परामर्श बुक गर्नुहोस्
+    </button>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       1. आजको राशिफल
+  ══════════════════════════════════════════ -->
+  <section class="section rashifal-section" id="rashifal-section">
+    <div class="section-inner">
+      <h2 class="section-title">🌅 आजको राशिफल</h2>
+      <p class="section-sub">आज आफ्नो राशि छनोट गर्नुहोस् र दैनिक फलादेश पढ्नुहोस्</p>
+      <div class="section-divider"></div>
+      <div style="text-align:center;margin-bottom:20px;">
+        <span class="rashi-date-badge" id="rashifal-date">मिति लोड हुँदैछ...</span>
+      </div>
+      <div class="rashi-grid" id="rashi-grid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       2. सरल कुण्डली निर्माता
+  ══════════════════════════════════════════ -->
+  <section class="section kundali-section" id="kundali-section">
+    <div class="section-inner">
+      <h2 class="section-title">📿 सरल कुण्डली निर्माता</h2>
+      <p class="section-sub">आफ्नो जन्मतिथि र समय भर्नुहोस् — तत्काल उत्तर भारतीय कुण्डली पाउनुहोस्</p>
+      <div class="section-divider"></div>
+      <div class="kundali-wrap">
+        <!-- Form -->
+        <div class="kundali-form-box">
+          <label class="kf-label">पूरा नाम</label>
+          <input class="kf-input" id="kf-name" type="text" placeholder="तपाईंको नाम" />
+
+          <label class="kf-label">जन्म मिति (AD)</label>
+          <div class="kf-row">
+            <input class="kf-input" id="kf-year" type="number" placeholder="वर्ष" min="1900" max="2100" style="margin-bottom:0" />
+            <input class="kf-input" id="kf-month" type="number" placeholder="महिना" min="1" max="12" style="margin-bottom:0" />
+            <input class="kf-input" id="kf-day" type="number" placeholder="दिन" min="1" max="31" style="margin-bottom:0" />
+          </div>
+          <div style="margin-bottom:14px;"></div>
+
+          <label class="kf-label">जन्म समय (अनुमानित भएमा पनि हुन्छ)</label>
+          <div class="kf-row">
+            <input class="kf-input" id="kf-hour" type="number" placeholder="घण्टा" min="0" max="23" style="margin-bottom:0" />
+            <input class="kf-input" id="kf-min" type="number" placeholder="मिनेट" min="0" max="59" style="margin-bottom:0" />
+            <select class="kf-input" id="kf-period" style="margin-bottom:0">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+          <div style="margin-bottom:14px;"></div>
+
+          <label class="kf-label">जन्मस्थान</label>
+          <input class="kf-input" id="kf-place" type="text" placeholder="जस्तै: काठमाडौँ, नेपाल" />
+
+          <button class="kf-btn" onclick="generateKundali()">📿 कुण्डली बनाउनुहोस्</button>
+          <p class="kundali-disclaimer">* यो सामान्य लग्न कुण्डली हो। सटीक फलादेशको लागि तलको परामर्श बुक गर्नुहोस्।</p>
+        </div>
+
+        <!-- Chart output -->
+        <div class="kundali-chart-box" id="kundali-output">
+          <div class="kundali-placeholder">
+            <div style="font-size:48px;margin-bottom:12px;">📿</div>
+            <div>माथि जन्मविवरण भरेपछि<br/>यहाँ कुण्डली देखिनेछ।</div>
           </div>
         </div>
-        <button class="chat-window-close" onclick="toggleAstroChat()">&times;</button>
       </div>
+    </div>
+  </section>
 
-      <!-- Quick Suggestion Chips -->
-      <div class="chat-chips-scroll">
-        <button class="chat-chip" onclick="sendQuickPrompt('विवाहको लागि ३६ गुण मिलान किन आवश्यक हुन्छ?')">💍 गुण मिलान के हो?</button>
-        <button class="chat-chip" onclick="sendQuickPrompt('शनिको साढेसाती भनेको के हो र यसको शान्ति कसरी गरिन्छ?')">🪐 साढेसाती उपाय</button>
-        <button class="chat-chip" onclick="sendQuickPrompt('माङ्गलिक दोषको प्रभाव के हुन्छ?')">🔥 माङ्गलिक दोष</button>
-        <button class="chat-chip" onclick="sendQuickPrompt('पण्डितजीसँग प्रत्यक्ष परामर्श कसरी लिने?')">📞 परामर्श लिने तरिका</button>
+  <!-- ══════════════════════════════════════════
+       3. शान्ति मन्त्र
+  ══════════════════════════════════════════ -->
+  <section class="section mantra-section" id="mantra-section">
+    <div class="section-inner">
+      <h2 class="section-title">🕉️ शान्ति मन्त्र</h2>
+      <p class="section-sub">नित्य जपका लागि पवित्र वैदिक मन्त्रहरू</p>
+      <div class="section-divider"></div>
+      <div class="mantra-grid" id="mantra-grid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       4. Booking CTA → loads the React booking form
+  ══════════════════════════════════════════ -->
+  <section class="section" id="booking-section" style="padding-top:24px;">
+    <div class="section-inner">
+      <div class="booking-banner">
+        <h2>🙏 व्यक्तिगत ज्योतिष परामर्श</h2>
+        <p>जन्मकुण्डली विश्लेषण, विवाह मिलान, करियर, स्वास्थ्य — पण्डितजीसँग सिधै कुरा गर्नुहोस्।</p>
       </div>
+      <!-- React bundle renders the booking form + packages + eSewa payment into #root -->
+      <div id="root" style="margin-top:24px;"></div>
+    </div>
+  </section>
 
-      <!-- Messages Body -->
-      <div id="chat-messages-body" class="chat-messages-area">
-        <div class="chat-bubble bot-bubble">
-          नमस्ते! म <b>Astro Tiwari AI</b> ज्योतिष सल्लाहकार हुँ।<br />
-          तपाईंको जन्म कुण्डली, ग्रहदशा, करियर, विवाह वा पूजा-उपाय सम्बन्धी कुनै पनि जिज्ञासा सोध्न सक्नुहुन्छ।
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <p>© 2083 BS &nbsp;·&nbsp; Astro Tiwari &nbsp;·&nbsp; Crafted with 🙏 in Nepal</p>
+    <p style="margin-top:6px;">
+      <a href="/admin">Admin</a>
+    </p>
+  </footer>
+
+  <!-- ── Floating dock ── -->
+  <div class="floating-bottom-dock">
+    <button class="dock-btn dock-btn-auth" id="user-auth-btn" onclick="openUserAuthModal('login')" title="लगइन / दर्ता">
+      <span id="user-auth-btn-icon">🔑</span>
+      <span id="user-auth-btn-text" class="dock-hide-mobile">लगइन</span>
+    </button>
+    <button class="dock-btn dock-btn-ghost dock-hide-mobile" onclick="document.getElementById('rashifal-section').scrollIntoView({behavior:'smooth'})">🌅 राशिफल</button>
+    <button class="dock-btn dock-btn-ghost dock-hide-mobile" onclick="document.getElementById('kundali-section').scrollIntoView({behavior:'smooth'})">📿 कुण्डली</button>
+    <button class="dock-btn dock-btn-pay" onclick="document.getElementById('booking-section').scrollIntoView({behavior:'smooth'})">
+      🙏 परामर्श बुक गर्नुहोस्
+    </button>
+  </div>
+
+  <!-- ── Auth modal ── -->
+  <div id="user-auth-modal" class="auth-modal-overlay" style="display:none;" onclick="handleAuthOverlayClick(event)">
+    <div class="auth-modal-card">
+      <button class="auth-close-btn" onclick="closeUserAuthModal()">×</button>
+      <div style="text-align:center;margin-bottom:14px;">
+        <div class="auth-logo-badge">🕉️</div>
+        <div class="auth-title">Astro Tiwari</div>
+        <div class="auth-subtitle">लगइन वा नयाँ खाता दर्ता गर्नुहोस्</div>
+      </div>
+      <div id="auth-status-banner" class="auth-status-box" style="display:none;"></div>
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" id="auth-tab-login" onclick="switchAuthTab('login')">लगइन</button>
+        <button class="auth-tab-btn" id="auth-tab-register" onclick="switchAuthTab('register')">नयाँ दर्ता</button>
+      </div>
+      <!-- Login form -->
+      <form id="user-login-form" onsubmit="handleUserLogin(event)">
+        <div class="auth-field-group">
+          <label for="login-identifier">ईमेल वा फोन नम्बर</label>
+          <input type="text" id="login-identifier" class="auth-input" placeholder="ईमेल वा ९८xxxxxxxx" required />
         </div>
-      </div>
-
-      <!-- Input Bar -->
-      <form id="chat-input-form" class="chat-input-row" onsubmit="handleSendChat(event)">
-        <input 
-          type="text" 
-          id="chat-user-msg" 
-          class="chat-input-field" 
-          placeholder="कुनै पनि ज्योतिषीय जिज्ञासा लेख्नुहोस्..." 
-          autocomplete="off"
-          required 
-        />
-        <button type="submit" id="chat-send-btn" class="chat-send-action" title="पठाउनुहोस्">
-          ➤
-        </button>
+        <div class="auth-field-group">
+          <label for="login-password">पासवर्ड</label>
+          <input type="password" id="login-password" class="auth-input" placeholder="पासवर्ड" required />
+        </div>
+        <button type="submit" id="login-submit-btn" class="auth-submit-btn">लगइन गर्नुहोस् ➔</button>
+        <div style="margin-top:12px;text-align:center;font-size:12px;color:var(--muted);">
+          खाता छैन? <a href="javascript:void(0)" onclick="switchAuthTab('register')" style="color:var(--gold);">यहाँ दर्ता गर्नुहोस्</a>
+        </div>
       </form>
-    </div>
-
-    <!-- User Authentication & Admin Verification Modal -->
-    <div id="user-auth-modal" class="auth-modal-overlay" style="display:none;" onclick="handleAuthOverlayClick(event)">
-      <div class="auth-modal-card">
-        <button class="auth-close-btn" onclick="closeUserAuthModal()">&times;</button>
-        
-        <div class="auth-header">
-          <div class="auth-logo-badge">🕉️</div>
-          <h3 class="auth-title">Astro Tiwari</h3>
-          <p class="auth-subtitle">Astro Tiwari वैदिक ज्योतिषीय परामर्श सेवामा स्वागत छ</p>
+      <!-- Register form -->
+      <form id="user-register-form" onsubmit="handleUserRegister(event)" style="display:none;">
+        <div class="auth-field-group">
+          <label for="reg-name">पूरा नाम *</label>
+          <input type="text" id="reg-name" class="auth-input" placeholder="तपाईंको पूरा नाम" required />
         </div>
-
-        <!-- Tabs -->
-        <div class="auth-tabs">
-          <button id="auth-tab-login" class="auth-tab-btn active" onclick="switchAuthTab('login')">🔑 लगइन (Sign In)</button>
-          <button id="auth-tab-register" class="auth-tab-btn" onclick="switchAuthTab('register')">✨ नयाँ दर्ता (Register)</button>
+        <div class="auth-field-group">
+          <label for="reg-phone">सम्पर्क / WhatsApp *</label>
+          <input type="tel" id="reg-phone" class="auth-input" placeholder="९८xxxxxxxx" required />
         </div>
-
-        <!-- Status Message Banner -->
-        <div id="auth-status-banner" class="auth-status-box"></div>
-
-        <!-- Login Form -->
-        <form id="user-login-form" onsubmit="handleUserLogin(event)" style="display:block;">
-          <div class="auth-field-group">
-            <label for="login-identifier">ईमेल वा फोन नम्बर</label>
-            <input type="text" id="login-identifier" class="auth-input" placeholder="तपाईंको ईमेल वा ९८xxxxxxxx" required />
-          </div>
-
-          <div class="auth-field-group">
-            <label for="login-password">पासवर्ड</label>
-            <input type="password" id="login-password" class="auth-input" placeholder="पासवर्ड प्रविष्ट गर्नुहोस्" required />
-          </div>
-
-          <button type="submit" id="login-submit-btn" class="auth-submit-btn">
-            लगइन गर्नुहोस् ➔
-          </button>
-          
-          <div style="margin-top:14px; text-align:center; font-size:12px; color:#ad9eb2;">
-            खाता छैन? <a href="javascript:void(0)" onclick="switchAuthTab('register')" style="color:#d8b06a; text-decoration:underline;">यहाँ नयाँ दर्ता गर्नुहोस्</a>
-          </div>
-        </form>
-
-        <!-- Register Form -->
-        <form id="user-register-form" onsubmit="handleUserRegister(event)" style="display:none;">
-          <div class="auth-notice-box">
-            <span style="font-size:15px;">🛡️</span>
-            <span><b>सूचना:</b> सुरक्षा र गोपनीयताका लागि एडमिनले प्रमाणीकरण (Verification) गरेपछि तपाईंको खाता सक्रिय हुनेछ।</span>
-          </div>
-
-          <div class="auth-field-group">
-            <label for="reg-name">तपाईंको पूरा नाम (Full Name) *</label>
-            <input type="text" id="reg-name" class="auth-input" placeholder="उदा. राम प्रसाद शर्मा" required />
-          </div>
-
-          <div class="auth-field-group">
-            <label for="reg-phone">सम्पर्क फोन / WhatsApp नम्बर *</label>
-            <input type="tel" id="reg-phone" class="auth-input" placeholder="९८xxxxxxxx" required />
-          </div>
-
-          <div class="auth-field-group">
-            <label for="reg-email">ईमेल ठेगाना (Email)</label>
-            <input type="email" id="reg-email" class="auth-input" placeholder="name@example.com" />
-          </div>
-
-          <div class="auth-field-group">
-            <label for="reg-password">गोप्य पासवर्ड (कम्तिमा ६ अक्षर) *</label>
-            <input type="password" id="reg-password" class="auth-input" placeholder="पासवर्ड बनाउनुहोस्" minlength="6" required />
-          </div>
-
-          <button type="submit" id="reg-submit-btn" class="auth-submit-btn" style="background:linear-gradient(135deg,#1f8f5a,#166c43); color:#fff;">
-            खाता दर्ता गर्नुहोस् ➔
-          </button>
-
-          <div style="margin-top:14px; text-align:center; font-size:12px; color:#ad9eb2;">
-            पहिले नै खाता छ? <a href="javascript:void(0)" onclick="switchAuthTab('login')" style="color:#d8b06a; text-decoration:underline;">यहाँ लगइन गर्नुहोस्</a>
-          </div>
-        </form>
-
-        <!-- Logged-in User Profile View -->
-        <div id="user-profile-view" style="display:none; text-align:center; padding:10px 0;">
-          <div style="font-size:42px; margin-bottom:8px;">👤</div>
-          <h4 id="profile-user-name" style="font-family:'Cormorant Garamond', serif; font-size:22px; color:#f4d38c; margin-bottom:4px;"></h4>
-          <div id="profile-user-contact" style="font-size:12.5px; color:#ad9eb2; margin-bottom:12px;"></div>
-          <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(46,204,113,0.15); border:1px solid rgba(46,204,113,0.4); color:#2ecc71; padding:5px 14px; border-radius:999px; font-size:12px; font-weight:700; margin-bottom:20px;">
-            ✅ एडमिन द्वारा प्रमाणित प्रयोगकर्ता
-          </div>
-          
-          <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-            <button onclick="scrollToPaymentSection(event); closeUserAuthModal();" class="auth-submit-btn" style="padding:8px 18px; font-size:12px; width:auto;">
-              कुण्डली सेवा लिनुहोस् ➔
-            </button>
-            <button onclick="handleUserLogout()" class="auth-submit-btn" style="background:rgba(231,76,60,0.15); border:1px solid rgba(231,76,60,0.3); color:#e74c3c; padding:8px 18px; font-size:12px; width:auto;">
-              🚪 बाहिरिनुहोस् (Logout)
-            </button>
-          </div>
+        <div class="auth-field-group">
+          <label for="reg-email">ईमेल (ऐच्छिक)</label>
+          <input type="email" id="reg-email" class="auth-input" placeholder="name@example.com" />
+        </div>
+        <div class="auth-field-group">
+          <label for="reg-password">पासवर्ड *</label>
+          <input type="password" id="reg-password" class="auth-input" placeholder="कम्तिमा ६ अक्षर" minlength="6" required />
+        </div>
+        <button type="submit" id="reg-submit-btn" class="auth-submit-btn" style="background:linear-gradient(135deg,#1f8f5a,#166c43);color:#fff;">
+          खाता दर्ता गर्नुहोस् ➔
+        </button>
+        <div style="margin-top:12px;text-align:center;font-size:12px;color:var(--muted);">
+          पहिले नै खाता छ? <a href="javascript:void(0)" onclick="switchAuthTab('login')" style="color:var(--gold);">यहाँ लगइन गर्नुहोस्</a>
+        </div>
+      </form>
+      <!-- Profile view (logged-in) -->
+      <div id="user-profile-view" style="display:none;text-align:center;padding:10px 0;">
+        <div style="font-size:42px;margin-bottom:8px;">👤</div>
+        <h4 id="profile-user-name" style="font-family:var(--serif);font-size:22px;color:var(--gold);margin-bottom:4px;"></h4>
+        <div id="profile-user-contact" style="font-size:12.5px;color:var(--muted);margin-bottom:12px;"></div>
+        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(46,204,113,.15);border:1px solid rgba(46,204,113,.4);color:#2ecc71;padding:5px 14px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:20px;">
+          ✅ एडमिन द्वारा प्रमाणित
+        </div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <button onclick="document.getElementById('booking-section').scrollIntoView({behavior:'smooth'});closeUserAuthModal();" class="auth-submit-btn" style="padding:8px 18px;font-size:12px;width:auto;">परामर्श बुक गर्नुहोस् ➔</button>
+          <button onclick="handleUserLogout()" class="auth-submit-btn" style="background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.3);color:#e74c3c;padding:8px 18px;font-size:12px;width:auto;">🚪 Logout</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Interactive Scripts: QR Lightbox & Form Submission Capture -->
-    <script>
-      // Automatically ensure removed sections and obsolete nav links are purged
-      function purgeRemovedSections() {
-        const p = document.getElementById('process');
-        if (p) p.remove();
-        document.querySelectorAll('button, a').forEach(el => {
-          if (el.textContent && el.textContent.trim() === 'कसरी हुन्छ?') {
-            el.remove();
-          }
-        });
+  <script>
+  // ════════════════════════════════════════
+  // Nepali date helper
+  // ════════════════════════════════════════
+  function getNepaliDate() {
+    const now = new Date();
+    const bsMonths = ['बैशाख','जेठ','असार','श्रावण','भाद्र','आश्विन','कार्तिक','मंसिर','पौष','माघ','फाल्गुन','चैत्र'];
+    const days = ['आइतबार','सोमबार','मङ्गलबार','बुधबार','बिहीबार','शुक्रबार','शनिबार'];
+    const bsYear = now.getFullYear() + 57 - (now.getMonth() < 3 ? 1 : 0);
+    let bsMonth = (now.getMonth() + 9) % 12;
+    let bsDay = now.getDate() + 15;
+    if (bsDay > 30) { bsDay -= 30; bsMonth = (bsMonth + 1) % 12; }
+    const toNep = n => String(n).replace(/\d/g, d => '०१२३४५६७८९'[d]);
+    return `${days[now.getDay()]}, ${bsMonths[bsMonth]} ${toNep(bsDay)}, ${toNep(bsYear)} BS`;
+  }
+  document.getElementById('rashifal-date').textContent = 'आज: ' + getNepaliDate();
+
+  // ════════════════════════════════════════
+  // 1. Rashifal Data + Grid
+  // ════════════════════════════════════════
+  const RASHIS = [
+    { sym:'♈', name:'मेष', en:'Aries (Mar 21–Apr 19)',
+      preview:'आज नयाँ सुरुवातको लागि शुभ दिन। आफ्नो विचारहरूलाई कार्यमा रूपान्तरण गर्नुहोस्।',
+      full:'💼 कार्यक्षेत्र: नेतृत्वको अवसर आउनेछ। आत्मविश्वास राख्नुहोस्।\n❤️ प्रेम: साथीसँग खुलेर बोल्नुहोस्।\n💰 धन: बचतमा ध्यान दिनुहोस्, अनावश्यक खर्च नगर्नुहोस्।\n🌿 स्वास्थ्य: शारीरिक व्यायाम र पर्याप्त निद्रा आवश्यक छ।\n🔮 भाग्याङ्क: ७ — शुभ रंग: रातो' },
+    { sym:'♉', name:'वृष', en:'Taurus (Apr 20–May 20)',
+      preview:'स्थिरता र धैर्यले आज सफलता दिलाउनेछ। जमिन चल्नेछैन — आफ्नो मार्ग नछोड्नुहोस्।',
+      full:'💼 कार्यक्षेत्र: मेहनत रङ आउँदैछ। लामो समयदेखिको प्रयास सफल हुनेछ।\n❤️ प्रेम: शान्त र प्रेमपूर्ण वातावरण रहनेछ।\n💰 धन: लगानीको लागि उपयुक्त दिन।\n🌿 स्वास्थ्य: खानपिनमा सावधानी राख्नुहोस्।\n🔮 भाग्याङ्क: ५ — शुभ रंग: हरियो' },
+    { sym:'♊', name:'मिथुन', en:'Gemini (May 21–Jun 20)',
+      preview:'संवादकला र बुद्धिले आज राम्रो काम गर्नेछ। नयाँ सम्पर्क बनाउन सक्नुहुन्छ।',
+      full:'💼 कार्यक्षेत्र: टिम वर्कमा उत्कृष्टता। सहकर्मीसँग मिलेर काम गर्नुहोस्।\n❤️ प्रेम: रोमान्टिक सन्देश पठाउन उचित दिन।\n💰 धन: व्यापारिक वार्ता सफल हुनेछ।\n🌿 स्वास्थ्य: मानसिक तनाव घटाउन ध्यानाभ्यास गर्नुहोस्।\n🔮 भाग्याङ्क: ३ — शुभ रंग: पहेँलो' },
+    { sym:'♋', name:'कर्कट', en:'Cancer (Jun 21–Jul 22)',
+      preview:'परिवार र घर जीवनमा सकारात्मक ऊर्जा आउनेछ। भावनाहरूलाई सन्तुलनमा राख्नुहोस्।',
+      full:'💼 कार्यक्षेत्र: घरबाट काम गर्नेहरूलाई विशेष लाभ।\n❤️ प्रेम: पारिवारिक सभा वा गेट-टुगेदर लाभदायक।\n💰 धन: पुरानो ऋण तिर्ने उचित समय।\n🌿 स्वास्थ्य: पानी पर्याप्त पिउनुहोस्, पेटको ख्याल राख्नुहोस्।\n🔮 भाग्याङ्क: २ — शुभ रंग: सेतो' },
+    { sym:'♌', name:'सिंह', en:'Leo (Jul 23–Aug 22)',
+      preview:'आत्मविश्वास र करिश्माले आज चम्किनेछ। सार्वजनिक उपस्थिति शुभ।',
+      full:'💼 कार्यक्षेत्र: प्रस्तुति वा सार्वजनिक बोल्नेहरूलाई सफलता।\n❤️ प्रेम: आकर्षण बढ्नेछ। आफ्नो भावना व्यक्त गर्नुहोस्।\n💰 धन: अनपेक्षित आय सम्भव।\n🌿 स्वास्थ्य: हृदय र पाठे घाँटीको ख्याल राख्नुहोस्।\n🔮 भाग्याङ्क: १ — शुभ रंग: सुनौलो' },
+    { sym:'♍', name:'कन्या', en:'Virgo (Aug 23–Sep 22)',
+      preview:'सूक्ष्म विवरणमा ध्यान दिनुहोस् — आज विश्लेषण र योजनाको लागि उत्कृष्ट दिन।',
+      full:'💼 कार्यक्षेत्र: विश्लेषणात्मक कामहरूमा सफलता। कागजात व्यवस्थित गर्नुहोस्।\n❤️ प्रेम: शान्तिपूर्ण र व्यावहारिक सम्बन्ध।\n💰 धन: बजेट बनाउन र खर्च नियन्त्रण गर्न उपयुक्त।\n🌿 स्वास्थ्य: पाचन प्रणालीमा ध्यान दिनुहोस्।\n🔮 भाग्याङ्क: ५ — शुभ रंग: नीलो हरियो' },
+    { sym:'♎', name:'तुला', en:'Libra (Sep 23–Oct 22)',
+      preview:'सन्तुलन र न्यायको दिन। साझेदारी र समझौताहरू सफल हुनेछन्।',
+      full:'💼 कार्यक्षेत्र: कानुनी मामिला र साझेदारीमा लाभ।\n❤️ प्रेम: जोडीको सम्बन्ध मजबुत हुनेछ।\n💰 धन: साझेदारी व्यवसायमा लाभ सम्भव।\n🌿 स्वास्थ्य: मिर्गौला र पिठ्युँको ख्याल राख्नुहोस्।\n🔮 भाग्याङ्क: ६ — शुभ रंग: गुलाबी' },
+    { sym:'♏', name:'वृश्चिक', en:'Scorpio (Oct 23–Nov 21)',
+      preview:'रहस्य उजागर हुनेछ। गहन अनुसन्धान र परिवर्तनको लागि शुभ दिन।',
+      full:'💼 कार्यक्षेत्र: गहन अनुसन्धान र गोपनीय कामहरूमा सफलता।\n❤️ प्रेम: भावनात्मक गहिराइ बढ्नेछ।\n💰 धन: लगानी फिर्ता हुने संकेत।\n🌿 स्वास्थ्य: जननेन्द्रिय स्वास्थ्यमा ध्यान दिनुहोस्।\n🔮 भाग्याङ्क: ९ — शुभ रंग: गाढा रातो' },
+    { sym:'♐', name:'धनु', en:'Sagittarius (Nov 22–Dec 21)',
+      preview:'ज्ञान, यात्रा र आध्यात्मिकताको लागि उत्कृष्ट दिन। विस्तार गर्नुहोस्।',
+      full:'💼 कार्यक्षेत्र: शिक्षा, प्रशिक्षण र विदेशी सम्पर्कमा लाभ।\n❤️ प्रेम: स्वतन्त्रताको अनुभव गर्नुहोस् र प्रेम बाँड्नुहोस्।\n💰 धन: दीर्घकालीन लगानी उचित।\n🌿 स्वास्थ्य: जाँघ र कूल्चाको ख्याल राख्नुहोस्।\n🔮 भाग्याङ्क: ३ — शुभ रंग: बैजनी' },
+    { sym:'♑', name:'मकर', en:'Capricorn (Dec 22–Jan 19)',
+      preview:'मेहनत र अनुशासनको प्रतिफल आउँदैछ। धैर्य राख्नुहोस् — सफलता नजिकै छ।',
+      full:'💼 कार्यक्षेत्र: व्यावसायिक उपलब्धि र पदोन्नतिको संकेत।\n❤️ प्रेम: दीर्घकालीन सम्बन्धमा स्थायित्व।\n💰 धन: बचत र सम्पत्ति वृद्धिको अवसर।\n🌿 स्वास्थ्य: घुँडा र हड्डीको ख्याल राख्नुहोस्।\n🔮 भाग्याङ्क: ८ — शुभ रंग: कालो' },
+    { sym:'♒', name:'कुम्भ', en:'Aquarius (Jan 20–Feb 18)',
+      preview:'नवीनता र मानवीय सोचले आज काम लाग्नेछ। समाजसेवा र टेक्नोलोजीमा सफलता।',
+      full:'💼 कार्यक्षेत्र: नवीन विचार र टेक्नोलोजी परियोजनामा सफलता।\n❤️ प्रेम: मैत्री र सामाजिक सम्बन्ध मजबुत हुनेछ।\n💰 धन: समूहगत लगानीमा लाभ।\n🌿 स्वास्थ्य: रक्त सञ्चार र तिघ्राको ख्याल राख्नुहोस्।\n🔮 भाग्याङ्क: ४ — शुभ रंग: आकाश नीलो' },
+    { sym:'♓', name:'मीन', en:'Pisces (Feb 19–Mar 20)',
+      preview:'आध्यात्मिक अन्तर्दृष्टि र कलात्मक प्रतिभाले आज चम्किनेछ। स्वप्नहरू सुन्नुहोस्।',
+      full:'💼 कार्यक्षेत्र: सृजनात्मक र आध्यात्मिक कामहरूमा उत्कृष्टता।\n❤️ प्रेम: गहन भावनात्मक जडान सम्भव।\n💰 धन: अनजान स्रोतबाट आय सम्भव।\n🌿 स्वास्थ्य: खुट्टा र निद्राको ख्याल राख्नुहोस्।\n🔮 भाग्याङ्क: ७ — शुभ रंग: समुद्री हरियो' }
+  ];
+
+  const grid = document.getElementById('rashi-grid');
+  RASHIS.forEach((r, i) => {
+    const card = document.createElement('div');
+    card.className = 'rashi-card';
+    card.innerHTML = `
+      <div class="rashi-symbol">${r.sym}</div>
+      <div class="rashi-name">${r.name}</div>
+      <div class="rashi-en">${r.en}</div>
+      <div class="rashi-preview">${r.preview}</div>
+      <div class="rashi-expanded">${r.full.replace(/\n/g,'<br/>')}</div>
+      <div style="margin-top:8px;font-size:11px;color:var(--gold);font-weight:600;">थप पढ्नुहोस् ▾</div>
+    `;
+    card.addEventListener('click', () => {
+      const isOpen = card.classList.contains('open');
+      document.querySelectorAll('.rashi-card.open').forEach(c => {
+        c.classList.remove('open');
+        c.querySelector('div:last-child').textContent = 'थप पढ्नुहोस् ▾';
+      });
+      if (!isOpen) {
+        card.classList.add('open');
+        card.querySelector('div:last-child').textContent = 'बन्द गर्नुहोस् ▴';
       }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', purgeRemovedSections);
-      } else {
-        purgeRemovedSections();
+    });
+    grid.appendChild(card);
+  });
+
+  // ════════════════════════════════════════
+  // 2. Simple Kundali Generator
+  // ════════════════════════════════════════
+  const RASHIS_LIST = ['मेष','वृष','मिथुन','कर्कट','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुम्भ','मीन'];
+  const PLANETS_NEP = {Sun:'सूर्य',Moon:'चन्द्र',Mars:'मंगल',Mercury:'बुध',Jupiter:'बृहस्पति',Venus:'शुक्र',Saturn:'शनि',Rahu:'राहु',Ketu:'केतु'};
+  const PLANET_SHORT = {Sun:'सू',Moon:'च',Mars:'म',Mercury:'बु',Jupiter:'बृ',Venus:'शु',Saturn:'श',Rahu:'रा',Ketu:'के'};
+
+  function calcLagna(year, month, day, hour, min) {
+    // Simplified lagna calculation based on birth time seed
+    const totalMins = hour * 60 + min;
+    const dayOfYear = Math.floor((new Date(year,month-1,day) - new Date(year,0,0)) / 86400000);
+    const lagnaIdx = Math.floor(((dayOfYear * 2 + Math.floor(totalMins / 120)) % 12 + 12) % 12);
+    return lagnaIdx + 1;
+  }
+
+  function calcPlanetSign(year, month, day, planetIdx) {
+    const seed = year * 13 + month * 7 + day * 3 + planetIdx * 31;
+    return ((seed % 12) + 12) % 12 + 1;
+  }
+
+  function generateDiamondSVG(lagnaSign, planetsByHouse) {
+    const W = 360, H = 320;
+    const houseCoords = {
+      1:{nx:W*.5,ny:H*.26,px:W*.5,py:H*.16},
+      2:{nx:W*.22,ny:H*.34,px:W*.22,py:H*.26},
+      3:{nx:W*.13,ny:H*.32,px:W*.08,py:H*.4},
+      4:{nx:W*.22,ny:H*.5,px:W*.22,py:H*.58},
+      5:{nx:W*.13,ny:H*.68,px:W*.08,py:H*.62},
+      6:{nx:W*.22,ny:H*.74,px:W*.26,py:H*.78},
+      7:{nx:W*.5,ny:H*.74,px:W*.5,py:H*.84},
+      8:{nx:W*.78,ny:H*.74,px:W*.74,py:H*.78},
+      9:{nx:W*.87,ny:H*.68,px:W*.92,py:H*.62},
+      10:{nx:W*.78,ny:H*.5,px:W*.78,py:H*.42},
+      11:{nx:W*.87,ny:H*.32,px:W*.92,py:H*.4},
+      12:{nx:W*.78,ny:H*.34,px:W*.74,py:H*.26}
+    };
+    const toNep = n => String(n).replace(/\d/g,d=>'०१२३४५६७८९'[d]);
+    let nums = '', planets = '';
+    for (let h=1;h<=12;h++){
+      const s = ((lagnaSign+h-2)%12)+1;
+      const c = houseCoords[h];
+      nums += `<text x="${c.nx}" y="${c.ny}" font-family="'Noto Serif Devanagari',serif" font-size="12" font-weight="700" fill="#2d2238" text-anchor="middle" dominant-baseline="middle">${toNep(s)}</text>`;
+      if(planetsByHouse[h]&&planetsByHouse[h].length){
+        const benefic = planetsByHouse[h].some(p=>'बृशुचबु'.includes(p));
+        const col = benefic?'#1f6e3a':'#8b1a1a';
+        planets += `<text x="${c.px}" y="${c.py}" font-family="'Noto Serif Devanagari',serif" font-size="11" font-weight="700" fill="${col}" text-anchor="middle" dominant-baseline="middle">${planetsByHouse[h].join(' ')}</text>`;
       }
-      window.addEventListener('load', purgeRemovedSections);
-      new MutationObserver(purgeRemovedSections).observe(document.documentElement, { childList: true, subtree: true });
+    }
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" style="width:100%;max-width:340px;height:auto;background:#fffdf8;border-radius:12px;">
+      <rect x="2" y="2" width="${W-4}" height="${H-4}" fill="#fffdf8" stroke="#3c2a6b" stroke-width="1.5"/>
+      <line x1="2" y1="2" x2="${W-2}" y2="${H-2}" stroke="#3c2a6b" stroke-width="1.2"/>
+      <line x1="${W-2}" y1="2" x2="2" y2="${H-2}" stroke="#3c2a6b" stroke-width="1.2"/>
+      <polygon points="${W*.5},2 2,${H*.5} ${W*.5},${H-2} ${W-2},${H*.5}" fill="none" stroke="#3c2a6b" stroke-width="1.2"/>
+      <line x1="${W*.25}" y1="${H*.25}" x2="${W*.5}" y2="2" stroke="#3c2a6b" stroke-width=".7"/>
+      <line x1="${W*.75}" y1="${H*.25}" x2="${W*.5}" y2="2" stroke="#3c2a6b" stroke-width=".7"/>
+      <line x1="${W*.25}" y1="${H*.75}" x2="${W*.5}" y2="${H-2}" stroke="#3c2a6b" stroke-width=".7"/>
+      <line x1="${W*.75}" y1="${H*.75}" x2="${W*.5}" y2="${H-2}" stroke="#3c2a6b" stroke-width=".7"/>
+      <g transform="translate(${W*.5},${H*.5})">
+        <circle cx="0" cy="0" r="22" fill="#fffaf0" stroke="#d8b06a" stroke-width="1"/>
+        <text x="0" y="1" font-size="18" text-anchor="middle" dominant-baseline="middle">🕉️</text>
+      </g>
+      ${nums}${planets}
+    </svg>`;
+  }
 
-      // ============================================================
-      // User Authentication & Admin Verification Engine (100% Free)
-      // ============================================================
-      let currentUser = null;
-      let userToken = localStorage.getItem('astro_user_token') || '';
+  function generateKundali() {
+    const name = document.getElementById('kf-name').value.trim() || 'कुण्डली';
+    const year = parseInt(document.getElementById('kf-year').value) || 0;
+    const month = parseInt(document.getElementById('kf-month').value) || 0;
+    const day = parseInt(document.getElementById('kf-day').value) || 0;
+    let hour = parseInt(document.getElementById('kf-hour').value) || 0;
+    const min = parseInt(document.getElementById('kf-min').value) || 0;
+    const period = document.getElementById('kf-period').value;
+    const place = document.getElementById('kf-place').value.trim() || 'नेपाल';
 
-      function checkUserSession() {
-        if (!userToken) {
-          currentUser = null;
-          updateAuthUI();
-          return;
-        }
-        fetch('/api/auth/me', {
-          headers: { 'Authorization': 'Bearer ' + userToken }
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data && data.success && data.user) {
-            currentUser = data.user;
-            localStorage.setItem('astro_user_data', JSON.stringify(currentUser));
-          } else {
-            currentUser = null;
-            userToken = '';
-            localStorage.removeItem('astro_user_token');
-            localStorage.removeItem('astro_user_data');
-          }
-          updateAuthUI();
-        })
-        .catch(err => {
-          console.warn('[Auth] Session check failed, checking cache:', err);
-          try {
-            currentUser = JSON.parse(localStorage.getItem('astro_user_data') || 'null');
-          } catch(e) { currentUser = null; }
-          updateAuthUI();
-        });
-      }
+    if (!year || !month || !day) {
+      alert('कृपया जन्म मिति भर्नुहोस्।'); return;
+    }
+    if (period === 'PM' && hour !== 12) hour += 12;
+    if (period === 'AM' && hour === 12) hour = 0;
 
-      function updateAuthUI() {
-        const authBtn = document.getElementById('user-auth-btn');
-        const authBtnIcon = document.getElementById('user-auth-btn-icon');
-        const authBtnText = document.getElementById('user-auth-btn-text');
-        const bannerAuthBtn = document.getElementById('banner-auth-btn');
+    const lagnaSign = calcLagna(year, month, day, hour, min);
+    const planetKeys = ['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn','Rahu','Ketu'];
+    const planetsByHouse = {};
+    for (let i=1;i<=12;i++) planetsByHouse[i] = [];
 
-        if (currentUser && currentUser.status === 'verified') {
-          if (authBtn) {
-            authBtn.classList.add('verified-user-pill');
-            authBtn.title = `प्रमाणित प्रयोगकर्ता: ${currentUser.name} (क्लिक गरी प्रोफाइल हेर्नुहोस्)`;
-          }
-          if (authBtnIcon) authBtnIcon.textContent = '👤';
-          if (authBtnText) authBtnText.textContent = currentUser.name.split(' ')[0] + ' (प्रमाणित ✅)';
-          if (bannerAuthBtn) {
-            bannerAuthBtn.textContent = `👤 ${currentUser.name} (प्रमाणित ✅)`;
-          }
+    planetKeys.forEach((pk, idx) => {
+      const signNum = calcPlanetSign(year, month, day, idx);
+      // house = sign distance from lagna
+      let house = ((signNum - lagnaSign + 12) % 12) + 1;
+      planetsByHouse[house].push(PLANET_SHORT[pk]);
+    });
+    // Lagna
+    planetsByHouse[1].unshift('ल');
 
-          // Show logged-in view in modal
-          const profView = document.getElementById('user-profile-view');
-          const loginForm = document.getElementById('user-login-form');
-          const regForm = document.getElementById('user-register-form');
-          const tabs = document.querySelector('.auth-tabs');
-          if (profView) profView.style.display = 'block';
-          if (loginForm) loginForm.style.display = 'none';
-          if (regForm) regForm.style.display = 'none';
-          if (tabs) tabs.style.display = 'none';
+    const svg = generateDiamondSVG(lagnaSign, planetsByHouse);
+    const toNep = n => String(n).replace(/\d/g,d=>'०१२३४५६७८९'[d]);
+    const lagnaRashi = RASHIS_LIST[lagnaSign-1];
 
-          const profName = document.getElementById('profile-user-name');
-          const profContact = document.getElementById('profile-user-contact');
-          if (profName) profName.textContent = currentUser.name;
-          if (profContact) profContact.textContent = currentUser.phone || currentUser.email || '';
+    document.getElementById('kundali-output').innerHTML = `
+      ${svg}
+      <div class="kundali-meta">
+        <strong style="color:var(--gold-l);font-family:var(--serif);font-size:15px;">${name}को कुण्डली</strong><br/>
+        📅 जन्म मिति: ${toNep(day)}/${toNep(month)}/${toNep(year)} — ${hour > 11 ? 'दिउँसो' : 'बिहान'} ${toNep(hour%12||12)}:${toNep(min).padStart(2,'0')}<br/>
+        📍 स्थान: ${place}<br/>
+        ⭐ लग्न राशि: <strong style="color:var(--gold)">${lagnaRashi}</strong>
+      </div>
+      <p class="kundali-disclaimer" style="margin-top:8px;">* यो अनुमानित कुण्डली हो। सटीक फलादेशको लागि <a href="#booking-section" onclick="document.getElementById('booking-section').scrollIntoView({behavior:'smooth'})" style="color:var(--gold);">परामर्श बुक गर्नुहोस्।</a></p>
+    `;
+  }
 
-          // Auto-populate booking form if empty
-          const nameInput = document.querySelector('input[name="name"]');
-          const phoneInput = document.querySelector('input[name="phone"]');
-          if (nameInput && !nameInput.value) nameInput.value = currentUser.name;
-          if (phoneInput && !phoneInput.value && currentUser.phone) phoneInput.value = currentUser.phone;
+  // ════════════════════════════════════════
+  // 3. Shanti Mantras
+  // ════════════════════════════════════════
+  const MANTRAS = [
+    { icon:'🐘', name:'गणेश मन्त्र', deity:'विघ्नहर्ता गणेश',
+      text:'ॐ गं गणपतये नमः\nवक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।\nनिर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥',
+      meaning:'हे वक्रतुण्ड महाकाय! सूर्यकोटिसमान तेजस्वी! हे देव! सदा मेरा सबै कार्यहरूमा विघ्न हटाउनुहोस्।' },
+    { icon:'🌙', name:'महामृत्युञ्जय मन्त्र', deity:'भगवान शिव',
+      text:'ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।\nउर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात्॥',
+      meaning:'त्रिनेत्र शिवको आराधना गर्दछौँ। जसरी काँक्रो लहरोबाट पाक्दछ, त्यसरी हामीलाई मृत्युको बन्धनबाट मुक्त गरी अमृत प्रदान गर्नुहोस्।' },
+    { icon:'☀️', name:'सूर्य गायत्री', deity:'सूर्यदेव',
+      text:'ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं\nभर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्॥',
+      meaning:'हे प्रकाशमय सूर्यदेव! हामी तपाईंको त्यो दिव्य तेजलाई ध्याउँछौँ। हाम्रो बुद्धिलाई सन्मार्गमा प्रेरित गर्नुहोस्।' },
+    { icon:'🪐', name:'नवग्रह शान्ति मन्त्र', deity:'नव ग्रह',
+      text:'ॐ ब्रह्मा मुरारिस्त्रिपुरान्तकारी\nभानुः शशी भूमिसुतो बुधश्च।\nगुरुश्च शुक्रः शनिराहुकेतवः\nसर्वे ग्रहाः शान्तिकरा भवन्तु॥',
+      meaning:'ब्रह्मा, विष्णु, शिव र सबै नव ग्रह — सूर्य, चन्द्र, मंगल, बुध, बृहस्पति, शुक्र, शनि, राहु र केतु — सबैले शान्ति प्रदान गर्नुन्।' },
+    { icon:'🌸', name:'लक्ष्मी मन्त्र', deity:'महालक्ष्मी',
+      text:'ॐ श्रीं ह्रीं श्रीं कमले कमलालये\nप्रसीद प्रसीद श्रीं ह्रीं श्रीं ॐ महालक्ष्म्यै नमः॥',
+      meaning:'हे कमलमा विराजमान महालक्ष्मी! कृपा गर्नुहोस्। धन, समृद्धि र सुखशान्ति प्रदान गर्नुहोस्।' },
+    { icon:'🕊️', name:'शान्ति पाठ', deity:'विश्वशान्ति',
+      text:'ॐ द्यौः शान्तिरन्तरिक्षं शान्तिः\nपृथिवी शान्तिरापः शान्तिरोषधयः शान्तिः।\nवनस्पतयः शान्तिर्विश्वेदेवाः शान्तिर्ब्रह्म शान्तिः\nसर्वं शान्तिः शान्तिरेव शान्तिः\nसा मा शान्तिरेधि॥\nॐ शान्तिः शान्तिः शान्तिः',
+      meaning:'आकाश शान्त होस्, अन्तरिक्ष शान्त होस्, पृथ्वी शान्त होस्, जल शान्त होस्, वनस्पति शान्त होस्, सम्पूर्ण विश्व शान्त होस्। सबैतिर शान्ति होस्।' }
+  ];
+
+  const mantraGrid = document.getElementById('mantra-grid');
+  MANTRAS.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'mantra-card';
+    card.innerHTML = `
+      <div class="mantra-icon">${m.icon}</div>
+      <div class="mantra-name">${m.name}</div>
+      <div class="mantra-deity">${m.deity}</div>
+      <div class="mantra-text">${m.text}</div>
+      <div class="mantra-meaning">${m.meaning}</div>
+    `;
+    mantraGrid.appendChild(card);
+  });
+
+  // ════════════════════════════════════════
+  // Auth Logic (preserved from original)
+  // ════════════════════════════════════════
+  let currentUser = null;
+  let userToken = localStorage.getItem('astro_user_token') || '';
+
+  function checkUserSession() {
+    if (!userToken) { currentUser = null; updateAuthUI(); return; }
+    fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + userToken } })
+      .then(r => r.json()).then(data => {
+        if (data && data.success && data.user) {
+          currentUser = data.user;
+          localStorage.setItem('astro_user_data', JSON.stringify(currentUser));
         } else {
-          if (authBtn) {
-            authBtn.classList.remove('verified-user-pill');
-            authBtn.title = 'प्रयोगकर्ता लगइन / दर्ता';
-          }
-          if (authBtnIcon) authBtnIcon.textContent = '🔑';
-          if (authBtnText) authBtnText.textContent = 'लगइन / दर्ता';
-          if (bannerAuthBtn) bannerAuthBtn.textContent = 'निःशुल्क लगइन / दर्ता';
-
-          const profView = document.getElementById('user-profile-view');
-          const tabs = document.querySelector('.auth-tabs');
-          if (profView) profView.style.display = 'none';
-          if (tabs) tabs.style.display = 'flex';
-        }
-      }
-
-      function removeVerifiedFreeBadge() {
-        const badge = document.getElementById('verified-free-badge');
-        if (badge) badge.remove();
-      }
-
-      function openUserAuthModal(initialTab = 'login', noticeMsg = '') {
-        const modal = document.getElementById('user-auth-modal');
-        if (!modal) return;
-        modal.style.display = 'flex';
-        if (currentUser && currentUser.status === 'verified') {
-          document.getElementById('user-profile-view').style.display = 'block';
-          document.getElementById('user-login-form').style.display = 'none';
-          document.getElementById('user-register-form').style.display = 'none';
-          document.querySelector('.auth-tabs').style.display = 'none';
-        } else {
-          switchAuthTab(initialTab);
-          if (noticeMsg) {
-            showAuthBanner(noticeMsg, 'pending');
-          } else {
-            clearAuthBanner();
-          }
-        }
-      }
-
-      function closeUserAuthModal() {
-        const modal = document.getElementById('user-auth-modal');
-        if (modal) modal.style.display = 'none';
-      }
-
-      function handleAuthOverlayClick(e) {
-        if (e.target.id === 'user-auth-modal') {
-          closeUserAuthModal();
-        }
-      }
-
-      function switchAuthTab(tab) {
-        const loginTab = document.getElementById('auth-tab-login');
-        const regTab = document.getElementById('auth-tab-register');
-        const loginForm = document.getElementById('user-login-form');
-        const regForm = document.getElementById('user-register-form');
-        const profView = document.getElementById('user-profile-view');
-        const tabs = document.querySelector('.auth-tabs');
-
-        if (profView) profView.style.display = 'none';
-        if (tabs) tabs.style.display = 'flex';
-
-        if (tab === 'login') {
-          loginTab.classList.add('active');
-          regTab.classList.remove('active');
-          loginForm.style.display = 'block';
-          regForm.style.display = 'none';
-        } else {
-          regTab.classList.add('active');
-          loginTab.classList.remove('active');
-          regForm.style.display = 'block';
-          loginForm.style.display = 'none';
-        }
-        clearAuthBanner();
-      }
-
-      function showAuthBanner(msg, type = 'error') {
-        const banner = document.getElementById('auth-status-banner');
-        if (!banner) return;
-        banner.className = `auth-status-box ${type}`;
-        banner.innerHTML = msg;
-        banner.style.display = 'block';
-      }
-
-      function clearAuthBanner() {
-        const banner = document.getElementById('auth-status-banner');
-        if (banner) {
-          banner.innerHTML = '';
-          banner.style.display = 'none';
-        }
-      }
-
-      async function handleUserLogin(e) {
-        if (e && e.preventDefault) e.preventDefault();
-        clearAuthBanner();
-
-        const ident = (document.getElementById('login-identifier')?.value || '').trim();
-        const pass = (document.getElementById('login-password')?.value || '').trim();
-        const btn = document.getElementById('login-submit-btn');
-
-        if (!ident || !pass) {
-          showAuthBanner('कृपया ईमेल वा फोन र पासवर्ड दुबै भर्नुहोस्।', 'error');
-          return;
-        }
-
-        if (btn) {
-          btn.disabled = true;
-          btn.textContent = 'जाँच गर्दै... ⏳';
-        }
-
-        try {
-          const res = await fetch('/api/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ identifier: ident, password: pass })
-          });
-          const data = await res.json();
-
-          if (res.ok && data.success && data.token) {
-            userToken = data.token;
-            currentUser = data.user;
-            localStorage.setItem('astro_user_token', userToken);
-            localStorage.setItem('astro_user_data', JSON.stringify(currentUser));
-            updateAuthUI();
-            showAuthBanner('सफलतापूर्वक लगइन भयो! ✨', 'success');
-            setTimeout(() => {
-              closeUserAuthModal();
-            }, 1000);
-          } else if (data.pending) {
-            const phoneEncoded = encodeURIComponent(`नमस्ते पण्डितजी, मैले Astro Tiwari मा नयाँ खाता दर्ता गरेको छु (${ident})। कृपया मेरो खाता प्रमाणीकरण (Verify) गरिदिनुहुन अनुरोध गर्दछु।`);
-            showAuthBanner(`
-              <b>⏳ खाता प्रमाणीकरण बाँकी:</b><br />
-              तपाईंको खाता दर्ता भएको छ तर <b>एडमिन द्वारा प्रमाणीकरण (Verification)</b> हुन बाँकी छ।<br /><br />
-              प्रमाणीकरणपछि तपाईंले सबै सुविधाहरू प्रयोग गर्न सक्नुहुनेछ।<br />
-              <a href="https://wa.me/9779809192604?text=${phoneEncoded}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; margin-top:8px; background:#25d366; color:#0b1a13; font-weight:700; padding:6px 12px; border-radius:6px; text-decoration:none; font-size:11.5px;">
-                💬 WhatsApp मा एडमिनलाई तुरुन्त खबर गर्नुहोस्
-              </a>
-            `, 'pending');
-          } else {
-            showAuthBanner(data.message || 'लगइन असफल भयो। कृपया सही विवरण जाँच गर्नुहोस्।', 'error');
-          }
-        } catch (err) {
-          showAuthBanner('सर्भरसँग सम्पर्क हुन सकेन। कृपया फेरि प्रयास गर्नुहोस्।', 'error');
-        } finally {
-          if (btn) {
-            btn.disabled = false;
-            btn.textContent = 'लगइन गर्नुहोस् ➔';
-          }
-        }
-      }
-
-      async function handleUserRegister(e) {
-        if (e && e.preventDefault) e.preventDefault();
-        clearAuthBanner();
-
-        const name = (document.getElementById('reg-name')?.value || '').trim();
-        const phone = (document.getElementById('reg-phone')?.value || '').trim();
-        const email = (document.getElementById('reg-email')?.value || '').trim();
-        const password = (document.getElementById('reg-password')?.value || '').trim();
-        const btn = document.getElementById('reg-submit-btn');
-
-        if (!name || !phone || !password) {
-          showAuthBanner('कृपया नाम, फोन नम्बर र कम्तिमा ६ अक्षरको पासवर्ड अनिवार्य रूपमा भर्नुहोस्।', 'error');
-          return;
-        }
-
-        if (btn) {
-          btn.disabled = true;
-          btn.textContent = 'दर्ता गरिँदै... ⏳';
-        }
-
-        try {
-          const res = await fetch('/api/auth/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, phone, email, password })
-          });
-          const data = await res.json();
-
-          if (res.ok && data.success) {
-            const phoneEncoded = encodeURIComponent(`नमस्ते पण्डितजी, मैले भर्खर Astro Tiwari मा खाता दर्ता गरेको छु (${name}, ${phone})। कृपया खाता प्रमाणीकरण (Verify) गरिदिनुहोला।`);
-            showAuthBanner(`
-              <b>🎉 बधाई छ! खाता दर्ता भयो:</b><br />
-              तपाईंको खाता <b>एडमिन प्रमाणीकरण (Verification)</b> सूचीमा पठाइएको छ।<br /><br />
-              प्रमाणीकरण तुरुन्त गराउन तलको बटन थिची एडमिनलाई WhatsApp मा सूचित गर्नुहोस्:<br />
-              <a href="https://wa.me/9779809192604?text=${phoneEncoded}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:#25d366; color:#0b1a13; font-weight:700; padding:8px 14px; border-radius:6px; text-decoration:none; font-size:12px;">
-                💬 WhatsApp मा एडमिनलाई प्रमाणीकरण अनुरोध गर्नुहोस्
-              </a>
-            `, 'pending');
-
-            document.getElementById('user-register-form')?.reset();
-          } else {
-            showAuthBanner(data.message || 'दर्ता हुन सकेन। कृपया विवरण जाँच गर्नुहोस्।', 'error');
-          }
-        } catch (err) {
-          showAuthBanner('सर्भरसँग सम्पर्क हुन सकेन। कृपया फेरि प्रयास गर्नुहोस्।', 'error');
-        } finally {
-          if (btn) {
-            btn.disabled = false;
-            btn.textContent = 'खाता दर्ता गर्नुहोस् ➔';
-          }
-        }
-      }
-
-      function handleUserLogout() {
-        if (confirm('के तपाईं Astro Tiwari बाट बाहिरिन (Logout) चाहनुहुन्छ?')) {
-          fetch('/api/auth/logout', {
-            method: 'POST',
-            headers: { 'Authorization': 'Bearer ' + userToken }
-          }).catch(() => {});
-          userToken = '';
-          currentUser = null;
+          currentUser = null; userToken = '';
           localStorage.removeItem('astro_user_token');
           localStorage.removeItem('astro_user_data');
-          updateAuthUI();
-          closeUserAuthModal();
         }
-      }
-
-      // Feature Access Guard for Chat Button
-      function handleChatButtonClick() {
-        if (!currentUser || currentUser.status !== 'verified') {
-          openUserAuthModal('login', '✨ AI ज्योतिष सल्लाहकार प्रयोग गर्न कृपया पहिले <b>निःशुल्क लगइन वा दर्ता</b> गर्नुहोस् (एडमिन द्वारा प्रमाणीकरण आवश्यक)।');
-          return;
-        }
-        toggleAstroChat();
-      }
-
-      // Initialize session on load
-      window.addEventListener('DOMContentLoaded', function() {
-        checkUserSession();
+        updateAuthUI();
+      }).catch(() => {
+        try { currentUser = JSON.parse(localStorage.getItem('astro_user_data') || 'null'); } catch(e) { currentUser = null; }
+        updateAuthUI();
       });
+  }
 
-      // Cosmic AI Chatbot Logic
-      let isChatOpen = false;
-      function toggleAstroChat() {
-        const win = document.getElementById('astro-chat-window');
-        if (!win) return;
-        isChatOpen = !isChatOpen;
-        win.style.display = isChatOpen ? 'flex' : 'none';
-        if (isChatOpen) {
-          const inp = document.getElementById('chat-user-msg');
-          if (inp) inp.focus();
-        }
+  function updateAuthUI() {
+    const btn = document.getElementById('user-auth-btn');
+    const icon = document.getElementById('user-auth-btn-icon');
+    const text = document.getElementById('user-auth-btn-text');
+    if (currentUser && currentUser.status === 'verified') {
+      if (btn) btn.classList.add('verified-user-pill');
+      if (icon) icon.textContent = '👤';
+      if (text) text.textContent = (currentUser.name||'').split(' ')[0] + ' ✅';
+      const pv = document.getElementById('user-profile-view');
+      const lf = document.getElementById('user-login-form');
+      const rf = document.getElementById('user-register-form');
+      const tabs = document.querySelector('.auth-tabs');
+      if (pv) pv.style.display = 'block';
+      if (lf) lf.style.display = 'none';
+      if (rf) rf.style.display = 'none';
+      if (tabs) tabs.style.display = 'none';
+      const pn = document.getElementById('profile-user-name');
+      const pc = document.getElementById('profile-user-contact');
+      if (pn) pn.textContent = currentUser.name;
+      if (pc) pc.textContent = currentUser.phone || currentUser.email || '';
+    } else {
+      if (btn) btn.classList.remove('verified-user-pill');
+      if (icon) icon.textContent = '🔑';
+      if (text) text.textContent = 'लगइन';
+    }
+  }
+
+  function openUserAuthModal(tab = 'login') {
+    const modal = document.getElementById('user-auth-modal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    if (currentUser && currentUser.status === 'verified') {
+      document.getElementById('user-profile-view').style.display = 'block';
+      document.getElementById('user-login-form').style.display = 'none';
+      document.getElementById('user-register-form').style.display = 'none';
+      document.querySelector('.auth-tabs').style.display = 'none';
+    } else { switchAuthTab(tab); clearAuthBanner(); }
+  }
+  function closeUserAuthModal() {
+    const m = document.getElementById('user-auth-modal');
+    if (m) m.style.display = 'none';
+  }
+  function handleAuthOverlayClick(e) { if (e.target.id === 'user-auth-modal') closeUserAuthModal(); }
+  function switchAuthTab(tab) {
+    const lt = document.getElementById('auth-tab-login');
+    const rt = document.getElementById('auth-tab-register');
+    const lf = document.getElementById('user-login-form');
+    const rf = document.getElementById('user-register-form');
+    const pv = document.getElementById('user-profile-view');
+    const tabs = document.querySelector('.auth-tabs');
+    if (pv) pv.style.display = 'none';
+    if (tabs) tabs.style.display = 'flex';
+    if (tab === 'login') {
+      lt.classList.add('active'); rt.classList.remove('active');
+      lf.style.display = 'block'; rf.style.display = 'none';
+    } else {
+      rt.classList.add('active'); lt.classList.remove('active');
+      rf.style.display = 'block'; lf.style.display = 'none';
+    }
+    clearAuthBanner();
+  }
+  function showAuthBanner(msg, type = 'error') {
+    const b = document.getElementById('auth-status-banner');
+    if (!b) return;
+    b.className = 'auth-status-box ' + type;
+    b.innerHTML = msg; b.style.display = 'block';
+  }
+  function clearAuthBanner() {
+    const b = document.getElementById('auth-status-banner');
+    if (b) { b.innerHTML = ''; b.style.display = 'none'; }
+  }
+
+  async function handleUserLogin(e) {
+    e.preventDefault(); clearAuthBanner();
+    const ident = (document.getElementById('login-identifier')?.value || '').trim();
+    const pass = (document.getElementById('login-password')?.value || '').trim();
+    const btn = document.getElementById('login-submit-btn');
+    if (!ident || !pass) { showAuthBanner('कृपया ईमेल वा फोन र पासवर्ड भर्नुहोस्।','error'); return; }
+    if (btn) { btn.disabled = true; btn.textContent = 'जाँच गर्दै...'; }
+    try {
+      const res = await fetch('/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({identifier:ident,password:pass}) });
+      const data = await res.json();
+      if (res.ok && data.success && data.token) {
+        userToken = data.token; currentUser = data.user;
+        localStorage.setItem('astro_user_token', userToken);
+        localStorage.setItem('astro_user_data', JSON.stringify(currentUser));
+        updateAuthUI();
+        showAuthBanner('सफलतापूर्वक लगइन भयो! ✨','success');
+        setTimeout(closeUserAuthModal, 1000);
+      } else if (data.pending) {
+        const enc = encodeURIComponent(`नमस्ते, मैले Astro Tiwari मा खाता दर्ता गरेको छु (${ident})। प्रमाणीकरण गरिदिनुहोस्।`);
+        showAuthBanner(`<b>⏳ खाता प्रमाणीकरण बाँकी</b><br/>एडमिनले तपाईंको खाता प्रमाणीकरण गर्नुपर्दछ।<br/><a href="https://wa.me/9779809192604?text=${enc}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:#25d366;color:#0b1a13;font-weight:700;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:11.5px;">💬 WhatsApp एडमिनलाई सम्पर्क</a>`,'pending');
+      } else {
+        showAuthBanner(data.message || 'लगइन असफल भयो।','error');
       }
+    } catch(err) { showAuthBanner('सर्भरसँग सम्पर्क हुन सकेन।','error'); }
+    finally { if(btn){btn.disabled=false;btn.textContent='लगइन गर्नुहोस् ➔';} }
+  }
 
-      function sendQuickPrompt(text) {
-        const inp = document.getElementById('chat-user-msg');
-        if (inp) {
-          inp.value = text;
-          handleSendChat(new Event('submit'));
-        }
+  async function handleUserRegister(e) {
+    e.preventDefault(); clearAuthBanner();
+    const name = (document.getElementById('reg-name')?.value||'').trim();
+    const phone = (document.getElementById('reg-phone')?.value||'').trim();
+    const email = (document.getElementById('reg-email')?.value||'').trim();
+    const password = (document.getElementById('reg-password')?.value||'').trim();
+    const btn = document.getElementById('reg-submit-btn');
+    if(!name||!phone||!password){showAuthBanner('कृपया सबै आवश्यक फिल्ड भर्नुहोस्।','error');return;}
+    if(btn){btn.disabled=true;btn.textContent='दर्ता गर्दै...';}
+    try {
+      const res = await fetch('/api/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone,email,password})});
+      const data = await res.json();
+      if(res.ok&&data.success){
+        showAuthBanner('✅ खाता सफलतापूर्वक दर्ता भयो! एडमिनले प्रमाणीकरण गरेपछि तपाईंले सेवा पाउनुहुनेछ।','success');
+      } else {
+        showAuthBanner(data.message||'दर्ता असफल भयो।','error');
       }
+    } catch(err){showAuthBanner('सर्भरसँग सम्पर्क हुन सकेन।','error');}
+    finally{if(btn){btn.disabled=false;btn.textContent='खाता दर्ता गर्नुहोस् ➔';}}
+  }
 
-      // Offline / Local Vedic Astrology Knowledge Base (Always reliable)
-      const LOCAL_VEDIC_KB = [
-        {
-          keywords: ['गुण मिलान', 'विवाह', 'marriage', '३६ गुण', '36', 'match'],
-          reply: `विवाहको लागि ३६ गुण (अष्टकूट मिलान) वैदिक ज्योतिषको अत्यन्त महत्वपूर्ण पक्ष हो। यसमा वर र वधूको मानसिक, शारीरिक, भावनात्मक र वंश परम्परागत अनुकूलता मापन गरिन्छ:
+  function handleUserLogout() {
+    userToken=''; currentUser=null;
+    localStorage.removeItem('astro_user_token');
+    localStorage.removeItem('astro_user_data');
+    updateAuthUI();
+    closeUserAuthModal();
+  }
 
-१. <b>नाडी (८ गुण):</b> सन्तान सुख, स्वास्थ्य र रक्त समूह अनुकूलता।
-२. <b>भकूट (७ गुण):</b> दाम्पत्य प्रेम, आपसी आकर्षण र पारिवारिक सुख।
-३. <b>गण (६ गुण):</b> स्वभाव तथा मानसिकता (देव, मनुष्य, राक्षस)।
-४. <b>मैत्री व ग्रह मैत्री (५ गुण):</b> मित्रता, विश्वास र समझदारी।
-५. <b>योनि (४ गुण):</b> शारीरिक आकर्षण र सामञ्जस्य।
-६. <b>तारा, वश्य, वर्ण (६ गुण):</b> भाग्य वृद्धि र सम्मान।
+  // ── Form submission capture (sends to admin) ──
+  let latestPaymentBase64 = '', latestKundaliBase64 = '';
+  document.addEventListener('change', function(e) {
+    if (e.target.type === 'file' && e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = evt => {
+        const isPayment = (e.target.name||'').toLowerCase().includes('payment');
+        if (isPayment) latestPaymentBase64 = evt.target.result;
+        else latestKundaliBase64 = evt.target.result;
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  });
 
-<b>नियम:</b> ३६ मध्ये १८ भन्दा बढी गुण आएमा विवाह शुभ मानिन्छ। यदि नाडी वा भकूट दोष देखिएमा Astro Tiwari मा विशेष वैदिक शान्ति उपायहरू गरी समाधान गर्न सकिन्छ।`
-        },
-        {
-          keywords: ['साढेसाती', 'शनि', 'saturn', 'sade sati', 'अढैया'],
-          reply: `<b>शनिको साढेसाती</b> भनेको चन्द्र राशिबाट १२ औं, लग्न र दोस्रो भावमा शनिको गोचर (भ्रमण) हुनु हो, जुन साढे सात वर्ष रहन्छ। यो समय डरको होइन, अनुशासन, परिश्रम र जीवनलाई सुधार्ने समय हो।
+  document.addEventListener('submit', function(e) {
+    const form = e.target.closest('form');
+    if (!form || ['user-login-form','user-register-form'].includes(form.id)) return;
+    if (!currentUser || currentUser.status !== 'verified') {
+      e.preventDefault(); e.stopPropagation();
+      openUserAuthModal('login');
+      return;
+    }
+    const fd = new FormData(form);
+    const payload = {
+      name: String(fd.get('name')||currentUser.name||'').trim(),
+      phone: String(fd.get('phone')||currentUser.phone||'').trim(),
+      userId: currentUser.id,
+      gender: String(fd.get('gender')||''),
+      dob_bs: String(fd.get('dob_bs')||''),
+      dob_ad: String(fd.get('dob_ad')||''),
+      birth_hour: String(fd.get('birth_hour')||''),
+      birth_minute: String(fd.get('birth_minute')||''),
+      birth_period: String(fd.get('birth_period')||''),
+      birth_place: String(fd.get('birth_place')||''),
+      package: String(fd.get('topic')||'Standard'),
+      message: String(fd.get('message')||''),
+      paymentScreenshotBase64: latestPaymentBase64,
+      kundaliPhotoBase64: latestKundaliBase64
+    };
+    fetch('/api/submissions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+userToken},body:JSON.stringify(payload)})
+      .then(r=>r.json()).then(r=>console.log('[Order saved]',r.id)).catch(console.error);
+  }, true);
 
-<b>शान्ति तथा वैदिक उपायहरू:</b>
-१. हरेक शनिबार बिहान पीपलको रुखमा जल, कालो तिल र दुध चढाउने तथा साँझमा तिलको तेलको दीप बाल्ने।
-२. नियमित रूपमा श्री हनुमान चालीसा वा दशरथकृत शनि स्तोत्र पाठ गर्ने।
-३. असहाय, वृद्ध, अपाङ्गता भएका वा श्रमिक वर्गलाई भोजन तथा कालो वस्त्र/छाता दान गर्ने।
-४. ॐ शं शनैश्चराय नमः वा ॐ प्रां प्रीं प्रौं सः शनैश्चराय नमः मन्त्र १०८ पटक जप गर्ने।`
-        },
-        {
-          keywords: ['माङ्गलिक', 'मांगलिक', 'mangal', 'mangal dosha'],
-          reply: `<b>माङ्गलिक दोष</b> कुण्डलीको १, ४, ७, ८ वा १२ औं भावमा मंगल ग्रह बस्दा उत्पन्न हुन्छ:
-
-१. यसले दाम्पत्य जीवनमा आवेश, रिस वा मतभेद ल्याउन सक्ने भएकाले सतर्कता आवश्यक हुन्छ।
-२. २८ वर्ष उमेर पुगेपछि वा वर-वधू दुबै मांगलिक भएमा यो दोष स्वतः शिथिल हुन्छ।
-३. <b>उपाय:</b> हरेक मंगलबार भगवान गणेश र हनुमानजीको दर्शन गर्ने, सिन्दूर चढाउने र 'ॐ अं अङ्गारकाय नमः' जप गर्ने। विवाहपूर्व दुबै कुण्डलीको गुण मिलान गराई योग्य ज्योतिषीबाट सल्लाह लिनु राम्रो हुन्छ।`
-        },
-        {
-          keywords: ['परामर्श', 'consultation', 'सम्पर्क', 'कसरी लिने', 'booking'],
-          reply: `पण्डित आयुष तिवारी (Astro Tiwari) सँग प्रत्यक्ष ज्योतिषीय परामर्श लिन अत्यन्त सहज छ:
-
-१. <b>Basic Reading (रु. २९९):</b> प्रमुख ग्रहदशा, करियर वा विवाह सम्बन्धी कुनै १ जिज्ञासाको समाधान।
-२. <b>Standard Package (रु. ४९९):</b> पूर्ण जन्मकुण्डली विश्लेषण, महादशा, भाग्य, करियर र विस्तृत PDF रिपोर्ट।
-३. <b>VIP Consultation (रु. १,०५५):</b> पण्डितजीसँग प्रत्यक्ष फोन/भिडियो संवाद, विस्तृत कुण्डली र जीवनभरका सटीक उपाय।
-
-👉 तल दिइएको कुण्डली फारम भरेर eSewa (9809192604) मार्फत भुक्तानी गरी तुरुन्त सेवा लिन सक्नुहुन्छ।`
-        },
-        {
-          keywords: ['राहु', 'rahu', 'केतु', 'ketu'],
-          reply: `<b>राहु-केतु महादशा एवं प्रभाव:</b>
-राहुले जीवनमा अचानक परिवर्तन, प्राविधिक सफलता वा विदेश यात्रा गराउँछ तर मानसिक भ्रम र चिन्ता पनि दिन सक्छ।
-<b>उपाय:</b> भगवान भैरव वा शिवजीको आराधना, कालो तिल वा उडदको दाल शनिबार दान गर्ने र 'ॐ रां राहवे नमः' मन्त्र जप गर्ने। उचित सल्लाहपछि ८ मुखी रुद्राक्ष वा गोमेद रत्न धारण गर्न सकिन्छ।`
-        },
-        {
-          keywords: ['करियर', 'job', 'जागिर', 'business', 'व्यापार', 'पैसा', 'धन'],
-          reply: `<b>करियर र धन योग:</b>
-कुण्डलीको दशम भावले कर्म र करियर, द्वितीय भावले धन र एकादश भावले लाभ दर्शाउँछ।
-<b>उपाय:</b> दैनिक बिहान तामाको लोटाबाट सूर्यदेवलाई जल (अर्घ्य) चढाउनाले कार्यक्षेत्रमा मान-प्रतिष्ठा र सरकारी वा निजी क्षेत्रमा स्थायित्व प्राप्त हुन्छ। पण्डितजीबाट आफ्नो दशमांश (D10) कुण्डली विश्लेषण गराउनुहोला।`
-        },
-        {
-          keywords: ['रत्न', 'रुद्राक्ष', 'gemstone', 'rudraksha'],
-          reply: `<b>रत्न तथा रुद्राक्ष परामर्श:</b>
-कुण्डलीको लग्न, पञ्चम वा नवम भाव (त्रिकोण) का शुभ ग्रहको मात्र रत्न लगाउनुपर्छ। मारक वा ६, ८, १२ औं भावका ग्रहको रत्न लगाउनु हानिकारक हुन सक्छ। तर रुद्राक्ष (विशेष गरी ५ मुखी वा ७ मुखी) ले सधैं सकारात्मक उर्जा दिन्छ र जोसुकैले पनि निर्धक्क धारण गर्न सक्छन्।`
-        }
-      ];
-
-      function getLocalVedicResponse(query) {
-        const q = (query || '').toLowerCase();
-        for (let item of LOCAL_VEDIC_KB) {
-          for (let kw of item.keywords) {
-            if (q.includes(kw.toLowerCase())) {
-              return item.reply;
-            }
-          }
-        }
-        return `तपाईंको जिज्ञासा प्राप्त भयो। वैदिक ज्योतिष शास्त्र अनुसार प्रत्येक व्यक्तिको जीवनमा ग्रह, गोचर र दशाको प्रत्यक्ष प्रभाव पर्दछ।\n\nयस विषयमा सटीक निर्णय गर्न तपाईंको जन्म मिति, जन्म समय र जन्म स्थान आवश्यक हुन्छ। कृपया तलको फारममा आफ्नो जन्म विवरण भर्नुहोला वा eSewa (9809192604) मार्फत परामर्श प्याकेज रोज्नुहोला। शुभम् भवतु! 🕉️`;
-      }
-
-      async function handleSendChat(e) {
-        if (e && e.preventDefault) e.preventDefault();
-
-        // Access guard: Public users must login and be verified by admin
-        if (!currentUser || currentUser.status !== 'verified') {
-          openUserAuthModal('login', '✨ AI ज्योतिष सल्लाहकारसँग प्रत्यक्ष कुरा गर्न कृपया <b>निःशुल्क लगइन वा दर्ता</b> गर्नुहोस् (एडमिन द्वारा प्रमाणीकरण आवश्यक)।');
-          return;
-        }
-
-        const input = document.getElementById('chat-user-msg');
-        const body = document.getElementById('chat-messages-body');
-        if (!input || !body) return;
-
-        const text = input.value.trim();
-        if (!text) return;
-        input.value = '';
-
-        // Add user bubble
-        const userDiv = document.createElement('div');
-        userDiv.className = 'chat-bubble user-bubble';
-        userDiv.textContent = text;
-        body.appendChild(userDiv);
-
-        // Add loading bot bubble
-        const botDiv = document.createElement('div');
-        botDiv.className = 'chat-bubble bot-bubble';
-        botDiv.innerHTML = '<em>चिन्तन गर्दै... ⏳</em>';
-        body.appendChild(botDiv);
-        body.scrollTop = body.scrollHeight;
-
-        let replyFound = '';
-        try {
-          const res = await fetch('/api/ai/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text })
-          });
-          if (res.ok) {
-            const json = await res.json();
-            if (json && (json.reply || json.response)) {
-              replyFound = json.reply || json.response;
-            }
-          }
-        } catch (fetchErr) {
-          console.warn('[AI Chat] Backend unreachable, using local Vedic engine:', fetchErr);
-        }
-
-        // If backend returned reply, use it; otherwise use instant client-side Vedic intelligence
-        if (!replyFound) {
-          replyFound = getLocalVedicResponse(text);
-        }
-
-        botDiv.innerHTML = replyFound.replace(/\n/g, '<br />');
-        body.scrollTop = body.scrollHeight;
-      }
-
-      // Smooth scroll to packages & payment section on home page
-      function scrollToPaymentSection(event) {
-        if (event && event.preventDefault) event.preventDefault();
-        const packages = document.getElementById('packages') || document.querySelector('form:not(#chat-input-form)') || document.querySelector('.booking-form');
-        if (packages) {
-          packages.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-
-      function selectPackageAndScroll(planKey) {
-        // 1. Scroll to the booking form & payment section
-        const form = document.querySelector('form:not(#chat-input-form)') || document.querySelector('.booking-form');
-        const packages = document.getElementById('packages');
-        const target = form || packages;
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        // 2. Pre-select package in the dropdown/select if it exists
-        const topicSelect = document.querySelector('select[name="topic"]') || document.querySelector('form select');
-        if (topicSelect) {
-          for (let opt of topicSelect.options) {
-            const val = (opt.value + ' ' + opt.text).toLowerCase();
-            if (planKey === 'basic' && (val.includes('basic') || val.includes('२९९') || val.includes('299'))) {
-              topicSelect.value = opt.value;
-              topicSelect.dispatchEvent(new Event('change', { bubbles: true }));
-              break;
-            } else if (planKey === 'vip' && (val.includes('vip') || val.includes('१०५५') || val.includes('1055') || val.includes('१,०५५'))) {
-              topicSelect.value = opt.value;
-              topicSelect.dispatchEvent(new Event('change', { bubbles: true }));
-              break;
-            } else if (planKey === 'standard' && (val.includes('standard') || val.includes('४९९') || val.includes('499'))) {
-              topicSelect.value = opt.value;
-              topicSelect.dispatchEvent(new Event('change', { bubbles: true }));
-              break;
-            }
-          }
-        }
-      }
-
-      // Auto-scroll to consultation if plan parameter exists in URL
-      window.addEventListener('DOMContentLoaded', function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const plan = urlParams.get('plan');
-        if (plan) {
-          setTimeout(() => {
-            selectPackageAndScroll(plan);
-          }, 600);
-        }
-      });
-
-      // Move Packages section to top right after Hero
-      function placePackagesAtTop() {
-        const packages = document.getElementById('packages');
-        if (!packages) return;
-        const main = document.querySelector('main') || document.querySelector('#root > div');
-        if (!main) return;
-
-        const hero = main.querySelector('.cosmic-card')?.closest('section') || main.querySelector('section');
-        if (hero && hero !== packages && packages.previousElementSibling !== hero) {
-          hero.after(packages);
-        }
-      }
-
-      // Wire payment amounts and package buttons directly without 404 navigation
-      document.addEventListener('click', function(e) {
-        // 1. Check if user clicked on payment amounts pill (Basic रु. २९९, Standard रु. ४९९, VIP रु. १,०५५)
-        const amtSpan = e.target.closest('.payment-amounts span');
-        if (amtSpan) {
-          e.preventDefault();
-          e.stopPropagation();
-          const parent = amtSpan.parentElement;
-          const idx = parent ? Array.from(parent.children).indexOf(amtSpan) : -1;
-          const txt = (amtSpan.innerText || '').toLowerCase();
-          
-          let plan = 'standard';
-          if (idx === 0 || txt.includes('basic') || txt.includes('२९९') || txt.includes('299')) {
-            plan = 'basic';
-          } else if (idx === 2 || txt.includes('vip') || txt.includes('१०५५') || txt.includes('1055') || txt.includes('१,०५५')) {
-            plan = 'vip';
-          } else {
-            plan = 'standard';
-          }
-          selectPackageAndScroll(plan);
-          return;
-        }
-
-        // Click on .payment-amounts container directly
-        const amtContainer = e.target.closest('.payment-amounts');
-        if (amtContainer) {
-          e.preventDefault();
-          e.stopPropagation();
-          selectPackageAndScroll('standard');
-          return;
-        }
-
-        // 2. Check if user clicked on package card button or the package card itself
-        const btn = e.target.closest('.package-button, button');
-        const card = e.target.closest('.package-card');
-        if (btn || card) {
-          const el = btn || card;
-          const txt = (el.innerText || el.className || '').toLowerCase();
-          if (txt.includes('basic') || txt.includes('२९९') || txt.includes('299')) {
-            e.preventDefault();
-            e.stopPropagation();
-            selectPackageAndScroll('basic');
-            return;
-          } else if (txt.includes('vip') || txt.includes('१०५५') || txt.includes('1055') || txt.includes('१,०५५')) {
-            e.preventDefault();
-            e.stopPropagation();
-            selectPackageAndScroll('vip');
-            return;
-          } else if (txt.includes('standard') || txt.includes('४९९') || txt.includes('499')) {
-            e.preventDefault();
-            e.stopPropagation();
-            selectPackageAndScroll('standard');
-            return;
-          }
-        }
-      }, true);
-
-      const topObserver = new MutationObserver(placePackagesAtTop);
-      topObserver.observe(document.body, { childList: true, subtree: true });
-
-      // 1. QR Code Click-to-Zoom Lightbox
-      document.addEventListener('click', function(e) {
-        const img = e.target.closest('.qr-payment-wrap img, .qr-frame img, img[alt*="eSewa"]');
-        if (!img) return;
-
-        let modal = document.getElementById('qr-modal-overlay');
-        if (!modal) {
-          modal = document.createElement('div');
-          modal.id = 'qr-modal-overlay';
-          modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(11,10,20,0.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity 0.25s ease;cursor:pointer;';
-          
-          modal.innerHTML = `
-            <div style="background:#fff;border-radius:1.5rem;padding:24px 20px 20px;max-width:360px;width:100%;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,0.6);position:relative;transform:scale(0.92);transition:transform 0.25s ease;cursor:default;" onclick="event.stopPropagation()">
-              <button id="qr-modal-close" aria-label="Close" style="position:absolute;top:14px;right:14px;background:#f3eef6;border:none;width:32px;height:32px;border-radius:50%;font-size:20px;line-height:1;cursor:pointer;color:#45394d;display:flex;align-items:center;justify-content:center;">&times;</button>
-              
-              <div style="margin-bottom:12px;">
-                <span style="background:#1f8f5a;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:0.02em;">eSewa Payment QR</span>
-              </div>
-              
-              <img src="${img.src}" alt="eSewa QR Large" style="width:100%;max-width:280px;height:auto;border-radius:0.75rem;display:block;margin:0 auto 14px;box-shadow:0 4px 16px rgba(0,0,0,0.08);"/>
-              
-              <div style="margin-bottom:14px;">
-                <div style="font-size:17px;font-weight:700;color:#221b27;">Ayush Tiwari</div>
-                <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;">
-                  <span style="font-size:15px;color:#5a4f61;font-weight:600;letter-spacing:0.5px;">9809192604</span>
-                  <button id="copy-esewa-btn" style="background:#f4ecdf;color:#a8794f;border:1px solid #d9be9e;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.15s ease;">Copy</button>
-                </div>
-              </div>
-              
-              <p style="font-size:11.5px;color:#7b6d81;margin:0;line-height:1.5;">
-                eSewa app बाट scan गर्नुहोस् वा सिधै eSewa ID मा रकम पठाउनुहोस्।
-              </p>
-            </div>
-          `;
-          document.body.appendChild(modal);
-
-          modal.addEventListener('click', function(evt) {
-            modal.style.opacity = '0';
-            modal.firstElementChild.style.transform = 'scale(0.92)';
-            setTimeout(() => modal.remove(), 250);
-          });
-
-          modal.querySelector('#qr-modal-close').addEventListener('click', function() {
-            modal.style.opacity = '0';
-            modal.firstElementChild.style.transform = 'scale(0.92)';
-            setTimeout(() => modal.remove(), 250);
-          });
-
-          const copyBtn = modal.querySelector('#copy-esewa-btn');
-          copyBtn.addEventListener('click', function() {
-            navigator.clipboard.writeText('9809192604').then(() => {
-              copyBtn.textContent = 'Copied! ✓';
-              copyBtn.style.background = '#1f8f5a';
-              copyBtn.style.color = '#fff';
-              setTimeout(() => {
-                copyBtn.textContent = 'Copy';
-                copyBtn.style.background = '#f4ecdf';
-                copyBtn.style.color = '#a8794f';
-              }, 2000);
-            });
-          });
-        }
-
-        requestAnimationFrame(() => {
-          modal.style.opacity = '1';
-          modal.firstElementChild.style.transform = 'scale(1)';
-        });
-      });
-
-      // 2. Automatically save consultation submissions to Admin Portal
-      let latestPaymentBase64 = '';
-      let latestKundaliBase64 = '';
-
-      // Track file inputs when selected
-      document.addEventListener('change', function(e) {
-        if (e.target.type === 'file' && e.target.files && e.target.files[0]) {
-          const file = e.target.files[0];
-          const reader = new FileReader();
-          reader.onload = function(evt) {
-            const dataUrl = evt.target.result;
-            // Identify if payment screenshot or kundali
-            const name = (e.target.name || '').toLowerCase();
-            const accept = (e.target.accept || '').toLowerCase();
-            const form = e.target.closest('form');
-            const isPayment = name.includes('payment') || (form && form.innerText.includes('Payment screenshot'));
-            
-            if (isPayment || e.target.id?.includes('payment') || latestKundaliBase64) {
-              latestPaymentBase64 = dataUrl;
-            } else {
-              latestKundaliBase64 = dataUrl;
-            }
-          };
-          reader.readAsDataURL(file);
-        }
-      });
-
-      // Intercept booking form submission
-      document.addEventListener('submit', function(e) {
-        const form = e.target.closest('.booking-form, form');
-        if (!form || form.id === 'login-form' || form.id === 'user-login-form' || form.id === 'user-register-form' || form.id === 'chat-input-form' || form.classList.contains('boss-code-form')) return;
-
-        // Access guard: Public users must login and be verified by admin
-        if (!currentUser || currentUser.status !== 'verified') {
-          e.preventDefault();
-          e.stopPropagation();
-          openUserAuthModal('login', '✨ कुण्डली तथा परामर्श फारम बुझाउन कृपया पहिले <b>निःशुल्क लगइन वा दर्ता</b> गर्नुहोस् (एडमिन द्वारा प्रमाणीकरण आवश्यक)।');
-          return;
-        }
-
-        const fd = new FormData(form);
-        const name = String(fd.get('name') || currentUser.name || '').trim();
-        const phone = String(fd.get('phone') || currentUser.phone || '').trim();
-        if (!name && !phone) return;
-
-        const payload = {
-          name: name,
-          phone: phone,
-          userId: currentUser.id,
-          userEmail: currentUser.email,
-          isVerifiedUser: true,
-          verifiedFreeUser: true,
-          gender: String(fd.get('gender') || ''),
-          dob_bs: String(fd.get('dob_bs') || ''),
-          dob_ad: String(fd.get('dob_ad') || ''),
-          birth_hour: String(fd.get('birth_hour') || ''),
-          birth_minute: String(fd.get('birth_minute') || ''),
-          birth_period: String(fd.get('birth_period') || ''),
-          birth_place: String(fd.get('birth_place') || ''),
-          package: String(fd.get('topic') || 'Standard Package (रु. ४९९)'),
-          message: String(fd.get('message') || ''),
-          rectification: String(fd.get('rectification') || ''),
-          paymentScreenshotBase64: latestPaymentBase64 || '',
-          kundaliPhotoBase64: latestKundaliBase64 || ''
-        };
-
-        fetch('/api/submissions', {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + userToken
-          },
-          body: JSON.stringify(payload)
-        }).then(res => res.json()).then(res => {
-          console.log('[Admin Sync] Consultation saved for admin review:', res.id);
-        }).catch(err => {
-          console.error('[Admin Sync Error]', err);
-        });
-      }, true);
-    </script>
-  </body>
+  // Init
+  checkUserSession();
+  </script>
+</body>
 </html>
