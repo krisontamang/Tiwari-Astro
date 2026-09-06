@@ -212,19 +212,20 @@ function calculateVedicPositions(year, month, day, hour, minute, lat, lon) {
 
   // Sign helper
   function toRashiInfo(deg) {
-    const signIndex = Math.floor(deg / 30);
+    const normDeg = ((Number(deg) % 360) + 360) % 360;
+    const signIndex = Math.floor(normDeg / 30) % 12;
     const signNumber = signIndex + 1; // 1 to 12
-    const degreeInSign = deg % 30;
+    const degreeInSign = normDeg % 30;
     const degInt = Math.floor(degreeInSign);
     const minInt = Math.floor((degreeInSign - degInt) * 60);
-    const rashi = RASHIS[signIndex];
+    const rashi = RASHIS[signIndex] || RASHIS[0];
     return {
       signNumber,
       rashiName: rashi.name,
       rashiLord: rashi.lord,
       element: rashi.element,
       degreeFormatted: `${degInt}° ${minInt.toString().padStart(2, '0')}'`,
-      rawDegree: deg
+      rawDegree: normDeg
     };
   }
 

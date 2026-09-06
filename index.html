@@ -13,6 +13,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script>
+      // Single Page URL normalizer: If opened on /pay, /404, or sub-path, normalize to '/' so Wouter stays on Home
+      (function() {
+        if (typeof window !== 'undefined' && window.location.pathname !== '/') {
+          var p = window.location.pathname;
+          if (!p.startsWith('/admin') && !p.startsWith('/api') && !p.startsWith('/uploads')) {
+            var search = window.location.search || '';
+            var hash = window.location.hash || '';
+            window.history.replaceState(null, '', '/' + search + hash);
+          }
+        }
+      })();
+    </script>
     <title>Astro Tiwari — ज्योतिषमा स्पष्टता</title>
     <script type="module" crossorigin src="/assets/index-ChgpL9kq.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-DpdlmGVI.css">
@@ -310,8 +323,8 @@
     <a href="/admin" class="admin-corner-link" title="Astro Tiwari Admin Portal">
       <span>🔐</span> Admin
     </a>
-    <a href="/pay" class="pay-corner-link" title="Simple Payment System (Choose plan & Pay)">
-      <span>💳</span> Quick Pay & Upload Screenshot
+    <a href="#packages" onclick="scrollToPaymentSection(event)" class="pay-corner-link" title="eSewa भुक्तानी र कुण्डली फारम">
+      <span>💳</span> eSewa भुक्तानी & कुण्डली
     </a>
 
     <!-- Cosmic Astrology AI Chatbot Floating Trigger -->
@@ -394,6 +407,80 @@
         }
       }
 
+      // Offline / Local Vedic Astrology Knowledge Base (Always reliable)
+      const LOCAL_VEDIC_KB = [
+        {
+          keywords: ['गुण मिलान', 'विवाह', 'marriage', '३६ गुण', '36', 'match'],
+          reply: `विवाहको लागि ३६ गुण (अष्टकूट मिलान) वैदिक ज्योतिषको अत्यन्त महत्वपूर्ण पक्ष हो। यसमा वर र वधूको मानसिक, शारीरिक, भावनात्मक र वंश परम्परागत अनुकूलता मापन गरिन्छ:
+
+१. <b>नाडी (८ गुण):</b> सन्तान सुख, स्वास्थ्य र रक्त समूह अनुकूलता।
+२. <b>भकूट (७ गुण):</b> दाम्पत्य प्रेम, आपसी आकर्षण र पारिवारिक सुख।
+३. <b>गण (६ गुण):</b> स्वभाव तथा मानसिकता (देव, मनुष्य, राक्षस)।
+४. <b>मैत्री व ग्रह मैत्री (५ गुण):</b> मित्रता, विश्वास र समझदारी।
+५. <b>योनि (४ गुण):</b> शारीरिक आकर्षण र सामञ्जस्य।
+६. <b>तारा, वश्य, वर्ण (६ गुण):</b> भाग्य वृद्धि र सम्मान।
+
+<b>नियम:</b> ३६ मध्ये १८ भन्दा बढी गुण आएमा विवाह शुभ मानिन्छ। यदि नाडी वा भकूट दोष देखिएमा Astro Tiwari मा विशेष वैदिक शान्ति उपायहरू गरी समाधान गर्न सकिन्छ।`
+        },
+        {
+          keywords: ['साढेसाती', 'शनि', 'saturn', 'sade sati', 'अढैया'],
+          reply: `<b>शनिको साढेसाती</b> भनेको चन्द्र राशिबाट १२ औं, लग्न र दोस्रो भावमा शनिको गोचर (भ्रमण) हुनु हो, जुन साढे सात वर्ष रहन्छ। यो समय डरको होइन, अनुशासन, परिश्रम र जीवनलाई सुधार्ने समय हो।
+
+<b>शान्ति तथा वैदिक उपायहरू:</b>
+१. हरेक शनिबार बिहान पीपलको रुखमा जल, कालो तिल र दुध चढाउने तथा साँझमा तिलको तेलको दीप बाल्ने।
+२. नियमित रूपमा श्री हनुमान चालीसा वा दशरथकृत शनि स्तोत्र पाठ गर्ने।
+३. असहाय, वृद्ध, अपाङ्गता भएका वा श्रमिक वर्गलाई भोजन तथा कालो वस्त्र/छाता दान गर्ने।
+४. ॐ शं शनैश्चराय नमः वा ॐ प्रां प्रीं प्रौं सः शनैश्चराय नमः मन्त्र १०८ पटक जप गर्ने।`
+        },
+        {
+          keywords: ['माङ्गलिक', 'मांगलिक', 'mangal', 'mangal dosha'],
+          reply: `<b>माङ्गलिक दोष</b> कुण्डलीको १, ४, ७, ८ वा १२ औं भावमा मंगल ग्रह बस्दा उत्पन्न हुन्छ:
+
+१. यसले दाम्पत्य जीवनमा आवेश, रिस वा मतभेद ल्याउन सक्ने भएकाले सतर्कता आवश्यक हुन्छ।
+२. २८ वर्ष उमेर पुगेपछि वा वर-वधू दुबै मांगलिक भएमा यो दोष स्वतः शिथिल हुन्छ।
+३. <b>उपाय:</b> हरेक मंगलबार भगवान गणेश र हनुमानजीको दर्शन गर्ने, सिन्दूर चढाउने र 'ॐ अं अङ्गारकाय नमः' जप गर्ने। विवाहपूर्व दुबै कुण्डलीको गुण मिलान गराई योग्य ज्योतिषीबाट सल्लाह लिनु राम्रो हुन्छ।`
+        },
+        {
+          keywords: ['परामर्श', 'consultation', 'सम्पर्क', 'कसरी लिने', 'booking'],
+          reply: `पण्डित आयुष तिवारी (Astro Tiwari) सँग प्रत्यक्ष ज्योतिषीय परामर्श लिन अत्यन्त सहज छ:
+
+१. <b>Basic Reading (रु. २९९):</b> प्रमुख ग्रहदशा, करियर वा विवाह सम्बन्धी कुनै १ जिज्ञासाको समाधान।
+२. <b>Standard Package (रु. ४९९):</b> पूर्ण जन्मकुण्डली विश्लेषण, महादशा, भाग्य, करियर र विस्तृत PDF रिपोर्ट।
+३. <b>VIP Consultation (रु. १,०५५):</b> पण्डितजीसँग प्रत्यक्ष फोन/भिडियो संवाद, विस्तृत कुण्डली र जीवनभरका सटीक उपाय।
+
+👉 तल दिइएको कुण्डली फारम भरेर eSewa (9809192604) मार्फत भुक्तानी गरी तुरुन्त सेवा लिन सक्नुहुन्छ।`
+        },
+        {
+          keywords: ['राहु', 'rahu', 'केतु', 'ketu'],
+          reply: `<b>राहु-केतु महादशा एवं प्रभाव:</b>
+राहुले जीवनमा अचानक परिवर्तन, प्राविधिक सफलता वा विदेश यात्रा गराउँछ तर मानसिक भ्रम र चिन्ता पनि दिन सक्छ।
+<b>उपाय:</b> भगवान भैरव वा शिवजीको आराधना, कालो तिल वा उडदको दाल शनिबार दान गर्ने र 'ॐ रां राहवे नमः' मन्त्र जप गर्ने। उचित सल्लाहपछि ८ मुखी रुद्राक्ष वा गोमेद रत्न धारण गर्न सकिन्छ।`
+        },
+        {
+          keywords: ['करियर', 'job', 'जागिर', 'business', 'व्यापार', 'पैसा', 'धन'],
+          reply: `<b>करियर र धन योग:</b>
+कुण्डलीको दशम भावले कर्म र करियर, द्वितीय भावले धन र एकादश भावले लाभ दर्शाउँछ।
+<b>उपाय:</b> दैनिक बिहान तामाको लोटाबाट सूर्यदेवलाई जल (अर्घ्य) चढाउनाले कार्यक्षेत्रमा मान-प्रतिष्ठा र सरकारी वा निजी क्षेत्रमा स्थायित्व प्राप्त हुन्छ। पण्डितजीबाट आफ्नो दशमांश (D10) कुण्डली विश्लेषण गराउनुहोला।`
+        },
+        {
+          keywords: ['रत्न', 'रुद्राक्ष', 'gemstone', 'rudraksha'],
+          reply: `<b>रत्न तथा रुद्राक्ष परामर्श:</b>
+कुण्डलीको लग्न, पञ्चम वा नवम भाव (त्रिकोण) का शुभ ग्रहको मात्र रत्न लगाउनुपर्छ। मारक वा ६, ८, १२ औं भावका ग्रहको रत्न लगाउनु हानिकारक हुन सक्छ। तर रुद्राक्ष (विशेष गरी ५ मुखी वा ७ मुखी) ले सधैं सकारात्मक उर्जा दिन्छ र जोसुकैले पनि निर्धक्क धारण गर्न सक्छन्।`
+        }
+      ];
+
+      function getLocalVedicResponse(query) {
+        const q = (query || '').toLowerCase();
+        for (let item of LOCAL_VEDIC_KB) {
+          for (let kw of item.keywords) {
+            if (q.includes(kw.toLowerCase())) {
+              return item.reply;
+            }
+          }
+        }
+        return `तपाईंको जिज्ञासा प्राप्त भयो। वैदिक ज्योतिष शास्त्र अनुसार प्रत्येक व्यक्तिको जीवनमा ग्रह, गोचर र दशाको प्रत्यक्ष प्रभाव पर्दछ।\n\nयस विषयमा सटीक निर्णय गर्न तपाईंको जन्म मिति, जन्म समय र जन्म स्थान आवश्यक हुन्छ। कृपया तलको फारममा आफ्नो जन्म विवरण भर्नुहोला वा eSewa (9809192604) मार्फत परामर्श प्याकेज रोज्नुहोला। शुभम् भवतु! 🕉️`;
+      }
+
       async function handleSendChat(e) {
         if (e && e.preventDefault) e.preventDefault();
         const input = document.getElementById('chat-user-msg');
@@ -417,23 +504,83 @@
         body.appendChild(botDiv);
         body.scrollTop = body.scrollHeight;
 
+        let replyFound = '';
         try {
           const res = await fetch('/api/ai/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: text })
           });
-          const json = await res.json();
-          if (json && json.success) {
-            botDiv.innerHTML = json.response.replace(/\n/g, '<br />');
-          } else {
-            botDiv.textContent = 'माफ गर्नुहोस्, हाल AI सल्लाहकार सेवा उपलब्ध छैन। कृपया केही समयपछि पुनः प्रयास गर्नुहोस्।';
+          if (res.ok) {
+            const json = await res.json();
+            if (json && (json.reply || json.response)) {
+              replyFound = json.reply || json.response;
+            }
           }
-        } catch (err) {
-          botDiv.textContent = 'नेटवर्क त्रुटि भयो। कृपया इन्टरनेट जडान जाँच गर्नुहोस्।';
+        } catch (fetchErr) {
+          console.warn('[AI Chat] Backend unreachable, using local Vedic engine:', fetchErr);
         }
+
+        // If backend returned reply, use it; otherwise use instant client-side Vedic intelligence
+        if (!replyFound) {
+          replyFound = getLocalVedicResponse(text);
+        }
+
+        botDiv.innerHTML = replyFound.replace(/\n/g, '<br />');
         body.scrollTop = body.scrollHeight;
       }
+
+      // Smooth scroll to packages & payment section on home page
+      function scrollToPaymentSection(event) {
+        if (event && event.preventDefault) event.preventDefault();
+        const packages = document.getElementById('packages') || document.querySelector('form:not(#chat-input-form)') || document.querySelector('.booking-form');
+        if (packages) {
+          packages.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      function selectPackageAndScroll(planKey) {
+        // 1. Scroll to the booking form & payment section
+        const form = document.querySelector('form:not(#chat-input-form)') || document.querySelector('.booking-form');
+        const packages = document.getElementById('packages');
+        const target = form || packages;
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // 2. Pre-select package in the dropdown/select if it exists
+        const topicSelect = document.querySelector('select[name="topic"]') || document.querySelector('form select');
+        if (topicSelect) {
+          for (let opt of topicSelect.options) {
+            const val = (opt.value + ' ' + opt.text).toLowerCase();
+            if (planKey === 'basic' && (val.includes('basic') || val.includes('२९९') || val.includes('299'))) {
+              topicSelect.value = opt.value;
+              topicSelect.dispatchEvent(new Event('change', { bubbles: true }));
+              break;
+            } else if (planKey === 'vip' && (val.includes('vip') || val.includes('१०५५') || val.includes('1055') || val.includes('१,०५५'))) {
+              topicSelect.value = opt.value;
+              topicSelect.dispatchEvent(new Event('change', { bubbles: true }));
+              break;
+            } else if (planKey === 'standard' && (val.includes('standard') || val.includes('४९९') || val.includes('499'))) {
+              topicSelect.value = opt.value;
+              topicSelect.dispatchEvent(new Event('change', { bubbles: true }));
+              break;
+            }
+          }
+        }
+      }
+
+      // Auto-scroll to consultation if plan parameter exists in URL
+      window.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const plan = urlParams.get('plan');
+        if (plan) {
+          setTimeout(() => {
+            selectPackageAndScroll(plan);
+          }, 600);
+        }
+      });
+
       // Move Packages section to top right after Hero
       function placePackagesAtTop() {
         const packages = document.getElementById('packages');
@@ -447,7 +594,7 @@
         }
       }
 
-      // Wire payment amounts and package buttons directly to 3-step checkout
+      // Wire payment amounts and package buttons directly without 404 navigation
       document.addEventListener('click', function(e) {
         // 1. Check if user clicked on payment amounts pill (Basic रु. २९९, Standard रु. ४९९, VIP रु. १,०५५)
         const amtSpan = e.target.closest('.payment-amounts span');
@@ -466,7 +613,7 @@
           } else {
             plan = 'standard';
           }
-          window.location.href = `/pay?plan=${plan}`;
+          selectPackageAndScroll(plan);
           return;
         }
 
@@ -475,7 +622,7 @@
         if (amtContainer) {
           e.preventDefault();
           e.stopPropagation();
-          window.location.href = '/pay?plan=standard';
+          selectPackageAndScroll('standard');
           return;
         }
 
@@ -488,17 +635,17 @@
           if (txt.includes('basic') || txt.includes('२९९') || txt.includes('299')) {
             e.preventDefault();
             e.stopPropagation();
-            window.location.href = '/pay?plan=basic';
+            selectPackageAndScroll('basic');
             return;
           } else if (txt.includes('vip') || txt.includes('१०५५') || txt.includes('1055') || txt.includes('१,०५५')) {
             e.preventDefault();
             e.stopPropagation();
-            window.location.href = '/pay?plan=vip';
+            selectPackageAndScroll('vip');
             return;
           } else if (txt.includes('standard') || txt.includes('४९९') || txt.includes('499')) {
             e.preventDefault();
             e.stopPropagation();
-            window.location.href = '/pay?plan=standard';
+            selectPackageAndScroll('standard');
             return;
           }
         }

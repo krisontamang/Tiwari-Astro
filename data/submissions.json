@@ -339,7 +339,131 @@
     "status": "verified",
     "verifiedAt": "2026-09-06T10:45:12.000Z",
     "verifiedBy": "bensartiwari@gmail.com",
-    "adminNote": "eSewa Transaction ID: 90284812 verified. कुण्डली विश्लेषण तयार।"
+    "adminNote": "eSewa Transaction ID: 90284812 verified. कुण्डली विश्लेषण तयार।",
+    "chartSvgUrl": "/uploads/chart-SUB-1741258902.svg",
+    "kundaliData": {
+      "ayanamsa": "23° 47' (Lahiri)",
+      "lagna": {
+        "signNumber": 4,
+        "rashiName": "कर्क",
+        "degreeFormatted": "14° 49'",
+        "lord": "चन्द्र (Moon)"
+      },
+      "moonSign": {
+        "signNumber": 9,
+        "rashiName": "धनु",
+        "degreeFormatted": "28° 13'",
+        "lord": "बृहस्पति (Jupiter)"
+      },
+      "nakshatra": {
+        "name": "उत्तराषाढा (Uttara Ashadha)",
+        "pada": 1
+      },
+      "planets": [
+        {
+          "key": "Ascendant",
+          "nepaliName": "लग्न (Ascendant)",
+          "dev": "ल",
+          "signNumber": 4,
+          "rashiName": "कर्क",
+          "bhava": 1,
+          "degreeFormatted": "14° 49'",
+          "lord": "चन्द्र (Moon)"
+        },
+        {
+          "key": "Sun",
+          "nepaliName": "सूर्य (Sun)",
+          "dev": "सू",
+          "signNumber": 11,
+          "rashiName": "कुम्भ",
+          "bhava": 8,
+          "degreeFormatted": "3° 15'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Moon",
+          "nepaliName": "चन्द्र (Moon)",
+          "dev": "चं",
+          "signNumber": 9,
+          "rashiName": "धनु",
+          "bhava": 6,
+          "degreeFormatted": "28° 13'",
+          "lord": "बृहस्पति (Jupiter)"
+        },
+        {
+          "key": "Mars",
+          "nepaliName": "मंगल (Mars)",
+          "dev": "मं",
+          "signNumber": 11,
+          "rashiName": "कुम्भ",
+          "bhava": 8,
+          "degreeFormatted": "10° 06'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Mercury",
+          "nepaliName": "बुध (Mercury)",
+          "dev": "बु",
+          "signNumber": 11,
+          "rashiName": "कुम्भ",
+          "bhava": 8,
+          "degreeFormatted": "5° 20'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Jupiter",
+          "nepaliName": "बृहस्पति (Guru)",
+          "dev": "गु",
+          "signNumber": 9,
+          "rashiName": "धनु",
+          "bhava": 6,
+          "degreeFormatted": "12° 58'",
+          "lord": "बृहस्पति (Jupiter)"
+        },
+        {
+          "key": "Venus",
+          "nepaliName": "शुक्र (Venus)",
+          "dev": "शु",
+          "signNumber": 10,
+          "rashiName": "मकर",
+          "bhava": 7,
+          "degreeFormatted": "1° 56'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Saturn",
+          "nepaliName": "शनि (Saturn)",
+          "dev": "श",
+          "signNumber": 12,
+          "rashiName": "मीन",
+          "bhava": 9,
+          "degreeFormatted": "8° 56'",
+          "lord": "बृहस्पति (Jupiter)"
+        },
+        {
+          "key": "Rahu",
+          "nepaliName": "राहु (Rahu)",
+          "dev": "रा",
+          "signNumber": 6,
+          "rashiName": "कन्या",
+          "bhava": 3,
+          "degreeFormatted": "26° 10'",
+          "lord": "बुध (Mercury)"
+        },
+        {
+          "key": "Ketu",
+          "nepaliName": "केतु (Ketu)",
+          "dev": "के",
+          "signNumber": 12,
+          "rashiName": "मीन",
+          "bhava": 9,
+          "degreeFormatted": "26° 10'",
+          "lord": "बृहस्पति (Jupiter)"
+        }
+      ]
+    },
+    "chartSource": "Astro Tiwari Vedic Engine",
+    "aiContext": "=============================================\n🌟 ASTRO TIWARI — वैदिक जन्म कुण्डली विश्लेषण\n=============================================\nजातकको नाम: अनिता केसी\nजन्म विवरण: 1996-02-16 16:30 | Pokhara, Nepal\n\n[आधारभूत ज्योतिष विवरण]\n- लग्न (Ascendant): कर्क (14° 49') — स्वामी: चन्द्र (Moon)\n- जन्म राशि (Moon Sign): धनु (28° 13') — स्वामी: बृहस्पति (Jupiter)\n- जन्म नक्षत्र: उत्तराषाढा (Uttara Ashadha) (चरण: 1)\n- अयनांश: 23° 47' (Lahiri)\n\n[ग्रहहरूको भावगत स्थिति]\n- लग्न (Ascendant) (ल): 1 औं भावमा, कर्क राशि (14° 49')\n- सूर्य (Sun) (सू): 8 औं भावमा, कुम्भ राशि (3° 15')\n- चन्द्र (Moon) (चं): 6 औं भावमा, धनु राशि (28° 13')\n- मंगल (Mars) (मं): 8 औं भावमा, कुम्भ राशि (10° 06')\n- बुध (Mercury) (बु): 8 औं भावमा, कुम्भ राशि (5° 20')\n- बृहस्पति (Guru) (गु): 6 औं भावमा, धनु राशि (12° 58')\n- शुक्र (Venus) (शु): 7 औं भावमा, मकर राशि (1° 56')\n- शनि (Saturn) (श): 9 औं भावमा, मीन राशि (8° 56')\n- राहु (Rahu) (रा): 3 औं भावमा, कन्या राशि (26° 10')\n- केतु (Ketu) (के): 9 औं भावमा, मीन राशि (26° 10')\n\n[पण्डितजी तथा AI का लागि विशेष मार्गदर्शन]\n१. लग्न र लग्नेशको बल तथा स्वास्थ्य/व्यक्तित्व प्रभाव।\n२. चन्द्रमा र मानसिक शान्ति, भाग्य र पेशागत स्थिति।\n३. महादशा, अन्तर्दशा तथा वर्तमान गोचरको प्रभाव।\n४. शुभ रत्न, रुद्राक्ष तथा वैदिक शान्ति उपायहरू।\n============================================="
   },
   {
     "id": "SUB-1741258903",

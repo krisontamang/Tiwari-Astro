@@ -461,7 +461,13 @@ const server = http.createServer(async (req, res) => {
     const message = body.message || body.query || '';
     const context = body.context || {};
     const aiResponse = await aiChatbot.processAstrologyChat(message, context);
-    return sendJSON(res, 200, { success: true, ...aiResponse });
+    const replyText = aiResponse.reply || aiResponse.response || '';
+    return sendJSON(res, 200, {
+      success: true,
+      reply: replyText,
+      response: replyText,
+      ...aiResponse
+    });
   }
 
   // --- API: Model Context Protocol (MCP) JSON-RPC 2.0 (Astroway/VedAstro) ---
@@ -618,14 +624,12 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // --- Route /pay or /checkout to pay/index.html ---
+  // --- Route /pay or /checkout redirect smoothly to Home Packages & Consultation ---
   if (pathname === '/pay' || pathname === '/pay/' || pathname.startsWith('/pay/') || pathname === '/checkout' || pathname === '/checkout/') {
-    const payPath = path.join(PUBLIC_DIR, 'pay', 'index.html');
-    if (fs.existsSync(payPath)) {
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
-      fs.createReadStream(payPath).pipe(res);
-      return;
-    }
+    const search = parsedUrl.search || '?plan=standard';
+    res.writeHead(302, { 'Location': '/' + search + '#packages' });
+    res.end();
+    return;
   }
 
   // --- Route /admin to admin/index.html ---
