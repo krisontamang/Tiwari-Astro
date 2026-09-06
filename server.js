@@ -73,6 +73,7 @@ const iztroService = require('./services/iztroService');
 const jyotishSarathiService = require('./services/jyotishSarathiService');
 const mantrasData = require('./data/mantrasData');
 const nepaliPatroService = require('./services/nepaliPatroService');
+const supabaseClient = require('./services/supabaseClient');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -108,6 +109,11 @@ function readSubmissions() {
 function writeSubmissions(data) {
   try {
     fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf8');
+    if (supabaseClient && supabaseClient.isConfigured()) {
+      supabaseClient.saveSubmissionsBulk(data).catch(err => {
+        console.warn('[Supabase Sync Warning]', err.message);
+      });
+    }
     return true;
   } catch (e) {
     console.error('Error writing submissions:', e);
@@ -127,6 +133,11 @@ function readUsers() {
 function writeUsers(data) {
   try {
     fs.writeFileSync(USERS_FILE, JSON.stringify(data, null, 2), 'utf8');
+    if (supabaseClient && supabaseClient.isConfigured() && Array.isArray(data)) {
+      Promise.all(data.map(u => supabaseClient.saveUser(u))).catch(err => {
+        console.warn('[Supabase User Sync Warning]', err.message);
+      });
+    }
     return true;
   } catch (e) {
     console.error('Error writing users:', e);
@@ -573,6 +584,9 @@ async function handleRequest(req, res) {
     let submissions = readSubmissions();
     submissions = submissions.filter(s => s.id !== id);
     writeSubmissions(submissions);
+    if (supabaseClient && supabaseClient.isConfigured()) {
+      supabaseClient.deleteSubmission(id).catch(err => console.warn('[Supabase Delete Warning]', err.message));
+    }
     return sendJSON(res, 200, { success: true });
   }
 
@@ -709,6 +723,45 @@ async function handleRequest(req, res) {
       success: true,
       data: extractedData
     });
+  }
+
+  // --- API: Supabase Cloud Database Status & Health ---
+  if (pathname === '/api/supabase/status' && req.method === 'GET') {
+    const health = await supabaseClient.healthCheck();
+    return sendJSON(res, 200, { success: true, ...health });
+  }
+
+  // --- API: Supabase Bi-directional Cloud Sync ---
+  if (pathname === '/api/supabase/sync' && (req.method === 'POST' || req.method === 'GET')) {
+    try {
+      const localSubs = readSubmissions();
+      const pushSuccess = await supabaseClient.saveSubmissionsBulk(localSubs);
+      const remoteSubs = await supabaseClient.fetchSubmissions();
+      let mergedCount = localSubs.length;
+      if (Array.isArray(remoteSubs)) {
+        const localMap = new Map(localSubs.map(s => [s.id, s]));
+        let updated = false;
+        for (const r of remoteSubs) {
+          if (!localMap.has(r.id)) {
+            localSubs.push(r);
+            updated = true;
+          }
+        }
+        if (updated) {
+          fs.writeFileSync(DATA_FILE, JSON.stringify(localSubs, null, 2), 'utf8');
+        }
+        mergedCount = localSubs.length;
+      }
+      return sendJSON(res, 200, {
+        success: true,
+        message: 'Supabase cloud sync completed',
+        pushed: pushSuccess,
+        totalLocalSubmissions: mergedCount,
+        cloudStatus: await supabaseClient.healthCheck()
+      });
+    } catch (syncErr) {
+      return sendJSON(res, 500, { success: false, error: syncErr.message });
+    }
   }
 
   // --- API: Astrologer API Status ---
@@ -1936,8 +1989,18 @@ if (!process.env.VERCEL) {
     console.log(`📡 Local Site:  http://localhost:${PORT}`);
     console.log(`🔐 Admin Panel: http://localhost:${PORT}/admin`);
     console.log(`🔮 Astrology:   http://localhost:${PORT}/api/astrology/status`);
+    console.log(`☁️ Supabase:    http://localhost:${PORT}/api/supabase/status`);
     console.log(`======================================================\n`);
     backfillMissingKundalis();
+    if (supabaseClient && supabaseClient.isConfigured()) {
+      supabaseClient.healthCheck().then(hc => {
+        if (hc.connected) {
+          console.log(`☁️ [Supabase Cloud] Connected to project: ${hc.projectRef} (${hc.url})`);
+        } else {
+          console.warn(`⚠️ [Supabase Cloud] Connection pending: ${hc.error || 'Check network or credentials'}`);
+        }
+      }).catch(e => console.warn('[Supabase Health Warning]', e.message));
+    }
   });
 
   server.on('error', (err) => {
