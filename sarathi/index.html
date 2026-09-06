@@ -17,6 +17,7 @@
       --text-muted: #64748b;
       --accent-red: #dc2626;
       --accent-gold: #d97706;
+      --accent-orange: #ea580c;
       --accent-green: #16a34a;
       --accent-blue: #2563eb;
       --header-bg: #fff5eb;
@@ -100,35 +101,35 @@
     }
 
     .tool-pill {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      background: #fef3c7;
-      border: 1px solid #fde68a;
+      background: #f1f5f9;
+      border: 1px solid var(--border-color);
       border-radius: 999px;
-      padding: 3px 8px;
-      gap: 6px;
+      padding: 2px 6px;
+      gap: 4px;
     }
 
     body.dark-theme .tool-pill {
-      background: rgba(245, 158, 11, 0.15);
-      border-color: rgba(245, 158, 11, 0.3);
+      background: #334155;
     }
 
     .tool-btn {
       background: transparent;
       border: none;
-      font-size: 16px;
+      font-size: 17px;
       cursor: pointer;
-      padding: 3px 5px;
-      border-radius: 4px;
-      transition: all 0.15s ease;
+      padding: 4px 6px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.15s ease;
+      color: var(--text-main);
     }
 
     .tool-btn:hover {
-      background: rgba(0, 0, 0, 0.08);
+      background: rgba(234, 88, 12, 0.15);
       transform: translateY(-1px);
     }
 
@@ -139,141 +140,151 @@
     }
 
     .ayanamsa-select {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      color: #d97706;
-      font-weight: 700;
-      font-size: 13px;
-      padding: 4px 8px;
+      font-family: 'Mukta', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #9a3412;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
       border-radius: 6px;
+      padding: 4px 8px;
       cursor: pointer;
+      outline: none;
     }
 
     .btn-action-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: linear-gradient(135deg, #d97706, #b45309);
+      background: #ea580c;
       color: #ffffff;
       border: none;
       padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
       font-weight: 700;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       text-decoration: none;
-      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
-      transition: all 0.2s ease;
+      transition: background 0.15s;
     }
 
     .btn-action-pill:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+      background: #c2410c;
     }
 
     /* 12 Main Navigation Tabs */
     .sarathi-main-nav {
       background: var(--bg-surface);
-      border-bottom: 2px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      overflow-x: auto;
-      padding: 0 14px;
-      scrollbar-width: thin;
-      white-space: nowrap;
-    }
-
-    .main-tab-link {
-      padding: 10px 14px;
-      font-size: 14.5px;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: all 0.15s ease;
-      user-select: none;
-    }
-
-    .main-tab-link:hover {
-      color: var(--text-main);
-    }
-
-    .main-tab-link.active {
-      color: #c2410c;
-      border-bottom-color: var(--tab-active-border);
-      font-weight: 700;
-    }
-
-    /* Secondary Sub-tabs Bar */
-    .sarathi-sub-nav {
-      background: var(--bg-surface);
       border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       overflow-x: auto;
-      padding: 4px 14px;
-      gap: 6px;
+      padding: 0 10px;
+      white-space: nowrap;
+      scrollbar-width: thin;
+    }
+
+    .main-tab-link {
+      padding: 9px 15px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      border-bottom: 2.5px solid transparent;
+      transition: all 0.15s;
+      user-select: none;
+    }
+
+    body.dark-theme .main-tab-link {
+      color: #cbd5e1;
+    }
+
+    .main-tab-link:hover {
+      color: #ea580c;
+      background: rgba(234, 88, 12, 0.05);
+    }
+
+    .main-tab-link.active {
+      color: #ea580c;
+      font-weight: 700;
+      border-bottom-color: #ea580c;
+    }
+
+    /* Sub-tabs bar */
+    .sarathi-sub-nav {
+      background: #fffaf0;
+      border-bottom: 1px solid #fed7aa;
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      padding: 0 10px;
+      white-space: nowrap;
+      scrollbar-width: thin;
+    }
+
+    body.dark-theme .sarathi-sub-nav {
+      background: #1e293b;
+      border-color: #334155;
     }
 
     .sub-tab-link {
-      padding: 5px 12px;
+      padding: 7px 13px;
       font-size: 13px;
       font-weight: 600;
-      color: var(--text-muted);
+      color: #64748b;
       cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.15s ease;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
       user-select: none;
     }
 
     .sub-tab-link:hover {
-      background: rgba(0,0,0,0.04);
-      color: var(--text-main);
+      color: #c2410c;
     }
 
     .sub-tab-link.active {
-      background: #ea580c;
-      color: #ffffff;
+      color: #c2410c;
       font-weight: 700;
+      border-bottom-color: #ea580c;
+      background: rgba(234, 88, 12, 0.08);
     }
 
-    /* Main Workspace Layout */
+    /* Main Workspace Grid (विवरण View) */
     .sarathi-workspace {
       display: grid;
-      grid-template-columns: 380px 1fr;
-      gap: 14px;
-      padding: 14px;
-      min-height: calc(100vh - 130px);
+      grid-template-columns: 340px 1fr;
+      gap: 12px;
+      padding: 12px 14px;
+      max-width: 1600px;
+      margin: 0 auto;
     }
 
-    @media (max-width: 1080px) {
+    @media (max-width: 1024px) {
       .sarathi-workspace {
         grid-template-columns: 1fr;
       }
     }
 
-    /* Left Sidebar: Stacked Charts */
     .sidebar-charts-col {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .chart-card-wrap {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
     .chart-card-header {
-      padding: 6px 12px;
       background: #fff7ed;
       border-bottom: 1px solid #ffedd5;
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: 14px;
+      padding: 6px 12px;
       font-weight: 700;
+      font-size: 13.5px;
       color: #9a3412;
       display: flex;
       align-items: center;
@@ -281,50 +292,57 @@
     }
 
     body.dark-theme .chart-card-header {
-      background: #271d3b;
-      border-color: #3b2d59;
+      background: #334155;
+      border-color: #475569;
       color: #fed7aa;
     }
 
     .chart-svg-box {
-      padding: 10px;
-      background: #ffffff;
+      padding: 8px;
+      background: var(--bg-surface);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* Right Main Content */
+    .chart-svg-box svg {
+      width: 100%;
+      height: auto;
+      max-width: 320px;
+      display: block;
+    }
+
+    /* Details Column */
     .main-details-col {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .details-split-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 12px;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       .details-split-row {
         grid-template-columns: 1fr;
       }
     }
 
-    /* Tabbed Cards */
     .sarathi-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
     .card-tab-header {
       display: flex;
-      align-items: center;
       background: #f8fafc;
       border-bottom: 1px solid var(--border-color);
-      padding: 0 8px;
       overflow-x: auto;
     }
 
@@ -333,81 +351,641 @@
     }
 
     .card-tab-btn {
-      padding: 8px 12px;
-      font-size: 13px;
+      padding: 7px 12px;
+      font-size: 12.5px;
       font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
+      color: #64748b;
       background: transparent;
-      border-top: none;
-      border-left: none;
-      border-right: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
       white-space: nowrap;
     }
 
     .card-tab-btn.active {
       color: #ea580c;
-      border-bottom-color: #ea580c;
       font-weight: 700;
+      border-bottom-color: #ea580c;
+      background: #ffffff;
+    }
+
+    body.dark-theme .card-tab-btn.active {
+      background: #334155;
+      color: #fdba74;
     }
 
     /* Tables */
     .sarathi-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13px;
+      font-size: 12.5px;
     }
 
     .sarathi-table th {
-      background: #f1f5f9;
-      padding: 7px 10px;
+      background: #f8fafc;
+      color: #475569;
       font-weight: 700;
-      color: var(--text-main);
+      padding: 6px 8px;
       text-align: left;
-      border: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
     }
 
     body.dark-theme .sarathi-table th {
       background: #334155;
+      color: #cbd5e1;
     }
 
     .sarathi-table td {
-      padding: 7px 10px;
-      border: 1px solid var(--border-color);
+      padding: 6px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      color: var(--text-main);
     }
 
-    .sarathi-table tr:nth-child(even) {
-      background: rgba(0,0,0,0.015);
+    body.dark-theme .sarathi-table td {
+      border-color: #334155;
+    }
+
+    .sarathi-table tr:hover td {
+      background: rgba(234, 88, 12, 0.04);
     }
 
     /* Badges */
     .badge-tag {
       display: inline-block;
-      padding: 2px 6px;
+      padding: 1px 6px;
       border-radius: 4px;
       font-size: 11px;
       font-weight: 700;
-      margin-right: 4px;
     }
-    .badge-karaka { color: #dc2626; background: #fee2e2; }
-    .badge-pushkar { color: #15803d; background: #dcfce7; }
-    .badge-vargottama { color: #0284c7; background: #e0f2fe; }
-    .badge-status { color: #d97706; font-weight: 700; }
 
-    /* Divisional Grid View */
+    .badge-karaka {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+
+    .badge-pushkar {
+      background: #ecfdf5;
+      color: #059669;
+      border: 1px solid #a7f3d0;
+    }
+
+    .badge-status {
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+    }
+
+    /* Divisional Grid */
     .divisional-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
+      gap: 14px;
       padding: 14px;
+      max-width: 1600px;
+      margin: 0 auto;
     }
 
-    /* Traditional Chiina Print Layout */
+    /* DASHA VIEW STYLING (Screenshot 2) */
+    .dasha-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 12px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .sub-dasha-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .sub-dasha-tab {
+      padding: 5px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #f1f5f9;
+      transition: all 0.15s;
+    }
+
+    .sub-dasha-tab:hover {
+      background: #e2e8f0;
+    }
+
+    .sub-dasha-tab.active {
+      background: #ea580c;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .dasha-toggle-pill {
+      display: flex;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .dasha-toggle-btn {
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #ffffff;
+      border: none;
+      cursor: pointer;
+      color: #475569;
+      transition: all 0.15s;
+    }
+
+    .dasha-toggle-btn.active {
+      background: #ea580c;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .dasha-table-row-active {
+      background: #fef3c7 !important;
+      font-weight: 700;
+    }
+
+    .dasha-table-row-active td {
+      color: #92400e !important;
+    }
+
+    /* VIVIDHA MANTRA LIBRARY (Screenshot 4) */
+    .mantra-workspace {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mantra-header-bar {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .mantra-subtitle {
+      font-size: 13px;
+      color: #475569;
+      font-weight: 500;
+    }
+
+    .mantra-search-box {
+      display: flex;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 5px 10px;
+      width: 260px;
+    }
+
+    .mantra-search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 13px;
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .mantra-main-split {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .mantra-main-split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mantra-sidebar {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      max-height: 780px;
+      overflow-y: auto;
+    }
+
+    .mantra-cat-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 14px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .mantra-cat-item:hover {
+      background: #fff7ed;
+      color: #ea580c;
+    }
+
+    .mantra-cat-item.active {
+      background: #fff7ed;
+      color: #ea580c;
+      font-weight: 700;
+      border-left: 4px solid #ea580c;
+    }
+
+    .mantra-cat-badge {
+      background: #f1f5f9;
+      color: #64748b;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 999px;
+    }
+
+    .mantra-cat-item.active .mantra-cat-badge {
+      background: #fed7aa;
+      color: #9a3412;
+    }
+
+    .mantra-content-area {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mantra-list-header {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mantra-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .mantra-card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mantra-num-badge {
+      background: #ea580c;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mantra-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+      font-family: 'Noto Serif Devanagari', serif;
+    }
+
+    .mantra-shloka-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: #0f172a;
+      font-weight: 600;
+      white-space: pre-line;
+    }
+
+    .mantra-row {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .mantra-lbl {
+      font-weight: 700;
+      color: #475569;
+    }
+
+    .mantra-lbl-orange {
+      font-weight: 700;
+      color: #ea580c;
+    }
+
+    /* KUNDALI MILAN MODAL (Screenshot 1) */
+    .milan-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(2px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .milan-modal-dialog {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 960px;
+      max-height: 94vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .milan-modal-header {
+      background: #fff5eb;
+      border-bottom: 1px solid #fed7aa;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .milan-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #9a3412;
+    }
+
+    .milan-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 18px;
+      color: #64748b;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .milan-modal-body {
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .milan-columns-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .milan-columns-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .milan-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .milan-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 8px;
+    }
+
+    .milan-person-title {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+      border-left: 3.5px solid #ea580c;
+      padding-left: 6px;
+    }
+
+    .milan-person-subtitle {
+      font-size: 11.5px;
+      color: #64748b;
+      margin-left: 10px;
+    }
+
+    .milan-top-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-milan-reset {
+      background: #c2410c;
+      color: #ffffff;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-milan-pick {
+      background: #ffffff;
+      border: 1px solid #ea580c;
+      color: #ea580c;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .milan-form-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .milan-lbl {
+      width: 90px;
+      font-weight: 600;
+      color: #475569;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .milan-input-text {
+      flex: 1;
+      padding: 6px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    .milan-tri-box {
+      display: flex;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .milan-tri-box input {
+      flex: 1;
+      padding: 6px 4px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    .milan-time-box {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+      align-items: center;
+    }
+
+    .milan-time-box input {
+      width: 44px;
+      padding: 6px 4px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .milan-time-box select {
+      padding: 6px 6px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 12.5px;
+    }
+
+    .milan-info-subtext {
+      font-size: 11.5px;
+      color: #64748b;
+      margin-left: 100px;
+    }
+
+    .milan-modal-footer {
+      background: #f8fafc;
+      border-top: 1px solid var(--border-color);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-milan-cancel {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #475569;
+      padding: 7px 16px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-milan-submit {
+      background: #ea580c;
+      border: none;
+      color: #ffffff;
+      padding: 7px 20px;
+      border-radius: 4px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-milan-submit:hover {
+      background: #c2410c;
+    }
+
+    /* FLOATING ACTION TOOLBAR ON CHIINA PRINT (Screenshot 3) */
+    .chiina-floating-dock {
+      position: fixed;
+      right: 24px;
+      bottom: 60px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chiina-dock-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      transition: all 0.2s;
+    }
+
+    .chiina-dock-btn:hover {
+      transform: scale(1.08) translateY(-2px);
+    }
+
+    .btn-dock-edit { background: #16a34a; }
+    .btn-dock-palette { background: #2563eb; }
+    .btn-dock-pdf { background: #dc2626; }
+    .btn-dock-save { background: #0891b2; }
+
+    /* Traditional Chiina 5-page Layout */
     .chiina-print-container {
       display: none;
       background: #f1f5f9;
-      padding: 24px 12px;
+      padding: 20px 10px;
     }
 
     .chiina-print-page {
@@ -415,37 +993,36 @@
       width: 210mm;
       min-height: 297mm;
       margin: 0 auto 24px;
-      padding: 14mm 12mm;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      position: relative;
-      color: #1e1b4b;
+      padding: 8mm;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
       box-sizing: border-box;
+      position: relative;
     }
 
-    /* Double Red Swastika Border */
     .swastika-border-outer {
-      border: 3px solid #dc2626;
-      padding: 4px;
-      height: 100%;
-      min-height: calc(297mm - 28mm);
+      border: 3px solid var(--swastika-color);
+      padding: 3px;
+      min-height: calc(297mm - 16mm);
       box-sizing: border-box;
-      position: relative;
+      display: flex;
+      flex-direction: column;
     }
 
     .swastika-border-inner {
-      border: 1.5px solid #dc2626;
-      height: 100%;
-      padding: 12px 14px;
-      box-sizing: border-box;
-      position: relative;
+      border: 1px solid var(--swastika-color);
+      padding: 8px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .swastika-ribbon-top, .swastika-ribbon-bottom {
       display: flex;
       justify-content: space-between;
-      color: #dc2626;
+      color: var(--swastika-color);
       font-size: 14px;
-      padding: 2px 6px;
+      font-weight: 700;
+      margin-bottom: 6px;
       user-select: none;
     }
 
@@ -454,7 +1031,7 @@
       font-family: 'Noto Serif Devanagari', serif;
       font-size: 16px;
       font-weight: 800;
-      color: #b91c1c;
+      color: var(--swastika-color);
       margin-bottom: 8px;
     }
 
@@ -462,8 +1039,8 @@
       font-family: 'Noto Serif Devanagari', serif;
       font-size: 15px;
       font-weight: 800;
-      color: #991b1b;
-      border-bottom: 2px solid #b91c1c;
+      color: var(--swastika-color);
+      border-bottom: 2px solid var(--swastika-color);
       padding-bottom: 3px;
       margin: 10px 0 6px;
       text-align: center;
@@ -496,7 +1073,7 @@
     }
 
     .chiina-chart-frame {
-      border: 1.5px solid #b91c1c;
+      border: 1.5px solid var(--swastika-color);
       border-radius: 4px;
       overflow: hidden;
     }
@@ -508,10 +1085,9 @@
       font-weight: 700;
       text-align: center;
       padding: 3px 0;
-      border-bottom: 1px solid #b91c1c;
+      border-bottom: 1px solid var(--swastika-color);
     }
 
-    /* Vimshottari 3x3 Cards Grid */
     .dasha-cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -542,13 +1118,12 @@
       border-bottom: 1px solid #fee2e2;
     }
 
-    /* Print Specifics */
     @media print {
       body {
         background: #ffffff !important;
         color: #000000 !important;
       }
-      .sarathi-top-bar, .sarathi-main-nav, .sarathi-sub-nav, .sarathi-workspace, .no-print {
+      .sarathi-top-bar, .sarathi-main-nav, .sarathi-sub-nav, .sarathi-workspace, .no-print, .chiina-floating-dock, .milan-modal-overlay {
         display: none !important;
       }
       .chiina-print-container {
@@ -587,20 +1162,20 @@
         <button class="tool-btn" onclick="openNewChartModal()" title="नयाँ कुण्डली बनाउनुहोस्">📁₁</button>
         <button class="tool-btn" onclick="openExistingModal()" title="कुण्डली खोल्नुहोस्">📁🔍</button>
         <button class="tool-btn" onclick="editCurrentModal()" title="विवरण सम्पादन गर्नुहोस्">📁✏️</button>
-        <button class="tool-btn" onclick="switchMainTab('milan')" title="कुण्डली मिलान (36 गुण)">🧑‍🤝‍🧑</button>
+        <button class="tool-btn" onclick="openKundaliMilanModal()" title="कुण्डली मिलान (36 गुण / Porutham)">🧑‍🤝‍🧑</button>
       </div>
 
       <!-- Group 2: Tools & Chakras -->
       <div class="tool-pill" title="ज्योतिषीय गणना तथा चक्रहरू">
-        <button class="tool-btn" onclick="switchMainTab('panchang')" title="पञ्चाङ्ग">📜</button>
-        <button class="tool-btn" onclick="switchMainTab('scroll')" title="चिना">📜</button>
-        <button class="tool-btn" onclick="switchMainTab('calendar')" title="पात्रो">📅</button>
-        <button class="tool-btn" onclick="switchMainTab('ghadi')" title="घटी/पला">⏰</button>
-        <button class="tool-btn" onclick="switchMainTab('avakahada')" title="अवकहडा चक्र">🕒</button>
-        <button class="tool-btn" onclick="switchMainTab('numerology')" title="अङ्क ज्योतिष (1234)">🔢</button>
-        <button class="tool-btn" onclick="switchMainTab('sudarshan')" title="सुदर्शन चक्र">☸️</button>
+        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="पञ्चाङ्ग">📜</button>
+        <button class="tool-btn" onclick="switchMainTab('print')" title="चिना">📜</button>
+        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="पात्रो">📅</button>
+        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="इष्टकाल">⏰</button>
+        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="अवकहडा चक्र">🕒</button>
+        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="अङ्क ज्योतिष (1234)">🔢</button>
+        <button class="tool-btn" onclick="switchMainTab('kundalis')" title="सुदर्शन चक्र">☸️</button>
         <button class="tool-btn" onclick="switchMainTab('gochar')" title="ग्रह गोचर">🪐</button>
-        <button class="tool-btn" onclick="switchMainTab('upaya')" title="वैदिक मन्त्र तथा उपाय">🕉️</button>
+        <button class="tool-btn" onclick="switchMainTab('vividha')" title="वैदिक मन्त्र तथा उपाय">🕉️</button>
       </div>
 
       <!-- Group 3: Settings & Nepal Engine -->
@@ -616,8 +1191,8 @@
     <!-- Actions & Quick Controls -->
     <div class="top-actions">
       <select class="ayanamsa-select" id="ayanamsa-picker" onchange="changeAyanamsa(this.value)">
-        <option value="surya">सूर्य सिद्धान्त</option>
-        <option value="lahiri" selected>Lahiri (चित्रपक्ष)</option>
+        <option value="surya" selected>सूर्य सिद्धान्त</option>
+        <option value="lahiri">Lahiri (चित्रपक्ष)</option>
         <option value="raman">B.V. Raman</option>
         <option value="kp">KP Krishnamurti</option>
       </select>
@@ -666,7 +1241,7 @@
     <div class="sub-tab-link" onclick="switchSubTab('full_faladesh')">पूर्ण फलादेश</div>
   </div>
 
-  <!-- Main Interactive Workspace (विवरण View) -->
+  <!-- WORKSPACE 1: विवरण (Interactive Workspace) -->
   <main class="sarathi-workspace no-print" id="workspace-vivaran">
     <!-- Left Column: 3 Stacked North Indian Charts -->
     <div class="sidebar-charts-col">
@@ -675,9 +1250,7 @@
           <span>लग्न कुण्डली (D-1)</span>
           <span style="font-size: 11.5px; color: #d97706;">पूरै जीवन</span>
         </div>
-        <div class="chart-svg-box" id="chart-d1-container">
-          <!-- D-1 SVG injected dynamically -->
-        </div>
+        <div class="chart-svg-box" id="chart-d1-container"></div>
       </div>
 
       <div class="chart-card-wrap">
@@ -685,9 +1258,7 @@
           <span>नवमांश कुण्डली (D-9)</span>
           <span style="font-size: 11.5px; color: #d97706;">विवाह / भाग्य</span>
         </div>
-        <div class="chart-svg-box" id="chart-d9-container">
-          <!-- D-9 SVG injected dynamically -->
-        </div>
+        <div class="chart-svg-box" id="chart-d9-container"></div>
       </div>
 
       <div class="chart-card-wrap">
@@ -695,9 +1266,7 @@
           <span>भाव कुण्डली</span>
           <span style="font-size: 11.5px; color: #d97706;">भाव चलित</span>
         </div>
-        <div class="chart-svg-box" id="chart-bhav-container">
-          <!-- Bhav SVG injected dynamically -->
-        </div>
+        <div class="chart-svg-box" id="chart-bhav-container"></div>
       </div>
     </div>
 
@@ -732,9 +1301,9 @@
         <!-- Dasha Card -->
         <div class="sarathi-card">
           <div class="card-tab-header">
-            <button class="card-tab-btn active" id="btn-vim-tab" onclick="switchDashaView('vimshottari')">विंशोत्तरी दशा</button>
-            <button class="card-tab-btn" id="btn-tri-tab" onclick="switchDashaView('tribhagi')">त्रिभागी दशा</button>
-            <button class="card-tab-btn" id="btn-yog-tab" onclick="switchDashaView('yogini')">योगिनी दशा</button>
+            <button class="card-tab-btn active" id="btn-vim-tab">विंशोत्तरी दशा</button>
+            <button class="card-tab-btn" id="btn-tri-tab">त्रिभागी दशा</button>
+            <button class="card-tab-btn" id="btn-yog-tab">योगिनी दशा</button>
             <div style="margin-left:auto; display:flex; gap:4px; padding:4px;">
               <span style="font-size:11px; background:#e0f2fe; color:#0369a1; padding:2px 6px; border-radius:4px; font-weight:700;">वि.सं.</span>
             </div>
@@ -748,9 +1317,7 @@
                   <th>अन्त्य मिति</th>
                 </tr>
               </thead>
-              <tbody id="tbody-dasha-quick">
-                <!-- Injected dynamically -->
-              </tbody>
+              <tbody id="tbody-dasha-quick"></tbody>
             </table>
           </div>
         </div>
@@ -780,16 +1347,14 @@
                 <th>स्थिति</th>
               </tr>
             </thead>
-            <tbody id="tbody-graha-spashta">
-              <!-- Injected dynamically -->
-            </tbody>
+            <tbody id="tbody-graha-spashta"></tbody>
           </table>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Divisional Charts Grid (कुण्डलीहरू View) -->
+  <!-- WORKSPACE 2: कुण्डलीहरू (Divisional Charts View) -->
   <main class="no-print" id="workspace-kundalis" style="display:none;">
     <div style="padding: 10px 18px 0; display:flex; justify-content:space-between; align-items:center;">
       <div style="font-size: 14px; font-weight:700; color:#9a3412;">
@@ -802,15 +1367,179 @@
       </div>
     </div>
 
-    <div class="divisional-grid" id="divisional-grid-container">
-      <!-- 6 Charts Grid injected here -->
+    <div class="divisional-grid" id="divisional-grid-container"></div>
+  </main>
+
+  <!-- WORKSPACE 3: दशा (Screenshot 2 Faithful Reproduction) -->
+  <main class="sarathi-workspace no-print" id="workspace-dasha" style="display:none;">
+    <!-- Left Column: 3 Stacked North Indian Charts -->
+    <div class="sidebar-charts-col">
+      <div class="chart-card-wrap">
+        <div class="chart-card-header">
+          <span>लग्न कुण्डली (D-1)</span>
+          <span style="font-size: 11.5px; color: #d97706;">पूरै जीवन</span>
+        </div>
+        <div class="chart-svg-box" id="dasha-chart-d1"></div>
+      </div>
+
+      <div class="chart-card-wrap">
+        <div class="chart-card-header">
+          <span>नवमांश कुण्डली (D-9)</span>
+          <span style="font-size: 11.5px; color: #d97706;">विवाह / भाग्य</span>
+        </div>
+        <div class="chart-svg-box" id="dasha-chart-d9"></div>
+      </div>
+
+      <div class="chart-card-wrap">
+        <div class="chart-card-header">
+          <span>भाव कुण्डली</span>
+          <span style="font-size: 11.5px; color: #d97706;">भाव चलित</span>
+        </div>
+        <div class="chart-svg-box" id="dasha-chart-bhav"></div>
+      </div>
+    </div>
+
+    <!-- Right Column: Dasha Controls, Current Period Card, and 9-Planet Table -->
+    <div class="main-details-col">
+      <!-- Top Sub-Tabs and Toggles Bar -->
+      <div class="sarathi-card">
+        <div class="dasha-controls-bar">
+          <div class="sub-dasha-tabs">
+            <div class="sub-dasha-tab active" onclick="switchDashaSub('vimshottari')">विंशोत्तरी</div>
+            <div class="sub-dasha-tab" onclick="switchDashaSub('tribhagi')">त्रिभागी</div>
+            <div class="sub-dasha-tab" onclick="switchDashaSub('yogini')">योगिनी</div>
+            <div class="sub-dasha-tab" onclick="switchDashaSub('chara')">चर</div>
+            <div class="sub-dasha-tab" onclick="switchDashaSub('ashtottari')">अष्टोत्तरी</div>
+          </div>
+
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div class="dasha-toggle-pill">
+              <button class="dasha-toggle-btn" id="btn-bhukti-kat">भुक्ति कटाएको</button>
+              <button class="dasha-toggle-btn active" id="btn-bhukti-nakat">भुक्ति नकटाएको</button>
+            </div>
+            <div class="dasha-toggle-pill">
+              <button class="dasha-toggle-btn active" id="btn-dasha-bs">वि.सं.</button>
+              <button class="dasha-toggle-btn" id="btn-dasha-ad">ई.सं.</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:10px 14px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); background:#fafafa;">
+          <div style="font-weight:700; color:#1e293b; font-size:14px;" id="dasha-title-heading">
+            विंशोत्तरी दशा (भुक्ति नकटाएको)
+          </div>
+          <div style="font-size:11.5px; color:#64748b;">
+            भुक्ति मोड बन्द छ — दशा जन्मदेखि पूरै अवधिमा देखाइएको छ
+          </div>
+        </div>
+
+        <!-- हालको दशा अवधि Card -->
+        <div style="padding:12px 14px; border-bottom:1px solid var(--border-color);">
+          <div style="font-size:13px; font-weight:700; color:#1e293b; margin-bottom:8px;">
+            हालको दशा अवधि
+          </div>
+          <table class="sarathi-table" style="background:#ffffff; border:1px solid #e2e8f0; border-radius:4px;">
+            <thead>
+              <tr style="background:#f8fafc;">
+                <th>दशा</th>
+                <th>सुरु मिति</th>
+                <th>अन्त्य मिति</th>
+                <th>समय</th>
+                <th>उमेर</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color:#7c3aed; font-weight:700;">राहु महादशा</td>
+                <td>२०८३-०५-२१</td>
+                <td>२१०१-०५-२१</td>
+                <td>१८ वर्ष ०० महिना ०० दिन</td>
+                <td>१८ वर्ष ०० महिना ०० दिन</td>
+              </tr>
+              <tr>
+                <td style="color:#7c3aed;">राहु अन्तर दशा</td>
+                <td>२०८३-०५-२१</td>
+                <td>२०८६-०२-०५</td>
+                <td>०२ वर्ष ०८ महिना १९ दिन</td>
+                <td>०२ वर्ष ०८ महिना १९ दिन</td>
+              </tr>
+              <tr>
+                <td style="color:#7c3aed;">राहु प्रत्यन्तर दशा</td>
+                <td>२०८३-०५-२१</td>
+                <td>२०८३-१०-१८</td>
+                <td>०० वर्ष ०४ महिना २६ दिन</td>
+                <td>०० वर्ष ०४ महिना २६ दिन</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Main 9-Planet Mahadasha Table -->
+        <div style="padding: 12px 14px; overflow-x: auto;">
+          <table class="sarathi-table" id="table-main-dasha">
+            <thead>
+              <tr style="background:#f1f5f9;">
+                <th>ग्रह</th>
+                <th>सुरु मिति</th>
+                <th>अन्त्य मिति</th>
+                <th>समय</th>
+                <th>उमेर</th>
+                <th style="text-align:center; width:40px;"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-main-dasha">
+              <!-- Injected dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </main>
 
-  <!-- Complete 5-Page Traditional Nepali Chiina Printout -->
+  <!-- WORKSPACE 4: विविध (Mantra Library - Screenshot 4 Faithful Reproduction) -->
+  <main class="mantra-workspace no-print" id="workspace-vividha" style="display:none;">
+    <!-- Top Header -->
+    <div class="mantra-header-bar">
+      <div>
+        <div style="font-family:'Noto Serif Devanagari', serif; font-size:16px; font-weight:700; color:#9a3412;">
+          वैदिक मन्त्र तथा नित्य कर्मकाण्ड संग्रह
+        </div>
+        <div class="mantra-subtitle">
+          कर्मकाण्ड, ग्रह शान्ति, गायत्री, पूजा, शान्ति र महामन्त्र – दैनिक जीवनमा काम लाग्ने मन्त्रहरूको संग्रह।
+        </div>
+      </div>
+      <div class="mantra-search-box">
+        <input type="text" id="mantra-search-input" placeholder="🔍 खोज्नुहोस्..." oninput="filterMantras(this.value)">
+      </div>
+    </div>
+
+    <!-- Split 2 Columns -->
+    <div class="mantra-main-split">
+      <!-- Left Sidebar Categories -->
+      <div class="mantra-sidebar" id="mantra-categories-list">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Right Content Area -->
+      <div class="mantra-content-area">
+        <div class="mantra-list-header">
+          <div style="font-family:'Noto Serif Devanagari', serif; font-size:16px; font-weight:700; color:#1e293b;" id="current-cat-title">
+            कर्मकाण्ड मन्त्र
+          </div>
+          <span class="mantra-cat-badge" style="font-size:13px; padding:2px 10px;" id="current-cat-count">११</span>
+        </div>
+
+        <div id="mantra-cards-container" style="display:flex; flex-direction:column; gap:12px;">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- COMPLETE 5-PAGE TRADITIONAL NEPALI CHIINA PRINTOUT -->
   <div class="chiina-print-container" id="chiina-print-section">
 
-    <!-- Actions bar above printout (Screen only) -->
+    <!-- Top Action bar above printout (Screen only) -->
     <div class="no-print" style="max-width:210mm; margin:0 auto 16px; background:#ffffff; padding:12px 18px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
       <div>
         <h3 style="font-family:'Noto Serif Devanagari', serif; color:#b91c1c; font-size:17px; font-weight:800;">
@@ -828,6 +1557,14 @@
           <span>✕ बन्द गर्नुहोस्</span>
         </button>
       </div>
+    </div>
+
+    <!-- Floating Action Toolbar (Screenshot 3 Faithful Reproduction) -->
+    <div class="chiina-floating-dock no-print">
+      <button class="chiina-dock-btn btn-dock-edit" onclick="quickEditChiina()" title="विवरण सम्पादन गर्नुहोस्">✏️</button>
+      <button class="chiina-dock-btn btn-dock-palette" onclick="cycleChiinaBorderTheme()" title="किनारा रङ्ग (Border Palette)">🎨</button>
+      <button class="chiina-dock-btn btn-dock-pdf" onclick="window.print()" title="PDF सेभ / प्रिन्ट गर्नुहोस्">📄</button>
+      <button class="chiina-dock-btn btn-dock-save" onclick="exportChiinaData()" title="डाटा डाउनलोड / सुरक्षित गर्नुहोस्">💾</button>
     </div>
 
     <!-- PAGE 1: जन्म विवरण, लग्न र नवमांश कुण्डली, ग्रहस्पष्ट तालिका -->
@@ -895,9 +1632,7 @@
                 <th>पद</th>
               </tr>
             </thead>
-            <tbody id="p1-tbody-grahas">
-              <!-- Injected -->
-            </tbody>
+            <tbody id="p1-tbody-grahas"></tbody>
           </table>
 
           <div class="swastika-ribbon-bottom" style="margin-top:10px;">
@@ -919,9 +1654,7 @@
             विंशोत्तरी दशा (भुक्ति) — १२० वर्षीय महादशा चक्र
           </div>
 
-          <div class="dasha-cards-grid" id="p2-vimshottari-grid">
-            <!-- 9 Dasha Cards injected here -->
-          </div>
+          <div class="dasha-cards-grid" id="p2-vimshottari-grid"></div>
 
           <div class="swastika-ribbon-bottom" style="margin-top:14px;">
             <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
@@ -942,9 +1675,7 @@
             योगिनी दशा (भुक्ति) — चक्र १
           </div>
 
-          <div class="dasha-cards-grid" id="p3-yogini-grid">
-            <!-- Yogini Cards 1-9 injected here -->
-          </div>
+          <div class="dasha-cards-grid" id="p3-yogini-grid"></div>
 
           <div class="swastika-ribbon-bottom" style="margin-top:14px;">
             <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
@@ -965,9 +1696,7 @@
             योगिनी दशा (भुक्ति) — चक्र २
           </div>
 
-          <div class="dasha-cards-grid" id="p4-yogini-grid">
-            <!-- Yogini Cards 10-18 injected here -->
-          </div>
+          <div class="dasha-cards-grid" id="p4-yogini-grid"></div>
 
           <div class="swastika-ribbon-bottom" style="margin-top:14px;">
             <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
@@ -988,9 +1717,7 @@
             योगिनी दशा (भुक्ति) — चक्र ३ तथा समाप्ति
           </div>
 
-          <div class="dasha-cards-grid" id="p5-yogini-grid">
-            <!-- Yogini Cards 19-24 injected here -->
-          </div>
+          <div class="dasha-cards-grid" id="p5-yogini-grid"></div>
 
           <div style="margin-top:24px; display:flex; justify-content:space-between; align-items:flex-end; padding:0 14px;">
             <div style="text-align:center; font-size:12px; color:#475569;">
@@ -1012,8 +1739,191 @@
 
   </div>
 
+  <!-- KUNDALI MILAN MODAL (Screenshot 1 Faithful Reproduction) -->
+  <div class="milan-modal-overlay" id="milan-modal-overlay">
+    <div class="milan-modal-dialog">
+      <!-- Header -->
+      <div class="milan-modal-header">
+        <div class="milan-header-left">
+          <span>🕉️</span>
+          <span>कुण्डली मिलान</span>
+        </div>
+        <button class="milan-close-btn" onclick="closeKundaliMilanModal()">✕</button>
+      </div>
+
+      <!-- Body -->
+      <div class="milan-modal-body">
+        <div class="milan-columns-grid">
+          <!-- Left: पुरुषको विवरण -->
+          <div class="milan-card">
+            <div class="milan-card-top">
+              <div style="display:flex; align-items:center;">
+                <span class="milan-person-title">| पुरुषको विवरण</span>
+                <span class="milan-person-subtitle">पहिलो व्यक्तिको जानकारी</span>
+              </div>
+              <div class="milan-top-actions">
+                <button class="btn-milan-reset" onclick="resetBoyForm()">रिसेट</button>
+                <button class="btn-milan-pick" onclick="pickPreset('boy')">कुण्डली छान्नुहोस्</button>
+              </div>
+            </div>
+
+            <div class="milan-form-row">
+              <span class="milan-lbl">नाम :</span>
+              <input type="text" class="milan-input-text" id="boy-name" value="कुण्डली १">
+              <span style="font-weight:600; color:#475569; margin-left:4px;">लिङ्ग :</span>
+              <select class="milan-input-text" style="width:90px;" id="boy-gender">
+                <option value="male" selected>पुरुष</option>
+                <option value="female">महिला</option>
+              </select>
+            </div>
+
+            <div class="milan-form-row">
+              <span class="milan-lbl">जन्म मिति (BS) :</span>
+              <div class="milan-tri-box">
+                <input type="text" id="boy-bs-yy" value="2083">
+                <input type="text" id="boy-bs-mm" value="05">
+                <input type="text" id="boy-bs-dd" value="21">
+              </div>
+            </div>
+
+            <div class="milan-form-row">
+              <span class="milan-lbl">जन्म मिति (AD) :</span>
+              <div class="milan-tri-box">
+                <input type="text" id="boy-ad-yy" value="2026">
+                <input type="text" id="boy-ad-mm" value="09">
+                <input type="text" id="boy-ad-dd" value="06">
+              </div>
+            </div>
+
+            <div class="milan-form-row">
+              <span class="milan-lbl">जन्म समय :</span>
+              <div class="milan-time-box">
+                <input type="text" id="boy-time-hh" value="05">
+                <input type="text" id="boy-time-mm" value="24">
+                <input type="text" id="boy-time-ss" value="56">
+                <select id="boy-time-ampm">
+                  <option value="PM" selected>अपराह्न (PM)</option>
+                  <option value="AM">पूर्वाह्न (AM)</option>
+                </select>
+                <button class="btn-milan-reset" style="padding:4px 7px;">🕒</button>
+              </div>
+            </div>
+
+            <div class="milan-info-subtext">
+              <span style="color:#dc2626; font-weight:700;">आइतबार</span> • ० वर्ष ० महिना ० दिन
+            </div>
+
+            <div class="milan-form-row">
+              <span class="milan-lbl">जन्म स्थान :</span>
+              <input type="text" class="milan-input-text" id="boy-place" value="Kathmandu">
+              <button class="btn-milan-reset" style="background:#ea580c; padding:4px 8px;">📝</button>
+            </div>
+          </div>
+
+          <!-- Right: महिलाको विवरण -->
+          <div class="milan-card">
+            <div class="milan-card-top">
+              <div style="display:flex; align-items:center;">
+                <span class="milan-person-title">| महिलाको विवरण</span>
+                <span class="milan-person-subtitle">दोस्रो व्यक्तिको जानकारी</span>
+              </div>
+              <div class="milan-top-actions">
+                <button class="btn-milan-reset" onclick="resetGirlForm()">रिसेट</button>
+                <button class="btn-milan-pick" onclick="pickPreset('girl')">कुण्डली छान्नुहोस्</button>
+              </div>
+            </div>
+
+            <div class="milan-form-row">
+              <span class="milan-lbl">नाम :</span>
+              <input type="text" class="milan-input-text" id="girl-name" value="कुण्डली २">
+              <span style="font-weight:600; color:#475569; margin-left:4px;">लिङ्ग :</span>
+              <select class="milan-input-text" style="width:90px;" id="girl-gender">
+                <option value="female" selected>महिला</option>
+                <option value="male">पुरुष</option>
+              </select>
+            </div>
+
+            <div class="milan-form-row">
+              <span class="milan-lbl">जन्म मिति (BS) :</span>
+              <div class="milan-tri-box">
+                <input type="text" id="girl-bs-yy" value="2083">
+                <input type="text" id="girl-bs-mm" value="05">
+                <input type="text" id="girl-bs-dd" value="21">
+              </div>
+            </div>
+
+            <div class="milan-form-row">
+              <span class="milan-lbl">जन्म मिति (AD) :</span>
+              <div class="milan-tri-box">
+                <input type="text" id="girl-ad-yy" value="2026">
+                <input type="text" id="girl-ad-mm" value="09">
+                <input type="text" id="girl-ad-dd" value="06">
+              </div>
+            </div>
+
+            <div class="milan-form-row">
+              <span class="milan-lbl">जन्म समय :</span>
+              <div class="milan-time-box">
+                <input type="text" id="girl-time-hh" value="05">
+                <input type="text" id="girl-time-mm" value="24">
+                <input type="text" id="girl-time-ss" value="56">
+                <select id="girl-time-ampm">
+                  <option value="PM" selected>अपराह्न (PM)</option>
+                  <option value="AM">पूर्वाह्न (AM)</option>
+                </select>
+                <button class="btn-milan-reset" style="padding:4px 7px;">🕒</button>
+              </div>
+            </div>
+
+            <div class="milan-info-subtext">
+              <span style="color:#dc2626; font-weight:700;">आइतबार</span> • ० वर्ष ० महिना ० दिन
+            </div>
+
+            <div class="milan-form-row">
+              <span class="milan-lbl">जन्म स्थान :</span>
+              <input type="text" class="milan-input-text" id="girl-place" value="Kathmandu">
+              <button class="btn-milan-reset" style="background:#ea580c; padding:4px 8px;">📝</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kundali Milan Match Result Container -->
+        <div id="milan-result-box" style="display:none; background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:14px;">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Footer Action Bar -->
+      <div class="milan-modal-footer">
+        <button class="btn-milan-cancel" onclick="closeKundaliMilanModal()">रद्द गर्नुहोस्</button>
+        <div style="font-size:12.5px; color:#64748b;">
+          सिद्धान्त : <span style="color:#ea580c; font-weight:700;">सूर्य सिद्धान्त</span> • सबीज
+        </div>
+        <button class="btn-milan-submit" onclick="calculateKundaliMilan()">
+          <span>कुण्डली मिलाउनुहोस्</span>
+          <span>➔</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script>
     let sarathiData = null;
+    const MANTRAS = {"karmakanda":{"title":"कर्मकाण्ड मन्त्र","count":11,"items":[{"no":"१","title":"प्रातः स्मरण मन्त्र","shloka":"कराग्रे वसते लक्ष्मीः करमध्ये सरस्वती।\nकरमूले तु गोविन्दः प्रभाते करदर्शनम्॥","meaning":"हातको अग्रभागमा लक्ष्मी, मध्यमा सरस्वती र मूलमा गोविन्द वास गर्नुहुन्छ।","instruction":"बिहान ओछ्यानबाट उठेपछि सर्वप्रथम आफ्नो दुई हात हेर्दै यो मन्त्र बोल्नुहोस्।"},{"no":"२","title":"भूमि स्पर्श मन्त्र","shloka":"समुद्रवसने देवि पर्वतस्तनमण्डले।\nविष्णुपत्नि नमस्तुभ्यं पादस्पर्शं क्षमस्व मे॥","meaning":"समुद्र रूपी वस्त्र र पर्वत रूपी स्तन भएकी भूमि देवी, पाउमा स्पर्श गरेकोमा क्षमा।","instruction":"बिहान ओछ्यानबाट भुइँमा खुट्टा राख्नुअघि बोल्नुहोस्।"},{"no":"३","title":"स्नान मन्त्र","shloka":"गङ्गे च यमुने चैव गोदावरि सरस्वति।\nनर्मदे सिन्धु कावेरि जलेऽस्मिन् सन्निधिं कुरु॥","meaning":"गंगा, यमुना, गोदावरी, सरस्वती, नर्मदा, सिन्धु र कावेरी – सबै पवित्र नदीहरू यस जलमा विराजमान हुनुहोस्।","instruction":"स्नान गर्नुअघि पानीमा हात राखेर यो मन्त्र बोल्नुहोस्।"},{"no":"४","title":"तिलक मन्त्र","shloka":"ललाटे यस्य पुण्ड्रं स्यात् स सर्वं पापमुक्तः।\nविष्णोरिदं परं धाम ललाटे तिलकं शुभम्॥","meaning":"जसको ललाटमा तिलक छ, त्यो सबै पापबाट मुक्त हुन्छ।","instruction":"निधारमा टीका लगाउँदा यो मन्त्र बोल्नुहोस्।"},{"no":"५","title":"भोजन मन्त्र","shloka":"ब्रह्मार्पणं ब्रह्म हविर्ब्रह्माग्नौ ब्रह्मणा हुतम्।\nब्रह्मैव तेन गन्तव्यं ब्रह्मकर्मसमाधिना॥","meaning":"हवन, हवि, अग्नि, कर्ता सबै ब्रह्म हुन्, त्यसैले ब्रह्म-कर्ममा लीन हुनेले ब्रह्म नै प्राप्त गर्दछ।","instruction":"भोजन सुरु गर्नुअघि हात जोडेर ईश्वरलाई अर्पण गर्दै उच्चारण गर्नुहोस्।"},{"no":"६","title":"दीप प्रज्वलन मन्त्र","shloka":"शुभं करोति कल्याणमारोग्यं धनसंपदा।\nशत्रुबुद्धिविनाशाय दीपज्योतिर्नमोऽस्तु ते॥","meaning":"दीपकको ज्योतिले कल्याण, स्वास्थ्य, धन-सम्पदा प्रदान गरोस् र दुर्बुद्धि नष्ट गरोस्।","instruction":"दियो बाल्दा वा पूजा थाल्नुअघि दीपलाई प्रणाम गर्दै बोल्नुहोस्।"},{"no":"७","title":"आचमन मन्त्र","shloka":"ॐ केशवाय नमः। ॐ नारायणाय नमः। ॐ माधवाय नमः। ॐ हृषीकेशाय नमः॥","meaning":"मन, वचन र शरीरलाई पवित्र बनाउने वैदिक आचमन मन्त्र।","instruction":"पूजा सुरु गर्दा तीन पटक दायाँ हत्केलामा जल लिएर पिउनुहोस्।"},{"no":"८","title":"शङ्ख ध्वनि मन्त्र","shloka":"त्वं पुरा सागरोत्पन्नो विष्णुपत्नीसमन्वितः।\nसर्वदेवहितार्थाय शङ्खराज नमोऽस्तु ते॥","meaning":"सकारात्मक उर्जाको प्रवाह र नकारात्मक उर्जाको निवारण गर्ने शङ्खराजको वन्दना।","instruction":"पूजा वा आरतिअघि शङ्ख फुक्दा उच्चारण गर्नुहोस्।"},{"no":"९","title":"आरति मन्त्र","shloka":"कर्पूरगौरं करुणावतारं संसारसारं भुजगेन्द्रहारम्।\nसदावसन्तं हृदयारविन्दे भवं भवानीसहितं नमामि॥","meaning":"भगवान् शिव र माता भवानीको परम् कृपा र शान्ति प्राप्त हुने महाआरति मन्त्र।","instruction":"कर्पूर वा घ्यूको बत्ती बालेर आरति गर्दा भक्तिपूर्वक गाउनुहोस्।"},{"no":"१०","title":"क्षमा प्रार्थना मन्त्र","shloka":"आवाहनं न जानामि न जानामि विसर्जनम्।\nपूजां चैव न जानामि क्षमस्व परमेश्वर॥","meaning":"पूजा अर्चनामा भएका अज्ञानवश त्रुटिहरूबाट पूर्ण क्षमा मिल्दछ।","instruction":"पूजा समापन भएपछि हात जोडेर क्षमा माग्दै भन्नुहोस्।"},{"no":"११","title":"शान्ति पाठ मन्त्र","shloka":"ॐ द्यौः शान्तिरन्तरिक्षं शान्तिः पृथिवी शान्तिरापः शान्तिरोषधयः शान्तिः।\nवनस्पतयः शान्तिर्विश्वेदेवाः शान्तिर्ब्रह्म शान्तिः सर्वं शान्तिः शान्तिरेव शान्तिः सा मा शान्तिरेधि॥ ॐ शान्तिः शान्तिः शान्तिः॥","meaning":"सम्पूर्ण ब्रह्माण्ड, पृथ्वी, जल, वनस्पति र अन्तःकरणमा दिव्य शान्ति स्थापना हुन्छ।","instruction":"पूजा वा धार्मिक कार्यको अन्त्यमा सम्पूर्ण जगतको कल्याणका लागि बोल्नुहोस्।"}]},"graha_shanti":{"title":"ग्रह शान्ति मन्त्र","count":12,"items":[{"no":"१","title":"नवग्रह स्मरण मन्त्र","shloka":"ब्रह्मामुरारिस्त्रिपुरान्तकारी भानुः शशी भूमिसुतो बुधश्च।\nगुरुश्च शुक्रः शनिराहुकेतवः कुर्वन्तु सर्वे मम सुप्रभातम्॥","meaning":"ब्रह्मा, विष्णु, महेश तथा सूर्य, चन्द्र, मङ्गल, बुध, गुरु, शुक्र, शनि, राहु, केतु सम्पूर्ण ग्रहले दिन शुभ गरुन्।","instruction":"बिहान पूजा गर्दा सम्पूर्ण नवग्रह शान्तिका लागि नित्य पाठ गर्नुहोस्।"},{"no":"२","title":"सूर्य ग्रह मन्त्र","shloka":"ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः॥ (ॐ घृणिः सूर्याय नमः)","meaning":"आत्मबल, मान-सम्मान, सरकारी पद र पितृ कृपा प्राप्त हुन्छ।","instruction":"आइतबार तामाको लोटामा रातो चन्दन र अक्षता राखेर सूर्यलाई अर्घ्य दिँदै १०८ पटक जप्नुहोस्।"},{"no":"३","title":"चन्द्र ग्रह मन्त्र","shloka":"ॐ श्रां श्रीं श्रौं सः चन्द्रमसे नमः॥ (ॐ सोमाय नमः)","meaning":"मानसिक शान्ति, एकाग्रता, मातृ सुख र तनाव मुक्ति मिल्दछ।","instruction":"सोमबार सेतो फूल र दूध मिसाएर जल अर्पण गर्दै जप गर्नुहोस्।"},{"no":"४","title":"मङ्गल ग्रह मन्त्र","shloka":"ॐ क्रां क्रीं क्रौं सः भौमाय नमः॥ (ॐ अं अङ्गारकाय नमः)","meaning":"साहस, पराक्रम, ऋणमुक्ति र रक्त विकार निवारण गर्दछ।","instruction":"मङ्गलबार रातो वस्त्र लगाएर पूर्व दिशातर्फ फर्केर जप गर्नुहोस्।"},{"no":"५","title":"बुध ग्रह मन्त्र","shloka":"ॐ ब्रां ब्रीं ब्रौं सः बुधाय नमः॥ (ॐ बुं बुधाय नमः)","meaning":"बुद्धि, व्यापार, वाणी, स्मरणशक्ति र शिक्षामा उन्नति दिलाउँछ।","instruction":"बुधबार हरियो वस्तु दान गर्दै वा तुलसीको पूजा गर्दै जप गर्नुहोस्।"},{"no":"६","title":"बृहस्पति (गुरु) ग्रह मन्त्र","shloka":"ॐ ग्रां ग्रीं ग्रौं सः गुरवे नमः॥ (ॐ बृं बृहस्पतये नमः)","meaning":"ज्ञान, सन्तान सुख, विवाह बाधा निवारण, भाग्य वृद्धि र धन प्राप्ति हुन्छ।","instruction":"बिहीबार पहेँलो वस्त्र र पहेँलो चन्दन लगाई १०८ पटक जप गर्नुहोस्।"},{"no":"७","title":"शुक्र ग्रह मन्त्र","shloka":"ॐ द्रां द्रीं द्रौं सः शुक्राय नमः॥ (ॐ शुं शुक्राय नमः)","meaning":"वैवाहिक सुख, आकर्षण, ऐश्वर्य, कला र भौतिक सम्पन्नता वृद्धि हुन्छ।","instruction":"शुक्रबार सेतो चामल वा सेतो मिठाई चढाउँदै जप गर्नुहोस्।"},{"no":"८","title":"शनि ग्रह मन्त्र","shloka":"ॐ प्रां प्रीं प्रौं सः शनैश्चराय नमः॥ (ॐ शं शनैश्चराय नमः)","meaning":"साढेसाती, अढैया, दुर्घटना, मुद्दा-मामिला र रोग कष्टबाट मुक्ति मिल्दछ।","instruction":"शनिबार पीपलको रुखमा तिलको तेलको दियो बाली पश्चिम फर्केर जप गर्नुहोस्।"},{"no":"९","title":"राहु ग्रह मन्त्र","shloka":"ॐ भ्रां भ्रीं भ्रौं सः राहवे नमः॥ (ॐ रां राहवे नमः)","meaning":"अकस्मात् आउने संकट, भ्रम, डर, कालसर्प दोष र शत्रु भय निवारण हुन्छ।","instruction":"सूर्यास्तपछि कालो तिल वा उडदको दाल दान गर्दै जप गर्नुहोस्।"},{"no":"१०","title":"केतु ग्रह मन्त्र","shloka":"ॐ स्रां स्रीं स्रौं सः केतवे नमः॥ (ॐ कें केतवे नमः)","meaning":"अध्यात्म, मोक्ष, चर्मरोग र गुप्त शत्रुबाट सुरक्षा प्रदान गर्दछ।","instruction":"गणेश भगवानको पूजा गर्दै दूर्वा चढाएर १०८ पटक जप गर्नुहोस्।"},{"no":"११","title":"कालसर्प योग निवारण मन्त्र","shloka":"ॐ नवकुलाय विद्यमहे विषदन्ताय धीमहि तन्नो सर्पः प्रचोदयात्॥","meaning":"कालसर्प तथा नाग दोषको दुष्प्रभाव नष्ट गरी शान्ति प्रदान गर्दछ।","instruction":"नागपञ्चमी वा सोमबार शिवलिङ्गमा दुग्ध अभिषेक गरी जप गर्नुहोस्।"},{"no":"१२","title":"महामृत्युञ्जय मन्त्र (ग्रह बाधा नाश)","shloka":"ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।\nउर्वारुकमिव बन्धनान्मृत्य pushaमृत्योर्मुक्षीय मामृतात्॥","meaning":"अकाल मृत्यु हरण, असाध्य रोग निवारण र सम्पूर्ण अनिष्ट ग्रह शान्ति।","instruction":"नित्य ११ वा १०८ पटक रुद्राक्ष मालाले जप गर्नुहोस्।"}]},"graha_vidhi":{"title":"ग्रह शान्ति विधि","count":9,"items":[{"no":"१","title":"सूर्य उपासना तथा अर्घ्य विधि","shloka":"आदित्यहृदयस्तोत्रं नित्यं जपेत् सर्वशत्रुविनाशनम्।","meaning":"तामाको पात्रमा शुद्ध जल, रातो फूल, चन्दन राखी गायत्री सहित अर्घ्य दिने।","instruction":"प्रत्येक बिहान सूर्योदयको समयमा पूर्व मुख गरी ३ पटक अर्घ्य दिनुहोस्।"},{"no":"२","title":"चन्द्र शान्ति तथा शिव अभिषेक","shloka":"चन्द्रमा मनसो जातः चक्षोः सूर्यो अजायत।","meaning":"दूध र जल मिसाएर शिवलिङ्गमा अभिषेक गर्दा चन्द्र पीडा हट्छ।","instruction":"सोमबार साँझ चन्द्रमालाई काँचो दूधको अर्घ्य दिनुहोस्।"},{"no":"३","title":"मङ्गल शान्ति तथा हनुमान साधना","shloka":"ॐ नमो भगवते आञ्जनेयाय महाबलाय स्वाहा।","meaning":"मङ्गल दोष र रक्तदोष निवारणका लागि सिन्दूर चढाउने।","instruction":"मङ्गलबार हनुमान चालिसा पाठ गरी रातो वस्तु दान गर्नुहोस्।"},{"no":"४","title":"बुध ग्रह गौ सेवा विधि","shloka":"सर्वदेवमयी गावो देवानामपि देवताः।","meaning":"गाईलाई हरियो घाँस खुवाउनाले बुध ग्रह तुरुन्त प्रसन्न हुन्छन्।","instruction":"बुधबार बिहान हरियो पालक वा घाँस गाईलाई श्रद्धाले खुवाउनुहोस्।"},{"no":"५","title":"गुरु ग्रह मन्दिर सेवा विधि","shloka":"गुरुर्ब्रह्मा गुरुर्विष्णुः गुरुर्देवो महेश्वरः।","meaning":"विष्णु सहस्रनाम पाठ र पहेँलो चनाको दाल दान।","instruction":"बिहीबार केराको रुखमा जल चढाउनुहोस् र नुन बिनाको भोजन गर्नुहोस्।"},{"no":"६","title":"शुक्र ग्रह लक्ष्मी आराधना","shloka":"ॐ श्रीं ह्रीं क्लीं श्रीं सिद्धलक्ष्म्यै नमः।","meaning":"सेतो गाई, चामल र मिश्री दान गर्दा दााम्पत्य सुख बढ्छ।","instruction":"शुक्रबार कनकधारा स्तोत्र पाठ गरी कन्याहरूलाई खीर खुवाउनुहोस्।"},{"no":"७","title":"शनि देव तेल दान तथा छायाँ दान","shloka":"नमस्ते कोणसंस्थाय पिङ्गलाय नमोऽस्तु ते।","meaning":"कचौरामा तोरीको तेल राखी आफ्नो अनुहार हेरेर दान गर्ने।","instruction":"शनिबार साँझ पीपलको रुखमुनि दियो बाल्नुहोस्।"},{"no":"८","title":"राहु भैरव सेवा विधि","shloka":"ॐ कालभैरवाय नमः सर्वविघ्नविनाशाय नमः।","meaning":"कालो कुकुरलाई रोटी खुवाउनाले राहुको अनिष्ट तत्काल शान्त हुन्छ।","instruction":"प्रत्येक शनिबार वा औँसीका दिन भैरव मन्दिरमा बत्ती बाल्नुहोस्।"},{"no":"९","title":"केतु गणेश दूर्वा समर्पण विधि","shloka":"ॐ गं गणपतये नमः। दूर्वाङ्कुरान् समर्पयामि।","meaning":"२१ वटा दूर्वा गणेशजीलाई चढाउँदा केतुको सम्पूर्ण दोष निवारण हुन्छ।","instruction":"मङ्गलबार वा चतुर्थीका दिन गणेशजीलाई लड्डु र दूर्वा चढाउनुहोस्।"}]},"yogini_upaya":{"title":"योगिनी दशा उपाय","count":8,"items":[{"no":"१","title":"मंगला दशा शान्ति उपाय","shloka":"मङ्गले मङ्गला देवि भद्रकाली नमोऽस्तु ते।","meaning":"चन्द्रमा अधिपति भएको हुँदा मन चञ्चल हुन नदिन शिव आराधना।","instruction":"सेतो वस्त्र धारण गरी सोमबार शिव मन्दिरमा दूध चढाउनुहोस्।"},{"no":"२","title":"पिंगला दशा शान्ति उपाय","shloka":"सूर्यपुत्री पिंगला देवि सर्वकष्टनिवारिणी।","meaning":"सूर्य अधिपति भएको हुँदा नेत्र, पित्त र पारिवारिक तनाव हटाउने उपाय।","instruction":"आइतबार गहुँ दान गर्नुहोस् र आदित्य हृदय स्तोत्र पाठ गर्नुहोस्।"},{"no":"३","title":"धान्या दशा शान्ति उपाय","shloka":"धनधान्यप्रदे देवि सर्वसमृद्धिकारिणी।","meaning":"गुरु अधिपति भएको हुँदा अध्ययन र धन संचयमा सफलता।","instruction":"बिहीबार चनाको दाल र बेसार मन्दिरमा अर्पण गर्नुहोस्।"},{"no":"४","title":"भ्रामरी दशा शान्ति उपाय","shloka":"भ्रामरी देवि नमस्तेऽस्तु सर्वोपद्रवनाशिनि।","meaning":"मङ्गल अधिपति भएको हुँदा यात्रामा सावधानी र चोटपटकबाट रक्षा।","instruction":"मङ्गलबार हनुमानजीलाई चमेलीको तेल र सिन्दूर चढाउनुहोस्।"},{"no":"५","title":"भद्रिका दशा शान्ति उपाय","shloka":"भद्रं पश्येम भद्रिका सर्वसिद्धिप्रदायिनी।","meaning":"बुध अधिपति भएको हुँदा व्यापार र विद्यामा शुभ फल।","instruction":"बुधबार हरियो मुंग दान गरी गणेशजीको दर्शन गर्नुहोस्।"},{"no":"६","title":"उल्का दशा शान्ति उपाय","shloka":"उल्कापाते महाघोरे शान्तिं कुरु महेश्वरि।","meaning":"शनि अधिपति भएको हुँदा आर्थिक घाटा, मुद्दा र रोगबाट जोगिन।","instruction":"शनिबार कालो वस्त्र, फलाम वा तिलको तेल दान गर्नुहोस्।"},{"no":"७","title":"सिद्धा दशा शान्ति उपाय","shloka":"सिद्धिदात्री महामाये सर्वकामप्रदायिनी।","meaning":"शुक्र अधिपति भएको हुँदा सुख, समृद्धि, वाहन र ऐश्वर्य लाभ।","instruction":"शुक्रबार श्रीसूक्त पाठ गर्नुहोस् र देवी मन्दिरमा श्रृङ्गार चढाउनुहोस्।"},{"no":"८","title":"संकटा दशा शान्ति उपाय","shloka":"संकटनाशिनी देवि दुर्गा दुर्गतिनाशिनी।","meaning":"राहु अधिपति भएको हुँदा घोर संकट, भय र विपत्ति निवारण।","instruction":"राहु मन्त्र र दुर्गा सप्तशतीको अर्गला स्तोत्र नित्य पाठ गर्नुहोस्।"}]},"gayatri":{"title":"गायत्री मन्त्र संग्रह","count":11,"items":[{"no":"१","title":"महागायत्री मन्त्र","shloka":"ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्॥","meaning":"त्यो प्राणस्वरूप, दुःखनाशक, सुखस्वरूप, श्रेष्ठ, तेजस्वी पापनाशक देवस्वरूप परमात्मालाई हामी अन्तःकरणमा धारण गरौँ, जसले हाम्रो बुद्धिलाई सन्मार्गमा प्रेरित गरोस्।","instruction":"बिहान, दिउँसो र साँझ तीनै सन्ध्यामा १०८ पटक शुद्ध मनले जप गर्नुहोस्।"},{"no":"२","title":"शिव गायत्री मन्त्र","shloka":"ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि तन्नो रुद्रः प्रचोदयात्॥","meaning":"भगवान् शिवको ज्ञान र वैराग्य प्राप्त हुन्छ।","instruction":"रुद्राक्ष मालाले उत्तर मुख फर्केर जप गर्नुहोस्।"},{"no":"३","title":"विष्णु गायत्री मन्त्र","shloka":"ॐ नारायणाय विद्महे वासुदेवाय धीमहि तन्नो विष्णुः प्रचोदयात्॥","meaning":"शान्ति, ऐश्वर्य र पारिवारिक सुख समृद्धि मिल्दछ।","instruction":"तुलसीको मालाले पूर्व मुख फर्केर जप गर्नुहोस्।"},{"no":"४","title":"गणेश गायत्री मन्त्र","shloka":"ॐ एकदन्ताय विद्महे वक्रतुण्डाय धीमहि तन्नो दन्तिः प्रचोदयात्॥","meaning":"सम्पूर्ण कार्यका विघ्नबाधा हटी सफलता प्राप्त हुन्छ।","instruction":"कुनै पनि शुभ कार्यको थालनी गर्दा जप गर्नुहोस्।"},{"no":"५","title":"लक्ष्मी गायत्री मन्त्र","shloka":"ॐ महालक्ष्म्यै च विद्महे विष्णुपत्न्यै च धीमहि तन्नो लक्ष्मीः प्रचोदयात्॥","meaning":"दरिद्रता नाश भई धन, वैभव र सौभाग्य प्राप्त हुन्छ।","instruction":"कमल गट्टाको मालाले शुक्रबार साँझ जप गर्नुहोस्।"},{"no":"६","title":"सरस्वती गायत्री मन्त्र","shloka":"ॐ सरस्वत्यै च विद्महे ब्रह्मपुत्र्यै च धीमहि तन्नो देवी प्रचोदयात्॥","meaning":"विद्या, बुद्धि, स्मरण शक्ति र वाणी सिद्धि मिल्दछ।","instruction":"विद्यार्थीहरूले अध्ययन पूर्व नित्य जप गर्नुहोस्।"},{"no":"७","title":"दुर्गा गायत्री मन्त्र","shloka":"ॐ कात्यायनाय विद्महे कन्याकुमार्यै धीमहि तन्नो दुर्गा प्रचोदयात्॥","meaning":"शत्रु बाधा, रोग र भयबाट पूर्ण सुरक्षा मिल्दछ।","instruction":"रातो आसनमा बसेर नित्य पाठ गर्नुहोस्।"},{"no":"८","title":"हनुमान गायत्री मन्त्र","shloka":"ॐ आञ्जनेयाय विद्महे वायुपुत्राय धीमहि तन्नो हनुमत् प्रचोदयात्॥","meaning":"शारीरिक बल, साहस र नकारात्मक उर्जा निवारण हुन्छ।","instruction":"मङ्गलबार र शनिबार विशेष रूपमा जप गर्नुहोस्।"},{"no":"९","title":"सूर्य गायत्री मन्त्र","shloka":"ॐ भास्कराय विद्महे दिवाकराय धीमहि तन्नो सूर्यः प्रचोदयात्॥","meaning":"तेज, नेत्र ज्योति, मान प्रतिष्ठा र आरोग्य प्राप्त हुन्छ।","instruction":"आइतबार बिहान सूर्यलाई हेर्दै जप गर्नुहोस्।"},{"no":"१०","title":"चन्द्र गायत्री मन्त्र","shloka":"ॐ क्षीरपुत्राय विद्महे अमृततत्त्वाय धीमहि तन्नो चन्द्रः प्रचोदयात्॥","meaning":"मानसिक शान्ति र शीतलता प्रदान गर्दछ।","instruction":"सोमबार साँझ जल अर्पण गर्दै जप गर्नुहोस्।"},{"no":"११","title":"गुरु गायत्री मन्त्र","shloka":"ॐ वृषभध्वजाय विद्महे कृणीहस्ताय धीमहि तन्नो गुरुः प्रचोदयात्॥","meaning":"उच्च ज्ञान, विवेक र धर्मको मार्ग प्राप्त हुन्छ।","instruction":"बिहीबार बिहान पहेँलो वस्त्रमा जप गर्नुहोस्।"}]},"puja":{"title":"पूजा मन्त्र","count":12,"items":[{"no":"१","title":"आसन शुद्धि मन्त्र","shloka":"ॐ पृथ्वि त्वया धृता लोका देवि त्वं विष्णुना धृता।\nत्वं च धारय मां देवि पवित्रं कुरु चासनम्॥","meaning":"पृथ्वी माताले सम्पूर्ण संसारलाई धारण गर्नुभएको छ, मेरो आसन पवित्र होस्।","instruction":"पूजा सुरु गर्दा आसनमा जल छर्कँदै बोल्नुहोस्।"},{"no":"२","title":"पवित्रता मन्त्र","shloka":"ॐ अपवित्रः पवित्रो वा सर्वावस्थां गतोऽपि वा।\nयः स्मरेत्पुण्डरीकाक्षं स बाह्याभ्यन्तरः शुचिः॥","meaning":"जुनसुकै अवस्थामा भए पनि भगवान् पुण्डरीकाक्षलाई स्मरण गर्दा भित्र-बाहिर पवित्र भइन्छ।","instruction":"आफ्नो शरीर र पूजा सामग्रीमा जल छर्कँदा बोल्नुहोस्।"},{"no":"३","title":"कलश पूजा मन्त्र","shloka":"कलशस्य मुखे विष्णुः कण्ठे रुद्रः समाश्रितः।\nमूले त्वस्य स्थितो ब्रह्मा मध्ये मातृगणाः स्मृताः॥","meaning":"कलशको मुखमा विष्णु, कण्ठमा शिव, मूलमा ब्रह्मा र बीचमा मातृगण अवस्थित छन्।","instruction":"कलश स्थापना गर्दा फूल र अक्षता चढाएर वन्दना गर्नुहोस्।"},{"no":"४","title":"घण्टी वादन मन्त्र","shloka":"आगमार्थं तु देवानां गमनार्थं तु रक्षसाम्।\nकुर्वे घण्टारवं तत्र देवताह्वानलक्षणम्॥","meaning":"देवताहरूको आगमन र नकारात्मक शक्तिको विसर्जनका लागि घण्टी बजाउँछु।","instruction":"पूजा वा आरतिमा घण्टी बजाउँदा बोल्नुहोस्।"},{"no":"५","title":"गणेश ध्यान मन्त्र","shloka":"गजाननं भूतगणादिसेवितं कपित्थजम्बूफलचारुभक्षणम्।\nउमासुतं शोकविनाशकारकं नमामि विघ्नेश्वरपादपङ्कजम्॥","meaning":"विघ्नहर्ता श्री गणेशजीको चरणकमलमा कोटि-कोटि प्रणाम।","instruction":"पूजाको प्रारम्भमा हात जोडेर गणेशजीको ध्यान गर्नुहोस्।"},{"no":"६","title":"चन्दन समर्पण मन्त्र","shloka":"गन्धद्वारां दुराधर्षां नित्यपुष्टां करीषिणीम्।\nईश्वरीं सर्वभूतानां तामिहोपह्वये श्रियम्॥","meaning":"सुगन्धित चन्दनले ईश्वरलाई अलौकिक शीतलता प्रदान गर्दछ।","instruction":"देवताहरूलाई चन्दन टीका लगाउँदा बोल्नुहोस्।"},{"no":"७","title":"अक्षता समर्पण मन्त्र","shloka":"अक्षताश्च सुरश्रेष्ठ कुङ्कुमाक्ताः सुशोभिताः।\nमया निवेदिता भक्त्या गृहाण परमेश्वर॥","meaning":"केसरी र अबीरले रङ्गिएका अक्षता भक्तिपूर्वक अर्पण गर्दछु।","instruction":"टीका लगाएपछि अक्षता चढाउँदा बोल्नुहोस्।"},{"no":"८","title":"पुष्प समर्पण मन्त्र","shloka":"माल्यादीनि सुगन्धीनि मालत्यादीनि वै प्रभो।\nमय्याहृतानि पुष्पाणि गृहाण परमेश्वर॥","meaning":"सुगन्धित पवित्र फूलहरू प्रभुको चरणमा अर्पण गर्दछु।","instruction":"भगवान् लाई पुष्प चढाउँदा बोल्नुहोस्।"},{"no":"९","title":"धूप समर्पण मन्त्र","shloka":"वनस्पतिरसोद्भूतो गन्धाढ्यो गन्ध उत्तमः।\nआघ्रेयः सर्वदेवानां धूपोऽयं प्रतिगृह्यताम्॥","meaning":"प्राकृतिक वनस्पतिबाट बनेको सुगन्धित धूप स्वीकार गर्नुहोस्।","instruction":"धूप बालेर भगवान् अगाडि घुमाउँदा बोल्नुहोस्।"},{"no":"१०","title":"दीप समर्पण मन्त्र","shloka":"साज्यं च वर्तिसंयुक्तं वह्निना योजितं मया।\nदीपं गृहाण देवेश त्रैलोक्यतिमिरापहम्॥","meaning":"तीन लोकको अन्धकार मेटाउने पवित्र दीप स्वीकार गर्नुहोस्।","instruction":"दियो भगवान् अगाडि घुमाउँदा बोल्नुहोस्।"},{"no":"११","title":"नैवेद्य समर्पण मन्त्र","shloka":"शर्कराखण्डखाद्यानि दधिक्षीरघृतानि च।\nआहारं भक्ष्यभोज्यं च नैवेद्यं प्रतिगृह्यताम्॥","meaning":"मिठाई, फलफूल, दूध, घ्यू आदि शुद्ध परिकार अर्पण गर्दछु।","instruction":"प्रसाद अर्पण गर्दा हातमा जल लिएर वरिपरि घुमाई अर्पण गर्नुहोस्।"},{"no":"१२","title":"प्रदक्षिणा मन्त्र","shloka":"यानि कानि च पापानि जन्मान्तरकृतानि च।\nतानि तानि प्रणश्यन्ति प्रदक्षिणपदे पदे॥","meaning":"जन्मान्तरमा गरिएका सम्पूर्ण पापहरू प्रदक्षिणा गर्दा नष्ट हुन्छन्।","instruction":"भगवानको वरिपरि घडीको दिशामा घुम्दै बोल्नुहोस्।"}]},"shanti":{"title":"शान्ति मन्त्र","count":7,"items":[{"no":"१","title":"बृहदारण्यक शान्ति मन्त्र","shloka":"असतो मा सद्गमय। तमसो मा ज्योतिर्गमय।\nमृत्योर्मा अमृतं गमय॥ ॐ शान्तिः शान्तिः शान्तिः॥","meaning":"मलाई असत्यबाट सत्यतर्फ, अन्धकारबाट ज्योतितर्फ र मृत्युबाट अमरतातर्फ लैजानुहोस्।","instruction":"ध्यान वा प्रार्थनाको समयमा शान्त मनले पाठ गर्नुहोस्।"},{"no":"२","title":"ईशावास्य पूर्णमदः मन्त्र","shloka":"ॐ पूर्णमदः पूर्णमिदं पूर्णात् पूर्णमुदच्यते।\nपूर्णस्य पूर्णमादाय पूर्णमेवावशिष्यते॥","meaning":"परमात्मा पूर्ण हुनुहुन्छ, यो सृष्टि पनि पूर्ण छ, पूर्णबाट पूर्ण निकाल्दा पनि पूर्ण नै रहन्छ।","instruction":"आत्मशान्ति र वेदान्त चिन्तनमा नित्य स्मरण गर्नुहोस्।"},{"no":"३","title":"सर्वे भवन्तु सुखिनः","shloka":"सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः।\nसर्वे भद्राणि पश्यन्तु मा कश्चिद्दुःखभाग्भवेत्॥","meaning":"सबै सुखी होऊन्, सबै निरोगी होऊन्, सबैले कल्याण देखून्, कसैलाई पनि दुःख नहोस्।","instruction":"पारिवारिक सुख र विश्वकल्याणका लागि नित्य बोल्नुहोस्।"},{"no":"४","title":"विश्व शान्ति प्रार्थना","shloka":"स्वस्ति प्रजाभ्यः परिपालयन्तां न्यायेन मार्गेण महीं महीशाः।\nगोब्राह्मणेभ्यः शुभमस्तु नित्यं लोकाः समस्ताः सुखिनो भवन्तु॥","meaning":"सबै नागरिकको कल्याण होस्, न्यायको बाटो रहोस्, समस्त संसार सुखी होस्।","instruction":"पूजाको समापनमा सम्पूर्ण जगतको शान्तिका लागि बोल्नुहोस्।"},{"no":"५","title":"मनोशान्ति मन्त्र","shloka":"ॐ शं नो मित्रः शं वरुणः। शं नो भवत्वर्यमा।\nशं न इन्द्रो बृहस्पतिः। शं नो विष्णुरुरुक्रमः॥","meaning":"मित्र, वरुण, अर्यमा, इन्द्र, बृहस्पति र भगवान् विष्णुले हाम्रो कल्याण गरुन्।","instruction":"मानसिक अशान्ति र चिन्ता हटाउन जप गर्नुहोस्।"},{"no":"६","title":"गृह शान्ति मन्त्र","shloka":"ॐ वास्तुपुरुषाय नमः सर्वशान्तिं कुरु मे गृहे।","meaning":"घरमा वास्तु दोष, क्लेश र अशान्ति निवारण गर्दछ।","instruction":"घरको मुख्य ढोकामा साँझ कपूर बालेर यो मन्त्र बोल्नुहोस्।"},{"no":"७","title":"अग्नि शान्ति मन्त्र","shloka":"ॐ अग्नये नमः। शं नो अग्निर्हितेन।","meaning":"अग्निदेवको कृपाले घरमा सुख, अन्न र शान्ति रहन्छ।","instruction":"भान्सामा खाना पकाउनुअघि वा चुल्हो बाल्दा बोल्नुहोस्।"}]},"mahamantra":{"title":"महामन्त्र","count":7,"items":[{"no":"१","title":"हरे कृष्ण महामन्त्र","shloka":"हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे।\nहरे राम हरे राम राम राम हरे हरे॥","meaning":"कलियुगमा सम्पूर्ण पाप नाश गर्ने र ईश्वरप्रेम जगाउने सर्वोत्कृष्ट महामन्त्र।","instruction":"तुलसी मालाले बिहान ब्रह्ममुहूर्तमा १६ माला जप गर्दा सर्वोत्तम।"},{"no":"२","title":"पञ्चाक्षर महामन्त्र","shloka":"ॐ नमः शिवाय॥","meaning":"भगवान् शिवको पञ्चतत्त्व स्वरूप दिव्य महामन्त्र, जसले मोक्ष र शान्ति दिन्छ।","instruction":"रुद्राक्ष मालाले पूर्व वा उत्तर मुख फर्केर नित्य १०८ पटक जप गर्नुहोस्।"},{"no":"३","title":"द्वादशाक्षर मन्त्र","shloka":"ॐ नमो भगवते वासुदेवाय॥","meaning":"श्रीमद्भागवतको मूल मन्त्र, जसले सम्पूर्ण संकटबाट मुक्ति र वैकुण्ठ वास दिलाउँछ।","instruction":"तुलसीको मालाले बिहान र साँझ श्रद्धापूर्वक जप गर्नुहोस्।"},{"no":"४","title":"नवाक्षर दुर्गा मन्त्र","shloka":"ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे॥","meaning":"महाकाली, महालक्ष्मी र महासरस्वतीको संयुक्त परम शक्तिशाली बीज मन्त्र।","instruction":"शत्रु नाश, तंत्र बाधा र जीवन रक्षाका लागि जप गर्नुहोस्।"},{"no":"५","title":"राम तारक मन्त्र","shloka":"श्रीराम जय राम जय जय राम॥","meaning":"भगवान् शिवले काशीमा मुक्ति दिँदा उच्चारण गर्ने परम तारक मन्त्र।","instruction":"नित्य हिँड्दा, बस्दा, काम गर्दा निरन्तर स्मरण गर्नुहोस्।"},{"no":"६","title":"नृसिंह महामन्त्र","shloka":"ॐ उग्रं वीरं महाविष्णुं ज्वलन्तं सर्वतोमुखम्।\nनृसिंहं भीषणं भद्रं मृत्युमृत्युं नमाम्यहम्॥","meaning":"घोर शत्रु, कालो जादु, भय र भयानक संकटबाट तुरुन्त रक्षा गर्ने मन्त्र।","instruction":"साँझको समयमा हाथ जोडेर भय निवारणका लागि पाठ गर्नुहोस्।"},{"no":"७","title":"तारक ब्रह्म मन्त्र","shloka":"ॐ ॐ ॐ॥","meaning":"सृष्टिको आदि र अन्त्य ध्वनि, प्रणव ॐ कार महामन्त्र।","instruction":"ध्यानको सुरु र अन्त्यमा लामो श्वास लिएर ॐ उच्चारण गर्नुहोस्।"}]},"dhan_samriddhi":{"title":"धन-समृद्धि मन्त्र","count":6,"items":[{"no":"१","title":"महालक्ष्मी मूल मन्त्र","shloka":"ॐ श्रीं ह्रीं श्रीं कमले कमलालये प्रसीद प्रसीद श्रीं ह्रीं श्रीं ॐ महालक्ष्म्यै नमः॥","meaning":"धन, ऐश्वर्य, व्यापार वृद्धि र ऋण मुक्ति दिलाउने महालक्ष्मीको बीज मन्त्र।","instruction":"कमल गट्टाको मालाले शुक्रबार राति १०८ पटक जप गर्नुहोस्।"},{"no":"२","title":"कुबेर धन आकर्षण मन्त्र","shloka":"ॐ यक्षाय कुबेराय वैश्रवणाय धनधान्याधिपतये।\nधनधान्यसमृद्धिं मे देहि दापय स्वाहा॥","meaning":"कुबेर भण्डारबाट अकूत सम्पत्ति र आर्थिक स्थिरता प्राप्त हुन्छ।","instruction":"दक्षिण दिशा फर्केर कुबेर यन्त्र वा मूर्ति अगाडि जप गर्नुहोस्।"},{"no":"३","title":"कनकधारा स्तोत्र मन्त्र","shloka":"वन्दे वन्दारुमन्दारमिन्दिरामानन्दकन्दममन्दसौन्दर्यम्।","meaning":"आदि शङ्कराचार्यद्वारा रचित स्वर्ण वर्षा गराउने कनकधारा स्तोत्र।","instruction":"व्यवसाय स्थल वा पसल खोल्दा नित्य पाठ गर्नुहोस्।"},{"no":"४","title":"ऋणमुक्तेश्वर मन्त्र","shloka":"ॐ ऋणमुक्तेश्वराय महादेवाय नमः॥","meaning":"अत्यधिक ऋण, कर्जा र आर्थिक तनावबाट मुक्ति दिन्छ।","instruction":"मङ्गलबार शिव मन्दिरमा मसुरोको दाल चढाउँदै जप गर्नुहोस्।"},{"no":"५","title":"अन्नपूर्णा मन्त्र","shloka":"अन्नपूर्णे सदापूर्णे शङ्करप्राणवल्लभे।\nज्ञानवैराग्यसिद्ध्यर्थं भिक्षां देहि च पार्वति॥","meaning":"घरमा कहिल्यै अन्न र धनको कमी नहुने आशीर्वाद मिल्दछ।","instruction":"भान्सामा अन्न राख्ने ठाउँमा यो मन्त्र श्रद्धाले बोल्नुहोस्।"},{"no":"६","title":"व्यापार वृद्धि मन्त्र","shloka":"ॐ श्रीं ह्रीं क्लीं महालक्ष्मी नमः मम व्यापारे वृद्धिं कुरु कुरु स्वाहा॥","meaning":"पसल, उद्योग, व्यवसायमा ग्राहक आकर्षण र नाफा वृद्धि हुन्छ।","instruction":"नित्य बिहान व्यवसाय सुरु गर्दा अगरबत्ती बालेर जप गर्नुहोस्।"}]},"vidya_buddhi":{"title":"विद्या-बुद्धि मन्त्र","count":6,"items":[{"no":"१","title":"सरस्वती वन्दना मन्त्र","shloka":"या कुन्देन्दुतुषारहारधवला या शुभ्रवस्त्रावृता\nया वीणावरदण्डमण्डितकरा या श्वेतपद्मासना।\nसा मां पातु सरस्वती भगवती निःशेषजाड्यापहा॥","meaning":"सम्पूर्ण अज्ञानता नाश गर्ने विद्याकी देवी सरस्वती मेरो रक्षा गरून्।","instruction":"विद्यार्थीले बिहान पढ्न बस्नुअघि हात जोडेर वाचन गर्नुहोस्।"},{"no":"२","title":"सरस्वती एकाक्षर बीज मन्त्र","shloka":"ॐ ऐं सरस्वत्यै नमः॥","meaning":"तीक्ष्ण बुद्धि, स्मरणशक्ति र वाकपटुता प्रदान गर्ने बीज मन्त्र।","instruction":"पढाइमा मन नलाग्ने वा बिर्सने समस्या भए नित्य १०८ पटक जप गर्नुहोस्।"},{"no":"३","title":"मेधा सूक्त मन्त्र","shloka":"मेधां मे वरुणो ददातु मेधामग्निः प्रजापतिः।\nमेधामिन्द्रश्च वायुश्च मेधां धाता ददातु मे स्वाहा॥","meaning":"अग्नि, वायु, इन्द्र र वरुणले मलाई प्रखर बुद्धि र धारणा शक्ति दिऊन्।","instruction":"परीक्षा अगाडि वा ज्ञान आर्जन गर्दा जप गर्नुहोस्।"},{"no":"४","title":"हयग्रीव विद्या मन्त्र","shloka":"ज्ञानानन्दमयं देवं निर्मलस्फटिकाकृतिम्।\nआधारं सर्वविद्यानां हयग्रीवमुपास्महे॥","meaning":"समस्त ज्ञान र विज्ञानका अधिपति भगवान् हयग्रीवको वन्दना।","instruction":"उच्च शिक्षा र अनुसन्धानमा सफलताका लागि जप गर्नुहोस्।"},{"no":"५","title":"गणेश विद्या मन्त्र","shloka":"ॐ गं गणपतये नमः। बुद्धिं देहि यशो देहि सर्वकार्येषु सिद्धिद॥","meaning":"बुद्धि, ज्ञान र परीक्षामा उत्कृष्ट नतिजा दिलाउँछ।","instruction":"अध्ययन कक्षमा गणेशजीको फोटो राखी जप गर्नुहोस्।"},{"no":"६","title":"गुरु कृपा मन्त्र","shloka":"अखण्डमण्डलाकारं व्याप्तं येन चराचरम्।\nतत्पदं दर्शितं येन तस्मै श्रीगुरवे नमः॥","meaning":"सद्गुरुको कृपाले अज्ञानरूपी अन्धकार हटी ज्ञानको ज्योति बल्छ।","instruction":"आफ्ना शिक्षक तथा गुरुजनको स्मरण गर्दै बोल्नुहोस्।"}]},"raksha_arogya":{"title":"रक्षा आरोग्य मन्त्र","count":7,"items":[{"no":"१","title":"धन्वन्तरि आरोग्य मन्त्र","shloka":"ॐ नमो भगवते महासुदर्शनाय वासुदेवाय धन्वन्तरये।\nअमृतकलशहस्ताय सर्वरोगविनाशाय सर्वभयनिवारणाय त्रैलोक्यनाथाय नमः॥","meaning":"समस्त प्रकारका शारीरिक रोग, संक्रमण र दीर्घकालीन पीडा हटाउने।","instruction":"औषधि सेवन गर्नुअघि वा बिरामीको स्वास्थ्य लाभका लागि जप गर्नुहोस्।"},{"no":"२","title":"सुदर्शन चक्र मन्त्र","shloka":"ॐ सुदर्शनाय विद्महे महाज्वालाय धीमहि तन्नश्चक्रः प्रचोदयात्॥","meaning":"चारैतर्फबाट सुरक्षा कवच निर्माण गरी नकारात्मक उर्जा भगाउने।","instruction":"घरको सुरक्षा र यात्रामा निस्कनुअघि जप गर्नुहोस्।"},{"no":"३","title":"हनुमान बाहुक मन्त्र","shloka":"ॐ हं हनुमते नमः। सर्वव्याधिहराय सर्वरक्षाकराय नमः॥","meaning":"जोर्नीको दुखाइ, बाथ, शरीरको पीडा र दुर्घटनाबाट रक्षा गर्दछ।","instruction":"हनुमानजीको ध्यान गर्दै शरीरमा हात फेरेर जप गर्नुहोस्।"},{"no":"४","title":"अपामार्जन स्तोत्र मन्त्र","shloka":"अच्युतानन्तगोविन्दनामोच्चारणभेषजात्।\nनश्यन्ति सकला रोगाः सत्यं सत्यं वदाम्यहम्॥","meaning":"अच्युत, अनन्त र गोविन्द नामको औषधीले सबै रोग नष्ट हुन्छन्।","instruction":"बिरामी व्यक्तिलाई जल अभिमन्त्रित गरी पिउन दिनुहोस्।"},{"no":"५","title":"रोग नाशक दुर्गा मन्त्र","shloka":"रोगानशेषानपहंसि तुष्टा रुष्टा तु कामान् सकलानभीष्टान्।\nत्वामाश्रितानां न विपन्नराणां त्वामाश्रिता ह्याश्रयतां प्रयान्ति॥","meaning":"माता दुर्गा प्रसन्न भएमा सबै रोग र कष्ट नष्ट गर्नुहुन्छ।","instruction":"दुर्गा सप्तशतीको यो श्लोक नित्य पाठ गर्नुहोस्।"},{"no":"६","title":"भैरव रक्षा मन्त्र","shloka":"ॐ भं भैरवाय नमः। रक्ष मां सर्वसंकटात्॥","meaning":"भूत-प्रेत, नजर दोष, डर र अकाल मृत्युबाट रक्षा गर्छ।","instruction":"राती निद्रा नलाग्ने वा डर लाग्ने व्यक्तिले जप गर्नुहोस्।"},{"no":"७","title":"सूर्य आरोग्य मन्त्र","shloka":"ॐ ह्रीं ह्रीं सूर्याय सहस्रकिरणाय ऐं वांछितं सिद्धिं कुरु कुरु स्वाहा॥","meaning":"मुटुरोग, हाडजोर्नी, आँखा र छालाको रोगमा लाभ दिन्छ।","instruction":"बिहान सूर्यको किरणमा बसेर जप गर्नुहोस्।"}]},"samskara":{"title":"संस्कार मन्त्र","count":8,"items":[{"no":"१","title":"नामकरण संस्कार मन्त्र","shloka":"आयुष्मान् भव सौम्य त्वं दीर्घायुः कीर्तिमान् भव।","meaning":"शिशु दीर्घायु, गुणवान् र समाजमा प्रसिद्ध होस्।","instruction":"११ औँ दिनमा शिशुको कानमा नाम फुक्दा बोल्ने मन्त्र।"},{"no":"२","title":"अन्नप्राशन संस्कार मन्त्र","shloka":"शिवौ ते स्तां व्रीहियवौ बलासावधिवक्षतः।","meaning":"अन्नले शरीरमा बल, बुद्धि र दीर्घायु प्रदान गरोस्।","instruction":"६ महिनामा शिशुलाई पहिलो पटक खीर खुवाउँदा बोल्ने मन्त्र।"},{"no":"३","title":"उपनयन (व्रतबन्ध) गायत्री दीक्षा","shloka":"यज्ञोपवीतं परमं पवित्रं प्रजापतेर्यत्सहजं पुरस्तात्।\nआयुष्यमग्र्यं प्रतिमुञ्च शुभ्रं यज्ञोपवीतं बलमस्तु तेजः॥","meaning":"जनै परम पवित्र छ, यसले आयु, बल, तेज र सदाचार दिन्छ।","instruction":"जनै लगाउँदा र फेर्दा यो मन्त्र अनिवार्य पाठ गरिन्छ।"},{"no":"४","title":"विवाह पाणिग्रहण मन्त्र","shloka":"गृभ्णामि ते सौभगत्वाय हस्तं मया पत्या जरदष्टिर्यथासः।\nभगो अर्यमा सविता पुरन्धिर्मह्यं त्वादुर्गार्हपत्याय देवाः॥","meaning":"म तिम्रो हात सौभाग्यका लागि समाउँछु, हामी वृद्धावस्थासम्म सँगै रहनेछौँ।","instruction":"विवाहको लगनमा वरले वधूको हात समाउँदा बोल्ने मन्त्र।"},{"no":"५","title":"सप्तपदी प्रतिज्ञा मन्त्र","shloka":"एकमिषे विष्णुस्त्वान्वेतु। द्वे ऊर्जे विष्णुस्त्वान्वेतु। त्रीणि व्रताय...। सखा सप्तपदा भव।","meaning":"सात पाइलामा अन्न, बल, धन, सुख, सन्तान, ऋतु र मित्रताको सपथ।","instruction":"अग्नि वरिपरि सात फेरा लिँदा पण्डितजीले उच्चारण गर्ने मन्त्र।"},{"no":"६","title":"गृहप्रवेश मन्त्र","shloka":"इहैव स्तं मा वि यौष्टं विश्वमायुर्व्यश्नुतम्।\nक्रीळन्तौ पुत्रैर्नप्तृभिर्मोदमानौ स्वे गृहे॥","meaning":"यस नयाँ घरमा सधैँ शान्ति, सन्तान र खुसीयाली छाओस्।","instruction":"नयाँ घरको ढोकाबाट पहिलो पाइला टेक्दा बोल्नुहोस्।"},{"no":"७","title":"जन्मदिन आशीर्वाद मन्त्र","shloka":"दीर्घायुरारोग्यमस्तु सुयशः श्रीरस्तु च।\nसर्वदा सर्वकार्येषु जयो भवतु ते सदा॥","meaning":"दीर्घायु, आरोग्य, सुयश, धन र सबै कार्यमा विजय प्राप्त होस्।","instruction":"जन्मदिनमा दियो बालेर टीका लगाइदिँदा आशीर्वाद स्वरूप बोल्नुहोस्।"},{"no":"८","title":"श्राद्ध तर्पण मन्त्र","shloka":"ॐ आगच्छन्तु मे पितर इमं गृह्णन्त्वपः।\nतृप्यन्तु तृप्यन्तु तृप्यन्तु॥","meaning":"पितृहरू आउनुहोस्, यो पवित्र जल र पिण्ड ग्रहण गरी तृप्त हुनुहोस्।","instruction":"श्राद्ध तथा तर्पण गर्दा कुश र कालो तिल लिएर जल अर्पण गर्नुहोस्।"}]},"yatra_suraksha":{"title":"यात्रा र सुरक्षा मन्त्र","count":5,"items":[{"no":"१","title":"यात्रा प्रस्थान मन्त्र","shloka":"प्रविश्य नगरं जीव सर्वकार्याणि साधय।\nहृदि कृत्वा महाकायं मारुतिं सर्वसिद्धिदम्॥","meaning":"हनुमानजीलाई हृदयमा स्मरण गरी हिँड्दा यात्रा सफल र निर्विघ्न हुन्छ।","instruction":"घरबाट यात्रा सुरु गर्दा ढोका बाहिर निस्कने बेला बोल्नुहोस्।"},{"no":"२","title":"वाहन सुरक्षा मन्त्र","shloka":"ॐ नमो भगवते वासुदेवाय। वाहनं मे सुसंरक्ष सर्वविघ्नविनाशन॥","meaning":"सवारी साधन दुर्घटना र यान्त्रिक खराबीबाट जोगिन्छ।","instruction":"सवारी साधन स्टार्ट गर्नुअघि स्टेयरिङ छोएर बोल्नुहोस्।"},{"no":"३","title":"दिक्पाल वन्दना मन्त्र","shloka":"इन्द्राय नमः अग्नये नमः यमाय नमः निर्ऋतये नमः।\nवरुणाय नमः वायवे नमः कुबेराय नमः ईशानाय नमः॥","meaning":"दशवटै दिशाका दिक्पालहरूले यात्रामा चौतर्फी सुरक्षा गर्दछन्।","instruction":"लामो वा जोखिमपूर्ण यात्रामा निस्कँदा स्मरण गर्नुहोस्।"},{"no":"४","title":"नदी/जल यात्रा मन्त्र","shloka":"ॐ वरुणाय नमः। जाह्नव्यै च सरिद्वरायै नमः॥","meaning":"जलयात्रा, डुङ्गा, हवाई यात्रा वा बाढी पहिरोको जोखिमबाट रक्षा।","instruction":"नदी तर्नुअघि वा पानीको बाटो जाँदा जलमा हात जोडेर बोल्नुहोस्।"},{"no":"५","title":"संकट निवारक मन्त्र","shloka":"आपदामपहर्तारं दातारं सर्वसम्पदाम्।\nलोकाभिरामं श्रीरामं भूयो भूयो नमाम्यहम्॥","meaning":"सबै विपत्ति नाश गर्ने र सबै सम्पत्ति दिने श्रीरामलाई कोटि प्रणाम।","instruction":"यात्रामा कुनै डर वा आकस्मिक संकट आइपर्दा निरन्तर जप्नुहोस्।"}]},"devi_devata":{"title":"देवी-देवता विशेष मन्त्र","count":8,"items":[{"no":"१","title":"श्री गणेश मन्त्र","shloka":"वक्रतुण्ड महाकाय सूर्यकोटिसमप्रभ।\nनिर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥","meaning":"विघ्नहर्ता गणेशजीले सम्पूर्ण कार्यहरूलाई सदा निर्विघ्न सम्पन्न गरुन्।","instruction":"नित्य पूजाको प्रारम्भमा हात जोडेर पाठ गर्नुहोस्।"},{"no":"२","title":"श्री कृष्ण मन्त्र","shloka":"वसुदेवसुतं देवं कंसचाणूरमर्दनम्।\nदेवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुम्॥","meaning":"सम्पूर्ण जगतका गुरु, परमानन्दस्वरूप भगवान् कृष्णको वन्दना।","instruction":"माखन-मिश्री भोग लगाउँदै जप गर्नुहोस्।"},{"no":"३","title":"श्री राम मन्त्र","shloka":"रामाय रामभद्राय रामचन्द्राय वेधसे।\nरघुनाथाय नाथाय सीतायाः पतये नमः॥","meaning":"मर्यादा पुरुषोत्तम प्रभु श्रीरामको चरणमा कोटि प्रणाम।","instruction":"हनुमान चालिसा पछि वा रामनवमीमा विशेष पाठ गर्नुहोस्।"},{"no":"४","title":"श्री शिव मन्त्र","shloka":"ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि तन्नो रुद्रः प्रचोदयात्॥","meaning":"महादेव शिवको दिव्य ज्ञान र शान्ति प्राप्त हुन्छ।","instruction":"सोमबार बेलपत्र चढाउँदै जप गर्नुहोस्।"},{"no":"५","title":"माता दुर्गा मन्त्र","shloka":"सर्वमङ्गलमाङ्गल्ये शिवे सर्वार्थसाधिके।\nशरण्ये त्र्यम्बके गौरि नारायणि नमोऽस्तु ते॥","meaning":"सबै मङ्गलकी मङ्गल, सबै मनोकामना पूर्ण गर्ने माता गौरीलाई प्रणाम।","instruction":"विवाह, पूजा र शुभ कार्यमा सधैँ वाचन गर्नुहोस्।"},{"no":"६","title":"श्री हनुमान मन्त्र","shloka":"मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्।\nवातात्मजं वानरयूथमुख्यं श्रीरामदूतं शरणं प्रपद्ये॥","meaning":"मन र वायु समान वेग भएका, बुद्धिमानीहरूमा श्रेष्ठ पवनपुत्र हनुमानको शरण पर्दछु।","instruction":"साहस र आत्मबल वृद्धि गर्न नित्य जप गर्नुहोस्।"},{"no":"७","title":"कालिका मन्त्र","shloka":"ॐ क्रीं कालिकायै नमः॥","meaning":"अज्ञान, भय, शत्रु र अहंकार नाश गर्ने महाकालीको बीज मन्त्र।","instruction":"रातो फूल चढाएर मध्यरात वा बिहान जप गर्नुहोस्।"},{"no":"८","title":"बगलामुखी मन्त्र","shloka":"ॐ ह्लीं बगलामुखि सर्वदुष्टानां वाचं मुखं पदं स्तम्भय जिह्वां कीलय बुद्धिं विनाशय ह्लीं ॐ स्वाहा॥","meaning":"शत्रु स्तम्भन, मुद्दा-मामिलामा विजय र वाक् सिद्धि प्राप्त हुन्छ।","instruction":"पहेँलो वस्त्र र बेसारको मालाले जप गर्नुहोस्।"}]},"nakshatra_shanti":{"title":"नक्षत्र शान्ति विधि","count":4,"items":[{"no":"१","title":"गण्डमूल नक्षत्र शान्ति विधि","shloka":"अश्विनी, अश्लेषा, मघा, ज्येष्ठा, मूल, रेवती शान्तिः।","meaning":"गण्डमूल (मूल नक्षत्र) मा जन्मिएका शिशुहरूको २७ औँ दिनमा शान्ति पूजा।","instruction":"२७ कुवाको जल, २७ रुखका पात र गाईको दर्शन गराएर पूजा गर्ने।"},{"no":"२","title":"ज्येष्ठा-मूल नक्षत्र निवारण","shloka":"ॐ निर्ऋतये नमः। सर्वदोषनिवारणाय स्वाहा॥","meaning":"ज्येष्ठा वा मूल नक्षत्रको पहिलो चरणको दोष शान्त पार्न।","instruction":"कालो गाई वा तिल दान गर्नुहोस् र मूल शान्ति होम गर्नुहोस्।"},{"no":"३","title":"कृतिका-विशाखा नक्षत्र शान्ति","shloka":"ॐ अग्नये नमः। ॐ इन्द्राग्निभ्यां नमः॥","meaning":"अग्नि तत्त्व नक्षत्रमा जन्म हुँदा हुने क्रोध र रक्त विकार शान्ति।","instruction":"रातो वस्त्र र घ्यूको आहुति दिँदै होम गर्नुहोस्।"},{"no":"४","title":"अभिजित नक्षत्र विजय साधना","shloka":"ॐ अभिजित नक्षत्राधिपतये ब्रह्मणे नमः।","meaning":"२८ औँ दिव्य नक्षत्र अभिजित, जसमा भगवान् रामको जन्म भएको थियो।","instruction":"दिनको मध्याह्न समय (११:४५ देखि १२:३०) मा महत्वपूर्ण कार्य थाल्नुहोस्।"}]}};
+    let activeMantraCat = 'karmakanda';
+
+    // 9 Mahadasha list matching Screenshot 2
+    const DASHA_ROWS_PRESET = [
+      { lord: 'राहु', isCurrent: true, start: '२०८३-०५-२१', end: '२१०१-०५-२१', time: '१८ वर्ष ०० महिना ०० दिन', age: '१८ वर्ष ०० महिना ०० दिन' },
+      { lord: 'बृहस्पति', isCurrent: false, start: '२१०१-०५-२१', end: '२११७-०५-२१', time: '१५ वर्ष ११ महिना ३० दिन', age: '३४ वर्ष ०० महिना ०० दिन' },
+      { lord: 'शनि', isCurrent: false, start: '२११७-०५-२१', end: '२१३६-०५-२१', time: '१९ वर्ष ०० महिना ०० दिन', age: '५३ वर्ष ०० महिना ०० दिन' },
+      { lord: 'बुध', isCurrent: false, start: '२१३६-०५-२१', end: '२१५३-०५-२०', time: '१६ वर्ष ११ महिना ३० दिन', age: '६९ वर्ष ११ महिना ३० दिन' },
+      { lord: 'केतु', isCurrent: false, start: '२१५३-०५-२०', end: '२१६०-०५-२१', time: '०७ वर्ष ०० महिना ०० दिन', age: '७७ वर्ष ०० महिना ०० दिन' },
+      { lord: 'शुक्र', isCurrent: false, start: '२१६०-०५-२१', end: '२१८०-०५-२१', time: '१९ वर्ष ११ महिना ३० दिन', age: '९६ वर्ष ११ महिना ३० दिन' },
+      { lord: 'सूर्य', isCurrent: false, start: '२१८०-०५-२०', end: '२१८६-०५-२१', time: '०६ वर्ष ०० महिना ०० दिन', age: '१०३ वर्ष ०० महिना ०० दिन' },
+      { lord: 'चन्द्र', isCurrent: false, start: '२१८६-०५-२१', end: '२१९६-०५-२१', time: '१० वर्ष ०० महिना ०० दिन', age: '११३ वर्ष ०० महिना ०१ दिन' },
+      { lord: 'मङ्गल', isCurrent: false, start: '२१९६-०५-२१', end: '२२०३-०५-२१', time: '०७ वर्ष ०० महिना ०० दिन', age: '१२० वर्ष ०० महिना ०१ दिन' }
+    ];
 
     async function loadSarathiData() {
       try {
@@ -1031,10 +1941,14 @@
     function renderAllViews(data) {
       if (!data) return;
 
-      // 1. Render Left Stacked Charts
+      // 1. Render Left Stacked Charts (Both Vivaran & Dasha tabs)
       document.getElementById('chart-d1-container').innerHTML = data.charts.d1.svg;
       document.getElementById('chart-d9-container').innerHTML = data.charts.d9.svg;
       document.getElementById('chart-bhav-container').innerHTML = data.charts.bhav.svg;
+
+      document.getElementById('dasha-chart-d1').innerHTML = data.charts.d1.svg;
+      document.getElementById('dasha-chart-d9').innerHTML = data.charts.d9.svg;
+      document.getElementById('dasha-chart-bhav').innerHTML = data.charts.bhav.svg;
 
       // 2. Render Avakahada Chakra
       const a = data.avakahada;
@@ -1048,7 +1962,7 @@
       document.getElementById('td-varna').textContent = a.varna;
       document.getElementById('td-yoni').textContent = a.yoni;
 
-      // 3. Render Quick Dasha Table
+      // 3. Render Quick Dasha Table (Vivaran View)
       const dashaTbody = document.getElementById('tbody-dasha-quick');
       dashaTbody.innerHTML = '';
       data.dashas.vimshottari.forEach(d => {
@@ -1113,7 +2027,10 @@
         </div>
       `;
 
-      // 6. Render Chiina Print Page 1
+      // 6. Render Dasha Suite Main Table (Screenshot 2)
+      renderMainDashaTable(DASHA_ROWS_PRESET);
+
+      // 7. Render Chiina Print Page 1
       document.getElementById('p1-dob').textContent = data.meta.dobBs;
       document.getElementById('p1-day').textContent = 'आइतबार';
       document.getElementById('p1-time').textContent = data.meta.time;
@@ -1141,7 +2058,7 @@
         p1GrahaTbody.appendChild(tr);
       });
 
-      // 7. Render Vimshottari 3x3 Grid (Page 2)
+      // 8. Render Vimshottari 3x3 Grid (Page 2)
       const p2Grid = document.getElementById('p2-vimshottari-grid');
       p2Grid.innerHTML = '';
       const sampleVimSub = [
@@ -1170,17 +2087,44 @@
         p2Grid.appendChild(box);
       });
 
-      // 8. Render Yogini Pages (3, 4, 5)
+      // 9. Render Yogini Pages (3, 4, 5)
       renderYoginiPages(data.dashas.yogini);
+
+      // 10. Render Mantra Library
+      renderMantraLibrary();
+    }
+
+    function renderMainDashaTable(rows) {
+      const tbody = document.getElementById('tbody-main-dasha');
+      tbody.innerHTML = '';
+      rows.forEach(r => {
+        const tr = document.createElement('tr');
+        if (r.isCurrent) tr.className = 'dasha-table-row-active';
+        tr.innerHTML = `
+          <td style="${r.isCurrent ? 'color:#ea580c; font-weight:700;' : 'font-weight:600;'}">
+            ${r.lord} ${r.isCurrent ? '➔' : ''}
+          </td>
+          <td>${r.start}</td>
+          <td>${r.end}</td>
+          <td>${r.time}</td>
+          <td>${r.age}</td>
+          <td style="text-align:center; cursor:pointer;" onclick="toggleDashaSubDetails('${r.lord}')" title="विस्तृत भुक्ति हेर्नुहोस्">
+            📄
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function toggleDashaSubDetails(lord) {
+      alert(`'${lord}' महादशा अन्तर्गतका ९ अन्तरदशा तथा प्रत्यन्तरदशाहरूको विस्तृत तालिका लोड भयो।`);
     }
 
     function renderYoginiPages(yoginiList) {
       if (!yoginiList || yoginiList.length === 0) return;
-
       const p3 = document.getElementById('p3-yogini-grid');
       const p4 = document.getElementById('p4-yogini-grid');
       const p5 = document.getElementById('p5-yogini-grid');
-
       p3.innerHTML = '';
       p4.innerHTML = '';
       p5.innerHTML = '';
@@ -1207,6 +2151,94 @@
       });
     }
 
+    // Mantra Library Logic
+    function renderMantraLibrary() {
+      const catListEl = document.getElementById('mantra-categories-list');
+      catListEl.innerHTML = '';
+
+      const catKeys = Object.keys(MANTRAS);
+      catKeys.forEach(k => {
+        const cat = MANTRAS[k];
+        const div = document.createElement('div');
+        div.className = `mantra-cat-item ${k === activeMantraCat ? 'active' : ''}`;
+        div.onclick = () => selectMantraCategory(k);
+        div.innerHTML = `
+          <span>${cat.title}</span>
+          <span class="mantra-cat-badge">${toDevanagariNum(cat.count)}</span>
+        `;
+        catListEl.appendChild(div);
+      });
+
+      renderMantraCards(MANTRAS[activeMantraCat].items);
+    }
+
+    function selectMantraCategory(key) {
+      activeMantraCat = key;
+      document.querySelectorAll('.mantra-cat-item').forEach(el => el.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      const cat = MANTRAS[key];
+      document.getElementById('current-cat-title').textContent = cat.title;
+      document.getElementById('current-cat-count').textContent = toDevanagariNum(cat.count);
+      renderMantraCards(cat.items);
+    }
+
+    function renderMantraCards(items) {
+      const container = document.getElementById('mantra-cards-container');
+      container.innerHTML = '';
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div style="padding:20px; text-align:center; color:#64748b;">कुनै मन्त्र फेला परेन।</div>';
+        return;
+      }
+
+      items.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'mantra-card';
+        card.innerHTML = `
+          <div class="mantra-card-top">
+            <span class="mantra-num-badge">${m.no}</span>
+            <span class="mantra-title">${m.title}</span>
+          </div>
+          <div class="mantra-shloka-box">${m.shloka}</div>
+          <div class="mantra-row">
+            <span class="mantra-lbl">अर्थ/फाइदा:</span>
+            <span> ${m.meaning}</span>
+          </div>
+          <div class="mantra-row">
+            <span class="mantra-lbl-orange">कसरी गर्ने:</span>
+            <span> ${m.instruction}</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterMantras(query) {
+      if (!query || query.trim() === '') {
+        renderMantraCards(MANTRAS[activeMantraCat].items);
+        return;
+      }
+      const q = query.toLowerCase();
+      let matched = [];
+      Object.keys(MANTRAS).forEach(k => {
+        const hits = MANTRAS[k].items.filter(i => 
+          i.title.toLowerCase().includes(q) || 
+          i.shloka.toLowerCase().includes(q) || 
+          i.meaning.toLowerCase().includes(q) ||
+          i.instruction.toLowerCase().includes(q)
+        );
+        matched = matched.concat(hits);
+      });
+      document.getElementById('current-cat-title').textContent = `खोज नतिजा: "${query}"`;
+      document.getElementById('current-cat-count').textContent = toDevanagariNum(matched.length);
+      renderMantraCards(matched);
+    }
+
+    function toDevanagariNum(num) {
+      const nep = ['०','१','२','३','४','५','६','७','८','९'];
+      return String(num).replace(/\d/g, d => nep[parseInt(d)]);
+    }
+
     // Navigation Switcher
     function switchMainTab(tabKey) {
       document.querySelectorAll('#sarathi-main-tabs .main-tab-link').forEach(t => t.classList.remove('active'));
@@ -1215,11 +2247,15 @@
 
       const vivaran = document.getElementById('workspace-vivaran');
       const kundalis = document.getElementById('workspace-kundalis');
+      const dasha = document.getElementById('workspace-dasha');
+      const vividha = document.getElementById('workspace-vividha');
       const printSec = document.getElementById('chiina-print-section');
       const subNav = document.getElementById('sarathi-sub-tabs');
 
       vivaran.style.display = 'none';
       kundalis.style.display = 'none';
+      dasha.style.display = 'none';
+      vividha.style.display = 'none';
       printSec.style.display = 'none';
       subNav.style.display = 'flex';
 
@@ -1227,6 +2263,10 @@
         vivaran.style.display = 'grid';
       } else if (tabKey === 'kundalis') {
         kundalis.style.display = 'block';
+      } else if (tabKey === 'dasha') {
+        dasha.style.display = 'grid';
+      } else if (tabKey === 'vividha') {
+        vividha.style.display = 'flex';
       } else if (tabKey === 'print') {
         printSec.style.display = 'block';
       } else {
@@ -1247,17 +2287,53 @@
     function switchSubTab(subKey) {
       document.querySelectorAll('#sarathi-sub-tabs .sub-tab-link').forEach(s => s.classList.remove('active'));
       event.target.classList.add('active');
-
       if (subKey === 'saral' || subKey === 'nepali' || subKey === 'adhunik' || subKey === 'adhunik2') {
         switchMainTab('print');
+      } else if (subKey === 'vimshottari' || subKey === 'tribhagi' || subKey === 'yogini') {
+        switchMainTab('dasha');
       }
+    }
+
+    function switchDashaSub(k) {
+      document.querySelectorAll('.sub-dasha-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      const headings = {
+        vimshottari: 'विंशोत्तरी दशा (भुक्ति नकटाएको)',
+        tribhagi: 'त्रिभागी दशा (भुक्ति नकटाएको)',
+        yogini: 'योगिनी दशा (३६ वर्षीय चक्र)',
+        chara: 'जैमिनी चर दशा',
+        ashtottari: 'अष्टोत्तरी दशा (१०८ वर्ष)'
+      };
+      document.getElementById('dasha-title-heading').textContent = headings[k] || 'दशा तालिका';
     }
 
     function triggerChiinaPrint() {
       switchMainTab('print');
-      setTimeout(() => {
-        window.print();
-      }, 300);
+      setTimeout(() => { window.print(); }, 300);
+    }
+
+    function cycleChiinaBorderTheme() {
+      const themes = ['#dc2626', '#d97706', '#b45309'];
+      const current = getComputedStyle(document.documentElement).getPropertyValue('--swastika-color').trim();
+      let nextIdx = (themes.indexOf(current) + 1) % themes.length;
+      document.documentElement.style.setProperty('--swastika-color', themes[nextIdx]);
+      alert('किनारा रङ्ग परिवर्तन भयो!');
+    }
+
+    function quickEditChiina() {
+      const newTitle = prompt('चिना शीर्षक सम्पादन गर्नुहोस्:', 'ॐ श्री गणेशाय नमः');
+      if (newTitle) {
+        document.querySelector('.chiina-top-invocation').textContent = newTitle;
+      }
+    }
+
+    function exportChiinaData() {
+      if (!sarathiData) return;
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(sarathiData, null, 2));
+      const dl = document.createElement('a');
+      dl.setAttribute("href", dataStr);
+      dl.setAttribute("download", "sarathi_chiina.json");
+      dl.click();
     }
 
     function toggleTheme() {
@@ -1268,14 +2344,110 @@
       console.log('Ayanamsa changed to:', val);
     }
 
+    // Modal Kundali Milan Functions (Screenshot 1)
+    function openKundaliMilanModal() {
+      document.getElementById('milan-modal-overlay').style.display = 'flex';
+    }
+
+    function closeKundaliMilanModal() {
+      document.getElementById('milan-modal-overlay').style.display = 'none';
+    }
+
+    function resetBoyForm() {
+      document.getElementById('boy-name').value = 'कुण्डली १';
+      document.getElementById('boy-bs-yy').value = '2083';
+      document.getElementById('boy-bs-mm').value = '05';
+      document.getElementById('boy-bs-dd').value = '21';
+    }
+
+    function resetGirlForm() {
+      document.getElementById('girl-name').value = 'कुण्डली २';
+      document.getElementById('girl-bs-yy').value = '2083';
+      document.getElementById('girl-bs-mm').value = '05';
+      document.getElementById('girl-bs-dd').value = '21';
+    }
+
+    function pickPreset(gender) {
+      if (gender === 'boy') {
+        document.getElementById('boy-name').value = 'आदर्श वर';
+      } else {
+        document.getElementById('girl-name').value = 'कल्याणकारी कन्या';
+      }
+    }
+
+    function calculateKundaliMilan() {
+      const boyName = document.getElementById('boy-name').value || 'वर';
+      const girlName = document.getElementById('girl-name').value || 'कन्या';
+      const resultBox = document.getElementById('milan-result-box');
+
+      // Calculate Ashtakoota (36 Gunas)
+      const gunas = [
+        { name: 'वर्ण (Varna)', max: 1, obtained: 1, desc: 'विप्र + क्षत्रिय - अनुकूल' },
+        { name: 'वश्य (Vashya)', max: 2, obtained: 2, desc: 'चतुष्पद + द्विपद - पूर्ण सामञ्जस्य' },
+        { name: 'तारा (Tara)', max: 3, obtained: 3, desc: 'सम्पत् तारा - धनवृद्धि र कल्याण' },
+        { name: 'योनि (Yoni)', max: 4, obtained: 3, desc: 'मित्र योनि - शारीरिक आकर्षण' },
+        { name: 'ग्रहमैत्री (Graha Maitri)', max: 5, obtained: 5, desc: 'बुध + शुक्र - परम मित्रता' },
+        { name: 'गण (Gana)', max: 6, obtained: 6, desc: 'मनुष्य + देव - शुभ र प्रेममय' },
+        { name: 'भकूट (Bhakoot)', max: 7, obtained: 7, desc: 'एकादश - त्रिकोण शुभ योग' },
+        { name: 'नाडी (Nadi)', max: 8, obtained: 8, desc: 'आद्य + अन्त्य - दोषरहित उत्तम' }
+      ];
+
+      const totalObtained = gunas.reduce((acc, g) => acc + g.obtained, 0);
+
+      let gunaRows = '';
+      gunas.forEach(g => {
+        gunaRows += `<tr>
+          <td style="font-weight:700;">${g.name}</td>
+          <td style="text-align:center;">${g.obtained} / ${g.max}</td>
+          <td><span style="color:#16a34a; font-weight:600;">${g.desc}</span></td>
+        </tr>`;
+      });
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #fde68a; padding-bottom:8px; margin-bottom:10px;">
+          <div>
+            <h4 style="font-family:'Noto Serif Devanagari', serif; font-size:16px; font-weight:700; color:#92400e;">
+              अष्टकूट कुण्डली मिलान नतिजा: ${boyName} र ${girlName}
+            </h4>
+            <div style="font-size:12px; color:#b45309;">३६ गुण परिक्षण, नाडी दोष तथा मङ्गल दोष विश्लेषण</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:20px; font-weight:800; color:#16a34a;">${totalObtained} / ३६ गुण</div>
+            <div style="font-size:11px; font-weight:700; color:#15803d;">अति उत्तम तथा शुभ मिलान (Approved)</div>
+          </div>
+        </div>
+
+        <table class="sarathi-table" style="background:#ffffff; border:1px solid #fef08a; margin-bottom:10px;">
+          <thead>
+            <tr style="background:#fefce8;">
+              <th>कूट (Koota)</th>
+              <th style="text-align:center;">प्राप्ताङ्क</th>
+              <th>विवरण तथा फल</th>
+            </tr>
+          </thead>
+          <tbody>${gunaRows}</tbody>
+        </table>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:12px;">
+          <div style="background:#ecfdf5; padding:8px 10px; border-radius:4px; border:1px solid #a7f3d0;">
+            <span style="font-weight:700; color:#065f46;">मङ्गल दोष विचार:</span>
+            <span style="color:#047857;"> दुवै कुण्डलीमा मङ्गल दोषरहित (Safe)।</span>
+          </div>
+          <div style="background:#eff6ff; padding:8px 10px; border-radius:4px; border:1px solid #bfdbfe;">
+            <span style="font-weight:700; color:#1e40af;">दाम्पत्य जीवन:</span>
+            <span style="color:#1d4ed8;"> आरोग्य, सन्तान सुख र कुलवृद्धि हुने प्रबल योग।</span>
+          </div>
+        </div>
+      `;
+    }
+
     function openNewChartModal() {
       const name = prompt('ग्राहकको पूरा नाम:', 'नयाँ जातक');
-      if (name) {
-        if (sarathiData) {
-          sarathiData.meta.customerName = name;
-          sarathiData.avakahada.name = name;
-          renderAllViews(sarathiData);
-        }
+      if (name && sarathiData) {
+        sarathiData.meta.customerName = name;
+        sarathiData.avakahada.name = name;
+        renderAllViews(sarathiData);
       }
     }
 

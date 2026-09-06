@@ -272,5 +272,6 @@ module.exports = {
   resolveRashiIndex,
   getPanchaPakshiBird,
   calculate10Poruthams,
+  calculatePoruthams: calculate10Poruthams,
   calculatePapasamya
 };

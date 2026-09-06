@@ -1040,6 +1040,10 @@
               🏛️ Kerykeion पाश्चात्य
             </button>
 
+            <button onclick="openXinisIztroModal()" class="btn-ghost" style="border-color:rgba(56,189,248,0.5); color:#38bdf8; background:rgba(56,189,248,0.08);">
+              🌌 XiNiS &amp; 紫微斗数
+            </button>
+
             <button onclick="openUsersModal()" class="btn-ghost" style="border-color:rgba(52,152,219,0.5); color:#3498db; background:rgba(52,152,219,0.08); position:relative;">
               👥 प्रयोगकर्ता प्रमाणीकरण <span id="nav-pending-users-badge" style="background:#e74c3c; color:#fff; border-radius:999px; font-size:10px; font-weight:700; padding:1px 6px; margin-left:4px; display:none;">0</span>
             </button>
@@ -2404,6 +2408,92 @@
         <div id="kerykeion-results-pane" style="min-height:260px;">
           <div style="text-align:center; padding:30px; color:#ad9eb2; font-size:12.5px;">
             विवरण भरेर 'गणना गर्नुहोस्' थिच्नुहोस्।
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- XiNiS Engine & Zi Wei Dou Shu Modal -->
+    <div id="xinis-iztro-modal" class="custom-modal" onclick="handleXinisModalOverlayClick(event)">
+      <div class="custom-modal-box" style="max-width:960px; width:95%; max-height:92vh; overflow-y:auto; background:var(--bg-card); border:1px solid rgba(56,189,248,0.3); box-shadow:0 25px 50px -12px rgba(0,0,0,0.7); border-radius:14px; padding:24px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:14px;">
+          <div>
+            <h3 style="font-size:18px; color:#38bdf8; margin:0 0 4px 0; font-family:'Cinzel', serif; display:flex; align-items:center; gap:8px;">
+              🌌 XiNiS Engine &amp; 紫微斗数 (Zi Wei Dou Shu)
+            </h3>
+            <p style="font-size:12px; color:var(--text-muted); margin:0;">
+              Swiss Ephemeris १० घर प्रणाली, ७ दृष्टि ढाँचा (Grand Trine, T-Square, Yod, Kite), १६ स्थिर तारा र परम्परागत चिनियाँ १२-महल कुण्डली
+            </p>
+          </div>
+          <button class="km-close-btn" onclick="closeXinisIztroModal()" style="background:transparent; border:none; color:var(--text-muted); font-size:18px; cursor:pointer; padding:4px 8px; border-radius:6px;">✕</button>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div style="display:flex; gap:8px; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:8px; flex-wrap:wrap;">
+          <button id="btn-tab-xinis-chart" onclick="switchXinisTab('chart')" class="btn-ghost" style="font-size:12px; padding:6px 14px; border-color:rgba(56,189,248,0.4); color:#38bdf8; background:rgba(56,189,248,0.1); font-weight:700;">
+            🌌 १० घर &amp; दृष्टि ढाँचा
+          </button>
+          <button id="btn-tab-xinis-stars" onclick="switchXinisTab('stars')" class="btn-ghost" style="font-size:12px; padding:6px 14px; border-color:transparent; color:var(--text-muted);">
+            ✨ १६ स्थिर तारा (Fixed Stars)
+          </button>
+          <button id="btn-tab-xinis-prog" onclick="switchXinisTab('prog')" class="btn-ghost" style="font-size:12px; padding:6px 14px; border-color:transparent; color:var(--text-muted);">
+            ⏩ Secondary Progressions (१ दिन = १ वर्ष)
+          </button>
+          <button id="btn-tab-iztro" onclick="switchXinisTab('iztro')" class="btn-ghost" style="font-size:12px; padding:6px 14px; border-color:transparent; color:var(--text-muted);">
+            📜 紫微斗数 १२-महल Astrolabe SVG
+          </button>
+        </div>
+
+        <!-- Inputs Grid -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:16px; background:rgba(255,255,255,0.02); padding:14px; border-radius:10px; border:1px solid rgba(255,255,255,0.05);">
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px;">नाम / Name</label>
+            <input id="xi-name" type="text" value="Bensar Tiwari" style="width:100%; height:32px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; padding:0 8px; font-size:12px;" />
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px;">लिङ्ग / Gender</label>
+            <select id="xi-gender" style="width:100%; height:32px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; padding:0 8px; font-size:12px;">
+              <option value="Male">पुरुष (Male)</option>
+              <option value="Female">महिला (Female)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px;">जन्म मिति (UTC/Local)</label>
+            <input id="xi-dob" type="datetime-local" value="1995-10-24T14:30" style="width:100%; height:32px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; padding:0 8px; font-size:12px;" />
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px;">घर प्रणाली (House System)</label>
+            <select id="xi-house-system" style="width:100%; height:32px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; padding:0 8px; font-size:12px;">
+              <option value="Placidus" selected>Placidus (P) - समय अर्ध-चाप</option>
+              <option value="Whole_Sign">Whole Sign (W) - सम्पूर्ण राशि १ घर</option>
+              <option value="Koch">Koch (K) - जन्मस्थान केन्द्रित</option>
+              <option value="Equal">Equal (E) - बराबर ३० डिग्री</option>
+              <option value="Campanus">Campanus (C) - Prime Vertical</option>
+              <option value="Regiomontanus">Regiomontanus (R) - आकाशीय भूमध्य</option>
+              <option value="Porphyry">Porphyry (O) - चतुर्थांश बराबर ३ भाग</option>
+              <option value="Morinus">Morinus (M) - मोरिन्स प्रणाली</option>
+              <option value="Topocentric">Topocentric (T) - पेज-पोलिच</option>
+              <option value="Alcabitius">Alcabitius (B) - ११औं शताब्दी अरबी</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px;">Latitude / Longitude</label>
+            <div style="display:flex; gap:6px;">
+              <input id="xi-lat" type="number" step="0.0001" value="27.7172" placeholder="Lat" style="width:50%; height:32px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; padding:0 6px; font-size:11.5px;" />
+              <input id="xi-lon" type="number" step="0.0001" value="85.3240" placeholder="Lon" style="width:50%; height:32px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; color:#fff; padding:0 6px; font-size:11.5px;" />
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button onclick="runXinisIztroAction()" class="btn-primary" style="width:100%; height:32px; font-size:12px; font-weight:700; background:#0284c7; border-color:#0284c7; color:#fff; display:flex; align-items:center; justify-content:center; gap:6px;">
+              🚀 गणना गर्नुहोस् (Execute)
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Results Pane -->
+        <div id="xinis-results-pane" style="min-height:340px; background:rgba(0,0,0,0.25); border-radius:10px; padding:16px; border:1px solid rgba(255,255,255,0.04);">
+          <div style="text-align:center; padding:50px 20px; color:var(--text-muted); font-size:13px;">
+            माथिको विवरण जाँच गरी '🚀 गणना गर्नुहोस्' थिच्नुहोस्।
           </div>
         </div>
       </div>
@@ -5406,6 +5496,287 @@
         vedastroModal.addEventListener('click', (e) => {
           if (e.target === vedastroModal) closeVedastroModal();
         });
+      }
+
+      // ==============================================================
+      // XINIS ENGINE & ZI WEI DOU SHU MODAL CONTROLLER
+      // ==============================================================
+      const xinisModal = document.getElementById('xinis-iztro-modal');
+      let activeXinisTab = 'chart';
+
+      function openXinisIztroModal() {
+        if (xinisModal) xinisModal.style.display = 'flex';
+      }
+
+      function closeXinisIztroModal() {
+        if (xinisModal) xinisModal.style.display = 'none';
+      }
+
+      function handleXinisModalOverlayClick(e) {
+        if (e.target === xinisModal) closeXinisIztroModal();
+      }
+
+      function switchXinisTab(tab) {
+        activeXinisTab = tab;
+        const tabs = ['chart', 'stars', 'prog', 'iztro'];
+        tabs.forEach(t => {
+          const btn = document.getElementById(`btn-tab-xinis-${t}`) || document.getElementById(`btn-tab-${t}`);
+          if (btn) {
+            if (t === tab) {
+              btn.style.borderColor = 'rgba(56,189,248,0.4)';
+              btn.style.color = '#38bdf8';
+              btn.style.background = 'rgba(56,189,248,0.1)';
+              btn.style.fontWeight = '700';
+            } else {
+              btn.style.borderColor = 'transparent';
+              btn.style.color = 'var(--text-muted)';
+              btn.style.background = 'transparent';
+              btn.style.fontWeight = 'normal';
+            }
+          }
+        });
+        runXinisIztroAction();
+      }
+
+      async function runXinisIztroAction() {
+        const pane = document.getElementById('xinis-results-pane');
+        const name = document.getElementById('xi-name').value.trim() || 'Seeker';
+        const gender = document.getElementById('xi-gender').value;
+        const dobVal = document.getElementById('xi-dob').value;
+        const houseSys = document.getElementById('xi-house-system').value;
+        const lat = parseFloat(document.getElementById('xi-lat').value) || 27.7172;
+        const lon = parseFloat(document.getElementById('xi-lon').value) || 85.3240;
+
+        const dtUtc = dobVal ? new Date(dobVal).toISOString() : new Date().toISOString();
+
+        pane.innerHTML = `<div style="text-align:center; padding:40px; color:#38bdf8;">⏳ गणना हुँदैछ (Processing Swiss Ephemeris &amp; Astrolabe)...</div>`;
+
+        try {
+          if (activeXinisTab === 'chart') {
+            const res = await fetch(`${API_BASE}/api/xinis/natal-chart`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ datetime_utc: dtUtc, latitude: lat, longitude: lon, house_system: houseSys })
+            });
+            const data = await res.json();
+            if (!data.success) throw new Error(data.error || 'XiNiS calculation failed');
+
+            const c = data.chart;
+            let patternsHtml = '';
+            if (c.patterns && c.patterns.length > 0) {
+              patternsHtml = `
+                <div style="margin-bottom:16px;">
+                  <h4 style="font-size:13px; color:#38bdf8; margin:0 0 8px 0;">🎯 पहिचान गरिएका दृष्टि ढाँचा (Detected Aspect Patterns)</h4>
+                  <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:10px;">
+                    ${c.patterns.map(p => `
+                      <div style="background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.25); border-radius:8px; padding:10px;">
+                        <div style="font-size:13px; font-weight:700; color:#38bdf8;">${p.patternType}</div>
+                        <div style="font-size:11.5px; color:#f8fafc; margin:4px 0;">ग्रहहरू: <b>${p.planets.join(' • ')}</b> ${p.apexPlanet ? `<span style="color:#fbbf24;">(Apex: ${p.apexPlanet})</span>` : ''}</div>
+                        <div style="font-size:11px; color:var(--text-muted);">${p.nature}</div>
+                        <div style="font-size:10px; color:#34d399; margin-top:4px;">Strength: ${p.strength}%</div>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            } else {
+              patternsHtml = `<div style="color:var(--text-muted); font-size:12px; margin-bottom:14px;">यस कुण्डलीमा कुनै विशेष ज्यामितीय ढाँचा भेटिएन।</div>`;
+            }
+
+            const planetsRows = Object.values(c.planets).map(p => `
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                <td style="padding:6px 8px; font-weight:700; color:#f8fafc;">${p.name}</td>
+                <td style="padding:6px 8px; color:#38bdf8;">${p.signSymbol} ${p.sign}</td>
+                <td style="padding:6px 8px; color:#cbd5e1;">${p.formatted}</td>
+                <td style="padding:6px 8px; color:#fbbf24;">घर ${p.house}</td>
+                <td style="padding:6px 8px; color:${p.retrograde ? '#f87171' : '#34d399'};">${p.retrograde ? '℞' : 'D'}</td>
+                <td style="padding:6px 8px; color:var(--text-muted);">${p.speed}°/d</td>
+              </tr>
+            `).join('');
+
+            const houseSysKeys = Object.keys(c.allHouses);
+            const houseCompRows = houseSysKeys.map(k => {
+              const h = c.allHouses[k];
+              return `
+                <div style="background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:6px; font-size:11.5px; display:flex; justify-content:space-between; align-items:center;">
+                  <div><b style="color:#38bdf8;">${h.name} (${h.code})</b> <span style="color:var(--text-muted); font-size:10.5px;">${h.description.slice(0, 30)}...</span></div>
+                  <div style="color:#fbbf24;">Asc: ${h.ascendant}° | MC: ${h.mc}°</div>
+                </div>
+              `;
+            }).join('');
+
+            pane.innerHTML = `
+              <div>
+                ${patternsHtml}
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px; margin-top:14px;">
+                  <div>
+                    <h4 style="font-size:13px; color:#38bdf8; margin:0 0 8px 0;">🪐 ग्रह स्थिति (${c.houses.system} System)</h4>
+                    <div style="max-height:260px; overflow-y:auto; border:1px solid rgba(255,255,255,0.05); border-radius:8px;">
+                      <table style="width:100%; border-collapse:collapse; font-size:11.5px; text-align:left;">
+                        <thead>
+                          <tr style="background:rgba(255,255,255,0.04); color:var(--text-muted);">
+                            <th style="padding:6px 8px;">Planet</th>
+                            <th style="padding:6px 8px;">Sign</th>
+                            <th style="padding:6px 8px;">Deg</th>
+                            <th style="padding:6px 8px;">House</th>
+                            <th style="padding:6px 8px;">Motion</th>
+                            <th style="padding:6px 8px;">Speed</th>
+                          </tr>
+                        </thead>
+                        <tbody>${planetsRows}</tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 style="font-size:13px; color:#38bdf8; margin:0 0 8px 0;">🏛️ १० घर प्रणाली तुलना (10 House Systems Comparison)</h4>
+                    <div style="display:flex; flex-direction:column; gap:6px; max-height:260px; overflow-y:auto;">
+                      ${houseCompRows}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else if (activeXinisTab === 'stars') {
+            const res = await fetch(`${API_BASE}/api/xinis/fixed-stars`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ datetime_utc: dtUtc, latitude: lat, longitude: lon })
+            });
+            const data = await res.json();
+            if (!data.success) throw new Error(data.error || 'Fixed stars calculation failed');
+
+            const conjHtml = data.conjunctions.length > 0 ? data.conjunctions.map(cj => `
+              <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); border-radius:8px; padding:12px; margin-bottom:8px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <b style="font-size:13px; color:#fbbf24;">${cj.starName} (${cj.constellation}) ☌ ${cj.planetName}</b>
+                  <span style="font-size:11px; background:#f59e0b; color:#000; font-weight:700; padding:2px 8px; border-radius:999px;">Orb: ${cj.orb}° (${cj.exactness}%)</span>
+                </div>
+                <div style="font-size:11.5px; color:#e2e8f0; margin:6px 0;">${cj.meaning}</div>
+                <div style="font-size:10.5px; color:var(--text-muted);">Nature: ${cj.nature} | Sign: ${cj.sign}</div>
+              </div>
+            `).join('') : `<div style="color:var(--text-muted); font-size:12px; padding:16px;">यस जन्म मितिमा १.२° भित्र कुनै प्रमुख स्थिर तारा दृष्टि भेटिएन।</div>`;
+
+            const starsList = data.majorStars.map(st => `
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                <td style="padding:6px 8px; font-weight:700; color:#f8fafc;">${st.name}</td>
+                <td style="padding:6px 8px; color:#94a3b8;">${st.constellation}</td>
+                <td style="padding:6px 8px; color:#38bdf8;">${st.symbol} ${st.sign} ${st.degreeInSign}°</td>
+                <td style="padding:6px 8px; color:#fbbf24;">Mag: ${st.magnitude}</td>
+                <td style="padding:6px 8px; color:#34d399;">${st.nature}</td>
+              </tr>
+            `).join('');
+
+            pane.innerHTML = `
+              <div>
+                <h4 style="font-size:13px; color:#fbbf24; margin:0 0 8px 0;">⭐ ग्रह र स्थिर तारा युति (Fixed Star Conjunctions)</h4>
+                ${conjHtml}
+                <h4 style="font-size:13px; color:#38bdf8; margin:16px 0 8px 0;">✨ १६ प्रमुख स्थिर तारा (J2000.0 Precession: ${data.precessionDegrees}°)</h4>
+                <div style="max-height:240px; overflow-y:auto; border:1px solid rgba(255,255,255,0.05); border-radius:8px;">
+                  <table style="width:100%; border-collapse:collapse; font-size:11px; text-align:left;">
+                    <thead>
+                      <tr style="background:rgba(255,255,255,0.04); color:var(--text-muted);">
+                        <th style="padding:6px 8px;">Star</th>
+                        <th style="padding:6px 8px;">Constellation</th>
+                        <th style="padding:6px 8px;">Position</th>
+                        <th style="padding:6px 8px;">Brightness</th>
+                        <th style="padding:6px 8px;">Nature</th>
+                      </tr>
+                    </thead>
+                    <tbody>${starsList}</tbody>
+                  </table>
+                </div>
+              </div>
+            `;
+          } else if (activeXinisTab === 'prog') {
+            const res = await fetch(`${API_BASE}/api/xinis/progressions`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ datetime_utc: dtUtc, latitude: lat, longitude: lon, progression_date: new Date().toISOString() })
+            });
+            const data = await res.json();
+            if (!data.success) throw new Error(data.error || 'Progressions calculation failed');
+
+            const prog = data.progressions;
+            const progRows = Object.values(prog.progressedPlanets).map(p => `
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                <td style="padding:6px 8px; font-weight:700; color:#f8fafc;">${p.name}</td>
+                <td style="padding:6px 8px; color:#38bdf8;">${p.signSymbol} ${p.sign}</td>
+                <td style="padding:6px 8px; color:#cbd5e1;">${p.formatted}</td>
+                <td style="padding:6px 8px; color:#fbbf24;">घर ${p.house}</td>
+                <td style="padding:6px 8px; color:${p.retrograde ? '#f87171' : '#34d399'};">${p.retrograde ? '℞' : 'D'}</td>
+              </tr>
+            `).join('');
+
+            const progAspects = prog.progressedToNatalAspects.slice(0, 10).map(pa => `
+              <div style="background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:6px; font-size:11.5px; display:flex; justify-content:space-between; align-items:center;">
+                <div><span style="color:#a855f7;">Progressed ${pa.progressedPlanet}</span> ${pa.aspect.symbol} ${pa.aspect.aspectType} <span style="color:#38bdf8;">Natal ${pa.natalPlanet}</span></div>
+                <div style="color:#34d399; font-size:11px;">Orb: ${pa.aspect.orb}° (${pa.aspect.status})</div>
+              </div>
+            `).join('');
+
+            pane.innerHTML = `
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; background:rgba(168,85,247,0.1); padding:10px 14px; border-radius:8px; border:1px solid rgba(168,85,247,0.3);">
+                  <div style="font-size:13px; color:#c084fc;"><b>Secondary Progression (१ दिन = १ वर्ष)</b></div>
+                  <div style="font-size:12px; color:#f8fafc;">उमेर: <b>${prog.progressedAgeYears} वर्ष</b> | Symbolic Date: <b>${prog.symbolicDate.slice(0,10)}</b></div>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
+                  <div>
+                    <h4 style="font-size:13px; color:#38bdf8; margin:0 0 8px 0;">📈 Progressed ग्रह स्थिति</h4>
+                    <div style="max-height:240px; overflow-y:auto; border:1px solid rgba(255,255,255,0.05); border-radius:8px;">
+                      <table style="width:100%; border-collapse:collapse; font-size:11.5px; text-align:left;">
+                        <thead>
+                          <tr style="background:rgba(255,255,255,0.04); color:var(--text-muted);">
+                            <th style="padding:6px 8px;">Planet</th>
+                            <th style="padding:6px 8px;">Sign</th>
+                            <th style="padding:6px 8px;">Degree</th>
+                            <th style="padding:6px 8px;">House</th>
+                            <th style="padding:6px 8px;">Motion</th>
+                          </tr>
+                        </thead>
+                        <tbody>${progRows}</tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 style="font-size:13px; color:#38bdf8; margin:0 0 8px 0;">🔗 Progressed-to-Natal दृष्टिसमूह (Aspects)</h4>
+                    <div style="display:flex; flex-direction:column; gap:6px; max-height:240px; overflow-y:auto;">
+                      ${progAspects || '<div style="color:var(--text-muted); font-size:12px;">कुनै दृष्टि छैन।</div>'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else if (activeXinisTab === 'iztro') {
+            const res = await fetch(`${API_BASE}/api/iztro/chart-svg?format=json`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name, gender, birthDate: dtUtc })
+            });
+            const data = await res.json();
+            if (!data.success) throw new Error(data.error || 'Zi Wei Dou Shu calculation failed');
+
+            pane.innerHTML = `
+              <div style="text-align:center;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; background:rgba(59,130,246,0.1); padding:10px 16px; border-radius:8px; border:1px solid rgba(59,130,246,0.3);">
+                  <div style="text-align:left;">
+                    <div style="font-size:14px; font-weight:700; color:#60a5fa;">${data.astrolabe.meta.name} — 紫微斗数十二宫星盘</div>
+                    <div style="font-size:11.5px; color:var(--text-muted);">${data.astrolabe.meta.lunarDate} • ${data.astrolabe.meta.wuxingBureau.nameZh} (${data.astrolabe.meta.wuxingBureau.nameEn})</div>
+                  </div>
+                  <div style="text-align:right;">
+                    <span style="font-size:11px; background:#1e3a8a; color:#bfdbfe; padding:3px 8px; border-radius:6px;">Life: ${data.astrolabe.meta.lifePalaceBranch}</span>
+                    <span style="font-size:11px; background:#4c1d95; color:#e9d5ff; padding:3px 8px; border-radius:6px; margin-left:4px;">Body: ${data.astrolabe.meta.bodyPalaceBranch}</span>
+                  </div>
+                </div>
+                <div style="width:100%; max-width:820px; margin:0 auto; overflow:auto; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:#090d16;">
+                  ${data.svg}
+                </div>
+              </div>
+            `;
+          }
+        } catch (err) {
+          pane.innerHTML = `<div style="color:var(--accent-red); padding:24px; text-align:center;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
       }
 
       // Start application

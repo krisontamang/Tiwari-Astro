@@ -68,7 +68,10 @@ const panditAgentService = require('./services/panditAgentService');
 const poruthamService = require('./services/poruthamService');
 const openRouterService = require('./services/openRouterService');
 const kerykeionService = require('./services/kerykeionService');
+const xinisEngineService = require('./services/xinisEngineService');
+const iztroService = require('./services/iztroService');
 const jyotishSarathiService = require('./services/jyotishSarathiService');
+const mantrasData = require('./data/mantrasData');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -912,6 +915,222 @@ async function handleRequest(req, res) {
     }
   }
 
+  // --- API: XiNiS Astrology Engine & Swiss Ephemeris (https://github.com/arikusi/xinis-engine.git) ---
+  if (pathname === '/api/xinis/status' && req.method === 'GET') {
+    return sendJSON(res, 200, {
+      success: true,
+      service: 'XiNiS Astrology Engine & Swiss Ephemeris (pyswisseph)',
+      version: '1.0.0',
+      source: 'https://github.com/arikusi/xinis-engine.git',
+      features: [
+        '10 House Systems (Placidus, Whole Sign, Koch, Equal, Campanus, Regiomontanus, Porphyry, Morinus, Topocentric, Alcabitius)',
+        'Multi-House System Comparison',
+        'Dynamic Aspect Engine with Luminary Orb Multipliers',
+        '7 Aspect Patterns (Grand Trine, T-Square, Grand Cross, Yod, Kite, Stellium, Mystic Rectangle)',
+        '16 Major Fixed Stars & 3 Clusters with J2000.0 Precession and Conjunction Finder',
+        'Secondary Progressions (1 day = 1 year)',
+        'Solar & Lunar Returns with High-Precision Convergence Solver',
+        'Transits Engine & Aspect Analyzer',
+        'AI-Ready Markdown and JSON Export'
+      ],
+      houseSystems: xinisEngineService.HOUSE_SYSTEMS,
+      aspects: xinisEngineService.ASPECTS_CONFIG,
+      fixedStarsCount: Object.keys(xinisEngineService.MAJOR_FIXED_STARS).length
+    });
+  }
+
+  if (pathname === '/api/xinis/natal-chart' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const chart = xinisEngineService.calculateNatalChart(body);
+      return sendJSON(res, 200, { success: true, chart });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/xinis/multi-houses' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const chart = xinisEngineService.calculateNatalChart(body);
+      return sendJSON(res, 200, {
+        success: true,
+        ascendant: chart.houses.ascendant,
+        mc: chart.houses.mc,
+        allHouseSystems: chart.allHouses
+      });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/xinis/aspect-patterns' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const chart = xinisEngineService.calculateNatalChart(body);
+      return sendJSON(res, 200, {
+        success: true,
+        patternsDetected: chart.patterns.length,
+        patterns: chart.patterns,
+        aspectsCount: chart.aspects.length,
+        aspects: chart.aspects
+      });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/xinis/fixed-stars' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const chart = xinisEngineService.calculateNatalChart(body);
+      const targetDt = new Date(body.datetime_utc || body.date || new Date());
+      const starsData = xinisEngineService.calculateFixedStars(targetDt, Number(body.star_orb || 1.2));
+      return sendJSON(res, 200, {
+        success: true,
+        conjunctions: chart.fixedStarConjunctions,
+        majorStars: starsData.stars,
+        starClusters: starsData.clusters,
+        precessionDegrees: starsData.precessionDegrees,
+        julianDay: starsData.julianDay
+      });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/xinis/progressions' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const targetProgDate = body.progression_date || body.progressionDate || new Date();
+      const prog = xinisEngineService.calculateSecondaryProgressions(body, targetProgDate);
+      return sendJSON(res, 200, { success: true, progressions: prog });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/xinis/solar-return' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const returnYear = Number(body.return_year || body.year || new Date().getFullYear());
+      const returnLoc = (body.return_latitude && body.return_longitude) ? {
+        name: body.return_location_name || 'Return Location',
+        latitude: Number(body.return_latitude),
+        longitude: Number(body.return_longitude)
+      } : null;
+      const sr = xinisEngineService.calculateSolarReturn(body, returnYear, returnLoc);
+      return sendJSON(res, 200, { success: true, solarReturn: sr });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/xinis/lunar-return' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const targetDate = body.return_date || body.date || new Date();
+      const returnLoc = (body.return_latitude && body.return_longitude) ? {
+        name: body.return_location_name || 'Return Location',
+        latitude: Number(body.return_latitude),
+        longitude: Number(body.return_longitude)
+      } : null;
+      const lr = xinisEngineService.calculateLunarReturn(body, targetDate, returnLoc);
+      return sendJSON(res, 200, { success: true, lunarReturn: lr });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/xinis/transits' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const transitDt = body.transit_date || body.transitDate || new Date();
+      const tr = xinisEngineService.calculateTransits(body, transitDt);
+      return sendJSON(res, 200, { success: true, transits: tr });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/xinis/export' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const chart = xinisEngineService.calculateNatalChart(body);
+      const markdown = xinisEngineService.exportToMarkdown(chart);
+      return sendJSON(res, 200, { success: true, markdown, chart });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  // --- API: Swiss Ephemeris / pyswisseph Direct Positions ---
+  if (pathname === '/api/swisseph/positions' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const dt = new Date(body.datetime_utc || body.date || new Date());
+      const jd = xinisEngineService.datetimeToJulianDay(dt);
+      const lat = Number(body.latitude || 27.7172);
+      const lon = Number(body.longitude || 85.3240);
+      const houses = xinisEngineService.calculateHouseSystems(jd, lat, lon, body.house_system || 'Placidus');
+      const chart = xinisEngineService.calculateNatalChart({ datetime_utc: dt.toISOString(), latitude: lat, longitude: lon });
+      return sendJSON(res, 200, {
+        success: true,
+        source: 'Swiss Ephemeris (pyswisseph / XiNiS)',
+        julianDay: jd,
+        datetimeUtc: dt.toISOString(),
+        coordinates: { latitude: lat, longitude: lon },
+        planets: chart.planets,
+        houses
+      });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  // --- API: iztro Zi Wei Dou Shu (Purple Star Astrology / 紫微斗数) ---
+  if (pathname === '/api/iztro/status' && req.method === 'GET') {
+    return sendJSON(res, 200, {
+      success: true,
+      service: 'iztro Zi Wei Dou Shu (Purple Star Astrology / 紫微斗数) Engine',
+      version: '2.6.1',
+      source: 'https://github.com/SylarLong/iztro.git',
+      palaces: iztroService.PALACE_NAMES,
+      majorStars: Object.values(iztroService.MAJOR_STARS),
+      auxiliaryStars: Object.values(iztroService.AUXILIARY_STARS),
+      fiveElementsBureaus: iztroService.FIVE_ELEMENTS_BUREAU
+    });
+  }
+
+  if (pathname === '/api/iztro/astrolabe' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const astrolabe = iztroService.calculateAstrolabe(body);
+      return sendJSON(res, 200, { success: true, astrolabe });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/iztro/chart-svg' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const astrolabe = iztroService.calculateAstrolabe(body);
+      const svg = iztroService.generateAstrolabeSvg(astrolabe, body);
+      if (parsedUrl.query.format === 'json') {
+        return sendJSON(res, 200, { success: true, svg, astrolabe });
+      }
+      res.writeHead(200, {
+        'Content-Type': 'image/svg+xml; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600',
+        'Access-Control-Allow-Origin': '*'
+      });
+      return res.end(svg);
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
   // --- API: Model Context Protocol (MCP) JSON-RPC 2.0 (Astroway/VedAstro) ---
   if (pathname === '/api/mcp' && req.method === 'POST') {
     const body = await parseJSONBody(req);
@@ -950,6 +1169,20 @@ async function handleRequest(req, res) {
     if (payload.birthPlace) sample.meta.place = payload.birthPlace;
     if (payload.name) sample.avakahada.name = payload.name;
     return sendJSON(res, 200, { success: true, data: sample });
+  }
+
+  if (pathname === '/api/sarathi/mantras' && req.method === 'GET') {
+    return sendJSON(res, 200, { success: true, data: mantrasData });
+  }
+
+  if (pathname === '/api/sarathi/milan' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const boyNak = Number(body.boyNakshatra || 6); // default Ardra
+    const boyRashi = Number(body.boyRashi || 3); // Gemini
+    const girlNak = Number(body.girlNakshatra || 14); // Chitra
+    const girlRashi = Number(body.girlRashi || 7); // Libra
+    const milanRes = (poruthamService.calculate10Poruthams || poruthamService.calculatePoruthams)(girlNak, boyNak, girlRashi, boyRashi);
+    return sendJSON(res, 200, { success: true, ...milanRes });
   }
 
   // --- API: VedAstro Vedic Engine Suite (VedAstro/VedAstro Cloud & Local Engine) ---

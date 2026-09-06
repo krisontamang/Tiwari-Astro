@@ -16,6 +16,8 @@ const panditAgentService = require('./panditAgentService');
 const poruthamService = require('./poruthamService');
 const openRouterService = require('./openRouterService');
 const kerykeionService = require('./kerykeionService');
+const xinisEngineService = require('./xinisEngineService');
+const iztroService = require('./iztroService');
 
 const MCP_TOOLS = [
   {
@@ -449,6 +451,105 @@ const MCP_TOOLS = [
       },
       required: ['year', 'month', 'day']
     }
+  },
+  {
+    name: 'xinis_natal_chart',
+    description: 'Calculate complete astrological chart with XiNiS Engine across 10 house systems (Placidus, Whole Sign, Koch, Equal, Campanus, Regiomontanus, Porphyry, Morinus, Topocentric, Alcabitius), Part of Fortune, Vertex, and AI Markdown export.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        datetime_utc: { type: 'string', description: 'ISO UTC datetime of birth (e.g. 2000-05-15T12:30:00Z)' },
+        latitude: { type: 'number', description: 'Birth latitude (-90 to 90)' },
+        longitude: { type: 'number', description: 'Birth longitude (-180 to 180)' },
+        location_name: { type: 'string', description: 'City/Location name' },
+        house_system: { type: 'string', description: 'House system (Placidus, Whole_Sign, Koch, Equal, Campanus, Regiomontanus, Porphyry, Morinus, Topocentric, Alcabitius)' }
+      },
+      required: ['datetime_utc']
+    }
+  },
+  {
+    name: 'xinis_aspect_patterns',
+    description: 'Detect 7 astrological aspect patterns (Grand Trine, T-Square, Grand Cross, Yod / Finger of God, Kite, Stellium, Mystic Rectangle) with apex focal planets and elements.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        datetime_utc: { type: 'string', description: 'ISO UTC datetime of birth' },
+        latitude: { type: 'number' },
+        longitude: { type: 'number' },
+        house_system: { type: 'string' }
+      },
+      required: ['datetime_utc']
+    }
+  },
+  {
+    name: 'xinis_fixed_stars',
+    description: 'Calculate positions of 16 major fixed stars (Regulus, Spica, Algol, Aldebaran, Antares, Sirius, Betelgeuse, Rigel, Vega, Arcturus, etc.) and star clusters (Pleiades, Hyades, Praesepe) with J2000.0 precession and planetary conjunctions.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        datetime_utc: { type: 'string', description: 'Target or birth ISO UTC datetime' },
+        latitude: { type: 'number' },
+        longitude: { type: 'number' },
+        star_orb: { type: 'number', description: 'Maximum orb in degrees for conjunction (default 1.2)' }
+      },
+      required: ['datetime_utc']
+    }
+  },
+  {
+    name: 'xinis_secondary_progressions',
+    description: 'Compute secondary progressed chart (1 day = 1 year of life) with progressed planets, houses, and progressed-to-natal aspects.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        datetime_utc: { type: 'string', description: 'Birth ISO UTC datetime' },
+        latitude: { type: 'number' },
+        longitude: { type: 'number' },
+        progression_date: { type: 'string', description: 'Target date to progress to (e.g. 2026-09-06)' }
+      },
+      required: ['datetime_utc', 'progression_date']
+    }
+  },
+  {
+    name: 'xinis_solar_lunar_returns',
+    description: 'Find the exact moment the transiting Sun or Moon returns to its natal longitude with high-precision numerical convergence, generating full return charts.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        datetime_utc: { type: 'string', description: 'Birth ISO UTC datetime' },
+        latitude: { type: 'number' },
+        longitude: { type: 'number' },
+        return_type: { type: 'string', enum: ['solar', 'lunar'], description: 'Type of return: solar or lunar' },
+        return_year: { type: 'number', description: 'Year for solar return (e.g. 2025)' },
+        return_date: { type: 'string', description: 'Approximate target date for lunar return' }
+      },
+      required: ['datetime_utc']
+    }
+  },
+  {
+    name: 'iztro_ziwei_astrolabe',
+    description: 'Calculate complete Chinese Purple Star Astrology (Zi Wei Dou Shu / 紫微斗数) astrolabe: Chinese Lunar calendar date, 12 Palaces, 14 Major Stars with brightness, Auxiliary stars, Da Xian, and Si Hua transformations.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', description: 'Subject name' },
+        gender: { type: 'string', enum: ['Male', 'Female', 'male', 'female'], description: 'Gender for Da Xian direction' },
+        birthDate: { type: 'string', description: 'Solar date of birth ISO (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ssZ)' }
+      },
+      required: ['birthDate']
+    }
+  },
+  {
+    name: 'iztro_ziwei_svg',
+    description: 'Generate traditional Chinese 12-Palace Perimeter Square Grid Astrolabe SVG chart for Zi Wei Dou Shu.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        gender: { type: 'string', enum: ['Male', 'Female', 'male', 'female'] },
+        birthDate: { type: 'string' }
+      },
+      required: ['birthDate']
+    }
   }
 ];
 
@@ -861,6 +962,103 @@ async function handleMcpRequest(requestBody) {
           id,
           result: {
             content: [{ type: 'text', text: report }]
+          }
+        };
+      }
+
+      if (toolName === 'xinis_natal_chart') {
+        const chart = xinisEngineService.calculateNatalChart(args);
+        const markdown = xinisEngineService.exportToMarkdown(chart);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [
+              { type: 'text', text: markdown },
+              { type: 'text', text: JSON.stringify(chart, null, 2) }
+            ]
+          }
+        };
+      }
+
+      if (toolName === 'xinis_aspect_patterns') {
+        const chart = xinisEngineService.calculateNatalChart(args);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify({
+              patterns: chart.patterns,
+              aspectsCount: chart.aspects.length,
+              planets: Object.keys(chart.planets)
+            }, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'xinis_fixed_stars') {
+        const chart = xinisEngineService.calculateNatalChart(args);
+        const starsData = xinisEngineService.calculateFixedStars(new Date(args.datetime_utc || new Date()), args.star_orb || 1.2);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify({
+              conjunctions: chart.fixedStarConjunctions,
+              allMajorStars: starsData.stars,
+              starClusters: starsData.clusters,
+              precessionDegrees: starsData.precessionDegrees
+            }, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'xinis_secondary_progressions') {
+        const prog = xinisEngineService.calculateSecondaryProgressions(args, args.progression_date || new Date());
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(prog, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'xinis_solar_lunar_returns') {
+        let returnData;
+        if (args.return_type === 'lunar') {
+          returnData = xinisEngineService.calculateLunarReturn(args, args.return_date || new Date());
+        } else {
+          returnData = xinisEngineService.calculateSolarReturn(args, args.return_year || new Date().getFullYear());
+        }
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(returnData, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'iztro_ziwei_astrolabe') {
+        const astrolabe = iztroService.calculateAstrolabe(args);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(astrolabe, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'iztro_ziwei_svg') {
+        const astrolabe = iztroService.calculateAstrolabe(args);
+        const svg = iztroService.generateAstrolabeSvg(astrolabe, args);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: svg }]
           }
         };
       }
