@@ -1,0 +1,18 @@
+{
+  "name": "astro-tiwari",
+  "version": "1.0.0",
+  "description": "Astro Tiwari — सरल, व्यक्तिगत र संवेदनशील वैदिक ज्योतिष मार्गदर्शन",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "astrology",
+    "vedic",
+    "nepali",
+    "kundali"
+  ],
+  "author": "",
+  "license": "ISC"
+}

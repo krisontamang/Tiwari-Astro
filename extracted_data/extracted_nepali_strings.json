@@ -1,0 +1,6 @@
+[
+  "),w(!Z.birthTime.trim());const xt=Z.birthTime.replace(/[०-९]/g,wt=>String(",
+  "\".indexOf(wt))).match(/(\\d{1,2})(?:\\s*[:.]\\s*(\\d{1,2}))?\\s*(AM|PM|बिहान|पूर्वाह्न|दिउँसो|अपराह्न|बेलुका|साँझ|राति)?/i);if(xt){let wt=Number(xt[1]||0);wa(xt[2]||\"",
+  "\",Xt=B?`\nKundali photo: ${B.name} (WhatsApp मा attach गरिनेछ)`:`\nKundali photo: छैन`,Te=K?`\nPayment screenshot: ${K.name} (जाँचका लागि attach गरिनेछ)`:`\nPayment screenshot: छैन`,La=`नमस्कार Astro Tiwari, म ${xt} हुँ।\n\nलिङ्ग: ${Lt}\nजन्म मिति (वि.सं.): ${ee}\nजन्म मिति (ई.सं.): ${ae}\nजन्म समय: ${De}:${xn} ${Pa}\nजन्म स्थान: ${aa}\nसम्पर्क नम्बर: ${wt}\nPackage: ${At}\nथप सन्देश: ${Vt}\nजन्म समय सम्बन्धी जानकारी: ${ve}${ja}${Te}${Xt}`;y(La),v(\"",
+  "\",text:m,files:Z})}catch{}else window.open(`https://wa.me/9779809192604?text=${encodeURIComponent(m+`\n\nकृपया यही chat मा Kundali photo attach गर्नुहोस्।`)}`,\""
+]
