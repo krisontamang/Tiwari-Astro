@@ -985,15 +985,15 @@
 
         <!-- Stepper -->
         <div class="stepper">
-          <div class="step-item" id="step-nav-1">
+          <div class="step-item active" id="step-nav-1" onclick="goToStep(1)" style="cursor:pointer;" title="प्याकेज छान्नुहोस्">
             <span class="step-num">1</span> Plan
           </div>
           <div class="step-line" id="line-1"></div>
-          <div class="step-item" id="step-nav-2">
+          <div class="step-item" id="step-nav-2" onclick="goToStep(2)" style="cursor:pointer;" title="विवरण भर्नुहोस्">
             <span class="step-num">2</span> Details
           </div>
           <div class="step-line" id="line-2"></div>
-          <div class="step-item" id="step-nav-3">
+          <div class="step-item" id="step-nav-3" onclick="proceedToPayment()" style="cursor:pointer;" title="भुक्तानी गर्नुहोस्">
             <span class="step-num">3</span> Payment
           </div>
         </div>
@@ -1391,10 +1391,16 @@
       function initPlanFromUrl() {
         const params = new URLSearchParams(window.location.search);
         const p = (params.get('plan') || '').toLowerCase();
-        if (p.includes('basic') || p === '299') {
-          selectPlanDirect('Basic Package', 299, 'सामान्य ग्रहदशा, मुख्य प्रश्नको उत्तर र छोटो मार्गदर्शन।');
-        } else if (p.includes('vip') || p === '1055') {
-          selectPlanDirect('VIP Premium Package', 1055, 'सम्पूर्ण कुण्डली, विवाह मिलान, २ वर्षको गोचर फल तथा विशेष उपाय।');
+        if (p) {
+          if (p.includes('basic') || p === '299') {
+            selectPlanDirect('Basic Package', 299, 'सामान्य ग्रहदशा, मुख्य प्रश्नको उत्तर र छोटो मार्गदर्शन।');
+          } else if (p.includes('vip') || p === '1055') {
+            selectPlanDirect('VIP Premium Package', 1055, 'सम्पूर्ण कुण्डली, विवाह मिलान, २ वर्षको गोचर फल तथा विशेष उपाय।');
+          } else {
+            selectPlanDirect('Standard Package', 499, 'पूर्ण जन्मकुण्डली, करियर, विवाह तथा स्वास्थ्यको गहन विश्लेषण।');
+          }
+          // Since the user selected the package on the homepage, advance straight to Step 2
+          goToStep(2);
         } else {
           selectPlanDirect('Standard Package', 499, 'पूर्ण जन्मकुण्डली, करियर, विवाह तथा स्वास्थ्यको गहन विश्लेषण।');
         }

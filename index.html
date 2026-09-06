@@ -68,6 +68,48 @@
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(0, 135, 90, 0.55);
       }
+
+      /* Interactive Payment Amount Badges */
+      .payment-amounts {
+        cursor: pointer;
+        position: relative;
+      }
+      .payment-amounts::after {
+        content: '👆 कुनै पनि प्याकेजमा क्लिक गरी तुरुन्त भुक्तानी गर्नुहोस्';
+        display: block;
+        grid-column: 1 / -1;
+        font-size: 11px;
+        color: #d8b06a;
+        text-align: center;
+        margin-top: 8px;
+        opacity: 0.9;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+      }
+      .payment-amounts span {
+        cursor: pointer !important;
+        transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        position: relative;
+        user-select: none;
+        border: 1px solid rgba(216, 176, 106, 0.22) !important;
+      }
+      .payment-amounts span:hover {
+        transform: translateY(-3px) scale(1.04);
+        background: rgba(216, 176, 106, 0.28) !important;
+        border-color: #d8b06a !important;
+        box-shadow: 0 6px 20px rgba(216, 176, 106, 0.45);
+      }
+      .payment-amounts span:active {
+        transform: translateY(0) scale(0.97);
+      }
+
+      .package-card {
+        cursor: pointer;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .package-card:hover {
+        transform: translateY(-4px);
+      }
     </style>
   </head>
   <body>
@@ -96,23 +138,60 @@
         }
       }
 
-      // Wire package buttons directly to 3-step checkout
+      // Wire payment amounts and package buttons directly to 3-step checkout
       document.addEventListener('click', function(e) {
-        const btn = e.target.closest('.package-button, button');
-        if (!btn) return;
-        const txt = btn.innerText || '';
-        if (txt.includes('Basic रोज्नुहोस्')) {
+        // 1. Check if user clicked on payment amounts pill (Basic रु. २९९, Standard रु. ४९९, VIP रु. १,०५५)
+        const amtSpan = e.target.closest('.payment-amounts span');
+        if (amtSpan) {
           e.preventDefault();
           e.stopPropagation();
-          window.location.href = '/pay?plan=basic';
-        } else if (txt.includes('Standard रोज्नुहोस्')) {
+          const parent = amtSpan.parentElement;
+          const idx = parent ? Array.from(parent.children).indexOf(amtSpan) : -1;
+          const txt = (amtSpan.innerText || '').toLowerCase();
+          
+          let plan = 'standard';
+          if (idx === 0 || txt.includes('basic') || txt.includes('२९९') || txt.includes('299')) {
+            plan = 'basic';
+          } else if (idx === 2 || txt.includes('vip') || txt.includes('१०५५') || txt.includes('1055') || txt.includes('१,०५५')) {
+            plan = 'vip';
+          } else {
+            plan = 'standard';
+          }
+          window.location.href = `/pay?plan=${plan}`;
+          return;
+        }
+
+        // Click on .payment-amounts container directly
+        const amtContainer = e.target.closest('.payment-amounts');
+        if (amtContainer) {
           e.preventDefault();
           e.stopPropagation();
           window.location.href = '/pay?plan=standard';
-        } else if (txt.includes('VIP रोज्नुहोस्')) {
-          e.preventDefault();
-          e.stopPropagation();
-          window.location.href = '/pay?plan=vip';
+          return;
+        }
+
+        // 2. Check if user clicked on package card button or the package card itself
+        const btn = e.target.closest('.package-button, button');
+        const card = e.target.closest('.package-card');
+        if (btn || card) {
+          const el = btn || card;
+          const txt = (el.innerText || el.className || '').toLowerCase();
+          if (txt.includes('basic') || txt.includes('२९९') || txt.includes('299')) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.href = '/pay?plan=basic';
+            return;
+          } else if (txt.includes('vip') || txt.includes('१०५५') || txt.includes('1055') || txt.includes('१,०५५')) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.href = '/pay?plan=vip';
+            return;
+          } else if (txt.includes('standard') || txt.includes('४९९') || txt.includes('499')) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.location.href = '/pay?plan=standard';
+            return;
+          }
         }
       }, true);
 
