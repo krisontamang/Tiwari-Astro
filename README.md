@@ -9,11 +9,10 @@ A modern, responsive Vedic Astrology consultation web application built with Rea
 
 ---
 
-## 🔐 Admin Portal Credentials
+## 🔐 Admin Portal
 
-- **URL**: [http://localhost:3000/admin](http://localhost:3000/admin)
-- **Email**: `bensartiwari@gmail.com`
-- **Password**: `Astro@369`
+- **URL**: `/admin` (Protected route)
+- Configured securely via environment variables or server config.
 
 ### Admin Features:
 1. **Payment Verification**:

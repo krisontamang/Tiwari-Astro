@@ -19,9 +19,9 @@ if (!fs.existsSync(DATA_FILE)) {
   fs.writeFileSync(DATA_FILE, '[]', 'utf8');
 }
 
-const ADMIN_EMAIL = 'bensartiwari@gmail.com';
-const ADMIN_PASSWORD = 'Astro@369';
-const ADMIN_TOKEN = 'astro-tiwari-secure-token-369-bensar';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'astro-tiwari-secure-token-369-bensar';
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',

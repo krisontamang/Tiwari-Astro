@@ -143,19 +143,6 @@
         transform: translateY(-1px);
         box-shadow: 0 6px 25px rgba(216, 176, 106, 0.35);
       }
-      .login-hint {
-        margin-top: 22px;
-        padding: 12px;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px dashed rgba(216, 176, 106, 0.2);
-        border-radius: 0.75rem;
-        font-size: 11.5px;
-        color: var(--text-muted);
-        line-height: 1.6;
-      }
-      .login-hint b {
-        color: var(--gold-light);
-      }
 
       /* --- Dashboard Header --- */
       #dashboard-view { display: none; }
@@ -736,9 +723,9 @@
               type="email" 
               id="admin-email" 
               class="form-input" 
-              value="bensartiwari@gmail.com" 
               required 
-              placeholder="bensartiwari@gmail.com"
+              placeholder="ईमेल ठेगाना (admin email)"
+              autocomplete="email"
             />
           </div>
 
@@ -748,9 +735,9 @@
               type="password" 
               id="admin-password" 
               class="form-input" 
-              value="Astro@369" 
               required 
-              placeholder="••••••••"
+              placeholder="पासवर्ड (••••••••)"
+              autocomplete="current-password"
             />
           </div>
 
@@ -759,12 +746,6 @@
             <span id="login-spinner" style="display:none;">⏳</span>
           </button>
         </form>
-
-        <div class="login-hint">
-          <b>🔐 Authorized Credentials:</b><br />
-          Email: <b>bensartiwari@gmail.com</b><br />
-          Password: <b>Astro@369</b>
-        </div>
       </div>
     </div>
 
