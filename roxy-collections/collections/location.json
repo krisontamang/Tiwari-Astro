@@ -1,0 +1,1298 @@
+{
+	"item": [
+		{
+			"id": "ca8fdd31-07fe-4f7c-95dc-c6d0747ab8d4",
+			"name": "Location and Timezone",
+			"description": {
+				"content": "Location and timezone API with city search and geocoding across 235,000+ cities in 240+ countries, returning latitude, longitude, IANA timezone, and DST-aware UTC offset. Coverage goes down to towns of a few hundred people and every administrative seat, so a rural birthplace resolves as reliably as a capital. The location layer for birth chart forms, horoscope apps, event planners, and any feature that needs place-to-coordinates resolution. Fully offline dataset with no third party geocoding call, and fields that map directly to the astrology endpoints. One key covers every RoxyAPI domain, with Remote MCP and typed SDKs.",
+				"type": "text/plain"
+			},
+			"item": [
+				{
+					"id": "394b723f-623c-4239-9954-dff08cde27ed",
+					"name": "Search cities worldwide - Geocoding autocomplete with coordinates and timezone",
+					"request": {
+						"name": "Search cities worldwide - Geocoding autocomplete with coordinates and timezone",
+						"description": {
+							"content": "Turn a place name into coordinates, an IANA timezone and a DST-aware UTC offset, across 235,000+ cities and towns in 240+ countries. Coverage reaches rural towns of a few hundred people and every administrative seat, so a birthplace outside a major metro resolves as reliably as a capital. Matching is case-insensitive, accent-insensitive and partial, so ber matches Berlin, Bern and Bergen, native scripts are transliterated, and historic names resolve to the current place, so bombay returns Mumbai and peking returns Beijing. Results are ordered by match quality first and population second, so an exactly named small town is never buried under a larger city that merely shares its opening letters. Built for birth chart location pickers, horoscope apps, event scheduling, and any feature that needs place-to-coordinates resolution.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"search"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "q",
+									"value": "berlin",
+									"description": "(Required) Place to search for, written the way a person would. Accepts a bare city (berlin), a city plus country (berlin germany), a comma-qualified place (richfield, utah), a fully qualified place (richfield, utah, united states), or a historic name (bombay, peking, constantinople). Commas are optional, and a qualifier the dataset spells differently, such as USA for United States, still resolves. Matched against city name, alternate names, state or province, and country. Add the state or country whenever the name is common, since that is what separates the six Springfields, and Richfield, Utah from Richfield, Minnesota."
+								},
+								{
+									"disabled": false,
+									"key": "limit",
+									"value": "10",
+									"description": "Maximum items to return per page. Range: 1-50, default 10."
+								},
+								{
+									"disabled": false,
+									"key": "offset",
+									"value": "0",
+									"description": "Number of items to skip for pagination. Default 0."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "b74b4738-3ed7-4f1b-8429-2c433cf0b0fa",
+							"name": "Matching places, best match first, with coordinates, IANA timezone and UTC offset",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"search"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "berlin"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"total\": 3,\n  \"limit\": 10,\n  \"offset\": 0,\n  \"cities\": [\n    {\n      \"city\": \"Berlin\",\n      \"province\": \"Berlin\",\n      \"country\": \"Germany\",\n      \"iso2\": \"DE\",\n      \"latitude\": 52.52,\n      \"longitude\": 13.405,\n      \"timezone\": \"Europe/Berlin\",\n      \"utcOffset\": 1,\n      \"population\": 3644826\n    },\n    {\n      \"city\": \"Berlin\",\n      \"province\": \"Berlin\",\n      \"country\": \"Germany\",\n      \"iso2\": \"DE\",\n      \"latitude\": 52.52,\n      \"longitude\": 13.405,\n      \"timezone\": \"Europe/Berlin\",\n      \"utcOffset\": 1,\n      \"population\": 3644826\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "2e1e0e2e-531d-4258-b067-b6f8dceae19f",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"search"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "berlin"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 4490.707877412537,\n      \"maximum\": 1572.5986245959666,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1200.6511582638445,\n      \"maximum\": 3896.440234125883,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "27817ea4-a163-4303-b454-96a1c8e0c09a",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"search"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "berlin"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "f11e4411-ecaa-44ca-be6f-f1af38b66d56",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"search"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "berlin"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "584c420f-fdd6-4415-9754-c2eee958e0fa",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"search"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "berlin"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "88ad54c0-71d9-4ded-a24f-6c450295624a",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"search"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "berlin"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "87584627-4ed3-48cf-a899-f3db1301f393",
+					"name": "List all countries - ISO codes and city coverage",
+					"request": {
+						"name": "List all countries - ISO codes and city coverage",
+						"description": {
+							"content": "Returns every country with ISO 3166-1 alpha-2 and alpha-3 codes, plus the number of searchable cities per country. Use this endpoint to build country dropdown menus, regional filters, or to check city coverage before querying a birth location. Countries are sorted alphabetically by name. Covers Europe, Americas, Asia, Middle East, Africa, and Oceania.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"countries"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "limit",
+									"value": "50",
+									"description": "Maximum items to return per page. Range: 1-250, default 50."
+								},
+								{
+									"disabled": false,
+									"key": "offset",
+									"value": "0",
+									"description": "Number of items to skip for pagination. Default 0."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "b2e6a5e6-71dd-438a-b9d9-f14673870013",
+							"name": "Alphabetically sorted list of all countries with ISO codes and city counts",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "50"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"total\": 246,\n  \"limit\": 50,\n  \"offset\": 0,\n  \"countries\": [\n    {\n      \"name\": \"Germany\",\n      \"iso2\": \"DE\",\n      \"iso3\": \"DEU\",\n      \"cityCount\": 11894\n    },\n    {\n      \"name\": \"Germany\",\n      \"iso2\": \"DE\",\n      \"iso3\": \"DEU\",\n      \"cityCount\": 11894\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "045ad803-6543-40b3-8af1-7312578239ef",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "50"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 4490.707877412537,\n      \"maximum\": 1572.5986245959666,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1200.6511582638445,\n      \"maximum\": 3896.440234125883,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "ef6c0326-bd89-49bc-97db-7e808f7e8def",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "50"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "5d278721-abcf-48b2-8dcc-fd4cab4d99e3",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "50"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "bafa34f3-52d0-4783-9647-f326565ff8bd",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "50"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "897f3eb0-df86-4fbb-bfba-0483c947a21f",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "50"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "b439bbdc-3468-49d4-9106-dd3823887ac6",
+					"name": "Get cities in a country - Geocoding directory sorted by population",
+					"request": {
+						"name": "Get cities in a country - Geocoding directory sorted by population",
+						"description": {
+							"content": "Returns all cities for a specific country, identified by ISO 3166-1 alpha-2 code (e.g. DE for Germany, FR for France, GB for United Kingdom, US for United States). Each city includes geographic coordinates, IANA timezone, and DST-aware UTC offset for direct use in astrology birth chart, horoscope, transit, and panchang calculations. Cities sorted by population with the largest metropolitan areas first.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"countries",
+								":iso2"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "limit",
+									"value": "20",
+									"description": "Maximum items to return per page. Range: 1-100, default 20."
+								},
+								{
+									"disabled": false,
+									"key": "offset",
+									"value": "0",
+									"description": "Number of items to skip for pagination. Default 0."
+								}
+							],
+							"variable": [
+								{
+									"disabled": false,
+									"type": "any",
+									"value": "DE",
+									"key": "iso2",
+									"description": "(Required) ISO 3166-1 alpha-2 country code, case-insensitive. Common codes: DE (Germany), FR (France), GB (United Kingdom), US (United States), ES (Spain), IT (Italy), NL (Netherlands), IN (India), BR (Brazil), JP (Japan)."
+								}
+							]
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "c4d5f889-c935-420c-a630-a64ca81561aa",
+							"name": "Cities in the specified country, sorted by population (largest first)",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries",
+										":iso2"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "DE",
+											"key": "iso2",
+											"description": "(Required) ISO 3166-1 alpha-2 country code, case-insensitive. Common codes: DE (Germany), FR (France), GB (United Kingdom), US (United States), ES (Spain), IT (Italy), NL (Netherlands), IN (India), BR (Brazil), JP (Japan)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"total\": 11894,\n  \"limit\": 50,\n  \"offset\": 0,\n  \"cities\": [\n    {\n      \"city\": \"Berlin\",\n      \"province\": \"Berlin\",\n      \"country\": \"Germany\",\n      \"iso2\": \"DE\",\n      \"latitude\": 52.52,\n      \"longitude\": 13.405,\n      \"timezone\": \"Europe/Berlin\",\n      \"utcOffset\": 1,\n      \"population\": 3644826\n    },\n    {\n      \"city\": \"Berlin\",\n      \"province\": \"Berlin\",\n      \"country\": \"Germany\",\n      \"iso2\": \"DE\",\n      \"latitude\": 52.52,\n      \"longitude\": 13.405,\n      \"timezone\": \"Europe/Berlin\",\n      \"utcOffset\": 1,\n      \"population\": 3644826\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "5f9d7c28-4994-4d54-8a8e-4c61567a3fe2",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries",
+										":iso2"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "DE",
+											"key": "iso2",
+											"description": "(Required) ISO 3166-1 alpha-2 country code, case-insensitive. Common codes: DE (Germany), FR (France), GB (United Kingdom), US (United States), ES (Spain), IT (Italy), NL (Netherlands), IN (India), BR (Brazil), JP (Japan)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 4490.707877412537,\n      \"maximum\": 1572.5986245959666,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1200.6511582638445,\n      \"maximum\": 3896.440234125883,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "2af65801-7a07-4aba-8f6e-326283b41de9",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries",
+										":iso2"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "DE",
+											"key": "iso2",
+											"description": "(Required) ISO 3166-1 alpha-2 country code, case-insensitive. Common codes: DE (Germany), FR (France), GB (United Kingdom), US (United States), ES (Spain), IT (Italy), NL (Netherlands), IN (India), BR (Brazil), JP (Japan)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "9b0c3572-4381-4001-914b-394f04d55590",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries",
+										":iso2"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "DE",
+											"key": "iso2",
+											"description": "(Required) ISO 3166-1 alpha-2 country code, case-insensitive. Common codes: DE (Germany), FR (France), GB (United Kingdom), US (United States), ES (Spain), IT (Italy), NL (Netherlands), IN (India), BR (Brazil), JP (Japan)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "ed4b96ba-afaf-4259-8dcf-5af125d44bcc",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries",
+										":iso2"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "DE",
+											"key": "iso2",
+											"description": "(Required) ISO 3166-1 alpha-2 country code, case-insensitive. Common codes: DE (Germany), FR (France), GB (United Kingdom), US (United States), ES (Spain), IT (Italy), NL (Netherlands), IN (India), BR (Brazil), JP (Japan)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "150077f2-3e17-452b-97f4-8343cfa168a0",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"countries",
+										":iso2"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "DE",
+											"key": "iso2",
+											"description": "(Required) ISO 3166-1 alpha-2 country code, case-insensitive. Common codes: DE (Germany), FR (France), GB (United Kingdom), US (United States), ES (Spain), IT (Italy), NL (Netherlands), IN (India), BR (Brazil), JP (Japan)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				}
+			],
+			"event": []
+		}
+	],
+	"event": [],
+	"variable": [
+		{
+			"type": "string",
+			"value": "https://roxyapi.com/api/v2/location",
+			"key": "baseUrl"
+		},
+		{
+			"key": "apiKey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "roxySlug",
+			"value": "location",
+			"type": "string"
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}"
+			},
+			{
+				"key": "in",
+				"value": "header"
+			}
+		]
+	},
+	"info": {
+		"_postman_id": "c97bf150-20b1-4347-ba80-147dc5b3b00d",
+		"name": "Location and Timezone API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"description": {
+			"content": "Location and timezone API with city search and geocoding across 235,000+ cities in 240+ countries, returning latitude, longitude, IANA timezone, and DST-aware UTC offset. Coverage goes down to towns of a few hundred people and every administrative seat, so a rural birthplace resolves as reliably as a capital. The location layer for birth chart forms, horoscope apps, event planners, and any feature that needs place-to-coordinates resolution. Fully offline dataset with no third party geocoding call, and fields that map directly to the astrology endpoints. One key covers every RoxyAPI domain, with Remote MCP and typed SDKs.\n\n# RoxyAPI: AI-Native Insight Infrastructure\n\n> **Base URL:** `https://roxyapi.com/api/v2`\n> All endpoint paths below are relative to this base URL.\n\nThe only multi-domain spiritual intelligence API. 18 domains (Astrology, Vedic Astrology, Forecast, Human Design, Chinese Astrology, Feng Shui, Mesoamerican Astrology, Vastu Shastra, Numerology, Kabbalah, Tarot Reading, Biorhythm, Ayurveda, I-Ching Oracle, Crystals and Healing Stones, Dream Interpretation, Angel Numbers, Location and Timezone), 258+ endpoints, one API key, instant activation. Remote MCP server per domain plus AGENTS.md for AI coding agents.\n\n## Who uses RoxyAPI\n\n- **Developers** building astrology apps, tarot platforms, numerology calculators, or dream journals\n- **AI agent builders** connecting Claude, GPT, or Gemini to real calculation engines via MCP\n- **Vibe coders** shipping insight apps with Cursor, Bolt, or Replit using zero domain knowledge\n- **Founders and brands** launching branded spiritual experiences for their audience\n\n## Quick start (60 seconds)\n\n**1. Get your API key** at [roxyapi.com/pricing](https://roxyapi.com/pricing). Instant delivery, no account required.\n\n**2. Make your first call:**\n```bash\ncurl -H \"X-API-Key: YOUR_KEY\" https://roxyapi.com/api/v2/tarot/draw -X POST -H \"Content-Type: application/json\" -d '{\"count\": 3}'\n```\n\n**3. Monitor usage:**\n```bash\ncurl -H \"X-API-Key: YOUR_KEY\" https://roxyapi.com/api/v2/usage\n```\n\n## AI agent integration (Remote MCP)\n\nRoxyAPI ships a Remote MCP server per product over Streamable HTTP, with no local setup and no Docker. Your AI agent auto-discovers all 258+ endpoints as callable tools with zero configuration:\n- **Claude Desktop, Cursor, Windsurf**: Add MCP server URL in settings\n- **OpenAI Agents, Gemini ADK**: Connect via Streamable HTTP transport\n- **Custom agents**: Use the MCP Python/TypeScript SDK\n\nMCP endpoints: `https://roxyapi.com/mcp/{domain}` (e.g., `/mcp/astrology`, `/mcp/tarot`)\n\nSetup guide: [roxyapi.com/docs/mcp](https://roxyapi.com/docs/mcp)\n\n## Authentication\n\nAll endpoints require an API key via header or query param:\n- **Header (recommended):** `X-API-Key: YOUR_KEY`\n- **Query param (testing):** `?api_key=YOUR_KEY`\n\n## Response format\n\nClean JSON, no wrapper objects. Errors return `{ \"error\": \"message\", \"code\": \"error_code\" }`. The `error` field is human-readable (may change wording). The `code` field is machine-readable and stable, so it is the one safe to switch on programmatically.\n\nRate limit headers on every response: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Used`, `X-RateLimit-Reset` (Unix timestamp, seconds). Quotas reset on the 1st of every calendar month at 12:00 AM UTC, not on your renewal date.\n\n## Errors\n\nAll errors return `{ \"error\": \"message\", \"code\": \"error_code\" }`:\n\n| Status | Code | When |\n|--------|------|------|\n| 400 | `validation_error` | Missing or invalid parameters. Response includes `issues[]` with per-field `path`, `message`, `code`, `expected`, `minimum`, `maximum`, `format`, `pattern`. |\n| 401 | `api_key_required` | No API key provided |\n| 401 | `invalid_api_key` | Key format invalid or tampered |\n| 401 | `subscription_not_found` | Key references non-existent subscription |\n| 401 | `subscription_inactive` | Subscription cancelled, expired, or suspended |\n| 404 | `not_found` | Resource not found. Response may include a ranked `suggestions[]` array (each with `endpoint`, `hint`, and a `docs` deep link) for typo recovery. |\n| 405 | `method_not_allowed` | Path exists for a different HTTP method. Response includes `allow[]` and the `Allow` header lists valid methods. |\n| 429 | `rate_limit_exceeded` | Monthly quota reached |\n| 500 | `internal_error` | Server error |\n\n## Pricing\n\nFlat per-request pricing. Every call counts the same, whether a planet position or a full birth chart with aspects. No credit systems, no variable costs. Plans from $39 per month for 50K requests, up to 3M requests, with custom volume above that.\n\nSee [roxyapi.com/pricing](https://roxyapi.com/pricing)\n\n## Resources\n\n- [Quickstart guide](https://roxyapi.com/docs/quickstart): first API call in 60 seconds\n- [Documentation](https://roxyapi.com/docs): guides, tutorials, domain reference\n- [MCP setup](https://roxyapi.com/docs/mcp): connect AI agents\n- [Open source templates](https://roxyapi.com/starters): clone and deploy in 30 minutes\n- [FAQ](https://roxyapi.com/faq): common questions\n- [Contact](https://roxyapi.com/contact): support and API key recovery\n\n\nContact Support:\n Name: RoxyAPI Support",
+			"type": "text/plain"
+		}
+	}
+}

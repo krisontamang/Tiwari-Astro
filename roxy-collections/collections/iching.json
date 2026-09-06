@@ -1,0 +1,3832 @@
+{
+	"item": [
+		{
+			"id": "04cdca63-c8f8-440c-a492-826aeb79e06c",
+			"name": "I-Ching",
+			"description": {
+				"content": "I-Ching oracle API with all 64 hexagrams, 384 changing lines, 8 trigrams, and modern interpretations for love, career, and decision-making. Cast readings with the authentic three-coin method, get a daily hexagram, and explore the Book of Changes programmatically. Built for divination apps, AI oracle chatbots, fortune-telling platforms, daily wisdom features, and spiritual guidance products. One key covers every RoxyAPI domain, with Remote MCP and typed SDKs.",
+				"type": "text/plain"
+			},
+			"item": [
+				{
+					"id": "5aa95c03-596f-4d6b-a50a-3b382a39201d",
+					"name": "Daily hexagram - Daily I-Ching oracle API",
+					"request": {
+						"name": "Daily hexagram - Daily I-Ching oracle API",
+						"description": {
+							"content": "Receive a daily I-Ching hexagram for guidance and reflection. This endpoint uses seeded randomness to ensure the same seed gets the same hexagram on the same day, perfect for \"Hexagram of the Day\" features in oracle apps, meditation platforms, and daily wisdom tools. Returns the hexagram with judgment, image, and interpretations for love, career, decisions, and practical advice based on ancient Chinese wisdom from the Book of Changes.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"daily"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": [
+						{
+							"id": "25636eec-ddf0-4a6c-9d6f-e7443172a6d9",
+							"name": "Daily hexagram reading with full interpretation",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"date\": \"2026-01-28\",\n  \"seed\": \"user123-2026-01-28\",\n  \"hexagram\": {\n    \"number\": 1,\n    \"symbol\": \"䷀\",\n    \"chinese\": \"乾\",\n    \"english\": \"The Creative\",\n    \"pinyin\": \"Qián\",\n    \"upperTrigram\": \"Heaven\",\n    \"lowerTrigram\": \"Heaven\",\n    \"judgment\": \"Pure creative force is available and it runs from origin to completion without obstruction, so the situation rewards initiative that stays correct and does not slacken. Success here is built by sustained effort held to a straight line, not by a single burst.\",\n    \"image\": \"Heaven above heaven: the same motion repeated without pause and without fatigue. Renew your own strength on your own schedule rather than waiting to be driven by circumstances.\",\n    \"interpretation\": {\n      \"general\": \"A time of great creative power and initiative. The universe supports bold action and forward movement. Success comes through strength of character and unwavering perseverance.\",\n      \"love\": \"A time of strong creative energy and passionate connection. Take the initiative in expressing your feelings, but avoid arrogance.\",\n      \"career\": \"Exceptional opportunities for advancement and recognition await. Your creative ideas and leadership abilities are at their peak.\",\n      \"decision\": \"The time is right for bold action. Trust your instincts and move forward with confidence.\",\n      \"advice\": \"Be like the heavens: consistent, powerful, and untiring. Make yourself strong through steady effort, not through force.\"\n    }\n  },\n  \"dailyMessage\": \"Your hexagram for 2026-01-28: The Creative (乾). Be like the heavens: consistent, powerful, and untiring.\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "6745b6d9-c410-4705-bcec-4a8a5bc83b25",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1333.5796175869896,\n      \"maximum\": 1259.8168900923424,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 9745.896258669352,\n      \"maximum\": 7293.2836963819,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "4c4d6861-93c0-4769-be7a-d1fd6cbab08c",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "7eaa088d-3c31-4ca8-844a-4aa157fd8123",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "ed506df9-8ff9-41df-910d-6db7363ce032",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "4be9025d-2a1e-433d-b52d-c9fcd1135abc",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "262a71f3-0464-4ca9-abe6-db1a54fcf9d8",
+					"name": "Cast daily reading with changing lines - I-Ching divination API",
+					"request": {
+						"name": "Cast daily reading with changing lines - I-Ching divination API",
+						"description": {
+							"content": "Cast a complete daily I-Ching reading using the traditional three-coin method with seeded randomness. Unlike the simple daily hexagram, this provides the full casting experience with line values (6-9), changing line positions, and the resulting hexagram if transformation occurs. Same seed + same date = same casting result. Perfect for I-Ching divination apps requiring authentic oracle experience with daily consistency.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"daily",
+								"cast"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": [
+						{
+							"id": "68ff5d42-75ac-4644-ab90-5c72849e1318",
+							"name": "Complete daily casting with primary and resulting hexagrams",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily",
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"date\": \"2026-01-28\",\n  \"seed\": \"user123-2026-01-28\",\n  \"lines\": [\n    7,\n    8,\n    9,\n    7,\n    6,\n    8\n  ],\n  \"changingLinePositions\": [\n    3,\n    5\n  ],\n  \"hexagram\": {\n    \"number\": 1,\n    \"symbol\": \"䷀\",\n    \"chinese\": \"乾\",\n    \"english\": \"The Creative\",\n    \"pinyin\": \"Qián\",\n    \"upperTrigram\": \"Heaven\",\n    \"lowerTrigram\": \"Heaven\",\n    \"judgment\": \"Pure creative force is available and it runs from origin to completion without obstruction, so the situation rewards initiative that stays correct and does not slacken. Success here is built by sustained effort held to a straight line, not by a single burst.\",\n    \"image\": \"Heaven above heaven: the same motion repeated without pause and without fatigue. Renew your own strength on your own schedule rather than waiting to be driven by circumstances.\",\n    \"interpretation\": {\n      \"general\": \"A time of great creative power and initiative. The universe supports bold action and forward movement. Success comes through strength of character and unwavering perseverance.\",\n      \"love\": \"A time of strong creative energy and passionate connection. Take the initiative in expressing your feelings, but avoid arrogance.\",\n      \"career\": \"Exceptional opportunities for advancement and recognition await. Your creative ideas and leadership abilities are at their peak.\",\n      \"decision\": \"The time is right for bold action. Trust your instincts and move forward with confidence.\",\n      \"advice\": \"Be like the heavens: consistent, powerful, and untiring. Make yourself strong through steady effort, not through force.\"\n    }\n  },\n  \"changingLines\": [\n    {\n      \"position\": 1,\n      \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n      \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n    },\n    {\n      \"position\": 1,\n      \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n      \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n    }\n  ],\n  \"resultingHexagram\": {\n    \"number\": 1,\n    \"symbol\": \"䷀\",\n    \"chinese\": \"乾\",\n    \"english\": \"The Creative\",\n    \"pinyin\": \"Qián\",\n    \"upperTrigram\": \"Heaven\",\n    \"lowerTrigram\": \"Heaven\",\n    \"judgment\": \"Pure creative force is available and it runs from origin to completion without obstruction, so the situation rewards initiative that stays correct and does not slacken. Success here is built by sustained effort held to a straight line, not by a single burst.\",\n    \"image\": \"Heaven above heaven: the same motion repeated without pause and without fatigue. Renew your own strength on your own schedule rather than waiting to be driven by circumstances.\",\n    \"interpretation\": {\n      \"general\": \"A time of great creative power and initiative. The universe supports bold action and forward movement. Success comes through strength of character and unwavering perseverance.\",\n      \"love\": \"A time of strong creative energy and passionate connection. Take the initiative in expressing your feelings, but avoid arrogance.\",\n      \"career\": \"Exceptional opportunities for advancement and recognition await. Your creative ideas and leadership abilities are at their peak.\",\n      \"decision\": \"The time is right for bold action. Trust your instincts and move forward with confidence.\",\n      \"advice\": \"Be like the heavens: consistent, powerful, and untiring. Make yourself strong through steady effort, not through force.\"\n    }\n  }\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "69c6191a-ca21-41ed-8148-f0db03383b52",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily",
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1333.5796175869896,\n      \"maximum\": 1259.8168900923424,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 9745.896258669352,\n      \"maximum\": 7293.2836963819,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "d84d9c17-0b95-495b-8a73-a0dc3fb46b62",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily",
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "60d189dd-f1d8-406e-abc6-e7904af61f2f",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily",
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "79d94099-1e02-4604-b280-e17b8143767d",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily",
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "4ce90eef-c34b-48b4-ba35-b982b6555549",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily",
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"seed\": \"user123\",\n  \"date\": \"2026-03-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "3e0f2812-57af-4b29-bbb3-7c6eab779398",
+					"name": "List all 64 hexagrams - I-Ching hexagram catalog API",
+					"request": {
+						"name": "List all 64 hexagrams - I-Ching hexagram catalog API",
+						"description": {
+							"content": "Browse all 64 I-Ching hexagrams from the Book of Changes with their Chinese names, English translations, and trigram compositions. The hexagrams are ordered by the traditional King Wen sequence used in I-Ching divination for 3,000 years. Each hexagram represents a unique life situation combining two trigrams (Heaven, Earth, Thunder, Wind, Water, Fire, Mountain, Lake) into profound wisdom for decision-making and self-understanding.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"hexagrams"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								},
+								{
+									"disabled": false,
+									"key": "limit",
+									"value": "20",
+									"description": "Maximum items to return per page. Range: 1-64, default 20."
+								},
+								{
+									"disabled": false,
+									"key": "offset",
+									"value": "0",
+									"description": "Number of items to skip for pagination. Default 0."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "d09adaad-4e8d-46dc-a83b-025146295d42",
+							"name": "List of hexagrams with basic information.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"total\": 64,\n  \"limit\": 20,\n  \"offset\": 0,\n  \"hexagrams\": [\n    {\n      \"number\": 1,\n      \"symbol\": \"䷀\",\n      \"chinese\": \"乾\",\n      \"english\": \"The Creative\",\n      \"pinyin\": \"Qián\",\n      \"upperTrigram\": \"Heaven\",\n      \"lowerTrigram\": \"Heaven\"\n    },\n    {\n      \"number\": 1,\n      \"symbol\": \"䷀\",\n      \"chinese\": \"乾\",\n      \"english\": \"The Creative\",\n      \"pinyin\": \"Qián\",\n      \"upperTrigram\": \"Heaven\",\n      \"lowerTrigram\": \"Heaven\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "94ddd558-cae9-45fa-aabc-a0e924e2075e",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1333.5796175869896,\n      \"maximum\": 1259.8168900923424,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 9745.896258669352,\n      \"maximum\": 7293.2836963819,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "6089a5ce-91a0-4c80-8e47-92d31f3670fd",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "b0a753be-e3d5-4720-a623-d7fd7e023ad0",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "348b5747-3693-4975-a2af-abb146f5e31c",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "c2839afd-071c-403c-81de-18fb4ea3f585",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "20"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "21b8e3d9-fcb3-46ef-a76e-7abb37a4156c",
+					"name": "Random hexagram - I-Ching hexagram picker API",
+					"request": {
+						"name": "Random hexagram - I-Ching hexagram picker API",
+						"description": {
+							"content": "Receive a random I-Ching hexagram with full interpretation. Perfect for daily oracle features, meditation prompts, or exploring the Book of Changes. Returns complete hexagram data including judgment, image, interpretations for love/career/decisions, and all six changing line meanings.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"hexagrams",
+								"random"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "e57a0488-c4d1-40ca-91c7-9815e3bbbdff",
+							"name": "A random hexagram with full details.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"random"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"number\": 1,\n  \"symbol\": \"䷀\",\n  \"chinese\": \"乾\",\n  \"english\": \"The Creative\",\n  \"pinyin\": \"Qián\",\n  \"binary\": \"111111\",\n  \"upperTrigram\": \"Heaven\",\n  \"lowerTrigram\": \"Heaven\",\n  \"judgment\": \"Pure creative force is available and it runs from origin to completion without obstruction, so the situation rewards initiative that stays correct and does not slacken. Success here is built by sustained effort held to a straight line, not by a single burst.\",\n  \"image\": \"Heaven above heaven: the same motion repeated without pause and without fatigue. Renew your own strength on your own schedule rather than waiting to be driven by circumstances.\",\n  \"interpretation\": {\n    \"general\": \"This hexagram represents the primal power of creation and the energy of pure initiative.\",\n    \"love\": \"A time of strong attraction and passionate connection. Take the initiative in expressing your feelings.\",\n    \"career\": \"Exceptional opportunities for advancement and recognition. Your creative ideas are at their peak.\",\n    \"decision\": \"The time is right for bold action. Trust your instincts and move forward with confidence.\",\n    \"advice\": \"Be like the heavens: consistent, powerful, and untiring. Make yourself strong through steady effort.\"\n  },\n  \"changingLines\": [\n    {\n      \"position\": 1,\n      \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n      \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n    },\n    {\n      \"position\": 1,\n      \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n      \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "f6cab915-1cfe-4933-b5fe-25ddbbce5a91",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"random"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1333.5796175869896,\n      \"maximum\": 1259.8168900923424,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 9745.896258669352,\n      \"maximum\": 7293.2836963819,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "b3d96236-5b65-4d4c-95e4-a8bd60cff033",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"random"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "8bbf6f7d-e688-4797-8d2f-6aa4cb48324f",
+							"name": "No hexagrams available.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"random"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"Resource not found\",\n  \"code\": \"not_found\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "f52bcc7d-02cc-404c-b290-808a6b324420",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"random"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "446b6f44-00b6-4f17-9769-aa4fa5162f75",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"random"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "0c08ca51-69d9-47d4-befb-7564cd5b8761",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"random"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "ae65dee4-68df-4850-9b2e-8b4112dfcf49",
+					"name": "Lookup hexagram by line pattern - I-Ching binary lookup API",
+					"request": {
+						"name": "Lookup hexagram by line pattern - I-Ching binary lookup API",
+						"description": {
+							"content": "Find an I-Ching hexagram by its binary line pattern. Provide 6 digits (0 or 1) representing broken (yin) and solid (yang) lines from bottom to top. Use this for custom divination interfaces where users input their own line configurations, or to find hexagrams matching specific trigram combinations. Example: \"111111\" returns Hexagram 1 (The Creative), \"000000\" returns Hexagram 2 (The Receptive).",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"hexagrams",
+								"lookup"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								},
+								{
+									"disabled": false,
+									"key": "lines",
+									"value": "111111",
+									"description": "(Required) Six-digit binary pattern (0=yin/broken, 1=yang/solid) from bottom to top."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "430f58fe-0e20-4fd2-ad98-31e8b6e1d95d",
+							"name": "Matching hexagram.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"lookup"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "lines",
+											"value": "111111"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"number\": 1,\n  \"symbol\": \"䷀\",\n  \"chinese\": \"乾\",\n  \"english\": \"The Creative\",\n  \"pinyin\": \"Qián\",\n  \"binary\": \"111111\",\n  \"upperTrigram\": \"Heaven\",\n  \"lowerTrigram\": \"Heaven\",\n  \"judgment\": \"Pure creative force is available and it runs from origin to completion without obstruction, so the situation rewards initiative that stays correct and does not slacken. Success here is built by sustained effort held to a straight line, not by a single burst.\",\n  \"image\": \"Heaven above heaven: the same motion repeated without pause and without fatigue. Renew your own strength on your own schedule rather than waiting to be driven by circumstances.\",\n  \"interpretation\": {\n    \"general\": \"This hexagram represents the primal power of creation and the energy of pure initiative.\",\n    \"love\": \"A time of strong attraction and passionate connection. Take the initiative in expressing your feelings.\",\n    \"career\": \"Exceptional opportunities for advancement and recognition. Your creative ideas are at their peak.\",\n    \"decision\": \"The time is right for bold action. Trust your instincts and move forward with confidence.\",\n    \"advice\": \"Be like the heavens: consistent, powerful, and untiring. Make yourself strong through steady effort.\"\n  },\n  \"changingLines\": [\n    {\n      \"position\": 1,\n      \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n      \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n    },\n    {\n      \"position\": 1,\n      \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n      \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "c68a0129-2030-4eba-ae9c-9af1356dc3ea",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"lookup"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "lines",
+											"value": "111111"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1333.5796175869896,\n      \"maximum\": 1259.8168900923424,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 9745.896258669352,\n      \"maximum\": 7293.2836963819,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "d4b700cd-f2cf-46ad-9130-f3a9c6b981dd",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"lookup"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "lines",
+											"value": "111111"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "9343d513-c222-48c6-9d4b-95cd0264f6c6",
+							"name": "No hexagram found for pattern.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"lookup"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "lines",
+											"value": "111111"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"Resource not found\",\n  \"code\": \"not_found\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "09030395-d9cb-4ba0-a88b-7daecc2428b8",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"lookup"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "lines",
+											"value": "111111"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "23b94447-19df-4693-b415-f2d4e0ee56c0",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"lookup"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "lines",
+											"value": "111111"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "0fd888c6-7dad-4204-81a6-8bb42a9ed605",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										"lookup"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "lines",
+											"value": "111111"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "9ed5c149-6ec5-4424-b1dd-5a7b9e00968a",
+					"name": "Get hexagram by number - I-Ching hexagram detail API",
+					"request": {
+						"name": "Get hexagram by number - I-Ching hexagram detail API",
+						"description": {
+							"content": "Retrieve complete I-Ching hexagram details by King Wen sequence number (1-64). Returns the full hexagram with Chinese name, English translation, judgment text, image text, modern interpretations for general situations, love, career, and decision-making, plus all six changing line meanings. Use this to display detailed hexagram information after casting or for educational reference.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"hexagrams",
+								":number"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								}
+							],
+							"variable": [
+								{
+									"disabled": false,
+									"type": "any",
+									"value": "1",
+									"key": "number",
+									"description": "(Required) Hexagram number in King Wen sequence (1-64)."
+								}
+							]
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "ea706080-6ce0-43b6-ba51-b89d3312e64c",
+							"name": "Full hexagram details.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										":number"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "1",
+											"key": "number",
+											"description": "(Required) Hexagram number in King Wen sequence (1-64)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"number\": 1,\n  \"symbol\": \"䷀\",\n  \"chinese\": \"乾\",\n  \"english\": \"The Creative\",\n  \"pinyin\": \"Qián\",\n  \"binary\": \"111111\",\n  \"upperTrigram\": \"Heaven\",\n  \"lowerTrigram\": \"Heaven\",\n  \"judgment\": \"Pure creative force is available and it runs from origin to completion without obstruction, so the situation rewards initiative that stays correct and does not slacken. Success here is built by sustained effort held to a straight line, not by a single burst.\",\n  \"image\": \"Heaven above heaven: the same motion repeated without pause and without fatigue. Renew your own strength on your own schedule rather than waiting to be driven by circumstances.\",\n  \"interpretation\": {\n    \"general\": \"This hexagram represents the primal power of creation and the energy of pure initiative.\",\n    \"love\": \"A time of strong attraction and passionate connection. Take the initiative in expressing your feelings.\",\n    \"career\": \"Exceptional opportunities for advancement and recognition. Your creative ideas are at their peak.\",\n    \"decision\": \"The time is right for bold action. Trust your instincts and move forward with confidence.\",\n    \"advice\": \"Be like the heavens: consistent, powerful, and untiring. Make yourself strong through steady effort.\"\n  },\n  \"changingLines\": [\n    {\n      \"position\": 1,\n      \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n      \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n    },\n    {\n      \"position\": 1,\n      \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n      \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "49e859e7-5e61-4566-b5f3-9ce5e0e2d3b5",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										":number"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "1",
+											"key": "number",
+											"description": "(Required) Hexagram number in King Wen sequence (1-64)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1333.5796175869896,\n      \"maximum\": 1259.8168900923424,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 9745.896258669352,\n      \"maximum\": 7293.2836963819,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "fc38d638-1c52-40f7-9013-88a2aef7ac3b",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										":number"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "1",
+											"key": "number",
+											"description": "(Required) Hexagram number in King Wen sequence (1-64)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "5d5b094b-8307-4ad4-b418-edc745b8547d",
+							"name": "Hexagram not found.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										":number"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "1",
+											"key": "number",
+											"description": "(Required) Hexagram number in King Wen sequence (1-64)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"Resource not found\",\n  \"code\": \"not_found\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "b5f7519e-526a-44a7-b7f6-769ebb9f4aa5",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										":number"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "1",
+											"key": "number",
+											"description": "(Required) Hexagram number in King Wen sequence (1-64)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "605a73c2-b8e5-4e70-9a72-b076d64f5c1a",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										":number"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "1",
+											"key": "number",
+											"description": "(Required) Hexagram number in King Wen sequence (1-64)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "82c657c7-6ac1-46d2-b0dc-c296ea69712c",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"hexagrams",
+										":number"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "1",
+											"key": "number",
+											"description": "(Required) Hexagram number in King Wen sequence (1-64)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "5706b63b-40d5-471f-8509-047370581647",
+					"name": "Cast an I-Ching reading - Hexagram divination API",
+					"request": {
+						"name": "Cast an I-Ching reading - Hexagram divination API",
+						"description": {
+							"content": "Generate an authentic I-Ching reading using the traditional three-coin casting method. Each of the six lines is determined by virtually tossing three coins, producing values 6-9 where 6 (old yin) and 9 (old yang) are changing lines. Returns the primary hexagram with full interpretation, the line values showing which lines are changing, and if any lines change, the resulting hexagram that the primary transforms into. Optionally provide a seed for reproducible castings. Perfect for divination apps, oracle features, and decision-making tools.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"cast"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								},
+								{
+									"disabled": false,
+									"key": "seed",
+									"value": "user123-question1",
+									"description": "Optional seed for reproducible castings. Same seed = same casting every time. Pass any unique identifier (userId, session token, question hash). Omit for random casting."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "c5048c1a-769a-4e37-bc0b-7b399815d043",
+							"name": "Complete I-Ching reading with primary and resulting hexagrams.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "seed",
+											"value": "user123-question1"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"lines\": [\n    7,\n    8,\n    9,\n    7,\n    6,\n    8\n  ],\n  \"changingLinePositions\": [\n    3,\n    5\n  ],\n  \"seed\": \"user123-question1\",\n  \"hexagram\": {\n    \"number\": 1,\n    \"symbol\": \"䷀\",\n    \"chinese\": \"乾\",\n    \"english\": \"The Creative\",\n    \"pinyin\": \"Qián\",\n    \"binary\": \"111111\",\n    \"upperTrigram\": \"Heaven\",\n    \"lowerTrigram\": \"Heaven\",\n    \"judgment\": \"Pure creative force is available and it runs from origin to completion without obstruction, so the situation rewards initiative that stays correct and does not slacken. Success here is built by sustained effort held to a straight line, not by a single burst.\",\n    \"image\": \"Heaven above heaven: the same motion repeated without pause and without fatigue. Renew your own strength on your own schedule rather than waiting to be driven by circumstances.\",\n    \"interpretation\": {\n      \"general\": \"This hexagram represents the primal power of creation and the energy of pure initiative.\",\n      \"love\": \"A time of strong attraction and passionate connection. Take the initiative in expressing your feelings.\",\n      \"career\": \"Exceptional opportunities for advancement and recognition. Your creative ideas are at their peak.\",\n      \"decision\": \"The time is right for bold action. Trust your instincts and move forward with confidence.\",\n      \"advice\": \"Be like the heavens: consistent, powerful, and untiring. Make yourself strong through steady effort.\"\n    },\n    \"changingLines\": [\n      {\n        \"position\": 1,\n        \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n        \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n      },\n      {\n        \"position\": 1,\n        \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n        \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n      }\n    ]\n  },\n  \"resultingHexagram\": {\n    \"number\": 1,\n    \"symbol\": \"䷀\",\n    \"chinese\": \"乾\",\n    \"english\": \"The Creative\",\n    \"pinyin\": \"Qián\",\n    \"binary\": \"111111\",\n    \"upperTrigram\": \"Heaven\",\n    \"lowerTrigram\": \"Heaven\",\n    \"judgment\": \"Pure creative force is available and it runs from origin to completion without obstruction, so the situation rewards initiative that stays correct and does not slacken. Success here is built by sustained effort held to a straight line, not by a single burst.\",\n    \"image\": \"Heaven above heaven: the same motion repeated without pause and without fatigue. Renew your own strength on your own schedule rather than waiting to be driven by circumstances.\",\n    \"interpretation\": {\n      \"general\": \"This hexagram represents the primal power of creation and the energy of pure initiative.\",\n      \"love\": \"A time of strong attraction and passionate connection. Take the initiative in expressing your feelings.\",\n      \"career\": \"Exceptional opportunities for advancement and recognition. Your creative ideas are at their peak.\",\n      \"decision\": \"The time is right for bold action. Trust your instincts and move forward with confidence.\",\n      \"advice\": \"Be like the heavens: consistent, powerful, and untiring. Make yourself strong through steady effort.\"\n    },\n    \"changingLines\": [\n      {\n        \"position\": 1,\n        \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n        \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n      },\n      {\n        \"position\": 1,\n        \"text\": \"The dragon is still hidden below the surface, so it does not act.\",\n        \"meaning\": \"The first line is the beginning, still underground and unrecognized. Strength is present but untested, and showing it now invites resistance it cannot yet survive. Stay hidden and build.\"\n      }\n    ]\n  }\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "68e71c2b-36b5-4bed-814c-b8b4a0304d58",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "seed",
+											"value": "user123-question1"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1333.5796175869896,\n      \"maximum\": 1259.8168900923424,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 9745.896258669352,\n      \"maximum\": 7293.2836963819,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "6421f152-fe5f-42a4-b20e-77224743a68f",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "seed",
+											"value": "user123-question1"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "b27a4997-79a2-4cc7-ba2e-fa3bc4513133",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "seed",
+											"value": "user123-question1"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "12447b4c-8159-4ce3-aa26-9db2cb8ae71e",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "seed",
+											"value": "user123-question1"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "2ba0dbc7-6a55-45ce-a3de-c5352d769e4b",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"cast"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "seed",
+											"value": "user123-question1"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "9248379a-00a0-496e-a43d-8d9bfa006062",
+					"name": "List all 8 trigrams - Bagua trigram catalog API",
+					"request": {
+						"name": "List all 8 trigrams - Bagua trigram catalog API",
+						"description": {
+							"content": "Retrieve all 8 I-Ching trigrams (bagua), the fundamental building blocks of hexagrams. Each trigram consists of three lines and represents a primal force of nature: Heaven (Qian), Earth (Kun), Thunder (Zhen), Wind (Xun), Water (Kan), Fire (Li), Mountain (Gen), and Lake (Dui). Understanding trigrams is essential for interpreting hexagram meanings, as each hexagram combines an upper and lower trigram.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"trigrams"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "15114415-42b2-404d-b2f8-d96eaf54014a",
+							"name": "List of all 8 trigrams with basic information.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"total\": 8,\n  \"trigrams\": [\n    {\n      \"number\": 1,\n      \"symbol\": \"☰\",\n      \"chinese\": \"乾\",\n      \"english\": \"Heaven\",\n      \"pinyin\": \"Qián\",\n      \"binary\": \"111\",\n      \"attribute\": \"Creative\"\n    },\n    {\n      \"number\": 1,\n      \"symbol\": \"☰\",\n      \"chinese\": \"乾\",\n      \"english\": \"Heaven\",\n      \"pinyin\": \"Qián\",\n      \"binary\": \"111\",\n      \"attribute\": \"Creative\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "36435a7f-31f1-458a-bbbe-ccf11337f169",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1333.5796175869896,\n      \"maximum\": 1259.8168900923424,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 9745.896258669352,\n      \"maximum\": 7293.2836963819,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "4436f5b9-c5da-46ee-b6cf-2535c5ca3a5c",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "16c50f95-2f11-44aa-899c-61e80f519a96",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "c6d67838-edd2-4ff5-a441-f887cf474472",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "9b0e9ea8-e13e-4c1a-8074-d547c56d9c88",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "61a7b55e-bd4a-463f-91bb-5ff4b6a44c54",
+					"name": "Get trigram by number or name - Bagua trigram detail API",
+					"request": {
+						"name": "Get trigram by number or name - Bagua trigram detail API",
+						"description": {
+							"content": "Retrieve a specific I-Ching trigram by its number (1-8) or English name (Heaven, Earth, Thunder, Wind, Water, Fire, Mountain, Lake). Returns complete trigram information including Chinese name, pinyin, element associations, core attributes, and symbolic meaning. Use this to understand the component trigrams of any hexagram.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"trigrams",
+								":id"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								}
+							],
+							"variable": [
+								{
+									"disabled": false,
+									"type": "any",
+									"value": "Heaven",
+									"key": "id",
+									"description": "(Required) Trigram number (1-8) or English name (Heaven, Earth, Thunder, Wind, Water, Fire, Mountain, Lake)."
+								}
+							]
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "6d74e401-918f-4332-a1ec-659204ad1114",
+							"name": "Trigram details.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "Heaven",
+											"key": "id",
+											"description": "(Required) Trigram number (1-8) or English name (Heaven, Earth, Thunder, Wind, Water, Fire, Mountain, Lake)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"number\": 1,\n  \"symbol\": \"☰\",\n  \"chinese\": \"乾\",\n  \"english\": \"Heaven\",\n  \"pinyin\": \"Qián\",\n  \"binary\": \"111\",\n  \"element\": \"Metal\",\n  \"attribute\": \"Creative\",\n  \"familyMember\": \"Father\",\n  \"direction\": \"Northwest\",\n  \"bodyPart\": \"Head\",\n  \"animal\": \"Horse\",\n  \"season\": \"Late Autumn\",\n  \"quality\": \"Strong\",\n  \"meaning\": \"The Creative force representing pure yang energy, strength, leadership, and the power of initiative.\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "6c78f2d6-5c70-4de2-a420-30994de72763",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "Heaven",
+											"key": "id",
+											"description": "(Required) Trigram number (1-8) or English name (Heaven, Earth, Thunder, Wind, Water, Fire, Mountain, Lake)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 1333.5796175869896,\n      \"maximum\": 1259.8168900923424,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 9745.896258669352,\n      \"maximum\": 7293.2836963819,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "7a11ad97-9f2d-45c6-a9c5-c73d70dbaf12",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "Heaven",
+											"key": "id",
+											"description": "(Required) Trigram number (1-8) or English name (Heaven, Earth, Thunder, Wind, Water, Fire, Mountain, Lake)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "dd77c499-c621-43a8-818e-10123faf372d",
+							"name": "Trigram not found.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "Heaven",
+											"key": "id",
+											"description": "(Required) Trigram number (1-8) or English name (Heaven, Earth, Thunder, Wind, Water, Fire, Mountain, Lake)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"Resource not found\",\n  \"code\": \"not_found\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "5d2cae62-7a81-4baa-a467-6fbc78e76d90",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "Heaven",
+											"key": "id",
+											"description": "(Required) Trigram number (1-8) or English name (Heaven, Earth, Thunder, Wind, Water, Fire, Mountain, Lake)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "bb37be2b-2d0a-4418-9674-af9522b5aa44",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "Heaven",
+											"key": "id",
+											"description": "(Required) Trigram number (1-8) or English name (Heaven, Earth, Thunder, Wind, Water, Fire, Mountain, Lake)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "d3bf434d-b368-4b02-aed0-181cbdbe0bbf",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"trigrams",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "Heaven",
+											"key": "id",
+											"description": "(Required) Trigram number (1-8) or English name (Heaven, Earth, Thunder, Wind, Water, Fire, Mountain, Lake)."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				}
+			],
+			"event": []
+		}
+	],
+	"event": [],
+	"variable": [
+		{
+			"type": "string",
+			"value": "https://roxyapi.com/api/v2/iching",
+			"key": "baseUrl"
+		},
+		{
+			"key": "apiKey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "roxySlug",
+			"value": "iching",
+			"type": "string"
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}"
+			},
+			{
+				"key": "in",
+				"value": "header"
+			}
+		]
+	},
+	"info": {
+		"_postman_id": "341b2ccf-087c-4997-8b33-cf7b1b42e6a4",
+		"name": "I-Ching Oracle API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"description": {
+			"content": "I-Ching oracle API with all 64 hexagrams, 384 changing lines, 8 trigrams, and modern interpretations for love, career, and decision-making. Cast readings with the authentic three-coin method, get a daily hexagram, and explore the Book of Changes programmatically. Built for divination apps, AI oracle chatbots, fortune-telling platforms, daily wisdom features, and spiritual guidance products. One key covers every RoxyAPI domain, with Remote MCP and typed SDKs.\n\n# RoxyAPI: AI-Native Insight Infrastructure\n\n> **Base URL:** `https://roxyapi.com/api/v2`\n> All endpoint paths below are relative to this base URL.\n\nThe only multi-domain spiritual intelligence API. 18 domains (Astrology, Vedic Astrology, Forecast, Human Design, Chinese Astrology, Feng Shui, Mesoamerican Astrology, Vastu Shastra, Numerology, Kabbalah, Tarot Reading, Biorhythm, Ayurveda, I-Ching Oracle, Crystals and Healing Stones, Dream Interpretation, Angel Numbers, Location and Timezone), 258+ endpoints, one API key, instant activation. Remote MCP server per domain plus AGENTS.md for AI coding agents.\n\n## Who uses RoxyAPI\n\n- **Developers** building astrology apps, tarot platforms, numerology calculators, or dream journals\n- **AI agent builders** connecting Claude, GPT, or Gemini to real calculation engines via MCP\n- **Vibe coders** shipping insight apps with Cursor, Bolt, or Replit using zero domain knowledge\n- **Founders and brands** launching branded spiritual experiences for their audience\n\n## Quick start (60 seconds)\n\n**1. Get your API key** at [roxyapi.com/pricing](https://roxyapi.com/pricing). Instant delivery, no account required.\n\n**2. Make your first call:**\n```bash\ncurl -H \"X-API-Key: YOUR_KEY\" https://roxyapi.com/api/v2/tarot/draw -X POST -H \"Content-Type: application/json\" -d '{\"count\": 3}'\n```\n\n**3. Monitor usage:**\n```bash\ncurl -H \"X-API-Key: YOUR_KEY\" https://roxyapi.com/api/v2/usage\n```\n\n## AI agent integration (Remote MCP)\n\nRoxyAPI ships a Remote MCP server per product over Streamable HTTP, with no local setup and no Docker. Your AI agent auto-discovers all 258+ endpoints as callable tools with zero configuration:\n- **Claude Desktop, Cursor, Windsurf**: Add MCP server URL in settings\n- **OpenAI Agents, Gemini ADK**: Connect via Streamable HTTP transport\n- **Custom agents**: Use the MCP Python/TypeScript SDK\n\nMCP endpoints: `https://roxyapi.com/mcp/{domain}` (e.g., `/mcp/astrology`, `/mcp/tarot`)\n\nSetup guide: [roxyapi.com/docs/mcp](https://roxyapi.com/docs/mcp)\n\n## Authentication\n\nAll endpoints require an API key via header or query param:\n- **Header (recommended):** `X-API-Key: YOUR_KEY`\n- **Query param (testing):** `?api_key=YOUR_KEY`\n\n## Response format\n\nClean JSON, no wrapper objects. Errors return `{ \"error\": \"message\", \"code\": \"error_code\" }`. The `error` field is human-readable (may change wording). The `code` field is machine-readable and stable, so it is the one safe to switch on programmatically.\n\nRate limit headers on every response: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Used`, `X-RateLimit-Reset` (Unix timestamp, seconds). Quotas reset on the 1st of every calendar month at 12:00 AM UTC, not on your renewal date.\n\n## Errors\n\nAll errors return `{ \"error\": \"message\", \"code\": \"error_code\" }`:\n\n| Status | Code | When |\n|--------|------|------|\n| 400 | `validation_error` | Missing or invalid parameters. Response includes `issues[]` with per-field `path`, `message`, `code`, `expected`, `minimum`, `maximum`, `format`, `pattern`. |\n| 401 | `api_key_required` | No API key provided |\n| 401 | `invalid_api_key` | Key format invalid or tampered |\n| 401 | `subscription_not_found` | Key references non-existent subscription |\n| 401 | `subscription_inactive` | Subscription cancelled, expired, or suspended |\n| 404 | `not_found` | Resource not found. Response may include a ranked `suggestions[]` array (each with `endpoint`, `hint`, and a `docs` deep link) for typo recovery. |\n| 405 | `method_not_allowed` | Path exists for a different HTTP method. Response includes `allow[]` and the `Allow` header lists valid methods. |\n| 429 | `rate_limit_exceeded` | Monthly quota reached |\n| 500 | `internal_error` | Server error |\n\n## Pricing\n\nFlat per-request pricing. Every call counts the same, whether a planet position or a full birth chart with aspects. No credit systems, no variable costs. Plans from $39 per month for 50K requests, up to 3M requests, with custom volume above that.\n\nSee [roxyapi.com/pricing](https://roxyapi.com/pricing)\n\n## Resources\n\n- [Quickstart guide](https://roxyapi.com/docs/quickstart): first API call in 60 seconds\n- [Documentation](https://roxyapi.com/docs): guides, tutorials, domain reference\n- [MCP setup](https://roxyapi.com/docs/mcp): connect AI agents\n- [Open source templates](https://roxyapi.com/starters): clone and deploy in 30 minutes\n- [FAQ](https://roxyapi.com/faq): common questions\n- [Contact](https://roxyapi.com/contact): support and API key recovery\n\n\nContact Support:\n Name: RoxyAPI Support",
+			"type": "text/plain"
+		}
+	}
+}

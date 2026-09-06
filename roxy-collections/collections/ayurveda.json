@@ -1,0 +1,3421 @@
+{
+	"item": [
+		{
+			"id": "9cd7001a-292d-4097-a62b-5e1ff8ea27a8",
+			"name": "Ayurveda",
+			"description": {
+				"content": "Ayurveda API for dosha profiles, the dinacharya daily routine and the ritucharya seasonal regimen, with a verse cited on every value. Read the vata, pitta and kapha constitution from a verified sidereal birth chart, compute brahma muhurta and the six dosha periods from the real sunrise at any location, resolve the Ayurvedic season from actual solar ingress instants under two published conventions, and serve the catalogue of three doshas, fifteen sub-doshas, six tastes and twenty qualities straight from the primary texts. Deterministic, cacheable and localized. One key covers every RoxyAPI domain, with Remote MCP and typed SDKs.",
+				"type": "text/plain"
+			},
+			"item": [
+				{
+					"id": "65e1bbed-e150-4623-bb6f-0a3ce977d388",
+					"name": "Ayurvedic constitution from a birth chart - Dosha profile API",
+					"request": {
+						"name": "Ayurvedic constitution from a birth chart - Dosha profile API",
+						"description": {
+							"content": "Read the Ayurvedic constitution from a sidereal birth chart and return the vata, pitta and kapha shares with a verse behind every factor. Three factors are scored, each one carrying a classical rule that it shows the native humour: the rising sign, the sign the Moon occupies, and the strongest graha by shadbala. The composite that blends them is a RoxyAPI convention rather than a classical one, so its version and its weights ship inside the response, and every response states that this is general wellness and cultural interest only.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"constitution"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"date\": \"1990-07-04\",\n  \"time\": \"10:12:00\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.209,\n  \"timezone\": -11.097871490287574,\n  \"ayanamsa\": \"lahiri\",\n  \"ayanamsaValue\": 24,\n  \"signDoshaScheme\": \"satyacharya\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": [
+						{
+							"id": "a7529aa1-6cff-45d8-9571-aaf4c9d25f77",
+							"name": "The constitution, its cited factors, and the graha table behind them.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"constitution"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"1990-07-04\",\n  \"time\": \"10:12:00\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.209,\n  \"timezone\": -11.097871490287574,\n  \"ayanamsa\": \"lahiri\",\n  \"ayanamsaValue\": 24,\n  \"signDoshaScheme\": \"satyacharya\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"frame\": {\n    \"ayanamsa\": \"lahiri\",\n    \"ayanamsaDegrees\": 23.72820922463809\n  },\n  \"lagnaSign\": \"leo\",\n  \"moonSign\": \"scorpio\",\n  \"factors\": [\n    {\n      \"id\": \"lagna-sign\",\n      \"input\": \"leo\",\n      \"doshas\": [\n        \"pitta\"\n      ],\n      \"weight\": 2,\n      \"source\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    },\n    {\n      \"id\": \"lagna-sign\",\n      \"input\": \"leo\",\n      \"doshas\": [\n        \"pitta\"\n      ],\n      \"weight\": 2,\n      \"source\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    }\n  ],\n  \"composite\": {\n    \"vata\": 20,\n    \"pitta\": 60,\n    \"kapha\": 20,\n    \"dominant\": \"pitta\",\n    \"secondary\": \"vata\",\n    \"type\": \"pitta\",\n    \"convention\": \"roxyapi/v1\",\n    \"weighting\": {\n      \"lagnaSign\": 2,\n      \"moonSign\": 1,\n      \"strongestPlanet\": 2,\n      \"strongPlanetThreshold\": 0.9,\n      \"dualTypeMargin\": 10\n    }\n  },\n  \"strengthRanking\": [\n    {\n      \"graha\": \"Mars\",\n      \"totalVirupas\": 525.53,\n      \"rank\": 1,\n      \"strong\": true\n    },\n    {\n      \"graha\": \"Mars\",\n      \"totalVirupas\": 525.53,\n      \"rank\": 1,\n      \"strong\": true\n    }\n  ],\n  \"planetDoshas\": [\n    {\n      \"graha\": \"Sun\",\n      \"sanskritName\": \"sūrya\",\n      \"doshas\": [\n        \"pitta\"\n      ],\n      \"dhatu\": \"bone\",\n      \"dhatuSanskrit\": \"asthi\",\n      \"doshaSource\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      },\n      \"dhatuSource\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    },\n    {\n      \"graha\": \"Sun\",\n      \"sanskritName\": \"sūrya\",\n      \"doshas\": [\n        \"pitta\"\n      ],\n      \"dhatu\": \"bone\",\n      \"dhatuSanskrit\": \"asthi\",\n      \"doshaSource\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      },\n      \"dhatuSource\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    }\n  ],\n  \"summary\": \"The chart reads pitta, and pitta carries the largest share of it at 60 percent.\",\n  \"conventions\": {\n    \"signDoshaScheme\": \"satyacharya\",\n    \"ayanamsa\": \"lahiri\"\n  },\n  \"meta\": {\n    \"disclaimer\": \"For general wellness and cultural interest only. This is not medical advice, and it is unrelated to the diagnosis, cure, mitigation, prevention or treatment of any disease or condition. Consult a qualified professional.\"\n  }\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "8c2f50f4-48ab-4d7a-a262-e48f25069d94",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"constitution"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"1990-07-04\",\n  \"time\": \"10:12:00\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.209,\n  \"timezone\": -11.097871490287574,\n  \"ayanamsa\": \"lahiri\",\n  \"ayanamsaValue\": 24,\n  \"signDoshaScheme\": \"satyacharya\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 766.9206353114821,\n      \"maximum\": 8503.835528770085,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 6915.314189988398,\n      \"maximum\": 7162.857475940803,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "af964dd9-594f-48ad-9a69-aea11405ab5d",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"constitution"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"1990-07-04\",\n  \"time\": \"10:12:00\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.209,\n  \"timezone\": -11.097871490287574,\n  \"ayanamsa\": \"lahiri\",\n  \"ayanamsaValue\": 24,\n  \"signDoshaScheme\": \"satyacharya\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "e94afa7a-8cfa-42a7-b0be-c394d560af98",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"constitution"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"1990-07-04\",\n  \"time\": \"10:12:00\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.209,\n  \"timezone\": -11.097871490287574,\n  \"ayanamsa\": \"lahiri\",\n  \"ayanamsaValue\": 24,\n  \"signDoshaScheme\": \"satyacharya\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "92af7ad8-18eb-4e11-86ed-932742d3df72",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"constitution"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"1990-07-04\",\n  \"time\": \"10:12:00\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.209,\n  \"timezone\": -11.097871490287574,\n  \"ayanamsa\": \"lahiri\",\n  \"ayanamsaValue\": 24,\n  \"signDoshaScheme\": \"satyacharya\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "03dd32e9-163c-4174-9c68-5aee87d4fbe9",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"constitution"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"1990-07-04\",\n  \"time\": \"10:12:00\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.209,\n  \"timezone\": -11.097871490287574,\n  \"ayanamsa\": \"lahiri\",\n  \"ayanamsaValue\": 24,\n  \"signDoshaScheme\": \"satyacharya\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "1df67522-4a00-4b17-ae4b-0e396587717d",
+					"name": "Dinacharya daily routine - Brahma muhurta and dosha clock API",
+					"request": {
+						"name": "Dinacharya daily routine - Brahma muhurta and dosha clock API",
+						"description": {
+							"content": "Compute the dinacharya daily routine for one date and one place: sunrise, sunset, the brahma muhurta window, and the six dosha periods of the day and the night. The default division cuts the actual day and the actual night into thirds, which is what the frame chapter states, and the modern clock grid is returned alongside it under its own label so a caller can show either. The brahma muhurta is a fixed window of 96 to 48 minutes before sunrise rather than a share of the night, which is the reading the classical commentary settles on.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"dinacharya"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"date\": \"2026-06-21\",\n  \"latitude\": 51.5074,\n  \"longitude\": -0.1278,\n  \"timezone\": 11.619775286907249,\n  \"doshaClock\": \"sunrise-anchored\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": [
+						{
+							"id": "457996d9-b0fd-46e6-bb8d-ead80ae7a171",
+							"name": "The day divided, with the routine the chapter gives.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"dinacharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-06-21\",\n  \"latitude\": 51.5074,\n  \"longitude\": -0.1278,\n  \"timezone\": 11.619775286907249,\n  \"doshaClock\": \"sunrise-anchored\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"date\": \"2026-06-21\",\n  \"sunrise\": \"2026-06-21T03:43:12.000Z\",\n  \"sunset\": \"2026-06-21T20:21:30.000Z\",\n  \"nextSunrise\": \"2026-06-22T03:43:30.000Z\",\n  \"brahmaMuhurta\": {\n    \"start\": \"2026-06-21T02:07:12.000Z\",\n    \"end\": \"2026-06-21T02:55:12.000Z\",\n    \"muhurtaMinutes\": 48,\n    \"muhurtasPerAhoratra\": 30,\n    \"source\": {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  },\n  \"doshaPeriods\": [\n    {\n      \"dosha\": \"kapha\",\n      \"start\": \"2026-06-21T03:43:12.000Z\",\n      \"end\": \"2026-06-21T09:05:44.000Z\",\n      \"span\": \"day\",\n      \"third\": 1\n    },\n    {\n      \"dosha\": \"kapha\",\n      \"start\": \"2026-06-21T03:43:12.000Z\",\n      \"end\": \"2026-06-21T09:05:44.000Z\",\n      \"span\": \"day\",\n      \"third\": 1\n    }\n  ],\n  \"alternatePeriods\": [\n    {\n      \"dosha\": \"kapha\",\n      \"start\": \"2026-06-21T03:43:12.000Z\",\n      \"end\": \"2026-06-21T09:05:44.000Z\",\n      \"span\": \"day\",\n      \"third\": 1\n    },\n    {\n      \"dosha\": \"kapha\",\n      \"start\": \"2026-06-21T03:43:12.000Z\",\n      \"end\": \"2026-06-21T09:05:44.000Z\",\n      \"span\": \"day\",\n      \"third\": 1\n    }\n  ],\n  \"routine\": [\n    {\n      \"order\": 1,\n      \"id\": \"waking\",\n      \"sanskritName\": \"brāhmamuhūrta\",\n      \"guidance\": \"One who is well rises in the brahma muhurta, the window that closes as sunrise approaches, for the protection of life.\",\n      \"timing\": \"sunrise minus 96 minutes to sunrise minus 48 minutes\",\n      \"source\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    },\n    {\n      \"order\": 1,\n      \"id\": \"waking\",\n      \"sanskritName\": \"brāhmamuhūrta\",\n      \"guidance\": \"One who is well rises in the brahma muhurta, the window that closes as sunrise approaches, for the protection of life.\",\n      \"timing\": \"sunrise minus 96 minutes to sunrise minus 48 minutes\",\n      \"source\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    }\n  ],\n  \"summary\": \"The brahma muhurta opens 96 minutes before sunrise and closes 48 minutes before it, a fixed window rather than a share of the night.\",\n  \"sources\": [\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    },\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  ],\n  \"conventions\": {\n    \"doshaClock\": \"sunrise-anchored\"\n  },\n  \"meta\": {\n    \"disclaimer\": \"For general wellness and cultural interest only. This is not medical advice, and it is unrelated to the diagnosis, cure, mitigation, prevention or treatment of any disease or condition. Consult a qualified professional.\"\n  }\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "0cb71b7e-ea54-4593-8de4-e6ca61c8c080",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"dinacharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-06-21\",\n  \"latitude\": 51.5074,\n  \"longitude\": -0.1278,\n  \"timezone\": 11.619775286907249,\n  \"doshaClock\": \"sunrise-anchored\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 766.9206353114821,\n      \"maximum\": 8503.835528770085,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 6915.314189988398,\n      \"maximum\": 7162.857475940803,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "9706bed3-dee8-4ea8-b823-9d0934417d49",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"dinacharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-06-21\",\n  \"latitude\": 51.5074,\n  \"longitude\": -0.1278,\n  \"timezone\": 11.619775286907249,\n  \"doshaClock\": \"sunrise-anchored\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "8c2784d7-b1a5-44d7-b7f4-96836163b9cc",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"dinacharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-06-21\",\n  \"latitude\": 51.5074,\n  \"longitude\": -0.1278,\n  \"timezone\": 11.619775286907249,\n  \"doshaClock\": \"sunrise-anchored\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "a1e4b0bc-2fff-4761-9cb2-8506e53fe8c8",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"dinacharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-06-21\",\n  \"latitude\": 51.5074,\n  \"longitude\": -0.1278,\n  \"timezone\": 11.619775286907249,\n  \"doshaClock\": \"sunrise-anchored\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "c5cdeaf2-65d0-464c-b169-92dc8f03cef4",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"dinacharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-06-21\",\n  \"latitude\": 51.5074,\n  \"longitude\": -0.1278,\n  \"timezone\": 11.619775286907249,\n  \"doshaClock\": \"sunrise-anchored\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "d6754540-bd1d-4820-a93b-2016197092cb",
+					"name": "Ayurveda seasonal regimen - Ritucharya and ritu resolution API",
+					"request": {
+						"name": "Ayurveda seasonal regimen - Ritucharya and ritu resolution API",
+						"description": {
+							"content": "Resolve the ritucharya, the Ayurvedic season, for a date from the real solar ingress instants and return the regimen the primary text gives for it. The response carries the season with its exact opening and closing instants, the half of the year the sun is in, where each dosha stands in the seasonal cycle, the taste that grows across the season, and the behaviour items the chapter states. Season boundaries are measured in the tropical zodiac by default, which is what published almanacs use, and the sidereal reading is available as a convention and runs about 24 days later.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"ritucharya"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "POST",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"date\": \"2026-03-01\",\n  \"ritucharyaScheme\": \"sutrasthana-6\",\n  \"rituZodiac\": \"sayana\",\n  \"hemisphere\": \"northern\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": [
+						{
+							"id": "e6f219bd-673a-4b62-9500-0d0cb0f0b6fe",
+							"name": "The season, its boundaries, and what the chapter states for it.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"ritucharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-03-01\",\n  \"ritucharyaScheme\": \"sutrasthana-6\",\n  \"rituZodiac\": \"sayana\",\n  \"hemisphere\": \"northern\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"date\": \"2026-03-01\",\n  \"ritu\": {\n    \"id\": \"vasanta\",\n    \"sanskritName\": \"vasanta\",\n    \"devanagari\": \"वसन्त\",\n    \"gloss\": \"spring\",\n    \"classicalRitu\": \"vasanta\",\n    \"start\": \"2026-02-18T15:51:27.000Z\",\n    \"end\": \"2026-04-20T01:39:12.000Z\",\n    \"solarMonths\": [\n      {\n        \"index\": 11,\n        \"id\": \"pisces\",\n        \"sanskritName\": \"Meena\"\n      },\n      {\n        \"index\": 11,\n        \"id\": \"pisces\",\n        \"sanskritName\": \"Meena\"\n      }\n    ]\n  },\n  \"ayana\": {\n    \"id\": \"uttarayana\",\n    \"source\": {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  },\n  \"phase\": {\n    \"id\": \"adana\",\n    \"tastes\": [\n      {\n        \"id\": \"kashaya\",\n        \"sanskritName\": \"kaṣāya\",\n        \"english\": \"astringent\"\n      },\n      {\n        \"id\": \"kashaya\",\n        \"sanskritName\": \"kaṣāya\",\n        \"english\": \"astringent\"\n      }\n    ],\n    \"source\": {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  },\n  \"strength\": {\n    \"level\": \"moderate\",\n    \"source\": {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  },\n  \"tasteIncreasing\": {\n    \"id\": \"kashaya\",\n    \"sanskritName\": \"kaṣāya\",\n    \"english\": \"astringent\",\n    \"source\": {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  },\n  \"doshaCycle\": [\n    {\n      \"dosha\": \"kapha\",\n      \"state\": \"aggravated\",\n      \"meaning\": \"Going out of its own channel, with its own marks showing.\",\n      \"note\": \"One public-domain translation of Charaka Sutrasthana 6.22 places the accumulation in hemanta instead.\"\n    },\n    {\n      \"dosha\": \"kapha\",\n      \"state\": \"aggravated\",\n      \"meaning\": \"Going out of its own channel, with its own marks showing.\",\n      \"note\": \"One public-domain translation of Charaka Sutrasthana 6.22 places the accumulation in hemanta instead.\"\n    }\n  ],\n  \"regimen\": [\n    {\n      \"id\": \"vasanta-activity\",\n      \"guidance\": \"Take up physical exercise, dry rubbing, mouth rinsing and frequent washing in comfortably warm water.\",\n      \"source\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    },\n    {\n      \"id\": \"vasanta-activity\",\n      \"guidance\": \"Take up physical exercise, dry rubbing, mouth rinsing and frequent washing in comfortably warm water.\",\n      \"source\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    }\n  ],\n  \"summary\": \"The solar months of Meena and Mesha fall in vasanta, spring.\",\n  \"sources\": [\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    },\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  ],\n  \"conventions\": {\n    \"ritucharyaScheme\": \"sutrasthana-6\",\n    \"rituZodiac\": \"sayana\",\n    \"hemisphere\": \"northern\"\n  },\n  \"meta\": {\n    \"disclaimer\": \"For general wellness and cultural interest only. This is not medical advice, and it is unrelated to the diagnosis, cure, mitigation, prevention or treatment of any disease or condition. Consult a qualified professional.\"\n  }\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "94b8333a-81d7-4f1e-880a-9834be4d503e",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"ritucharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-03-01\",\n  \"ritucharyaScheme\": \"sutrasthana-6\",\n  \"rituZodiac\": \"sayana\",\n  \"hemisphere\": \"northern\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 766.9206353114821,\n      \"maximum\": 8503.835528770085,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 6915.314189988398,\n      \"maximum\": 7162.857475940803,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "58a5d7b4-dd48-481d-a14b-fd2690c9a455",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"ritucharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-03-01\",\n  \"ritucharyaScheme\": \"sutrasthana-6\",\n  \"rituZodiac\": \"sayana\",\n  \"hemisphere\": \"northern\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "b42b9858-9ff9-4974-a55e-1d01bb36ae8d",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"ritucharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-03-01\",\n  \"ritucharyaScheme\": \"sutrasthana-6\",\n  \"rituZodiac\": \"sayana\",\n  \"hemisphere\": \"northern\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "c6ce4811-bba4-4324-9fb8-4f398ee5f927",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"ritucharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-03-01\",\n  \"ritucharyaScheme\": \"sutrasthana-6\",\n  \"rituZodiac\": \"sayana\",\n  \"hemisphere\": \"northern\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "aaa33d08-83d6-4522-93b2-e74d6df7f8de",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"ritucharya"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "POST",
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"date\": \"2026-03-01\",\n  \"ritucharyaScheme\": \"sutrasthana-6\",\n  \"rituZodiac\": \"sayana\",\n  \"hemisphere\": \"northern\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "621f4c1f-7662-4a41-bead-69dba9ece73b",
+					"name": "Daily Ayurveda reading - Dosha clock and brahma muhurta by location API",
+					"request": {
+						"name": "Daily Ayurveda reading - Dosha clock and brahma muhurta by location API",
+						"description": {
+							"content": "Get one days Ayurveda reading for a place: sunrise, the brahma muhurta window, the six dosha periods cut from the actual day and night, and the season the date falls in with where each dosha stands in its yearly cycle. It composes the routine and the season routes for one location so a widget needs one call rather than two. The default conventions apply throughout and are echoed; call those two routes directly to choose a different season scheme, zodiac, hemisphere or dosha clock.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"daily"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								},
+								{
+									"disabled": false,
+									"key": "date",
+									"value": "2026-06-21",
+									"description": "Reading date in YYYY-MM-DD format. Past and future dates are both supported, for editorial scheduling and backfill. Defaults to the current day in the timezone parameter."
+								},
+								{
+									"disabled": false,
+									"key": "latitude",
+									"value": "51.5074",
+									"description": "Latitude in decimal degrees. It sets how long the day and the night actually are, which is what the dosha periods are cut from."
+								},
+								{
+									"disabled": false,
+									"key": "longitude",
+									"value": "-0.1278",
+									"description": "Longitude in decimal degrees. It sets the clock time of sunrise at this place."
+								},
+								{
+									"disabled": false,
+									"key": "timezone",
+									"value": "Europe/London",
+									"description": "Selects which day counts as current when date is omitted, and which local day sunrise is computed for. Defaults to UTC, so the reading rolls over at 00:00 UTC. Accepts an IANA name (e.g. \"Europe/London\"), decimal hours (e.g. 5.5 for IST), or a fixed UTC offset (e.g. \"-05:00\")."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "3feebc00-0d54-481d-a4a6-d14fdcd4854c",
+							"name": "The day, composed from the routine and the season.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "date",
+											"value": "2026-06-21"
+										},
+										{
+											"key": "latitude",
+											"value": "51.5074"
+										},
+										{
+											"key": "longitude",
+											"value": "-0.1278"
+										},
+										{
+											"key": "timezone",
+											"value": "Europe/London"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"date\": \"2026-06-21\",\n  \"sunrise\": \"2026-06-21T03:43:12.000Z\",\n  \"sunset\": \"2026-06-21T20:21:30.000Z\",\n  \"brahmaMuhurta\": {\n    \"start\": \"2026-06-21T02:07:12.000Z\",\n    \"end\": \"2026-06-21T02:55:12.000Z\"\n  },\n  \"doshaPeriods\": [\n    {\n      \"dosha\": \"kapha\",\n      \"start\": \"2026-06-21T03:43:12.000Z\",\n      \"end\": \"2026-06-21T09:05:44.000Z\",\n      \"span\": \"day\"\n    },\n    {\n      \"dosha\": \"kapha\",\n      \"start\": \"2026-06-21T03:43:12.000Z\",\n      \"end\": \"2026-06-21T09:05:44.000Z\",\n      \"span\": \"day\"\n    }\n  ],\n  \"ritu\": {\n    \"id\": \"grisma\",\n    \"sanskritName\": \"grīṣma\",\n    \"gloss\": \"summer\",\n    \"start\": \"2026-04-20T01:39:12.000Z\",\n    \"end\": \"2026-06-21T14:24:36.000Z\",\n    \"ayana\": \"uttarayana\",\n    \"phase\": \"adana\",\n    \"strength\": \"lowest\",\n    \"tasteIncreasing\": \"katu\"\n  },\n  \"doshaCycle\": [\n    {\n      \"dosha\": \"kapha\",\n      \"state\": \"settling\"\n    },\n    {\n      \"dosha\": \"kapha\",\n      \"state\": \"settling\"\n    }\n  ],\n  \"summary\": \"The day sits in grisma, and pitta holds the part of it this reading was taken in.\",\n  \"sources\": [\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    },\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  ],\n  \"conventions\": {\n    \"doshaClock\": \"sunrise-anchored\",\n    \"ritucharyaScheme\": \"sutrasthana-6\",\n    \"rituZodiac\": \"sayana\",\n    \"hemisphere\": \"northern\"\n  },\n  \"meta\": {\n    \"disclaimer\": \"For general wellness and cultural interest only. This is not medical advice, and it is unrelated to the diagnosis, cure, mitigation, prevention or treatment of any disease or condition. Consult a qualified professional.\"\n  }\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "e4f8d318-87df-414b-a361-860c7cecf477",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "date",
+											"value": "2026-06-21"
+										},
+										{
+											"key": "latitude",
+											"value": "51.5074"
+										},
+										{
+											"key": "longitude",
+											"value": "-0.1278"
+										},
+										{
+											"key": "timezone",
+											"value": "Europe/London"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 766.9206353114821,\n      \"maximum\": 8503.835528770085,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 6915.314189988398,\n      \"maximum\": 7162.857475940803,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "ff0febce-32f8-40f2-aad2-3834dd85c530",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "date",
+											"value": "2026-06-21"
+										},
+										{
+											"key": "latitude",
+											"value": "51.5074"
+										},
+										{
+											"key": "longitude",
+											"value": "-0.1278"
+										},
+										{
+											"key": "timezone",
+											"value": "Europe/London"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "a3087119-a501-4982-8509-bc18525202fe",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "date",
+											"value": "2026-06-21"
+										},
+										{
+											"key": "latitude",
+											"value": "51.5074"
+										},
+										{
+											"key": "longitude",
+											"value": "-0.1278"
+										},
+										{
+											"key": "timezone",
+											"value": "Europe/London"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "a6c5da33-a4fe-4805-88dc-33049ae52313",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "date",
+											"value": "2026-06-21"
+										},
+										{
+											"key": "latitude",
+											"value": "51.5074"
+										},
+										{
+											"key": "longitude",
+											"value": "-0.1278"
+										},
+										{
+											"key": "timezone",
+											"value": "Europe/London"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "984a2ef0-8442-4d5d-95f4-228f46a4f7b3",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"daily"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "date",
+											"value": "2026-06-21"
+										},
+										{
+											"key": "latitude",
+											"value": "51.5074"
+										},
+										{
+											"key": "longitude",
+											"value": "-0.1278"
+										},
+										{
+											"key": "timezone",
+											"value": "Europe/London"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "ea69ff0a-bc19-4809-9e75-5ede923a19ab",
+					"name": "List the three doshas - Dosha catalogue API",
+					"request": {
+						"name": "List the three doshas - Dosha catalogue API",
+						"description": {
+							"content": "Return vata, pitta and kapha with the qualities, seats and five sub-doshas each carries, and the three states the seasonal cycle moves them through. Every quality is one of the twenty gunas and every state is described as a position and a quality rather than as a complaint, which is what lets the catalogue join to the tastes and qualities endpoints without a lookup table in between. Each entry carries the verse it comes from, and the second primary text is recorded where it reads the list differently.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"doshas"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								},
+								{
+									"disabled": false,
+									"key": "limit",
+									"value": "3",
+									"description": "Maximum items to return per page. Range: 1-3, default 3."
+								},
+								{
+									"disabled": false,
+									"key": "offset",
+									"value": "0",
+									"description": "Number of items to skip for pagination. Default 0."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "d1214704-adf9-4048-a248-8c794a67633c",
+							"name": "The three doshas.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"total\": 3,\n  \"limit\": 3,\n  \"offset\": 0,\n  \"doshas\": [\n    {\n      \"id\": \"vata\",\n      \"sanskritName\": \"vāta\",\n      \"devanagari\": \"वात\",\n      \"alsoCalled\": [\n        \"vāyu\",\n        \"anila\",\n        \"māruta\",\n        \"samīraṇa\"\n      ],\n      \"element\": \"vayu, air\",\n      \"modernElementPair\": \"air with ether\",\n      \"qualities\": [\n        \"ruksa, dry\",\n        \"laghu, light\",\n        \"sita, cold\"\n      ],\n      \"qualityGunas\": [\n        \"ruksha\",\n        \"laghu\",\n        \"khara\",\n        \"sukshma\",\n        \"cala\"\n      ],\n      \"seats\": [\n        \"the colon\",\n        \"the hips\",\n        \"the thighs\"\n      ],\n      \"specialSeat\": \"the colon\",\n      \"seatsVariant\": \"Charaka Sutrasthana 20.8 names the bladder and the feet where this chapter names the ear and the organ of touch.\",\n      \"functions\": [\n        \"upholds the structure and the working of the body\",\n        \"impels speech\"\n      ],\n      \"subDoshas\": [\n        {\n          \"id\": \"prana\",\n          \"sanskritName\": \"prāṇa\",\n          \"devanagari\": \"प्राण\",\n          \"seat\": \"the head\",\n          \"function\": \"upholds the intellect, the heart, the senses and the mind, and carries out spitting, sneezing, belching, the inward breath and the swallowing of food\",\n          \"source\": {\n            \"text\": \"Brihat Jataka\",\n            \"chapter\": \"18\",\n            \"verse\": \"note to 20, the Satyacharya extract\",\n            \"translation\": \"N. Chidambaram Iyer\",\n            \"year\": 1885,\n            \"publicDomain\": true,\n            \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n          },\n          \"moves\": \"the chest and the throat\"\n        },\n        {\n          \"id\": \"prana\",\n          \"sanskritName\": \"prāṇa\",\n          \"devanagari\": \"प्राण\",\n          \"seat\": \"the head\",\n          \"function\": \"upholds the intellect, the heart, the senses and the mind, and carries out spitting, sneezing, belching, the inward breath and the swallowing of food\",\n          \"source\": {\n            \"text\": \"Brihat Jataka\",\n            \"chapter\": \"18\",\n            \"verse\": \"note to 20, the Satyacharya extract\",\n            \"translation\": \"N. Chidambaram Iyer\",\n            \"year\": 1885,\n            \"publicDomain\": true,\n            \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n          },\n          \"moves\": \"the chest and the throat\"\n        }\n      ],\n      \"states\": {\n        \"balanced\": \"even, and staying within its own seat, with nothing disturbed\",\n        \"accumulating\": \"increasing within its own seat, with an aversion to more of its own qualities and a wish for the opposite ones\",\n        \"aggravated\": \"moving beyond its own seat, with dryness, lightness and movement conspicuous\",\n        \"settlesWith\": \"unctuous, heavy, warm, smooth and stable qualities\",\n        \"source\": {\n          \"text\": \"Brihat Jataka\",\n          \"chapter\": \"18\",\n          \"verse\": \"note to 20, the Satyacharya extract\",\n          \"translation\": \"N. Chidambaram Iyer\",\n          \"year\": 1885,\n          \"publicDomain\": true,\n          \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n        }\n      },\n      \"source\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    },\n    {\n      \"id\": \"vata\",\n      \"sanskritName\": \"vāta\",\n      \"devanagari\": \"वात\",\n      \"alsoCalled\": [\n        \"vāyu\",\n        \"anila\",\n        \"māruta\",\n        \"samīraṇa\"\n      ],\n      \"element\": \"vayu, air\",\n      \"modernElementPair\": \"air with ether\",\n      \"qualities\": [\n        \"ruksa, dry\",\n        \"laghu, light\",\n        \"sita, cold\"\n      ],\n      \"qualityGunas\": [\n        \"ruksha\",\n        \"laghu\",\n        \"khara\",\n        \"sukshma\",\n        \"cala\"\n      ],\n      \"seats\": [\n        \"the colon\",\n        \"the hips\",\n        \"the thighs\"\n      ],\n      \"specialSeat\": \"the colon\",\n      \"seatsVariant\": \"Charaka Sutrasthana 20.8 names the bladder and the feet where this chapter names the ear and the organ of touch.\",\n      \"functions\": [\n        \"upholds the structure and the working of the body\",\n        \"impels speech\"\n      ],\n      \"subDoshas\": [\n        {\n          \"id\": \"prana\",\n          \"sanskritName\": \"prāṇa\",\n          \"devanagari\": \"प्राण\",\n          \"seat\": \"the head\",\n          \"function\": \"upholds the intellect, the heart, the senses and the mind, and carries out spitting, sneezing, belching, the inward breath and the swallowing of food\",\n          \"source\": {\n            \"text\": \"Brihat Jataka\",\n            \"chapter\": \"18\",\n            \"verse\": \"note to 20, the Satyacharya extract\",\n            \"translation\": \"N. Chidambaram Iyer\",\n            \"year\": 1885,\n            \"publicDomain\": true,\n            \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n          },\n          \"moves\": \"the chest and the throat\"\n        },\n        {\n          \"id\": \"prana\",\n          \"sanskritName\": \"prāṇa\",\n          \"devanagari\": \"प्राण\",\n          \"seat\": \"the head\",\n          \"function\": \"upholds the intellect, the heart, the senses and the mind, and carries out spitting, sneezing, belching, the inward breath and the swallowing of food\",\n          \"source\": {\n            \"text\": \"Brihat Jataka\",\n            \"chapter\": \"18\",\n            \"verse\": \"note to 20, the Satyacharya extract\",\n            \"translation\": \"N. Chidambaram Iyer\",\n            \"year\": 1885,\n            \"publicDomain\": true,\n            \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n          },\n          \"moves\": \"the chest and the throat\"\n        }\n      ],\n      \"states\": {\n        \"balanced\": \"even, and staying within its own seat, with nothing disturbed\",\n        \"accumulating\": \"increasing within its own seat, with an aversion to more of its own qualities and a wish for the opposite ones\",\n        \"aggravated\": \"moving beyond its own seat, with dryness, lightness and movement conspicuous\",\n        \"settlesWith\": \"unctuous, heavy, warm, smooth and stable qualities\",\n        \"source\": {\n          \"text\": \"Brihat Jataka\",\n          \"chapter\": \"18\",\n          \"verse\": \"note to 20, the Satyacharya extract\",\n          \"translation\": \"N. Chidambaram Iyer\",\n          \"year\": 1885,\n          \"publicDomain\": true,\n          \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n        }\n      },\n      \"source\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    }\n  ],\n  \"sources\": [\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    },\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  ],\n  \"meta\": {\n    \"disclaimer\": \"For general wellness and cultural interest only. This is not medical advice, and it is unrelated to the diagnosis, cure, mitigation, prevention or treatment of any disease or condition. Consult a qualified professional.\"\n  }\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "5b0cd257-4e41-4094-bc25-6488d2651ad6",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 766.9206353114821,\n      \"maximum\": 8503.835528770085,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 6915.314189988398,\n      \"maximum\": 7162.857475940803,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "9efad677-74e6-4a39-8ac8-951aa59ce353",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "ffa53e55-ebc8-4955-9839-26f27e785b83",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "2a0c518d-37d9-4967-b640-f8175f1e5357",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "5602d453-dba0-466f-b0b9-4f9c28dcde28",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "4c870acb-d659-4a50-bd84-968668c9a0ee",
+					"name": "Get one dosha - Vata pitta kapha profile API",
+					"request": {
+						"name": "Get one dosha - Vata pitta kapha profile API",
+						"description": {
+							"content": "Return one dosha with its elements, qualities, seats, five sub-doshas and three states. Use it to render a dosha card or a glossary entry without pulling the whole catalogue, and read qualityGunas to join it to the twenty qualities.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"doshas",
+								":id"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								}
+							],
+							"variable": [
+								{
+									"disabled": false,
+									"type": "any",
+									"value": "vata",
+									"key": "id",
+									"description": "(Required) Dosha identifier, case-insensitive. One of vata, pitta or kapha."
+								}
+							]
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "2a92a58b-1d3d-40db-b0f9-20ba1629275d",
+							"name": "The dosha.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "vata",
+											"key": "id",
+											"description": "(Required) Dosha identifier, case-insensitive. One of vata, pitta or kapha."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"dosha\": {\n    \"id\": \"vata\",\n    \"sanskritName\": \"vāta\",\n    \"devanagari\": \"वात\",\n    \"alsoCalled\": [\n      \"vāyu\",\n      \"anila\",\n      \"māruta\",\n      \"samīraṇa\"\n    ],\n    \"element\": \"vayu, air\",\n    \"modernElementPair\": \"air with ether\",\n    \"qualities\": [\n      \"ruksa, dry\",\n      \"laghu, light\",\n      \"sita, cold\"\n    ],\n    \"qualityGunas\": [\n      \"ruksha\",\n      \"laghu\",\n      \"khara\",\n      \"sukshma\",\n      \"cala\"\n    ],\n    \"seats\": [\n      \"the colon\",\n      \"the hips\",\n      \"the thighs\"\n    ],\n    \"specialSeat\": \"the colon\",\n    \"seatsVariant\": \"Charaka Sutrasthana 20.8 names the bladder and the feet where this chapter names the ear and the organ of touch.\",\n    \"functions\": [\n      \"upholds the structure and the working of the body\",\n      \"impels speech\"\n    ],\n    \"subDoshas\": [\n      {\n        \"id\": \"prana\",\n        \"sanskritName\": \"prāṇa\",\n        \"devanagari\": \"प्राण\",\n        \"seat\": \"the head\",\n        \"function\": \"upholds the intellect, the heart, the senses and the mind, and carries out spitting, sneezing, belching, the inward breath and the swallowing of food\",\n        \"source\": {\n          \"text\": \"Brihat Jataka\",\n          \"chapter\": \"18\",\n          \"verse\": \"note to 20, the Satyacharya extract\",\n          \"translation\": \"N. Chidambaram Iyer\",\n          \"year\": 1885,\n          \"publicDomain\": true,\n          \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n        },\n        \"moves\": \"the chest and the throat\"\n      },\n      {\n        \"id\": \"prana\",\n        \"sanskritName\": \"prāṇa\",\n        \"devanagari\": \"प्राण\",\n        \"seat\": \"the head\",\n        \"function\": \"upholds the intellect, the heart, the senses and the mind, and carries out spitting, sneezing, belching, the inward breath and the swallowing of food\",\n        \"source\": {\n          \"text\": \"Brihat Jataka\",\n          \"chapter\": \"18\",\n          \"verse\": \"note to 20, the Satyacharya extract\",\n          \"translation\": \"N. Chidambaram Iyer\",\n          \"year\": 1885,\n          \"publicDomain\": true,\n          \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n        },\n        \"moves\": \"the chest and the throat\"\n      }\n    ],\n    \"states\": {\n      \"balanced\": \"even, and staying within its own seat, with nothing disturbed\",\n      \"accumulating\": \"increasing within its own seat, with an aversion to more of its own qualities and a wish for the opposite ones\",\n      \"aggravated\": \"moving beyond its own seat, with dryness, lightness and movement conspicuous\",\n      \"settlesWith\": \"unctuous, heavy, warm, smooth and stable qualities\",\n      \"source\": {\n        \"text\": \"Brihat Jataka\",\n        \"chapter\": \"18\",\n        \"verse\": \"note to 20, the Satyacharya extract\",\n        \"translation\": \"N. Chidambaram Iyer\",\n        \"year\": 1885,\n        \"publicDomain\": true,\n        \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n      }\n    },\n    \"source\": {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  },\n  \"sources\": [\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    },\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  ],\n  \"meta\": {\n    \"disclaimer\": \"For general wellness and cultural interest only. This is not medical advice, and it is unrelated to the diagnosis, cure, mitigation, prevention or treatment of any disease or condition. Consult a qualified professional.\"\n  }\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "7b58fac7-388f-4846-831f-e55f15896a96",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "vata",
+											"key": "id",
+											"description": "(Required) Dosha identifier, case-insensitive. One of vata, pitta or kapha."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 766.9206353114821,\n      \"maximum\": 8503.835528770085,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 6915.314189988398,\n      \"maximum\": 7162.857475940803,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "fc01335f-7a62-4e33-975b-5d7d68837497",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "vata",
+											"key": "id",
+											"description": "(Required) Dosha identifier, case-insensitive. One of vata, pitta or kapha."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "6badccb7-280a-428f-a36c-4c0d06028931",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "vata",
+											"key": "id",
+											"description": "(Required) Dosha identifier, case-insensitive. One of vata, pitta or kapha."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "534bfddd-4cf2-4f0d-9b24-ac7d37eac62b",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "vata",
+											"key": "id",
+											"description": "(Required) Dosha identifier, case-insensitive. One of vata, pitta or kapha."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "fde9a164-7697-4189-93d9-1930fe0b8e48",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"doshas",
+										":id"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										}
+									],
+									"variable": [
+										{
+											"disabled": false,
+											"type": "any",
+											"value": "vata",
+											"key": "id",
+											"description": "(Required) Dosha identifier, case-insensitive. One of vata, pitta or kapha."
+										}
+									]
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "cc2f4a8f-826f-4cd5-864a-2dd63fe7ec13",
+					"name": "List the six tastes - Ayurveda rasa and dosha matrix API",
+					"request": {
+						"name": "List the six tastes - Ayurveda rasa and dosha matrix API",
+						"description": {
+							"content": "Return the six rasas, the tastes of Ayurveda, with the complete eighteen-cell matrix of which taste lowers and raises which dosha, in both directions. The order is the one the root verse gives, which is also the order of strength it states, and it puts bitter before pungent where most modern lists reverse them. The matrix is returned on each taste and again as a per-dosha index, so a caller can read it either way without deriving one from the other.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"tastes"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								},
+								{
+									"disabled": false,
+									"key": "limit",
+									"value": "6",
+									"description": "Maximum items to return per page. Range: 1-6, default 6."
+								},
+								{
+									"disabled": false,
+									"key": "offset",
+									"value": "0",
+									"description": "Number of items to skip for pagination. Default 0."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "c6785005-6a77-4dbf-a3df-d40e82095da3",
+							"name": "The six tastes and the matrix.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"tastes"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "6"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"total\": 6,\n  \"limit\": 6,\n  \"offset\": 0,\n  \"strengthOrder\": [\n    \"madhura\",\n    \"amla\",\n    \"lavana\",\n    \"tikta\",\n    \"katu\",\n    \"kashaya\"\n  ],\n  \"rasas\": [\n    {\n      \"id\": \"madhura\",\n      \"sanskritName\": \"madhura\",\n      \"devanagari\": \"मधुर\",\n      \"textForm\": \"svādu\",\n      \"english\": \"sweet\",\n      \"elements\": [\n        \"ap, water\"\n      ],\n      \"decreases\": [\n        \"vata\",\n        \"pitta\"\n      ],\n      \"increases\": [\n        \"kapha\"\n      ]\n    },\n    {\n      \"id\": \"madhura\",\n      \"sanskritName\": \"madhura\",\n      \"devanagari\": \"मधुर\",\n      \"textForm\": \"svādu\",\n      \"english\": \"sweet\",\n      \"elements\": [\n        \"ap, water\"\n      ],\n      \"decreases\": [\n        \"vata\",\n        \"pitta\"\n      ],\n      \"increases\": [\n        \"kapha\"\n      ]\n    }\n  ],\n  \"matrix\": {\n    \"key_0\": {\n      \"decreasedBy\": [\n        \"madhura\",\n        \"amla\",\n        \"lavana\"\n      ],\n      \"increasedBy\": [\n        \"tikta\",\n        \"katu\",\n        \"kashaya\"\n      ]\n    },\n    \"key_1\": {\n      \"decreasedBy\": [\n        \"madhura\",\n        \"amla\",\n        \"lavana\"\n      ],\n      \"increasedBy\": [\n        \"tikta\",\n        \"katu\",\n        \"kashaya\"\n      ]\n    }\n  },\n  \"sources\": [\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    },\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  ],\n  \"meta\": {\n    \"disclaimer\": \"For general wellness and cultural interest only. This is not medical advice, and it is unrelated to the diagnosis, cure, mitigation, prevention or treatment of any disease or condition. Consult a qualified professional.\"\n  }\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "1dffbcfd-456f-4f37-89af-7cf2003e4201",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"tastes"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "6"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 766.9206353114821,\n      \"maximum\": 8503.835528770085,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 6915.314189988398,\n      \"maximum\": 7162.857475940803,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "b61cea3c-1ea0-4562-82e3-5978f9afbb10",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"tastes"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "6"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "f0fb3ab7-5a9f-4efa-8d1d-115b2ccbe319",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"tastes"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "6"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "99dd2ef2-9352-4824-8a81-08ddf424158c",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"tastes"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "6"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "ce1fc5a0-c09b-46c7-a158-ba189543d5ce",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"tastes"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "6"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				},
+				{
+					"id": "55f88ba8-6076-4e77-bd41-3b96a8854707",
+					"name": "List the twenty qualities - Ayurveda guna pairs API",
+					"request": {
+						"name": "List the twenty qualities - Ayurveda guna pairs API",
+						"description": {
+							"content": "Return the twenty gunas, the qualities of Ayurveda, as the ten opposed pairs the commentaries spell out, each member with the single action word attached to it, and the half-verse that states the like-increases-like rule the whole domain runs on. Each quality carries the doshas that hold it, so the pairs join straight to the dosha catalogue. One pair carries a recorded disagreement between the two commentaries, and the response states it rather than resolving it silently, because the choice decides which dosha that pair joins to.",
+							"type": "text/plain"
+						},
+						"url": {
+							"path": [
+								"qualities"
+							],
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"disabled": false,
+									"key": "lang",
+									"value": "en",
+									"description": "Response language (BCP 47). Supported: en, tr, de, es, hi, pt, fr, ru, zh-Hans, zh-Hant. Defaults to en. Coverage varies by domain, and a field with no translation in the requested language returns English."
+								},
+								{
+									"disabled": false,
+									"key": "limit",
+									"value": "10",
+									"description": "Maximum items to return per page. Range: 1-10, default 10."
+								},
+								{
+									"disabled": false,
+									"key": "offset",
+									"value": "0",
+									"description": "Number of items to skip for pagination. Default 0."
+								}
+							],
+							"variable": []
+						},
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"method": "GET",
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key"
+								},
+								{
+									"key": "value",
+									"value": "{{apiKey}}"
+								},
+								{
+									"key": "in",
+									"value": "header"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "399f56ad-f607-4923-83c8-8a8d9048cbb2",
+							"name": "The ten pairs and the rule they operate under.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"qualities"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"total\": 10,\n  \"limit\": 10,\n  \"offset\": 0,\n  \"rule\": \"Increase of all things comes about through what is alike, and the reverse through what is opposite.\",\n  \"pairs\": [\n    {\n      \"number\": 1,\n      \"a\": {\n        \"id\": \"guru\",\n        \"sanskritName\": \"guru\",\n        \"english\": \"heavy\",\n        \"action\": \"building up\",\n        \"actionSanskrit\": \"bṛṃhaṇa\",\n        \"doshas\": [\n          \"kapha\"\n        ]\n      },\n      \"b\": {\n        \"id\": \"guru\",\n        \"sanskritName\": \"guru\",\n        \"english\": \"heavy\",\n        \"action\": \"building up\",\n        \"actionSanskrit\": \"bṛṃhaṇa\",\n        \"doshas\": [\n          \"kapha\"\n        ]\n      },\n      \"note\": \"The two commentaries name this member differently: cala here, sara in the other.\"\n    },\n    {\n      \"number\": 1,\n      \"a\": {\n        \"id\": \"guru\",\n        \"sanskritName\": \"guru\",\n        \"english\": \"heavy\",\n        \"action\": \"building up\",\n        \"actionSanskrit\": \"bṛṃhaṇa\",\n        \"doshas\": [\n          \"kapha\"\n        ]\n      },\n      \"b\": {\n        \"id\": \"guru\",\n        \"sanskritName\": \"guru\",\n        \"english\": \"heavy\",\n        \"action\": \"building up\",\n        \"actionSanskrit\": \"bṛṃhaṇa\",\n        \"doshas\": [\n          \"kapha\"\n        ]\n      },\n      \"note\": \"The two commentaries name this member differently: cala here, sara in the other.\"\n    }\n  ],\n  \"sources\": [\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    },\n    {\n      \"text\": \"Brihat Jataka\",\n      \"chapter\": \"18\",\n      \"verse\": \"note to 20, the Satyacharya extract\",\n      \"translation\": \"N. Chidambaram Iyer\",\n      \"year\": 1885,\n      \"publicDomain\": true,\n      \"note\": \"Chapter 18, not 19: the running head on the printed pages reads CH. 19.\"\n    }\n  ],\n  \"meta\": {\n    \"disclaimer\": \"For general wellness and cultural interest only. This is not medical advice, and it is unrelated to the diagnosis, cure, mitigation, prevention or treatment of any disease or condition. Consult a qualified professional.\"\n  }\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "c5edc9e9-3684-4db2-98de-02fb5f10b065",
+							"name": "Validation error. `issues[]` lists every failed field.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"qualities"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"validation_error\",\n  \"issues\": [\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 766.9206353114821,\n      \"maximum\": 8503.835528770085,\n      \"inclusive\": false,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"message\": \"string\",\n      \"code\": \"string\",\n      \"expected\": \"string\",\n      \"minimum\": 6915.314189988398,\n      \"maximum\": 7162.857475940803,\n      \"inclusive\": true,\n      \"format\": \"string\",\n      \"pattern\": \"string\"\n    }\n  ]\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "047cb394-d3e2-44e2-9f8b-8c1d5a303d52",
+							"name": "Invalid or missing API key",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"qualities"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "fbeece4f-2507-4046-a5f4-3c7e4ca747b0",
+							"name": "Method not allowed. The path exists but only responds to the methods listed in `allow[]` and the `Allow` response header.",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"qualities"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"header": [
+								{
+									"disabled": false,
+									"description": "Comma-separated list of allowed methods (RFC 9110).",
+									"key": "Allow",
+									"value": "string"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"method_not_allowed\",\n  \"allow\": [\n    \"string\",\n    \"string\"\n  ],\n  \"docs\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "156c5ef5-42c7-428e-a9d8-979a54d296b5",
+							"name": "Monthly rate limit exceeded",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"qualities"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						},
+						{
+							"id": "3a8766e9-0521-460d-aa18-385607e064f3",
+							"name": "Internal server error",
+							"originalRequest": {
+								"url": {
+									"path": [
+										"qualities"
+									],
+									"host": [
+										"{{baseUrl}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "en"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									],
+									"variable": []
+								},
+								"header": [
+									{
+										"description": {
+											"content": "Added as a part of security scheme: apikey",
+											"type": "text/plain"
+										},
+										"key": "X-API-Key",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"method": "GET",
+								"body": {}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+							"cookie": [],
+							"_postman_previewlanguage": "json"
+						}
+					],
+					"event": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					}
+				}
+			],
+			"event": []
+		}
+	],
+	"event": [],
+	"variable": [
+		{
+			"type": "string",
+			"value": "https://roxyapi.com/api/v2/ayurveda",
+			"key": "baseUrl"
+		},
+		{
+			"key": "apiKey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "roxySlug",
+			"value": "ayurveda",
+			"type": "string"
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}"
+			},
+			{
+				"key": "in",
+				"value": "header"
+			}
+		]
+	},
+	"info": {
+		"_postman_id": "82f57f52-408c-4674-b2b6-eab3e593bc56",
+		"name": "Ayurveda API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"description": {
+			"content": "Ayurveda API for dosha profiles, the dinacharya daily routine and the ritucharya seasonal regimen, with a verse cited on every value. Read the vata, pitta and kapha constitution from a verified sidereal birth chart, compute brahma muhurta and the six dosha periods from the real sunrise at any location, resolve the Ayurvedic season from actual solar ingress instants under two published conventions, and serve the catalogue of three doshas, fifteen sub-doshas, six tastes and twenty qualities straight from the primary texts. Deterministic, cacheable and localized. One key covers every RoxyAPI domain, with Remote MCP and typed SDKs.\n\n# RoxyAPI: AI-Native Insight Infrastructure\n\n> **Base URL:** `https://roxyapi.com/api/v2`\n> All endpoint paths below are relative to this base URL.\n\nThe only multi-domain spiritual intelligence API. 18 domains (Astrology, Vedic Astrology, Forecast, Human Design, Chinese Astrology, Feng Shui, Mesoamerican Astrology, Vastu Shastra, Numerology, Kabbalah, Tarot Reading, Biorhythm, Ayurveda, I-Ching Oracle, Crystals and Healing Stones, Dream Interpretation, Angel Numbers, Location and Timezone), 258+ endpoints, one API key, instant activation. Remote MCP server per domain plus AGENTS.md for AI coding agents.\n\n## Who uses RoxyAPI\n\n- **Developers** building astrology apps, tarot platforms, numerology calculators, or dream journals\n- **AI agent builders** connecting Claude, GPT, or Gemini to real calculation engines via MCP\n- **Vibe coders** shipping insight apps with Cursor, Bolt, or Replit using zero domain knowledge\n- **Founders and brands** launching branded spiritual experiences for their audience\n\n## Quick start (60 seconds)\n\n**1. Get your API key** at [roxyapi.com/pricing](https://roxyapi.com/pricing). Instant delivery, no account required.\n\n**2. Make your first call:**\n```bash\ncurl -H \"X-API-Key: YOUR_KEY\" https://roxyapi.com/api/v2/tarot/draw -X POST -H \"Content-Type: application/json\" -d '{\"count\": 3}'\n```\n\n**3. Monitor usage:**\n```bash\ncurl -H \"X-API-Key: YOUR_KEY\" https://roxyapi.com/api/v2/usage\n```\n\n## AI agent integration (Remote MCP)\n\nRoxyAPI ships a Remote MCP server per product over Streamable HTTP, with no local setup and no Docker. Your AI agent auto-discovers all 258+ endpoints as callable tools with zero configuration:\n- **Claude Desktop, Cursor, Windsurf**: Add MCP server URL in settings\n- **OpenAI Agents, Gemini ADK**: Connect via Streamable HTTP transport\n- **Custom agents**: Use the MCP Python/TypeScript SDK\n\nMCP endpoints: `https://roxyapi.com/mcp/{domain}` (e.g., `/mcp/astrology`, `/mcp/tarot`)\n\nSetup guide: [roxyapi.com/docs/mcp](https://roxyapi.com/docs/mcp)\n\n## Authentication\n\nAll endpoints require an API key via header or query param:\n- **Header (recommended):** `X-API-Key: YOUR_KEY`\n- **Query param (testing):** `?api_key=YOUR_KEY`\n\n## Response format\n\nClean JSON, no wrapper objects. Errors return `{ \"error\": \"message\", \"code\": \"error_code\" }`. The `error` field is human-readable (may change wording). The `code` field is machine-readable and stable, so it is the one safe to switch on programmatically.\n\nRate limit headers on every response: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Used`, `X-RateLimit-Reset` (Unix timestamp, seconds). Quotas reset on the 1st of every calendar month at 12:00 AM UTC, not on your renewal date.\n\n## Errors\n\nAll errors return `{ \"error\": \"message\", \"code\": \"error_code\" }`:\n\n| Status | Code | When |\n|--------|------|------|\n| 400 | `validation_error` | Missing or invalid parameters. Response includes `issues[]` with per-field `path`, `message`, `code`, `expected`, `minimum`, `maximum`, `format`, `pattern`. |\n| 401 | `api_key_required` | No API key provided |\n| 401 | `invalid_api_key` | Key format invalid or tampered |\n| 401 | `subscription_not_found` | Key references non-existent subscription |\n| 401 | `subscription_inactive` | Subscription cancelled, expired, or suspended |\n| 404 | `not_found` | Resource not found. Response may include a ranked `suggestions[]` array (each with `endpoint`, `hint`, and a `docs` deep link) for typo recovery. |\n| 405 | `method_not_allowed` | Path exists for a different HTTP method. Response includes `allow[]` and the `Allow` header lists valid methods. |\n| 429 | `rate_limit_exceeded` | Monthly quota reached |\n| 500 | `internal_error` | Server error |\n\n## Pricing\n\nFlat per-request pricing. Every call counts the same, whether a planet position or a full birth chart with aspects. No credit systems, no variable costs. Plans from $39 per month for 50K requests, up to 3M requests, with custom volume above that.\n\nSee [roxyapi.com/pricing](https://roxyapi.com/pricing)\n\n## Resources\n\n- [Quickstart guide](https://roxyapi.com/docs/quickstart): first API call in 60 seconds\n- [Documentation](https://roxyapi.com/docs): guides, tutorials, domain reference\n- [MCP setup](https://roxyapi.com/docs/mcp): connect AI agents\n- [Open source templates](https://roxyapi.com/starters): clone and deploy in 30 minutes\n- [FAQ](https://roxyapi.com/faq): common questions\n- [Contact](https://roxyapi.com/contact): support and API key recovery\n\n\nContact Support:\n Name: RoxyAPI Support",
+			"type": "text/plain"
+		}
+	}
+}

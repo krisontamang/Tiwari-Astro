@@ -46,6 +46,7 @@ const vedicEngine = require('./services/vedicEngine');
 const vedastro = require('./services/vedastro');
 const aiChatbot = require('./services/aiChatbot');
 const mcpServer = require('./services/mcpServer');
+const roxyApi = require('./services/roxyApi');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -483,6 +484,142 @@ const server = http.createServer(async (req, res) => {
     const { lat = '27.7172', lon = '85.3240', time = '06:30', date = '07/12/1997', tz = '+05:45' } = body;
     const vedastroRes = await vedastro.getHoroscopePredictions(lat, lon, time, date, tz);
     return sendJSON(res, 200, vedastroRes);
+  }
+
+  // --- API: RoxyAPI Postman Collections & OpenAPI Endpoints ---
+  // --- API: RoxyAPI Postman Collections & OpenAPI Endpoints ---
+  // 1. List all 18 Postman Collections
+  if (pathname === '/api/roxy/collections' && req.method === 'GET') {
+    const list = roxyApi.getAvailableCollections();
+    const totalEndpoints = list.reduce((acc, c) => acc + (c.endpointsCount || c.endpointCount || 0), 0);
+    return sendJSON(res, 200, { success: true, count: list.length, totalCollections: list.length, totalEndpoints, collections: list });
+  }
+
+  // 2. Download / View Specific Postman Collection JSON
+  if (pathname.startsWith('/api/roxy/collections/') && req.method === 'GET') {
+    const domain = pathname.replace('/api/roxy/collections/', '').replace('.json', '');
+    const data = roxyApi.getCollectionData(domain);
+    if (data) {
+      res.writeHead(200, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Disposition': `attachment; filename="${domain}.postman_collection.json"`,
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.end(JSON.stringify(data, null, 2));
+      return;
+    }
+    return sendJSON(res, 404, { success: false, message: `Collection ${domain} not found` });
+  }
+
+  // 3. OpenAPI 3.1.0 Specification
+  if (pathname.startsWith('/api/roxy/openapi/') && req.method === 'GET') {
+    const domain = pathname.replace('/api/roxy/openapi/', '').replace('.json', '');
+    const data = roxyApi.getOpenApiSpec(domain);
+    if (data) {
+      res.writeHead(200, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Disposition': `attachment; filename="${domain}.openapi.json"`,
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.end(JSON.stringify(data, null, 2));
+      return;
+    }
+    return sendJSON(res, 404, { success: false, message: `OpenAPI spec for ${domain} not found` });
+  }
+
+  // 4. Postman Ready Environment
+  if (pathname === '/api/roxy/environment' && req.method === 'GET') {
+    const env = roxyApi.getEnvironmentData();
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Disposition': 'attachment; filename="roxyapi.postman_environment.json"',
+      'Access-Control-Allow-Origin': '*'
+    });
+    res.end(JSON.stringify(env, null, 2));
+    return;
+  }
+
+  // 5. RoxyAPI Manglik Dosha Calculator
+  if (pathname === '/api/roxy/dosha/manglik' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const marsBhava = Number(body.marsBhava || body.marsHouse) || 1;
+    const lagnaSign = Number(body.lagnaSign || body.lagnaRashi) || 1;
+    const moonBhava = body.moonBhava ? Number(body.moonBhava) : (body.moonRashi ? Number(body.moonRashi) : null);
+    const age = Number(body.age) || 27;
+    const result = roxyApi.calculateManglikDosha(marsBhava, lagnaSign, moonBhava, age);
+    return sendJSON(res, 200, { success: true, result, ...result });
+  }
+
+  // 6. RoxyAPI Kalsarpa Dosha Calculator
+  if (pathname === '/api/roxy/dosha/kalsarpa' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    let planets = body.planets || [];
+    if (!planets.length && (body.dobAd || body.dobBs)) {
+      const chart = await astrologyService.generateChartForSubmission(body);
+      planets = chart.astrologyData?.planets || [];
+    }
+    const result = roxyApi.calculateKalsarpaDosha(planets.length ? planets : body);
+    return sendJSON(res, 200, { success: true, result, ...result });
+  }
+
+  // 7. RoxyAPI Sade Sati Calculator
+  if (pathname === '/api/roxy/dosha/sadhesati' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const moonSign = Number(body.moonSign || body.moonRashi || body.moonRashiId) || 1;
+    const currentSaturn = Number(body.currentSaturnRashi || body.currentSaturnSign) || 11;
+    const result = roxyApi.calculateSadhesati(moonSign, currentSaturn);
+    return sendJSON(res, 200, { success: true, result, ...result });
+  }
+
+  // 8. RoxyAPI 301 Classic Vedic Yoga Detector
+  if (pathname === '/api/roxy/yoga/detect' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    let planets = body.planets || [];
+    if (!planets.length && (body.dobAd || body.dobBs)) {
+      const chart = await astrologyService.generateChartForSubmission(body);
+      planets = chart.astrologyData?.planets || [];
+    }
+    const result = roxyApi.detectVedicYogas(planets);
+    return sendJSON(res, 200, { success: true, totalFound: result.totalDetected, detectedYogas: result.yogas, ...result });
+  }
+
+  // 9. RoxyAPI 8 Day & 8 Night Choghadiyas
+  if (pathname === '/api/roxy/panchang/choghadiya' && (req.method === 'GET' || req.method === 'POST')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const dateObj = body.date ? new Date(body.date) : new Date();
+    const choghadiya = roxyApi.calculateChoghadiya(dateObj);
+    return sendJSON(res, 200, { success: true, choghadiya, ...choghadiya });
+  }
+
+  // 10. RoxyAPI 24 Planetary Horas
+  if (pathname === '/api/roxy/panchang/hora' && (req.method === 'GET' || req.method === 'POST')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const dateObj = body.date ? new Date(body.date) : new Date();
+    const hora = roxyApi.calculateHora(dateObj);
+    return sendJSON(res, 200, { success: true, ...hora });
+  }
+
+  // 11. RoxyAPI Overall Status
+  if (pathname === '/api/roxy/status' && req.method === 'GET') {
+    const collections = roxyApi.getAvailableCollections();
+    const totalEndpoints = collections.reduce((sum, c) => sum + c.endpointCount, 0);
+    return sendJSON(res, 200, {
+      success: true,
+      service: 'RoxyAPI Postman Collections & Vedic API Connector',
+      hasApiKey: Boolean(process.env.ROXY_API_KEY),
+      cloudBaseUrl: 'https://roxyapi.com/api/v2',
+      collectionsCount: collections.length,
+      totalEndpoints,
+      vedicEndpointsCount: collections.find(c => c.domain === 'vedic-astrology')?.endpointCount || 55,
+      features: [
+        '55 Vedic Astrology Postman Collections & OpenAPI 3.1 Specs',
+        'Manglik, Kalsarpa & Sade Sati Dosha Detectors',
+        '301 Classic Vedic Yoga Detection',
+        '8 Day & 8 Night Choghadiyas for Nepal',
+        '24 Planetary Horas of the Day',
+        '18 Domain Collections (Vedic, Vastu, Numerology, Ayurveda, etc.)'
+      ]
+    });
   }
 
   // --- API: Public New Submission (Form submission from customers) ---

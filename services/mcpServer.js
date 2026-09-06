@@ -8,6 +8,7 @@ const astrologyService = require('./astrology');
 const vedicEngine = require('./vedicEngine');
 const aiChatbot = require('./aiChatbot');
 const vedastro = require('./vedastro');
+const roxyApi = require('./roxyApi');
 
 const MCP_TOOLS = [
   {
@@ -72,6 +73,38 @@ const MCP_TOOLS = [
         query: { type: 'string', description: 'The question or situation to consult on' }
       },
       required: ['query']
+    }
+  },
+  {
+    name: 'roxy_check_doshas',
+    description: 'RoxyAPI: Evaluate Manglik Dosha, Kalsarpa Yoga, and Saturn Sade Sati / Dhayya with Vedic remedies.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        marsBhava: { type: 'number', description: 'House of Mars (1-12)' },
+        lagnaSign: { type: 'number', description: 'Lagna Rashi Number (1-12)' },
+        moonSign: { type: 'number', description: 'Moon Rashi Number (1-12)' }
+      }
+    }
+  },
+  {
+    name: 'roxy_detect_yogas',
+    description: 'RoxyAPI: Detect 301 classical Vedic Yogas in a birth chart (Gajakesari, Budhaditya, Pancha Mahapurusha, Raja Yogas).',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        birthDetails: { type: 'object', description: 'Birth details (dob, time, place)' }
+      }
+    }
+  },
+  {
+    name: 'roxy_get_choghadiya',
+    description: 'RoxyAPI: Calculate 8 Day and 8 Night Choghadiyas (Muhurtas: Amrit, Shubh, Labh, Char, Rog, Kaal, Udveg).',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        date: { type: 'string', description: 'Date (YYYY-MM-DD)' }
+      }
     }
   }
 ];
@@ -178,6 +211,48 @@ async function handleMcpRequest(requestBody) {
           id,
           result: {
             content: [{ type: 'text', text: aiRes.reply }]
+          }
+        };
+      }
+
+      if (toolName === 'roxy_check_doshas') {
+        const mars = args.marsBhava || 1;
+        const lagna = args.lagnaSign || 1;
+        const moon = args.moonSign || 1;
+        const manglik = roxyApi.calculateManglikDosha(mars, lagna);
+        const sadhesati = roxyApi.calculateSadhesati(moon);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify({ manglik, sadhesati }, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'roxy_detect_yogas') {
+        let planets = [];
+        if (args.birthDetails) {
+          const chart = await astrologyService.generateChartForSubmission(args.birthDetails);
+          planets = chart.astrologyData?.planets || [];
+        }
+        const yogas = roxyApi.detectVedicYogas(planets);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(yogas, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'roxy_get_choghadiya') {
+        const choghadiya = roxyApi.calculateChoghadiya(args.date ? new Date(args.date) : new Date());
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(choghadiya, null, 2) }]
           }
         };
       }

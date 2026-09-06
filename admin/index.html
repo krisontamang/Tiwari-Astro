@@ -1012,6 +1012,10 @@
               🔮 कुण्डली क्याल्कुलेटर
             </button>
 
+            <button onclick="openRoxyModal()" class="btn-ghost" style="border-color:rgba(216,176,106,0.5); color:#f4d38c; background:rgba(216,176,106,0.08);">
+              📮 RoxyAPI &amp; वैदिक उपकरण
+            </button>
+
             <div class="user-pill">
               <span class="user-dot"></span>
               <span id="admin-user-display">bensartiwari@gmail.com</span>
@@ -1487,6 +1491,158 @@
           </div>
           <div id="panchang-rahu-text" style="font-size:12px; color:#ddd;">
             राहु कालमा कुनै पनि नयाँ काम, सम्झौता वा यात्रा नगर्नु शुभ मानिन्छ।
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 8. ROXYAPI POSTMAN COLLECTIONS & VEDIC TOOLS MODAL -->
+    <!-- ============================================================== -->
+    <div id="roxy-modal" class="custom-modal">
+      <div class="lightbox-content" style="max-width: 880px; text-align: left;">
+        <button class="lightbox-close" onclick="closeRoxyModal()">&times;</button>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; padding-right:36px;">
+          <div>
+            <div style="font-family: var(--font-serif); font-size: 22px; color: var(--gold); margin-bottom: 2px;">
+              📮 RoxyAPI Postman Collections &amp; वैदिक उपकरण
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary);">
+              १८ वटा सम्पूर्ण Postman Collections, OpenAPI 3.1.0 Specs, दोष विश्लेषक (Manglik/Kalsarpa/Sade Sati), ३०१ योगहरू र चौघडिया।
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <a href="/api/roxy/environment" download="roxyapi-environment.json" class="btn-ghost" style="font-size:11px; padding:4px 10px; border-color:rgba(216,176,106,0.4); color:var(--gold-light); text-decoration:none;">
+              🌐 Postman Env
+            </a>
+          </div>
+        </div>
+
+        <!-- Roxy Tab Navigation -->
+        <div class="km-tab-nav" style="margin-bottom:14px;">
+          <button class="km-tab-link active" onclick="switchRoxyTab('collections', this)">
+            📚 Postman Collections (18)
+          </button>
+          <button class="km-tab-link" onclick="switchRoxyTab('doshas', this)">
+            ⚠️ दोष विश्लेषक (Doshas)
+          </button>
+          <button class="km-tab-link" onclick="switchRoxyTab('yogas', this)">
+            ✨ ३०१ वैदिक योग (Yogas)
+          </button>
+          <button class="km-tab-link" onclick="switchRoxyTab('choghadiya', this)">
+            ⏰ चौघडिया &amp; होरा (Muhurta)
+          </button>
+        </div>
+
+        <!-- Tab 1: Postman Collections Explorer -->
+        <div id="pane-roxy-collections" class="km-tab-pane active">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:10px;">
+            <input type="text" id="roxy-search-input" onkeyup="filterRoxyCollections()" placeholder="संग्रह खोज्नुहोस् (जस्तै: vedic, vastu, numerology, panchang...)" class="form-input" style="height:34px; font-size:11.5px; max-width:320px;" />
+            <div style="font-size:11px; color:var(--text-muted);" id="roxy-count-label">लोड हुँदैछ...</div>
+          </div>
+          <div class="km-table-wrap" style="max-height:340px;">
+            <table class="km-table">
+              <thead>
+                <tr>
+                  <th>संग्रह (Collection)</th>
+                  <th>डोमेन</th>
+                  <th>Endpoints</th>
+                  <th>Specs</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="roxy-collections-tbody">
+                <tr><td colspan="5" style="text-align:center; padding:20px; color:var(--gold);">⏳ Collections लोड हुँदैछ...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 2: Dosha Analyzer -->
+        <div id="pane-roxy-doshas" class="km-tab-pane">
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px; margin-bottom:14px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>लग्न राशि (Ascendant)</label>
+              <select id="roxy-lagna-rashi" class="form-input" style="height:34px; font-size:11.5px;"></select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>चन्द्र राशि (Moon Sign)</label>
+              <select id="roxy-moon-rashi" class="form-input" style="height:34px; font-size:11.5px;"></select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>मंगल भाव (Mars House)</label>
+              <select id="roxy-mars-house" class="form-input" style="height:34px; font-size:11.5px;">
+                <option value="1">१ (Lagna - तनु)</option>
+                <option value="2">२ (Dhana - धन)</option>
+                <option value="4">४ (Sukha - सुख/बन्धु)</option>
+                <option value="7">७ (Kalatra - जाया/विवाह)</option>
+                <option value="8">८ (Ayu - आयु/रन्ध्र)</option>
+                <option value="12">१२ (Vyaya - व्यय/मोक्ष)</option>
+                <option value="3">३ (Sahaja - पराक्रम)</option>
+                <option value="5">५ (Putra - सन्तान/बुद्धि)</option>
+                <option value="6">६ (Ari - शत्रु/रोग)</option>
+                <option value="9">९ (Dharma - भाग्य)</option>
+                <option value="10">१० (Karma - कर्म/राज्य)</option>
+                <option value="11">११ (Labha - लाभ)</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:14px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>राहु भाव (Rahu House - कालसर्पका लागि)</label>
+              <select id="roxy-rahu-house" class="form-input" style="height:34px; font-size:11.5px;"></select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>शनि गोचर राशि (Current Saturn Transit - साढेसाती)</label>
+              <select id="roxy-saturn-transit" class="form-input" style="height:34px; font-size:11.5px;"></select>
+            </div>
+          </div>
+          <button type="button" onclick="runRoxyDoshaCheck()" class="login-btn" style="margin-top:0; padding:10px; font-size:12px;">
+            🔍 सम्पूर्ण दोष विश्लेषण गर्नुहोस् (Check Manglik, Kalsarpa &amp; Sade Sati)
+          </button>
+          <div id="roxy-dosha-results" style="margin-top:14px;"></div>
+        </div>
+
+        <!-- Tab 3: Classic Yogas -->
+        <div id="pane-roxy-yogas" class="km-tab-pane">
+          <div style="font-size:12px; color:var(--text-secondary); margin-bottom:12px;">
+            पाराशरी बृहत् संहिता अनुसार ३०१ शास्त्रीय योगहरू (गजकेसरी, बुधादित्य, पञ्च महापुरुष, चामर, लक्ष्मी योग, आदि) को स्थिति विश्लेषण।
+          </div>
+          <button type="button" onclick="runRoxyYogaCheck()" class="login-btn" style="margin-top:0; padding:10px; font-size:12px;">
+            ✨ वर्तमान कुण्डलीबाट ३०१ वैदिक योगहरू पत्ता लगाउनुहोस्
+          </button>
+          <div id="roxy-yoga-results" style="margin-top:14px;"></div>
+        </div>
+
+        <!-- Tab 4: Choghadiya & Hora -->
+        <div id="pane-roxy-choghadiya" class="km-tab-pane">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <div style="font-size:12px; color:var(--gold-light); font-weight:bold;" id="roxy-choghadiya-time">
+              नेपाल समय अनुसार चौघडिया मुहूर्त
+            </div>
+            <button onclick="loadRoxyChoghadiya()" class="btn-ghost" style="font-size:11px; padding:3px 8px;">
+              🔄 ताजा गर्नुहोस्
+            </button>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+            <div>
+              <div style="font-size:11.5px; font-weight:700; color:var(--gold); margin-bottom:4px;">☀️ दिनको चौघडिया (Day Muhurtas)</div>
+              <div class="km-table-wrap" style="max-height:220px;">
+                <table class="km-table">
+                  <thead><tr><th>मुहूर्त</th><th>स्वभाव</th><th>समय अवधि</th></tr></thead>
+                  <tbody id="roxy-day-choghadiya-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11.5px; font-weight:700; color:#85c1e9; margin-bottom:4px;">🌙 रात्रिको चौघडिया (Night Muhurtas)</div>
+              <div class="km-table-wrap" style="max-height:220px;">
+                <table class="km-table">
+                  <thead><tr><th>मुहूर्त</th><th>स्वभाव</th><th>समय अवधि</th></tr></thead>
+                  <tbody id="roxy-night-choghadiya-tbody"></tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2813,6 +2969,300 @@
         if (panchangModal) panchangModal.style.display = 'none';
       }
 
+      // --- RoxyAPI Postman Collections & Vedic Tools Logic ---
+      const roxyModal = document.getElementById('roxy-modal');
+      let allRoxyCollections = [];
+      let roxyDropdownsPopulated = false;
+
+      function populateRoxyDropdowns() {
+        if (roxyDropdownsPopulated) return;
+        const lagnaSelect = document.getElementById('roxy-lagna-rashi');
+        const moonSelect = document.getElementById('roxy-moon-rashi');
+        const rahuSelect = document.getElementById('roxy-rahu-house');
+        const saturnSelect = document.getElementById('roxy-saturn-transit');
+
+        if (!lagnaSelect || !moonSelect || !rahuSelect || !saturnSelect) return;
+
+        RASHIS_LIST.forEach((rName, i) => {
+          lagnaSelect.add(new Option(rName, i + 1));
+          moonSelect.add(new Option(rName, i + 1));
+          saturnSelect.add(new Option(rName, i + 1));
+        });
+
+        for (let h = 1; h <= 12; h++) {
+          rahuSelect.add(new Option(`${h} भाव`, h));
+        }
+
+        lagnaSelect.value = '1'; // Mesha
+        moonSelect.value = '11'; // Kumbha
+        document.getElementById('roxy-mars-house').value = '7'; // 7th house
+        rahuSelect.value = '1'; // Rahu in 1st
+        saturnSelect.value = '11'; // Saturn in Kumbha
+
+        roxyDropdownsPopulated = true;
+      }
+
+      function openRoxyModal() {
+        populateRoxyDropdowns();
+        if (roxyModal) roxyModal.style.display = 'flex';
+        loadRoxyCollections();
+      }
+
+      function closeRoxyModal() {
+        if (roxyModal) roxyModal.style.display = 'none';
+      }
+
+      function switchRoxyTab(tabKey, btnEl) {
+        const modal = document.getElementById('roxy-modal');
+        if (!modal) return;
+        modal.querySelectorAll('.km-tab-link').forEach(b => b.classList.remove('active'));
+        modal.querySelectorAll('.km-tab-pane').forEach(p => p.classList.remove('active'));
+
+        if (btnEl) btnEl.classList.add('active');
+        const targetPane = document.getElementById(`pane-roxy-${tabKey}`);
+        if (targetPane) targetPane.classList.add('active');
+
+        if (tabKey === 'choghadiya') {
+          loadRoxyChoghadiya();
+        }
+      }
+
+      async function loadRoxyCollections() {
+        const tbody = document.getElementById('roxy-collections-tbody');
+        const countLabel = document.getElementById('roxy-count-label');
+        if (!tbody) return;
+
+        if (allRoxyCollections.length > 0) {
+          renderRoxyCollectionsTable(allRoxyCollections);
+          return;
+        }
+
+        try {
+          const res = await fetch(`${API_BASE}/api/roxy/collections`);
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.collections)) {
+            allRoxyCollections = data.collections;
+            countLabel.textContent = `कुल ${data.totalCollections} संग्रहहरू (${data.totalEndpoints} Endpoints)`;
+            renderRoxyCollectionsTable(allRoxyCollections);
+          } else {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--accent-red); padding:16px;">संग्रह लोड हुन सकेन</td></tr>`;
+          }
+        } catch (e) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(e.message)}</td></tr>`;
+        }
+      }
+
+      function renderRoxyCollectionsTable(items) {
+        const tbody = document.getElementById('roxy-collections-tbody');
+        if (!tbody) return;
+        if (!items || items.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:16px; color:var(--text-muted);">कुनै संग्रह भेटिएन</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = items.map(c => `
+          <tr>
+            <td>
+              <b style="color:var(--gold-light);">${escapeHtml(c.name || c.slug)}</b>
+              <div style="font-size:10px; color:var(--text-muted);">${escapeHtml((c.description || '').slice(0, 60))}${c.description && c.description.length > 60 ? '...' : ''}</div>
+            </td>
+            <td><span style="background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px; font-size:10.5px; color:#ad9eb2;">${escapeHtml(c.domain || c.slug)}</span></td>
+            <td><span style="background:rgba(216,176,106,0.15); color:#f4d38c; padding:2px 7px; border-radius:4px; font-weight:bold;">${c.endpointsCount || 0}</span></td>
+            <td><span style="color:#2ecc71; font-size:10.5px;">OpenAPI 3.1</span></td>
+            <td style="white-space:nowrap;">
+              <a href="/api/roxy/collections/${c.slug}" download="${c.slug}.postman_collection.json" class="btn-ghost" style="font-size:10px; padding:3px 7px; color:var(--gold); border-color:rgba(216,176,106,0.3); text-decoration:none; display:inline-block; margin-right:4px;" title="Download Postman Collection">
+                📥 Postman
+              </a>
+              <a href="/api/roxy/openapi/${c.slug}" download="${c.slug}.openapi.json" class="btn-ghost" style="font-size:10px; padding:3px 7px; color:#85c1e9; border-color:rgba(133,193,233,0.3); text-decoration:none; display:inline-block;" title="Download OpenAPI Spec">
+                📄 OpenAPI
+              </a>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      function filterRoxyCollections() {
+        const q = (document.getElementById('roxy-search-input')?.value || '').toLowerCase().trim();
+        if (!q) {
+          renderRoxyCollectionsTable(allRoxyCollections);
+          return;
+        }
+        const filtered = allRoxyCollections.filter(c => 
+          (c.name && c.name.toLowerCase().includes(q)) || 
+          (c.slug && c.slug.toLowerCase().includes(q)) ||
+          (c.domain && c.domain.toLowerCase().includes(q))
+        );
+        renderRoxyCollectionsTable(filtered);
+      }
+
+      async function runRoxyDoshaCheck() {
+        const lagna = Number(document.getElementById('roxy-lagna-rashi').value);
+        const moon = Number(document.getElementById('roxy-moon-rashi').value);
+        const marsHouse = Number(document.getElementById('roxy-mars-house').value);
+        const rahuHouse = Number(document.getElementById('roxy-rahu-house').value);
+        const saturnTransit = Number(document.getElementById('roxy-saturn-transit').value);
+        const resultsEl = document.getElementById('roxy-dosha-results');
+
+        resultsEl.innerHTML = `<div style="text-align:center; padding:16px; color:var(--gold);">⏳ दोष गणना हुँदैछ...</div>`;
+
+        try {
+          const [manglikRes, kalsarpaRes, sadhesatiRes] = await Promise.all([
+            fetch(`${API_BASE}/api/roxy/dosha/manglik`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ lagnaRashi: lagna, marsHouse, moonRashi: moon })
+            }).then(r => r.json()),
+            fetch(`${API_BASE}/api/roxy/dosha/kalsarpa`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ rahuHouse })
+            }).then(r => r.json()),
+            fetch(`${API_BASE}/api/roxy/dosha/sadhesati`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ moonRashi: moon, currentSaturnRashi: saturnTransit })
+            }).then(r => r.json())
+          ]);
+
+          const m = manglikRes.result || manglikRes;
+          const k = kalsarpaRes.result || kalsarpaRes;
+          const s = sadhesatiRes.result || sadhesatiRes;
+
+          resultsEl.innerHTML = `
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px;">
+              <!-- Manglik Card -->
+              <div style="background:rgba(255,255,255,0.02); border:1px solid ${m.isManglik ? (m.isCancelled ? '#f39c12' : '#e74c3c') : '#2ecc71'}; border-radius:0.75rem; padding:12px;">
+                <div style="font-size:11px; font-weight:700; color:${m.isManglik ? (m.isCancelled ? '#f39c12' : '#e74c3c') : '#2ecc71'}; margin-bottom:4px;">
+                  🔥 मांगलिक दोष: ${m.isManglik ? (m.isCancelled ? 'दोष भंग (Cancelled)' : 'विद्यमान (Present)') : 'शान्त (None)'}
+                </div>
+                <div style="font-size:11.5px; color:#ddd; margin-bottom:6px;">
+                  मंगल भाव: <b>${m.marsHouse}</b> | तीव्रता: <b>${m.intensity || 'सामान्य'}</b>
+                </div>
+                ${m.isCancelled ? `<div style="font-size:10.5px; color:#f4d38c; background:rgba(243,156,18,0.1); padding:4px 6px; border-radius:4px; margin-bottom:6px;">परिहार: ${escapeHtml(m.cancellationReason || 'शास्त्रीय अपवाद अनुसार दोष शान्त')}</div>` : ''}
+                <div style="font-size:10px; color:var(--text-muted);">
+                  उपाय: ${(m.remedies || []).slice(0, 2).join(', ')}
+                </div>
+              </div>
+
+              <!-- Kalsarpa Card -->
+              <div style="background:rgba(255,255,255,0.02); border:1px solid ${k.hasKalsarpa ? '#e74c3c' : '#2ecc71'}; border-radius:0.75rem; padding:12px;">
+                <div style="font-size:11px; font-weight:700; color:${k.hasKalsarpa ? '#e74c3c' : '#2ecc71'}; margin-bottom:4px;">
+                  🐍 कालसर्प योग: ${k.hasKalsarpa ? escapeHtml(k.type || 'विद्यमान') : 'शान्त (None)'}
+                </div>
+                <div style="font-size:11.5px; color:#ddd; margin-bottom:6px;">
+                  राहु: भाव ${k.rahuHouse || 1} → केतु: भाव ${((k.rahuHouse || 1) + 5) % 12 + 1}
+                </div>
+                <div style="font-size:10px; color:var(--text-muted); margin-bottom:4px;">
+                  प्रभाव: ${escapeHtml(k.effect || 'शुभ-अशुभ मिश्रित फल')}
+                </div>
+                <div style="font-size:10px; color:var(--text-muted);">
+                  उपाय: ${(k.remedies || []).slice(0, 2).join(', ')}
+                </div>
+              </div>
+
+              <!-- Sade Sati Card -->
+              <div style="background:rgba(255,255,255,0.02); border:1px solid ${s.isSadeSati ? '#e74c3c' : (s.isDhaiya ? '#f39c12' : '#2ecc71')}; border-radius:0.75rem; padding:12px;">
+                <div style="font-size:11px; font-weight:700; color:${s.isSadeSati ? '#e74c3c' : (s.isDhaiya ? '#f39c12' : '#2ecc71')}; margin-bottom:4px;">
+                  🪐 शनि साढेसाती: ${s.isSadeSati ? 'सक्रिय (Active)' : (s.isDhaiya ? 'ढैया (Dhaiya)' : 'शान्त (None)')}
+                </div>
+                <div style="font-size:11.5px; color:#ddd; margin-bottom:6px;">
+                  चरण: <b>${escapeHtml(s.phase || 'कुनै प्रभाव छैन')}</b>
+                </div>
+                <div style="font-size:10px; color:var(--text-muted); margin-bottom:4px;">
+                  प्रभाव: ${escapeHtml(s.effects || 'सामान्य')}
+                </div>
+                <div style="font-size:10px; color:var(--text-muted);">
+                  उपाय: ${(s.remedies || []).slice(0, 2).join(', ')}
+                </div>
+              </div>
+            </div>
+          `;
+        } catch (err) {
+          resultsEl.innerHTML = `<div style="color:var(--accent-red); padding:12px;">दोष जाँच त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      async function runRoxyYogaCheck() {
+        const resultsEl = document.getElementById('roxy-yoga-results');
+        resultsEl.innerHTML = `<div style="text-align:center; padding:16px; color:var(--gold);">⏳ ३०१ शास्त्रीय योगहरू विश्लेषण हुँदैछन्...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/roxy/yoga/detect`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ lagnaRashi: 1 })
+          });
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.detectedYogas)) {
+            resultsEl.innerHTML = `
+              <div style="font-size:12px; color:var(--gold-light); margin-bottom:10px; font-weight:bold;">
+                कुल पत्ता लागेका योगहरू: ${data.totalFound} वटा
+              </div>
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; max-height:280px; overflow-y:auto;">
+                ${data.detectedYogas.map(y => `
+                  <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(216,176,106,0.25); border-radius:0.6rem; padding:10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                      <b style="color:var(--gold-light); font-size:12px;">${escapeHtml(y.nepaliName || y.name)}</b>
+                      <span style="font-size:10px; background:${y.isAuspicious ? 'rgba(46,204,113,0.15)' : 'rgba(231,76,60,0.15)'}; color:${y.isAuspicious ? '#2ecc71' : '#e74c3c'}; padding:2px 6px; border-radius:4px; font-weight:bold;">
+                        ${y.isAuspicious ? 'शुभ योग' : 'अशुभ'}
+                      </span>
+                    </div>
+                    <div style="font-size:10.5px; color:var(--text-secondary); margin-bottom:4px;">
+                      <b>ग्रह सूत्र:</b> ${escapeHtml(y.combination || '—')}
+                    </div>
+                    <div style="font-size:11px; color:#ddd;">
+                      ${escapeHtml(y.effects || y.description || '—')}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          } else {
+            resultsEl.innerHTML = `<div style="color:var(--accent-red); padding:12px;">योग गणना हुन सकेन</div>`;
+          }
+        } catch (err) {
+          resultsEl.innerHTML = `<div style="color:var(--accent-red); padding:12px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      async function loadRoxyChoghadiya() {
+        const dayTbody = document.getElementById('roxy-day-choghadiya-tbody');
+        const nightTbody = document.getElementById('roxy-night-choghadiya-tbody');
+        const timeHeader = document.getElementById('roxy-choghadiya-time');
+
+        dayTbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:10px; color:var(--gold);">⏳ लोड हुँदैछ...</td></tr>`;
+        nightTbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:10px; color:var(--gold);">⏳ लोड हुँदैछ...</td></tr>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/roxy/panchang/choghadiya`);
+          const data = await res.json();
+          if (data && data.success && data.choghadiya) {
+            const ch = data.choghadiya;
+            timeHeader.textContent = `वार: ${ch.dayOfWeek || 'आज'} | ${data.date || ''} (${data.timeZone || 'नेपाल'})`;
+
+            const renderRow = (m) => {
+              const isShubh = ['अमृत', 'शुभ', 'लाभ', 'चर'].includes(m.name);
+              return `
+                <tr style="${m.active ? 'background:rgba(216,176,106,0.15); font-weight:bold;' : ''}">
+                  <td>
+                    <b style="color:${isShubh ? '#2ecc71' : '#e74c3c'};">${escapeHtml(m.name)}</b>
+                    ${m.active ? '<span style="font-size:9px; background:var(--gold); color:#120e18; padding:1px 5px; border-radius:999px; margin-left:4px;">वर्तमान</span>' : ''}
+                  </td>
+                  <td style="font-size:10.5px; color:${isShubh ? '#a2e8bc' : '#ff7675'};">${escapeHtml(m.nature)}</td>
+                  <td style="font-size:10px; color:var(--text-secondary);">${escapeHtml(m.timePeriod || '—')}</td>
+                </tr>
+              `;
+            };
+
+            dayTbody.innerHTML = (ch.daySlots || []).map(renderRow).join('');
+            nightTbody.innerHTML = (ch.nightSlots || []).map(renderRow).join('');
+          }
+        } catch (err) {
+          dayTbody.innerHTML = `<tr><td colspan="3" style="color:var(--accent-red);">लोड असफल</td></tr>`;
+          nightTbody.innerHTML = `<tr><td colspan="3" style="color:var(--accent-red);">लोड असफल</td></tr>`;
+        }
+      }
+
       // Close modals on backdrop click
       kundaliModal.addEventListener('click', (e) => {
         if (e.target === kundaliModal) closeKundaliModal();
@@ -2828,6 +3278,11 @@
       if (panchangModal) {
         panchangModal.addEventListener('click', (e) => {
           if (e.target === panchangModal) closePanchangModal();
+        });
+      }
+      if (roxyModal) {
+        roxyModal.addEventListener('click', (e) => {
+          if (e.target === roxyModal) closeRoxyModal();
         });
       }
 
