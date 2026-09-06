@@ -5,6 +5,7 @@
  */
 
 const https = require('https');
+const openRouterService = require('./openRouterService');
 
 const VEDIC_SYSTEM_PROMPT = `तपाईं Astro Tiwari को आधिकारिक वैदिक ज्योतिष AI सल्लाहकार हुनुहुन्छ। 
 तपाईं पण्डित आयुष तिवारी (Bensar Tiwari) को वैदिक ज्ञान, पराशर होरा शास्त्र र नेपाली ज्योतिष परम्परा अनुसार नम्र, संवेदनशील र स्पष्ट मार्गदर्शन प्रदान गर्नुहुन्छ।
@@ -77,7 +78,29 @@ async function processAstrologyChat(userMessage, contextData = {}) {
     };
   }
 
-  // 1. If OpenAI API key is set, call OpenAI GPT-4o-mini
+  // 1. Primary AI Gateway: OpenRouter AI Models
+  const openRouterKey = openRouterService.getApiKey();
+  if (openRouterKey) {
+    try {
+      const openRouterResult = await openRouterService.generateVedicAstrologyResponse({
+        userMessage: cleanMsg,
+        contextData
+      });
+      if (openRouterResult && openRouterResult.reply) {
+        return {
+          reply: openRouterResult.reply,
+          response: openRouterResult.reply,
+          model: openRouterResult.model,
+          provider: openRouterResult.provider,
+          source: openRouterResult.source
+        };
+      }
+    } catch (e) {
+      console.warn('OpenRouter call failed, falling back:', e.message);
+    }
+  }
+
+  // 2. Secondary AI Gateway: OpenAI GPT
   const openAiKey = process.env.OPENAI_API_KEY;
   if (openAiKey) {
     try {
@@ -88,7 +111,7 @@ async function processAstrologyChat(userMessage, contextData = {}) {
     }
   }
 
-  // 2. Intelligent Vedic Knowledge Matching
+  // 3. Intelligent Local Vedic Knowledge Matching
   const lower = cleanMsg.toLowerCase();
   for (const item of VEDIC_KNOWLEDGE_BASE) {
     for (const kw of item.keywords) {
