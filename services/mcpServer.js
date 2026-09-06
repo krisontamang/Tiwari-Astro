@@ -430,6 +430,25 @@ const MCP_TOOLS = [
       },
       required: ['year', 'month', 'day']
     }
+  },
+  {
+    name: 'kerykeion_full_report',
+    description: 'Generate comprehensive Markdown astrological interpretation report using Kerykeion Western astrology engine.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        year: { type: 'number' },
+        month: { type: 'number' },
+        day: { type: 'number' },
+        hour: { type: 'number' },
+        minute: { type: 'number' },
+        city: { type: 'string' },
+        lat: { type: 'number' },
+        lng: { type: 'number' }
+      },
+      required: ['year', 'month', 'day']
+    }
   }
 ];
 
@@ -830,6 +849,18 @@ async function handleMcpRequest(requestBody) {
           id,
           result: {
             content: [{ type: 'text', text: svg }]
+          }
+        };
+      }
+
+      if (toolName === 'kerykeion_full_report') {
+        const subject = kerykeionService.createSubject(args);
+        const report = kerykeionService.generateReport(subject);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: report }]
           }
         };
       }

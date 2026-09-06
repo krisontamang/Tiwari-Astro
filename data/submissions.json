@@ -1,5 +1,324 @@
 [
   {
+    "id": "SUB-1788694119233",
+    "orderId": "AT-119236",
+    "transactionId": "",
+    "createdAt": "2026-09-06T11:28:39.236Z",
+    "name": "परीक्षण प्रयोगकर्ता (Test User)",
+    "phone": "9828570151",
+    "email": "",
+    "gender": "",
+    "dobBs": "",
+    "dobAd": "",
+    "birthTime": "",
+    "birthPeriod": "",
+    "birthPlace": "",
+    "package": "निःशुल्क वैदिक कुण्डली परामर्श (रु. ०)",
+    "amount": 499,
+    "message": "मेरो जन्मकुण्डली निःशुल्क हेरिदिनुहोला।",
+    "rectification": "",
+    "paymentScreenshotUrl": "",
+    "kundaliPhotoUrl": "",
+    "chartSvgUrl": "/uploads/chart-SUB-1788694119233.svg",
+    "circleSvgUrl": "/uploads/circle-SUB-1788694119233.svg",
+    "kundaliData": {
+      "ayanamsa": "23° 49' (Lahiri)",
+      "lagna": {
+        "signNumber": 8,
+        "rashiName": "वृश्चिक",
+        "degreeFormatted": "17° 45'",
+        "lord": "मंगल (Mars)"
+      },
+      "moonSign": {
+        "signNumber": 11,
+        "rashiName": "कुम्भ",
+        "degreeFormatted": "18° 16'",
+        "lord": "शनि (Saturn)"
+      },
+      "nakshatra": {
+        "name": "शतभिषा (Shatabhisha)",
+        "pada": 4
+      },
+      "planets": [
+        {
+          "key": "Ascendant",
+          "nepaliName": "लग्न (Ascendant)",
+          "dev": "ल",
+          "signNumber": 8,
+          "rashiName": "वृश्चिक",
+          "bhava": 1,
+          "degreeFormatted": "17° 45'",
+          "lord": "मंगल (Mars)"
+        },
+        {
+          "key": "Sun",
+          "nepaliName": "सूर्य (Sun)",
+          "dev": "सू",
+          "signNumber": 8,
+          "rashiName": "वृश्चिक",
+          "bhava": 1,
+          "degreeFormatted": "21° 07'",
+          "lord": "मंगल (Mars)"
+        },
+        {
+          "key": "Moon",
+          "nepaliName": "चन्द्र (Moon)",
+          "dev": "चं",
+          "signNumber": 11,
+          "rashiName": "कुम्भ",
+          "bhava": 4,
+          "degreeFormatted": "18° 16'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Mars",
+          "nepaliName": "मंगल (Mars)",
+          "dev": "मं",
+          "signNumber": 10,
+          "rashiName": "मकर",
+          "bhava": 3,
+          "degreeFormatted": "25° 43'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Mercury",
+          "nepaliName": "बुध (Mercury)",
+          "dev": "बु",
+          "signNumber": 9,
+          "rashiName": "धनु",
+          "bhava": 2,
+          "degreeFormatted": "0° 24'",
+          "lord": "बृहस्पति (Jupiter)"
+        },
+        {
+          "key": "Jupiter",
+          "nepaliName": "बृहस्पति (Guru)",
+          "dev": "गु",
+          "signNumber": 11,
+          "rashiName": "कुम्भ",
+          "bhava": 4,
+          "degreeFormatted": "7° 45'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Venus",
+          "nepaliName": "शुक्र (Venus)",
+          "dev": "शु",
+          "signNumber": 8,
+          "rashiName": "वृश्चिक",
+          "bhava": 1,
+          "degreeFormatted": "24° 30'",
+          "lord": "मंगल (Mars)"
+        },
+        {
+          "key": "Saturn",
+          "nepaliName": "शनि (Saturn)",
+          "dev": "श",
+          "signNumber": 1,
+          "rashiName": "मेष",
+          "bhava": 6,
+          "degreeFormatted": "0° 58'",
+          "lord": "मंगल (Mars)"
+        },
+        {
+          "key": "Rahu",
+          "nepaliName": "राहु (Rahu)",
+          "dev": "रा",
+          "signNumber": 5,
+          "rashiName": "सिंह",
+          "bhava": 10,
+          "degreeFormatted": "21° 13'",
+          "lord": "सूर्य (Sun)"
+        },
+        {
+          "key": "Ketu",
+          "nepaliName": "केतु (Ketu)",
+          "dev": "के",
+          "signNumber": 11,
+          "rashiName": "कुम्भ",
+          "bhava": 4,
+          "degreeFormatted": "21° 13'",
+          "lord": "शनि (Saturn)"
+        }
+      ]
+    },
+    "d9Data": {
+      "navamshaLagna": {
+        "signNumber": 8,
+        "rashiName": "वृश्चिक (Scorpio)"
+      },
+      "planets": [
+        {
+          "key": "Ascendant",
+          "nepaliName": "लग्न (Ascendant)",
+          "dev": "ल",
+          "d1Sign": 8,
+          "d9Sign": 4,
+          "d9RashiName": "कर्क (Cancer)",
+          "d9Lord": "Moon"
+        },
+        {
+          "key": "Sun",
+          "nepaliName": "सूर्य (Sun)",
+          "dev": "सू",
+          "d1Sign": 8,
+          "d9Sign": 4,
+          "d9RashiName": "कर्क (Cancer)",
+          "d9Lord": "Moon"
+        },
+        {
+          "key": "Moon",
+          "nepaliName": "चन्द्र (Moon)",
+          "dev": "चं",
+          "d1Sign": 11,
+          "d9Sign": 7,
+          "d9RashiName": "तुला (Libra)",
+          "d9Lord": "Venus"
+        },
+        {
+          "key": "Mars",
+          "nepaliName": "मंगल (Mars)",
+          "dev": "मं",
+          "d1Sign": 10,
+          "d9Sign": 10,
+          "d9RashiName": "मकर (Capricorn)",
+          "d9Lord": "Saturn"
+        },
+        {
+          "key": "Mercury",
+          "nepaliName": "बुध (Mercury)",
+          "dev": "बु",
+          "d1Sign": 9,
+          "d9Sign": 1,
+          "d9RashiName": "मेष (Aries)",
+          "d9Lord": "Mars"
+        },
+        {
+          "key": "Jupiter",
+          "nepaliName": "बृहस्पति (Guru)",
+          "dev": "गु",
+          "d1Sign": 11,
+          "d9Sign": 7,
+          "d9RashiName": "तुला (Libra)",
+          "d9Lord": "Venus"
+        },
+        {
+          "key": "Venus",
+          "nepaliName": "शुक्र (Venus)",
+          "dev": "शु",
+          "d1Sign": 8,
+          "d9Sign": 4,
+          "d9RashiName": "कर्क (Cancer)",
+          "d9Lord": "Moon"
+        },
+        {
+          "key": "Saturn",
+          "nepaliName": "शनि (Saturn)",
+          "dev": "श",
+          "d1Sign": 1,
+          "d9Sign": 1,
+          "d9RashiName": "मेष (Aries)",
+          "d9Lord": "Mars"
+        },
+        {
+          "key": "Rahu",
+          "nepaliName": "राहु (Rahu)",
+          "dev": "रा",
+          "d1Sign": 5,
+          "d9Sign": 1,
+          "d9RashiName": "मेष (Aries)",
+          "d9Lord": "Mars"
+        },
+        {
+          "key": "Ketu",
+          "nepaliName": "केतु (Ketu)",
+          "dev": "के",
+          "d1Sign": 11,
+          "d9Sign": 7,
+          "d9RashiName": "तुला (Libra)",
+          "d9Lord": "Venus"
+        }
+      ]
+    },
+    "dashaData": {
+      "birthNakshatra": "मघा (Magha)",
+      "startingDasha": "Ketu",
+      "balanceYears": "0.00",
+      "currentDasha": "Moon",
+      "timeline": [
+        {
+          "lord": "Ketu",
+          "years": 0,
+          "start": "1997-12-06",
+          "end": "1997-12-06",
+          "isCurrent": false
+        },
+        {
+          "lord": "Venus",
+          "years": 20,
+          "start": "1997-12-06",
+          "end": "2017-12-06",
+          "isCurrent": false
+        },
+        {
+          "lord": "Sun",
+          "years": 6,
+          "start": "2017-12-06",
+          "end": "2023-12-07",
+          "isCurrent": false
+        },
+        {
+          "lord": "Moon",
+          "years": 10,
+          "start": "2023-12-07",
+          "end": "2033-12-06",
+          "isCurrent": true
+        },
+        {
+          "lord": "Mars",
+          "years": 7,
+          "start": "2033-12-06",
+          "end": "2040-12-06",
+          "isCurrent": false
+        },
+        {
+          "lord": "Rahu",
+          "years": 18,
+          "start": "2040-12-06",
+          "end": "2058-12-07",
+          "isCurrent": false
+        },
+        {
+          "lord": "Jupiter",
+          "years": 16,
+          "start": "2058-12-07",
+          "end": "2074-12-07",
+          "isCurrent": false
+        },
+        {
+          "lord": "Saturn",
+          "years": 19,
+          "start": "2074-12-07",
+          "end": "2093-12-06",
+          "isCurrent": false
+        },
+        {
+          "lord": "Mercury",
+          "years": 17,
+          "start": "2093-12-06",
+          "end": "2110-12-08",
+          "isCurrent": false
+        }
+      ]
+    },
+    "chartSource": "Astro Tiwari Vedic Engine",
+    "aiContext": "=============================================\n🌟 ASTRO TIWARI — वैदिक जन्म कुण्डली विश्लेषण\n=============================================\nजातकको नाम: परीक्षण प्रयोगकर्ता (Test User)\nजन्म विवरण: 1997-12-07 06:30 | Kathmandu, Nepal\n\n[आधारभूत ज्योतिष विवरण]\n- लग्न (Ascendant): वृश्चिक (17° 45') — स्वामी: मंगल (Mars)\n- जन्म राशि (Moon Sign): कुम्भ (18° 16') — स्वामी: शनि (Saturn)\n- जन्म नक्षत्र: शतभिषा (Shatabhisha) (चरण: 4)\n- अयनांश: 23° 49' (Lahiri)\n\n[ग्रहहरूको भावगत स्थिति]\n- लग्न (Ascendant) (ल): 1 औं भावमा, वृश्चिक राशि (17° 45')\n- सूर्य (Sun) (सू): 1 औं भावमा, वृश्चिक राशि (21° 07')\n- चन्द्र (Moon) (चं): 4 औं भावमा, कुम्भ राशि (18° 16')\n- मंगल (Mars) (मं): 3 औं भावमा, मकर राशि (25° 43')\n- बुध (Mercury) (बु): 2 औं भावमा, धनु राशि (0° 24')\n- बृहस्पति (Guru) (गु): 4 औं भावमा, कुम्भ राशि (7° 45')\n- शुक्र (Venus) (शु): 1 औं भावमा, वृश्चिक राशि (24° 30')\n- शनि (Saturn) (श): 6 औं भावमा, मेष राशि (0° 58')\n- राहु (Rahu) (रा): 10 औं भावमा, सिंह राशि (21° 13')\n- केतु (Ketu) (के): 4 औं भावमा, कुम्भ राशि (21° 13')\n\n[पण्डितजी तथा AI का लागि विशेष मार्गदर्शन]\n१. लग्न र लग्नेशको बल तथा स्वास्थ्य/व्यक्तित्व प्रभाव।\n२. चन्द्रमा र मानसिक शान्ति, भाग्य र पेशागत स्थिति।\n३. महादशा, अन्तर्दशा तथा वर्तमान गोचरको प्रभाव।\n४. शुभ रत्न, रुद्राक्ष तथा वैदिक शान्ति उपायहरू।\n=============================================",
+    "status": "pending",
+    "verifiedAt": null,
+    "verifiedBy": null,
+    "adminNote": ""
+  },
+  {
     "id": "SUB-1788688038534",
     "orderId": "AT-038535",
     "transactionId": "TEST-ASTRO-TRX-101",

@@ -1032,6 +1032,14 @@
               🪐 VedAstro इन्जिन
             </button>
 
+            <button onclick="openKerykeionModal()" class="btn-ghost" style="border-color:rgba(230,126,34,0.5); color:#e67e22; background:rgba(230,126,34,0.08);">
+              🏛️ Kerykeion पाश्चात्य
+            </button>
+
+            <button onclick="openUsersModal()" class="btn-ghost" style="border-color:rgba(52,152,219,0.5); color:#3498db; background:rgba(52,152,219,0.08); position:relative;">
+              👥 प्रयोगकर्ता प्रमाणीकरण <span id="nav-pending-users-badge" style="background:#e74c3c; color:#fff; border-radius:999px; font-size:10px; font-weight:700; padding:1px 6px; margin-left:4px; display:none;">0</span>
+            </button>
+
             <div class="user-pill">
               <span class="user-dot"></span>
               <span id="admin-user-display">bensartiwari@gmail.com</span>
@@ -1049,6 +1057,18 @@
       <main class="main-content">
         <!-- Stats Row -->
         <div class="stats-grid">
+          <div class="stat-card" onclick="openUsersModal()" style="cursor:pointer;" title="प्रयोगकर्ता व्यवस्थापन खोल्नुहोस्">
+            <div class="stat-label" style="color: #3498db;">👥 दर्ता प्रयोगकर्ता (Users)</div>
+            <div class="stat-value" style="color: #3498db;" id="stat-users-total">0</div>
+            <div class="stat-sub">निःशुल्क सेवा प्रयोगकर्ताहरू</div>
+          </div>
+
+          <div class="stat-card pending-card" onclick="openUsersModal('pending')" style="cursor:pointer;" title="प्रमाणीकरण बाँकी प्रयोगकर्ता">
+            <div class="stat-label" style="color: #e67e22;">⏳ खाता प्रमाणीकरण (Pending)</div>
+            <div class="stat-value" style="color: #e67e22;" id="stat-users-pending">0</div>
+            <div class="stat-sub">स्वीकृति पर्खिरहेका खाताहरू</div>
+          </div>
+
           <div class="stat-card">
             <div class="stat-label">कुल अनुरोधहरू (Total Submissions)</div>
             <div class="stat-value" id="stat-total">0</div>
@@ -1056,19 +1076,19 @@
           </div>
 
           <div class="stat-card pending-card">
-            <div class="stat-label" style="color: #f39c12;">⏳ प्रमाणीकरण बाँकी (Pending)</div>
+            <div class="stat-label" style="color: #f39c12;">⏳ भुक्तानी बाँकी (Pending)</div>
             <div class="stat-value" style="color: #f39c12;" id="stat-pending">0</div>
             <div class="stat-sub">eSewa screenshot जाँच गर्नुपर्ने</div>
           </div>
 
           <div class="stat-card verified-card">
-            <div class="stat-label" style="color: #2ecc71;">✅ प्रमाणित भुक्तानी (Verified)</div>
+            <div class="stat-label" style="color: #2ecc71;">✅ प्रमाणित फारम (Verified)</div>
             <div class="stat-value" style="color: #2ecc71;" id="stat-verified">0</div>
             <div class="stat-sub">स्वीकृत तथा परामर्श सुरु भएका</div>
           </div>
 
           <div class="stat-card">
-            <div class="stat-label" style="color: var(--gold-light);">💰 प्रमाणित आम्दानी (Revenue)</div>
+            <div class="stat-label" style="color: var(--gold-light);">💰 कुल आम्दानी (Revenue)</div>
             <div class="stat-value" style="color: var(--gold-light);" id="stat-revenue">रु. ०</div>
             <div class="stat-sub">सफल eSewa भुक्तानी कुल रकम</div>
           </div>
@@ -2267,7 +2287,123 @@
             </div>
           </div>
         </div>
+    <!-- ============================================================== -->
+    <!-- USER MANAGEMENT & VERIFICATION MODAL -->
+    <!-- ============================================================== -->
+    <div id="users-management-modal" class="custom-modal" onclick="handleUserModalOverlayClick(event)">
+      <div class="kundali-modal-content" style="max-width:980px; max-height:90vh; overflow-y:auto;">
+        <div class="kundali-header" style="padding-bottom:12px; margin-bottom:16px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:40px; height:40px; border-radius:50%; background:radial-gradient(circle,#5dade2,#2980b9); color:#fff; display:flex; align-items:center; justify-content:center; font-size:20px;">
+              👥
+            </div>
+            <div>
+              <h3 style="font-family:var(--font-serif); font-size:22px; color:#f4d38c; margin:0;">
+                प्रयोगकर्ता प्रमाणीकरण र व्यवस्थापन <span style="font-size:12px; color:#5dade2; font-weight:normal;">(User Approvals)</span>
+              </h3>
+              <p style="font-size:12px; color:#ad9eb2; margin:2px 0 0;">
+                सर्वसाधारणका लागि निःशुल्क दर्ता भएका खाताहरूलाई प्रमाणीकरण गर्नुहोस् वा अस्वीकृत गर्नुहोस्
+              </p>
+            </div>
+          </div>
+          <button class="km-close-btn" onclick="closeUsersModal()">✕</button>
+        </div>
+
+        <!-- Filter Tabs & Search Controls -->
+        <div class="controls-bar" style="margin-bottom:16px; padding:10px 14px;">
+          <div class="filter-tabs">
+            <button class="tab-btn active" id="btn-user-tab-all" onclick="filterUsers('all', this)">सबै (<span id="user-count-all">0</span>)</button>
+            <button class="tab-btn" id="btn-user-tab-pending" onclick="filterUsers('pending', this)" style="border-color:rgba(230,126,34,0.4); color:#e67e22;">
+              ⏳ प्रमाणीकरण बाँकी (<span id="user-count-pending">0</span>)
+            </button>
+            <button class="tab-btn" id="btn-user-tab-verified" onclick="filterUsers('verified', this)" style="border-color:rgba(46,204,113,0.4); color:#2ecc71;">
+              ✅ प्रमाणित (<span id="user-count-verified">0</span>)
+            </button>
+            <button class="tab-btn" id="btn-user-tab-rejected" onclick="filterUsers('rejected', this)" style="border-color:rgba(231,76,60,0.4); color:#e74c3c;">
+              ❌ अस्वीकृत (<span id="user-count-rejected">0</span>)
+            </button>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="search-box" style="min-width:220px;">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="user-search-input" oninput="handleUserSearch()" class="search-input" placeholder="नाम, फोन वा ईमेल खोज्नुहोस्..." />
+            </div>
+            <button onclick="loadUsers(true)" class="btn-ghost" title="Refresh">🔄 Refresh</button>
+          </div>
+        </div>
+
+        <!-- Users Table Container -->
+        <div id="users-table-container" style="min-height:220px;">
+          <div style="text-align:center; padding:30px; color:#ad9eb2;">
+            प्रयोगकर्ता सूची लोड हुँदैछ... ⏳
+          </div>
+        </div>
       </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- KERYKEION WESTERN ASTROLOGY & SYNASTRY MODAL -->
+    <!-- ============================================================== -->
+    <div id="kerykeion-modal" class="custom-modal" onclick="handleKerykeionModalOverlayClick(event)">
+      <div class="kundali-modal-content" style="max-width:1050px; max-height:92vh; overflow-y:auto;">
+        <div class="kundali-header">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:40px; height:40px; border-radius:50%; background:radial-gradient(circle,#f39c12,#d35400); color:#fff; display:flex; align-items:center; justify-content:center; font-size:20px;">
+              🏛️
+            </div>
+            <div>
+              <h3 style="font-family:var(--font-serif); font-size:22px; color:#f4d38c; margin:0;">
+                Kerykeion पाश्चात्य ज्योतिष &amp; Synastry
+              </h3>
+              <p style="font-size:12px; color:#ad9eb2; margin:2px 0 0;">
+                Swiss Ephemeris 12 भाव, ग्रह दृष्टि (Aspects), Ciro Discepolo सम्बन्ध स्कोर र 5-Ring SVG चार्ट
+              </p>
+            </div>
+          </div>
+          <button class="km-close-btn" onclick="closeKerykeionModal()">✕</button>
+        </div>
+
+        <!-- Kerykeion Inputs -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) auto; gap:8px; align-items:end; margin-bottom:14px; background:rgba(255,255,255,0.02); border:1px solid rgba(216,176,106,0.2); border-radius:0.75rem; padding:10px;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-size:11px; color:#d8b06a;">नाम (Name)</label>
+            <input type="text" id="kery-name" class="form-input" style="height:34px; font-size:11.5px;" value="Subject 1" />
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-size:11px; color:#d8b06a;">जन्म मिति</label>
+            <input type="date" id="kery-dob" class="form-input" style="height:34px; font-size:11.5px;" value="1995-05-15" />
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-size:11px; color:#d8b06a;">जन्म समय</label>
+            <input type="time" id="kery-time" class="form-input" style="height:34px; font-size:11.5px;" value="08:30" />
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-size:11px; color:#d8b06a;">सहर (City)</label>
+            <input type="text" id="kery-city" class="form-input" style="height:34px; font-size:11.5px;" value="Kathmandu" />
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-size:11px; color:#d8b06a;">भाव प्रणाली (House)</label>
+            <select id="kery-housesystem" class="form-input" style="height:34px; font-size:11px;">
+              <option value="Placidus">Placidus (Standard)</option>
+              <option value="Koch">Koch</option>
+              <option value="Whole_Sign">Whole Sign</option>
+              <option value="Equal">Equal House</option>
+            </select>
+          </div>
+          <button onclick="runKerykeionCalculation()" class="btn-primary" style="height:34px; font-size:11.5px; padding:0 16px; background:#e67e22; border-color:#e67e22; color:#fff; font-weight:700;">
+            ⚡ गणना गर्नुहोस्
+          </button>
+        </div>
+
+        <!-- Kerykeion Results Pane -->
+        <div id="kerykeion-results-pane" style="min-height:260px;">
+          <div style="text-align:center; padding:30px; color:#ad9eb2; font-size:12.5px;">
+            विवरण भरेर 'गणना गर्नुहोस्' थिच्नुहोस्।
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Toast Component -->
     <div id="toast">
@@ -2414,6 +2550,7 @@
           if (data.authenticated) {
             showDashboard();
             loadSubmissions();
+            loadUsers();
             return;
           }
         } catch (e) {
@@ -2421,6 +2558,7 @@
           if (token === 'astro-tiwari-secure-token-369-bensar') {
             showDashboard();
             loadSubmissions();
+            loadUsers();
             return;
           }
         }
@@ -2467,6 +2605,7 @@
               showToast('लगइन सफल भयो! स्वागत छ Bensar Tiwari जी।');
               showDashboard();
               loadSubmissions();
+              loadUsers();
               return;
             }
           }
@@ -2483,6 +2622,7 @@
           showToast('लगइन सफल भयो! स्वागत छ Bensar Tiwari जी।');
           showDashboard();
           loadSubmissions();
+          loadUsers();
         } else {
           showToast('इमेल वा पासवर्ड मिलेन। कृपया सही विवरण राख्नुहोस्।', '❌');
         }
@@ -2539,6 +2679,7 @@
 
       refreshBtn.addEventListener('click', () => {
         loadSubmissions();
+        loadUsers();
         showToast('डाटा रिफ्रेस गरियो');
       });
 
@@ -4884,6 +5025,376 @@
         }
       }
 
+      // ==============================================================
+      // USER MANAGEMENT & ADMIN VERIFICATION CONTROLLER
+      // ==============================================================
+      const usersModal = document.getElementById('users-management-modal');
+      let currentUsersList = [];
+      let activeUserFilter = 'all';
+
+      function openUsersModal(filter = 'all') {
+        if (!usersModal) return;
+        usersModal.style.display = 'flex';
+        activeUserFilter = filter;
+        updateUserTabButtons();
+        loadUsers(true);
+      }
+
+      function closeUsersModal() {
+        if (usersModal) usersModal.style.display = 'none';
+      }
+
+      function handleUserModalOverlayClick(e) {
+        if (e.target === usersModal) closeUsersModal();
+      }
+
+      function filterUsers(filter, btn) {
+        activeUserFilter = filter;
+        updateUserTabButtons();
+        renderUsersList();
+      }
+
+      function updateUserTabButtons() {
+        ['all', 'pending', 'verified', 'rejected'].forEach(f => {
+          const b = document.getElementById(`btn-user-tab-${f}`);
+          if (b) {
+            if (f === activeUserFilter) b.classList.add('active');
+            else b.classList.remove('active');
+          }
+        });
+      }
+
+      async function loadUsers(showRefreshToast = false) {
+        const token = getToken();
+        if (!token) return;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/users`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.users)) {
+            currentUsersList = data.users;
+            updateUserCounts(data);
+            renderUsersList();
+            if (showRefreshToast) showToast('प्रयोगकर्ता सूची अद्यावधिक गरियो');
+          } else {
+            console.warn('[Users] Load failed:', data);
+          }
+        } catch (e) {
+          console.error('[Users] Error fetching users:', e);
+        }
+      }
+
+      function updateUserCounts(data) {
+        const total = data.totalCount || currentUsersList.length;
+        const pending = data.pendingCount !== undefined ? data.pendingCount : currentUsersList.filter(u => u.status === 'pending').length;
+        const verified = data.verifiedCount !== undefined ? data.verifiedCount : currentUsersList.filter(u => u.status === 'verified').length;
+        const rejected = data.rejectedCount !== undefined ? data.rejectedCount : currentUsersList.filter(u => u.status === 'rejected').length;
+
+        // Modal Counts
+        const cAll = document.getElementById('user-count-all');
+        const cPen = document.getElementById('user-count-pending');
+        const cVer = document.getElementById('user-count-verified');
+        const cRej = document.getElementById('user-count-rejected');
+        if (cAll) cAll.textContent = total;
+        if (cPen) cPen.textContent = pending;
+        if (cVer) cVer.textContent = verified;
+        if (cRej) cRej.textContent = rejected;
+
+        // Stats Grid Cards
+        const sTotal = document.getElementById('stat-users-total');
+        const sPending = document.getElementById('stat-users-pending');
+        if (sTotal) sTotal.textContent = total;
+        if (sPending) sPending.textContent = pending;
+
+        // Navbar Badge
+        const navBadge = document.getElementById('nav-pending-users-badge');
+        if (navBadge) {
+          navBadge.textContent = pending;
+          navBadge.style.display = pending > 0 ? 'inline-block' : 'none';
+        }
+      }
+
+      function handleUserSearch() {
+        renderUsersList();
+      }
+
+      function renderUsersList() {
+        const container = document.getElementById('users-table-container');
+        if (!container) return;
+
+        const query = (document.getElementById('user-search-input')?.value || '').trim().toLowerCase();
+
+        let filtered = currentUsersList.filter(u => {
+          if (activeUserFilter !== 'all' && u.status !== activeUserFilter) return false;
+          if (query) {
+            const matchName = (u.name || '').toLowerCase().includes(query);
+            const matchEmail = (u.email || '').toLowerCase().includes(query);
+            const matchPhone = (u.phone || '').toLowerCase().includes(query);
+            return matchName || matchEmail || matchPhone;
+          }
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div style="text-align:center; padding:40px; color:#ad9eb2; font-size:13px;">
+              🔍 कुनै पनि प्रयोगकर्ता फेला परेन।
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = `
+          <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:12.5px; text-align:left;">
+              <thead>
+                <tr style="border-bottom:1px solid rgba(216,176,106,0.25); color:#d8b06a; font-size:11px; text-transform:uppercase;">
+                  <th style="padding:10px 12px;">प्रयोगकर्ता</th>
+                  <th style="padding:10px 12px;">सम्पर्क विवरण</th>
+                  <th style="padding:10px 12px;">दर्ता मिति</th>
+                  <th style="padding:10px 12px;">स्थिति (Status)</th>
+                  <th style="padding:10px 12px; text-align:right;">कार्यहरू (Actions)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${filtered.map(u => {
+                  let statusBadge = '';
+                  if (u.status === 'verified') {
+                    statusBadge = '<span class="badge" style="background:rgba(46,204,113,0.15); border:1px solid rgba(46,204,113,0.4); color:#2ecc71;">✅ प्रमाणित (Free Active)</span>';
+                  } else if (u.status === 'rejected') {
+                    statusBadge = '<span class="badge" style="background:rgba(231,76,60,0.15); border:1px solid rgba(231,76,60,0.4); color:#e74c3c;">❌ अस्वीकृत</span>';
+                  } else {
+                    statusBadge = '<span class="badge" style="background:rgba(230,126,34,0.15); border:1px solid rgba(230,126,34,0.4); color:#f39c12;">⏳ प्रमाणीकरण बाँकी</span>';
+                  }
+
+                  const cleanPhone = (u.phone || '').replace(/[^0-9]/g, '');
+                  const waText = encodeURIComponent(`नमस्ते ${u.name} जी! Astro Tiwari मा तपाईंको खाता सफलतापूर्वक प्रमाणित (Approved) गरिएको छ। अब तपाईंले वेबसाइटमा लगइन गरी सबै ज्योतिषीय सेवाहरू १००% निःशुल्क प्रयोग गर्न सक्नुहुन्छ: https://tiwari-astro.vercel.app`);
+                  const waUrl = cleanPhone ? `https://wa.me/${cleanPhone.length === 10 ? '977' + cleanPhone : cleanPhone}?text=${waText}` : '#';
+
+                  return `
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05); transition:background 0.15s;">
+                      <td style="padding:12px;">
+                        <div style="font-weight:700; color:#fff; font-size:13.5px;">${escapeHtml(u.name || 'Anonymous')}</div>
+                        <div style="font-size:10.5px; color:#ad9eb2;">ID: ${u.id}</div>
+                      </td>
+                      <td style="padding:12px;">
+                        <div style="color:#f4d38c; font-weight:600;">📱 ${escapeHtml(u.phone || 'N/A')}</div>
+                        <div style="font-size:11px; color:#aaa;">✉️ ${escapeHtml(u.email || 'N/A')}</div>
+                      </td>
+                      <td style="padding:12px; font-size:11.5px; color:#ccc;">
+                        ${new Date(u.createdAt).toLocaleDateString('ne-NP')}
+                        <div style="font-size:10.5px; color:#888;">${new Date(u.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                      </td>
+                      <td style="padding:12px;">
+                        ${statusBadge}
+                      </td>
+                      <td style="padding:12px; text-align:right;">
+                        <div style="display:inline-flex; gap:6px; align-items:center; justify-content:flex-end; flex-wrap:wrap;">
+                          ${u.status !== 'verified' ? `
+                            <button onclick="verifyUser('${u.id}')" class="btn-ghost" style="background:rgba(46,204,113,0.15); border-color:rgba(46,204,113,0.4); color:#2ecc71; padding:5px 10px; font-size:11px; font-weight:700;" title="प्रमाणित गर्नुहोस्">
+                              ✅ स्वीकृत
+                            </button>
+                          ` : ''}
+
+                          ${u.status !== 'rejected' ? `
+                            <button onclick="rejectUser('${u.id}')" class="btn-ghost" style="background:rgba(231,76,60,0.12); border-color:rgba(231,76,60,0.3); color:#e74c3c; padding:5px 10px; font-size:11px;" title="अस्वीकृत गर्नुहोस्">
+                              ❌ अस्वीकृत
+                            </button>
+                          ` : ''}
+
+                          ${cleanPhone ? `
+                            <a href="${waUrl}" target="_blank" class="btn-ghost" style="background:rgba(37,211,102,0.12); border-color:rgba(37,211,102,0.3); color:#25d366; padding:5px 10px; font-size:11px; text-decoration:none;" title="WhatsApp मा जानकारी दिनुहोस्">
+                              💬 WhatsApp
+                            </a>
+                          ` : ''}
+
+                          <button onclick="deleteUser('${u.id}')" class="btn-ghost" style="color:#796c80; padding:5px 8px; font-size:11px;" title="मेटाउनुहोस्">
+                            🗑️
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      async function verifyUser(userId) {
+        const token = getToken();
+        if (!token) return;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/users/verify`, {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ userId })
+          });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            showToast('प्रयोगकर्ता सफलतापूर्वक प्रमाणित भयो! 🎉');
+            loadUsers();
+          } else {
+            showToast(data.message || 'प्रमाणीकरण असफल', '❌');
+          }
+        } catch (e) {
+          showToast('सर्भर त्रुटि: ' + e.message, '❌');
+        }
+      }
+
+      async function rejectUser(userId) {
+        const token = getToken();
+        if (!token) return;
+
+        const reason = prompt('अस्वीकृत गर्नुको कारण लेख्नुहोस् (वैकल्पिक):', 'नक्कली विवरण / सम्पर्क नभएको');
+        if (reason === null) return;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/users/reject`, {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ userId, reason })
+          });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            showToast('प्रयोगकर्ता अस्वीकृत गरियो');
+            loadUsers();
+          } else {
+            showToast(data.message || 'अस्वीकृत गर्न सकिएन', '❌');
+          }
+        } catch (e) {
+          showToast('सर्भर त्रुटि: ' + e.message, '❌');
+        }
+      }
+
+      async function deleteUser(userId) {
+        const token = getToken();
+        if (!token) return;
+
+        if (!confirm('के तपाईं साँच्चै यो प्रयोगकर्ता खाता मेटाउन चाहनुहुन्छ?')) return;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/users/delete`, {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ userId })
+          });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            showToast('प्रयोगकर्ता खाता मेटाइयो', '🗑️');
+            loadUsers();
+          } else {
+            showToast(data.message || 'मेटाउन सकिएन', '❌');
+          }
+        } catch (e) {
+          showToast('सर्भर त्रुटि: ' + e.message, '❌');
+        }
+      }
+
+      // ==============================================================
+      // KERYKEION WESTERN ASTROLOGY & SYNASTRY CONTROLLER
+      // ==============================================================
+      const kerykeionModal = document.getElementById('kerykeion-modal');
+
+      function openKerykeionModal() {
+        if (kerykeionModal) kerykeionModal.style.display = 'flex';
+      }
+
+      function closeKerykeionModal() {
+        if (kerykeionModal) kerykeionModal.style.display = 'none';
+      }
+
+      function handleKerykeionModalOverlayClick(e) {
+        if (e.target === kerykeionModal) closeKerykeionModal();
+      }
+
+      async function runKerykeionCalculation() {
+        const pane = document.getElementById('kerykeion-results-pane');
+        if (!pane) return;
+
+        const name = document.getElementById('kery-name')?.value || 'Subject 1';
+        const dob = document.getElementById('kery-dob')?.value || '1995-05-15';
+        const time = document.getElementById('kery-time')?.value || '08:30';
+        const city = document.getElementById('kery-city')?.value || 'Kathmandu';
+        const housesystem = document.getElementById('kery-housesystem')?.value || 'Placidus';
+
+        const [year, month, day] = dob.split('-').map(Number);
+        const [hour, minute] = time.split(':').map(Number);
+
+        pane.innerHTML = `<div style="text-align:center; padding:30px; color:#e67e22;">⏳ Kerykeion गणना हुँदैछ (Aspects &amp; 5-Ring Wheel)...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/kerykeion/chart-svg`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name, year, month, day, hour, minute, city, nation: 'NP',
+              housesystem, chart_type: 'Natal'
+            })
+          });
+          const data = await res.json();
+
+          if (data && data.success && data.svg) {
+            pane.innerHTML = `
+              <div style="display:grid; grid-template-columns: 1.1fr 1fr; gap:16px; align-items:start;">
+                <div style="background:#0d0918; border:1px solid rgba(216,176,106,0.3); border-radius:1rem; padding:12px; overflow:hidden;">
+                  <div style="font-size:12px; font-weight:700; color:#f4d38c; margin-bottom:8px; text-align:center;">
+                    🏛️ 5-Ring Western Concentric Wheel
+                  </div>
+                  <div style="width:100%; height:auto; overflow:hidden; display:flex; justify-content:center;">
+                    ${data.svg}
+                  </div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                  <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px;">
+                    <div style="font-size:11px; text-transform:uppercase; color:#e67e22; font-weight:700; margin-bottom:6px;">कुण्डली विवरण</div>
+                    <div style="font-size:12.5px; color:#eee;"><b>${escapeHtml(name)}</b> — ${dob} ${time}, ${escapeHtml(city)}</div>
+                    <div style="font-size:11.5px; color:#ad9eb2; margin-top:4px;">House System: <b>${housesystem}</b> | Zodiac: <b>Tropical</b></div>
+                  </div>
+
+                  <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px; max-height:260px; overflow-y:auto;">
+                    <div style="font-size:11px; text-transform:uppercase; color:#2ecc71; font-weight:700; margin-bottom:6px;">ग्रह अवस्थिति (Planetary Positions)</div>
+                    ${data.chartData?.planets ? `
+                      <table style="width:100%; font-size:11.5px; border-collapse:collapse;">
+                        <thead><tr style="color:#aaa; border-bottom:1px solid #333;"><th style="padding:4px;">ग्रह</th><th style="padding:4px;">राशि</th><th style="padding:4px;">डिग्री</th><th style="padding:4px;">भाव</th></tr></thead>
+                        <tbody>
+                          ${Object.entries(data.chartData.planets).map(([pName, pObj]) => `
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.03);">
+                              <td style="padding:4px; font-weight:700; color:#f4d38c;">${pName}</td>
+                              <td style="padding:4px; color:#fff;">${pObj.sign || ''}</td>
+                              <td style="padding:4px; color:#ccc;">${typeof pObj.position === 'number' ? pObj.position.toFixed(2) + '°' : ''}</td>
+                              <td style="padding:4px; color:#2ecc71;">${pObj.house || ''}</td>
+                            </tr>
+                          `).join('')}
+                        </tbody>
+                      </table>
+                    ` : '<div style="font-size:11.5px; color:#888;">चार्ट डेटा उपलब्ध छैन।</div>'}
+                  </div>
+                </div>
+              </div>
+            `;
+          } else {
+            pane.innerHTML = `<div style="color:var(--accent-red); padding:20px; text-align:center;">गणना असफल भयो: ${escapeHtml(data.error || 'अज्ञात त्रुटि')}</div>`;
+          }
+        } catch (e) {
+          pane.innerHTML = `<div style="color:var(--accent-red); padding:20px; text-align:center;">त्रुटि: ${escapeHtml(e.message)}</div>`;
+        }
+      }
+
       if (vedastroModal) {
         vedastroModal.addEventListener('click', (e) => {
           if (e.target === vedastroModal) closeVedastroModal();
@@ -4895,6 +5406,7 @@
       checkAstrologyApiStatus();
       fetchOpenRouterStatus();
       fetchVedastroStatus();
+      loadUsers();
     </script>
   </body>
 </html>

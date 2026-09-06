@@ -2,22 +2,36 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const crypto = require('crypto');
 
 const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = __dirname;
-const DATA_FILE = path.join(__dirname, 'data', 'submissions.json');
-const UPLOADS_DIR = path.join(__dirname, 'uploads');
+const IS_VERCEL = Boolean(process.env.VERCEL);
+const DATA_DIR = IS_VERCEL ? path.join('/tmp', 'data') : path.join(__dirname, 'data');
+const UPLOADS_DIR = IS_VERCEL ? path.join('/tmp', 'uploads') : path.join(__dirname, 'uploads');
+const DATA_FILE = path.join(DATA_DIR, 'submissions.json');
+const USERS_FILE = path.join(DATA_DIR, 'users.json');
 
-// Ensure directories exist
-if (!fs.existsSync(path.join(__dirname, 'data'))) {
-  fs.mkdirSync(path.join(__dirname, 'data'), { recursive: true });
+// Ensure directories and initial files exist safely
+try {
+  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  if (!fs.existsSync(DATA_FILE)) {
+    const seed = fs.existsSync(path.join(__dirname, 'data', 'submissions.json'))
+      ? fs.readFileSync(path.join(__dirname, 'data', 'submissions.json'), 'utf8')
+      : '[]';
+    fs.writeFileSync(DATA_FILE, seed, 'utf8');
+  }
+  if (!fs.existsSync(USERS_FILE)) {
+    const seedUsers = fs.existsSync(path.join(__dirname, 'data', 'users.json'))
+      ? fs.readFileSync(path.join(__dirname, 'data', 'users.json'), 'utf8')
+      : '[]';
+    fs.writeFileSync(USERS_FILE, seedUsers, 'utf8');
+  }
+} catch (e) {
+  console.warn('[Storage Init Warning]', e.message);
 }
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-}
-if (!fs.existsSync(DATA_FILE)) {
-  fs.writeFileSync(DATA_FILE, '[]', 'utf8');
-}
+
 // Native .env file loader
 const envPath = path.join(__dirname, '.env');
 if (fs.existsSync(envPath)) {
@@ -53,6 +67,7 @@ const dashaService = require('./services/dashaService');
 const panditAgentService = require('./services/panditAgentService');
 const poruthamService = require('./services/poruthamService');
 const openRouterService = require('./services/openRouterService');
+const kerykeionService = require('./services/kerykeionService');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -93,6 +108,63 @@ function writeSubmissions(data) {
     console.error('Error writing submissions:', e);
     return false;
   }
+}
+
+function readUsers() {
+  try {
+    return JSON.parse(fs.readFileSync(USERS_FILE, 'utf8'));
+  } catch (e) {
+    console.error('Error reading users:', e);
+    return [];
+  }
+}
+
+function writeUsers(data) {
+  try {
+    fs.writeFileSync(USERS_FILE, JSON.stringify(data, null, 2), 'utf8');
+    return true;
+  } catch (e) {
+    console.error('Error writing users:', e);
+    return false;
+  }
+}
+
+function hashPassword(password) {
+  return crypto.createHash('sha256').update(String(password || '').trim()).digest('hex');
+}
+
+// In-memory active user sessions: token -> user details
+const activeUserSessions = new Map();
+
+function generateSessionToken(user) {
+  const token = 'usr_' + crypto.randomBytes(24).toString('hex');
+  activeUserSessions.set(token, {
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    phone: user.phone,
+    status: user.status,
+    role: user.role || 'user',
+    loginTime: Date.now()
+  });
+  return token;
+}
+
+function getAuthenticatedUser(req) {
+  const authHeader = req.headers['authorization'] || '';
+  const bearerMatch = authHeader.match(/Bearer\s+(usr_[a-f0-9]+)/i);
+  let token = bearerMatch ? bearerMatch[1] : (authHeader.startsWith('usr_') ? authHeader : null);
+
+  if (!token) {
+    const cookies = req.headers['cookie'] || '';
+    const cookieMatch = cookies.match(/user_token=(usr_[a-f0-9]+)/i);
+    if (cookieMatch) token = cookieMatch[1];
+  }
+
+  if (token && activeUserSessions.has(token)) {
+    return activeUserSessions.get(token);
+  }
+  return null;
 }
 
 function sendJSON(res, statusCode, data) {
@@ -139,7 +211,7 @@ function checkAdminAuth(req) {
   return false;
 }
 
-const server = http.createServer(async (req, res) => {
+async function handleRequest(req, res) {
   const parsedUrl = url.parse(req.url, true);
   const pathname = decodeURIComponent(parsedUrl.pathname);
 
@@ -152,6 +224,225 @@ const server = http.createServer(async (req, res) => {
     });
     res.end();
     return;
+  }
+
+  // --- API: Public User Registration ---
+  if (pathname === '/api/auth/register' && req.method === 'POST') {
+    const body = await parseJSONBody(req);
+    if (!body) return sendJSON(res, 400, { success: false, message: 'Invalid payload' });
+
+    const { name, email, phone, password } = body;
+    if (!name || !password || (!email && !phone)) {
+      return sendJSON(res, 400, {
+        success: false,
+        message: 'कृपया पूरा नाम, सम्पर्क (ईमेल वा फोन), र पासवर्ड अनिवार्य रूपमा भर्नुहोस्।'
+      });
+    }
+
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const cleanPhone = (phone || '').trim();
+    const cleanName = name.trim();
+    const users = readUsers();
+
+    // Check duplicate email or phone
+    const existing = users.find(u => 
+      (cleanEmail && u.email && u.email.toLowerCase() === cleanEmail) ||
+      (cleanPhone && u.phone && u.phone === cleanPhone)
+    );
+
+    if (existing) {
+      return sendJSON(res, 400, {
+        success: false,
+        message: 'यो ईमेल वा फोन नम्बर पहिले नै दर्ता भइसकेको छ। कृपया सिधै लगइन गर्नुहोस्।'
+      });
+    }
+
+    const newUser = {
+      id: 'USR-' + Date.now(),
+      name: cleanName,
+      email: cleanEmail,
+      phone: cleanPhone,
+      passwordHash: hashPassword(password),
+      status: 'pending', // Pending Admin Verification
+      role: 'user',
+      createdAt: new Date().toISOString(),
+      verifiedAt: null,
+      verifiedBy: null
+    };
+
+    users.unshift(newUser);
+    writeUsers(users);
+
+    console.log(`[User Auth] New user registered: ${newUser.name} (${newUser.email || newUser.phone}), Status: pending`);
+
+    return sendJSON(res, 201, {
+      success: true,
+      pending: true,
+      message: 'खाता सफलतापूर्वक दर्ता भयो! सुरक्षा र सत्यताका लागि एडमिन प्रमाणीकरण (Verification) पछि मात्र सबै निःशुल्क सुविधाहरू प्रयोग गर्न सकिनेछ।'
+    });
+  }
+
+  // --- API: Public User Login ---
+  if (pathname === '/api/auth/login' && req.method === 'POST') {
+    const body = await parseJSONBody(req);
+    if (!body) return sendJSON(res, 400, { success: false, message: 'Invalid payload' });
+
+    const { identifier, email, phone, password } = body;
+    const loginId = (identifier || email || phone || '').trim().toLowerCase();
+    const inputPass = String(password || '').trim();
+
+    if (!loginId || !inputPass) {
+      return sendJSON(res, 400, { success: false, message: 'कृपया ईमेल/फोन र पासवर्ड भर्नुहोस्।' });
+    }
+
+    const users = readUsers();
+    const user = users.find(u =>
+      (u.email && u.email.toLowerCase() === loginId) ||
+      (u.phone && u.phone === loginId)
+    );
+
+    if (!user || user.passwordHash !== hashPassword(inputPass)) {
+      return sendJSON(res, 401, {
+        success: false,
+        message: 'ईमेल/फोन वा पासवर्ड मिलेन। कृपया सही विवरण प्रविष्ट गर्नुहोस्।'
+      });
+    }
+
+    // Check verification status
+    if (user.status === 'pending') {
+      return sendJSON(res, 403, {
+        success: false,
+        pending: true,
+        message: 'तपाईंको खाता एडमिन द्वारा प्रमाणीकरण (Verification) हुन बाँकी छ। प्रमाणीकरण सम्पन्न भएपछि तुरुन्त लगइन हुनेछ।'
+      });
+    }
+
+    if (user.status === 'rejected') {
+      return sendJSON(res, 403, {
+        success: false,
+        rejected: true,
+        message: 'तपाईंको खाता एडमिन द्वारा अस्वीकृत गरिएको छ। थप जानकारीका लागि WhatsApp मा सम्पर्क गर्नुहोस्।'
+      });
+    }
+
+    // Verified User -> Issue token
+    const token = generateSessionToken(user);
+    res.setHeader('Set-Cookie', `user_token=${token}; Path=/; SameSite=Lax; Max-Age=2592000`); // 30 days
+    return sendJSON(res, 200, {
+      success: true,
+      token,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        status: user.status,
+        role: user.role
+      }
+    });
+  }
+
+  // --- API: Public User Get Profile ---
+  if (pathname === '/api/auth/me' && req.method === 'GET') {
+    const authUser = getAuthenticatedUser(req);
+    if (authUser) {
+      return sendJSON(res, 200, { success: true, user: authUser });
+    }
+    return sendJSON(res, 401, { success: false, message: 'Not authenticated' });
+  }
+
+  // --- API: Public User Logout ---
+  if (pathname === '/api/auth/logout' && (req.method === 'POST' || req.method === 'GET')) {
+    const authHeader = req.headers['authorization'] || '';
+    const bearerMatch = authHeader.match(/Bearer\s+(usr_[a-f0-9]+)/i);
+    let token = bearerMatch ? bearerMatch[1] : (authHeader.startsWith('usr_') ? authHeader : null);
+    if (token) activeUserSessions.delete(token);
+    res.setHeader('Set-Cookie', 'user_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT');
+    return sendJSON(res, 200, { success: true, message: 'Logged out' });
+  }
+
+  // --- API: Admin List Users ---
+  if (pathname === '/api/admin/users' && req.method === 'GET') {
+    if (!checkAdminAuth(req)) {
+      return sendJSON(res, 401, { success: false, message: 'Unauthorized' });
+    }
+    const users = readUsers();
+    const filterStatus = parsedUrl.query && parsedUrl.query.status;
+    const safeUsers = users
+      .filter(u => !filterStatus || u.status === filterStatus)
+      .map(({ passwordHash, ...safe }) => safe);
+
+    const pendingCount = users.filter(u => u.status === 'pending').length;
+    const verifiedCount = users.filter(u => u.status === 'verified').length;
+    const rejectedCount = users.filter(u => u.status === 'rejected').length;
+
+    return sendJSON(res, 200, {
+      success: true,
+      totalCount: users.length,
+      pendingCount,
+      verifiedCount,
+      rejectedCount,
+      users: safeUsers
+    });
+  }
+
+  // --- API: Admin Verify / Approve User ---
+  if (pathname === '/api/admin/users/verify' && req.method === 'POST') {
+    if (!checkAdminAuth(req)) {
+      return sendJSON(res, 401, { success: false, message: 'Unauthorized' });
+    }
+    const body = await parseJSONBody(req) || {};
+    const { userId } = body;
+    if (!userId) return sendJSON(res, 400, { success: false, message: 'userId required' });
+
+    const users = readUsers();
+    const u = users.find(x => x.id === userId);
+    if (!u) return sendJSON(res, 404, { success: false, message: 'User not found' });
+
+    u.status = 'verified';
+    u.verifiedAt = new Date().toISOString();
+    u.verifiedBy = 'Admin';
+    writeUsers(users);
+
+    console.log(`[Admin] User verified: ${u.name} (${u.email || u.phone})`);
+    return sendJSON(res, 200, { success: true, message: 'प्रयोगकर्ता सफलतापूर्वक प्रमाणित गरियो!', user: u });
+  }
+
+  // --- API: Admin Reject User ---
+  if (pathname === '/api/admin/users/reject' && req.method === 'POST') {
+    if (!checkAdminAuth(req)) {
+      return sendJSON(res, 401, { success: false, message: 'Unauthorized' });
+    }
+    const body = await parseJSONBody(req) || {};
+    const { userId, reason } = body;
+    if (!userId) return sendJSON(res, 400, { success: false, message: 'userId required' });
+
+    const users = readUsers();
+    const u = users.find(x => x.id === userId);
+    if (!u) return sendJSON(res, 404, { success: false, message: 'User not found' });
+
+    u.status = 'rejected';
+    u.rejectReason = reason || 'Admin decision';
+    writeUsers(users);
+
+    console.log(`[Admin] User rejected: ${u.name} (${u.email || u.phone})`);
+    return sendJSON(res, 200, { success: true, message: 'प्रयोगकर्ता अस्वीकृत गरियो।', user: u });
+  }
+
+  // --- API: Admin Delete User ---
+  if (pathname === '/api/admin/users/delete' && req.method === 'POST') {
+    if (!checkAdminAuth(req)) {
+      return sendJSON(res, 401, { success: false, message: 'Unauthorized' });
+    }
+    const body = await parseJSONBody(req) || {};
+    const { userId } = body;
+    if (!userId) return sendJSON(res, 400, { success: false, message: 'userId required' });
+
+    let users = readUsers();
+    users = users.filter(x => x.id !== userId);
+    writeUsers(users);
+
+    return sendJSON(res, 200, { success: true, message: 'प्रयोगकर्ता हटाइयो।' });
   }
 
   // --- API: Admin Login ---
@@ -503,6 +794,118 @@ const server = http.createServer(async (req, res) => {
         model
       });
       return sendJSON(res, 200, { success: true, ...result });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  // --- API: Kerykeion Western/Tropical Astrological Engine & SVG Wheel Generator ---
+  if (pathname === '/api/kerykeion/status' && req.method === 'GET') {
+    return sendJSON(res, 200, {
+      success: true,
+      service: 'Kerykeion Astrological Library',
+      source: 'https://github.com/g-battaglia/kerykeion.git',
+      author: 'Giacomo Battaglia',
+      version: '5.12.0',
+      activeEngine: 'Astro Tiwari Kerykeion Engine (100% Offline & Native JS)',
+      capabilities: [
+        'AstrologicalSubjectFactory (Sun-Pluto, Nodes, Chiron, Lilith, Ascendant, MC, Dsc, IC)',
+        '12 House Systems (Placidus, Equal, Whole Sign)',
+        'AspectsFactory (10 Major & Minor Aspects, Exact Orbs, Applying/Separating Motion)',
+        'RelationshipScoreFactory (Ciro Discepolo Synastry Compatibility Method)',
+        'ChartDrawer (Modern 5-Ring Concentric SVG Wheel Chart)',
+        'Dual-Wheel Synastry SVG Chart',
+        'Textual / Markdown Report Generator'
+      ],
+      zodiacSigns: kerykeionService.ZODIAC_SIGNS.map(s => `${s.glyph} ${s.name}`),
+      aspectsSupported: kerykeionService.DEFAULT_ASPECTS.map(a => `${a.symbol} ${a.name} (${a.degree}°)`),
+      ciroRules: kerykeionService.CIRO_RULES
+    });
+  }
+
+  if ((pathname === '/api/kerykeion/subject' || pathname === '/api/kerykeion/birth-chart') && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const subject = kerykeionService.createSubject(body);
+      return sendJSON(res, 200, { success: true, subject });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/kerykeion/aspects' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const subject = kerykeionService.createSubject(body);
+      const aspects = kerykeionService.calculateSingleChartAspects(subject, body.options);
+      return sendJSON(res, 200, { success: true, aspects });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/kerykeion/synastry' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    try {
+      const s1 = kerykeionService.createSubject(body.person1 || body.subject1 || {});
+      const s2 = kerykeionService.createSubject(body.person2 || body.subject2 || {});
+      const synastryAspects = kerykeionService.calculateSynastryAspects(s1, s2, body.options);
+      const score = kerykeionService.calculateRelationshipScore(s1, s2, body.options);
+      return sendJSON(res, 200, {
+        success: true,
+        synastryAspects,
+        relationshipScore: score
+      });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/kerykeion/chart-svg' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const subject = kerykeionService.createSubject(body);
+      const theme = body.theme || (parsedUrl.query && parsedUrl.query.theme) || 'dark';
+      const svg = kerykeionService.generateWheelSvg(subject, { theme });
+      if (parsedUrl.query && parsedUrl.query.format === 'svg') {
+        res.writeHead(200, {
+          'Content-Type': 'image/svg+xml; charset=utf-8',
+          'Access-Control-Allow-Origin': '*'
+        });
+        return res.end(svg);
+      }
+      return sendJSON(res, 200, { success: true, svg });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/kerykeion/synastry-svg' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const s1 = kerykeionService.createSubject(body.person1 || body.subject1 || {});
+      const s2 = kerykeionService.createSubject(body.person2 || body.subject2 || {});
+      const theme = body.theme || (parsedUrl.query && parsedUrl.query.theme) || 'dark';
+      const svg = kerykeionService.generateSynastryWheelSvg(s1, s2, { theme });
+      if (parsedUrl.query && parsedUrl.query.format === 'svg') {
+        res.writeHead(200, {
+          'Content-Type': 'image/svg+xml; charset=utf-8',
+          'Access-Control-Allow-Origin': '*'
+        });
+        return res.end(svg);
+      }
+      return sendJSON(res, 200, { success: true, svg });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  if (pathname === '/api/kerykeion/report' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      const subject = kerykeionService.createSubject(body);
+      const report = kerykeionService.generateReport(subject);
+      return sendJSON(res, 200, { success: true, report });
     } catch (err) {
       return sendJSON(res, 500, { success: false, error: err.message });
     }
@@ -1161,7 +1564,9 @@ const server = http.createServer(async (req, res) => {
     });
     res.end(content);
   });
-});
+}
+
+const server = http.createServer(handleRequest);
 
 // Backfill any missing Kundali charts in submissions.json
 async function backfillMissingKundalis() {
@@ -1200,22 +1605,33 @@ async function backfillMissingKundalis() {
   }
 }
 
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`\n======================================================`);
-  console.log(`🌟 Astro Tiwari is running locally!`);
-  console.log(`📡 Local Site:  http://localhost:${PORT}`);
-  console.log(`🔐 Admin Panel: http://localhost:${PORT}/admin`);
-  console.log(`🔮 Astrology:   http://localhost:${PORT}/api/astrology/status`);
-  console.log(`======================================================\n`);
-  backfillMissingKundalis();
-});
+if (!process.env.VERCEL) {
+  server.listen(PORT, '0.0.0.0', () => {
+    console.log(`\n======================================================`);
+    console.log(`🌟 Astro Tiwari is running locally!`);
+    console.log(`📡 Local Site:  http://localhost:${PORT}`);
+    console.log(`🔐 Admin Panel: http://localhost:${PORT}/admin`);
+    console.log(`🔮 Astrology:   http://localhost:${PORT}/api/astrology/status`);
+    console.log(`======================================================\n`);
+    backfillMissingKundalis();
+  });
 
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    const nextPort = Number(PORT) + 1;
-    console.log(`Port ${PORT} in use, trying ${nextPort}...`);
-    server.listen(nextPort, '0.0.0.0');
-  } else {
-    console.error('Server error:', err);
-  }
-});
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      const nextPort = Number(PORT) + 1;
+      console.log(`Port ${PORT} in use, trying ${nextPort}...`);
+      server.listen(nextPort, '0.0.0.0');
+    } else {
+      console.error('Server error:', err);
+    }
+  });
+}
+
+module.exports = {
+  server,
+  handleRequest,
+  readSubmissions,
+  writeSubmissions,
+  readUsers,
+  writeUsers
+};
