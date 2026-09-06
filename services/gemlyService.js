@@ -292,16 +292,22 @@ function recommendGemstones(options = {}) {
       lifeStone: {
         category: 'जीव रत्न (Life Stone / Lagna Lord)',
         description: 'शारीरिक आरोग्य, व्यक्तित्वको चमक, आत्मबल र दीर्घायुको लागि सर्वोपरि रत्न।',
+        name: lifeGem.name,
+        ...lifeGem,
         gemstone: lifeGem
       },
       luckyStone: {
         category: 'भाग्य रत्न (Lucky Stone / 9th House Lord)',
         description: 'भाग्योदय, ईश्वर कृपा, कार्य सिद्धि र भाग्य वृद्धिको लागि सर्वाधिक शुभ रत्न।',
+        name: luckyGem.name,
+        ...luckyGem,
         gemstone: luckyGem
       },
       beneficStone: {
         category: 'पुण्य रत्न (Knowledge & Intellect / 5th House Lord)',
         description: 'बुद्धि, उच्च शिक्षा, रचनात्मक प्रतिभा, सन्तान सुख र पूर्व पुण्य वृद्धिका लागि।',
+        name: beneficGem.name,
+        ...beneficGem,
         gemstone: beneficGem
       }
     },

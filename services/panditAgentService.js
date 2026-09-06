@@ -33,15 +33,15 @@ function detectDomain(query = '') {
 /**
  * Autonomous Multi-Agent Jyotish Consultation
  */
-async function consultAgenticPandit({
-  question = 'मेरो जागिर र भविष्य कस्तो रहनेछ?',
-  name = 'जिज्ञासु',
-  dob = '1995-05-15',
-  birthTime = '08:30',
-  birthPlace = 'काठमाडौं, नेपाल',
-  lagnaRashi = 1, // Default Mesha
-  moonLongitude = 45.5
-}) {
+async function consultAgenticPandit(payload = {}) {
+  const question = payload.question || payload.query || 'मेरो जागिर र भविष्य कस्तो रहनेछ?';
+  const name = payload.name || payload.clientName || 'जिज्ञासु';
+  const dob = payload.dob || payload.birthDate || payload.birthDetails?.date || '1995-05-15';
+  const birthTime = payload.birthTime || payload.birthDetails?.time || '08:30';
+  const birthPlace = payload.birthPlace || payload.birthDetails?.place || 'काठमाडौं, नेपाल';
+  const lagnaRashi = payload.lagnaRashi || payload.birthDetails?.lagna || 1;
+  const moonLongitude = Number(payload.moonLongitude || payload.birthDetails?.moonLongitude || 45.5);
+
   const domain = detectDomain(question);
   const dashaInfo = getCurrentDasha(dob, moonLongitude);
   const gemstoneInfo = recommendGemstones({ lagnaRashi, dob });
@@ -114,12 +114,22 @@ async function consultAgenticPandit({
     }
   ];
 
+  const agentsInvolved = ['LagnaExpert', 'DashaExpert', 'DomainExpert', 'RemedyExpert'];
+
   return {
     success: true,
     consultationId: 'PANDIT-' + Date.now().toString(36).toUpperCase(),
     clientName: name,
     question,
     domain,
+    agentsInvolved,
+    consultation: {
+      domain,
+      agentsInvolved,
+      summary: domainAnalysis,
+      favorableTiming,
+      remedies
+    },
     astrologicalVerdict: {
       summary: domainAnalysis,
       favorableTiming,

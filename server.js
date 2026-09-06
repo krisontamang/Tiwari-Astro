@@ -709,13 +709,24 @@ const server = http.createServer(async (req, res) => {
   // 1. Gemstones Catalog & Recommendation
   if (pathname === '/api/vedic/gemstones/catalog' && req.method === 'GET') {
     const catalog = gemlyService.getGemstoneCatalog();
-    return sendJSON(res, 200, catalog);
+    return sendJSON(res, 200, { success: true, catalog: catalog.gemstones, ...catalog });
   }
 
   if (pathname === '/api/vedic/gemstones/recommend' && (req.method === 'POST' || req.method === 'GET')) {
     const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
     const result = gemlyService.recommendGemstones(body);
-    return sendJSON(res, 200, result);
+    const lifeStone = result.recommendations?.lifeStone?.gemstone;
+    const luckyStone = result.recommendations?.luckyStone?.gemstone;
+    const beneficStone = result.recommendations?.beneficStone?.gemstone;
+    return sendJSON(res, 200, {
+      ...result,
+      recommendation: {
+        lifeStone,
+        luckyStone,
+        beneficStone,
+        ...result.recommendations
+      }
+    });
   }
 
   // 2. Vimshottari Dasha Timeline & Current Active Dasha
@@ -751,14 +762,31 @@ const server = http.createServer(async (req, res) => {
     const girlRashi = body.girlRashi || body.girlRashiId || body.bride?.rasi || body.bride?.rashi || 1;
     const boyRashi = body.boyRashi || body.boyRashiId || body.groom?.rasi || body.groom?.rashi || 1;
     const result = poruthamService.calculate10Poruthams(girlNak, boyNak, girlRashi, boyRashi);
-    return sendJSON(res, 200, result);
+    const pList = Array.isArray(result.poruthams) ? result.poruthams : (result.items || []);
+    return sendJSON(res, 200, {
+      ...result,
+      poruthamList: pList,
+      poruthams: {
+        totalScore: result.passedPoruthams,
+        passed: result.passedPoruthams,
+        total: 10,
+        verdict: result.overallVerdict,
+        isVetoViolated: result.isVetoViolated,
+        list: pList
+      }
+    });
   }
 
   // 5. Papasamya Malefic Point Balance
   if (pathname === '/api/vedic/match/papasamya' && (req.method === 'POST' || req.method === 'GET')) {
     const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
     const result = poruthamService.calculatePapasamya(body);
-    return sendJSON(res, 200, result);
+    return sendJSON(res, 200, {
+      ...result,
+      papasamya: {
+        ...result
+      }
+    });
   }
 
   // 6. Pancha Pakshi Bird & Compatibility
