@@ -137,6 +137,16 @@
       border-radius: var(--radius-full);
       margin-bottom: 14px;
     }
+    .section-tag.tag-free {
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(52, 211, 153, 0.45);
+      color: #34d399;
+    }
+    .section-tag.tag-paid {
+      background: rgba(216, 168, 70, 0.16);
+      border-color: rgba(216, 168, 70, 0.45);
+      color: var(--gold-300);
+    }
 
     .section-title {
       font-family: var(--font-serif);
@@ -328,12 +338,81 @@
       margin: 0 auto 32px;
     }
 
+    .hero-price-ribbon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 0 auto 26px;
+      max-width: 760px;
+    }
+
+    .hero-price-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(20, 15, 34, 0.85);
+      border: 1px solid rgba(216, 168, 70, 0.28);
+      border-radius: var(--radius-full);
+      padding: 7px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
+      color: var(--text-primary);
+    }
+    .hero-price-pill:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold-400);
+      background: rgba(216, 168, 70, 0.18);
+    }
+    .hero-price-pill.featured {
+      border-color: var(--gold-400);
+      background: rgba(216, 168, 70, 0.18);
+    }
+    .pill-medal { font-size: 15px; }
+    .pill-name { font-weight: 600; color: var(--text-secondary); }
+    .pill-price { font-weight: 800; color: var(--gold-200); }
+    .pill-badge {
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+      color: #100b1a;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 999px;
+    }
+
     .hero-btn-group {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
+    }
+
+    .btn-pay-hero {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #059669, #047857);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      color: #ffffff !important;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 24px;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      cursor: pointer;
+      min-height: 52px;
+      box-shadow: 0 4px 16px rgba(5, 150, 105, 0.35);
+      transition: all 0.2s ease;
+    }
+    .btn-pay-hero:hover {
+      background: linear-gradient(135deg, #10b981, #059669);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(16, 185, 129, 0.5);
     }
 
     .btn-main {
@@ -529,6 +608,214 @@
       background: linear-gradient(135deg, #ffe08a, var(--gold-500));
     }
 
+    /* eSewa Quick Pay Banner */
+    .esewa-payment-banner {
+      margin-top: 36px;
+      background: linear-gradient(135deg, rgba(20, 14, 34, 0.95), rgba(12, 9, 22, 0.98));
+      border: 1px solid rgba(216, 168, 70, 0.32);
+      border-radius: var(--radius-lg);
+      padding: clamp(24px, 3.5vw, 36px);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6), 0 0 24px rgba(216, 168, 70, 0.12);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+      max-width: 1040px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: 768px) {
+      .esewa-payment-banner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+    .esewa-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .esewa-title {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .esewa-title span {
+      color: var(--gold-300);
+    }
+    .esewa-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .esewa-id-box {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px dashed rgba(52, 211, 153, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .esewa-id-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+    .esewa-id-label {
+      font-size: 11px;
+      color: #a7f3d0;
+      font-weight: 600;
+    }
+    .esewa-id-num {
+      font-size: 19px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+    .btn-copy-esewa {
+      background: #059669;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-copy-esewa:hover {
+      background: #10b981;
+    }
+    .esewa-qr-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 2px solid var(--gold-300);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .esewa-qr-card:hover {
+      transform: scale(1.02);
+    }
+    .esewa-qr-img {
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+      margin: 0 auto 8px;
+    }
+    .esewa-qr-caption {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1e1b24;
+    }
+    .btn-portal-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff !important;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      transition: all 0.2s;
+    }
+    .btn-portal-link:hover {
+      background: linear-gradient(135deg, #34d399, #10b981);
+      transform: translateY(-2px);
+    }
+
+    /* Booking Plan Cards */
+    .booking-plan-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .b-plan-card {
+      background: rgba(14, 10, 24, 0.7);
+      border: 1.5px solid var(--gold-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .b-plan-card:hover {
+      border-color: var(--gold-400);
+      background: rgba(216, 168, 70, 0.12);
+    }
+    .b-plan-card.active {
+      border-color: var(--gold-400);
+      background: rgba(216, 168, 70, 0.18);
+      box-shadow: 0 0 18px rgba(216, 168, 70, 0.2);
+    }
+    .b-plan-top {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .b-plan-medal { font-size: 16px; }
+    .b-plan-name { font-weight: 700; color: #fff; font-size: 13.5px; }
+    .b-plan-badge {
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+      color: #100b1a;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 5px;
+      border-radius: 999px;
+      margin-left: auto;
+    }
+    .b-plan-price {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--gold-300);
+      margin-bottom: 3px;
+    }
+    .b-plan-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Floating Dock Pay Button */
+    .dock-btn-pay {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff !important;
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      text-decoration: none;
+    }
+    .dock-btn-pay:hover {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.5);
+    }
+
     /* ════════════════════════════════════════════════════════════════
        RASHIFAL WITH 4 TIME TABS (DAILY, WEEKLY, MONTHLY, YEARLY)
        ════════════════════════════════════════════════════════════════ */
@@ -722,20 +1009,6 @@
       grid-template-columns: 1fr 1fr 1fr;
       gap: 12px;
     }
-
-    .sync-banner {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11.5px;
-      color: var(--gold-400);
-      background: rgba(216, 168, 70, 0.08);
-      border: 1px solid rgba(216, 168, 70, 0.2);
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      margin-top: 6px;
-    }
-
     /* Scrollable Nepal Location Selector */
     .location-wrapper {
       position: relative;
@@ -1145,18 +1418,18 @@
         </a>
 
         <div class="nav-actions">
-          <button class="nav-link-btn hide-mobile" onclick="scrollToId('pricing-section')">
-            💰 योजना र शुल्क
-          </button>
           <button class="nav-link-btn hide-mobile" onclick="scrollToId('rashifal-section')">
-            🌅 राशिफल
+            🌅 राशिफल <span style="font-size:10px;background:rgba(16,185,129,0.2);color:#34d399;padding:1px 6px;border-radius:999px;">निःशुल्क</span>
           </button>
           <button class="nav-link-btn hide-mobile" onclick="scrollToId('kundali-section')">
-            📿 कुण्डली
+            📿 कुण्डली <span style="font-size:10px;background:rgba(16,185,129,0.2);color:#34d399;padding:1px 6px;border-radius:999px;">निःशुल्क</span>
           </button>
-          <button class="nav-link-btn hide-mobile" onclick="scrollToId('mantra-section')">
-            🕉️ मन्त्र
+          <button class="nav-link-btn hide-mobile" onclick="scrollToId('pricing-section')">
+            💰 शुल्क (रु. २९९+)
           </button>
+          <a href="/pay" class="nav-link-btn" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.4);color:#34d399;font-weight:700;">
+            💳 Quick Pay
+          </a>
           <button class="nav-cta-btn" onclick="scrollToId('booking-section')">
             परामर्श लिनुहोस् ➔
           </button>
@@ -1171,21 +1444,44 @@
   <section class="section hero-section">
     <div class="container">
       <div class="hero-badge">
-        <span>✨</span> प्रामाणिक परम्परागत वैदिक ज्योतिष मार्गदर्शन
+        <span>✨</span> प्रामाणिक वैदिक ज्योतिष तथा जीवन मार्गदर्शन
       </div>
       <h1 class="hero-title">
         तपाईंको भविष्य,<br /><span>तपाईंको रोजाइमा</span>
       </h1>
       <p class="hero-subtitle">
-        जीवनका गहन प्रश्नहरूको स्पष्ट उत्तर पाउनुहोस्। जन्मकुण्डली, विवाह मिलान, करियर तथा मानसिक शान्तिका लागि विद्वान पण्डितजीसँग सिधै परामर्श गर्नुहोस्।
+        दैनिक राशिफल तथा कुण्डली चक्र निःशुल्क हेर्नुहोस् वा पण्डितजीसँग व्यक्तिगत परामर्श लिनुहोस्।
       </p>
+
+      <!-- Clear Price Highlight Pills -->
+      <div class="hero-price-ribbon">
+        <div class="hero-price-pill" onclick="choosePricingPlan('Basic Package', '२९९')">
+          <span class="pill-medal">🥉</span>
+          <span class="pill-name">Basic:</span>
+          <span class="pill-price">रु. २९९</span>
+        </div>
+        <div class="hero-price-pill featured" onclick="choosePricingPlan('Standard Package', '४९९')">
+          <span class="pill-medal">🥈</span>
+          <span class="pill-name">Standard:</span>
+          <span class="pill-price">रु. ४९९</span>
+          <span class="pill-badge">लोकप्रिय</span>
+        </div>
+        <div class="hero-price-pill" onclick="choosePricingPlan('VIP Premium Package', '१०५५')">
+          <span class="pill-medal">🥇</span>
+          <span class="pill-name">VIP:</span>
+          <span class="pill-price">रु. १,०५५</span>
+        </div>
+      </div>
 
       <div class="hero-btn-group">
         <button class="btn-main" onclick="scrollToId('pricing-section')">
-          💰 परामर्श शुल्क तथा योजना हेर्नुहोस्
+          💰 परामर्श शुल्क (रु. २९९ बाट)
+        </button>
+        <button class="btn-outline" onclick="scrollToId('rashifal-section')">
+          🌅 आजको राशिफल (निःशुल्क)
         </button>
         <button class="btn-outline" onclick="scrollToId('kundali-section')">
-          📿 आफ्नो कुण्डली चक्र बनाउनुहोस्
+          📿 कुण्डली चक्र (निःशुल्क)
         </button>
       </div>
     </div>
@@ -1197,9 +1493,9 @@
   <section class="section pricing-section" id="pricing-section">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">स्पष्ट र पारदर्शी शुल्क</div>
+        <div class="section-tag tag-paid">💎 सशुल्क परामर्श योजना (Paid Consultation)</div>
         <h2 class="section-title">परामर्श योजना तथा शुल्क</h2>
-        <p class="section-desc">आफ्नो आवश्यकता अनुसार उचित योजना छान्नुहोस् र पण्डितजीसँग प्रत्यक्ष मार्गदर्शन प्राप्त गर्नुहोस्</p>
+        <p class="section-desc">स्पष्ट र पारदर्शी शुल्क — आफ्नो आवश्यकता अनुसार योजना छान्नुहोस्</p>
         <div class="ornament">✦ ॐ ✦</div>
       </div>
 
@@ -1215,20 +1511,20 @@
               <span class="price-sub">/ एक पटक</span>
             </div>
             <ul class="pricing-features">
-              <li><span>✓</span> १ वटा मुख्य समस्या वा जिज्ञासाको उत्तर</li>
-              <li><span>✓</span> वर्तमान ग्रह दशा तथा गोचर विश्लेषण</li>
-              <li><span>✓</span> सरल पूजा वा जप उपायको सुझाव</li>
-              <li><span>✓</span> WhatsApp मा अडियो सन्देश मार्गदर्शन</li>
+              <li><span>✓</span> ३० पेजको महाभविष्यफल PDF रिपोर्ट</li>
+              <li><span>✓</span> १ वटा मुख्य समस्याको समाधान</li>
+              <li><span>✓</span> वर्तमान ग्रह दशा तथा गोचर फल</li>
+              <li><span>✓</span> सरल पूजा वा जप उपाय</li>
             </ul>
           </div>
           <button class="btn-choose-plan" onclick="choosePricingPlan('Basic Package', '२९९')">
-            यो योजना छान्नुहोस् ➔
+            यो योजना छान्नुहोस् (रु. २९९) ➔
           </button>
         </div>
 
         <!-- Plan 2: Standard (Featured) -->
         <div class="pricing-card featured">
-          <div class="pricing-badge">लोकप्रिय छनोट</div>
+          <div class="pricing-badge">सबैभन्दा लोकप्रिय</div>
           <div>
             <div class="pricing-tier">Standard Package</div>
             <div class="pricing-desc">पूर्ण जन्मकुण्डली, करियर, विवाह तथा स्वास्थ्यको गहन विश्लेषण।</div>
@@ -1238,15 +1534,15 @@
               <span class="price-sub">/ एक पटक</span>
             </div>
             <ul class="pricing-features">
-              <li><span>✓</span> सम्पूर्ण १२ भाव तथा नवग्रह स्थिति विश्लेषण</li>
-              <li><span>✓</span> करियर, धन, विवाह तथा स्वास्थ्य मार्गदर्शन</li>
-              <li><span>✓</span> विंशोत्तरी महादशा तथा अन्तरदशा विश्लेषण</li>
+              <li><span>✓</span> Basic Package का सम्पूर्ण सुविधाहरू</li>
+              <li><span>✓</span> पूर्ण कुण्डली तथा १२ भाव विश्लेषण</li>
+              <li><span>✓</span> करियर, धन, विवाह तथा स्वास्थ्य फल</li>
+              <li><span>✓</span> तपाईंका ३ व्यक्तिगत प्रश्नको उत्तर</li>
               <li><span>✓</span> १५ मिनेट पण्डितजीसँग प्रत्यक्ष अडियो कल</li>
-              <li><span>✓</span> रत्न वा रुद्राक्ष सम्बन्धी व्यक्तिगत सल्लाह</li>
             </ul>
           </div>
           <button class="btn-choose-plan" onclick="choosePricingPlan('Standard Package', '४९९')">
-            यो योजना छान्नुहोस् ➔
+            यो योजना छान्नुहोस् (रु. ४९९) ➔
           </button>
         </div>
 
@@ -1261,16 +1557,45 @@
               <span class="price-sub">/ एक पटक</span>
             </div>
             <ul class="pricing-features">
-              <li><span>✓</span> विस्तृत ५-पृष्ठ जन्मकुण्डली प्रतिवेदन</li>
+              <li><span>✓</span> सम्पूर्ण कुण्डली तथा २ वर्षको गोचर फल</li>
               <li><span>✓</span> विवाह गुण मिलान (३६ गुण तथा मांगलिक दोष)</li>
-              <li><span>✓</span> आगामी २ वर्षको पूर्ण गोचर तथा दशाफल</li>
-              <li><span>✓</span> ३० मिनेट पण्डितजीसँग विस्तृत प्रत्यक्ष कुराकानी</li>
-              <li><span>✓</span> विशेष वैदिक अनुष्ठान तथा शान्ति मार्गदर्शन</li>
+              <li><span>✓</span> असीमित प्रश्न तथा प्रत्यक्ष कल (प्राथमिकता)</li>
+              <li><span>✓</span> रत्न, रुद्राक्ष तथा विशेष वैदिक अनुष्ठान</li>
             </ul>
           </div>
           <button class="btn-choose-plan" onclick="choosePricingPlan('VIP Premium Package', '१०५५')">
-            यो योजना छान्नुहोस् ➔
+            यो योजना छान्नुहोस् (रु. १,०५५) ➔
           </button>
+        </div>
+      </div>
+
+      <!-- eSewa Quick Pay Banner -->
+      <div class="esewa-payment-banner">
+        <div>
+          <div class="esewa-eyebrow">⚡ सजिलो भुक्तानी • eSewa Quick Pay</div>
+          <h3 class="esewa-title">आफ्नो प्याकेज <span>आजै Confirm गर्नुहोस्</span></h3>
+          <p class="esewa-desc">तलको eSewa QR स्क्यान गरी वा eSewa ID मा रकम पठाएर WhatsApp मा स्क्रिनसट पठाउनुहोस्।</p>
+          
+          <div class="esewa-id-box">
+            <div class="esewa-id-text">
+              <span class="esewa-id-label">eSewa ID (नाम: Ayush Tiwari)</span>
+              <span class="esewa-id-num">9809192604</span>
+            </div>
+            <button class="btn-copy-esewa" onclick="copyEsewaId()">📋 Copy ID</button>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <a href="/pay" class="btn-portal-link">
+              💳 Quick Pay अनलाइन पोर्टल खोल्नुहोस् ➔
+            </a>
+            <span style="font-size:12px;color:var(--text-muted);">(रु. २९९ / ४९९ / १०५५)</span>
+          </div>
+        </div>
+
+        <div class="esewa-qr-card" onclick="openQrModal()" title="ठूलो हेर्न क्लिक गर्नुहोस्">
+          <img src="/manus-storage/eSewa_My_QR_9809192604_1788636795054_2026-09-06_01_18_15_45f0b9e9.jpg" alt="eSewa QR Code" class="esewa-qr-img" />
+          <div class="esewa-qr-caption">eSewa Scan & Pay • 9809192604</div>
+          <div style="font-size:11px;color:#059669;margin-top:2px;">🔍 ठूलो हेर्न QR मा थिच्नुहोस्</div>
         </div>
       </div>
     </div>
@@ -1282,9 +1607,9 @@
   <section class="section" id="rashifal-section" style="border-top:1px solid var(--gold-border);border-bottom:1px solid var(--gold-border);background:rgba(120,60,180,0.05);">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">राशिफल तथा ग्रहगोचर</div>
+        <div class="section-tag tag-free">✨ १००% निःशुल्क सेवा (Free Service)</div>
         <h2 class="section-title">तपाईंको राशिफल</h2>
-        <p class="section-desc">दैनिक, साप्ताहिक, मासिक वा वार्षिक समयावधि छान्नुहोस् र आफ्नो राशिको सम्पूर्ण फलादेश पढ्नुहोस्</p>
+        <p class="section-desc">दैनिक, साप्ताहिक, मासिक तथा वार्षिक फलादेश</p>
         <div class="ornament">✦ ॐ ✦</div>
       </div>
 
@@ -1320,9 +1645,9 @@
   <section class="section" id="kundali-section">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">निःशुल्क सेवा</div>
-        <h2 class="section-title">सरल कुण्डली निर्माता</h2>
-        <p class="section-desc">वि.सं. वा ई.सं. कुनै एकमा जन्म मिति भर्नासाथ अर्को स्वतः गणितीय हिसाबले भरिनेछ</p>
+        <div class="section-tag tag-free">✨ १००% निःशुल्क सेवा (Free Service)</div>
+        <h2 class="section-title">सरल कुण्डली चक्र निर्माता</h2>
+        <p class="section-desc">जन्म मिति र समय भरेर आफ्नो कुण्डली चक्र तुरुन्त हेर्नुहोस्</p>
         <div class="ornament">✦ ॐ ✦</div>
       </div>
 
@@ -1348,9 +1673,6 @@
               <input class="input-field" id="bs-month" type="number" placeholder="महिना (१-१२)" min="1" max="12" oninput="onBsDateChanged()" />
               <input class="input-field" id="bs-day" type="number" placeholder="दिन (१-३२)" min="1" max="32" oninput="onBsDateChanged()" />
             </div>
-            <div class="sync-banner" id="bs-sync-hint">
-              <span>⚡</span> वि.सं. भर्दा ई.सं. (AD) स्वतः हिसाब हुनेछ
-            </div>
           </div>
 
           <!-- OPTION 2: GREGORIAN (AD) -->
@@ -1363,9 +1685,6 @@
               <input class="input-field" id="ad-year" type="number" placeholder="Year (1998)" min="1920" max="2040" oninput="onAdDateChanged()" />
               <input class="input-field" id="ad-month" type="number" placeholder="Month (1-12)" min="1" max="12" oninput="onAdDateChanged()" />
               <input class="input-field" id="ad-day" type="number" placeholder="Day (1-31)" min="1" max="31" oninput="onAdDateChanged()" />
-            </div>
-            <div class="sync-banner" id="ad-sync-hint">
-              <span>⚡</span> ई.सं. भर्दा वि.सं. (BS) स्वतः हिसाब हुनेछ
             </div>
           </div>
 
@@ -1435,9 +1754,9 @@
   <section class="section" id="mantra-section" style="border-top:1px solid var(--gold-border);">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">नित्य साधना</div>
+        <div class="section-tag tag-free">✨ १००% निःशुल्क सेवा (Free Service)</div>
         <h2 class="section-title">पवित्र वैदिक शान्ति मन्त्र</h2>
-        <p class="section-desc">मनको शान्ति, पारिवारिक कल्याण र सकारात्मक ऊर्जाका लागि नित्य जप गर्न सकिने मन्त्रहरू</p>
+        <p class="section-desc">दैनिक साधना तथा मानसिक शान्तिका लागि</p>
         <div class="ornament">✦ ॐ ✦</div>
       </div>
 
@@ -1451,18 +1770,47 @@
   <section class="section booking-section" id="booking-section">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">पण्डितजीसँग प्रत्यक्ष परामर्श</div>
+        <div class="section-tag tag-paid">💎 सशुल्क परामर्श (Paid Consultation)</div>
         <h2 class="section-title">व्यक्तिगत ज्योतिषीय परामर्श</h2>
-        <p class="section-desc">जन्मकुण्डली गम्भीर विश्लेषण, विवाह गुण मिलान, करियर तथा मानसिक शान्तिका लागि समय बुक गर्नुहोस्</p>
+        <p class="section-desc">आफ्नो उपयुक्त योजना रोज्नुहोस् र पण्डितजीसँग सिधै कुराकानी गर्नुहोस्</p>
         <div class="ornament">✦ ॐ ✦</div>
       </div>
 
       <div class="booking-card">
-        <form id="consultation-form" onsubmit="handleConsultationSubmit(event)">
-          <div class="input-group">
-            <label class="input-label" for="booking-plan">छनोट गरिएको योजना</label>
-            <input class="input-field" id="booking-plan" type="text" value="Standard Package (रू ४९९)" readonly style="background:rgba(216,168,70,0.1);color:var(--gold-200);font-weight:700;" />
+        <!-- Interactive Package Selector -->
+        <label class="input-label" style="margin-bottom:12px;">परामर्श योजना छनोट गर्नुहोस् (Select Package)</label>
+        <div class="booking-plan-cards" id="booking-plan-cards">
+          <div class="b-plan-card" id="bcard-basic" onclick="selectBookingPlan('Basic Package', '२९९')">
+            <div class="b-plan-top">
+              <span class="b-plan-medal">🥉</span>
+              <span class="b-plan-name">Basic Package</span>
+            </div>
+            <div class="b-plan-price">रु. २९९/-</div>
+            <div class="b-plan-desc">३० पेज महाभविष्यफल रिपोर्ट, १ मुख्य समस्याको समाधान</div>
           </div>
+
+          <div class="b-plan-card active" id="bcard-standard" onclick="selectBookingPlan('Standard Package', '४९९')">
+            <div class="b-plan-top">
+              <span class="b-plan-medal">🥈</span>
+              <span class="b-plan-name">Standard Package</span>
+              <span class="b-plan-badge">लोकप्रिय</span>
+            </div>
+            <div class="b-plan-price">रु. ४९९/-</div>
+            <div class="b-plan-desc">पूर्ण कुण्डली, करियर, विवाह, ३ प्रश्न र अडियो कल</div>
+          </div>
+
+          <div class="b-plan-card" id="bcard-vip" onclick="selectBookingPlan('VIP Premium Package', '१०५५')">
+            <div class="b-plan-top">
+              <span class="b-plan-medal">🥇</span>
+              <span class="b-plan-name">VIP Premium</span>
+            </div>
+            <div class="b-plan-price">रु. १,०५५/-</div>
+            <div class="b-plan-desc">सम्पूर्ण कुण्डली, २ वर्षको गोचर, असीमित प्रश्न र प्रत्यक्ष कल</div>
+          </div>
+        </div>
+
+        <form id="consultation-form" onsubmit="handleConsultationSubmit(event)">
+          <input type="hidden" id="booking-plan" value="Standard Package (रू ४९९)" />
 
           <div class="grid-3" style="grid-template-columns:1fr 1fr;margin-bottom:18px;">
             <div>
@@ -1485,8 +1833,8 @@
           </button>
         </form>
 
-        <p style="text-align:center;font-size:12.5px;color:var(--text-muted);margin-top:18px;">
-          * सन्देश पठाएपछि पण्डितजीले तपाईंको समय मिलाएर WhatsApp मा सम्पर्क गर्नुहुनेछ।
+        <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:16px;">
+          * सन्देश पठाएपछि पण्डितजीले समय मिलाएर WhatsApp मा सम्पर्क गर्नुहुनेछ।
         </p>
       </div>
     </div>
@@ -1505,9 +1853,9 @@
       <p style="margin-top:12px;">
         <a href="/admin">🔐 Admin Portal</a> &nbsp;|&nbsp;
         <a href="#pricing-section">योजना र शुल्क</a> &nbsp;|&nbsp;
-        <a href="#rashifal-section">राशिफल</a> &nbsp;|&nbsp;
-        <a href="#kundali-section">कुण्डली चक्र</a> &nbsp;|&nbsp;
-        <a href="#mantra-section">शान्ति मन्त्र</a>
+        <a href="#rashifal-section">राशिफल (Free)</a> &nbsp;|&nbsp;
+        <a href="#kundali-section">कुण्डली चक्र (Free)</a> &nbsp;|&nbsp;
+        <a href="#mantra-section">शान्ति मन्त्र (Free)</a>
       </p>
     </div>
   </footer>
@@ -1516,17 +1864,21 @@
        FLOATING DOCK
        ════════════════════════════════════════════════════════════════ -->
   <nav class="floating-dock">
+    <a href="/pay" class="dock-btn dock-btn-pay" title="तुरुन्त अनलाइन भुक्तानी (Quick Pay)">
+      <span>💳 Quick Pay</span>
+      <span class="dock-hide-mobile">&nbsp;(रु. २९९ / ४९९ / १०५५)</span>
+    </a>
     <button class="dock-btn dock-btn-ghost dock-hide-mobile" onclick="scrollToId('pricing-section')">
       <span>💰</span> शुल्क
     </button>
     <button class="dock-btn dock-btn-ghost dock-hide-mobile" onclick="scrollToId('rashifal-section')">
-      <span>🌅</span> राशिफल
+      <span>🌅</span> राशिफल (Free)
     </button>
     <button class="dock-btn dock-btn-ghost dock-hide-mobile" onclick="scrollToId('kundali-section')">
-      <span>📿</span> कुण्डली
+      <span>📿</span> कुण्डली (Free)
     </button>
     <button class="dock-btn dock-btn-primary" onclick="scrollToId('booking-section')">
-      <span>💬</span> परामर्श बुक गर्नुहोस्
+      <span>💬</span> परामर्श बुक
     </button>
   </nav>
 
@@ -1549,17 +1901,64 @@
       setTimeout(() => { t.style.display = 'none'; }, 2600);
     }
 
+    function selectBookingPlan(planName, price) {
+      document.querySelectorAll('.b-plan-card').forEach(c => c.classList.remove('active'));
+      if (planName.toLowerCase().includes('basic')) {
+        document.getElementById('bcard-basic')?.classList.add('active');
+      } else if (planName.toLowerCase().includes('standard')) {
+        document.getElementById('bcard-standard')?.classList.add('active');
+      } else if (planName.toLowerCase().includes('vip')) {
+        document.getElementById('bcard-vip')?.classList.add('active');
+      }
+      const el = document.getElementById('booking-plan');
+      if (el) el.value = `${planName} (रू ${price})`;
+      showToast(`✅ ${planName} (रु. ${price}) छनोट गरियो`);
+    }
+
     function choosePricingPlan(planName, price) {
-      document.getElementById('booking-plan').value = `${planName} (रू ${price})`;
+      selectBookingPlan(planName, price);
       scrollToId('booking-section');
-      showToast(`✅ ${planName} छनोट गरियो`);
+    }
+
+    function copyEsewaId() {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText('9809192604').then(() => {
+          showToast('✅ eSewa ID: 9809192604 कपी भयो!');
+        });
+      } else {
+        showToast('✅ eSewa ID: 9809192604');
+      }
+    }
+
+    function openQrModal() {
+      let modal = document.getElementById('qr-modal-overlay');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'qr-modal-overlay';
+        modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(10,7,20,0.88);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:16px;cursor:pointer;';
+        modal.innerHTML = `
+          <div style="background:#fff;border-radius:1.5rem;padding:24px 20px 20px;max-width:340px;width:100%;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,0.6);position:relative;" onclick="event.stopPropagation()">
+            <button id="qr-modal-close" style="position:absolute;top:12px;right:12px;background:#f3eef6;border:none;width:32px;height:32px;border-radius:50%;font-size:20px;line-height:1;cursor:pointer;color:#45394d;display:flex;align-items:center;justify-content:center;">&times;</button>
+            <div style="margin-bottom:12px;"><span style="background:#059669;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;">eSewa Payment QR</span></div>
+            <img src="/manus-storage/eSewa_My_QR_9809192604_1788636795054_2026-09-06_01_18_15_45f0b9e9.jpg" alt="eSewa QR Large" style="width:100%;max-width:260px;height:auto;border-radius:0.75rem;display:block;margin:0 auto 14px;box-shadow:0 4px 16px rgba(0,0,0,0.08);"/>
+            <div style="font-size:16px;font-weight:700;color:#221b27;margin-bottom:6px;">Ayush Tiwari</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;">
+              <span style="font-size:15px;color:#059669;font-weight:700;">9809192604</span>
+              <button onclick="copyEsewaId()" style="background:#f4ecdf;color:#a8794f;border:1px solid #d9be9e;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:600;cursor:pointer;">Copy</button>
+            </div>
+            <p style="font-size:12px;color:#64748b;line-height:1.5;margin:0;">eSewa app बाट scan गर्नुहोस् वा सिधै eSewa ID मा रकम पठाउनुहोस्।</p>
+          </div>
+        `;
+        document.body.appendChild(modal);
+        modal.addEventListener('click', () => modal.remove());
+        modal.querySelector('#qr-modal-close').addEventListener('click', () => modal.remove());
+      }
     }
 
     // ── MATHEMATICAL BS <-> AD TWO-WAY CONVERTER ──
     let isConverting = false;
 
     // Mathematical epoch base: 2055-01-31 BS = 1998-05-14 AD
-    // Average days per BS year = 365.25. 1 BS month ≈ 30.4375 days
     function approximateBsToAd(y, m, d) {
       const estYear = y - 57;
       let estMonth = m + 3;
@@ -1587,14 +1986,11 @@
       if (!by || !bm || !bd || by < 1980 || by > 2100 || bm < 1 || bm > 12 || bd < 1 || bd > 32) return;
 
       isConverting = true;
-      // Instant mathematical fast update
       const approx = approximateBsToAd(by, bm, bd);
       document.getElementById('ad-year').value = approx.year;
       document.getElementById('ad-month').value = approx.month;
       document.getElementById('ad-day').value = approx.day;
-      document.getElementById('bs-sync-hint').innerHTML = '<span>⚡</span> गणितीय रूपान्तरण भयो (AD auto-filled)';
 
-      // Precise API server calculation
       try {
         const res = await fetch(`/api/patro/convert?bs=${by}-${String(bm).padStart(2,'0')}-${String(bd).padStart(2,'0')}`);
         const data = await res.json();
@@ -1602,7 +1998,6 @@
           document.getElementById('ad-year').value = data.year;
           document.getElementById('ad-month').value = data.month;
           document.getElementById('ad-day').value = data.day;
-          document.getElementById('bs-sync-hint').innerHTML = `<span>✓</span> ई.सं. <strong>${data.year}/${data.month}/${data.day}</strong> (${data.weekdayNp || ''}) मा रूपान्तरण भयो`;
         }
       } catch (err) {}
       finally { isConverting = false; }
@@ -1617,14 +2012,11 @@
       if (!ay || !am || !ad || ay < 1920 || ay > 2045 || am < 1 || am > 12 || ad < 1 || ad > 31) return;
 
       isConverting = true;
-      // Instant mathematical fast update
       const approx = approximateAdToBs(ay, am, ad);
       document.getElementById('bs-year').value = approx.year;
       document.getElementById('bs-month').value = approx.month;
       document.getElementById('bs-day').value = approx.day;
-      document.getElementById('ad-sync-hint').innerHTML = '<span>⚡</span> गणितीय रूपान्तरण भयो (BS auto-filled)';
 
-      // Precise API server calculation
       try {
         const res = await fetch(`/api/patro/convert?ad=${ay}-${String(am).padStart(2,'0')}-${String(ad).padStart(2,'0')}`);
         const data = await res.json();
@@ -1632,7 +2024,6 @@
           document.getElementById('bs-year').value = data.year;
           document.getElementById('bs-month').value = data.month;
           document.getElementById('bs-day').value = data.day;
-          document.getElementById('ad-sync-hint').innerHTML = `<span>✓</span> वि.सं. <strong>${data.year} ${data.monthNameNp || ''} ${data.day}</strong> मा रूपान्तरण भयो`;
         }
       } catch (err) {}
       finally { isConverting = false; }
