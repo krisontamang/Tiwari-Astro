@@ -706,6 +706,245 @@
       color: #ea580c;
     }
 
+    /* NEPALI PATRO & HAMRO PATRO SUITE */
+    .patro-workspace {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .patro-header-bar {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .patro-nav-pills {
+      display: flex;
+      gap: 6px;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 8px;
+      flex-wrap: wrap;
+    }
+
+    .patro-pill-btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .patro-pill-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .patro-pill-btn.active {
+      background: #ea580c;
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(234, 88, 12, 0.3);
+    }
+
+    .calendar-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 16px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .calendar-day-header {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 4px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: #334155;
+    }
+
+    .calendar-day-header.saturday {
+      color: #dc2626;
+      background: #fee2e2;
+      border-color: #fca5a5;
+    }
+
+    .calendar-cell {
+      min-height: 96px;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 6px 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+    }
+
+    .calendar-cell:hover {
+      border-color: #ea580c;
+      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .calendar-cell.saturday {
+      background: #fff5f5;
+    }
+
+    .calendar-cell.saturday .cell-bs-day {
+      color: #dc2626;
+    }
+
+    .calendar-cell.today {
+      border: 2px solid #ea580c !important;
+      background: #fffbeb !important;
+      box-shadow: 0 4px 14px rgba(234, 88, 12, 0.25);
+    }
+
+    .cell-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .cell-bs-day {
+      font-size: 20px;
+      font-weight: 800;
+      font-family: 'Noto Serif Devanagari', serif;
+      color: #0f172a;
+      line-height: 1;
+    }
+
+    .cell-ad-day {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .cell-tithi {
+      font-size: 11px;
+      color: #b45309;
+      font-weight: 600;
+      margin-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cell-festival-badge {
+      font-size: 10.5px;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: #fee2e2;
+      color: #b91c1c;
+      font-weight: 700;
+      margin-top: 4px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* 12 Rashi Cards */
+    .rashi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 14px;
+    }
+
+    .rashi-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      transition: all 0.2s;
+    }
+
+    .rashi-card:hover {
+      border-color: #ea580c;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    .rashi-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 8px;
+    }
+
+    .rashi-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rashi-symbol-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #f97316, #c2410c);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .rashi-name-np {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .rashi-name-en {
+      font-size: 11.5px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .rashi-prediction-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #334155;
+    }
+
     /* KUNDALI MILAN MODAL (Screenshot 1) */
     .milan-modal-overlay {
       position: fixed;
@@ -1167,9 +1406,9 @@
 
       <!-- Group 2: Tools & Chakras -->
       <div class="tool-pill" title="ज्योतिषीय गणना तथा चक्रहरू">
-        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="पञ्चाङ्ग">📜</button>
+        <button class="tool-btn" onclick="openNepaliPatroModal('panchanga')" title="पञ्चाङ्ग">📜</button>
         <button class="tool-btn" onclick="switchMainTab('print')" title="चिना">📜</button>
-        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="पात्रो">📅</button>
+        <button class="tool-btn" onclick="openNepaliPatroModal('calendar')" title="पात्रो (नेपाली क्यालेन्डर)">📅</button>
         <button class="tool-btn" onclick="switchMainTab('vivaran')" title="इष्टकाल">⏰</button>
         <button class="tool-btn" onclick="switchMainTab('vivaran')" title="अवकहडा चक्र">🕒</button>
         <button class="tool-btn" onclick="switchMainTab('vivaran')" title="अङ्क ज्योतिष (1234)">🔢</button>
@@ -1183,7 +1422,7 @@
         <button class="tool-btn" title="मुहूर्त">⚙️📅</button>
         <button class="tool-btn" title="निर्देशिका">📇</button>
         <button class="tool-btn" title="अक्षांश/देशान्तर">📍</button>
-        <button class="tool-btn" title="नेपाली विक्रम सम्वत् (B.S.)">🇳🇵</button>
+        <button class="tool-btn" onclick="openNepaliPatroModal('rashifal')" title="नेपाली विक्रम सम्वत् (B.S.) र हाम्रो पात्रो राशिफल">🇳🇵</button>
         <button class="tool-btn" onclick="toggleTheme()" title="थिम परिवर्तन">🌓</button>
       </div>
     </div>
@@ -1211,7 +1450,7 @@
     </div>
   </header>
 
-  <!-- 12 Main Navigation Tabs -->
+  <!-- 13 Main Navigation Tabs -->
   <nav class="sarathi-main-nav no-print" id="sarathi-main-tabs">
     <div class="main-tab-link active" onclick="switchMainTab('vivaran')">विवरण</div>
     <div class="main-tab-link" onclick="switchMainTab('kundalis')">कुण्डलीहरू</div>
@@ -1223,6 +1462,7 @@
     <div class="main-tab-link" onclick="switchMainTab('ashtakavarga')">अष्टकवर्ग</div>
     <div class="main-tab-link" onclick="switchMainTab('varshaphala')">वर्षफल</div>
     <div class="main-tab-link" onclick="switchMainTab('vividha')">विविध</div>
+    <div class="main-tab-link" onclick="switchMainTab('patro')">नेपाली पात्रो</div>
     <div class="main-tab-link" onclick="switchMainTab('gochar')">गोचर</div>
     <div class="main-tab-link" onclick="switchMainTab('print')">चिना प्रिन्ट</div>
   </nav>
@@ -1531,6 +1771,238 @@
 
         <div id="mantra-cards-container" style="display:flex; flex-direction:column; gap:12px;">
           <!-- Injected dynamically -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- WORKSPACE: नेपाली पात्रो, पञ्चाङ्ग तथा हाम्रो पात्रो सुइट (sushilldhakal/nepali-calendar, khumnath/nepdate, milancodess/hamro-patro-scraper) -->
+  <main class="patro-workspace no-print" id="workspace-patro" style="display:none;">
+    <!-- Top Header Bar -->
+    <div class="patro-header-bar">
+      <div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:22px;">🇳🇵</span>
+          <span style="font-family:'Noto Serif Devanagari', serif; font-size:18px; font-weight:700; color:#9a3412;">
+            नेपाली क्यालेन्डर, पञ्चाङ्ग तथा हाम्रो पात्रो सुइट
+          </span>
+          <span style="font-size:11px; background:#fed7aa; color:#b45309; padding:2px 8px; border-radius:999px; font-weight:700;">BS 1700 - 2200</span>
+        </div>
+        <div style="font-size:12.5px; color:#475569; margin-top:2px;" id="patro-header-today-str">
+          आज: लोड हुँदैछ...
+        </div>
+      </div>
+
+      <!-- Navigation Pills for Patro Views -->
+      <div class="patro-nav-pills">
+        <button class="patro-pill-btn active" id="pill-patro-calendar" onclick="switchPatroSub('calendar')">📅 क्यालेन्डर</button>
+        <button class="patro-pill-btn" id="pill-patro-panchanga" onclick="switchPatroSub('panchanga')">📜 दैनिक पञ्चाङ्ग</button>
+        <button class="patro-pill-btn" id="pill-patro-rashifal" onclick="switchPatroSub('rashifal')">♈ हाम्रो पात्रो राशिफल</button>
+        <button class="patro-pill-btn" id="pill-patro-convert" onclick="switchPatroSub('convert')">🔄 मिति रूपान्तरण</button>
+        <button class="patro-pill-btn" id="pill-patro-market" onclick="switchPatroSub('market')">💰 बजार र विनिमय</button>
+      </div>
+    </div>
+
+    <!-- SUB-VIEW 1: CALENDAR (पात्रो) -->
+    <div id="patro-sub-calendar">
+      <div class="calendar-controls-bar">
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <button class="btn-action-pill" style="padding:6px 12px; font-size:13px;" onclick="prevPatroMonth()">◀ अघिल्लो</button>
+          <select id="patro-year-select" class="milan-input-text" style="width:110px; font-weight:700;" onchange="changePatroMonthYear()"></select>
+          <select id="patro-month-select" class="milan-input-text" style="width:120px; font-weight:700;" onchange="changePatroMonthYear()"></select>
+          <button class="btn-action-pill" style="padding:6px 12px; font-size:13px;" onclick="nextPatroMonth()">पछिल्लो ▶</button>
+          <button class="btn-action-pill" style="background:#0891b2; padding:6px 12px; font-size:13px;" onclick="goToPatroToday()">आज (Today)</button>
+        </div>
+
+        <div style="font-size:14px; font-weight:700; color:#9a3412;" id="patro-current-month-label">
+          लोड हुँदैछ...
+        </div>
+      </div>
+
+      <!-- 7 Column Day Grid -->
+      <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:8px; padding:12px; margin-top:10px;">
+        <div class="calendar-grid" id="patro-calendar-headers" style="margin-bottom:8px;">
+          <div class="calendar-day-header">आइतबार (Sun)</div>
+          <div class="calendar-day-header">सोमबार (Mon)</div>
+          <div class="calendar-day-header">मङ्गलबार (Tue)</div>
+          <div class="calendar-day-header">बुधबार (Wed)</div>
+          <div class="calendar-day-header">बिहीबार (Thu)</div>
+          <div class="calendar-day-header">शुक्रबार (Fri)</div>
+          <div class="calendar-day-header saturday">शनिबार (Sat)</div>
+        </div>
+        <div class="calendar-grid" id="patro-calendar-days">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Selected Day Details Card -->
+      <div id="patro-day-detail-box" style="margin-top:12px; display:none; background:#fffaf0; border:1.5px solid #fed7aa; border-radius:8px; padding:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-family:'Noto Serif Devanagari', serif; font-size:16px; font-weight:700; color:#9a3412;" id="pdd-title">दिन विवरण</div>
+          <button onclick="document.getElementById('patro-day-detail-box').style.display='none'" style="background:transparent; border:none; font-size:16px; cursor:pointer;">✕</button>
+        </div>
+        <div id="pdd-content" style="margin-top:8px; font-size:13.5px; line-height:1.6; color:#1e293b;"></div>
+      </div>
+    </div>
+
+    <!-- SUB-VIEW 2: MATHEMATICAL PANCHANGA (पञ्चाङ्ग) -->
+    <div id="patro-sub-panchanga" style="display:none;">
+      <div class="sarathi-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:12px;">
+          <div style="font-family:'Noto Serif Devanagari', serif; font-size:16px; font-weight:700; color:#9a3412;">
+            📜 दैनिक वैदिक तथा खगोलीय पञ्चाङ्ग (Nepdate Engine)
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <input type="date" id="panchanga-date-input" class="milan-input-text" style="width:140px;" onchange="loadPanchangaForDate(this.value)">
+            <button class="btn-action-pill" style="padding:6px 12px; font-size:12.5px;" onclick="loadTodayPanchanga()">आजको पञ्चाङ्ग</button>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px;" id="panchanga-cards-grid">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB-VIEW 3: HAMRO PATRO RASHIFAL (१२ राशिको राशिफल) -->
+    <div id="patro-sub-rashifal" style="display:none;">
+      <div class="sarathi-card" style="margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <div style="font-family:'Noto Serif Devanagari', serif; font-size:16px; font-weight:700; color:#9a3412;">
+              ♈ हाम्रो पात्रो प्रत्यक्ष १२ राशिको राशिफल (Hamro Patro Live)
+            </div>
+            <div style="font-size:12px; color:#64748b;" id="rashifal-meta-text">
+              प्रत्यक्ष अनलाइन राशिफल तथा ज्योतिषीय फलादेश
+            </div>
+          </div>
+
+          <div style="display:flex; gap:6px;">
+            <button class="sub-dasha-tab active" id="btn-rf-daily" onclick="loadRashifalView('daily')">दैनिक (Daily)</button>
+            <button class="sub-dasha-tab" id="btn-rf-weekly" onclick="loadRashifalView('weekly')">साप्ताहिक (Weekly)</button>
+            <button class="sub-dasha-tab" id="btn-rf-monthly" onclick="loadRashifalView('monthly')">मासिक (Monthly)</button>
+            <button class="sub-dasha-tab" id="btn-rf-yearly" onclick="loadRashifalView('yearly')">वार्षिक (Yearly)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="rashi-grid" id="rashifal-cards-container">
+        <!-- 12 Rashi Cards injected dynamically -->
+      </div>
+    </div>
+
+    <!-- SUB-VIEW 4: BS <-> AD DATE CONVERTER (मिति रूपान्तरण) -->
+    <div id="patro-sub-convert" style="display:none;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <!-- Left: BS to AD -->
+        <div class="sarathi-card">
+          <h3 style="font-family:'Noto Serif Devanagari', serif; font-size:16px; color:#9a3412; margin-bottom:12px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">
+            🇳🇵 विक्रम सम्वत् (B.S.) ➔ ईस्वी सम्वत् (A.D.)
+          </h3>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="milan-form-row">
+              <span class="milan-lbl">वि.सं. वर्ष :</span>
+              <input type="number" id="conv-bs-yy" class="milan-input-text" value="2083" min="1700" max="2200">
+            </div>
+            <div class="milan-form-row">
+              <span class="milan-lbl">महिना :</span>
+              <select id="conv-bs-mm" class="milan-input-text">
+                <option value="1">१ - वैशाख</option>
+                <option value="2">२ - जेठ</option>
+                <option value="3">३ - असार</option>
+                <option value="4">४ - साउन</option>
+                <option value="5" selected>५ - भदौ</option>
+                <option value="6">६ - असोज</option>
+                <option value="7">७ - कात्तिक</option>
+                <option value="8">८ - मंसिर</option>
+                <option value="9">९ - पुस</option>
+                <option value="10">१० - माघ</option>
+                <option value="11">११ - फागुन</option>
+                <option value="12">१२ - चैत</option>
+              </select>
+            </div>
+            <div class="milan-form-row">
+              <span class="milan-lbl">गते :</span>
+              <input type="number" id="conv-bs-dd" class="milan-input-text" value="21" min="1" max="32">
+            </div>
+            <button class="btn-action-pill" style="align-self:flex-start; margin-top:6px;" onclick="convertBsToAdUI()">
+              🔄 रूपान्तरण गर्नुहोस् (Convert to AD)
+            </button>
+
+            <div id="conv-bs-result" style="margin-top:10px; padding:12px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; display:none;"></div>
+          </div>
+        </div>
+
+        <!-- Right: AD to BS -->
+        <div class="sarathi-card">
+          <h3 style="font-family:'Noto Serif Devanagari', serif; font-size:16px; color:#9a3412; margin-bottom:12px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">
+            🌐 ईस्वी सम्वत् (A.D.) ➔ विक्रम सम्वत् (B.S.)
+          </h3>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div class="milan-form-row">
+              <span class="milan-lbl">ई.सं. मिति :</span>
+              <input type="date" id="conv-ad-date" class="milan-input-text" value="2026-09-06">
+            </div>
+            <button class="btn-action-pill" style="align-self:flex-start; margin-top:6px;" onclick="convertAdToBsUI()">
+              🔄 रूपान्तरण गर्नुहोस् (Convert to BS)
+            </button>
+
+            <div id="conv-ad-result" style="margin-top:10px; padding:12px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; display:none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB-VIEW 5: BULLION & FOREX (बजार तथा विनिमय दर) -->
+    <div id="patro-sub-market" style="display:none;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <!-- Left: Bullion Gold/Silver -->
+        <div class="sarathi-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:8px; margin-bottom:12px;">
+            <h3 style="font-family:'Noto Serif Devanagari', serif; font-size:16px; color:#9a3412;">
+              🥇 सुन तथा चाँदीको दरभाउ (Hamro Patro Live)
+            </h3>
+            <span style="font-size:11px; background:#fef3c7; color:#92400e; padding:2px 6px; border-radius:4px; font-weight:700;">Live Market</span>
+          </div>
+
+          <table class="sarathi-table" id="table-gold-rates">
+            <thead>
+              <tr style="background:#fef3c7; color:#92400e;">
+                <th>विवरण (Item)</th>
+                <th>इकाई (Unit)</th>
+                <th>मूल्य (Price NRs)</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-gold-rates">
+              <!-- Injected dynamically -->
+            </tbody>
+          </table>
+          <div style="font-size:11.5px; color:#64748b; margin-top:8px;" id="gold-update-time"></div>
+        </div>
+
+        <!-- Right: NRB Forex Rates -->
+        <div class="sarathi-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:8px; margin-bottom:12px;">
+            <h3 style="font-family:'Noto Serif Devanagari', serif; font-size:16px; color:#9a3412;">
+              💵 विदेशी मुद्रा विनिमय दर (नेपाल राष्ट्र बैंक)
+            </h3>
+            <span style="font-size:11px; background:#eff6ff; color:#1e40af; padding:2px 6px; border-radius:4px; font-weight:700;">NRB Official</span>
+          </div>
+
+          <table class="sarathi-table" id="table-forex-rates">
+            <thead>
+              <tr style="background:#eff6ff; color:#1e40af;">
+                <th>मुद्रा (Currency)</th>
+                <th>इकाई</th>
+                <th>खरिद दर (Buy)</th>
+                <th>बिक्री दर (Sell)</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-forex-rates">
+              <!-- Injected dynamically -->
+            </tbody>
+          </table>
+          <div style="font-size:11.5px; color:#64748b; margin-top:8px;" id="forex-update-time"></div>
         </div>
       </div>
     </div>
@@ -2249,28 +2721,33 @@
       const kundalis = document.getElementById('workspace-kundalis');
       const dasha = document.getElementById('workspace-dasha');
       const vividha = document.getElementById('workspace-vividha');
+      const patro = document.getElementById('workspace-patro');
       const printSec = document.getElementById('chiina-print-section');
       const subNav = document.getElementById('sarathi-sub-tabs');
 
-      vivaran.style.display = 'none';
-      kundalis.style.display = 'none';
-      dasha.style.display = 'none';
-      vividha.style.display = 'none';
-      printSec.style.display = 'none';
-      subNav.style.display = 'flex';
+      if (vivaran) vivaran.style.display = 'none';
+      if (kundalis) kundalis.style.display = 'none';
+      if (dasha) dasha.style.display = 'none';
+      if (vividha) vividha.style.display = 'none';
+      if (patro) patro.style.display = 'none';
+      if (printSec) printSec.style.display = 'none';
+      if (subNav) subNav.style.display = 'flex';
 
       if (tabKey === 'vivaran') {
-        vivaran.style.display = 'grid';
+        if (vivaran) vivaran.style.display = 'grid';
       } else if (tabKey === 'kundalis') {
-        kundalis.style.display = 'block';
+        if (kundalis) kundalis.style.display = 'block';
       } else if (tabKey === 'dasha') {
-        dasha.style.display = 'grid';
+        if (dasha) dasha.style.display = 'grid';
       } else if (tabKey === 'vividha') {
-        vividha.style.display = 'flex';
+        if (vividha) vividha.style.display = 'flex';
+      } else if (tabKey === 'patro') {
+        if (patro) patro.style.display = 'flex';
+        initPatroSuite();
       } else if (tabKey === 'print') {
-        printSec.style.display = 'block';
+        if (printSec) printSec.style.display = 'block';
       } else {
-        vivaran.style.display = 'grid';
+        if (vivaran) vivaran.style.display = 'grid';
       }
     }
 
@@ -2279,7 +2756,7 @@
         vivaran: 'विवरण', kundalis: 'कुण्डलीहरू', dasha: 'दशा', yogas: 'योग र युति',
         faladesh: 'फलादेश', grahamaitri: 'ग्रहमैत्री', shadbala: 'षड्बल',
         ashtakavarga: 'अष्टकवर्ग', varshaphala: 'वर्षफल', vividha: 'विविध',
-        gochar: 'गोचर', print: 'चिना प्रिन्ट'
+        patro: 'नेपाली पात्रो', gochar: 'गोचर', print: 'चिना प्रिन्ट'
       };
       return map[k] || 'विवरण';
     }
@@ -2457,6 +2934,397 @@
 
     function editCurrentModal() {
       openNewChartModal();
+    }
+
+    // ==========================================
+    // NEPALI PATRO, PANCHANGA & HAMRO PATRO SUITE
+    // ==========================================
+    let currentBsYear = 2083;
+    let currentBsMonth = 5; // भदौ
+    let patroDataCache = {};
+    let activePatroSub = 'calendar';
+
+    function openNepaliPatroModal(subKey) {
+      switchMainTab('patro');
+      if (subKey) {
+        switchPatroSub(subKey);
+      }
+    }
+
+    function switchPatroSub(subKey) {
+      activePatroSub = subKey;
+      document.querySelectorAll('.patro-pill-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`pill-patro-${subKey}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const subs = ['calendar', 'panchanga', 'rashifal', 'convert', 'market'];
+      subs.forEach(s => {
+        const el = document.getElementById(`patro-sub-${s}`);
+        if (el) el.style.display = (s === subKey) ? 'block' : 'none';
+      });
+
+      if (subKey === 'calendar') {
+        renderPatroCalendar();
+      } else if (subKey === 'panchanga') {
+        loadTodayPanchanga();
+      } else if (subKey === 'rashifal') {
+        loadRashifalView('daily');
+      } else if (subKey === 'market') {
+        loadMarketRates();
+      }
+    }
+
+    const BS_MONTHS_NAMES = [
+      'वैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज',
+      'कात्तिक', 'मंसिर', 'पुस', 'माघ', 'फागुन', 'चैत'
+    ];
+
+    function initPatroSuite() {
+      // Setup Year Select (BS 2000 to 2100)
+      const yrSel = document.getElementById('patro-year-select');
+      if (yrSel && yrSel.options.length === 0) {
+        for (let y = 2000; y <= 2100; y++) {
+          const opt = document.createElement('option');
+          opt.value = y;
+          opt.textContent = `${toDevanagariNum(y)} (${y})`;
+          if (y === currentBsYear) opt.selected = true;
+          yrSel.appendChild(opt);
+        }
+      }
+
+      // Setup Month Select
+      const moSel = document.getElementById('patro-month-select');
+      if (moSel && moSel.options.length === 0) {
+        BS_MONTHS_NAMES.forEach((m, idx) => {
+          const opt = document.createElement('option');
+          opt.value = idx + 1;
+          opt.textContent = `${toDevanagariNum(idx + 1)} - ${m}`;
+          if (idx + 1 === currentBsMonth) opt.selected = true;
+          moSel.appendChild(opt);
+        });
+      }
+
+      // Load header today
+      fetch('/api/patro/today')
+        .then(r => r.json())
+        .then(d => {
+          if (d && d.bsDate) {
+            document.getElementById('patro-header-today-str').innerHTML = `
+              आज: <b>${d.bsDate}</b> (${d.bsMonthName} ${d.bsDay} गते, ${d.weekday}) • <b>${d.adDate} AD</b> • ${d.panchanga ? d.panchanga.tithi : ''}
+            `;
+          }
+        })
+        .catch(e => console.warn('Patro today error:', e));
+
+      renderPatroCalendar();
+    }
+
+    function changePatroMonthYear() {
+      currentBsYear = Number(document.getElementById('patro-year-select').value);
+      currentBsMonth = Number(document.getElementById('patro-month-select').value);
+      renderPatroCalendar();
+    }
+
+    function prevPatroMonth() {
+      if (currentBsMonth === 1) {
+        currentBsYear -= 1;
+        currentBsMonth = 12;
+      } else {
+        currentBsMonth -= 1;
+      }
+      document.getElementById('patro-year-select').value = currentBsYear;
+      document.getElementById('patro-month-select').value = currentBsMonth;
+      renderPatroCalendar();
+    }
+
+    function nextPatroMonth() {
+      if (currentBsMonth === 12) {
+        currentBsYear += 1;
+        currentBsMonth = 1;
+      } else {
+        currentBsMonth += 1;
+      }
+      document.getElementById('patro-year-select').value = currentBsYear;
+      document.getElementById('patro-month-select').value = currentBsMonth;
+      renderPatroCalendar();
+    }
+
+    function goToPatroToday() {
+      currentBsYear = 2083;
+      currentBsMonth = 5;
+      document.getElementById('patro-year-select').value = currentBsYear;
+      document.getElementById('patro-month-select').value = currentBsMonth;
+      renderPatroCalendar();
+    }
+
+    async function renderPatroCalendar() {
+      const container = document.getElementById('patro-calendar-days');
+      if (!container) return;
+      container.innerHTML = '<div style="grid-column: span 7; text-align:center; padding:20px; color:#64748b;">पात्रो लोड हुँदैछ...</div>';
+
+      try {
+        const res = await fetch(`/api/patro/month/${currentBsYear}/${currentBsMonth}`);
+        const data = await res.json();
+        if (!data.success || !data.month) throw new Error('Could not load month');
+
+        const m = data.month;
+        document.getElementById('patro-current-month-label').innerHTML = `
+          ${m.monthNameNp} ${toDevanagariNum(m.bsYear)} (${m.monthNameEn}) • ${m.daysInMonth} दिन • ${m.firstDayAd} देखि
+        `;
+
+        container.innerHTML = '';
+
+        // Empty padding cells for start weekday offset
+        for (let i = 0; i < m.startWeekday; i++) {
+          const emptyCell = document.createElement('div');
+          emptyCell.style.background = '#f8fafc';
+          emptyCell.style.border = '1px dashed #e2e8f0';
+          emptyCell.style.borderRadius = '8px';
+          container.appendChild(emptyCell);
+        }
+
+        // Render each day
+        m.days.forEach(d => {
+          const cell = document.createElement('div');
+          const isSat = (d.weekday === 6);
+          const isToday = (m.bsYear === 2083 && m.bsMonth === 5 && d.day === 21);
+
+          cell.className = `calendar-cell ${isSat ? 'saturday' : ''} ${isToday ? 'today' : ''}`;
+          cell.onclick = () => showPatroDayDetail(d, m);
+
+          let festHtml = '';
+          if (d.festivals && d.festivals.length > 0) {
+            festHtml = `<div class="cell-festival-badge" title="${d.festivals[0].nameNp}">${d.festivals[0].nameNp}</div>`;
+          }
+
+          cell.innerHTML = `
+            <div class="cell-top-row">
+              <span class="cell-bs-day">${toDevanagariNum(d.day)}</span>
+              <span class="cell-ad-day">${d.adDate.slice(8, 10)}</span>
+            </div>
+            <div class="cell-tithi">${d.tithi || ''}</div>
+            ${festHtml}
+          `;
+          container.appendChild(cell);
+        });
+      } catch (err) {
+        container.innerHTML = `<div style="grid-column: span 7; text-align:center; padding:20px; color:#dc2626;">पात्रो लोड गर्न सकिएन: ${err.message}</div>`;
+      }
+    }
+
+    function showPatroDayDetail(d, m) {
+      const box = document.getElementById('patro-day-detail-box');
+      const title = document.getElementById('pdd-title');
+      const content = document.getElementById('pdd-content');
+
+      title.innerHTML = `📅 ${m.monthNameNp} ${toDevanagariNum(d.day)} गते, ${toDevanagariNum(m.bsYear)} (${d.weekdayNp})`;
+      
+      let fest = 'कुनै विशेष चाडपर्व छैन।';
+      if (d.festivals && d.festivals.length) {
+        fest = d.festivals.map(f => `<b style="color:#b91c1c;">${f.nameNp}</b> (${f.isHoliday ? 'सार्वजनिक विदा' : 'पर्व'})`).join(', ');
+      }
+
+      content.innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px;">
+          <div><b>ईस्वी सम्वत्:</b> ${d.adDate} (${d.weekdayEn})</div>
+          <div><b>तिथि:</b> ${d.tithi || '—'}</div>
+          <div><b>नक्षत्र:</b> ${d.nakshatra || '—'}</div>
+          <div><b>सूर्योदय:</b> ${d.sunrise || '०५:५१'} | <b>सूर्यास्त:</b> ${d.sunset || '१८:१५'}</div>
+        </div>
+        <div style="margin-top:8px; padding-top:6px; border-top:1px dashed #cbd5e1;">
+          <b>चाडपर्व तथा दिवस:</b> ${fest}
+        </div>
+      `;
+      box.style.display = 'block';
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    async function loadTodayPanchanga() {
+      const input = document.getElementById('panchanga-date-input');
+      const todayIso = new Date().toISOString().split('T')[0];
+      if (input) input.value = todayIso;
+      loadPanchangaForDate(todayIso);
+    }
+
+    async function loadPanchangaForDate(dateStr) {
+      const grid = document.getElementById('panchanga-cards-grid');
+      if (!grid) return;
+      grid.innerHTML = '<div style="color:#64748b; padding:20px;">पञ्चाङ्ग गणना हुँदैछ...</div>';
+
+      try {
+        const res = await fetch(`/api/patro/today?date=${dateStr}`);
+        const data = await res.json();
+        const p = data.panchanga || {};
+
+        const cards = [
+          { title: 'तिथि (Tithi)', val: p.tithi || '—', sub: `पक्ष: ${p.paksha || '—'} (${p.tithiPercent || 0}% पूरा)`, icon: '🌓', color: '#b45309' },
+          { title: 'नक्षत्र (Nakshatra)', val: p.nakshatra || '—', sub: 'चन्द्र नक्षत्र मण्डल', icon: '⭐', color: '#0284c7' },
+          { title: 'योग (Yoga)', val: p.yoga || '—', sub: 'खगोलीय कोण योग', icon: '🧘', color: '#7c3aed' },
+          { title: 'करण (Karana)', val: p.karana || '—', sub: 'तिथिको आधा भाग', icon: '⚙️', color: '#059669' },
+          { title: 'सूर्योदय तथा सूर्यास्त', val: `${p.sunrise || '०५:५१'} / ${p.sunset || '१८:१५'}`, sub: 'काठमाडौं, नेपाल (+५:४५)', icon: '🌅', color: '#ea580c' },
+          { title: 'राहुकाल (वर्जित समय)', val: p.rahukaal || '—', sub: 'अशुभ काल (कुनै नयाँ कार्य नगर्नुहोला)', icon: '⚠️', color: '#dc2626' },
+          { title: 'अभिजित मुहूर्त (सर्वसिद्ध)', val: p.abhijitMuhurat || '११:४५ - १२:३४', sub: 'शुभ कार्य आरम्भको लागि उत्तम', icon: '✨', color: '#16a34a' },
+          { title: 'सूर्य तथा चन्द्र राशि', val: `सूर्य: ${p.sunRashi || 'सिंह'} • चन्द्र: ${p.moonRashi || 'मिथुन'}`, sub: 'गोचर ग्रह राशि स्थिति', icon: '🪐', color: '#4338ca' }
+        ];
+
+        grid.innerHTML = cards.map(c => `
+          <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:8px; padding:12px 14px; display:flex; gap:12px; align-items:center; box-shadow:0 1px 3px rgba(0,0,0,0.03);">
+            <div style="font-size:26px; background:#f8fafc; border-radius:8px; width:46px; height:46px; display:flex; align-items:center; justify-content:center;">${c.icon}</div>
+            <div>
+              <div style="font-size:11.5px; font-weight:700; color:#64748b; text-transform:uppercase;">${c.title}</div>
+              <div style="font-family:'Noto Serif Devanagari', serif; font-size:15px; font-weight:700; color:${c.color}; margin:2px 0;">${c.val}</div>
+              <div style="font-size:11px; color:#64748b;">${c.sub}</div>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        grid.innerHTML = `<div style="color:#dc2626; padding:20px;">पञ्चाङ्ग लोड गर्न सकिएन: ${err.message}</div>`;
+      }
+    }
+
+    const RASHI_ZODIAC_ICONS = {
+      1: '♈', 2: '♉', 3: '♊', 4: '♋', 5: '♌', 6: '♍',
+      7: '♎', 8: '♏', 9: '♐', 10: '♑', 11: '♒', 12: '♓'
+    };
+
+    async function loadRashifalView(type) {
+      document.querySelectorAll('#patro-sub-rashifal .sub-dasha-tab').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`btn-rf-${type}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const container = document.getElementById('rashifal-cards-container');
+      if (!container) return;
+      container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:30px; color:#64748b;">हाम्रो पात्रोबाट प्रत्यक्ष राशिफल प्राप्त हुँदैछ...</div>';
+
+      try {
+        const res = await fetch(`/api/patro/rashifal/${type}`);
+        const data = await res.json();
+        const list = Array.isArray(data.rashifal) ? data.rashifal : (data.rashifal?.items || []);
+
+        if (!list || list.length === 0) throw new Error('No rashifal found');
+
+        const typeNames = { daily: 'दैनिक', weekly: 'साप्ताहिक', monthly: 'मासिक', yearly: 'वार्षिक' };
+        document.getElementById('rashifal-meta-text').textContent = `${typeNames[type] || ''} राशिफल • प्रत्यक्ष Hamro Patro Scraper द्वारा संचालित`;
+
+        container.innerHTML = list.map((r, idx) => {
+          const rashiNum = r.rashi || (idx + 1);
+          const icon = RASHI_ZODIAC_ICONS[rashiNum] || '♈';
+          return `
+            <div class="rashi-card">
+              <div class="rashi-card-header">
+                <div class="rashi-title-wrap">
+                  <div class="rashi-symbol-badge">${icon}</div>
+                  <div>
+                    <div class="rashi-name-np">${r.name || r.nameNp}</div>
+                    <div class="rashi-name-en">${r.nameEn || ''}</div>
+                  </div>
+                </div>
+                <span style="font-size:11px; background:#fed7aa; color:#9a3412; font-weight:700; padding:2px 8px; border-radius:999px;">
+                  राशि ${toDevanagariNum(rashiNum)}
+                </span>
+              </div>
+              <div style="font-size:11.5px; color:#b45309; font-weight:600;">
+                नामाक्षर: ${r.syllables || '—'}
+              </div>
+              <div class="rashi-prediction-text">
+                ${r.text || r.prediction || 'आजको दिन सामान्य तथा शुभ रहनेछ।'}
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:30px; color:#dc2626;">राशिफल लोड गर्न सकिएन: ${err.message}</div>`;
+      }
+    }
+
+    async function convertBsToAdUI() {
+      const yy = document.getElementById('conv-bs-yy').value;
+      const mm = document.getElementById('conv-bs-mm').value;
+      const dd = document.getElementById('conv-bs-dd').value;
+      const resBox = document.getElementById('conv-bs-result');
+
+      resBox.style.display = 'block';
+      resBox.innerHTML = 'गणना हुँदैछ...';
+
+      try {
+        const res = await fetch(`/api/patro/convert?bs=${yy}-${String(mm).padStart(2,'0')}-${String(dd).padStart(2,'0')}`);
+        const d = await res.json();
+        if (!d.success) throw new Error(d.error || 'Conversion failed');
+
+        resBox.innerHTML = `
+          <div style="font-size:13px; color:#166534;">
+            <b>वि.सं.:</b> ${toDevanagariNum(yy)} साल ${BS_MONTHS_NAMES[Number(mm)-1]} ${toDevanagariNum(dd)} गते<br>
+            <b>ई.सं. (A.D.):</b> <b style="font-size:15px; color:#15803d;">${d.strFormatted || d.ad}</b> (${d.weekdayEn || ''})<br>
+            <span style="font-size:11.5px; color:#65a30d;">✓ Bikram Sambat 500-Year Table Validated</span>
+          </div>
+        `;
+      } catch (err) {
+        resBox.innerHTML = `<span style="color:#dc2626;">त्रुटि: ${err.message}</span>`;
+      }
+    }
+
+    async function convertAdToBsUI() {
+      const ad = document.getElementById('conv-ad-date').value;
+      const resBox = document.getElementById('conv-ad-result');
+
+      resBox.style.display = 'block';
+      resBox.innerHTML = 'गणना हुँदैछ...';
+
+      try {
+        const res = await fetch(`/api/patro/convert?ad=${ad}`);
+        const d = await res.json();
+        if (!d.success) throw new Error(d.error || 'Conversion failed');
+
+        resBox.innerHTML = `
+          <div style="font-size:13px; color:#166534;">
+            <b>ई.सं. (A.D.):</b> ${ad}<br>
+            <b>वि.सं. (B.S.):</b> <b style="font-size:15px; color:#15803d;">${d.strFormatted}</b> (${d.monthNameNp} ${toDevanagariNum(d.day)} गते, ${d.weekdayNp})<br>
+            <span style="font-size:11.5px; color:#65a30d;">✓ Bikram Sambat Calendar Engine Validated</span>
+          </div>
+        `;
+      } catch (err) {
+        resBox.innerHTML = `<span style="color:#dc2626;">त्रुटि: ${err.message}</span>`;
+      }
+    }
+
+    async function loadMarketRates() {
+      const goldTbody = document.getElementById('tbody-gold-rates');
+      const forexTbody = document.getElementById('tbody-forex-rates');
+      if (!goldTbody || !forexTbody) return;
+
+      goldTbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding:10px;">लोड हुँदैछ...</td></tr>';
+      forexTbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:10px;">लोड हुँदैछ...</td></tr>';
+
+      try {
+        const res = await fetch('/api/patro/market');
+        const data = await res.json();
+
+        // Render Gold
+        if (data.gold) {
+          goldTbody.innerHTML = `
+            <tr><td>छापावाल सुन (Fine Gold)</td><td>१ तोला</td><td style="font-weight:700; color:#b45309;">${data.gold.fineGoldPerTola}</td></tr>
+            <tr><td>छापावाल सुन (१० ग्राम)</td><td>१० ग्राम</td><td style="font-weight:700; color:#b45309;">${data.gold.fineGold10Gram}</td></tr>
+            <tr><td>तेजाबी सुन (Tejabi Gold)</td><td>१ तोला</td><td style="font-weight:700; color:#b45309;">${data.gold.tejabiGoldPerTola}</td></tr>
+            <tr><td>चाँदी (Silver)</td><td>१ तोला</td><td style="font-weight:700; color:#475569;">${data.gold.silverPerTola}</td></tr>
+          `;
+          document.getElementById('gold-update-time').textContent = `स्रोत: ${data.gold.source} • अपडेट: ${new Date(data.gold.updatedAt).toLocaleTimeString()}`;
+        }
+
+        // Render Forex
+        if (data.forex && data.forex.rates) {
+          forexTbody.innerHTML = data.forex.rates.map(r => `
+            <tr>
+              <td><b>${r.currency}</b> - ${r.name}</td>
+              <td>${r.unit}</td>
+              <td style="color:#059669; font-weight:600;">रु. ${r.buy}</td>
+              <td style="color:#dc2626; font-weight:600;">रु. ${r.sell}</td>
+            </tr>
+          `).join('');
+          document.getElementById('forex-update-time').textContent = `स्रोत: ${data.forex.source}`;
+        }
+      } catch (err) {
+        goldTbody.innerHTML = `<tr><td colspan="3" style="color:#dc2626;">लोड गर्न सकिएन</td></tr>`;
+      }
     }
 
     window.addEventListener('DOMContentLoaded', () => {

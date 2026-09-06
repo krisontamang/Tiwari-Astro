@@ -1044,6 +1044,10 @@
               🌌 XiNiS &amp; 紫微斗数
             </button>
 
+            <button onclick="openNepaliPatroAdminModal()" class="btn-ghost" style="border-color:rgba(239,68,68,0.5); color:#f87171; background:rgba(239,68,68,0.08);" title="नेपाली क्यालेन्डर, पञ्चाङ्ग तथा हाम्रो पात्रो स्क्र्यापर">
+              🇳🇵 नेपाल पात्रो &amp; राशिफल
+            </button>
+
             <button onclick="openUsersModal()" class="btn-ghost" style="border-color:rgba(52,152,219,0.5); color:#3498db; background:rgba(52,152,219,0.08); position:relative;">
               👥 प्रयोगकर्ता प्रमाणीकरण <span id="nav-pending-users-badge" style="background:#e74c3c; color:#fff; border-radius:999px; font-size:10px; font-weight:700; padding:1px 6px; margin-left:4px; display:none;">0</span>
             </button>
@@ -2495,6 +2499,44 @@
           <div style="text-align:center; padding:50px 20px; color:var(--text-muted); font-size:13px;">
             माथिको विवरण जाँच गरी '🚀 गणना गर्नुहोस्' थिच्नुहोस्।
           </div>
+        </div>
+    <!-- Nepali Patro, Panchang & Hamro Patro Suite Modal -->
+    <div id="nepali-patro-admin-modal" class="custom-modal" onclick="handlePatroModalOverlayClick(event)">
+      <div class="custom-modal-box" style="max-width:1080px; width:95%; max-height:92vh; overflow-y:auto; background:var(--bg-card); border:1px solid rgba(239,68,68,0.35); box-shadow:0 25px 50px -12px rgba(0,0,0,0.7); border-radius:14px; padding:24px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:14px;">
+          <div>
+            <h3 style="font-size:18px; color:#f87171; margin:0 0 4px 0; font-family:'Cinzel', serif; display:flex; align-items:center; gap:8px;">
+              🇳🇵 नेपाल क्यालेन्डर, पञ्चाङ्ग तथा हाम्रो पात्रो सुइट
+            </h3>
+            <p style="font-size:12px; color:var(--text-muted); margin:0;">
+              ५०० वर्ष (BS 1700-2200) विक्रम सम्वत्, खगोलीय गणितीय पञ्चाङ्ग, १२ राशिको प्रत्यक्ष हाम्रो पात्रो राशिफल तथा विदेशी मुद्रा विनिमय
+            </p>
+          </div>
+          <button class="km-close-btn" onclick="closeNepaliPatroAdminModal()" style="background:transparent; border:none; color:var(--text-muted); font-size:18px; cursor:pointer; padding:4px 8px; border-radius:6px;">✕</button>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div style="display:flex; gap:8px; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:8px; flex-wrap:wrap;">
+          <button id="btn-tab-adpatro-calendar" onclick="switchAdminPatroTab('calendar')" class="btn-ghost" style="font-size:12px; padding:6px 14px; border-color:rgba(239,68,68,0.4); color:#f87171; background:rgba(239,68,68,0.1); font-weight:700;">
+            📅 क्यालेन्डर (Calendar)
+          </button>
+          <button id="btn-tab-adpatro-panchang" onclick="switchAdminPatroTab('panchang')" class="btn-ghost" style="font-size:12px; padding:6px 14px; border-color:transparent; color:var(--text-muted);">
+            📜 दैनिक पञ्चाङ्ग (Nepdate)
+          </button>
+          <button id="btn-tab-adpatro-rashifal" onclick="switchAdminPatroTab('rashifal')" class="btn-ghost" style="font-size:12px; padding:6px 14px; border-color:transparent; color:var(--text-muted);">
+            ♈ प्रत्यक्ष राशिफल (Hamro Patro)
+          </button>
+          <button id="btn-tab-adpatro-convert" onclick="switchAdminPatroTab('convert')" class="btn-ghost" style="font-size:12px; padding:6px 14px; border-color:transparent; color:var(--text-muted);">
+            🔄 मिति रूपान्तरण (BS ⇄ AD)
+          </button>
+          <button id="btn-tab-adpatro-market" onclick="switchAdminPatroTab('market')" class="btn-ghost" style="font-size:12px; padding:6px 14px; border-color:transparent; color:var(--text-muted);">
+            💰 बजार तथा विनिमय (Bullion/Forex)
+          </button>
+        </div>
+
+        <!-- Dynamic Content Pane -->
+        <div id="admin-patro-content-pane" style="min-height:360px;">
+          <!-- Dynamically populated -->
         </div>
       </div>
     </div>
@@ -5776,6 +5818,273 @@
           }
         } catch (err) {
           pane.innerHTML = `<div style="color:var(--accent-red); padding:24px; text-align:center;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      // Nepali Patro Suite Admin Modal
+      let adminActivePatroTab = 'calendar';
+      let adminPatroYear = 2083;
+      let adminPatroMonth = 5;
+
+      function openNepaliPatroAdminModal() {
+        const modal = document.getElementById('nepali-patro-admin-modal');
+        if (modal) {
+          modal.style.display = 'flex';
+          switchAdminPatroTab(adminActivePatroTab || 'calendar');
+        }
+      }
+
+      function closeNepaliPatroAdminModal() {
+        const modal = document.getElementById('nepali-patro-admin-modal');
+        if (modal) modal.style.display = 'none';
+      }
+
+      function handlePatroModalOverlayClick(e) {
+        if (e.target.id === 'nepali-patro-admin-modal') {
+          closeNepaliPatroAdminModal();
+        }
+      }
+
+      async function switchAdminPatroTab(tab) {
+        adminActivePatroTab = tab;
+        const tabs = ['calendar', 'panchang', 'rashifal', 'convert', 'market'];
+        tabs.forEach(t => {
+          const btn = document.getElementById(`btn-tab-adpatro-${t}`);
+          if (btn) {
+            if (t === tab) {
+              btn.style.borderColor = 'rgba(239,68,68,0.5)';
+              btn.style.color = '#f87171';
+              btn.style.background = 'rgba(239,68,68,0.1)';
+              btn.style.fontWeight = '700';
+            } else {
+              btn.style.borderColor = 'transparent';
+              btn.style.color = 'var(--text-muted)';
+              btn.style.background = 'transparent';
+              btn.style.fontWeight = 'normal';
+            }
+          }
+        });
+
+        const pane = document.getElementById('admin-patro-content-pane');
+        if (!pane) return;
+
+        if (tab === 'calendar') {
+          pane.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+              <div style="display:flex; gap:8px; align-items:center;">
+                <button class="btn-ghost" onclick="adminPrevMonth()">◀ अघिल्लो</button>
+                <select id="adp-year" class="form-input" style="width:110px; height:32px; padding:2px 8px;" onchange="adminChangeMonth()">
+                  ${[2081,2082,2083,2084,2085].map(y => `<option value="${y}" ${y === adminPatroYear ? 'selected' : ''}>${y} वि.सं.</option>`).join('')}
+                </select>
+                <select id="adp-month" class="form-input" style="width:120px; height:32px; padding:2px 8px;" onchange="adminChangeMonth()">
+                  ${['१ - वैशाख','२ - जेठ','३ - असार','४ - साउन','५ - भदौ','६ - असोज','७ - कात्तिक','८ - मंसिर','९ - पुस','१० - माघ','११ - फागुन','१२ - चैत'].map((m, idx) => `<option value="${idx+1}" ${idx+1 === adminPatroMonth ? 'selected' : ''}>${m}</option>`).join('')}
+                </select>
+                <button class="btn-ghost" onclick="adminNextMonth()">पछिल्लो ▶</button>
+              </div>
+              <div id="adp-month-title" style="font-weight:700; color:#f87171; font-size:14px;">लोड हुँदैछ...</div>
+            </div>
+            <div id="adp-grid-days" style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px;"></div>
+          `;
+          renderAdminCalendarDays();
+        } else if (tab === 'panchang') {
+          pane.innerHTML = '<div style="text-align:center; padding:30px; color:var(--text-muted);">पञ्चाङ्ग लोड हुँदैछ...</div>';
+          try {
+            const res = await fetch(`${API_BASE}/api/patro/today`);
+            const d = await res.json();
+            const p = d.panchanga || {};
+            pane.innerHTML = `
+              <div style="background:rgba(255,255,255,0.02); padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.05); margin-bottom:14px;">
+                <h4 style="color:#f87171; margin:0 0 6px 0; font-size:16px;">आज: ${d.bsDate} (${d.bsMonthName} ${d.bsDay} गते, ${d.weekday})</h4>
+                <div style="font-size:12px; color:var(--text-muted);">ईस्वी सम्वत्: ${d.adDate} AD | स्थान: काठमाडौं, नेपाल</div>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px;">
+                <div class="km-stat-box"><span class="km-stat-title">तिथि (Tithi)</span><b style="color:#f8fafc;">${p.tithi || '—'}</b></div>
+                <div class="km-stat-box"><span class="km-stat-title">नक्षत्र (Nakshatra)</span><b style="color:#38bdf8;">${p.nakshatra || '—'}</b></div>
+                <div class="km-stat-box"><span class="km-stat-title">योग (Yoga)</span><b style="color:#c084fc;">${p.yoga || '—'}</b></div>
+                <div class="km-stat-box"><span class="km-stat-title">करण (Karana)</span><b style="color:#34d399;">${p.karana || '—'}</b></div>
+                <div class="km-stat-box"><span class="km-stat-title">सूर्योदय / सूर्यास्त</span><b style="color:#fbbf24;">${p.sunrise || '—'} / ${p.sunset || '—'}</b></div>
+                <div class="km-stat-box"><span class="km-stat-title">राहुकाल (Inauspicious)</span><b style="color:#f87171;">${p.rahukaal || '—'}</b></div>
+                <div class="km-stat-box"><span class="km-stat-title">अभिजित मुहूर्त</span><b style="color:#34d399;">${p.abhijitMuhurat || '—'}</b></div>
+                <div class="km-stat-box"><span class="km-stat-title">सूर्य / चन्द्र राशि</span><b style="color:#f4d38c;">${p.sunRashi || '—'} / ${p.moonRashi || '—'}</b></div>
+              </div>
+            `;
+          } catch (e) {
+            pane.innerHTML = `<div style="color:var(--accent-red); padding:20px;">त्रुटि: ${e.message}</div>`;
+          }
+        } else if (tab === 'rashifal') {
+          pane.innerHTML = '<div style="text-align:center; padding:30px; color:var(--text-muted);">हाम्रो पात्रोबाट राशिफल लोड हुँदैछ...</div>';
+          try {
+            const res = await fetch(`${API_BASE}/api/patro/rashifal/daily`);
+            const d = await res.json();
+            const list = Array.isArray(d.rashifal) ? d.rashifal : (d.rashifal?.items || []);
+            pane.innerHTML = `
+              <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
+                ${list.map(r => `
+                  <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:12px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                      <b style="color:#f87171; font-size:14px;">${r.name || r.nameNp} (${r.nameEn || ''})</b>
+                      <span style="font-size:10.5px; color:#d8b06a;">${r.syllables || ''}</span>
+                    </div>
+                    <div style="font-size:12px; color:#cbd5e1; line-height:1.5;">${r.text || 'आजको दिन सामान्य तथा शुभ रहनेछ।'}</div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          } catch (e) {
+            pane.innerHTML = `<div style="color:var(--accent-red); padding:20px;">त्रुटि: ${e.message}</div>`;
+          }
+        } else if (tab === 'convert') {
+          pane.innerHTML = `
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div style="background:rgba(255,255,255,0.03); padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+                <h4 style="color:#f87171; margin:0 0 10px 0;">🇳🇵 वि.सं. ➔ ई.सं. (AD)</h4>
+                <input id="adconv-bs" class="form-input" placeholder="2083-05-21" value="2083-05-21" style="margin-bottom:10px;" />
+                <button onclick="runAdminBsConvert()" class="btn-ghost" style="border-color:#f87171; color:#f87171;">रूपान्तरण (Convert)</button>
+                <div id="adconv-bs-res" style="margin-top:10px; font-size:13px; color:#34d399;"></div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03); padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+                <h4 style="color:#38bdf8; margin:0 0 10px 0;">🌐 ई.सं. ➔ वि.सं. (BS)</h4>
+                <input id="adconv-ad" type="date" class="form-input" value="2026-09-06" style="margin-bottom:10px;" />
+                <button onclick="runAdminAdConvert()" class="btn-ghost" style="border-color:#38bdf8; color:#38bdf8;">रूपान्तरण (Convert)</button>
+                <div id="adconv-ad-res" style="margin-top:10px; font-size:13px; color:#34d399;"></div>
+              </div>
+            </div>
+          `;
+        } else if (tab === 'market') {
+          pane.innerHTML = '<div style="text-align:center; padding:30px; color:var(--text-muted);">बजार तथा विनिमय दर लोड हुँदैछ...</div>';
+          try {
+            const res = await fetch(`${API_BASE}/api/patro/market`);
+            const d = await res.json();
+            pane.innerHTML = `
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                <div style="background:rgba(255,255,255,0.03); padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+                  <h4 style="color:#fbbf24; margin:0 0 10px 0;">🥇 सुन तथा चाँदी (Hamro Patro Live)</h4>
+                  <table style="width:100%; border-collapse:collapse; font-size:12px;">
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:6px;">छापावाल सुन (१ तोला)</td><td style="color:#fbbf24; font-weight:700; text-align:right;">${d.gold?.fineGoldPerTola || '—'}</td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:6px;">छापावाल सुन (१० ग्राम)</td><td style="color:#fbbf24; font-weight:700; text-align:right;">${d.gold?.fineGold10Gram || '—'}</td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:6px;">तेजाबी सुन (१ तोला)</td><td style="color:#fbbf24; font-weight:700; text-align:right;">${d.gold?.tejabiGoldPerTola || '—'}</td></tr>
+                    <tr><td style="padding:6px;">चाँदी (१ तोला)</td><td style="color:#cbd5e1; font-weight:700; text-align:right;">${d.gold?.silverPerTola || '—'}</td></tr>
+                  </table>
+                </div>
+                <div style="background:rgba(255,255,255,0.03); padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+                  <h4 style="color:#38bdf8; margin:0 0 10px 0;">💵 विदेशी मुद्रा दर (नेपाल राष्ट्र बैंक)</h4>
+                  <div style="max-height:220px; overflow-y:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:11.5px;">
+                      <thead><tr style="color:var(--text-muted);"><th style="text-align:left;">मुद्रा</th><th>इकाई</th><th>खरिद</th><th>बिक्री</th></tr></thead>
+                      <tbody>
+                        ${(d.forex?.rates || []).map(r => `
+                          <tr style="border-bottom:1px solid rgba(255,255,255,0.04); text-align:center;">
+                            <td style="text-align:left; padding:4px;"><b>${r.currency}</b> ${r.name}</td>
+                            <td>${r.unit}</td>
+                            <td style="color:#34d399;">${r.buy}</td>
+                            <td style="color:#f87171;">${r.sell}</td>
+                          </tr>
+                        `).join('')}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            `;
+          } catch (e) {
+            pane.innerHTML = `<div style="color:var(--accent-red); padding:20px;">त्रुटि: ${e.message}</div>`;
+          }
+        }
+      }
+
+      async function renderAdminCalendarDays() {
+        const grid = document.getElementById('adp-grid-days');
+        const title = document.getElementById('adp-month-title');
+        if (!grid) return;
+
+        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:20px;">पात्रो लोड हुँदैछ...</div>';
+        try {
+          const res = await fetch(`${API_BASE}/api/patro/month/${adminPatroYear}/${adminPatroMonth}`);
+          const d = await res.json();
+          if (!d.success || !d.month) throw new Error('Could not load month');
+
+          const m = d.month;
+          if (title) title.textContent = `${m.monthNameNp} ${m.bsYear} (${m.monthNameEn}) • ${m.daysInMonth} दिन`;
+
+          const headers = ['आइत','सोम','मङ्गल','बुध','बिही','शुक्र','शनि'];
+          let html = headers.map((h, idx) => `
+            <div style="background:rgba(255,255,255,0.04); padding:6px; text-align:center; font-size:11.5px; font-weight:700; border-radius:4px; color:${idx === 6 ? '#f87171' : 'var(--text-secondary)'};">${h}</div>
+          `).join('');
+
+          for (let i = 0; i < m.startWeekday; i++) {
+            html += `<div style="min-height:54px; background:rgba(255,255,255,0.01); border-radius:4px;"></div>`;
+          }
+
+          m.days.forEach(day => {
+            const isSat = (day.weekday === 6);
+            const isToday = (m.bsYear === 2083 && m.bsMonth === 5 && day.day === 21);
+            html += `
+              <div style="min-height:54px; background:${isToday ? 'rgba(239,68,68,0.15)' : 'rgba(255,255,255,0.02)'}; border:1px solid ${isToday ? '#f87171' : 'rgba(255,255,255,0.05)'}; border-radius:6px; padding:4px 6px; display:flex; flex-direction:column; justify-content:space-between;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <b style="font-size:15px; color:${isSat ? '#f87171' : '#f8fafc'};">${day.day}</b>
+                  <span style="font-size:10px; color:var(--text-muted);">${day.adDate.slice(8,10)}</span>
+                </div>
+                <div style="font-size:9.5px; color:#d8b06a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${day.tithi || ''}</div>
+              </div>
+            `;
+          });
+          grid.innerHTML = html;
+        } catch (e) {
+          grid.innerHTML = `<div style="grid-column:1/-1; color:var(--accent-red); padding:10px;">त्रुटि: ${e.message}</div>`;
+        }
+      }
+
+      function adminPrevMonth() {
+        if (adminPatroMonth === 1) { adminPatroYear--; adminPatroMonth = 12; }
+        else { adminPatroMonth--; }
+        const yEl = document.getElementById('adp-year');
+        const mEl = document.getElementById('adp-month');
+        if (yEl) yEl.value = adminPatroYear;
+        if (mEl) mEl.value = adminPatroMonth;
+        renderAdminCalendarDays();
+      }
+
+      function adminNextMonth() {
+        if (adminPatroMonth === 12) { adminPatroYear++; adminPatroMonth = 1; }
+        else { adminPatroMonth++; }
+        const yEl = document.getElementById('adp-year');
+        const mEl = document.getElementById('adp-month');
+        if (yEl) yEl.value = adminPatroYear;
+        if (mEl) mEl.value = adminPatroMonth;
+        renderAdminCalendarDays();
+      }
+
+      function adminChangeMonth() {
+        const yEl = document.getElementById('adp-year');
+        const mEl = document.getElementById('adp-month');
+        if (yEl) adminPatroYear = Number(yEl.value);
+        if (mEl) adminPatroMonth = Number(mEl.value);
+        renderAdminCalendarDays();
+      }
+
+      async function runAdminBsConvert() {
+        const val = document.getElementById('adconv-bs').value.trim();
+        const resBox = document.getElementById('adconv-bs-res');
+        resBox.textContent = 'गणना हुँदैछ...';
+        try {
+          const res = await fetch(`${API_BASE}/api/patro/convert?bs=${val}`);
+          const d = await res.json();
+          resBox.innerHTML = `✓ <b>AD:</b> ${d.strFormatted || d.ad} (${d.weekdayEn || ''})`;
+        } catch (e) {
+          resBox.textContent = 'त्रुटि: ' + e.message;
+        }
+      }
+
+      async function runAdminAdConvert() {
+        const val = document.getElementById('adconv-ad').value;
+        const resBox = document.getElementById('adconv-ad-res');
+        resBox.textContent = 'गणना हुँदैछ...';
+        try {
+          const res = await fetch(`${API_BASE}/api/patro/convert?ad=${val}`);
+          const d = await res.json();
+          resBox.innerHTML = `✓ <b>BS:</b> ${d.strFormatted} (${d.monthNameNp} ${d.day} गते, ${d.weekdayNp})`;
+        } catch (e) {
+          resBox.textContent = 'त्रुटि: ' + e.message;
         }
       }
 

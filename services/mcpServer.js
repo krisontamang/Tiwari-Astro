@@ -18,6 +18,8 @@ const openRouterService = require('./openRouterService');
 const kerykeionService = require('./kerykeionService');
 const xinisEngineService = require('./xinisEngineService');
 const iztroService = require('./iztroService');
+const nepaliPatroService = require('./nepaliPatroService');
+
 
 const MCP_TOOLS = [
   {
@@ -550,6 +552,63 @@ const MCP_TOOLS = [
       },
       required: ['birthDate']
     }
+  },
+  {
+    name: 'get_nepali_date',
+    description: 'Get current Nepali Bikram Sambat (BS) date, English AD equivalent, Tithi, Paksha, weekday, and Kathmandu sunrise/sunset.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        date: { type: 'string', description: 'Optional ISO date or AD date (YYYY-MM-DD). Defaults to current date.' }
+      }
+    }
+  },
+  {
+    name: 'convert_bs_ad',
+    description: 'Convert Bikram Sambat (BS 1700-2200) date to Anno Domini (AD) or AD date to BS with high accuracy.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        direction: { type: 'string', enum: ['bs_to_ad', 'ad_to_bs'], description: 'Conversion direction' },
+        bsDate: { type: 'string', description: 'BS date format YYYY-MM-DD e.g. 2083-05-22' },
+        adDate: { type: 'string', description: 'AD date format YYYY-MM-DD e.g. 2026-09-06' }
+      },
+      required: ['direction']
+    }
+  },
+  {
+    name: 'get_nepali_panchanga',
+    description: 'Compute full mathematical Nepali Panchanga: Tithi, Paksha, Nakshatra, Yoga, Karana, Sunrise, Sunset, Rahukaal, and Abhijit Muhurat.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        date: { type: 'string', description: 'Target date (ISO or YYYY-MM-DD). Defaults to today.' },
+        lat: { type: 'number', description: 'Latitude (default Kathmandu 27.7172)' },
+        lon: { type: 'number', description: 'Longitude (default Kathmandu 85.3240)' }
+      }
+    }
+  },
+  {
+    name: 'get_nepali_festivals',
+    description: 'Get major Nepali festivals, national holidays, and religious observances for a given BS month or year from Bikram Sambat calendar.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        bsYear: { type: 'number', description: 'Bikram Sambat year (e.g. 2083)' },
+        bsMonth: { type: 'number', description: 'Bikram Sambat month (1-12, 1=Baisakh)' }
+      }
+    }
+  },
+  {
+    name: 'get_rashifal',
+    description: 'Get live daily, weekly, monthly, or yearly Rashifal (astrological horoscope) for all 12 Rashis from Hamro Patro scraper.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        type: { type: 'string', enum: ['daily', 'weekly', 'monthly', 'yearly'], description: 'Horoscope timeframe (default: daily)' },
+        rashi: { type: 'string', description: 'Optional specific Rashi name in Nepali or English (e.g. मेष or Aries)' }
+      }
+    }
   }
 ];
 
@@ -1059,6 +1118,91 @@ async function handleMcpRequest(requestBody) {
           id,
           result: {
             content: [{ type: 'text', text: svg }]
+          }
+        };
+      }
+
+      if (toolName === 'get_nepali_date') {
+        const targetDate = args.date ? new Date(args.date) : new Date();
+        const bs = nepaliPatroService.adToBs(targetDate);
+        const panchang = nepaliPatroService.calculatePanchanga(targetDate);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{
+              type: 'text',
+              text: JSON.stringify({
+                bs,
+                panchanga: panchang,
+                ad: targetDate.toISOString().split('T')[0]
+              }, null, 2)
+            }]
+          }
+        };
+      }
+
+      if (toolName === 'convert_bs_ad') {
+        let result;
+        if (args.direction === 'bs_to_ad') {
+          const parts = (args.bsDate || '').split('-').map(Number);
+          result = nepaliPatroService.bsToAd(parts[0], parts[1], parts[2]);
+        } else {
+          result = nepaliPatroService.adToBs(args.adDate || new Date());
+        }
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'get_nepali_panchanga') {
+        const targetDate = args.date ? new Date(args.date) : new Date();
+        const panchang = nepaliPatroService.calculatePanchanga(targetDate, args.lat || 27.7172, args.lon || 85.3240);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(panchang, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'get_nepali_festivals') {
+        const year = args.bsYear || 2083;
+        const month = args.bsMonth;
+        let festivals = nepaliPatroService.NEPALI_FESTIVALS;
+        if (month) {
+          festivals = festivals.filter(f => f.bsMonth === Number(month));
+        }
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify({ bsYear: year, bsMonth: month || 'all', total: festivals.length, festivals }, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'get_rashifal') {
+        const type = args.type || 'daily';
+        const rashifal = await nepaliPatroService.getRashifal(type);
+        let result = rashifal;
+        if (args.rashi && rashifal && rashifal.items) {
+          const needle = args.rashi.toLowerCase().trim();
+          result = rashifal.items.find(r => 
+            (r.rashiNp && r.rashiNp.includes(needle)) || 
+            (r.rashiEn && r.rashiEn.toLowerCase().includes(needle))
+          ) || rashifal;
+        }
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(result, null, 2) }]
           }
         };
       }

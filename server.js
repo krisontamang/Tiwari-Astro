@@ -72,6 +72,7 @@ const xinisEngineService = require('./services/xinisEngineService');
 const iztroService = require('./services/iztroService');
 const jyotishSarathiService = require('./services/jyotishSarathiService');
 const mantrasData = require('./data/mantrasData');
+const nepaliPatroService = require('./services/nepaliPatroService');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -1183,6 +1184,51 @@ async function handleRequest(req, res) {
     const girlRashi = Number(body.girlRashi || 7); // Libra
     const milanRes = (poruthamService.calculate10Poruthams || poruthamService.calculatePoruthams)(girlNak, boyNak, girlRashi, boyRashi);
     return sendJSON(res, 200, { success: true, ...milanRes });
+  }
+
+  // --- API: Nepali Patro, Panchanga & Hamro Patro Suite (sushilldhakal/nepali-calendar, khumnath/nepdate, milancodess/hamro-patro-scraper) ---
+  if (pathname === '/api/patro/today' && req.method === 'GET') {
+    const todayData = await nepaliPatroService.getTodayPatro();
+    return sendJSON(res, 200, { success: true, ...todayData });
+  }
+
+  if (pathname === '/api/patro/convert' && req.method === 'GET') {
+    const q = parsedUrl.query || {};
+    if (q.bs) {
+      const parts = q.bs.split('-').map(Number);
+      const conv = nepaliPatroService.bsToAd(parts[0], parts[1], parts[2]);
+      return sendJSON(res, 200, { success: true, from: 'BS', to: 'AD', input: q.bs, ...conv });
+    } else if (q.ad) {
+      const conv = nepaliPatroService.adToBs(q.ad);
+      return sendJSON(res, 200, { success: true, from: 'AD', to: 'BS', input: q.ad, ...conv });
+    } else {
+      const todayBs = nepaliPatroService.adToBs(new Date());
+      return sendJSON(res, 200, { success: true, todayBs });
+    }
+  }
+
+  if (pathname.startsWith('/api/patro/month/') && req.method === 'GET') {
+    const parts = pathname.split('/').slice(4);
+    const bsYear = Number(parts[0] || 2083);
+    const bsMonth = Number(parts[1] || 5);
+    const monthGrid = nepaliPatroService.getBsMonthCalendar(bsYear, bsMonth);
+    return sendJSON(res, 200, { success: true, month: monthGrid });
+  }
+
+  if (pathname === '/api/patro/festivals' && req.method === 'GET') {
+    return sendJSON(res, 200, { success: true, total: nepaliPatroService.NEPALI_FESTIVALS.length, festivals: nepaliPatroService.NEPALI_FESTIVALS });
+  }
+
+  if ((pathname === '/api/patro/rashifal' || pathname.startsWith('/api/patro/rashifal/')) && req.method === 'GET') {
+    const type = pathname.split('/')[4] || parsedUrl.query.type || 'daily';
+    const rashifal = await nepaliPatroService.getRashifal(type);
+    return sendJSON(res, 200, { success: true, type, rashifal });
+  }
+
+  if (pathname === '/api/patro/market' && req.method === 'GET') {
+    const gold = await nepaliPatroService.getGoldSilverRates();
+    const forex = await nepaliPatroService.getForexRates();
+    return sendJSON(res, 200, { success: true, gold, forex });
   }
 
   // --- API: VedAstro Vedic Engine Suite (VedAstro/VedAstro Cloud & Local Engine) ---
