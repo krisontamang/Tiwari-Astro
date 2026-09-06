@@ -1028,6 +1028,10 @@
               ⚡ OpenRouter AI
             </button>
 
+            <button onclick="openVedastroModal()" class="btn-ghost" style="border-color:rgba(255,159,67,0.5); color:#ff9f43; background:rgba(255,159,67,0.08);">
+              🪐 VedAstro इन्जिन
+            </button>
+
             <div class="user-pill">
               <span class="user-dot"></span>
               <span id="admin-user-display">bensartiwari@gmail.com</span>
@@ -2131,6 +2135,139 @@
         </div>
       </div>
     </div>
+
+    <!-- ============================================================== -->
+    <!-- MODAL: VEDASTRO VEDIC ENGINE EXPLORER -->
+    <!-- ============================================================== -->
+    <div id="vedastro-modal" class="kundali-modal-backdrop" style="display:none;">
+      <div class="kundali-modal-card" style="max-width:920px; border-color:rgba(255,159,67,0.4); box-shadow:0 0 50px rgba(255,159,67,0.15);">
+        <div class="kundali-modal-header" style="border-bottom-color:rgba(255,159,67,0.3);">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:38px; height:38px; border-radius:10px; background:rgba(255,159,67,0.15); display:flex; align-items:center; justify-content:center; font-size:22px; border:1px solid rgba(255,159,67,0.3);">
+              🪐
+            </div>
+            <div>
+              <h3 style="font-family:var(--font-serif); font-size:18px; color:#fff; margin:0;">
+                VedAstro वैदिक इन्जिन <span style="font-size:12px; color:#ff9f43; font-weight:normal;">(VedAstro/VedAstro)</span>
+              </h3>
+              <p style="font-size:11.5px; color:#aaa; margin:2px 0 0;">
+                ६५०+ शास्त्रीय गणना, स्विस एफेमेरिस शुद्धता, षड्बल, द्वादश भाव, अष्टकवर्ग र फलित भविष्यवाणी
+              </p>
+            </div>
+          </div>
+          <button class="km-close-btn" onclick="closeVedastroModal()">✕</button>
+        </div>
+
+        <div class="kundali-modal-body" style="padding:16px;">
+          <!-- Live API Status Card -->
+          <div id="va-status-card" style="background:rgba(255,159,67,0.05); border:1px solid rgba(255,159,67,0.25); border-radius:0.75rem; padding:12px; margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-size:11px; text-transform:uppercase; color:#ff9f43; font-weight:700;">VedAstro Engine स्थिति</div>
+                <div style="font-size:15px; font-weight:700; color:#fff; margin-top:2px;">
+                  <span id="va-status-badge" class="badge badge-paid">क्लाउड र स्थानीय इन्जिन सक्रिय</span>
+                  <span id="va-engine-type" style="font-size:11px; color:#aaa; margin-left:8px;">Dual-Engine Mode (Cloud API + Offline Fallback)</span>
+                </div>
+              </div>
+              <div style="text-align:right; font-size:11px; color:#ddd;">
+                <div>Ayanamsha: <b style="color:#f4d38c;" id="va-ayanamsa-display">Lahiri (Chitra Paksha)</b></div>
+                <div style="font-size:10.5px; color:#aaa;">Precision: <span style="color:#2ecc71;">NASA / Swiss Ephemeris Standard</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Parameter Input Bar -->
+          <div style="display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr auto; gap:8px; align-items:end; margin-bottom:14px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:10px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:11px; color:#bbb;">जन्म मिति (DOB)</label>
+              <input type="date" id="va-dob" class="form-input" style="height:34px; font-size:11.5px;" value="1995-05-15" />
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:11px; color:#bbb;">जन्म समय (Time)</label>
+              <input type="time" id="va-time" class="form-input" style="height:34px; font-size:11.5px;" value="08:30" />
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:11px; color:#bbb;">अक्षांश/देशान्तर</label>
+              <input type="text" id="va-coords" class="form-input" style="height:34px; font-size:11px;" value="27.7172, 85.3240" placeholder="Lat, Lon" />
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:11px; color:#bbb;">अयनांश (Ayanamsa)</label>
+              <select id="va-ayanamsa" class="form-input" style="height:34px; font-size:11px;">
+                <option value="LAHIRI">Lahiri (लाहिरी)</option>
+                <option value="RAMAN">Raman (रमन)</option>
+                <option value="KRISHNAMURTI">KP (कृष्णमूर्ति)</option>
+              </select>
+            </div>
+            <button onclick="runCurrentVedastroTab()" class="btn-primary" style="height:34px; font-size:11.5px; padding:0 16px; background:#ff9f43; border-color:#ff9f43; color:#0b0a14; font-weight:700;">
+              🔄 गणना गर्नुहोस्
+            </button>
+          </div>
+
+          <!-- Tabs Header -->
+          <div class="km-tabs" style="border-bottom:1px solid rgba(255,255,255,0.1); margin-bottom:12px;">
+            <button class="km-tab-btn active" onclick="switchVedastroTab('predictions', this)">
+              📜 फलित भविष्यवाणी (Predictions)
+            </button>
+            <button class="km-tab-btn" onclick="switchVedastroTab('planets', this)">
+              🪐 ग्रह स्थिति र षड्बल (Planets &amp; Shadbala)
+            </button>
+            <button class="km-tab-btn" onclick="switchVedastroTab('bhavas', this)">
+              🏛️ द्वादश भाव (12 Houses)
+            </button>
+            <button class="km-tab-btn" onclick="switchVedastroTab('ashtakavarga', this)">
+              📊 अष्टकवर्ग (Ashtakavarga)
+            </button>
+            <button class="km-tab-btn" onclick="switchVedastroTab('yogas', this)">
+              🔮 शास्त्रीय योग (Vedic Yogas)
+            </button>
+          </div>
+
+          <!-- Tab 1: Predictions -->
+          <div id="va-pane-predictions" class="va-tab-pane">
+            <div id="va-predictions-results">
+              <div style="text-align:center; padding:20px; color:#888; font-size:12px;">
+                'गणना गर्नुहोस्' थिचेर VedAstro का शास्त्रीय फलित भविष्यवाणीहरू प्राप्त गर्नुहोस्।
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Planets & Shadbala -->
+          <div id="va-pane-planets" class="va-tab-pane" style="display:none;">
+            <div id="va-planets-results">
+              <div style="text-align:center; padding:20px; color:#888; font-size:12px;">
+                ९ ग्रहहरूको निरयण/सायन भोग, नक्षत्र पाद, वक्री/अस्त स्थिति, र ६ प्रकारका षड्बल अंकहरू।
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Bhavas -->
+          <div id="va-pane-bhavas" class="va-tab-pane" style="display:none;">
+            <div id="va-bhavas-results">
+              <div style="text-align:center; padding:20px; color:#888; font-size:12px;">
+                तनु, धन, सहज, सुख, पुत्र, अरि, कलत्र, आयु, धर्म, कर्म, लाभ, र व्यय भावको स्थिति।
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 4: Ashtakavarga -->
+          <div id="va-pane-ashtakavarga" class="va-tab-pane" style="display:none;">
+            <div id="va-ashtakavarga-results">
+              <div style="text-align:center; padding:20px; color:#888; font-size:12px;">
+                मेष देखि मीन सम्मका १२ राशिहरूमा ३३७ सर्वाष्टकवर्ग रेखा/बिन्दु वितरण।
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 5: Yogas -->
+          <div id="va-pane-yogas" class="va-tab-pane" style="display:none;">
+            <div id="va-yogas-results">
+              <div style="text-align:center; padding:20px; color:#888; font-size:12px;">
+                गजकेसरी, बुधादित्य, पञ्च महापुरुष र शुभ योगहरूको उपस्थिति परीक्षण।
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- Toast Component -->
     <div id="toast">
@@ -4477,10 +4614,287 @@
         });
       }
 
+      // --- VedAstro Vedic Engine UI Handlers ---
+      const vedastroModal = document.getElementById('vedastro-modal');
+      let currentVedastroTab = 'predictions';
+
+      function openVedastroModal() {
+        if (vedastroModal) vedastroModal.style.display = 'flex';
+        fetchVedastroStatus();
+        runCurrentVedastroTab();
+      }
+
+      function closeVedastroModal() {
+        if (vedastroModal) vedastroModal.style.display = 'none';
+      }
+
+      function switchVedastroTab(tabId, el) {
+        currentVedastroTab = tabId;
+        document.querySelectorAll('#vedastro-modal .km-tab-btn').forEach(b => b.classList.remove('active'));
+        if (el) el.classList.add('active');
+
+        document.querySelectorAll('#vedastro-modal .va-tab-pane').forEach(p => p.style.display = 'none');
+        const activePane = document.getElementById(`va-pane-${tabId}`);
+        if (activePane) activePane.style.display = 'block';
+
+        runCurrentVedastroTab();
+      }
+
+      function getVedastroInputs() {
+        const dob = document.getElementById('va-dob')?.value || '1995-05-15';
+        const time = document.getElementById('va-time')?.value || '08:30';
+        const coords = (document.getElementById('va-coords')?.value || '27.7172, 85.3240').split(',');
+        const lat = parseFloat(coords[0]?.trim() || '27.7172');
+        const lon = parseFloat(coords[1]?.trim() || '85.3240');
+        const ayanamsa = document.getElementById('va-ayanamsa')?.value || 'LAHIRI';
+        return { dob, time, lat, lon, ayanamsa, tz: '+05:45' };
+      }
+
+      function runCurrentVedastroTab() {
+        if (currentVedastroTab === 'predictions') runVedastroPredictions();
+        else if (currentVedastroTab === 'planets') runVedastroPlanets();
+        else if (currentVedastroTab === 'bhavas') runVedastroBhavas();
+        else if (currentVedastroTab === 'ashtakavarga') runVedastroAshtakavarga();
+        else if (currentVedastroTab === 'yogas') runVedastroYogas();
+      }
+
+      async function fetchVedastroStatus() {
+        const badge = document.getElementById('va-status-badge');
+        const typeEl = document.getElementById('va-engine-type');
+        try {
+          const res = await fetch(`${API_BASE}/api/vedastro/status`);
+          const data = await res.json();
+          if (data && data.success) {
+            if (badge) {
+              badge.textContent = data.cloudApi?.isReachable ? 'क्लाउड + लोकल इन्जिन सक्रिय' : 'स्थानीय उच्च-शुद्धता इन्जिन सक्रिय';
+              badge.className = 'badge badge-paid';
+            }
+            if (typeEl) {
+              typeEl.textContent = `${data.engine} (Ver ${data.version})`;
+            }
+          }
+        } catch (e) {
+          console.warn('VedAstro status fetch failed:', e);
+        }
+      }
+
+      async function runVedastroPredictions() {
+        const el = document.getElementById('va-predictions-results');
+        if (!el) return;
+        const p = getVedastroInputs();
+        el.innerHTML = `<div style="text-align:center; padding:20px; color:#ff9f43;">⏳ VedAstro फलित भविष्यवाणी गणना हुँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/vedastro/predictions`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(p)
+          });
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.predictions)) {
+            el.innerHTML = `
+              <div style="font-size:11px; color:#aaa; margin-bottom:10px; display:flex; justify-content:space-between;">
+                <span>स्रोत: <b style="color:#ff9f43;">${escapeHtml(data.source || 'VedAstro')}</b></span>
+                <span>कुल भविष्यवाणी: <b>${data.predictions.length}</b></span>
+              </div>
+              <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:10px; max-height:360px; overflow-y:auto; padding-right:4px;">
+                ${data.predictions.map(pred => `
+                  <div style="background:rgba(255,255,255,0.02); border:1px solid ${pred.nature === 'Good' ? 'rgba(46,204,113,0.3)' : 'rgba(231,76,60,0.3)'}; border-radius:0.5rem; padding:10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                      <b style="font-size:12px; color:#fff;">${escapeHtml(pred.name || 'Prediction')}</b>
+                      <span class="badge ${pred.nature === 'Good' ? 'badge-paid' : 'badge-pending'}" style="font-size:9.5px;">${escapeHtml(pred.nature || 'Neutral')}</span>
+                    </div>
+                    <div style="font-size:11px; color:#ccc; line-height:1.5;">${escapeHtml(pred.description || '')}</div>
+                    ${pred.classicalRule ? `<div style="font-size:9.5px; color:#f4d38c; margin-top:6px; font-style:italic;">📜 ${escapeHtml(pred.classicalRule)}</div>` : ''}
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          } else {
+            el.innerHTML = `<div style="color:var(--accent-red); padding:16px;">भविष्यवाणी गणना हुन सकेन।</div>`;
+          }
+        } catch (e) {
+          el.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(e.message)}</div>`;
+        }
+      }
+
+      async function runVedastroPlanets() {
+        const el = document.getElementById('va-planets-results');
+        if (!el) return;
+        const p = getVedastroInputs();
+        el.innerHTML = `<div style="text-align:center; padding:20px; color:#ff9f43;">⏳ ग्रह स्थिति र षड्बल गणना हुँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/vedastro/all-planet-data`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(p)
+          });
+          const data = await res.json();
+          if (data && data.success && data.planetData) {
+            const rows = Object.values(data.planetData).map(pl => `
+              <tr>
+                <td style="font-weight:700; color:#fff;">${escapeHtml(pl.planet)}</td>
+                <td style="color:#f4d38c;">${escapeHtml(pl.nirayanaLongitude?.formatted || '')}</td>
+                <td>${escapeHtml(pl.rashiSanskrit || pl.rashi || '')} (${pl.houseNumber || '-'} भाव)</td>
+                <td>नक्षत्र ${pl.nakshatraIndex || '-'} (पद ${pl.pada || '-'})</td>
+                <td><span class="badge ${pl.motion?.includes('Retrograde') ? 'badge-pending' : 'badge-paid'}" style="font-size:9.5px;">${escapeHtml(pl.motion || 'Direct')}</span></td>
+                <td>${pl.isCombust ? '<span style="color:#e74c3c; font-weight:700;">अस्त (Combust)</span>' : '<span style="color:#2ecc71;">उदय (Active)</span>'}</td>
+                <td style="font-weight:700; color:#2ecc71;">${pl.shadbala?.totalRupas ? pl.shadbala.totalRupas + ' R' : '-'}</td>
+              </tr>
+            `).join('');
+
+            el.innerHTML = `
+              <div style="background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:8px; max-height:360px; overflow-y:auto;">
+                <table class="km-table" style="font-size:11px;">
+                  <thead>
+                    <tr>
+                      <th>ग्रह</th>
+                      <th>निरयण भोग (Longitude)</th>
+                      <th>राशि र भाव</th>
+                      <th>नक्षत्र र पाद</th>
+                      <th>गति (Motion)</th>
+                      <th>अस्त/उदय</th>
+                      <th>षड्बल (Rupas)</th>
+                    </tr>
+                  </thead>
+                  <tbody>${rows}</tbody>
+                </table>
+              </div>
+            `;
+          } else {
+            el.innerHTML = `<div style="color:var(--accent-red); padding:16px;">ग्रह स्थिति प्राप्त हुन सकेन।</div>`;
+          }
+        } catch (e) {
+          el.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(e.message)}</div>`;
+        }
+      }
+
+      async function runVedastroBhavas() {
+        const el = document.getElementById('va-bhavas-results');
+        if (!el) return;
+        const p = getVedastroInputs();
+        el.innerHTML = `<div style="text-align:center; padding:20px; color:#ff9f43;">⏳ द्वादश भाव गणना हुँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/vedastro/house-data`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(p)
+          });
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.houses)) {
+            el.innerHTML = `
+              <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:10px; max-height:360px; overflow-y:auto;">
+                ${data.houses.map(h => `
+                  <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.5rem; padding:10px;">
+                    <div style="font-size:12px; font-weight:700; color:#f4d38c; margin-bottom:4px;">
+                      भाव ${h.houseNumber}: ${escapeHtml(h.name)}
+                    </div>
+                    <div style="font-size:11px; color:#ccc;">राशि: <b>${escapeHtml(h.rashiSanskrit || h.rashi)}</b></div>
+                    <div style="font-size:11px; color:#aaa;">भावेश (Lord): <b style="color:#2ecc71;">${escapeHtml(h.lord)}</b></div>
+                    <div style="font-size:10.5px; color:#888; margin-top:4px;">
+                      अवस्थित ग्रह: <span style="color:#fff;">${h.occupyingPlanets?.length ? h.occupyingPlanets.join(', ') : 'खाली (None)'}</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          } else {
+            el.innerHTML = `<div style="color:var(--accent-red); padding:16px;">भाव विवरण प्राप्त हुन सकेन।</div>`;
+          }
+        } catch (e) {
+          el.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(e.message)}</div>`;
+        }
+      }
+
+      async function runVedastroAshtakavarga() {
+        const el = document.getElementById('va-ashtakavarga-results');
+        if (!el) return;
+        const p = getVedastroInputs();
+        el.innerHTML = `<div style="text-align:center; padding:20px; color:#ff9f43;">⏳ अष्टकवर्ग गणना हुँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/vedastro/ashtakavarga`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(p)
+          });
+          const data = await res.json();
+          if (data && data.success && data.sarvashtakavarga) {
+            const signs = Object.values(data.sarvashtakavarga);
+            el.innerHTML = `
+              <div style="margin-bottom:10px; font-size:11.5px; color:#ccc; display:flex; justify-content:space-between; align-items:center;">
+                <span>कुल सर्वाष्टकवर्ग रेखा: <b style="color:#f4d38c;">${data.totalBindus || 337} Bindus</b></span>
+                <span style="font-size:10.5px; color:#aaa;">(२८ भन्दा माथि = बलिष्ठ, २८ भन्दा तल = विचारणीय)</span>
+              </div>
+              <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap:10px;">
+                ${signs.map(s => `
+                  <div style="background:rgba(255,255,255,0.02); border:1px solid ${s.bindus >= 28 ? 'rgba(46,204,113,0.3)' : 'rgba(231,76,60,0.3)'}; border-radius:0.5rem; padding:10px; text-align:center;">
+                    <div style="font-size:11px; color:#aaa;">${escapeHtml(s.rashiSanskrit || s.rashi)}</div>
+                    <div style="font-size:20px; font-weight:800; color:${s.bindus >= 28 ? '#2ecc71' : '#f39c12'}; margin:4px 0;">${s.bindus}</div>
+                    <div style="font-size:9.5px; color:#888;">${escapeHtml(s.strength || '')}</div>
+                  </div>
+                `).join('')}
+              </div>
+              <div style="font-size:11px; color:#bbb; background:rgba(255,255,255,0.02); padding:10px; border-radius:6px; margin-top:12px;">
+                💡 <b>शास्त्रीय नियम:</b> ${escapeHtml(data.guidance || '२८ भन्दा बढी बिन्दु भएका राशिहरूमा शुभ कार्य र गोचर अनुकूल मानिन्छ।')}
+              </div>
+            `;
+          } else {
+            el.innerHTML = `<div style="color:var(--accent-red); padding:16px;">अष्टकवर्ग प्राप्त हुन सकेन।</div>`;
+          }
+        } catch (e) {
+          el.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(e.message)}</div>`;
+        }
+      }
+
+      async function runVedastroYogas() {
+        const el = document.getElementById('va-yogas-results');
+        if (!el) return;
+        const p = getVedastroInputs();
+        el.innerHTML = `<div style="text-align:center; padding:20px; color:#ff9f43;">⏳ शास्त्रीय वैदिक योग परीक्षण हुँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/vedastro/yogas`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(p)
+          });
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.yogas)) {
+            el.innerHTML = `
+              <div style="display:flex; flex-direction:column; gap:8px; max-height:360px; overflow-y:auto;">
+                ${data.yogas.map(y => `
+                  <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,159,67,0.3); border-radius:0.5rem; padding:12px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                      <b style="font-size:13px; color:#f4d38c;">${escapeHtml(y.name)}</b>
+                      <span class="badge badge-paid" style="font-size:9.5px;">${escapeHtml(y.nature || 'Auspicious')}</span>
+                    </div>
+                    <div style="font-size:11.5px; color:#ccc; line-height:1.5;">${escapeHtml(y.description)}</div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          } else {
+            el.innerHTML = `<div style="color:var(--accent-red); padding:16px;">योग विवरण प्राप्त हुन सकेन।</div>`;
+          }
+        } catch (e) {
+          el.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(e.message)}</div>`;
+        }
+      }
+
+      if (vedastroModal) {
+        vedastroModal.addEventListener('click', (e) => {
+          if (e.target === vedastroModal) closeVedastroModal();
+        });
+      }
+
       // Start application
       initAuth();
       checkAstrologyApiStatus();
       fetchOpenRouterStatus();
+      fetchVedastroStatus();
     </script>
   </body>
 </html>

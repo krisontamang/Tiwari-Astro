@@ -15,6 +15,7 @@ const dashaService = require('./dashaService');
 const panditAgentService = require('./panditAgentService');
 const poruthamService = require('./poruthamService');
 const openRouterService = require('./openRouterService');
+const kerykeionService = require('./kerykeionService');
 
 const MCP_TOOLS = [
   {
@@ -332,6 +333,102 @@ const MCP_TOOLS = [
         lat: { type: 'number', description: 'Latitude' },
         lon: { type: 'number', description: 'Longitude' }
       }
+    }
+  },
+  {
+    name: 'kerykeion_birth_chart',
+    description: 'Calculate complete Kerykeion Western/Tropical natal chart with 12 houses (Placidus/Equal), planetary positions (Sun-Pluto, Chiron, Nodes), elements, and moon phase.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', description: 'Subject name' },
+        year: { type: 'number', description: 'Birth Year' },
+        month: { type: 'number', description: 'Birth Month (1-12)' },
+        day: { type: 'number', description: 'Birth Day (1-31)' },
+        hour: { type: 'number', description: 'Birth Hour (0-23)' },
+        minute: { type: 'number', description: 'Birth Minute (0-59)' },
+        city: { type: 'string', description: 'Birth City' },
+        nation: { type: 'string', description: 'Country code (e.g. NP, US, GB)' },
+        lat: { type: 'number', description: 'Latitude' },
+        lng: { type: 'number', description: 'Longitude' },
+        houseSystem: { type: 'string', description: 'House system: Placidus, Equal, Whole_Sign' }
+      },
+      required: ['year', 'month', 'day']
+    }
+  },
+  {
+    name: 'kerykeion_aspects',
+    description: 'Calculate planetary aspect grid with exact orbs and applying/separating dynamics according to Kerykeion AspectsFactory.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        year: { type: 'number', description: 'Birth Year' },
+        month: { type: 'number', description: 'Birth Month' },
+        day: { type: 'number', description: 'Birth Day' },
+        hour: { type: 'number', description: 'Birth Hour' },
+        minute: { type: 'number', description: 'Birth Minute' },
+        lat: { type: 'number', description: 'Latitude' },
+        lng: { type: 'number', description: 'Longitude' }
+      },
+      required: ['year', 'month', 'day']
+    }
+  },
+  {
+    name: 'kerykeion_synastry_score',
+    description: 'Calculate Ciro Discepolo synastry compatibility score (0-30+ pts, minimal to rare exceptional) and inter-chart aspects between two individuals.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        person1: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            year: { type: 'number' },
+            month: { type: 'number' },
+            day: { type: 'number' },
+            hour: { type: 'number' },
+            minute: { type: 'number' },
+            lat: { type: 'number' },
+            lng: { type: 'number' }
+          },
+          required: ['year', 'month', 'day']
+        },
+        person2: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            year: { type: 'number' },
+            month: { type: 'number' },
+            day: { type: 'number' },
+            hour: { type: 'number' },
+            minute: { type: 'number' },
+            lat: { type: 'number' },
+            lng: { type: 'number' }
+          },
+          required: ['year', 'month', 'day']
+        }
+      },
+      required: ['person1', 'person2']
+    }
+  },
+  {
+    name: 'kerykeion_chart_svg',
+    description: 'Generate modern 5-concentric-ring circular SVG astrological wheel chart for natal or synastry.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        year: { type: 'number' },
+        month: { type: 'number' },
+        day: { type: 'number' },
+        hour: { type: 'number' },
+        minute: { type: 'number' },
+        city: { type: 'string' },
+        lat: { type: 'number' },
+        lng: { type: 'number' },
+        theme: { type: 'string', description: 'Theme: dark or light' }
+      },
+      required: ['year', 'month', 'day']
     }
   }
 ];
@@ -689,6 +786,54 @@ async function handleMcpRequest(requestBody) {
         };
       }
 
+      if (toolName === 'kerykeion_birth_chart') {
+        const subject = kerykeionService.createSubject(args);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(subject, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'kerykeion_aspects') {
+        const subject = kerykeionService.createSubject(args);
+        const aspects = kerykeionService.calculateSingleChartAspects(subject, args.options);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(aspects, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'kerykeion_synastry_score') {
+        const s1 = kerykeionService.createSubject(args.person1);
+        const s2 = kerykeionService.createSubject(args.person2);
+        const score = kerykeionService.calculateRelationshipScore(s1, s2, args.options);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(score, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'kerykeion_chart_svg') {
+        const subject = kerykeionService.createSubject(args);
+        const svg = kerykeionService.generateWheelSvg(subject, { theme: args.theme || 'dark' });
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: svg }]
+          }
+        };
+      }
+
       return {
         jsonrpc: '2.0',
         id,
@@ -713,5 +858,6 @@ async function handleMcpRequest(requestBody) {
 module.exports = {
   MCP_TOOLS,
   getTools: () => MCP_TOOLS,
+  listTools: () => MCP_TOOLS,
   handleMcpRequest
 };

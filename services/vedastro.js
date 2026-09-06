@@ -204,11 +204,23 @@ async function getHoroscopePredictions(lat = 27.7172, lon = 85.3240, timeStr = '
   const cloudRes = await fetchVedAstro(path, 6000);
 
   if (cloudRes.success && cloudRes.payload) {
+    const rawList = Array.isArray(cloudRes.payload)
+      ? cloudRes.payload
+      : (cloudRes.payload.HoroscopePredictions || Object.values(cloudRes.payload));
+    const normalized = (rawList || []).map(p => ({
+      name: p.Name || p.name || 'Vedic Life Trend',
+      description: (p.Description || p.description || '').trim(),
+      nature: p.Nature || p.nature || (p.Weight > 0 ? 'Good' : p.Weight < 0 ? 'Caution' : 'Neutral'),
+      strength: p.Weight ? Math.abs(p.Weight) : (p.strength || 75),
+      tags: p.Tags || p.tags || [],
+      relatedBody: p.RelatedBody || p.relatedBody || null
+    }));
+
     return {
       success: true,
       source: 'VedAstro Cloud Engine',
-      totalPredictions: Array.isArray(cloudRes.payload) ? cloudRes.payload.length : Object.keys(cloudRes.payload).length,
-      predictions: cloudRes.payload
+      totalPredictions: normalized.length,
+      predictions: normalized
     };
   }
 
@@ -290,33 +302,12 @@ async function getHoroscopePredictions(lat = 27.7172, lon = 85.3240, timeStr = '
   };
 }
 
-// 2. Get All Planet Data (Shadbala, Combustion, Retrogression, Nakshatra)
-async function getAllPlanetData(planetName = 'All', lat = 27.7172, lon = 85.3240, timeStr = '08:30', dateStr = '15/05/1995', tzStr = '+05:45', ayanamsa = DEFAULT_AYANAMSA) {
-  const normDate = normalizeDateStr(dateStr);
-  const normTime = normalizeTimeStr(timeStr);
-  const normTz = normalizeTzStr(tzStr);
-
-  const endpoint = planetName === 'All'
-    ? `/Calculate/AllPlanetData/PlanetName/All/Location/${lat},${lon}/Time/${normTime}/${normDate}/${normTz}/Ayanamsa/${ayanamsa}`
-    : `/Calculate/AllPlanetData/PlanetName/${planetName}/Location/${lat},${lon}/Time/${normTime}/${normDate}/${normTz}/Ayanamsa/${ayanamsa}`;
-
-  const cloudRes = await fetchVedAstro(endpoint, 6000);
-  if (cloudRes.success && cloudRes.payload) {
-    return {
-      success: true,
-      source: 'VedAstro Cloud Engine',
-      planetData: cloudRes.payload
-    };
-  }
-
-  // Fallback: Accurate Local Planet & Shadbala Computation
+function computeLocalPlanetDataset(normDate, normTime, lat, lon, planetsToCalc) {
   const state = computeLocalCelestialState(normDate, normTime, lat, lon);
   const sunLong = state.planets.Sun.nirayana;
   const lagnaRashi = state.lagnaSign;
 
   const result = {};
-  const planetsToCalc = planetName === 'All' ? PLANET_NAMES : [planetName];
-
   planetsToCalc.forEach(pName => {
     const p = state.planets[pName] || state.planets.Sun;
     const deg = p.nirayana;
@@ -348,6 +339,7 @@ async function getAllPlanetData(planetName = 'All', lat = 27.7172, lon = 85.3240
 
     result[pName] = {
       planet: pName,
+      degrees: Math.round(deg * 100) / 100,
       nirayanaLongitude: {
         totalDegrees: Math.round(deg * 1000) / 1000,
         formatted: `${Math.floor(degInRashi)}° ${Math.floor((degInRashi % 1) * 60)}' ${ZODIAC_SIGNS[rashiIdx]}`
@@ -379,10 +371,57 @@ async function getAllPlanetData(planetName = 'All', lat = 27.7172, lon = 85.3240
     };
   });
 
+  return { planetData: result, planets: Object.values(result) };
+}
+
+// 2. Get All Planet Data (Shadbala, Combustion, Retrogression, Nakshatra)
+async function getAllPlanetData(planetName = 'All', lat = 27.7172, lon = 85.3240, timeStr = '08:30', dateStr = '15/05/1995', tzStr = '+05:45', ayanamsa = DEFAULT_AYANAMSA) {
+  const normDate = normalizeDateStr(dateStr);
+  const normTime = normalizeTimeStr(timeStr);
+  const normTz = normalizeTzStr(tzStr);
+
+  const endpoint = planetName === 'All'
+    ? `/Calculate/AllPlanetData/PlanetName/All/Location/${lat},${lon}/Time/${normTime}/${normDate}/${normTz}/Ayanamsa/${ayanamsa}`
+    : `/Calculate/AllPlanetData/PlanetName/${planetName}/Location/${lat},${lon}/Time/${normTime}/${normDate}/${normTz}/Ayanamsa/${ayanamsa}`;
+
+  const cloudRes = await fetchVedAstro(endpoint, 6000);
+  const planetsToCalc = planetName === 'All' ? PLANET_NAMES : [planetName];
+  const local = computeLocalPlanetDataset(normDate, normTime, lat, lon, planetsToCalc);
+
+  if (cloudRes.success && cloudRes.payload) {
+    const rawCloudList = cloudRes.payload.AllPlanetData || [];
+    const cloudMap = {};
+    if (Array.isArray(rawCloudList)) {
+      rawCloudList.forEach(item => {
+        const pKey = Object.keys(item)[0];
+        if (pKey) cloudMap[pKey] = item[pKey];
+      });
+    }
+
+    const mergedPlanetData = {};
+    const mergedList = [];
+    for (const [pName, pInfo] of Object.entries(local.planetData)) {
+      mergedPlanetData[pName] = {
+        ...pInfo,
+        vedastroCloudDetails: cloudMap[pName] || null
+      };
+      mergedList.push(mergedPlanetData[pName]);
+    }
+
+    return {
+      success: true,
+      source: 'VedAstro Cloud Engine',
+      planetData: mergedPlanetData,
+      planets: mergedList,
+      rawCloud: cloudRes.payload
+    };
+  }
+
   return {
     success: true,
     source: 'VedAstro Local Parashari Engine (Offline High-Precision)',
-    planetData: result
+    planetData: local.planetData,
+    planets: local.planets
   };
 }
 
@@ -494,6 +533,11 @@ async function getAllHouseData(lat = 27.7172, lon = 85.3240, timeStr = '08:30', 
     source: 'VedAstro Local Parashari Engine (Offline High-Precision)',
     totalHouses: 12,
     lagnaRashi: ZODIAC_SIGNS[lagnaRashi - 1],
+    ascendant: {
+      rashi: ZODIAC_SIGNS[lagnaRashi - 1],
+      rashiSanskrit: ZODIAC_SANSKRIT[lagnaRashi - 1],
+      degree: Math.round(lagnaDeg * 100) / 100
+    },
     houses
   };
 }
@@ -561,10 +605,17 @@ async function getMatchReport(mLat, mLon, mTime, mDate, mTz, fLat, fLon, fTime, 
   const cloudRes = await fetchVedAstro(path, 6000);
 
   if (cloudRes.success && cloudRes.payload) {
+    const rep = cloudRes.payload.MatchReport || cloudRes.payload;
+    const kScore = rep.KutaScore !== undefined ? rep.KutaScore : (rep.Score || 0);
     return {
       success: true,
       source: 'VedAstro Cloud Engine',
-      matchReport: cloudRes.payload
+      kutaScore: kScore,
+      totalScore: kScore,
+      maxScore: 100,
+      isCompatible: kScore >= 50,
+      recommendation: kScore >= 70 ? 'उत्कृष्ट (Highly Recommended)' : kScore >= 50 ? 'मध्यम अनुकूल (Acceptable)' : 'विचारणीय (Caution)',
+      details: rep
     };
   }
 
@@ -584,8 +635,10 @@ async function getMatchReport(mLat, mLon, mTime, mDate, mTz, fLat, fLon, fTime, 
     success: true,
     source: 'VedAstro Local Parashari Engine (Offline High-Precision)',
     kutaScore: poruthams.passedPoruthams,
-    totalKutas: 10,
+    totalScore: poruthams.passedPoruthams,
+    maxScore: 10,
     isCompatible: poruthams.passedPoruthams >= 6 && !poruthams.isVetoViolated,
+    recommendation: poruthams.overallVerdict,
     verdict: poruthams.overallVerdict,
     details: poruthams
   };
@@ -723,7 +776,10 @@ async function checkStatus() {
   const cloudTest = await fetchVedAstro('/Calculate/Panchanga/Location/27.7172,85.3240/Time/12:00/01/01/2025/+05:45', 3000);
   return {
     success: true,
+    status: 'Operational',
     engine: 'VedAstro Unified Engine (Cloud + Local Fallback)',
+    activeEngine: cloudTest.success ? 'VedAstro Cloud Engine (Live)' : 'VedAstro Local Parashari Engine (Zero-Downtime Fallback)',
+    ayanamsa: DEFAULT_AYANAMSA,
     version: '5.0',
     cloudApi: {
       url: VEDASTRO_API_BASE,
