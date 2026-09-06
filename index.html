@@ -139,6 +139,21 @@
         transform: translateY(-2px);
       }
 
+      .dock-btn-sarathi {
+        background: linear-gradient(135deg, #7c3aed, #4c1d95);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #ffffff !important;
+        font-weight: 700;
+        box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+        text-decoration: none;
+      }
+      .dock-btn-sarathi:hover {
+        background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(124, 58, 237, 0.5);
+        color: #ffffff !important;
+      }
+
       @media (max-width: 680px) {
         .floating-bottom-dock {
           bottom: 10px;
@@ -571,6 +586,10 @@
         <span id="user-auth-btn-icon">🔑</span>
         <span id="user-auth-btn-text">लगइन / दर्ता</span>
       </button>
+
+      <a href="/sarathi" class="dock-btn dock-btn-sarathi" title="ज्योतिष सारथी सफ्टवेयर खोल्नुहोस्">
+        <span>🪐 सारथी</span>
+      </a>
 
       <a href="/admin" class="dock-btn dock-btn-admin" title="Admin Portal">
         <span>🔐 Admin</span>

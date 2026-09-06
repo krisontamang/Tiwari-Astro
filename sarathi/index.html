@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ज्योतिष सारथी — सम्पूर्ण वैदिक ज्योतिष सफ्टवेयर (Astro Tiwari)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700;800&family=Noto+Serif+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #f8f9fa;
+      --bg-surface: #ffffff;
+      --border-color: #e5e7eb;
+      --border-dark: #cbd5e1;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --accent-red: #dc2626;
+      --accent-gold: #d97706;
+      --accent-green: #16a34a;
+      --accent-blue: #2563eb;
+      --header-bg: #fff5eb;
+      --header-border: #fed7aa;
+      --tab-active-border: #f97316;
+      --chart-line: #1e1b4b;
+      --swastika-color: #dc2626;
+    }
+
+    body.dark-theme {
+      --bg-main: #0f172a;
+      --bg-surface: #1e293b;
+      --border-color: #334155;
+      --border-dark: #475569;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --header-bg: #1e1b4b;
+      --header-border: #4338ca;
+      --chart-line: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Mukta', sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Top Sarathi Header */
+    .sarathi-top-bar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f59e0b, #b45309);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 15px;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+    }
+
+    .brand-title {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: #9a3412;
+      letter-spacing: -0.2px;
+    }
+
+    /* Grouped Toolbar Icons */
+    .toolbar-groups {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tool-pill {
+      display: inline-flex;
+      align-items: center;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      border-radius: 999px;
+      padding: 3px 8px;
+      gap: 6px;
+    }
+
+    body.dark-theme .tool-pill {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .tool-btn {
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 3px 5px;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tool-btn:hover {
+      background: rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ayanamsa-select {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: #d97706;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-action-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: linear-gradient(135deg, #d97706, #b45309);
+      color: #ffffff;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-action-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+    }
+
+    /* 12 Main Navigation Tabs */
+    .sarathi-main-nav {
+      background: var(--bg-surface);
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      padding: 0 14px;
+      scrollbar-width: thin;
+      white-space: nowrap;
+    }
+
+    .main-tab-link {
+      padding: 10px 14px;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .main-tab-link:hover {
+      color: var(--text-main);
+    }
+
+    .main-tab-link.active {
+      color: #c2410c;
+      border-bottom-color: var(--tab-active-border);
+      font-weight: 700;
+    }
+
+    /* Secondary Sub-tabs Bar */
+    .sarathi-sub-nav {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      padding: 4px 14px;
+      gap: 6px;
+    }
+
+    .sub-tab-link {
+      padding: 5px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .sub-tab-link:hover {
+      background: rgba(0,0,0,0.04);
+      color: var(--text-main);
+    }
+
+    .sub-tab-link.active {
+      background: #ea580c;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Main Workspace Layout */
+    .sarathi-workspace {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 14px;
+      padding: 14px;
+      min-height: calc(100vh - 130px);
+    }
+
+    @media (max-width: 1080px) {
+      .sarathi-workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Sidebar: Stacked Charts */
+    .sidebar-charts-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .chart-card-wrap {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .chart-card-header {
+      padding: 6px 12px;
+      background: #fff7ed;
+      border-bottom: 1px solid #ffedd5;
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #9a3412;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    body.dark-theme .chart-card-header {
+      background: #271d3b;
+      border-color: #3b2d59;
+      color: #fed7aa;
+    }
+
+    .chart-svg-box {
+      padding: 10px;
+      background: #ffffff;
+    }
+
+    /* Right Main Content */
+    .main-details-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .details-split-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .details-split-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Tabbed Cards */
+    .sarathi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .card-tab-header {
+      display: flex;
+      align-items: center;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0 8px;
+      overflow-x: auto;
+    }
+
+    body.dark-theme .card-tab-header {
+      background: #1e293b;
+    }
+
+    .card-tab-btn {
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      background: transparent;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      white-space: nowrap;
+    }
+
+    .card-tab-btn.active {
+      color: #ea580c;
+      border-bottom-color: #ea580c;
+      font-weight: 700;
+    }
+
+    /* Tables */
+    .sarathi-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .sarathi-table th {
+      background: #f1f5f9;
+      padding: 7px 10px;
+      font-weight: 700;
+      color: var(--text-main);
+      text-align: left;
+      border: 1px solid var(--border-color);
+    }
+
+    body.dark-theme .sarathi-table th {
+      background: #334155;
+    }
+
+    .sarathi-table td {
+      padding: 7px 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .sarathi-table tr:nth-child(even) {
+      background: rgba(0,0,0,0.015);
+    }
+
+    /* Badges */
+    .badge-tag {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-right: 4px;
+    }
+    .badge-karaka { color: #dc2626; background: #fee2e2; }
+    .badge-pushkar { color: #15803d; background: #dcfce7; }
+    .badge-vargottama { color: #0284c7; background: #e0f2fe; }
+    .badge-status { color: #d97706; font-weight: 700; }
+
+    /* Divisional Grid View */
+    .divisional-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+      padding: 14px;
+    }
+
+    /* Traditional Chiina Print Layout */
+    .chiina-print-container {
+      display: none;
+      background: #f1f5f9;
+      padding: 24px 12px;
+    }
+
+    .chiina-print-page {
+      background: #ffffff;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto 24px;
+      padding: 14mm 12mm;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      position: relative;
+      color: #1e1b4b;
+      box-sizing: border-box;
+    }
+
+    /* Double Red Swastika Border */
+    .swastika-border-outer {
+      border: 3px solid #dc2626;
+      padding: 4px;
+      height: 100%;
+      min-height: calc(297mm - 28mm);
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .swastika-border-inner {
+      border: 1.5px solid #dc2626;
+      height: 100%;
+      padding: 12px 14px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .swastika-ribbon-top, .swastika-ribbon-bottom {
+      display: flex;
+      justify-content: space-between;
+      color: #dc2626;
+      font-size: 14px;
+      padding: 2px 6px;
+      user-select: none;
+    }
+
+    .chiina-top-invocation {
+      text-align: center;
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: #b91c1c;
+      margin-bottom: 8px;
+    }
+
+    .chiina-section-title {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #991b1b;
+      border-bottom: 2px solid #b91c1c;
+      padding-bottom: 3px;
+      margin: 10px 0 6px;
+      text-align: center;
+    }
+
+    .chiina-info-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      margin-bottom: 12px;
+    }
+
+    .chiina-info-table td {
+      border: 1px solid #fca5a5;
+      padding: 4px 8px;
+    }
+
+    .chiina-info-table td.label {
+      background: #fef2f2;
+      font-weight: 700;
+      color: #991b1b;
+      width: 22%;
+    }
+
+    .chiina-charts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .chiina-chart-frame {
+      border: 1.5px solid #b91c1c;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .chiina-chart-title {
+      background: #fee2e2;
+      color: #991b1b;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      padding: 3px 0;
+      border-bottom: 1px solid #b91c1c;
+    }
+
+    /* Vimshottari 3x3 Cards Grid */
+    .dasha-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .dasha-box {
+      border: 1px solid #f87171;
+      border-radius: 4px;
+      background: #fffaf0;
+      overflow: hidden;
+      font-size: 11px;
+    }
+
+    .dasha-box-header {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 4px 6px;
+      font-weight: 700;
+      text-align: center;
+      border-bottom: 1px solid #f87171;
+    }
+
+    .dasha-sub-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 2px 6px;
+      border-bottom: 1px solid #fee2e2;
+    }
+
+    /* Print Specifics */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .sarathi-top-bar, .sarathi-main-nav, .sarathi-sub-nav, .sarathi-workspace, .no-print {
+        display: none !important;
+      }
+      .chiina-print-container {
+        display: block !important;
+        padding: 0 !important;
+        background: transparent !important;
+      }
+      .chiina-print-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        page-break-after: always;
+        width: 100% !important;
+        min-height: 100vh !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 6mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sarathi Header -->
+  <header class="sarathi-top-bar no-print">
+    <div class="brand-section">
+      <div class="brand-logo">🕉️</div>
+      <h1 class="brand-title">ज्योतिष सारथी</h1>
+      <span style="font-size: 11px; color: #b45309; background: #fed7aa; padding: 1px 6px; border-radius: 999px; font-weight: 700;">PRO Suite</span>
+    </div>
+
+    <!-- Grouped Icons -->
+    <div class="toolbar-groups">
+      <!-- Group 1: Folders & Match -->
+      <div class="tool-pill" title="ग्राहक तथा कुण्डली व्यवस्थापन">
+        <button class="tool-btn" onclick="openNewChartModal()" title="नयाँ कुण्डली बनाउनुहोस्">📁₁</button>
+        <button class="tool-btn" onclick="openExistingModal()" title="कुण्डली खोल्नुहोस्">📁🔍</button>
+        <button class="tool-btn" onclick="editCurrentModal()" title="विवरण सम्पादन गर्नुहोस्">📁✏️</button>
+        <button class="tool-btn" onclick="switchMainTab('milan')" title="कुण्डली मिलान (36 गुण)">🧑‍🤝‍🧑</button>
+      </div>
+
+      <!-- Group 2: Tools & Chakras -->
+      <div class="tool-pill" title="ज्योतिषीय गणना तथा चक्रहरू">
+        <button class="tool-btn" onclick="switchMainTab('panchang')" title="पञ्चाङ्ग">📜</button>
+        <button class="tool-btn" onclick="switchMainTab('scroll')" title="चिना">📜</button>
+        <button class="tool-btn" onclick="switchMainTab('calendar')" title="पात्रो">📅</button>
+        <button class="tool-btn" onclick="switchMainTab('ghadi')" title="घटी/पला">⏰</button>
+        <button class="tool-btn" onclick="switchMainTab('avakahada')" title="अवकहडा चक्र">🕒</button>
+        <button class="tool-btn" onclick="switchMainTab('numerology')" title="अङ्क ज्योतिष (1234)">🔢</button>
+        <button class="tool-btn" onclick="switchMainTab('sudarshan')" title="सुदर्शन चक्र">☸️</button>
+        <button class="tool-btn" onclick="switchMainTab('gochar')" title="ग्रह गोचर">🪐</button>
+        <button class="tool-btn" onclick="switchMainTab('upaya')" title="वैदिक मन्त्र तथा उपाय">🕉️</button>
+      </div>
+
+      <!-- Group 3: Settings & Nepal Engine -->
+      <div class="tool-pill" title="नेपाल ज्योतिषीय इन्जिन तथा सेटिङ">
+        <button class="tool-btn" title="मुहूर्त">⚙️📅</button>
+        <button class="tool-btn" title="निर्देशिका">📇</button>
+        <button class="tool-btn" title="अक्षांश/देशान्तर">📍</button>
+        <button class="tool-btn" title="नेपाली विक्रम सम्वत् (B.S.)">🇳🇵</button>
+        <button class="tool-btn" onclick="toggleTheme()" title="थिम परिवर्तन">🌓</button>
+      </div>
+    </div>
+
+    <!-- Actions & Quick Controls -->
+    <div class="top-actions">
+      <select class="ayanamsa-select" id="ayanamsa-picker" onchange="changeAyanamsa(this.value)">
+        <option value="surya">सूर्य सिद्धान्त</option>
+        <option value="lahiri" selected>Lahiri (चित्रपक्ष)</option>
+        <option value="raman">B.V. Raman</option>
+        <option value="kp">KP Krishnamurti</option>
+      </select>
+
+      <button class="btn-action-pill" onclick="triggerChiinaPrint()" title="चिना प्रिन्ट गर्नुहोस् वा PDF सेभ गर्नुहोस्">
+        <span>🖨️ चिना प्रिन्ट</span>
+      </button>
+
+      <a href="/admin" class="btn-action-pill" style="background: #475569;" title="Admin Portal मा फर्कनुहोस्">
+        <span>🔐 Admin</span>
+      </a>
+
+      <a href="/" class="btn-action-pill" style="background: #0284c7;" title="गृहपृष्ठ">
+        <span>🏠 Home</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- 12 Main Navigation Tabs -->
+  <nav class="sarathi-main-nav no-print" id="sarathi-main-tabs">
+    <div class="main-tab-link active" onclick="switchMainTab('vivaran')">विवरण</div>
+    <div class="main-tab-link" onclick="switchMainTab('kundalis')">कुण्डलीहरू</div>
+    <div class="main-tab-link" onclick="switchMainTab('dasha')">दशा</div>
+    <div class="main-tab-link" onclick="switchMainTab('yogas')">योग र युति</div>
+    <div class="main-tab-link" onclick="switchMainTab('faladesh')">फलादेश</div>
+    <div class="main-tab-link" onclick="switchMainTab('grahamaitri')">ग्रहमैत्री</div>
+    <div class="main-tab-link" onclick="switchMainTab('shadbala')">षड्बल</div>
+    <div class="main-tab-link" onclick="switchMainTab('ashtakavarga')">अष्टकवर्ग</div>
+    <div class="main-tab-link" onclick="switchMainTab('varshaphala')">वर्षफल</div>
+    <div class="main-tab-link" onclick="switchMainTab('vividha')">विविध</div>
+    <div class="main-tab-link" onclick="switchMainTab('gochar')">गोचर</div>
+    <div class="main-tab-link" onclick="switchMainTab('print')">चिना प्रिन्ट</div>
+  </nav>
+
+  <!-- Sub-tabs bar under चिना प्रिन्ट -->
+  <div class="sarathi-sub-nav no-print" id="sarathi-sub-tabs">
+    <div class="sub-tab-link active" onclick="switchSubTab('saral')">सरल चिना</div>
+    <div class="sub-tab-link" onclick="switchSubTab('nepali')">नेपाली चिना</div>
+    <div class="sub-tab-link" onclick="switchSubTab('adhunik')">आधुनिक चिना</div>
+    <div class="sub-tab-link" onclick="switchSubTab('adhunik2')">आधुनिक चिना २</div>
+    <div class="sub-tab-link" onclick="switchSubTab('vimshottari')">विंशोत्तरी दशा</div>
+    <div class="sub-tab-link" onclick="switchSubTab('tribhagi')">त्रिभागी दशा</div>
+    <div class="sub-tab-link" onclick="switchSubTab('yogini')">योगिनी दशा</div>
+    <div class="sub-tab-link" onclick="switchSubTab('kundali_list')">कुण्डलीहरूको सूची</div>
+    <div class="sub-tab-link" onclick="switchSubTab('yogas_list')">योग र युति</div>
+    <div class="sub-tab-link" onclick="switchSubTab('full_faladesh')">पूर्ण फलादेश</div>
+  </div>
+
+  <!-- Main Interactive Workspace (विवरण View) -->
+  <main class="sarathi-workspace no-print" id="workspace-vivaran">
+    <!-- Left Column: 3 Stacked North Indian Charts -->
+    <div class="sidebar-charts-col">
+      <div class="chart-card-wrap">
+        <div class="chart-card-header">
+          <span>लग्न कुण्डली (D-1)</span>
+          <span style="font-size: 11.5px; color: #d97706;">पूरै जीवन</span>
+        </div>
+        <div class="chart-svg-box" id="chart-d1-container">
+          <!-- D-1 SVG injected dynamically -->
+        </div>
+      </div>
+
+      <div class="chart-card-wrap">
+        <div class="chart-card-header">
+          <span>नवमांश कुण्डली (D-9)</span>
+          <span style="font-size: 11.5px; color: #d97706;">विवाह / भाग्य</span>
+        </div>
+        <div class="chart-svg-box" id="chart-d9-container">
+          <!-- D-9 SVG injected dynamically -->
+        </div>
+      </div>
+
+      <div class="chart-card-wrap">
+        <div class="chart-card-header">
+          <span>भाव कुण्डली</span>
+          <span style="font-size: 11.5px; color: #d97706;">भाव चलित</span>
+        </div>
+        <div class="chart-svg-box" id="chart-bhav-container">
+          <!-- Bhav SVG injected dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Details & Planetary Table -->
+    <div class="main-details-col">
+      <!-- Top Row: Avakahada & Dasha split -->
+      <div class="details-split-row">
+        <!-- Avakahada Card -->
+        <div class="sarathi-card">
+          <div class="card-tab-header">
+            <button class="card-tab-btn active">अवकहडाचक्र</button>
+            <button class="card-tab-btn">विवरण</button>
+            <button class="card-tab-btn">पञ्चाङ्ग</button>
+            <button class="card-tab-btn">घातकचक्र</button>
+            <button class="card-tab-btn">राशि चक्र</button>
+          </div>
+          <div style="padding: 10px;">
+            <table class="sarathi-table">
+              <tr><td style="font-weight:700; width:34%;">नाम</td><td id="td-name">कुण्डली १</td></tr>
+              <tr><td style="font-weight:700;">नामाक्षर</td><td id="td-namakshar" style="color:#0284c7; font-weight:700;">छ - आर्द्रा (०४) - मिथुन</td></tr>
+              <tr><td style="font-weight:700;">तिथि</td><td id="td-tithi">भाद्र कृष्ण - दशमी</td></tr>
+              <tr><td style="font-weight:700;">योग</td><td id="td-yoga">व्यतिपात</td></tr>
+              <tr><td style="font-weight:700;">करण</td><td id="td-karana" style="color:#16a34a; font-weight:700;">भद्रा</td></tr>
+              <tr><td style="font-weight:700;">गण</td><td id="td-gana" style="color:#9333ea; font-weight:700;">मनुष्य</td></tr>
+              <tr><td style="font-weight:700;">नाडी</td><td id="td-nadi" style="color:#2563eb; font-weight:700;">आद्य</td></tr>
+              <tr><td style="font-weight:700;">वर्ण / वैश्य</td><td id="td-varna">शूद्र / द्विपद</td></tr>
+              <tr><td style="font-weight:700;">योनि / आसन</td><td id="td-yoni">श्वान / सर्प</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Dasha Card -->
+        <div class="sarathi-card">
+          <div class="card-tab-header">
+            <button class="card-tab-btn active" id="btn-vim-tab" onclick="switchDashaView('vimshottari')">विंशोत्तरी दशा</button>
+            <button class="card-tab-btn" id="btn-tri-tab" onclick="switchDashaView('tribhagi')">त्रिभागी दशा</button>
+            <button class="card-tab-btn" id="btn-yog-tab" onclick="switchDashaView('yogini')">योगिनी दशा</button>
+            <div style="margin-left:auto; display:flex; gap:4px; padding:4px;">
+              <span style="font-size:11px; background:#e0f2fe; color:#0369a1; padding:2px 6px; border-radius:4px; font-weight:700;">वि.सं.</span>
+            </div>
+          </div>
+          <div style="padding: 10px; max-height: 290px; overflow-y: auto;">
+            <table class="sarathi-table" id="table-dasha-quick">
+              <thead>
+                <tr>
+                  <th>ग्रह</th>
+                  <th>सुरु मिति</th>
+                  <th>अन्त्य मिति</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-dasha-quick">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Graha Spashta Table -->
+      <div class="sarathi-card">
+        <div class="card-tab-header">
+          <button class="card-tab-btn active">ग्रहस्पष्ट</button>
+          <button class="card-tab-btn">ग्रहको दृष्टि</button>
+          <button class="card-tab-btn">भावमा दृष्टि</button>
+          <button class="card-tab-btn">आरूढ पद</button>
+          <button class="card-tab-btn">अष्टकवर्ग चार्ट</button>
+          <button class="card-tab-btn">नव-तारा</button>
+        </div>
+        <div style="padding: 10px; overflow-x: auto;">
+          <table class="sarathi-table" id="table-graha-spashta">
+            <thead>
+              <tr>
+                <th>ग्रह</th>
+                <th>राशि</th>
+                <th>ग्रहस्पष्ट</th>
+                <th>नक्षत्र</th>
+                <th>अवस्था</th>
+                <th>कारक</th>
+                <th>विशेषता</th>
+                <th>स्थिति</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-graha-spashta">
+              <!-- Injected dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Divisional Charts Grid (कुण्डलीहरू View) -->
+  <main class="no-print" id="workspace-kundalis" style="display:none;">
+    <div style="padding: 10px 18px 0; display:flex; justify-content:space-between; align-items:center;">
+      <div style="font-size: 14px; font-weight:700; color:#9a3412;">
+        षोडशवर्ग कुण्डलीहरू (Divisional Charts)
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-action-pill" style="padding:4px 10px; font-size:11.5px;">कुण्डलीहरू १</button>
+        <button class="btn-action-pill" style="padding:4px 10px; font-size:11.5px; background:#475569;">कुण्डलीहरू २</button>
+        <button class="btn-action-pill" style="padding:4px 10px; font-size:11.5px; background:#475569;">षोडशवर्ग तालिका</button>
+      </div>
+    </div>
+
+    <div class="divisional-grid" id="divisional-grid-container">
+      <!-- 6 Charts Grid injected here -->
+    </div>
+  </main>
+
+  <!-- Complete 5-Page Traditional Nepali Chiina Printout -->
+  <div class="chiina-print-container" id="chiina-print-section">
+
+    <!-- Actions bar above printout (Screen only) -->
+    <div class="no-print" style="max-width:210mm; margin:0 auto 16px; background:#ffffff; padding:12px 18px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+      <div>
+        <h3 style="font-family:'Noto Serif Devanagari', serif; color:#b91c1c; font-size:17px; font-weight:800;">
+          📜 पारम्परिक नेपाली चिना (५-पृष्ठ सम्पूर्ण संस्करण)
+        </h3>
+        <p style="font-size:12px; color:#64748b;">
+          A4 साइज, रातो 卐 स्वस्तिक किनारा र गणेश वन्दना सहित प्रिन्ट तयार।
+        </p>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button onclick="window.print()" class="btn-action-pill" style="padding:8px 18px; font-size:13.5px;">
+          <span>🖨️ सिधै प्रिन्ट / PDF सेभ गर्नुहोस्</span>
+        </button>
+        <button onclick="switchMainTab('vivaran')" class="btn-action-pill" style="background:#64748b; padding:8px 14px; font-size:13.5px;">
+          <span>✕ बन्द गर्नुहोस्</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PAGE 1: जन्म विवरण, लग्न र नवमांश कुण्डली, ग्रहस्पष्ट तालिका -->
+    <div class="chiina-print-page">
+      <div class="swastika-border-outer">
+        <div class="swastika-border-inner">
+          <div class="swastika-ribbon-top">
+            <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
+          </div>
+
+          <div class="chiina-top-invocation">ॐ श्री गणेशाय नमः</div>
+
+          <div class="chiina-section-title">जन्म विवरण</div>
+
+          <table class="chiina-info-table">
+            <tr>
+              <td class="label">जन्म मिति / विक्रम सम्वत्</td>
+              <td id="p1-dob">०६ सेप्टेम्बर २०२६ / २१ भाद्र २०८३</td>
+              <td class="label">नक्षत्र / अक्षर</td>
+              <td id="p1-nakshatra">छ - आर्द्रा (०४)</td>
+            </tr>
+            <tr>
+              <td class="label">जन्म वार</td>
+              <td id="p1-day">आइतबार</td>
+              <td class="label">राशि</td>
+              <td id="p1-rashi">मिथुन</td>
+            </tr>
+            <tr>
+              <td class="label">जन्म समय / इष्ट</td>
+              <td id="p1-time">१७:२१:०० / २९:०१:३७ घटी</td>
+              <td class="label">गण / नाडी</td>
+              <td id="p1-gana-nadi">मनुष्य / आद्य</td>
+            </tr>
+            <tr>
+              <td class="label">जन्म स्थान</td>
+              <td id="p1-place">Kathmandu (+५:४५)</td>
+              <td class="label">भयात / भभोग</td>
+              <td id="p1-bhayat">४९:१८:४७ / ५५:४८:१७</td>
+            </tr>
+            <tr>
+              <td class="label">अक्षांश / रेखांश</td>
+              <td colspan="3" id="p1-coords">२७° उ ४२' / ८५° पू १९'</td>
+            </tr>
+          </table>
+
+          <div class="chiina-charts-row">
+            <div class="chiina-chart-frame">
+              <div class="chiina-chart-title">लग्न कुण्डली (D-1)</div>
+              <div id="p1-chart-d1"></div>
+            </div>
+            <div class="chiina-chart-frame">
+              <div class="chiina-chart-title">नवमांश कुण्डली (D-9)</div>
+              <div id="p1-chart-d9"></div>
+            </div>
+          </div>
+
+          <div class="chiina-section-title" style="margin-top:6px;">एतत्समयजा ग्रहाणां स्पष्टाः</div>
+          <table class="sarathi-table" id="p1-graha-table" style="font-size:12px;">
+            <thead>
+              <tr style="background:#fee2e2; color:#991b1b;">
+                <th>ग्रह</th>
+                <th>राशि</th>
+                <th>अंश</th>
+                <th>नक्षत्र</th>
+                <th>पद</th>
+              </tr>
+            </thead>
+            <tbody id="p1-tbody-grahas">
+              <!-- Injected -->
+            </tbody>
+          </table>
+
+          <div class="swastika-ribbon-bottom" style="margin-top:10px;">
+            <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2: विंशोत्तरी दशा (भुक्ति) ३x३ कार्ड ग्रिड -->
+    <div class="chiina-print-page">
+      <div class="swastika-border-outer">
+        <div class="swastika-border-inner">
+          <div class="swastika-ribbon-top">
+            <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
+          </div>
+
+          <div class="chiina-section-title" style="font-size:17px; margin-bottom:12px;">
+            विंशोत्तरी दशा (भुक्ति) — १२० वर्षीय महादशा चक्र
+          </div>
+
+          <div class="dasha-cards-grid" id="p2-vimshottari-grid">
+            <!-- 9 Dasha Cards injected here -->
+          </div>
+
+          <div class="swastika-ribbon-bottom" style="margin-top:14px;">
+            <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: योगिनी दशा (भुक्ति) भाग १ -->
+    <div class="chiina-print-page">
+      <div class="swastika-border-outer">
+        <div class="swastika-border-inner">
+          <div class="swastika-ribbon-top">
+            <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
+          </div>
+
+          <div class="chiina-section-title" style="font-size:17px; margin-bottom:12px;">
+            योगिनी दशा (भुक्ति) — चक्र १
+          </div>
+
+          <div class="dasha-cards-grid" id="p3-yogini-grid">
+            <!-- Yogini Cards 1-9 injected here -->
+          </div>
+
+          <div class="swastika-ribbon-bottom" style="margin-top:14px;">
+            <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: योगिनी दशा (भुक्ति) भाग २ -->
+    <div class="chiina-print-page">
+      <div class="swastika-border-outer">
+        <div class="swastika-border-inner">
+          <div class="swastika-ribbon-top">
+            <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
+          </div>
+
+          <div class="chiina-section-title" style="font-size:17px; margin-bottom:12px;">
+            योगिनी दशा (भुक्ति) — चक्र २
+          </div>
+
+          <div class="dasha-cards-grid" id="p4-yogini-grid">
+            <!-- Yogini Cards 10-18 injected here -->
+          </div>
+
+          <div class="swastika-ribbon-bottom" style="margin-top:14px;">
+            <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 5: योगिनी दशा (भुक्ति) भाग ३ तथा हस्ताक्षर -->
+    <div class="chiina-print-page">
+      <div class="swastika-border-outer">
+        <div class="swastika-border-inner">
+          <div class="swastika-ribbon-top">
+            <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
+          </div>
+
+          <div class="chiina-section-title" style="font-size:17px; margin-bottom:12px;">
+            योगिनी दशा (भुक्ति) — चक्र ३ तथा समाप्ति
+          </div>
+
+          <div class="dasha-cards-grid" id="p5-yogini-grid">
+            <!-- Yogini Cards 19-24 injected here -->
+          </div>
+
+          <div style="margin-top:24px; display:flex; justify-content:space-between; align-items:flex-end; padding:0 14px;">
+            <div style="text-align:center; font-size:12px; color:#475569;">
+              <div>................................................</div>
+              <div style="font-weight:700; margin-top:4px;">ज्योतिषविद् / पण्डित हस्ताक्षर</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Noto Serif Devanagari', serif; font-size:17px; font-weight:800; color:#b91c1c;">ज्योतिष सारथी</div>
+              <div style="font-size:11px; color:#64748b;">Astro Tiwari Vedic Astrological Systems</div>
+            </div>
+          </div>
+
+          <div class="swastika-ribbon-bottom" style="margin-top:18px;">
+            <span>卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐 卐</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let sarathiData = null;
+
+    async function loadSarathiData() {
+      try {
+        const res = await fetch('/api/sarathi/sample');
+        const json = await res.json();
+        if (json.success && json.data) {
+          sarathiData = json.data;
+          renderAllViews(sarathiData);
+        }
+      } catch (err) {
+        console.error('Failed to load Sarathi data:', err);
+      }
+    }
+
+    function renderAllViews(data) {
+      if (!data) return;
+
+      // 1. Render Left Stacked Charts
+      document.getElementById('chart-d1-container').innerHTML = data.charts.d1.svg;
+      document.getElementById('chart-d9-container').innerHTML = data.charts.d9.svg;
+      document.getElementById('chart-bhav-container').innerHTML = data.charts.bhav.svg;
+
+      // 2. Render Avakahada Chakra
+      const a = data.avakahada;
+      document.getElementById('td-name').textContent = a.name;
+      document.getElementById('td-namakshar').textContent = a.namakshar;
+      document.getElementById('td-tithi').textContent = a.tithi;
+      document.getElementById('td-yoga').textContent = a.yoga;
+      document.getElementById('td-karana').textContent = a.karana;
+      document.getElementById('td-gana').textContent = a.gana;
+      document.getElementById('td-nadi').textContent = a.nadi;
+      document.getElementById('td-varna').textContent = a.varna;
+      document.getElementById('td-yoni').textContent = a.yoni;
+
+      // 3. Render Quick Dasha Table
+      const dashaTbody = document.getElementById('tbody-dasha-quick');
+      dashaTbody.innerHTML = '';
+      data.dashas.vimshottari.forEach(d => {
+        const tr = document.createElement('tr');
+        if (d.isCurrent) {
+          tr.style.background = '#fef3c7';
+          tr.style.fontWeight = '700';
+        }
+        tr.innerHTML = `
+          <td style="${d.isCurrent ? 'color:#b45309;' : ''}">${d.lord} ${d.isCurrent ? '➔' : ''}</td>
+          <td>${d.startBs}</td>
+          <td>${d.endBs}</td>
+        `;
+        dashaTbody.appendChild(tr);
+      });
+
+      // 4. Render Graha Spashta Table
+      const grahaTbody = document.getElementById('tbody-graha-spashta');
+      grahaTbody.innerHTML = '';
+      data.planets.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight:700; color:#9a3412;">${p.nameNepali}</td>
+          <td>${p.rashiName}</td>
+          <td style="font-weight:700; font-family:'Noto Serif Devanagari', serif;">${p.degreeFormatted}</td>
+          <td>${p.nakshatra} - <span style="color:#d97706;">${p.nakshatraLord}</span></td>
+          <td><span class="badge-tag" style="background:#f1f5f9; color:#475569;">${p.avastha || ''}</span></td>
+          <td>${p.karaka ? `<span class="badge-tag badge-karaka">${p.karaka}</span>` : ''}</td>
+          <td>${p.visheshata ? `<span class="badge-tag badge-pushkar">${p.visheshata}</span>` : ''}</td>
+          <td><span class="badge-tag badge-status">${p.sthiti || ''}</span></td>
+        `;
+        grahaTbody.appendChild(tr);
+      });
+
+      // 5. Render Divisional Charts Grid (कुण्डलीहरू Tab)
+      const divGrid = document.getElementById('divisional-grid-container');
+      divGrid.innerHTML = `
+        <div class="chart-card-wrap">
+          <div class="chart-card-header"><span>राशि कुण्डली (D-1)</span><span style="font-size:11px;">पूरै जीवन</span></div>
+          <div class="chart-svg-box">${data.charts.d1.svg}</div>
+        </div>
+        <div class="chart-card-wrap">
+          <div class="chart-card-header"><span>नवमांश कुण्डली (D-9)</span><span style="font-size:11px;">विवाह</span></div>
+          <div class="chart-svg-box">${data.charts.d9.svg}</div>
+        </div>
+        <div class="chart-card-wrap">
+          <div class="chart-card-header"><span>भाव कुण्डली</span><span style="font-size:11px;">भाव चलित</span></div>
+          <div class="chart-svg-box">${data.charts.bhav.svg}</div>
+        </div>
+        <div class="chart-card-wrap">
+          <div class="chart-card-header"><span>होरा कुण्डली (D-2)</span><span style="font-size:11px;">धन</span></div>
+          <div class="chart-svg-box">${data.charts.d2.svg}</div>
+        </div>
+        <div class="chart-card-wrap">
+          <div class="chart-card-header"><span>द्रेष्काण कुण्डली (D-3)</span><span style="font-size:11px;">दाजुभाइ, दिदीबहिनी</span></div>
+          <div class="chart-svg-box">${data.charts.d3.svg}</div>
+        </div>
+        <div class="chart-card-wrap" style="display:flex; flex-direction:column; justify-content:center; align-items:center; background:#fffbeb; border:2px dashed #fde68a; padding:20px; text-align:center;">
+          <div style="font-size:36px; margin-bottom:8px;">👑</div>
+          <div style="font-family:'Noto Serif Devanagari', serif; font-size:17px; font-weight:700; color:#b45309;">षोडशवर्ग अनलक</div>
+          <p style="font-size:12px; color:#92400e; margin-top:6px;">D-4, D-7, D-10, D-12, D-16, D-20, D-24, D-27, D-30, D-60 सम्पूर्ण चार्टहरू उपलब्ध छन्।</p>
+        </div>
+      `;
+
+      // 6. Render Chiina Print Page 1
+      document.getElementById('p1-dob').textContent = data.meta.dobBs;
+      document.getElementById('p1-day').textContent = 'आइतबार';
+      document.getElementById('p1-time').textContent = data.meta.time;
+      document.getElementById('p1-place').textContent = data.meta.place;
+      document.getElementById('p1-coords').textContent = data.meta.coordinates;
+      document.getElementById('p1-nakshatra').textContent = data.avakahada.namakshar.split(' - ')[1] || 'आर्द्रा (०४)';
+      document.getElementById('p1-rashi').textContent = data.avakahada.namakshar.split(' - ')[2] || 'मिथुन';
+      document.getElementById('p1-gana-nadi').textContent = `${data.avakahada.gana} / ${data.avakahada.nadi}`;
+      document.getElementById('p1-bhayat').textContent = data.meta.bhayatBhabhog;
+
+      document.getElementById('p1-chart-d1').innerHTML = data.charts.d1.svg;
+      document.getElementById('p1-chart-d9').innerHTML = data.charts.d9.svg;
+
+      const p1GrahaTbody = document.getElementById('p1-tbody-grahas');
+      p1GrahaTbody.innerHTML = '';
+      data.planets.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight:700;">${p.nameNepali}</td>
+          <td>${p.rashiName}</td>
+          <td style="font-family:'Noto Serif Devanagari', serif;">${p.degreeFormatted}</td>
+          <td>${p.nakshatra.split(' ')[0]}</td>
+          <td>${p.nakshatra.includes('०') ? p.nakshatra.split('(')[1].replace(')', '') : '०१'}</td>
+        `;
+        p1GrahaTbody.appendChild(tr);
+      });
+
+      // 7. Render Vimshottari 3x3 Grid (Page 2)
+      const p2Grid = document.getElementById('p2-vimshottari-grid');
+      p2Grid.innerHTML = '';
+      const sampleVimSub = [
+        { lord: 'राहु - १८ वर्ष', dates: '२०६७-०६-२३ - २०८५-०६-२३', bhuktis: [['राहु', '० वर्ष'], ['बृहस्पति', '० वर्ष'], ['शनि', '० वर्ष'], ['बुध', '० वर्ष'], ['केतु', '० वर्ष'], ['शुक्र', '० वर्ष'], ['सूर्य', '० वर्ष'], ['चन्द्र', '२०८४-०६-०५'], ['मङ्गल', '२०८५-०६-२३']] },
+        { lord: 'बृहस्पति - १६ वर्ष', dates: '२०८५-०६-२३ - २१०१-०६-२३', bhuktis: [['बृहस्पति', '२०८७-०८-११'], ['शनि', '२०९०-०२-२६'], ['बुध', '२०९२-०५-२९'], ['केतु', '२०९३-०५-०५'], ['शुक्र', '२०९६-०१-०९'], ['सूर्य', '२०९६-१०-२५'], ['चन्द्र', '२०९८-०२-२६'], ['मङ्गल', '२०९९-०२-०२'], ['राहु', '२१०१-०६-२३']] },
+        { lord: 'शनि - १९ वर्ष', dates: '२१०१-०६-२३ - २१२०-०६-२३', bhuktis: [['शनि', '२१०४-०६-२६'], ['बुध', '२१०७-०३-०७'], ['केतु', '२१०८-०४-१६'], ['शुक्र', '२१११-०६-१४'], ['सूर्य', '२११२-०५-२७'], ['चन्द्र', '२११३-१२-३०'], ['मङ्गल', '२११५-०२-०९'], ['राहु', '२११७-१२-१५'], ['बृहस्पति', '२१२०-०६-२३']] },
+        { lord: 'बुध - १७ वर्ष', dates: '२१२०-०६-२३ - २१३७-०६-२३', bhuktis: [['बुध', '२१२२-११-२४'], ['केतु', '२१२३-११-२१'], ['शुक्र', '२१२६-०९-१९'], ['सूर्य', '२१२७-०७-२३'], ['चन्द्र', '२१२८-१२-२६'], ['मङ्गल', '२१२९-१२-२३'], ['राहु', '२१३२-०७-०६'], ['बृहस्पति', '२१३४-१०-१५'], ['शनि', '२१३७-०६-२३']] },
+        { lord: 'केतु - ७ वर्ष', dates: '२१३७-०६-२३ - २१४४-०६-२३', bhuktis: [['केतु', '२१३७-११-२३'], ['शुक्र', '२१३९-०१-२४'], ['सूर्य', '२१३९-०५-२६'], ['चन्द्र', '२१३९-१२-३०'], ['मङ्गल', '२१४०-०५-२३'], ['राहु', '२१४१-०६-१०'], ['बृहस्पति', '२१४२-०५-१७'], ['शनि', '२१४३-०६-२६'], ['बुध', '२१४४-०६-२३']] },
+        { lord: 'शुक्र - २० वर्ष', dates: '२१४४-०६-२३ - २१६४-०६-२३', bhuktis: [['शुक्र', '२१४७-१०-२६'], ['सूर्य', '२१४८-१०-२५'], ['चन्द्र', '२१५०-०६-२३'], ['मङ्गल', '२१५१-०८-२४'], ['राहु', '२१५४-०८-२४'], ['बृहस्पति', '२१५७-०४-२५'], ['शनि', '२१६०-०६-२४'], ['बुध', '२१६३-०४-२६'], ['केतु', '२१६४-०६-२३']] },
+        { lord: 'सूर्य - ६ वर्ष', dates: '२१६४-०६-२३ - २१७०-०६-२३', bhuktis: [['सूर्य', '२१६४-१०-१३'], ['चन्द्र', '२१६५-०४-१३'], ['मङ्गल', '२१६५-०८-१८'], ['राहु', '२१६६-०७-१२'], ['बृहस्पति', '२१६७-०४-३१'], ['शनि', '२१६८-०४-१३'], ['बुध', '२१६९-०२-२१'], ['केतु', '२१६९-०६-२३'], ['शुक्र', '२१७०-०६-२३']] },
+        { lord: 'चन्द्र - १० वर्ष', dates: '२१७०-०६-२३ - २१८०-०६-२३', bhuktis: [['चन्द्र', '२१७१-०४-२४'], ['मङ्गल', '२१७१-११-२६'], ['राहु', '२१७३-०५-२३'], ['बृहस्पति', '२१७४-०९-२४'], ['शनि', '२१७६-०४-२४'], ['बुध', '२१७७-०९-२३'], ['केतु', '२१७८-०४-२४'], ['शुक्र', '२१७९-१२-२६'], ['सूर्य', '२१८०-०६-२३']] },
+        { lord: 'मङ्गल - ७ वर्ष', dates: '२१८०-०६-२३ - २१८७-०६-२४', bhuktis: [['मङ्गल', '२१८०-११-२४'], ['राहु', '२१८१-१२-१३'], ['बृहस्पति', '२१८२-११-१८'], ['शनि', '२१८३-१२-२८'], ['बुध', '२१८४-१२-२५'], ['केतु', '२१८५-०५-१८'], ['शुक्र', '२१८६-०७-१७'], ['सूर्य', '२१८६-११-२७'], ['चन्द्र', '२१८७-०६-२४']] }
+      ];
+
+      sampleVimSub.forEach(b => {
+        const box = document.createElement('div');
+        box.className = 'dasha-box';
+        let subRows = '';
+        b.bhuktis.forEach(([lord, dt]) => {
+          subRows += `<div class="dasha-sub-row"><span style="font-weight:600;">${lord}</span><span>${dt}</span></div>`;
+        });
+        box.innerHTML = `
+          <div class="dasha-box-header">${b.lord}<div style="font-size:9.5px; font-weight:normal; opacity:0.85;">${b.dates}</div></div>
+          ${subRows}
+        `;
+        p2Grid.appendChild(box);
+      });
+
+      // 8. Render Yogini Pages (3, 4, 5)
+      renderYoginiPages(data.dashas.yogini);
+    }
+
+    function renderYoginiPages(yoginiList) {
+      if (!yoginiList || yoginiList.length === 0) return;
+
+      const p3 = document.getElementById('p3-yogini-grid');
+      const p4 = document.getElementById('p4-yogini-grid');
+      const p5 = document.getElementById('p5-yogini-grid');
+
+      p3.innerHTML = '';
+      p4.innerHTML = '';
+      p5.innerHTML = '';
+
+      const makeCard = (y) => {
+        const box = document.createElement('div');
+        box.className = 'dasha-box';
+        let sub = '';
+        y.bhuktis.forEach(b => {
+          sub += `<div class="dasha-sub-row"><span style="font-weight:600;">${b.name}</span><span>${b.dateBs}</span></div>`;
+        });
+        box.innerHTML = `
+          <div class="dasha-box-header">${y.name} - ${y.years} वर्ष<div style="font-size:9.5px; font-weight:normal;">${y.dateBsRange}</div></div>
+          ${sub}
+        `;
+        return box;
+      };
+
+      yoginiList.forEach((y, idx) => {
+        const card = makeCard(y);
+        if (idx < 8) p3.appendChild(card);
+        else if (idx < 16) p4.appendChild(card);
+        else p5.appendChild(card);
+      });
+    }
+
+    // Navigation Switcher
+    function switchMainTab(tabKey) {
+      document.querySelectorAll('#sarathi-main-tabs .main-tab-link').forEach(t => t.classList.remove('active'));
+      const activeEl = Array.from(document.querySelectorAll('#sarathi-main-tabs .main-tab-link')).find(el => el.textContent.trim() === getTabLabel(tabKey));
+      if (activeEl) activeEl.classList.add('active');
+
+      const vivaran = document.getElementById('workspace-vivaran');
+      const kundalis = document.getElementById('workspace-kundalis');
+      const printSec = document.getElementById('chiina-print-section');
+      const subNav = document.getElementById('sarathi-sub-tabs');
+
+      vivaran.style.display = 'none';
+      kundalis.style.display = 'none';
+      printSec.style.display = 'none';
+      subNav.style.display = 'flex';
+
+      if (tabKey === 'vivaran') {
+        vivaran.style.display = 'grid';
+      } else if (tabKey === 'kundalis') {
+        kundalis.style.display = 'block';
+      } else if (tabKey === 'print') {
+        printSec.style.display = 'block';
+      } else {
+        vivaran.style.display = 'grid';
+      }
+    }
+
+    function getTabLabel(k) {
+      const map = {
+        vivaran: 'विवरण', kundalis: 'कुण्डलीहरू', dasha: 'दशा', yogas: 'योग र युति',
+        faladesh: 'फलादेश', grahamaitri: 'ग्रहमैत्री', shadbala: 'षड्बल',
+        ashtakavarga: 'अष्टकवर्ग', varshaphala: 'वर्षफल', vividha: 'विविध',
+        gochar: 'गोचर', print: 'चिना प्रिन्ट'
+      };
+      return map[k] || 'विवरण';
+    }
+
+    function switchSubTab(subKey) {
+      document.querySelectorAll('#sarathi-sub-tabs .sub-tab-link').forEach(s => s.classList.remove('active'));
+      event.target.classList.add('active');
+
+      if (subKey === 'saral' || subKey === 'nepali' || subKey === 'adhunik' || subKey === 'adhunik2') {
+        switchMainTab('print');
+      }
+    }
+
+    function triggerChiinaPrint() {
+      switchMainTab('print');
+      setTimeout(() => {
+        window.print();
+      }, 300);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark-theme');
+    }
+
+    function changeAyanamsa(val) {
+      console.log('Ayanamsa changed to:', val);
+    }
+
+    function openNewChartModal() {
+      const name = prompt('ग्राहकको पूरा नाम:', 'नयाँ जातक');
+      if (name) {
+        if (sarathiData) {
+          sarathiData.meta.customerName = name;
+          sarathiData.avakahada.name = name;
+          renderAllViews(sarathiData);
+        }
+      }
+    }
+
+    function openExistingModal() {
+      alert('Astro Tiwari Admin पोर्टलबाट कुनै पनि परामर्श सिधै १-क्लिकमा खोल्न सकिन्छ।');
+    }
+
+    function editCurrentModal() {
+      openNewChartModal();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSarathiData();
+    });
+  </script>
+</body>
+</html>

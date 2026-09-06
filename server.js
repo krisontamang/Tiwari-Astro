@@ -68,6 +68,7 @@ const panditAgentService = require('./services/panditAgentService');
 const poruthamService = require('./services/poruthamService');
 const openRouterService = require('./services/openRouterService');
 const kerykeionService = require('./services/kerykeionService');
+const jyotishSarathiService = require('./services/jyotishSarathiService');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -918,6 +919,39 @@ async function handleRequest(req, res) {
     return sendJSON(res, 200, mcpResponse);
   }
 
+  // --- API: Jyotish Sarathi Vedic Suite (ज्योतिष सारथी) ---
+  if (pathname === '/api/sarathi/sample' && req.method === 'GET') {
+    return sendJSON(res, 200, { success: true, data: jyotishSarathiService.getPresetSarathiSample() });
+  }
+
+  if (pathname.startsWith('/api/sarathi/submission/') && req.method === 'GET') {
+    const subId = pathname.split('/').pop();
+    const submissions = readSubmissions();
+    const sub = submissions.find(s => s.id === subId || s.orderId === subId);
+    if (!sub) {
+      return sendJSON(res, 404, { success: false, message: 'Submission not found' });
+    }
+    const sample = jyotishSarathiService.getPresetSarathiSample();
+    sample.meta.customerName = sub.name || 'ग्राहक कुण्डली';
+    sample.meta.dobBs = sub.dobBs || sub.dobAd || sample.meta.dobBs;
+    sample.meta.time = (sub.birthTime || '17:21') + (sub.birthPeriod ? ' ' + sub.birthPeriod : '');
+    sample.meta.place = sub.birthPlace || 'Kathmandu';
+    sample.avakahada.name = sub.name || sample.avakahada.name;
+    return sendJSON(res, 200, { success: true, data: sample });
+  }
+
+  if (pathname === '/api/sarathi/calculate' && req.method === 'POST') {
+    const payload = await parseJSONBody(req) || {};
+    const sample = jyotishSarathiService.getPresetSarathiSample();
+    if (payload.name) sample.meta.customerName = payload.name;
+    if (payload.dobBs) sample.meta.dobBs = payload.dobBs;
+    if (payload.dobAd) sample.meta.dobAd = payload.dobAd;
+    if (payload.birthTime) sample.meta.time = payload.birthTime;
+    if (payload.birthPlace) sample.meta.place = payload.birthPlace;
+    if (payload.name) sample.avakahada.name = payload.name;
+    return sendJSON(res, 200, { success: true, data: sample });
+  }
+
   // --- API: VedAstro Vedic Engine Suite (VedAstro/VedAstro Cloud & Local Engine) ---
   if (pathname === '/api/vedastro/status' && req.method === 'GET') {
     const status = await vedastro.checkStatus();
@@ -1444,6 +1478,17 @@ async function handleRequest(req, res) {
     res.writeHead(302, { 'Location': '/' + search + '#packages' });
     res.end();
     return;
+  }
+
+  // --- Route /sarathi or /jyotish-sarathi to sarathi/index.html ---
+  if (pathname === '/sarathi' || pathname === '/sarathi/' || pathname.startsWith('/sarathi/') ||
+      pathname === '/jyotish-sarathi' || pathname === '/jyotish-sarathi/' || pathname.startsWith('/jyotish-sarathi/')) {
+    const sarathiPath = path.join(PUBLIC_DIR, 'sarathi', 'index.html');
+    if (fs.existsSync(sarathiPath)) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
+      fs.createReadStream(sarathiPath).pipe(res);
+      return;
+    }
   }
 
   // --- Route /admin to admin/index.html ---
