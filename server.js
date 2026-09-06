@@ -47,6 +47,7 @@ const vedastro = require('./services/vedastro');
 const aiChatbot = require('./services/aiChatbot');
 const mcpServer = require('./services/mcpServer');
 const roxyApi = require('./services/roxyApi');
+const astrowaySdk = require('./services/astrowaySdk');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -620,6 +621,84 @@ const server = http.createServer(async (req, res) => {
         '18 Domain Collections (Vedic, Vastu, Numerology, Ayurveda, etc.)'
       ]
     });
+  }
+
+  // --- API: AstroWay Official TypeScript SDK Endpoints ---
+  // 1. AstroWay SDK Status & Connectivity
+  if (pathname === '/api/astroway/status' && req.method === 'GET') {
+    const info = astrowaySdk.getSdkInfo();
+    return sendJSON(res, 200, { success: true, ...info });
+  }
+
+  // 2. Download / View OpenAPI 3.1.0 Spec
+  if (pathname === '/api/astroway/spec' && req.method === 'GET') {
+    const specFile = path.join(__dirname, 'astroway-sdk', 'openapi.json');
+    if (fs.existsSync(specFile)) {
+      res.writeHead(200, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Disposition': 'attachment; filename="astroway-openapi-3.1.0.json"',
+        'Access-Control-Allow-Origin': '*'
+      });
+      fs.createReadStream(specFile).pipe(res);
+      return;
+    }
+    return sendJSON(res, 404, { success: false, message: 'AstroWay OpenAPI spec not found' });
+  }
+
+  // 3. AstroWay Keyless Reference Data (Signs, Planets, Houses, Aspects, Nakshatras)
+  if (pathname.startsWith('/api/astroway/reference') && req.method === 'GET') {
+    const category = pathname.replace('/api/astroway/reference/', '').replace('/api/astroway/reference', '') || 'signs';
+    const data = await astrowaySdk.getReferenceData(category);
+    return sendJSON(res, 200, { success: true, category, data });
+  }
+
+  // 4. AstroWay Chart Computation
+  if (pathname === '/api/astroway/chart' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const chart = await astrologyService.generateChartForSubmission(body);
+    return sendJSON(res, 200, {
+      success: true,
+      source: 'AstroWay TypeScript Engine',
+      chart
+    });
+  }
+
+  // 5. AstroWay Synastry & Compatibility
+  if (pathname === '/api/astroway/synastry' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const result = await astrowaySdk.computeSynastry(body.chart1 || body.boy, body.chart2 || body.girl);
+    return sendJSON(res, 200, { success: true, synastry: result, ...result });
+  }
+
+  // 6. AstroWay Transits
+  if (pathname === '/api/astroway/transits' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const result = await astrowaySdk.computeTransits(body.natal || body, body.targetDate);
+    return sendJSON(res, 200, { success: true, transits: result, ...result });
+  }
+
+  // 7. AstroWay Human Design BodyGraph
+  if (pathname === '/api/astroway/human-design' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const result = astrowaySdk.computeHumanDesign(body);
+    return sendJSON(res, 200, { success: true, humanDesign: result, ...result });
+  }
+
+  // 8. AstroWay Complete Numerology
+  if (pathname === '/api/astroway/numerology' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const name = body.name || body.fullName || 'Astro Tiwari';
+    const dob = body.dob || body.dobAd || '1995-05-15';
+    const result = astrowaySdk.computeNumerology(name, dob);
+    return sendJSON(res, 200, { success: true, numerology: result, ...result });
+  }
+
+  // 9. AstroWay Rider-Waite Tarot Spread
+  if (pathname === '/api/astroway/tarot' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const spreadType = body.spreadType || 'three-card';
+    const result = astrowaySdk.getTarotReading(spreadType);
+    return sendJSON(res, 200, { success: true, tarot: result, ...result });
   }
 
   // --- API: Public New Submission (Form submission from customers) ---

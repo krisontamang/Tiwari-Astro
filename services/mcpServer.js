@@ -9,6 +9,7 @@ const vedicEngine = require('./vedicEngine');
 const aiChatbot = require('./aiChatbot');
 const vedastro = require('./vedastro');
 const roxyApi = require('./roxyApi');
+const astrowaySdk = require('./astrowaySdk');
 
 const MCP_TOOLS = [
   {
@@ -104,6 +105,60 @@ const MCP_TOOLS = [
       type: 'object',
       properties: {
         date: { type: 'string', description: 'Date (YYYY-MM-DD)' }
+      }
+    }
+  },
+  {
+    name: 'astroway_human_design',
+    description: 'AstroWay SDK: Compute Human Design BodyGraph (Type, Strategy, Inner Authority, Profile, Definition, Centers).',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        date: { type: 'string', description: 'Date of birth (YYYY-MM-DD)' },
+        time: { type: 'string', description: 'Time of birth (HH:MM:SS)' }
+      }
+    }
+  },
+  {
+    name: 'astroway_numerology',
+    description: 'AstroWay SDK: Compute Life Path, Destiny Expression, Soul Urge, Personality, and Birthday Numbers.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', description: 'Full birth name' },
+        dob: { type: 'string', description: 'Date of birth (YYYY-MM-DD)' }
+      }
+    }
+  },
+  {
+    name: 'astroway_synastry',
+    description: 'AstroWay SDK: Calculate Synastry compatibility score (0-100) and aspect grid between two charts.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        chart1: { type: 'object', description: 'Subject 1 birth details (date, time, lat, lon)' },
+        chart2: { type: 'object', description: 'Subject 2 birth details (date, time, lat, lon)' }
+      },
+      required: ['chart1', 'chart2']
+    }
+  },
+  {
+    name: 'astroway_tarot',
+    description: 'AstroWay SDK: Draw a Rider-Waite Tarot card reading (1-card daily or 3-card past/present/future spread).',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        spreadType: { type: 'string', description: 'one-card or three-card' }
+      }
+    }
+  },
+  {
+    name: 'astroway_get_reference',
+    description: 'AstroWay SDK: Get reference data for signs, planets, houses, aspects, or nakshatras.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        category: { type: 'string', description: 'signs, planets, houses, aspects, or nakshatras' }
       }
     }
   }
@@ -257,6 +312,61 @@ async function handleMcpRequest(requestBody) {
         };
       }
 
+      if (toolName === 'astroway_human_design') {
+        const hd = astrowaySdk.computeHumanDesign(args);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(hd, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'astroway_numerology') {
+        const num = astrowaySdk.computeNumerology(args.name, args.dob);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(num, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'astroway_synastry') {
+        const syn = await astrowaySdk.computeSynastry(args.chart1, args.chart2);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(syn, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'astroway_tarot') {
+        const tarot = astrowaySdk.getTarotReading(args.spreadType || 'three-card');
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(tarot, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'astroway_get_reference') {
+        const ref = await astrowaySdk.getReferenceData(args.category || 'signs');
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(ref, null, 2) }]
+          }
+        };
+      }
+
       return {
         jsonrpc: '2.0',
         id,
@@ -280,5 +390,6 @@ async function handleMcpRequest(requestBody) {
 
 module.exports = {
   MCP_TOOLS,
+  getTools: () => MCP_TOOLS,
   handleMcpRequest
 };

@@ -1016,6 +1016,10 @@
               📮 RoxyAPI &amp; वैदिक उपकरण
             </button>
 
+            <button onclick="openAstrowayModal()" class="btn-ghost" style="border-color:rgba(133,193,233,0.5); color:#85c1e9; background:rgba(133,193,233,0.08);">
+              🌌 AstroWay SDK
+            </button>
+
             <div class="user-pill">
               <span class="user-dot"></span>
               <span id="admin-user-display">bensartiwari@gmail.com</span>
@@ -1641,6 +1645,200 @@
                   <thead><tr><th>मुहूर्त</th><th>स्वभाव</th><th>समय अवधि</th></tr></thead>
                   <tbody id="roxy-night-choghadiya-tbody"></tbody>
                 </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 9. ASTROWAY TYPESCRIPT SDK MODAL -->
+    <!-- ============================================================== -->
+    <div id="astroway-modal" class="custom-modal">
+      <div class="lightbox-content" style="max-width: 920px; text-align: left; max-height: 90vh; overflow-y: auto;">
+        <button class="lightbox-close" onclick="closeAstrowayModal()">&times;</button>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; padding-right:36px;">
+          <div>
+            <div style="font-family: var(--font-serif); font-size: 22px; color: #85c1e9; margin-bottom: 2px;">
+              🌌 AstroWay TypeScript SDK (v1.7.0)
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary);">
+              ७४२ Endpoints • ९४ Namespaces • Human Design (BodyGraph) • Numerology • Rider-Waite Tarot • Synastry
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <a href="/api/astroway/spec" target="_blank" class="btn-ghost" style="font-size:11px; padding:4px 10px; border-color:rgba(133,193,233,0.4); color:#85c1e9; text-decoration:none;">
+              📄 OpenAPI 3.1 Spec (8MB)
+            </a>
+          </div>
+        </div>
+
+        <!-- AstroWay Tab Navigation -->
+        <div class="km-tab-nav" style="margin-bottom:14px;">
+          <button class="km-tab-link active" onclick="switchAstrowayTab('sdk', this)">
+            📋 SDK स्थिति र सन्दर्भ
+          </button>
+          <button class="km-tab-link" onclick="switchAstrowayTab('hd', this)">
+            🧬 Human Design (BodyGraph)
+          </button>
+          <button class="km-tab-link" onclick="switchAstrowayTab('numerology', this)">
+            🔢 अंकज्योतिष (Numerology)
+          </button>
+          <button class="km-tab-link" onclick="switchAstrowayTab('tarot', this)">
+            🎴 टैरो र Synastry
+          </button>
+        </div>
+
+        <!-- Tab 1: SDK Overview & Reference Data -->
+        <div id="pane-astroway-sdk" class="km-tab-pane active">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:14px;">
+            <div style="background:rgba(133,193,233,0.05); border:1px solid rgba(133,193,233,0.25); border-radius:0.75rem; padding:14px;">
+              <div style="font-size:13px; font-weight:700; color:#85c1e9; margin-bottom:8px;">
+                ⚡ AstroWay SDK Overview
+              </div>
+              <div style="font-size:11.5px; color:#ccc; line-height:1.6;" id="astroway-sdk-summary">
+                SDK Package: <b>@astroway/sdk v1.7.0</b><br/>
+                कुल Endpoints: <b>742</b> (OpenAPI 3.1.0 Spec)<br/>
+                कुल Namespaces: <b>94</b> (Charts, Houses, Synastry, Return, Tarot, HD...)<br/>
+                Remote Base URL: <b>https://api.astroway.info/v1</b><br/>
+                API कुञ्जी स्थिति: <span id="astroway-key-badge" class="badge badge-paid">Keyless Public Access (Active)</span>
+              </div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:0.75rem; padding:14px;">
+              <div style="font-size:13px; font-weight:700; color:#f4d38c; margin-bottom:8px;">
+                🔍 द्रुत सन्दर्भ डाटा (Reference Explorer)
+              </div>
+              <div style="font-size:11px; color:#aaa; margin-bottom:10px;">
+                AstroWay को आधिकारिक सन्दर्भ पुस्तकालयहरू अन्वेषण गर्नुहोस्:
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                <button class="btn-ghost" style="font-size:11px; padding:4px 8px;" onclick="loadAstrowayReference('signs')">♈ १२ राशि (Signs)</button>
+                <button class="btn-ghost" style="font-size:11px; padding:4px 8px;" onclick="loadAstrowayReference('planets')">🪐 ग्रहहरू (Planets)</button>
+                <button class="btn-ghost" style="font-size:11px; padding:4px 8px;" onclick="loadAstrowayReference('houses')">🏛️ १२ भाव (Houses)</button>
+                <button class="btn-ghost" style="font-size:11px; padding:4px 8px;" onclick="loadAstrowayReference('aspects')">📐 दृष्टि (Aspects)</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="astroway-ref-output" style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px; font-size:11.5px; max-height:220px; overflow-y:auto; color:#ddd;">
+            <span style="color:#888;">माथिको कुनै एक श्रेणी छानेर AstroWay सन्दर्भ डाटा हेर्नुहोस्...</span>
+          </div>
+        </div>
+
+        <!-- Tab 2: Human Design (BodyGraph) -->
+        <div id="pane-astroway-hd" class="km-tab-pane">
+          <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:14px; margin-bottom:14px;">
+            <div style="font-size:12px; font-weight:700; color:#85c1e9; margin-bottom:10px;">
+              🧬 Human Design (BodyGraph) जन्म विवरण
+            </div>
+            <div style="display:grid; grid-template-columns: 1.5fr 1fr 1fr 1fr auto; gap:8px; align-items:flex-end;">
+              <div>
+                <label class="form-label" style="font-size:10.5px;">जन्म मिति</label>
+                <input type="date" id="aw-hd-dob" class="form-input" value="1995-05-15" style="height:32px; font-size:11.5px;" />
+              </div>
+              <div>
+                <label class="form-label" style="font-size:10.5px;">जन्म समय</label>
+                <input type="time" id="aw-hd-tob" class="form-input" value="08:30" style="height:32px; font-size:11.5px;" />
+              </div>
+              <div>
+                <label class="form-label" style="font-size:10.5px;">अक्षांश (Lat)</label>
+                <input type="number" id="aw-hd-lat" class="form-input" value="27.7172" step="0.0001" style="height:32px; font-size:11.5px;" />
+              </div>
+              <div>
+                <label class="form-label" style="font-size:10.5px;">देशान्तर (Lon)</label>
+                <input type="number" id="aw-hd-lon" class="form-input" value="85.3240" step="0.0001" style="height:32px; font-size:11.5px;" />
+              </div>
+              <button class="btn-primary" onclick="runAstrowayHumanDesign()" style="height:32px; font-size:11.5px; padding:0 14px; background:#85c1e9; color:#0b0a14; border-color:#85c1e9;">
+                गणना गर्नुहोस्
+              </button>
+            </div>
+          </div>
+
+          <div id="aw-hd-results">
+            <div style="text-align:center; padding:24px; color:#888; font-size:12px;">
+              माथि जन्म विवरण भरेर "गणना गर्नुहोस्" मा क्लिक गर्नुहोस्। BodyGraph Energy Type, Inner Authority, Profile, र ९ वटा केन्द्रहरू देखिनेछ।
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Numerology -->
+        <div id="pane-astroway-numerology" class="km-tab-pane">
+          <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:14px; margin-bottom:14px;">
+            <div style="font-size:12px; font-weight:700; color:#f4d38c; margin-bottom:10px;">
+              🔢 अंकज्योतिष प्रोफाइल (Vedic &amp; Western Pythagorean)
+            </div>
+            <div style="display:grid; grid-template-columns: 2fr 1.5fr auto; gap:8px; align-items:flex-end;">
+              <div>
+                <label class="form-label" style="font-size:10.5px;">पूरा नाम (Full Name)</label>
+                <input type="text" id="aw-num-name" class="form-input" placeholder="उदाहरण: Ramesh Sharma" value="Ramesh Sharma" style="height:32px; font-size:11.5px;" />
+              </div>
+              <div>
+                <label class="form-label" style="font-size:10.5px;">जन्म मिति (Date of Birth)</label>
+                <input type="date" id="aw-num-dob" class="form-input" value="1992-08-24" style="height:32px; font-size:11.5px;" />
+              </div>
+              <button class="btn-primary" onclick="runAstrowayNumerology()" style="height:32px; font-size:11.5px; padding:0 14px;">
+                अंक विश्लेषण
+              </button>
+            </div>
+          </div>
+
+          <div id="aw-num-results">
+            <div style="text-align:center; padding:24px; color:#888; font-size:12px;">
+              नाम र जन्म मिति हालेर जीवन पथ (Life Path), अभिव्यक्ति (Destiny), आत्म अभिलाषा (Soul Urge) र मास्टर नम्बरहरू पत्ता लगाउनुहोस्।
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Tarot & Synastry -->
+        <div id="pane-astroway-tarot" class="km-tab-pane">
+          <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:14px;">
+            <!-- Left: Tarot Card Spread -->
+            <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <div style="font-size:12.5px; font-weight:700; color:#85c1e9;">
+                  🎴 Rider-Waite टैरो वाचन
+                </div>
+                <div style="display:flex; gap:6px;">
+                  <select id="aw-tarot-type" class="form-input" style="height:28px; font-size:11px; padding:2px 8px; width:auto;">
+                    <option value="single">एकल कार्ड (Daily Insight)</option>
+                    <option value="three_card" selected>३ कार्ड (Past / Present / Future)</option>
+                  </select>
+                  <button class="btn-ghost" onclick="drawAstrowayTarot()" style="height:28px; font-size:11px; padding:2px 10px; color:#85c1e9; border-color:rgba(133,193,233,0.4);">
+                    कार्ड तान्नुहोस्
+                  </button>
+                </div>
+              </div>
+              <div id="aw-tarot-results" style="min-height:160px;">
+                <div style="text-align:center; padding:30px 10px; color:#888; font-size:11.5px;">
+                  "कार्ड तान्नुहोस्" बटन थिचेर Rider-Waite ७८ वटा कार्डहरूबाट वाचन प्राप्त गर्नुहोस्।
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Quick Synastry -->
+            <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:14px;">
+              <div style="font-size:12.5px; font-weight:700; color:#f4d38c; margin-bottom:10px;">
+                💞 AstroWay Synastry अनुकूलता
+              </div>
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:10px;">
+                <div>
+                  <label class="form-label" style="font-size:10px;">साझेदार १ जन्म मिति</label>
+                  <input type="date" id="aw-syn-p1" class="form-input" value="1994-06-12" style="height:28px; font-size:11px;" />
+                </div>
+                <div>
+                  <label class="form-label" style="font-size:10px;">साझेदार २ जन्म मिति</label>
+                  <input type="date" id="aw-syn-p2" class="form-input" value="1996-09-28" style="height:28px; font-size:11px;" />
+                </div>
+              </div>
+              <button class="btn-ghost" onclick="runAstrowaySynastry()" style="width:100%; height:30px; font-size:11px; margin-bottom:10px; color:#f4d38c; border-color:rgba(216,176,106,0.4);">
+                अनुकूलता स्कोर गणना गर्नुहोस्
+              </button>
+              <div id="aw-syn-results" style="font-size:11px; color:#bbb;">
+                <div style="text-align:center; color:#888; padding:16px;">
+                  दुई कुण्डली बीचको पश्चिमी र वैदिक दृष्टि सम्बन्ध हेर्नुहोस्।
+                </div>
               </div>
             </div>
           </div>
@@ -3284,6 +3482,284 @@
         roxyModal.addEventListener('click', (e) => {
           if (e.target === roxyModal) closeRoxyModal();
         });
+      }
+      if (astrowayModal) {
+        astrowayModal.addEventListener('click', (e) => {
+          if (e.target === astrowayModal) closeAstrowayModal();
+        });
+      }
+
+      // ==============================================================
+      // ASTROWAY TYPESCRIPT SDK INTEGRATION
+      // ==============================================================
+      const astrowayModal = document.getElementById('astroway-modal');
+
+      function openAstrowayModal() {
+        if (astrowayModal) astrowayModal.style.display = 'flex';
+        loadAstrowayStatus();
+      }
+
+      function closeAstrowayModal() {
+        if (astrowayModal) astrowayModal.style.display = 'none';
+      }
+
+      function switchAstrowayTab(tabKey, btnEl) {
+        const modal = document.getElementById('astroway-modal');
+        if (!modal) return;
+        modal.querySelectorAll('.km-tab-link').forEach(b => b.classList.remove('active'));
+        modal.querySelectorAll('.km-tab-pane').forEach(p => p.classList.remove('active'));
+
+        if (btnEl) btnEl.classList.add('active');
+        const targetPane = document.getElementById(`pane-astroway-${tabKey}`);
+        if (targetPane) targetPane.classList.add('active');
+      }
+
+      async function loadAstrowayStatus() {
+        try {
+          const res = await fetch(`${API_BASE}/api/astroway/status`);
+          const data = await res.json();
+          if (data && data.success) {
+            const sumEl = document.getElementById('astroway-sdk-summary');
+            if (sumEl) {
+              sumEl.innerHTML = `
+                SDK Package: <b>${escapeHtml(data.package || '@astroway/sdk')} v${escapeHtml(data.version || '1.7.0')}</b><br/>
+                कुल Endpoints: <b>${data.totalEndpoints || 742}</b> (OpenAPI 3.1.0 Spec)<br/>
+                कुल Namespaces: <b>${data.totalNamespaces || 94}</b> (Charts, Houses, Synastry, Return, Tarot, HD...)<br/>
+                Remote Base URL: <b>${escapeHtml(data.apiBaseUrl || 'https://api.astroway.info/v1')}</b><br/>
+                API कुञ्जी स्थिति: <span class="badge badge-paid">${data.hasApiKey ? 'Custom API Key (Active)' : 'Keyless Public Access (Active)'}</span>
+              `;
+            }
+          }
+        } catch (err) {
+          console.warn('AstroWay status check failed:', err);
+        }
+      }
+
+      async function loadAstrowayReference(category) {
+        const outEl = document.getElementById('astroway-ref-output');
+        if (!outEl) return;
+        outEl.innerHTML = `<span style="color:#85c1e9;">⏳ AstroWay सन्दर्भ डाटा लोड हुँदैछ (${category})...</span>`;
+        try {
+          const res = await fetch(`${API_BASE}/api/astroway/reference/${category}`);
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.data)) {
+            let html = `<div style="font-weight:700; color:#85c1e9; margin-bottom:8px;">कुल ${data.data.length} वटा ${escapeHtml(category)}:</div>`;
+            html += `<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:6px;">`;
+            data.data.forEach(item => {
+              const name = item.name || item.id || JSON.stringify(item);
+              const extra = item.ruler ? ` (स्वामी: ${item.ruler})` : (item.nature ? ` (${item.nature})` : (item.angle ? ` (${item.angle}°)` : ''));
+              html += `<div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:6px; padding:6px 8px; font-size:11px;">
+                <b>${escapeHtml(name)}</b><span style="color:#aaa;">${escapeHtml(extra)}</span>
+              </div>`;
+            });
+            html += `</div>`;
+            outEl.innerHTML = html;
+          } else {
+            outEl.innerHTML = `<div style="color:var(--accent-red);">डाटा फेला परेन।</div>`;
+          }
+        } catch (err) {
+          outEl.innerHTML = `<div style="color:var(--accent-red);">लोड गर्न असफल भयो: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      async function runAstrowayHumanDesign() {
+        const dob = document.getElementById('aw-hd-dob').value;
+        const tob = document.getElementById('aw-hd-tob').value || '12:00';
+        const lat = parseFloat(document.getElementById('aw-hd-lat').value) || 27.7172;
+        const lon = parseFloat(document.getElementById('aw-hd-lon').value) || 85.3240;
+        const resEl = document.getElementById('aw-hd-results');
+        if (!resEl) return;
+
+        resEl.innerHTML = `<div style="text-align:center; padding:20px; color:#85c1e9;">⏳ BodyGraph Human Design गणना हुँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/astroway/human-design`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ date: dob, time: tob, lat, lon, timezone: 'Asia/Kathmandu' })
+          });
+          const data = await res.json();
+          if (data && data.success && data.humanDesign) {
+            const hd = data.humanDesign;
+            const centers = hd.centers || {};
+            let centersHtml = Object.keys(centers).map(cName => {
+              const c = centers[cName];
+              const isDef = c && c.defined;
+              return `<div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.02); border:1px solid ${isDef ? 'rgba(133,193,233,0.3)' : 'rgba(255,255,255,0.06)'}; padding:5px 8px; border-radius:6px; font-size:11px;">
+                <span style="text-transform:capitalize; color:${isDef ? '#85c1e9' : '#aaa'};">${escapeHtml(cName)}</span>
+                <span class="badge ${isDef ? 'badge-paid' : 'badge-pending'}" style="font-size:9.5px; padding:2px 6px;">${isDef ? 'Defined (सक्रिय)' : 'Undefined (खुला)'}</span>
+              </div>`;
+            }).join('');
+
+            resEl.innerHTML = `
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                <div style="background:rgba(133,193,233,0.04); border:1px solid rgba(133,193,233,0.25); border-radius:0.75rem; padding:12px;">
+                  <div style="font-size:11px; text-transform:uppercase; color:#85c1e9; font-weight:700; margin-bottom:4px;">ऊर्जा प्रकार (Energy Type)</div>
+                  <div style="font-size:18px; font-weight:700; color:#fff; font-family:var(--font-serif); margin-bottom:4px;">${escapeHtml(hd.type || 'Generator')}</div>
+                  <div style="font-size:11.5px; color:#bbb; margin-bottom:10px;">${escapeHtml(hd.aura || '')}</div>
+                  <div style="font-size:11.5px; color:#ddd; line-height:1.6;">
+                    • <b>रणनीति (Strategy):</b> ${escapeHtml(hd.strategy || '')}<br/>
+                    • <b>आन्तरिक अख्तियारी (Authority):</b> ${escapeHtml(hd.authority || '')}<br/>
+                    • <b>प्रोफाइल (Profile):</b> ${escapeHtml(hd.profile || '')}<br/>
+                    • <b>परिभाषा (Definition):</b> ${escapeHtml(hd.definition || '')}
+                  </div>
+                </div>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px;">
+                  <div style="font-size:11px; text-transform:uppercase; color:#f4d38c; font-weight:700; margin-bottom:8px;">९ वटा BodyGraph केन्द्रहरू (Centers)</div>
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                    ${centersHtml}
+                  </div>
+                </div>
+              </div>
+            `;
+          } else {
+            resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">गणना असफल भयो।</div>`;
+          }
+        } catch (err) {
+          resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      async function runAstrowayNumerology() {
+        const name = document.getElementById('aw-num-name').value || 'Guest';
+        const dob = document.getElementById('aw-num-dob').value || '1990-01-01';
+        const resEl = document.getElementById('aw-num-results');
+        if (!resEl) return;
+
+        resEl.innerHTML = `<div style="text-align:center; padding:20px; color:#f4d38c;">⏳ अंकज्योतिष गणना हुँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/astroway/numerology`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, dob })
+          });
+          const data = await res.json();
+          if (data && data.success && data.numerology) {
+            const n = data.numerology;
+            const lp = n.lifePath || {};
+            resEl.innerHTML = `
+              <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin-bottom:12px;">
+                <div style="background:rgba(216,176,106,0.08); border:1px solid rgba(216,176,106,0.3); border-radius:0.75rem; padding:12px; text-align:center;">
+                  <div style="font-size:10px; color:#f4d38c; text-transform:uppercase; font-weight:700;">जीवन पथ (Life Path)</div>
+                  <div style="font-size:26px; font-weight:800; color:#f4d38c; margin:4px 0;">${lp.number || '-'}${lp.isMaster ? ' ⭐' : ''}</div>
+                  <div style="font-size:10.5px; color:#ccc;">${escapeHtml(lp.title || '')}</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px; text-align:center;">
+                  <div style="font-size:10px; color:#85c1e9; text-transform:uppercase; font-weight:700;">अभिव्यक्ति (Expression)</div>
+                  <div style="font-size:26px; font-weight:800; color:#85c1e9; margin:4px 0;">${n.expression?.number || '-'}</div>
+                  <div style="font-size:10.5px; color:#ccc;">भाग्य/Destiny अंक</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px; text-align:center;">
+                  <div style="font-size:10px; color:#e056fd; text-transform:uppercase; font-weight:700;">आत्म अभिलाषा (Soul Urge)</div>
+                  <div style="font-size:26px; font-weight:800; color:#e056fd; margin:4px 0;">${n.soulUrge?.number || '-'}</div>
+                  <div style="font-size:10.5px; color:#ccc;">Heart's Desire</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px; text-align:center;">
+                  <div style="font-size:10px; color:#2ecc71; text-transform:uppercase; font-weight:700;">जन्म दिन (Birthday)</div>
+                  <div style="font-size:26px; font-weight:800; color:#2ecc71; margin:4px 0;">${n.birthdayNumber || '-'}</div>
+                  <div style="font-size:10.5px; color:#ccc;">मूलांक (Root Number)</div>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px; font-size:11.5px; line-height:1.6; color:#ddd;">
+                <div style="font-weight:700; color:#f4d38c; margin-bottom:4px;">🌟 जीवन पथ अर्थ (Life Path Interpretation - स्वामी: ${escapeHtml(lp.planet || 'सूर्य')}):</div>
+                <div>${escapeHtml(lp.meaning || '')}</div>
+                <div style="margin-top:6px; color:#aaa; font-size:10.5px;">
+                  व्यक्तित्व अंक (Personality): <b>${n.personality?.number || '-'}</b> | स्वामी ग्रह: <b>${escapeHtml(lp.planet || '')}</b> | मास्टर अंक: <b>${lp.isMaster ? 'हो (11/22/33 Master Builder/Teacher)' : 'छैन'}</b>
+                </div>
+              </div>
+            `;
+          } else {
+            resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">अंक विश्लेषण गर्न सकिएन।</div>`;
+          }
+        } catch (err) {
+          resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      async function drawAstrowayTarot() {
+        const spreadType = document.getElementById('aw-tarot-type').value || 'three_card';
+        const resEl = document.getElementById('aw-tarot-results');
+        if (!resEl) return;
+
+        resEl.innerHTML = `<div style="text-align:center; padding:20px; color:#85c1e9;">⏳ Rider-Waite कार्ड तानिँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/astroway/tarot`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ spreadType })
+          });
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.cards)) {
+            let cardsHtml = data.cards.map((c, idx) => {
+              const posLabel = c.position || (spreadType === 'single' ? 'दैनिक मार्गदर्शन' : (idx === 0 ? 'भूतकाल (Past)' : (idx === 1 ? 'वर्तमान (Present)' : 'भविष्य (Future)')));
+              return `
+                <div style="background:rgba(133,193,233,0.04); border:1px solid rgba(133,193,233,0.25); border-radius:0.75rem; padding:10px; display:flex; flex-direction:column; justify-content:space-between;">
+                  <div>
+                    <div style="font-size:10px; text-transform:uppercase; color:#85c1e9; font-weight:700; margin-bottom:2px;">${escapeHtml(posLabel)}</div>
+                    <div style="font-size:14px; font-weight:700; color:#fff; font-family:var(--font-serif); margin-bottom:2px;">${escapeHtml(c.name)}</div>
+                    <div style="font-size:10px; color:${c.isReversed ? '#e74c3c' : '#2ecc71'}; margin-bottom:6px;">
+                      ${c.isReversed ? '🔄 उल्टो (Reversed)' : '⬆️ सुल्टो (Upright)'} • ${escapeHtml(c.arcana || 'Major Arcana')}
+                    </div>
+                    <div style="font-size:10.5px; color:#ddd; margin-bottom:6px; line-height:1.4;">
+                      ${escapeHtml(c.meaning || '')}
+                    </div>
+                  </div>
+                  <div style="font-size:10px; color:#f4d38c; border-top:1px solid rgba(255,255,255,0.06); padding-top:4px;">
+                    💡 <b>सल्लाह:</b> ${escapeHtml(c.advice || 'सचेत रहनुहोस्')}
+                  </div>
+                </div>
+              `;
+            }).join('');
+
+            resEl.innerHTML = `
+              <div style="display:grid; grid-template-columns:${spreadType === 'single' ? '1fr' : 'repeat(3, 1fr)'}; gap:8px;">
+                ${cardsHtml}
+              </div>
+            `;
+          } else {
+            resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">ट्यारो वाचन असफल भयो।</div>`;
+          }
+        } catch (err) {
+          resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      async function runAstrowaySynastry() {
+        const p1Dob = document.getElementById('aw-syn-p1').value;
+        const p2Dob = document.getElementById('aw-syn-p2').value;
+        const resEl = document.getElementById('aw-syn-results');
+        if (!resEl) return;
+
+        resEl.innerHTML = `<div style="text-align:center; padding:12px; color:#f4d38c;">⏳ अनुकूलता विश्लेषण हुँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/astroway/synastry`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chart1: { date: p1Dob }, chart2: { date: p2Dob } })
+          });
+          const data = await res.json();
+          if (data && data.success && data.synastry) {
+            const s = data.synastry;
+            const score = s.overallScore || 75;
+            resEl.innerHTML = `
+              <div style="text-align:center; margin-bottom:8px;">
+                <div style="font-size:24px; font-weight:800; color:#f4d38c;">${score}/100</div>
+                <div style="font-size:11px; font-weight:700; color:#85c1e9;">${escapeHtml(s.harmonyTier || 'Harmonic')}</div>
+                <div style="font-size:10px; color:#aaa; margin-top:2px;">${escapeHtml(s.interpretation || '')}</div>
+              </div>
+              <div style="max-height:80px; overflow-y:auto; font-size:10px; color:#ccc; border-top:1px solid rgba(255,255,255,0.06); padding-top:6px;">
+                ${(s.aspects || []).slice(0, 3).map(a => `<div>• ${escapeHtml(a.planet1)} ${escapeHtml(a.type)} ${escapeHtml(a.planet2)} (${escapeHtml(a.harmony)})</div>`).join('')}
+              </div>
+            `;
+          } else {
+            resEl.innerHTML = `<div style="color:var(--accent-red); padding:8px;">विश्लेषण हुन सकेन।</div>`;
+          }
+        } catch (err) {
+          resEl.innerHTML = `<div style="color:var(--accent-red); padding:8px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
       }
 
       // Start application
