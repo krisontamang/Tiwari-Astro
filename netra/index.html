@@ -3,40 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ज्योतिष सारथी — सम्पूर्ण वैदिक ज्योतिष सफ्टवेयर (Astro Tiwari)</title>
+  <title>वैदिक नेत्र — सम्पूर्ण वैदिक ज्योतिष विश्लेषण प्रणाली (Astro Tiwari)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700;800&family=Noto+Serif+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-main: #f8f9fa;
+      --bg-main: #f3f4f8;
       --bg-surface: #ffffff;
-      --border-color: #e5e7eb;
-      --border-dark: #cbd5e1;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --accent-red: #dc2626;
-      --accent-gold: #d97706;
-      --accent-orange: #ea580c;
-      --accent-green: #16a34a;
-      --accent-blue: #2563eb;
-      --header-bg: #fff5eb;
-      --header-border: #fed7aa;
-      --tab-active-border: #f97316;
+      --border-color: #ddd6fe;
+      --border-dark: #a78bfa;
+      --text-main: #1e1b4b;
+      --text-muted: #6b7280;
+      --accent-red: #7c3aed;
+      --accent-gold: #6d28d9;
+      --accent-orange: #5b21b6;
+      --accent-green: #059669;
+      --accent-blue: #4338ca;
+      --header-bg: #ede9fe;
+      --header-border: #c4b5fd;
+      --tab-active-border: #7c3aed;
       --chart-line: #1e1b4b;
-      --swastika-color: #dc2626;
+      --swastika-color: #6d28d9;
     }
 
     body.dark-theme {
-      --bg-main: #0f172a;
-      --bg-surface: #1e293b;
-      --border-color: #334155;
-      --border-dark: #475569;
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
+      --bg-main: #0e0b1e;
+      --bg-surface: #1a1535;
+      --border-color: #312e81;
+      --border-dark: #4c1d95;
+      --text-main: #ede9fe;
+      --text-muted: #a78bfa;
       --header-bg: #1e1b4b;
-      --header-border: #4338ca;
-      --chart-line: #cbd5e1;
+      --header-border: #6d28d9;
+      --chart-line: #c4b5fd;
     }
 
     * {
@@ -72,23 +72,26 @@
     }
 
     .brand-logo {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #f59e0b, #b45309);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #7c3aed, #4338ca);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
-      font-size: 15px;
-      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+      font-size: 17px;
+      box-shadow: 0 2px 10px rgba(124, 58, 237, 0.45);
     }
 
     .brand-title {
       font-family: 'Noto Serif Devanagari', serif;
       font-size: 19px;
       font-weight: 700;
-      color: #9a3412;
+      background: linear-gradient(135deg, #6d28d9, #4338ca);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       letter-spacing: -0.2px;
     }
 
@@ -129,7 +132,7 @@
     }
 
     .tool-btn:hover {
-      background: rgba(234, 88, 12, 0.15);
+      background: rgba(124, 58, 237, 0.15);
       transform: translateY(-1px);
     }
 
@@ -143,9 +146,9 @@
       font-family: 'Mukta', sans-serif;
       font-size: 12.5px;
       font-weight: 600;
-      color: #9a3412;
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
+      color: #5b21b6;
+      background: #ede9fe;
+      border: 1px solid #c4b5fd;
       border-radius: 6px;
       padding: 4px 8px;
       cursor: pointer;
@@ -153,7 +156,7 @@
     }
 
     .btn-action-pill {
-      background: #ea580c;
+      background: linear-gradient(135deg, #7c3aed, #4338ca);
       color: #ffffff;
       border: none;
       padding: 5px 12px;
@@ -165,11 +168,11 @@
       align-items: center;
       gap: 5px;
       text-decoration: none;
-      transition: background 0.15s;
+      transition: opacity 0.15s;
     }
 
     .btn-action-pill:hover {
-      background: #c2410c;
+      opacity: 0.85;
     }
 
     /* 12 Main Navigation Tabs */
@@ -200,20 +203,20 @@
     }
 
     .main-tab-link:hover {
-      color: #ea580c;
-      background: rgba(234, 88, 12, 0.05);
+      color: #7c3aed;
+      background: rgba(124, 58, 237, 0.07);
     }
 
     .main-tab-link.active {
-      color: #ea580c;
+      color: #7c3aed;
       font-weight: 700;
-      border-bottom-color: #ea580c;
+      border-bottom-color: #7c3aed;
     }
 
     /* Sub-tabs bar */
     .sarathi-sub-nav {
-      background: #fffaf0;
-      border-bottom: 1px solid #fed7aa;
+      background: #f5f3ff;
+      border-bottom: 1px solid #ddd6fe;
       display: flex;
       align-items: center;
       overflow-x: auto;
@@ -223,15 +226,15 @@
     }
 
     body.dark-theme .sarathi-sub-nav {
-      background: #1e293b;
-      border-color: #334155;
+      background: #1a1535;
+      border-color: #312e81;
     }
 
     .sub-tab-link {
       padding: 7px 13px;
       font-size: 13px;
       font-weight: 600;
-      color: #64748b;
+      color: #6b7280;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       transition: all 0.15s;
@@ -239,14 +242,14 @@
     }
 
     .sub-tab-link:hover {
-      color: #c2410c;
+      color: #6d28d9;
     }
 
     .sub-tab-link.active {
-      color: #c2410c;
+      color: #6d28d9;
       font-weight: 700;
-      border-bottom-color: #ea580c;
-      background: rgba(234, 88, 12, 0.08);
+      border-bottom-color: #7c3aed;
+      background: rgba(124, 58, 237, 0.08);
     }
 
     /* Main Workspace Grid (विवरण View) */
@@ -280,21 +283,21 @@
     }
 
     .chart-card-header {
-      background: #fff7ed;
-      border-bottom: 1px solid #ffedd5;
+      background: #ede9fe;
+      border-bottom: 1px solid #ddd6fe;
       padding: 6px 12px;
       font-weight: 700;
       font-size: 13.5px;
-      color: #9a3412;
+      color: #5b21b6;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     body.dark-theme .chart-card-header {
-      background: #334155;
-      border-color: #475569;
-      color: #fed7aa;
+      background: #2e1065;
+      border-color: #4c1d95;
+      color: #c4b5fd;
     }
 
     .chart-svg-box {
@@ -363,15 +366,15 @@
     }
 
     .card-tab-btn.active {
-      color: #ea580c;
+      color: #7c3aed;
       font-weight: 700;
-      border-bottom-color: #ea580c;
+      border-bottom-color: #7c3aed;
       background: #ffffff;
     }
 
     body.dark-theme .card-tab-btn.active {
-      background: #334155;
-      color: #fdba74;
+      background: #2e1065;
+      color: #c4b5fd;
     }
 
     /* Tables */
@@ -407,7 +410,7 @@
     }
 
     .sarathi-table tr:hover td {
-      background: rgba(234, 88, 12, 0.04);
+      background: rgba(124, 58, 237, 0.05);
     }
 
     /* Badges */
@@ -420,9 +423,9 @@
     }
 
     .badge-karaka {
-      background: #fef2f2;
-      color: #dc2626;
-      border: 1px solid #fecaca;
+      background: #f5f3ff;
+      color: #7c3aed;
+      border: 1px solid #ddd6fe;
     }
 
     .badge-pushkar {
@@ -432,9 +435,9 @@
     }
 
     .badge-status {
-      background: #eff6ff;
-      color: #2563eb;
-      border: 1px solid #bfdbfe;
+      background: #eef2ff;
+      color: #4338ca;
+      border: 1px solid #c7d2fe;
     }
 
     /* Divisional Grid */
@@ -480,7 +483,7 @@
     }
 
     .sub-dasha-tab.active {
-      background: #ea580c;
+      background: linear-gradient(135deg, #7c3aed, #4338ca);
       color: #ffffff;
       font-weight: 700;
     }
@@ -504,7 +507,7 @@
     }
 
     .dasha-toggle-btn.active {
-      background: #ea580c;
+      background: #7c3aed;
       color: #ffffff;
       font-weight: 700;
     }
@@ -600,15 +603,15 @@
     }
 
     .mantra-cat-item:hover {
-      background: #fff7ed;
-      color: #ea580c;
+      background: #f5f3ff;
+      color: #7c3aed;
     }
 
     .mantra-cat-item.active {
-      background: #fff7ed;
-      color: #ea580c;
+      background: #f5f3ff;
+      color: #7c3aed;
       font-weight: 700;
-      border-left: 4px solid #ea580c;
+      border-left: 4px solid #7c3aed;
     }
 
     .mantra-cat-badge {
@@ -621,8 +624,8 @@
     }
 
     .mantra-cat-item.active .mantra-cat-badge {
-      background: #fed7aa;
-      color: #9a3412;
+      background: #ddd6fe;
+      color: #5b21b6;
     }
 
     .mantra-content-area {
@@ -659,7 +662,7 @@
     }
 
     .mantra-num-badge {
-      background: #ea580c;
+      background: linear-gradient(135deg, #7c3aed, #4338ca);
       color: #ffffff;
       font-size: 12px;
       font-weight: 700;
@@ -1057,7 +1060,7 @@
     }
 
     .btn-milan-reset {
-      background: #c2410c;
+      background: #6d28d9;
       color: #ffffff;
       border: none;
       padding: 4px 10px;
@@ -1069,8 +1072,8 @@
 
     .btn-milan-pick {
       background: #ffffff;
-      border: 1px solid #ea580c;
-      color: #ea580c;
+      border: 1px solid #7c3aed;
+      color: #7c3aed;
       padding: 4px 10px;
       border-radius: 4px;
       font-size: 11.5px;
@@ -1168,7 +1171,7 @@
     }
 
     .btn-milan-submit {
-      background: #ea580c;
+      background: linear-gradient(135deg, #7c3aed, #4338ca);
       border: none;
       color: #ffffff;
       padding: 7px 20px;
@@ -1182,7 +1185,7 @@
     }
 
     .btn-milan-submit:hover {
-      background: #c2410c;
+      opacity: 0.88;
     }
 
     /* FLOATING ACTION TOOLBAR ON CHIINA PRINT (Screenshot 3) */
@@ -1278,8 +1281,8 @@
       font-family: 'Noto Serif Devanagari', serif;
       font-size: 15px;
       font-weight: 800;
-      color: var(--swastika-color);
-      border-bottom: 2px solid var(--swastika-color);
+      color: #5b21b6;
+      border-bottom: 2px solid #7c3aed;
       padding-bottom: 3px;
       margin: 10px 0 6px;
       text-align: center;
@@ -1362,7 +1365,7 @@
         background: #ffffff !important;
         color: #000000 !important;
       }
-      .sarathi-top-bar, .sarathi-main-nav, .sarathi-sub-nav, .sarathi-workspace, .no-print, .chiina-floating-dock, .milan-modal-overlay {
+      .netra-top-bar, .netra-main-nav, .netra-sub-nav, .sarathi-workspace, .no-print, .chiina-floating-dock, .milan-modal-overlay {
         display: none !important;
       }
       .chiina-print-container {
@@ -1386,43 +1389,42 @@
 </head>
 <body>
 
-  <!-- Top Sarathi Header -->
-  <header class="sarathi-top-bar no-print">
+  <!-- Top Vedic Netra Header -->
+  <header class="sarathi-top-bar no-print" style="border-bottom: 2px solid #ddd6fe;">
     <div class="brand-section">
-      <div class="brand-logo">🕉️</div>
-      <h1 class="brand-title">ज्योतिष सारथी</h1>
-      <span style="font-size: 11px; color: #b45309; background: #fed7aa; padding: 1px 6px; border-radius: 999px; font-weight: 700;">PRO Suite</span>
+      <div class="brand-logo">👁️</div>
+      <h1 class="brand-title">वैदिक नेत्र</h1>
+      <span style="font-size: 11px; color: #5b21b6; background: #ede9fe; padding: 1px 6px; border-radius: 999px; font-weight: 700; border: 1px solid #c4b5fd;">Vedic Netra Pro</span>
     </div>
 
     <!-- Grouped Icons -->
     <div class="toolbar-groups">
-      <!-- Group 1: Folders & Match -->
-      <div class="tool-pill" title="ग्राहक तथा कुण्डली व्यवस्थापन">
-        <button class="tool-btn" onclick="openNewChartModal()" title="नयाँ कुण्डली बनाउनुहोस्">📁₁</button>
-        <button class="tool-btn" onclick="openExistingModal()" title="कुण्डली खोल्नुहोस्">📁🔍</button>
-        <button class="tool-btn" onclick="editCurrentModal()" title="विवरण सम्पादन गर्नुहोस्">📁✏️</button>
-        <button class="tool-btn" onclick="openKundaliMilanModal()" title="कुण्डली मिलान (36 गुण / Porutham)">🧑‍🤝‍🧑</button>
+      <!-- Group 1: ग्रन्थागार & मिलान -->
+      <div class="tool-pill" title="ग्राहक तथा जन्मपत्री व्यवस्थापन">
+        <button class="tool-btn" onclick="openNewChartModal()" title="नयाँ जन्मपत्री बनाउनुहोस्">📁₁</button>
+        <button class="tool-btn" onclick="openExistingModal()" title="जन्मपत्री खोज्नुहोस्">📁🔍</button>
+        <button class="tool-btn" onclick="editCurrentModal()" title="विवरण परिमार्जन">📁✏️</button>
+        <button class="tool-btn" onclick="openKundaliMilanModal()" title="जन्मपत्री मिलान (३६ गुण)">🧑‍🤝‍🧑</button>
       </div>
 
-      <!-- Group 2: Tools & Chakras -->
-      <div class="tool-pill" title="ज्योतिषीय गणना तथा चक्रहरू">
-        <button class="tool-btn" onclick="openNepaliPatroModal('panchanga')" title="पञ्चाङ्ग">📜</button>
-        <button class="tool-btn" onclick="switchMainTab('print')" title="चिना">📜</button>
-        <button class="tool-btn" onclick="openNepaliPatroModal('calendar')" title="पात्रो (नेपाली क्यालेन्डर)">📅</button>
-        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="इष्टकाल">⏰</button>
-        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="अवकहडा चक्र">🕒</button>
-        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="अङ्क ज्योतिष (1234)">🔢</button>
-        <button class="tool-btn" onclick="switchMainTab('kundalis')" title="सुदर्शन चक्र">☸️</button>
-        <button class="tool-btn" onclick="switchMainTab('gochar')" title="ग्रह गोचर">🪐</button>
-        <button class="tool-btn" onclick="switchMainTab('vividha')" title="वैदिक मन्त्र तथा उपाय">🕉️</button>
+      <!-- Group 2: नक्षत्र विश्लेषण उपकरण -->
+      <div class="tool-pill" title="नक्षत्र विश्लेषण तथा वैदिक गणना">
+        <button class="tool-btn" onclick="openNepaliPatroModal('panchanga')" title="पञ्चाङ्ग दर्शन">📜</button>
+        <button class="tool-btn" onclick="switchMainTab('print')" title="जन्मपत्री मुद्रण">🖨️</button>
+        <button class="tool-btn" onclick="openNepaliPatroModal('calendar')" title="नेपाली पात्रो दृश्य">📅</button>
+        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="इष्टकाल गणना">⏰</button>
+        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="अवकहडा विश्लेषण">🔯</button>
+        <button class="tool-btn" onclick="switchMainTab('vivaran')" title="अङ्कविद्या">🔢</button>
+        <button class="tool-btn" onclick="switchMainTab('kundalis')" title="सुदर्शन दृष्टि">☸️</button>
+        <button class="tool-btn" onclick="switchMainTab('gochar')" title="ग्रह भ्रमण">🪐</button>
+        <button class="tool-btn" onclick="switchMainTab('vividha')" title="मन्त्र तथा उपाय कोश">🕉️</button>
       </div>
 
-      <!-- Group 3: Settings & Nepal Engine -->
-      <div class="tool-pill" title="नेपाल ज्योतिषीय इन्जिन तथा सेटिङ">
-        <button class="tool-btn" title="मुहूर्त">⚙️📅</button>
-        <button class="tool-btn" title="निर्देशिका">📇</button>
-        <button class="tool-btn" title="अक्षांश/देशान्तर">📍</button>
-        <button class="tool-btn" onclick="openNepaliPatroModal('rashifal')" title="नेपाली विक्रम सम्वत् (B.S.) र हाम्रो पात्रो राशिफल">🇳🇵</button>
+      <!-- Group 3: Netra Engine & परिवेश -->
+      <div class="tool-pill" title="नेत्र इन्जिन तथा परिवेश सेटिङ">
+        <button class="tool-btn" title="शुभ मुहूर्त">⚙️📅</button>
+        <button class="tool-btn" title="स्थान निर्देशिका">📍</button>
+        <button class="tool-btn" onclick="openNepaliPatroModal('rashifal')" title="नेपाली विक्रम सम्वत् राशिफल">🇳🇵</button>
         <button class="tool-btn" onclick="toggleTheme()" title="थिम परिवर्तन">🌓</button>
       </div>
     </div>
@@ -1431,54 +1433,54 @@
     <div class="top-actions">
       <select class="ayanamsa-select" id="ayanamsa-picker" onchange="changeAyanamsa(this.value)">
         <option value="surya" selected>सूर्य सिद्धान्त</option>
-        <option value="lahiri">Lahiri (चित्रपक्ष)</option>
+        <option value="lahiri">Lahiri — चित्रपक्ष</option>
         <option value="raman">B.V. Raman</option>
-        <option value="kp">KP Krishnamurti</option>
+        <option value="kp">KP — कृष्णमूर्ति</option>
       </select>
 
-      <button class="btn-action-pill" onclick="triggerChiinaPrint()" title="चिना प्रिन्ट गर्नुहोस् वा PDF सेभ गर्नुहोस्">
-        <span>🖨️ चिना प्रिन्ट</span>
+      <button class="btn-action-pill" onclick="triggerChiinaPrint()" title="जन्मपत्री प्रिन्ट वा PDF">
+        <span>🖨️ जन्मपत्री प्रिन्ट</span>
       </button>
 
-      <a href="/admin" class="btn-action-pill" style="background: #475569;" title="Admin Portal मा फर्कनुहोस्">
+      <a href="/admin" class="btn-action-pill" style="background: #4c1d95;" title="प्रशासन पोर्टल">
         <span>🔐 Admin</span>
       </a>
 
-      <a href="/" class="btn-action-pill" style="background: #0284c7;" title="गृहपृष्ठ">
+      <a href="/" class="btn-action-pill" style="background: #1d4ed8;" title="गृहपृष्ठ">
         <span>🏠 Home</span>
       </a>
     </div>
   </header>
 
-  <!-- 13 Main Navigation Tabs -->
-  <nav class="sarathi-main-nav no-print" id="sarathi-main-tabs">
-    <div class="main-tab-link active" onclick="switchMainTab('vivaran')">विवरण</div>
-    <div class="main-tab-link" onclick="switchMainTab('kundalis')">कुण्डलीहरू</div>
-    <div class="main-tab-link" onclick="switchMainTab('dasha')">दशा</div>
-    <div class="main-tab-link" onclick="switchMainTab('yogas')">योग र युति</div>
-    <div class="main-tab-link" onclick="switchMainTab('faladesh')">फलादेश</div>
-    <div class="main-tab-link" onclick="switchMainTab('grahamaitri')">ग्रहमैत्री</div>
-    <div class="main-tab-link" onclick="switchMainTab('shadbala')">षड्बल</div>
-    <div class="main-tab-link" onclick="switchMainTab('ashtakavarga')">अष्टकवर्ग</div>
-    <div class="main-tab-link" onclick="switchMainTab('varshaphala')">वर्षफल</div>
-    <div class="main-tab-link" onclick="switchMainTab('vividha')">विविध</div>
-    <div class="main-tab-link" onclick="switchMainTab('patro')">नेपाली पात्रो</div>
-    <div class="main-tab-link" onclick="switchMainTab('gochar')">गोचर</div>
-    <div class="main-tab-link" onclick="switchMainTab('print')">चिना प्रिन्ट</div>
+  <!-- 13 Main Navigation Tabs — Vedic Netra -->
+  <nav class="sarathi-main-nav no-print" id="sarathi-main-tabs" style="border-bottom: 2px solid #ddd6fe;">
+    <div class="main-tab-link active" onclick="switchMainTab('vivaran')">🔭 ग्रह-दर्पण</div>
+    <div class="main-tab-link" onclick="switchMainTab('kundalis')">📐 जन्मपत्री</div>
+    <div class="main-tab-link" onclick="switchMainTab('dasha')">⏳ दशा-काल</div>
+    <div class="main-tab-link" onclick="switchMainTab('yogas')">✨ योग-संयोग</div>
+    <div class="main-tab-link" onclick="switchMainTab('faladesh')">📖 नेत्र-फल</div>
+    <div class="main-tab-link" onclick="switchMainTab('grahamaitri')">🤝 ग्रह-सम्बन्ध</div>
+    <div class="main-tab-link" onclick="switchMainTab('shadbala')">⚖️ बलाबल</div>
+    <div class="main-tab-link" onclick="switchMainTab('ashtakavarga')">🎯 अष्टवर्ग</div>
+    <div class="main-tab-link" onclick="switchMainTab('varshaphala')">🗓️ वार्षिक-दृष्टि</div>
+    <div class="main-tab-link" onclick="switchMainTab('vividha')">🕉️ मन्त्र-कोश</div>
+    <div class="main-tab-link" onclick="switchMainTab('patro')">🇳🇵 नेपाली पात्रो</div>
+    <div class="main-tab-link" onclick="switchMainTab('gochar')">🪐 ग्रह-भ्रमण</div>
+    <div class="main-tab-link" onclick="switchMainTab('print')">🖨️ जन्मपत्री मुद्रण</div>
   </nav>
 
-  <!-- Sub-tabs bar under चिना प्रिन्ट -->
+  <!-- Sub-tabs under जन्मपत्री मुद्रण -->
   <div class="sarathi-sub-nav no-print" id="sarathi-sub-tabs">
-    <div class="sub-tab-link active" onclick="switchSubTab('saral')">सरल चिना</div>
-    <div class="sub-tab-link" onclick="switchSubTab('nepali')">नेपाली चिना</div>
-    <div class="sub-tab-link" onclick="switchSubTab('adhunik')">आधुनिक चिना</div>
-    <div class="sub-tab-link" onclick="switchSubTab('adhunik2')">आधुनिक चिना २</div>
-    <div class="sub-tab-link" onclick="switchSubTab('vimshottari')">विंशोत्तरी दशा</div>
-    <div class="sub-tab-link" onclick="switchSubTab('tribhagi')">त्रिभागी दशा</div>
-    <div class="sub-tab-link" onclick="switchSubTab('yogini')">योगिनी दशा</div>
-    <div class="sub-tab-link" onclick="switchSubTab('kundali_list')">कुण्डलीहरूको सूची</div>
-    <div class="sub-tab-link" onclick="switchSubTab('yogas_list')">योग र युति</div>
-    <div class="sub-tab-link" onclick="switchSubTab('full_faladesh')">पूर्ण फलादेश</div>
+    <div class="sub-tab-link active" onclick="switchSubTab('saral')">सरल जन्मपत्री</div>
+    <div class="sub-tab-link" onclick="switchSubTab('nepali')">परम्परागत नेपाली</div>
+    <div class="sub-tab-link" onclick="switchSubTab('adhunik')">आधुनिक लेआउट</div>
+    <div class="sub-tab-link" onclick="switchSubTab('adhunik2')">विस्तृत लेआउट</div>
+    <div class="sub-tab-link" onclick="switchSubTab('vimshottari')">विंशोत्तरी तालिका</div>
+    <div class="sub-tab-link" onclick="switchSubTab('tribhagi')">त्रिभागी तालिका</div>
+    <div class="sub-tab-link" onclick="switchSubTab('yogini')">योगिनी तालिका</div>
+    <div class="sub-tab-link" onclick="switchSubTab('kundali_list')">जन्मपत्री सूची</div>
+    <div class="sub-tab-link" onclick="switchSubTab('yogas_list')">योग-संयोग सूची</div>
+    <div class="sub-tab-link" onclick="switchSubTab('full_faladesh')">सम्पूर्ण नेत्र-फल</div>
   </div>
 
   <!-- WORKSPACE 1: विवरण (Interactive Workspace) -->

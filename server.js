@@ -1193,12 +1193,12 @@ async function handleRequest(req, res) {
     return sendJSON(res, 200, mcpResponse);
   }
 
-  // --- API: Jyotish Sarathi Vedic Suite (ज्योतिष सारथी) ---
-  if (pathname === '/api/sarathi/sample' && req.method === 'GET') {
+  // --- API: Vedic Netra Suite (वैदिक नेत्र) ---
+  if (pathname === '/api/netra/sample' && req.method === 'GET') {
     return sendJSON(res, 200, { success: true, data: jyotishSarathiService.getPresetSarathiSample() });
   }
 
-  if (pathname.startsWith('/api/sarathi/submission/') && req.method === 'GET') {
+  if (pathname.startsWith('/api/netra/submission/') && req.method === 'GET') {
     const subId = pathname.split('/').pop();
     const submissions = readSubmissions();
     const sub = submissions.find(s => s.id === subId || s.orderId === subId);
@@ -1214,7 +1214,7 @@ async function handleRequest(req, res) {
     return sendJSON(res, 200, { success: true, data: sample });
   }
 
-  if (pathname === '/api/sarathi/calculate' && req.method === 'POST') {
+  if (pathname === '/api/netra/calculate' && req.method === 'POST') {
     const payload = await parseJSONBody(req) || {};
     const sample = jyotishSarathiService.getPresetSarathiSample();
     if (payload.name) sample.meta.customerName = payload.name;
@@ -1226,11 +1226,11 @@ async function handleRequest(req, res) {
     return sendJSON(res, 200, { success: true, data: sample });
   }
 
-  if (pathname === '/api/sarathi/mantras' && req.method === 'GET') {
+  if (pathname === '/api/netra/mantras' && req.method === 'GET') {
     return sendJSON(res, 200, { success: true, data: mantrasData });
   }
 
-  if (pathname === '/api/sarathi/milan' && req.method === 'POST') {
+  if (pathname === '/api/netra/milan' && req.method === 'POST') {
     const body = await parseJSONBody(req) || {};
     const boyNak = Number(body.boyNakshatra || 6); // default Ardra
     const boyRashi = Number(body.boyRashi || 3); // Gemini
@@ -1813,13 +1813,13 @@ async function handleRequest(req, res) {
     return;
   }
 
-  // --- Route /sarathi or /jyotish-sarathi to sarathi/index.html ---
-  if (pathname === '/sarathi' || pathname === '/sarathi/' || pathname.startsWith('/sarathi/') ||
-      pathname === '/jyotish-sarathi' || pathname === '/jyotish-sarathi/' || pathname.startsWith('/jyotish-sarathi/')) {
-    const sarathiPath = path.join(PUBLIC_DIR, 'sarathi', 'index.html');
-    if (fs.existsSync(sarathiPath)) {
+  // --- Route /netra to netra/index.html (Vedic Netra) ---
+  if (pathname === '/netra' || pathname === '/netra/' || pathname.startsWith('/netra/') ||
+      pathname === '/vedic-netra' || pathname === '/vedic-netra/' || pathname.startsWith('/vedic-netra/')) {
+    const netraPath = path.join(PUBLIC_DIR, 'netra', 'index.html');
+    if (fs.existsSync(netraPath)) {
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
-      fs.createReadStream(sarathiPath).pipe(res);
+      fs.createReadStream(netraPath).pipe(res);
       return;
     }
   }

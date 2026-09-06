@@ -1,13 +1,14 @@
 /**
- * Jyotish Sarathi Vedic Calculation & Chart Engine
- * Replicates the complete calculations and visual formats of ज्योतिष सारथी:
+ * Vedic Netra — वैदिक गणना इन्जिन
+ * 
+ * Complete Vedic Astrology calculation engine for Astro Tiwari:
  * - Avakahada Chakra (अवकहडाचक्र)
  * - Comprehensive Graha Spashta (ग्रहस्पष्ट with Avastha, Karaka, Visheshata, Sthiti)
  * - Divisional Charts (षोडशवर्ग: D-1, D-2 Hora, D-3 Drekkana, D-9 Navamsha, Bhav Kundali, etc.)
  * - Vimshottari Dasha (120-year complete Mahadashas & Antardashas/Bhuktis with Nepali BS & AD dates)
  * - Yogini Dasha (36-year repeating cycles across full lifetime with sub-periods)
  * - North Indian Diamond Chart SVG Generator with Lord Ganesha center emblem
- * - 5-page Traditional Nepali Chiina Printout generator with red Swastika (卐) border
+ * - 5-page Traditional Nepali Janmapatra Printout generator with red Swastika (卍) border
  */
 
 const NAKSHATRAS = [
