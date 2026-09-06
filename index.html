@@ -35,39 +35,10 @@
         padding-bottom: 110px !important;
       }
 
-      /* Free Services Hero Announcement Banner */
-      .free-service-banner {
-        background: linear-gradient(90deg, #1f1633, #0f2b1d, #1f1633);
-        border-bottom: 1px solid rgba(216, 176, 106, 0.35);
-        color: #f4d38c;
-        padding: 8px 16px;
-        font-size: 12.5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        text-align: center;
-        position: relative;
-        z-index: 100;
-        font-weight: 500;
-      }
-      .free-service-banner b {
-        color: #2ecc71;
-      }
-      .free-banner-link {
-        color: #fff;
-        background: rgba(216, 176, 106, 0.25);
-        border: 1px solid #d8b06a;
-        padding: 2px 10px;
-        border-radius: 999px;
-        font-size: 11px;
-        cursor: pointer;
-        text-decoration: none;
-        margin-left: 6px;
-      }
-      .free-banner-link:hover {
-        background: #d8b06a;
-        color: #120d22;
+      /* Clean Experience / Process Section Override */
+      #process,
+      section#process {
+        display: none !important;
       }
 
       /* Unified Floating Cosmic Action Dock (No Overlaps on Any Screen) */
@@ -117,17 +88,27 @@
         transform: translateY(-2px);
       }
 
-      .dock-btn-free {
-        background: linear-gradient(135deg, #00875a, #006644);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        color: #fff;
+      .dock-btn-pay {
+        background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        color: #ffffff !important;
         font-weight: 700;
-        box-shadow: 0 4px 12px rgba(0, 135, 90, 0.3);
+        box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+        text-decoration: none;
       }
-      .dock-btn-free:hover {
-        background: #005a3c;
+      .dock-btn-pay:hover {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0, 135, 90, 0.45);
+        box-shadow: 0 6px 18px rgba(217, 119, 6, 0.5);
+        color: #ffffff !important;
+      }
+
+      /* Floating WhatsApp Button - Moved upward above bottom floating dock */
+      .floating-whatsapp {
+        bottom: 84px !important;
+        right: 24px !important;
+        z-index: 998 !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 4px 15px rgba(31, 143, 90, 0.4) !important;
       }
 
       .dock-btn-auth {
@@ -171,6 +152,11 @@
         }
         .dock-hide-mobile {
           display: none;
+        }
+        .floating-whatsapp {
+          bottom: 74px !important;
+          right: 14px !important;
+          padding: 10px 14px !important;
         }
       }
 
@@ -567,12 +553,6 @@
     </style>
   </head>
   <body>
-    <!-- Free Services Top Ribbon -->
-    <div class="free-service-banner">
-      <span>✨ <b>शुभ सूचना:</b> Astro Tiwari का सम्पूर्ण वैदिक ज्योतिषीय सेवाहरू सर्वसाधारणका लागि <b>निःशुल्क (100% FREE)</b> छन्!</span>
-      <a href="javascript:void(0)" onclick="openUserAuthModal()" class="free-banner-link" id="banner-auth-btn">निःशुल्क लगइन / दर्ता</a>
-    </div>
-
     <div id="root"></div>
 
     <!-- Unified Non-Overlapping Floating Cosmic Action Dock -->
@@ -582,9 +562,10 @@
         <span>🕉️ AI सल्लाहकार</span>
       </button>
 
-      <button class="dock-btn dock-btn-free" onclick="scrollToPaymentSection(event)" title="निःशुल्क कुण्डली सेवा">
-        <span>✨ १००% निःशुल्क सेवा</span>
-      </button>
+      <a href="/pay" class="dock-btn dock-btn-pay" title="तुरुन्त अनलाइन भुक्तानी (Quick Pay)">
+        <span>💳 Quick Pay</span>
+        <span class="dock-hide-mobile">&nbsp;(रु. २९९ / ४९९ / १०५५)</span>
+      </a>
 
       <button id="user-auth-btn" class="dock-btn dock-btn-auth" onclick="openUserAuthModal()" title="प्रयोगकर्ता लगइन / दर्ता">
         <span id="user-auth-btn-icon">🔑</span>
@@ -654,13 +635,13 @@
         <div class="auth-header">
           <div class="auth-logo-badge">🕉️</div>
           <h3 class="auth-title">Astro Tiwari</h3>
-          <p class="auth-subtitle">सम्पूर्ण वैदिक ज्योतिषीय सेवाहरू सर्वसाधारणका लागि <b>निःशुल्क (FREE)</b> छन्</p>
+          <p class="auth-subtitle">Astro Tiwari वैदिक ज्योतिषीय परामर्श सेवामा स्वागत छ</p>
         </div>
 
         <!-- Tabs -->
         <div class="auth-tabs">
           <button id="auth-tab-login" class="auth-tab-btn active" onclick="switchAuthTab('login')">🔑 लगइन (Sign In)</button>
-          <button id="auth-tab-register" class="auth-tab-btn" onclick="switchAuthTab('register')">✨ नयाँ दर्ता (Register Free)</button>
+          <button id="auth-tab-register" class="auth-tab-btn" onclick="switchAuthTab('register')">✨ नयाँ दर्ता (Register)</button>
         </div>
 
         <!-- Status Message Banner -->
@@ -683,7 +664,7 @@
           </button>
           
           <div style="margin-top:14px; text-align:center; font-size:12px; color:#ad9eb2;">
-            खाता छैन? <a href="javascript:void(0)" onclick="switchAuthTab('register')" style="color:#d8b06a; text-decoration:underline;">यहाँ निःशुल्क दर्ता गर्नुहोस्</a>
+            खाता छैन? <a href="javascript:void(0)" onclick="switchAuthTab('register')" style="color:#d8b06a; text-decoration:underline;">यहाँ नयाँ दर्ता गर्नुहोस्</a>
           </div>
         </form>
 
@@ -691,7 +672,7 @@
         <form id="user-register-form" onsubmit="handleUserRegister(event)" style="display:none;">
           <div class="auth-notice-box">
             <span style="font-size:15px;">🛡️</span>
-            <span><b>सूचना:</b> दर्ता १००% निःशुल्क छ। सुरक्षा र विश्वसनीयताका लागि एडमिनले प्रमाणीकरण (Verification) गरेपछि तपाईंको खाता सक्रिय हुनेछ।</span>
+            <span><b>सूचना:</b> सुरक्षा र गोपनीयताका लागि एडमिनले प्रमाणीकरण (Verification) गरेपछि तपाईंको खाता सक्रिय हुनेछ।</span>
           </div>
 
           <div class="auth-field-group">
@@ -715,7 +696,7 @@
           </div>
 
           <button type="submit" id="reg-submit-btn" class="auth-submit-btn" style="background:linear-gradient(135deg,#1f8f5a,#166c43); color:#fff;">
-            निःशुल्क खाता दर्ता गर्नुहोस् ✨
+            खाता दर्ता गर्नुहोस् ➔
           </button>
 
           <div style="margin-top:14px; text-align:center; font-size:12px; color:#ad9eb2;">
@@ -729,7 +710,7 @@
           <h4 id="profile-user-name" style="font-family:'Cormorant Garamond', serif; font-size:22px; color:#f4d38c; margin-bottom:4px;"></h4>
           <div id="profile-user-contact" style="font-size:12.5px; color:#ad9eb2; margin-bottom:12px;"></div>
           <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(46,204,113,0.15); border:1px solid rgba(46,204,113,0.4); color:#2ecc71; padding:5px 14px; border-radius:999px; font-size:12px; font-weight:700; margin-bottom:20px;">
-            ✅ एडमिन द्वारा प्रमाणित (सबै सेवा निःशुल्क)
+            ✅ एडमिन द्वारा प्रमाणित प्रयोगकर्ता
           </div>
           
           <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
@@ -746,6 +727,24 @@
 
     <!-- Interactive Scripts: QR Lightbox & Form Submission Capture -->
     <script>
+      // Automatically ensure removed sections and obsolete nav links are purged
+      function purgeRemovedSections() {
+        const p = document.getElementById('process');
+        if (p) p.remove();
+        document.querySelectorAll('button, a').forEach(el => {
+          if (el.textContent && el.textContent.trim() === 'कसरी हुन्छ?') {
+            el.remove();
+          }
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', purgeRemovedSections);
+      } else {
+        purgeRemovedSections();
+      }
+      window.addEventListener('load', purgeRemovedSections);
+      new MutationObserver(purgeRemovedSections).observe(document.documentElement, { childList: true, subtree: true });
+
       // ============================================================
       // User Authentication & Admin Verification Engine (100% Free)
       // ============================================================
@@ -820,13 +819,10 @@
           const phoneInput = document.querySelector('input[name="phone"]');
           if (nameInput && !nameInput.value) nameInput.value = currentUser.name;
           if (phoneInput && !phoneInput.value && currentUser.phone) phoneInput.value = currentUser.phone;
-
-          // Annotate packages as 100% Free
-          markServicesAsFree();
         } else {
           if (authBtn) {
             authBtn.classList.remove('verified-user-pill');
-            authBtn.title = 'प्रयोगकर्ता लगइन / दर्ता (सबै सेवा निःशुल्क)';
+            authBtn.title = 'प्रयोगकर्ता लगइन / दर्ता';
           }
           if (authBtnIcon) authBtnIcon.textContent = '🔑';
           if (authBtnText) authBtnText.textContent = 'लगइन / दर्ता';
@@ -839,15 +835,9 @@
         }
       }
 
-      function markServicesAsFree() {
-        const amtWrap = document.querySelector('.payment-amounts');
-        if (amtWrap && !document.getElementById('verified-free-badge')) {
-          const badge = document.createElement('div');
-          badge.id = 'verified-free-badge';
-          badge.style.cssText = 'background:rgba(46,204,113,0.18); border:1px solid rgba(46,204,113,0.4); border-radius:999px; padding:6px 14px; color:#2ecc71; font-size:12px; font-weight:700; text-align:center; margin:10px auto; max-width:440px;';
-          badge.innerHTML = '🎉 तपाईं प्रमाणित प्रयोगकर्ता हुनुहुन्छ — सम्पूर्ण सेवाहरू १००% निःशुल्क (रु. ०) छन्!';
-          amtWrap.parentNode.insertBefore(badge, amtWrap);
-        }
+      function removeVerifiedFreeBadge() {
+        const badge = document.getElementById('verified-free-badge');
+        if (badge) badge.remove();
       }
 
       function openUserAuthModal(initialTab = 'login', noticeMsg = '') {
@@ -953,7 +943,7 @@
             localStorage.setItem('astro_user_token', userToken);
             localStorage.setItem('astro_user_data', JSON.stringify(currentUser));
             updateAuthUI();
-            showAuthBanner('सफलतापूर्वक लगइन भयो! सम्पूर्ण सेवाहरू १००% निःशुल्क छन्। ✨', 'success');
+            showAuthBanner('सफलतापूर्वक लगइन भयो! ✨', 'success');
             setTimeout(() => {
               closeUserAuthModal();
             }, 1000);
@@ -962,7 +952,7 @@
             showAuthBanner(`
               <b>⏳ खाता प्रमाणीकरण बाँकी:</b><br />
               तपाईंको खाता दर्ता भएको छ तर <b>एडमिन द्वारा प्रमाणीकरण (Verification)</b> हुन बाँकी छ।<br /><br />
-              प्रमाणीकरणपछि तपाईंले सबै सेवाहरू निःशुल्क प्रयोग गर्न सक्नुहुनेछ।<br />
+              प्रमाणीकरणपछि तपाईंले सबै सुविधाहरू प्रयोग गर्न सक्नुहुनेछ।<br />
               <a href="https://wa.me/9779809192604?text=${phoneEncoded}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; margin-top:8px; background:#25d366; color:#0b1a13; font-weight:700; padding:6px 12px; border-radius:6px; text-decoration:none; font-size:11.5px;">
                 💬 WhatsApp मा एडमिनलाई तुरुन्त खबर गर्नुहोस्
               </a>
@@ -1009,10 +999,10 @@
           const data = await res.json();
 
           if (res.ok && data.success) {
-            const phoneEncoded = encodeURIComponent(`नमस्ते पण्डितजी, मैले भर्खर Astro Tiwari मा निःशुल्क खाता दर्ता गरेको छु (${name}, ${phone})। कृपया खाता प्रमाणीकरण (Verify) गरिदिनुहोला।`);
+            const phoneEncoded = encodeURIComponent(`नमस्ते पण्डितजी, मैले भर्खर Astro Tiwari मा खाता दर्ता गरेको छु (${name}, ${phone})। कृपया खाता प्रमाणीकरण (Verify) गरिदिनुहोला।`);
             showAuthBanner(`
               <b>🎉 बधाई छ! खाता दर्ता भयो:</b><br />
-              Astro Tiwari का सबै सुविधाहरू निःशुल्क छन्। तपाईंको खाता <b>एडमिन प्रमाणीकरण (Verification)</b> सूचीमा पठाइएको छ।<br /><br />
+              तपाईंको खाता <b>एडमिन प्रमाणीकरण (Verification)</b> सूचीमा पठाइएको छ।<br /><br />
               प्रमाणीकरण तुरुन्त गराउन तलको बटन थिची एडमिनलाई WhatsApp मा सूचित गर्नुहोस्:<br />
               <a href="https://wa.me/9779809192604?text=${phoneEncoded}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:#25d366; color:#0b1a13; font-weight:700; padding:8px 14px; border-radius:6px; text-decoration:none; font-size:12px;">
                 💬 WhatsApp मा एडमिनलाई प्रमाणीकरण अनुरोध गर्नुहोस्
@@ -1028,7 +1018,7 @@
         } finally {
           if (btn) {
             btn.disabled = false;
-            btn.textContent = 'निःशुल्क खाता दर्ता गर्नुहोस् ✨';
+            btn.textContent = 'खाता दर्ता गर्नुहोस् ➔';
           }
         }
       }
@@ -1465,7 +1455,7 @@
           birth_minute: String(fd.get('birth_minute') || ''),
           birth_period: String(fd.get('birth_period') || ''),
           birth_place: String(fd.get('birth_place') || ''),
-          package: String(fd.get('topic') || 'निःशुल्क वैदिक कुण्डली परामर्श (रु. ०)'),
+          package: String(fd.get('topic') || 'Standard Package (रु. ४९९)'),
           message: String(fd.get('message') || ''),
           rectification: String(fd.get('rectification') || ''),
           paymentScreenshotBase64: latestPaymentBase64 || '',
@@ -1480,7 +1470,7 @@
           },
           body: JSON.stringify(payload)
         }).then(res => res.json()).then(res => {
-          console.log('[Admin Sync] Free Consultation saved for admin review:', res.id);
+          console.log('[Admin Sync] Consultation saved for admin review:', res.id);
         }).catch(err => {
           console.error('[Admin Sync Error]', err);
         });
