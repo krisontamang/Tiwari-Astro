@@ -7,3 +7,4 @@ Thumbs.db
 astrologer-api-repo/
 uploads/*
 !uploads/sample-payment.jpg
+scratch/

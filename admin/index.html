@@ -760,6 +760,129 @@
         border-bottom: none;
       }
 
+      /* --- Chart Switcher & Kundali Subtabs --- */
+      .chart-toggle-group {
+        display: flex;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(216, 176, 106, 0.22);
+        border-radius: 999px;
+        padding: 3px;
+        margin-bottom: 12px;
+        gap: 4px;
+      }
+      .chart-tab-btn {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 11.5px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.2s;
+      }
+      .chart-tab-btn.active {
+        background: var(--gold);
+        color: #120e18;
+        font-weight: 700;
+        box-shadow: 0 2px 10px rgba(216,176,106,0.35);
+      }
+      .chart-tab-btn:hover:not(.active) {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .km-tab-nav {
+        display: flex;
+        gap: 6px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 8px;
+        margin-bottom: 14px;
+        overflow-x: auto;
+      }
+      .km-tab-link {
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--text-secondary);
+        padding: 6px 12px;
+        border-radius: 0.6rem;
+        font-size: 11.5px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.2s;
+      }
+      .km-tab-link:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .km-tab-link.active {
+        background: rgba(216, 176, 106, 0.15);
+        border-color: var(--gold-border);
+        color: var(--gold-light);
+        font-weight: 700;
+      }
+      .km-tab-pane {
+        display: none;
+      }
+      .km-tab-pane.active {
+        display: block;
+      }
+
+      .dasha-badge-active {
+        background: rgba(46, 204, 113, 0.2);
+        border: 1px solid rgba(46, 204, 113, 0.5);
+        color: #2ecc71;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 999px;
+      }
+
+      /* --- Milan & Panchang Modals --- */
+      .milan-result-card {
+        background: rgba(216, 176, 106, 0.08);
+        border: 1px solid var(--gold-border);
+        border-radius: 1rem;
+        padding: 16px;
+        text-align: center;
+        margin-top: 16px;
+      }
+      .milan-score-big {
+        font-family: var(--font-serif);
+        font-size: 38px;
+        font-weight: 700;
+        color: var(--gold-light);
+      }
+      .panchang-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .panchang-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 0.75rem;
+        padding: 12px;
+      }
+      .panchang-item-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .panchang-item-val {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
       /* Empty State */
       .empty-state {
         text-align: center;
@@ -876,6 +999,14 @@
               <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#2ecc71; box-shadow:0 0 8px #2ecc71;"></span>
               <span id="astrology-status-label">Astrologer API: Active</span>
             </div>
+
+            <button onclick="openMilanModal()" class="btn-ghost" style="border-color:rgba(216,176,106,0.35); color:#f4d38c;">
+              💑 गुण मिलान
+            </button>
+
+            <button onclick="openPanchangModal()" class="btn-ghost" style="border-color:rgba(216,176,106,0.35); color:#f4d38c;">
+              📅 पञ्चाङ्ग
+            </button>
 
             <button onclick="openCalculatorModal()" class="btn-ghost" style="border-color:rgba(216,176,106,0.35); color:#f4d38c;">
               🔮 कुण्डली क्याल्कुलेटर
@@ -998,8 +1129,17 @@
         </div>
 
         <div class="kundali-body-grid">
-          <!-- Left: SVG Chart Wheel -->
+          <!-- Left: SVG Chart Wheel with Chart Switcher -->
           <div class="kundali-chart-area">
+            <div class="chart-toggle-group">
+              <button id="btn-chart-diamond" class="chart-tab-btn active" onclick="setChartType('diamond')">
+                💎 चौकोने कुण्डली (Diamond)
+              </button>
+              <button id="btn-chart-circle" class="chart-tab-btn" onclick="setChartType('circle')">
+                ⭕ अन्तरिक्ष चक्र (Astrocircle)
+              </button>
+            </div>
+
             <div id="km-svg-container" class="kundali-svg-wrap">
               <!-- SVG is injected here -->
             </div>
@@ -1013,61 +1153,148 @@
             </div>
           </div>
 
-          <!-- Right: Detailed Planetary Positions & AI Context -->
+          <!-- Right: Detailed Planetary Positions & AI Context Tabs -->
           <div class="kundali-info-panel">
-            <div class="kundali-meta-grid">
-              <div class="km-stat-box">
-                <span class="km-stat-title">लग्न (Ascendant)</span>
-                <strong id="km-lagna-val" style="color:var(--gold-light);">—</strong>
+            <!-- Navigation Subtabs -->
+            <div class="km-tab-nav">
+              <button class="km-tab-link active" onclick="switchKmTab('d1', this)">🪐 लग्न (D1)</button>
+              <button class="km-tab-link" onclick="switchKmTab('d9', this)">☸️ नवमांश (D9)</button>
+              <button class="km-tab-link" onclick="switchKmTab('dasha', this)">⏳ विंशोत्तरी दशा</button>
+              <button class="km-tab-link" onclick="switchKmTab('ai', this)">🕉️ AI ज्योतिष</button>
+            </div>
+
+            <!-- Tab 1: D1 Natal Chart -->
+            <div id="pane-km-d1" class="km-tab-pane active">
+              <div class="kundali-meta-grid">
+                <div class="km-stat-box">
+                  <span class="km-stat-title">लग्न (Ascendant)</span>
+                  <strong id="km-lagna-val" style="color:var(--gold-light);">—</strong>
+                </div>
+                <div class="km-stat-box">
+                  <span class="km-stat-title">जन्म राशि (Moon)</span>
+                  <strong id="km-moon-val" style="color:#d4a5ff;">—</strong>
+                </div>
+                <div class="km-stat-box">
+                  <span class="km-stat-title">जन्म नक्षत्र (Nakshatra)</span>
+                  <strong id="km-nakshatra-val" style="color:#85c1e9;">—</strong>
+                </div>
+                <div class="km-stat-box">
+                  <span class="km-stat-title">अयनांश (Ayanamsa)</span>
+                  <strong id="km-ayanamsa-val" style="color:#a2e8bc;">—</strong>
+                </div>
               </div>
-              <div class="km-stat-box">
-                <span class="km-stat-title">जन्म राशि (Moon)</span>
-                <strong id="km-moon-val" style="color:#d4a5ff;">—</strong>
-              </div>
-              <div class="km-stat-box">
-                <span class="km-stat-title">जन्म नक्षत्र (Nakshatra)</span>
-                <strong id="km-nakshatra-val" style="color:#85c1e9;">—</strong>
-              </div>
-              <div class="km-stat-box">
-                <span class="km-stat-title">अयनांश (Ayanamsa)</span>
-                <strong id="km-ayanamsa-val" style="color:#a2e8bc;">—</strong>
+
+              <!-- Planetary Positions Table -->
+              <div style="margin-top:14px;">
+                <div style="font-size:11.5px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">
+                  🪐 ग्रह स्थिति तथा भाव (Planetary Placements)
+                </div>
+                <div class="km-table-wrap">
+                  <table class="km-table">
+                    <thead>
+                      <tr>
+                        <th>ग्रह</th>
+                        <th>राशि</th>
+                        <th>भाव</th>
+                        <th>अंश (Degree)</th>
+                        <th>स्वामी</th>
+                      </tr>
+                    </thead>
+                    <tbody id="km-planets-tbody">
+                      <!-- Planet rows -->
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
 
-            <!-- Planetary Positions Table -->
-            <div style="margin-top:14px;">
-              <div style="font-size:11.5px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">
-                🪐 ग्रह स्थिति तथा भाव (Planetary Placements)
+            <!-- Tab 2: D9 Navamsha Chart -->
+            <div id="pane-km-d9" class="km-tab-pane">
+              <div class="km-stat-box" style="margin-bottom:10px; background:rgba(216,176,106,0.06); border-color:var(--gold-border);">
+                <div style="font-size:11.5px; color:var(--gold-light); font-weight:600;">☸️ नवमांश कुण्डली (D9 Divisional Harmonic)</div>
+                <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">
+                  वैदिक ज्योतिषमा नवमांश कुण्डली विवाह, जीवनसाथी, धर्म र जीवनको उत्तरार्धको फल हेर्नका लागि प्रमुख मानिन्छ।
+                </div>
               </div>
               <div class="km-table-wrap">
                 <table class="km-table">
                   <thead>
                     <tr>
                       <th>ग्रह</th>
-                      <th>राशि</th>
-                      <th>भाव</th>
-                      <th>अंश (Degree)</th>
-                      <th>स्वामी</th>
+                      <th>D1 राशि</th>
+                      <th>D9 नवमांश राशि</th>
+                      <th>D9 स्वामी</th>
+                      <th>पद (Pada)</th>
                     </tr>
                   </thead>
-                  <tbody id="km-planets-tbody">
-                    <!-- Planet rows -->
+                  <tbody id="km-d9-tbody">
+                    <!-- D9 rows -->
                   </tbody>
                 </table>
               </div>
             </div>
 
-            <!-- AI Astrological Context & Actions -->
-            <div style="margin-top:14px;">
+            <!-- Tab 3: Vimshottari Dasha Timeline -->
+            <div id="pane-km-dasha" class="km-tab-pane">
+              <div class="km-stat-box" style="margin-bottom:12px; background:linear-gradient(135deg, rgba(31,143,90,0.15), rgba(216,176,106,0.1)); border:1px solid rgba(46,204,113,0.35);">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <div>
+                    <span class="km-stat-title" style="color:#2ecc71;">चालू महादशा (Active Mahadasha)</span>
+                    <strong id="km-current-dasha-title" style="font-size:15px; color:#fff;">—</strong>
+                  </div>
+                  <span id="km-current-dasha-badge" class="dasha-badge-active">Active</span>
+                </div>
+                <div id="km-dasha-balance-info" style="font-size:11px; color:#a2e8bc; margin-top:4px;">
+                  जन्म समयमा दशा शेष: —
+                </div>
+              </div>
+
+              <div style="font-size:11.5px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">
+                ⏳ १२० वर्षे विंशोत्तरी दशा चक्र (Dasha Timeline)
+              </div>
+              <div class="km-table-wrap">
+                <table class="km-table">
+                  <thead>
+                    <tr>
+                      <th>दशानाथ (Lord)</th>
+                      <th>अवधि</th>
+                      <th>सुरु मिति</th>
+                      <th>अन्त्य मिति</th>
+                      <th>स्थिति</th>
+                    </tr>
+                  </thead>
+                  <tbody id="km-dasha-tbody">
+                    <!-- Dasha rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tab 4: AI Astrological Context & Actions -->
+            <div id="pane-km-ai" class="km-tab-pane">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
                 <span style="font-size:11.5px; font-weight:700; color:var(--text-secondary);">
-                  📋 AI / पण्डितजी रिडिङ प्रम्प्ट (Astrology Prompt)
+                  📋 पराशर AI / पण्डितजी रिडिङ प्रम्प्ट (Astrology Prompt)
                 </span>
                 <button onclick="copyAiContext()" class="btn-ghost" style="padding:3px 8px; font-size:10.5px;">
                   📋 Copy Text
                 </button>
               </div>
               <textarea id="km-ai-context" class="admin-note-area" rows="4" readonly style="font-size:11px; font-family:monospace; line-height:1.4; color:#ad9eb2;"></textarea>
+
+              <!-- Interactive Modal Ask AI -->
+              <div style="margin-top:12px; background:rgba(255,255,255,0.03); border:1px solid rgba(216,176,106,0.2); border-radius:0.75rem; padding:10px;">
+                <div style="font-size:11.5px; font-weight:700; color:var(--gold); margin-bottom:6px;">
+                  🕉️ यो कुण्डलीको बारेमा AI सल्लाहकारसँग सोध्नुहोस्
+                </div>
+                <div style="display:flex; gap:6px;">
+                  <input type="text" id="km-ai-query-input" class="search-input" placeholder="जस्तै: करियर, विवाह वा स्वास्थ्यको उपाय के हुन सक्छ?" style="font-size:12px; padding:6px 10px;" onkeydown="if(event.key==='Enter') askKundaliAiUI()" />
+                  <button onclick="askKundaliAiUI()" class="btn-verify" style="padding:6px 14px; font-size:12px; white-space:nowrap;">
+                    सोध्नुहोस्
+                  </button>
+                </div>
+                <div id="km-ai-query-result" style="margin-top:8px; font-size:11.5px; color:#ddd; line-height:1.5; max-height:160px; overflow-y:auto; display:none; background:#0d0918; padding:8px 10px; border-radius:0.5rem; border:1px solid rgba(255,255,255,0.08);"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1141,6 +1368,127 @@
             <span id="calc-spinner" style="display:none;">⏳</span>
           </button>
         </form>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 6. KUNDALI MATCHING (36 GUNA ASHTAKOOT MILAN) MODAL -->
+    <!-- ============================================================== -->
+    <div id="milan-modal" class="custom-modal">
+      <div class="lightbox-content" style="max-width: 680px; text-align: left;">
+        <button class="lightbox-close" onclick="closeMilanModal()">&times;</button>
+        <div style="font-family: var(--font-serif); font-size: 22px; color: var(--gold); margin-bottom: 4px;">
+          💑 ३६ गुण कुण्डली मिलान (Ashtakoot Guna Milan)
+        </div>
+        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
+          वर र कन्याको नक्षत्र तथा राशि चयन गरी ३६ गुण, नाडी दोष र भकूट दोषको यथार्थ स्थिति पत्ता लगाउनुहोस्।
+        </div>
+
+        <form id="milan-form" onsubmit="handleMilanCalculate(event)">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+            <!-- Boy Box -->
+            <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(216,176,106,0.2); border-radius:0.75rem; padding:12px;">
+              <div style="font-size:12px; font-weight:700; color:var(--gold-light); margin-bottom:8px;">
+                👦 वरको विवरण (Groom)
+              </div>
+              <div class="form-group" style="margin-bottom:10px;">
+                <label>वरको नक्षत्र (Boy Nakshatra)</label>
+                <select id="milan-boy-nakshatra" class="form-input" style="height:38px; font-size:12px;"></select>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label>वरको जन्म राशि (Boy Moon Sign)</label>
+                <select id="milan-boy-rashi" class="form-input" style="height:38px; font-size:12px;"></select>
+              </div>
+            </div>
+
+            <!-- Girl Box -->
+            <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(216,176,106,0.2); border-radius:0.75rem; padding:12px;">
+              <div style="font-size:12px; font-weight:700; color:#d4a5ff; margin-bottom:8px;">
+                👧 कन्याको विवरण (Bride)
+              </div>
+              <div class="form-group" style="margin-bottom:10px;">
+                <label>कन्याको नक्षत्र (Girl Nakshatra)</label>
+                <select id="milan-girl-nakshatra" class="form-input" style="height:38px; font-size:12px;"></select>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label>कन्याको जन्म राशि (Girl Moon Sign)</label>
+                <select id="milan-girl-rashi" class="form-input" style="height:38px; font-size:12px;"></select>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" id="milan-submit-btn" class="login-btn" style="margin-top:16px;">
+            <span>💑 ३६ गुण मिलान गणना गर्नुहोस्</span>
+            <span id="milan-spinner" style="display:none;">⏳</span>
+          </button>
+        </form>
+
+        <!-- Milan Results Area -->
+        <div id="milan-results-container" style="display:none; margin-top:18px;">
+          <div class="milan-result-card">
+            <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); letter-spacing:0.04em;">
+              कुल प्राप्त गुण (Total Milan Score)
+            </div>
+            <div class="milan-score-big">
+              <span id="milan-score-val">0</span> / ३६
+            </div>
+            <div id="milan-verdict-badge" style="display:inline-block; padding:4px 14px; border-radius:999px; font-size:12px; font-weight:700; margin-top:4px;">
+              उत्तम मिलान
+            </div>
+            <div id="milan-recommendation" style="font-size:12px; color:var(--text-secondary); margin-top:8px;"></div>
+          </div>
+
+          <!-- Ashtakoot breakdown table -->
+          <div style="margin-top:14px;">
+            <div style="font-size:11.5px; font-weight:700; color:var(--gold); margin-bottom:6px;">
+              📊 अष्टकूट ८ आधारहरूको विस्तृत विश्लेषण
+            </div>
+            <div class="km-table-wrap">
+              <table class="km-table">
+                <thead>
+                  <tr>
+                    <th>कूट (Koota)</th>
+                    <th>अधिकतम अङ्क</th>
+                    <th>प्राप्त अङ्क</th>
+                    <th>विवरण</th>
+                  </tr>
+                </thead>
+                <tbody id="milan-kootas-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Dosha Warnings -->
+          <div id="milan-doshas-container" style="margin-top:12px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 7. DAILY PANCHANG (दैनिक पञ्चाङ्ग) MODAL -->
+    <!-- ============================================================== -->
+    <div id="panchang-modal" class="custom-modal">
+      <div class="lightbox-content" style="max-width: 620px; text-align: left;">
+        <button class="lightbox-close" onclick="closePanchangModal()">&times;</button>
+        <div style="font-family: var(--font-serif); font-size: 22px; color: var(--gold); margin-bottom: 4px;">
+          📅 आजको वैदिक पञ्चाङ्ग (Daily Panchang - Nepal)
+        </div>
+        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;" id="panchang-date-header">
+          नेपाल मानक समय अनुसार आजको ग्रह तथा नक्षत्र स्थिति।
+        </div>
+
+        <div class="panchang-grid" id="panchang-grid-container">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div style="margin-top:16px; background:rgba(231,76,60,0.1); border:1px solid rgba(231,76,60,0.3); border-radius:0.75rem; padding:12px;">
+          <div style="font-size:11.5px; font-weight:700; color:#e74c3c; margin-bottom:4px;">
+            ⚠️ राहु काल विचार (Inauspicious Period)
+          </div>
+          <div id="panchang-rahu-text" style="font-size:12px; color:#ddd;">
+            राहु कालमा कुनै पनि नयाँ काम, सम्झौता वा यात्रा नगर्नु शुभ मानिन्छ।
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1859,6 +2207,55 @@
         }
       }
 
+      let currentChartType = 'diamond';
+      const NAKSHATRAS_LIST = [
+        'अश्विनी (Ashwini)', 'भरणी (Bharani)', 'कृत्तिका (Krittika)', 'रोहिणी (Rohini)',
+        'मृगशिरा (Mrigashira)', 'आर्द्रा (Ardra)', 'पुनर्वसु (Punarvasu)', 'पुष्य (Pushya)',
+        'आश्लेषा (Ashlesha)', 'मघा (Magha)', 'पूर्वाफाल्गुनी (Purva Phalguni)', 'उत्तराफाल्गुनी (Uttara Phalguni)',
+        'हस्त (Hasta)', 'चित्रा (Chitra)', 'स्वाति (Swati)', 'विशाखा (Vishakha)',
+        'अनुराधा (Anuradha)', 'ज्येष्ठा (Jyeshtha)', 'मूल (Mula)', 'पूर्वाषाढा (Purva Ashadha)',
+        'उत्तराषाढा (Uttara Ashadha)', 'श्रवण (Shravana)', 'धनिष्ठा (Dhanishta)', 'शतभिषा (Shatabhisha)',
+        'पूर्वाभाद्रपदा (Purva Bhadrapada)', 'उत्तराभाद्रपदा (Uttara Bhadrapada)', 'रेवती (Revati)'
+      ];
+      const RASHIS_LIST = [
+        'मेष (Aries)', 'वृषभ (Taurus)', 'मिथुन (Gemini)', 'कर्कट (Cancer)',
+        'सिंह (Leo)', 'कन्या (Virgo)', 'तुला (Libra)', 'वृश्चिक (Scorpio)',
+        'धनु (Sagittarius)', 'मकर (Capricorn)', 'कुम्भ (Aquarius)', 'मीन (Pisces)'
+      ];
+
+      function setChartType(type) {
+        currentChartType = type;
+        const btnDiamond = document.getElementById('btn-chart-diamond');
+        const btnCircle = document.getElementById('btn-chart-circle');
+        if (btnDiamond && btnCircle) {
+          btnDiamond.classList.toggle('active', type === 'diamond');
+          btnCircle.classList.toggle('active', type === 'circle');
+        }
+
+        const svgContainer = document.getElementById('km-svg-container');
+        if (!activeKundaliData) return;
+
+        const targetUrl = (type === 'circle' && activeKundaliData.circleSvgUrl) 
+          ? activeKundaliData.circleSvgUrl 
+          : activeKundaliData.chartSvgUrl;
+
+        if (targetUrl) {
+          svgContainer.innerHTML = `<img src="${targetUrl}?t=${Date.now()}" style="width:100%; height:auto; display:block;" alt="Kundali Chart" />`;
+          document.getElementById('km-download-btn').href = targetUrl;
+        } else {
+          svgContainer.innerHTML = `<div style="padding:60px 20px; text-align:center; color:var(--text-muted);">कुण्डली चार्ट उपलब्ध छैन</div>`;
+        }
+      }
+
+      function switchKmTab(tabKey, btnEl) {
+        document.querySelectorAll('.km-tab-link').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.km-tab-pane').forEach(p => p.classList.remove('active'));
+
+        if (btnEl) btnEl.classList.add('active');
+        const targetPane = document.getElementById(`pane-km-${tabKey}`);
+        if (targetPane) targetPane.classList.add('active');
+      }
+
       async function openKundaliModal(id) {
         let item = currentSubmissions.find(s => s.id === id);
         if (!item) return;
@@ -1882,7 +2279,10 @@
             const chartResult = await res.json();
             if (chartResult && chartResult.success) {
               item.chartSvgUrl = chartResult.chartSvgUrl;
+              item.circleSvgUrl = chartResult.circleSvgUrl;
               item.kundaliData = chartResult.astrologyData;
+              item.d9Data = chartResult.d9Data;
+              item.dashaData = chartResult.dashaData;
               item.chartSource = chartResult.source;
               item.aiContext = chartResult.aiContext;
               localStorage.setItem(SUBMISSIONS_CACHE_KEY, JSON.stringify(currentSubmissions));
@@ -1902,14 +2302,8 @@
           `${item.dobBs ? item.dobBs + ' (वि.सं.)' : ''} ${item.dobAd ? item.dobAd + ' (ई.सं.)' : ''} | ${item.birthTime || '—'} | ${item.birthPlace || 'नेपाल'}`;
         document.getElementById('km-source-badge').textContent = item.chartSource || 'Astro Tiwari Vedic Engine';
 
-        // Load SVG into container
-        const svgContainer = document.getElementById('km-svg-container');
-        if (item.chartSvgUrl) {
-          svgContainer.innerHTML = `<img src="${item.chartSvgUrl}?t=${Date.now()}" style="width:100%; height:auto; display:block;" alt="Kundali Chart" />`;
-          document.getElementById('km-download-btn').href = item.chartSvgUrl;
-        } else {
-          svgContainer.innerHTML = `<div style="padding:60px 20px; text-align:center; color:var(--text-muted);">कुण्डली चार्ट उपलब्ध छैन</div>`;
-        }
+        // Set chart switcher default to diamond
+        setChartType('diamond');
 
         // Stats summary
         document.getElementById('km-lagna-val').textContent = k.lagna ? `${k.lagna.rashiName} (${k.lagna.degreeFormatted})` : '—';
@@ -1917,7 +2311,7 @@
         document.getElementById('km-nakshatra-val').textContent = k.nakshatra ? `${k.nakshatra.name.split(' ')[0]} (चरण ${k.nakshatra.pada})` : '—';
         document.getElementById('km-ayanamsa-val').textContent = k.ayanamsa || 'Lahiri';
 
-        // Planets Table
+        // 1. D1 Planets Table
         const tbody = document.getElementById('km-planets-tbody');
         const planets = k.planets || [];
         tbody.innerHTML = planets.map(p => `
@@ -1930,8 +2324,68 @@
           </tr>
         `).join('');
 
-        // AI Context
+        // 2. D9 Navamsha Table
+        const d9tbody = document.getElementById('km-d9-tbody');
+        const d9List = (item.d9Data && item.d9Data.planets) ? item.d9Data.planets : (Array.isArray(item.d9Data) ? item.d9Data : []);
+        if (d9List.length) {
+          d9tbody.innerHTML = d9List.map(p => `
+            <tr>
+              <td><b>${escapeHtml(p.nepaliName || p.planet || p.key || '')}</b> <span style="color:var(--gold); font-size:10px;">${escapeHtml(p.dev || '')}</span></td>
+              <td>${escapeHtml(p.d1Rashi || RASHIS_LIST[(p.d1Sign || 1) - 1] || '—')}</td>
+              <td><b style="color:var(--gold-light);">${escapeHtml(p.d9RashiName || p.navamshaRashi || '—')}</b></td>
+              <td style="color:var(--text-secondary); font-size:10.5px;">${escapeHtml(p.d9Lord || p.lord || '—')}</td>
+              <td><span style="background:rgba(216,176,106,0.15); color:#f4d38c; padding:2px 6px; border-radius:4px; font-weight:bold;">${p.pada || 1}</span></td>
+            </tr>
+          `).join('');
+        } else {
+          d9tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-muted); padding:16px;">नवमांश विवरण लोड भइरहेको छ...</td></tr>`;
+        }
+
+        // 3. Vimshottari Dasha Timeline
+        const dasha = item.dashaData || {};
+        const curDasha = dasha.currentDasha || {};
+        const curDashaName = typeof curDasha === 'string' ? curDasha : (curDasha.lord || 'शनि');
+        const curDashaDuration = curDasha.durationYears || curDasha.years || '';
+        document.getElementById('km-current-dasha-title').textContent = `${curDashaName} महादशा ${curDashaDuration ? `(${curDashaDuration} वर्ष)` : ''}`;
+        document.getElementById('km-dasha-balance-info').textContent = dasha.balanceYears 
+          ? `जन्म समयमा दशा शेष: ${dasha.balanceYears}` 
+          : (dasha.balanceOfDashaAtBirth ? `जन्म समयमा दशा शेष: ${dasha.balanceOfDashaAtBirth}` : 'जन्म समयमा दशा शेष: नक्षत्र अनुसार गणना गरिएको');
+        
+        const dashaTbody = document.getElementById('km-dasha-tbody');
+        const mList = dasha.timeline || dasha.mahadashas || [];
+        if (mList.length) {
+          dashaTbody.innerHTML = mList.map(m => {
+            const isAct = Boolean(m.isCurrent || m.isActive);
+            const startVal = m.start ? m.start.split('-')[0] : (m.startYear || '—');
+            const endVal = m.end ? m.end.split('-')[0] : (m.endYear || '—');
+            const durVal = m.years ?? m.durationYears ?? 0;
+            return `
+              <tr style="${isAct ? 'background:rgba(46,204,113,0.12); border-left:3px solid #2ecc71;' : ''}">
+                <td><b>${escapeHtml(m.lord)}</b></td>
+                <td>${durVal} वर्ष</td>
+                <td>${startVal}</td>
+                <td>${endVal}</td>
+                <td>${isAct ? '<span class="dasha-badge-active">वर्तमान सक्रिय</span>' : '<span style="color:var(--text-muted); font-size:10.5px;">सामान्य</span>'}</td>
+              </tr>
+            `;
+          }).join('');
+        } else {
+          dashaTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-muted); padding:16px;">दशा विवरण गणना भइरहेको छ...</td></tr>`;
+        }
+
+        // 4. AI Context
         document.getElementById('km-ai-context').value = item.aiContext || '';
+        const aiResultBox = document.getElementById('km-ai-query-result');
+        if (aiResultBox) {
+          aiResultBox.style.display = 'none';
+          aiResultBox.innerHTML = '';
+        }
+        const aiInput = document.getElementById('km-ai-query-input');
+        if (aiInput) aiInput.value = '';
+
+        // Reset to D1 tab
+        const firstTab = document.querySelector('.km-tab-nav .km-tab-link');
+        if (firstTab) switchKmTab('d1', firstTab);
 
         kundaliModal.style.display = 'flex';
       }
@@ -1951,6 +2405,49 @@
         });
       }
 
+      async function askKundaliAiUI() {
+        const input = document.getElementById('km-ai-query-input');
+        const resultBox = document.getElementById('km-ai-query-result');
+        if (!input || !resultBox) return;
+        const query = input.value.trim();
+        if (!query) return;
+
+        resultBox.style.display = 'block';
+        resultBox.innerHTML = `<span style="color:var(--gold);">⏳ पराशर वैदिक AI विश्लेषण गर्दैछ...</span>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/ai/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              message: query,
+              context: {
+                name: activeKundaliData?.name || 'जातक',
+                dobBs: activeKundaliData?.dobBs,
+                dobAd: activeKundaliData?.dobAd,
+                birthPlace: activeKundaliData?.birthPlace,
+                lagna: activeKundaliData?.kundaliData?.lagna?.rashiName,
+                moonSign: activeKundaliData?.kundaliData?.moonSign?.rashiName,
+                nakshatra: activeKundaliData?.kundaliData?.nakshatra?.name,
+                currentDasha: activeKundaliData?.dashaData?.currentDasha?.lord
+              }
+            })
+          });
+          const json = await res.json();
+          if (json && json.success) {
+            const replyText = json.reply || json.response || 'विश्लेषण प्राप्त भयो।';
+            resultBox.innerHTML = `
+              <div style="font-weight:700; color:var(--gold-light); margin-bottom:4px;">🕉️ पराशर AI उत्तर:</div>
+              <div style="white-space:pre-wrap;">${escapeHtml(replyText)}</div>
+            `;
+          } else {
+            resultBox.innerHTML = `<span style="color:var(--accent-red);">उत्तर प्राप्त हुन सकेन: ${escapeHtml(json.message || 'Error')}</span>`;
+          }
+        } catch (e) {
+          resultBox.innerHTML = `<span style="color:var(--accent-red);">AI जडान त्रुटि: ${escapeHtml(e.message)}</span>`;
+        }
+      }
+
       function printKundali() {
         if (!activeKundaliData) return;
         const printWindow = window.open('', '_blank');
@@ -1963,6 +2460,10 @@
             <td style="padding:6px; border:1px solid #ddd;">${p.degreeFormatted}</td>
           </tr>
         `).join('');
+
+        const chartUrl = currentChartType === 'circle' && activeKundaliData.circleSvgUrl 
+          ? activeKundaliData.circleSvgUrl 
+          : activeKundaliData.chartSvgUrl;
 
         printWindow.document.write(`
           <!DOCTYPE html>
@@ -1985,7 +2486,7 @@
               <p><b>लग्न:</b> ${k.lagna?.rashiName || '—'} | <b>राशि:</b> ${k.moonSign?.rashiName || '—'} | <b>नक्षत्र:</b> ${k.nakshatra?.name || '—'}</p>
             </div>
             <div class="chart-wrap">
-              <img src="${activeKundaliData.chartSvgUrl}" />
+              <img src="${chartUrl}" />
             </div>
             <h3>ग्रह स्थिति तथा भाव विवरण</h3>
             <table>
@@ -1995,7 +2496,7 @@
               <tbody>${planetsRows}</tbody>
             </table>
             <div style="margin-top:30px; text-align:center; font-size:11px; color:#888;">
-              ज्योतिष परामर्श सेवा: Astro Tiwari | Phone: +977 9809192604 | astrologer-api
+              ज्योतिष परामर्श सेवा: Astro Tiwari | Phone: +977 9809192604
             </div>
           </body>
           </html>
@@ -2051,7 +2552,10 @@
               birthTime: time,
               birthPlace: place,
               chartSvgUrl: result.chartSvgUrl,
+              circleSvgUrl: result.circleSvgUrl,
               kundaliData: result.astrologyData,
+              d9Data: result.d9Data,
+              dashaData: result.dashaData,
               chartSource: result.source,
               aiContext: result.aiContext
             };
@@ -2089,7 +2593,10 @@
           const result = await res.json();
           if (result && result.success) {
             item.chartSvgUrl = result.chartSvgUrl;
+            item.circleSvgUrl = result.circleSvgUrl;
             item.kundaliData = result.astrologyData;
+            item.d9Data = result.d9Data;
+            item.dashaData = result.dashaData;
             item.chartSource = result.source;
             item.aiContext = result.aiContext;
             localStorage.setItem(SUBMISSIONS_CACHE_KEY, JSON.stringify(currentSubmissions));
@@ -2103,6 +2610,209 @@
         }
       }
 
+      // --- Milan (Kundali Matching) Functions ---
+      const milanModal = document.getElementById('milan-modal');
+      let milanDropdownsPopulated = false;
+
+      function populateMilanDropdowns() {
+        if (milanDropdownsPopulated) return;
+        const boyNak = document.getElementById('milan-boy-nakshatra');
+        const girlNak = document.getElementById('milan-girl-nakshatra');
+        const boyRashi = document.getElementById('milan-boy-rashi');
+        const girlRashi = document.getElementById('milan-girl-rashi');
+
+        if (!boyNak || !girlNak || !boyRashi || !girlRashi) return;
+
+        NAKSHATRAS_LIST.forEach((name, i) => {
+          const opt1 = new Option(name, i + 1);
+          const opt2 = new Option(name, i + 1);
+          boyNak.add(opt1);
+          girlNak.add(opt2);
+        });
+
+        RASHIS_LIST.forEach((name, i) => {
+          const opt1 = new Option(name, i + 1);
+          const opt2 = new Option(name, i + 1);
+          boyRashi.add(opt1);
+          girlRashi.add(opt2);
+        });
+
+        // Set default demo pair
+        boyNak.value = '1'; // Ashwini
+        boyRashi.value = '1'; // Mesh
+        girlNak.value = '5'; // Mrigashira
+        girlRashi.value = '2'; // Vrishabh
+        milanDropdownsPopulated = true;
+      }
+
+      function openMilanModal() {
+        populateMilanDropdowns();
+        if (milanModal) milanModal.style.display = 'flex';
+      }
+
+      function closeMilanModal() {
+        if (milanModal) milanModal.style.display = 'none';
+      }
+
+      async function handleMilanCalculate(e) {
+        e.preventDefault();
+        const boyNak = Number(document.getElementById('milan-boy-nakshatra').value);
+        const boyRashi = Number(document.getElementById('milan-boy-rashi').value);
+        const girlNak = Number(document.getElementById('milan-girl-nakshatra').value);
+        const girlRashi = Number(document.getElementById('milan-girl-rashi').value);
+
+        const btn = document.getElementById('milan-submit-btn');
+        const spinner = document.getElementById('milan-spinner');
+        btn.disabled = true;
+        spinner.style.display = 'inline';
+
+        try {
+          const res = await fetch(`${API_BASE}/api/astrology/milan`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              boy: { nakshatraId: boyNak, rashiId: boyRashi },
+              girl: { nakshatraId: girlNak, rashiId: girlRashi }
+            })
+          });
+          const data = await res.json();
+          if (data && data.success) {
+            document.getElementById('milan-results-container').style.display = 'block';
+            const totalScore = data.total ?? data.totalScore ?? 0;
+            document.getElementById('milan-score-val').textContent = totalScore;
+            
+            const badge = document.getElementById('milan-verdict-badge');
+            badge.textContent = data.status || 'सामान्य मिलान';
+            if (totalScore >= 24) {
+              badge.style.background = 'rgba(46,204,113,0.2)';
+              badge.style.color = '#2ecc71';
+              badge.style.border = '1px solid #2ecc71';
+            } else if (totalScore >= 18) {
+              badge.style.background = 'rgba(243,156,18,0.2)';
+              badge.style.color = '#f39c12';
+              badge.style.border = '1px solid #f39c12';
+            } else {
+              badge.style.background = 'rgba(231,76,60,0.2)';
+              badge.style.color = '#e74c3c';
+              badge.style.border = '1px solid #e74c3c';
+            }
+
+            document.getElementById('milan-recommendation').textContent = (data.remedies && data.remedies.length) 
+              ? 'सिफारिस: ' + data.remedies.join(' | ') 
+              : 'कुण्डली मिलान सुखद वैवाहिक जीवनका लागि अनुकूल देखिन्छ।';
+
+            // Render 8 Kootas
+            const ktbody = document.getElementById('milan-kootas-tbody');
+            const kootas = [
+              data.varna, data.vashya, data.tara, data.yoni,
+              data.grahaMaitri, data.gana, data.bhakoot, data.nadi
+            ].filter(Boolean);
+
+            ktbody.innerHTML = kootas.map(k => `
+              <tr>
+                <td><b>${escapeHtml(k.title || k.name || 'कूट')}</b></td>
+                <td>${k.max}</td>
+                <td><b style="color:var(--gold-light);">${k.score ?? k.obtained ?? 0}</b></td>
+                <td style="font-size:11px; color:var(--text-secondary);">${escapeHtml(k.desc || k.description || '—')}</td>
+              </tr>
+            `).join('');
+
+            // Render Dosha Notices
+            const doshasBox = document.getElementById('milan-doshas-container');
+            const doshas = data.doshas || [];
+            if (doshas.length) {
+              doshasBox.innerHTML = doshas.map(d => `
+                <div style="background:rgba(231,76,60,0.12); border:1px solid rgba(231,76,60,0.35); border-radius:0.6rem; padding:8px 12px; margin-bottom:6px; font-size:11.5px;">
+                  <b style="color:#e74c3c;">⚠️ ${escapeHtml(d.name)}:</b> ${escapeHtml(d.effect || '')}
+                  <div style="font-size:10.5px; color:#f4d38c; margin-top:2px;">उपाय: ${escapeHtml(d.remedy || 'शान्ति पूजा')}</div>
+                </div>
+              `).join('');
+            } else {
+              doshasBox.innerHTML = `
+                <div style="background:rgba(46,204,113,0.1); border:1px solid rgba(46,204,113,0.3); border-radius:0.6rem; padding:8px 12px; font-size:11.5px; color:#a2e8bc;">
+                  ✅ नाडी र भकूट दोष देखिएन। गुण मिलान वैवाहिक दृष्टिकोणबाट अनुकूल छ।
+                </div>
+              `;
+            }
+            showToast('गुण मिलान सफलतापूर्वक सम्पन्न भयो! 💑');
+          } else {
+            showToast('मिलान गणना असफल भयो', '❌');
+          }
+        } catch (e) {
+          showToast('गणना त्रुटि: ' + e.message, '❌');
+        } finally {
+          btn.disabled = false;
+          spinner.style.display = 'none';
+        }
+      }
+
+      // --- Panchang Functions ---
+      const panchangModal = document.getElementById('panchang-modal');
+
+      async function openPanchangModal() {
+        if (panchangModal) panchangModal.style.display = 'flex';
+        const container = document.getElementById('panchang-grid-container');
+        container.innerHTML = `<div style="padding:30px; text-align:center; color:var(--gold);">⏳ आजको पञ्चाङ्ग लोड हुँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/astrology/panchang`);
+          const data = await res.json();
+          if (data && data.success && data.panchang) {
+            const p = data.panchang;
+            document.getElementById('panchang-date-header').textContent = `${p.date || 'आज'} | ${p.timeZone || 'नेपाल समय (+५:४५)'}`;
+            
+            container.innerHTML = `
+              <div class="panchang-item">
+                <div class="panchang-item-label">तिथि (Tithi)</div>
+                <div class="panchang-item-val" style="color:var(--gold-light);">${escapeHtml(p.tithi || '—')}</div>
+                <div style="font-size:10.5px; color:var(--text-muted);">${escapeHtml(p.paksha || '')}</div>
+              </div>
+              <div class="panchang-item">
+                <div class="panchang-item-label">वार (Day)</div>
+                <div class="panchang-item-val" style="color:#fff;">${escapeHtml(p.vaar || '—')}</div>
+              </div>
+              <div class="panchang-item">
+                <div class="panchang-item-label">नक्षत्र (Nakshatra)</div>
+                <div class="panchang-item-val" style="color:#d4a5ff;">${escapeHtml(p.nakshatra || '—')}</div>
+              </div>
+              <div class="panchang-item">
+                <div class="panchang-item-label">योग (Yoga)</div>
+                <div class="panchang-item-val" style="color:#85c1e9;">${escapeHtml(p.yoga || '—')}</div>
+              </div>
+              <div class="panchang-item">
+                <div class="panchang-item-label">करण (Karana)</div>
+                <div class="panchang-item-val" style="color:#a2e8bc;">${escapeHtml(p.karana || '—')}</div>
+              </div>
+              <div class="panchang-item">
+                <div class="panchang-item-label">शुभ मुहूर्त (Abhijit)</div>
+                <div class="panchang-item-val" style="color:#2ecc71;">${escapeHtml(p.abhijitMuhurta || '११:४५ AM - १२:३५ PM')}</div>
+              </div>
+              <div class="panchang-item">
+                <div class="panchang-item-label">दिशा शूल (Travel)</div>
+                <div class="panchang-item-val" style="color:#e67e22;">${escapeHtml(p.dishaShool || 'पश्चिम')}</div>
+              </div>
+              <div class="panchang-item">
+                <div class="panchang-item-label">सूर्य राशि (Sun Sign)</div>
+                <div class="panchang-item-val" style="color:var(--gold);">${escapeHtml(p.sunSign || 'कुम्भ')}</div>
+              </div>
+            `;
+
+            document.getElementById('panchang-rahu-text').innerHTML = `
+              <b>राहु काल:</b> <span style="color:#ff7675; font-weight:bold;">${escapeHtml(p.rahuKaal || '०४:३० PM - ०६:०० PM')}</span><br />
+              यस समय अवधिमा महत्त्वपूर्ण नयाँ कार्य, आर्थिक लगानी वा यात्रा सुरु नगर्नु उत्तम मानिन्छ।
+            `;
+          } else {
+            container.innerHTML = `<div style="padding:20px; color:var(--accent-red);">पञ्चाङ्ग लोड हुन सकेन।</div>`;
+          }
+        } catch (e) {
+          container.innerHTML = `<div style="padding:20px; color:var(--accent-red);">पञ्चाङ्ग लोड त्रुटि: ${escapeHtml(e.message)}</div>`;
+        }
+      }
+
+      function closePanchangModal() {
+        if (panchangModal) panchangModal.style.display = 'none';
+      }
+
       // Close modals on backdrop click
       kundaliModal.addEventListener('click', (e) => {
         if (e.target === kundaliModal) closeKundaliModal();
@@ -2110,6 +2820,16 @@
       calculatorModal.addEventListener('click', (e) => {
         if (e.target === calculatorModal) closeCalculatorModal();
       });
+      if (milanModal) {
+        milanModal.addEventListener('click', (e) => {
+          if (e.target === milanModal) closeMilanModal();
+        });
+      }
+      if (panchangModal) {
+        panchangModal.addEventListener('click', (e) => {
+          if (e.target === panchangModal) closePanchangModal();
+        });
+      }
 
       // Start application
       initAuth();

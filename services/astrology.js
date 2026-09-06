@@ -624,11 +624,24 @@ async function generateChartForSubmission(input) {
     chartSvg = generateVedicDiamondSvg(vedicData, name, birthDetailsStr);
   }
 
-  // 4. Save SVG file to disk
+  // 4. Save D1 Diamond SVG file to disk
   const filename = `chart-${id}.svg`;
   const filePath = path.join(UPLOADS_DIR, filename);
   fs.writeFileSync(filePath, chartSvg, 'utf8');
   const chartSvgUrl = `/uploads/${filename}`;
+
+  // 5. Generate Astrocircle Celestial Wheel SVG
+  const vedicEngine = require('./vedicEngine');
+  const circleSvg = vedicEngine.generateAstrocircleSvg(vedicData, name, birthDetailsStr);
+  const circleFilename = `circle-${id}.svg`;
+  const circleFilePath = path.join(UPLOADS_DIR, circleFilename);
+  fs.writeFileSync(circleFilePath, circleSvg, 'utf8');
+  const circleSvgUrl = `/uploads/${circleFilename}`;
+
+  // 6. Calculate D9 Navamsha and Vimshottari Dasha
+  const d9Data = vedicEngine.calculateNavamsha(vedicData.planets, vedicData.lagna.signNumber, 15);
+  const moonDeg = (vedicData.planets.find(p => p.key === 'Moon') || {}).rawDegree || 120;
+  const dashaData = vedicEngine.calculateVimshottariDasha(dateParts.year, dateParts.month, dateParts.day, moonDeg);
 
   const aiContext = buildAiAstrologyContext(name, vedicData, birthDetailsStr);
 
@@ -637,8 +650,11 @@ async function generateChartForSubmission(input) {
     id,
     source: chartSource,
     chartSvgUrl,
+    circleSvgUrl,
     chartSvg,
     astrologyData: vedicData,
+    d9Data,
+    dashaData,
     externalChartData,
     aiContext,
     subject: subjectData
@@ -655,19 +671,32 @@ function getAstrologerApiStatus() {
   return {
     status: 'connected',
     rapidApiConfigured: Boolean(rapidApiKey),
+    vedastroApiAvailable: true,
+    mcpServerActive: true,
+    aiChatbotActive: true,
     customApiUrl: customApiUrl || null,
     activeEngine: rapidApiKey
-      ? 'Astrologer-API (RapidAPI v5)'
-      : (customApiUrl ? 'Astrologer-API (Self-Hosted v5)' : 'Astro Tiwari Built-in Vedic Engine (100% Free & Offline)'),
+      ? 'Astrologer-API (RapidAPI v5) + Unified Vedic Ecosystem'
+      : (customApiUrl ? 'Astrologer-API (Self-Hosted v5) + Unified Vedic Ecosystem' : 'Astro Tiwari Unified Vedic Engine (100% Free & Offline)'),
     version: '5.0',
+    ecosystem: [
+      'Astrologer-API (NASA-grade Ephemeris & SVG Wheels)',
+      'VedAstro AI MCP (Horoscope, Yogas, Ashtakavarga)',
+      'Astroway MCP Server (/api/mcp JSON-RPC 2.0)',
+      'RoxyAPI Astrology AI Chatbot (Nepali/English conversational advisor)',
+      'Grahan & Nakshatra Engine (36 Guna Milan, Dasha, Panchang)',
+      'Astrocircle (Interactive 360° Celestial Wheel SVG)',
+      'Jyotish Vedic App (D9 Navamsha Chart)'
+    ],
     features: [
       'Vedic Lagna Kundali Diamond SVG',
-      'Western Concentric Wheel SVG (via Astrologer-API)',
-      'High-Precision Lahiri Ayanamsa Calculation',
-      'Planetary Positions (Sun to Ketu)',
-      '12 Bhavas & Rashi Lordship',
-      'Nakshatra & Pada Calculation',
-      'AI-Ready Astrological Reading Context'
+      'Astrocircle 360° Celestial Ring SVG',
+      'Vimshottari Dasha 120-Year Sequence & Active Dasha',
+      '36 Guna Ashtakoot Kundali Matching (Milan)',
+      'Daily Panchang (Tithi, Vaar, Nakshatra, Rahu Kaal) for Nepal',
+      'D9 Navamsha Divisional Chart',
+      'AI Astrological Chatbot & Consultation Reasoning',
+      'Model Context Protocol (MCP) Tools Endpoint'
     ]
   };
 }

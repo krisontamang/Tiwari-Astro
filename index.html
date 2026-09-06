@@ -110,6 +110,197 @@
       .package-card:hover {
         transform: translateY(-4px);
       }
+
+      /* Cosmic AI Chatbot Floating Widget */
+      .chat-corner-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+        background: linear-gradient(135deg, #1f1633, #120d20);
+        border: 1px solid rgba(216, 176, 106, 0.4);
+        color: #f4d38c;
+        padding: 9px 18px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(216, 176, 106, 0.2);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .chat-corner-btn:hover {
+        transform: translateY(-3px) scale(1.03);
+        background: linear-gradient(135deg, #2b1f47, #19122c);
+        border-color: #d8b06a;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 28px rgba(216, 176, 106, 0.35);
+        color: #fff;
+      }
+      .chat-pulse {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #2ecc71;
+        box-shadow: 0 0 10px #2ecc71;
+        animation: chatPulseAnim 2s infinite;
+      }
+      @keyframes chatPulseAnim {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(1.3); }
+      }
+
+      /* Chat Window */
+      .chat-modal-window {
+        position: fixed;
+        bottom: 78px;
+        right: 20px;
+        width: 360px;
+        max-width: calc(100vw - 32px);
+        height: 520px;
+        max-height: calc(100vh - 100px);
+        background: #120d22;
+        border: 1px solid rgba(216, 176, 106, 0.35);
+        border-radius: 1.25rem;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(216, 176, 106, 0.15);
+        z-index: 9999;
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        backdrop-filter: blur(14px);
+        animation: chatWindowPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      @keyframes chatWindowPop {
+        from { opacity: 0; transform: translateY(20px) scale(0.96); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .chat-window-header {
+        background: linear-gradient(90deg, #18122c, #100b1d);
+        border-bottom: 1px solid rgba(216, 176, 106, 0.2);
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .chat-header-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #f4d38c, #a8794f);
+        color: #160f22;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .chat-window-close {
+        background: transparent;
+        border: none;
+        color: #a395a8;
+        font-size: 22px;
+        cursor: pointer;
+        line-height: 1;
+        padding: 4px;
+        border-radius: 50%;
+      }
+      .chat-window-close:hover { color: #fff; }
+
+      .chat-chips-scroll {
+        display: flex;
+        gap: 6px;
+        padding: 8px 12px;
+        overflow-x: auto;
+        background: rgba(0,0,0,0.25);
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        scrollbar-width: none;
+      }
+      .chat-chips-scroll::-webkit-scrollbar { display: none; }
+      .chat-chip {
+        background: rgba(216, 176, 106, 0.1);
+        border: 1px solid rgba(216, 176, 106, 0.25);
+        color: #f4d38c;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.18s;
+      }
+      .chat-chip:hover {
+        background: #d8b06a;
+        color: #120e18;
+      }
+
+      .chat-messages-area {
+        flex: 1;
+        padding: 14px 12px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 12.5px;
+        line-height: 1.45;
+      }
+      .chat-bubble {
+        max-width: 86%;
+        padding: 9px 13px;
+        border-radius: 1rem;
+        word-break: break-word;
+      }
+      .bot-bubble {
+        background: #1c1530;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #f1ecf5;
+        align-self: flex-start;
+        border-bottom-left-radius: 0.25rem;
+      }
+      .user-bubble {
+        background: linear-gradient(135deg, #d8b06a, #b88840);
+        color: #120e18;
+        font-weight: 600;
+        align-self: flex-end;
+        border-bottom-right-radius: 0.25rem;
+      }
+      .chat-input-row {
+        padding: 10px;
+        background: #17112b;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .chat-input-field {
+        flex: 1;
+        background: #0d0918;
+        border: 1px solid rgba(216, 176, 106, 0.25);
+        border-radius: 999px;
+        padding: 8px 14px;
+        color: #fff;
+        font-size: 12.5px;
+        outline: none;
+      }
+      .chat-input-field:focus {
+        border-color: #d8b06a;
+      }
+      .chat-send-action {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #d8b06a, #b88840);
+        border: none;
+        color: #120e18;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      .chat-send-action:hover {
+        transform: scale(1.05);
+      }
     </style>
   </head>
   <body>
@@ -123,8 +314,126 @@
       <span>💳</span> Quick Pay & Upload Screenshot
     </a>
 
+    <!-- Cosmic Astrology AI Chatbot Floating Trigger -->
+    <button id="astro-chat-btn" class="chat-corner-btn" onclick="toggleAstroChat()" title="AI ज्योतिष सल्लाहकारसँग कुरा गर्नुहोस्">
+      <span class="chat-pulse"></span>
+      <span style="font-size: 16px;">🕉️</span>
+      <span>AI ज्योतिष सल्लाहकार</span>
+    </button>
+
+    <!-- Cosmic AI Chat Drawer / Window -->
+    <div id="astro-chat-window" class="chat-modal-window">
+      <div class="chat-window-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="chat-header-avatar">🕉️</div>
+          <div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: #f4d38c; line-height: 1.2;">
+              Astro Tiwari AI
+            </div>
+            <div style="font-size: 10.5px; color: #a2e8bc; display: flex; align-items: center; gap: 4px;">
+              <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #2ecc71;"></span>
+              वैदिक पराशर प्रणाली सक्रिय
+            </div>
+          </div>
+        </div>
+        <button class="chat-window-close" onclick="toggleAstroChat()">&times;</button>
+      </div>
+
+      <!-- Quick Suggestion Chips -->
+      <div class="chat-chips-scroll">
+        <button class="chat-chip" onclick="sendQuickPrompt('विवाहको लागि ३६ गुण मिलान किन आवश्यक हुन्छ?')">💍 गुण मिलान के हो?</button>
+        <button class="chat-chip" onclick="sendQuickPrompt('शनिको साढेसाती भनेको के हो र यसको शान्ति कसरी गरिन्छ?')">🪐 साढेसाती उपाय</button>
+        <button class="chat-chip" onclick="sendQuickPrompt('माङ्गलिक दोषको प्रभाव के हुन्छ?')">🔥 माङ्गलिक दोष</button>
+        <button class="chat-chip" onclick="sendQuickPrompt('पण्डितजीसँग प्रत्यक्ष परामर्श कसरी लिने?')">📞 परामर्श लिने तरिका</button>
+      </div>
+
+      <!-- Messages Body -->
+      <div id="chat-messages-body" class="chat-messages-area">
+        <div class="chat-bubble bot-bubble">
+          नमस्ते! म <b>Astro Tiwari AI</b> ज्योतिष सल्लाहकार हुँ।<br />
+          तपाईंको जन्म कुण्डली, ग्रहदशा, करियर, विवाह वा पूजा-उपाय सम्बन्धी कुनै पनि जिज्ञासा सोध्न सक्नुहुन्छ।
+        </div>
+      </div>
+
+      <!-- Input Bar -->
+      <form id="chat-input-form" class="chat-input-row" onsubmit="handleSendChat(event)">
+        <input 
+          type="text" 
+          id="chat-user-msg" 
+          class="chat-input-field" 
+          placeholder="कुनै पनि ज्योतिषीय जिज्ञासा लेख्नुहोस्..." 
+          autocomplete="off"
+          required 
+        />
+        <button type="submit" id="chat-send-btn" class="chat-send-action" title="पठाउनुहोस्">
+          ➤
+        </button>
+      </form>
+    </div>
+
     <!-- Interactive Scripts: QR Lightbox & Form Submission Capture -->
     <script>
+      // Cosmic AI Chatbot Logic
+      let isChatOpen = false;
+      function toggleAstroChat() {
+        const win = document.getElementById('astro-chat-window');
+        if (!win) return;
+        isChatOpen = !isChatOpen;
+        win.style.display = isChatOpen ? 'flex' : 'none';
+        if (isChatOpen) {
+          const inp = document.getElementById('chat-user-msg');
+          if (inp) inp.focus();
+        }
+      }
+
+      function sendQuickPrompt(text) {
+        const inp = document.getElementById('chat-user-msg');
+        if (inp) {
+          inp.value = text;
+          handleSendChat(new Event('submit'));
+        }
+      }
+
+      async function handleSendChat(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        const input = document.getElementById('chat-user-msg');
+        const body = document.getElementById('chat-messages-body');
+        if (!input || !body) return;
+
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+
+        // Add user bubble
+        const userDiv = document.createElement('div');
+        userDiv.className = 'chat-bubble user-bubble';
+        userDiv.textContent = text;
+        body.appendChild(userDiv);
+
+        // Add loading bot bubble
+        const botDiv = document.createElement('div');
+        botDiv.className = 'chat-bubble bot-bubble';
+        botDiv.innerHTML = '<em>चिन्तन गर्दै... ⏳</em>';
+        body.appendChild(botDiv);
+        body.scrollTop = body.scrollHeight;
+
+        try {
+          const res = await fetch('/api/ai/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text })
+          });
+          const json = await res.json();
+          if (json && json.success) {
+            botDiv.innerHTML = json.response.replace(/\n/g, '<br />');
+          } else {
+            botDiv.textContent = 'माफ गर्नुहोस्, हाल AI सल्लाहकार सेवा उपलब्ध छैन। कृपया केही समयपछि पुनः प्रयास गर्नुहोस्।';
+          }
+        } catch (err) {
+          botDiv.textContent = 'नेटवर्क त्रुटि भयो। कृपया इन्टरनेट जडान जाँच गर्नुहोस्।';
+        }
+        body.scrollTop = body.scrollHeight;
+      }
       // Move Packages section to top right after Hero
       function placePackagesAtTop() {
         const packages = document.getElementById('packages');

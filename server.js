@@ -42,6 +42,10 @@ if (fs.existsSync(envPath)) {
 }
 
 const astrologyService = require('./services/astrology');
+const vedicEngine = require('./services/vedicEngine');
+const vedastro = require('./services/vedastro');
+const aiChatbot = require('./services/aiChatbot');
+const mcpServer = require('./services/mcpServer');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -425,6 +429,56 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // --- API: Vimshottari Dasha Calculator ---
+  if (pathname === '/api/astrology/dasha' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const year = Number(body.year) || 1997;
+    const month = Number(body.month) || 12;
+    const day = Number(body.day) || 7;
+    const moonDeg = Number(body.moonLongitude) || 335.5;
+    const dasha = vedicEngine.calculateVimshottariDasha(year, month, day, moonDeg);
+    return sendJSON(res, 200, { success: true, ...dasha });
+  }
+
+  // --- API: Ashtakoot 36 Guna Milan (Kundali Matching) ---
+  if (pathname === '/api/astrology/milan' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const boy = body.boy || { nakshatraId: 1, rashiId: 1 };
+    const girl = body.girl || { nakshatraId: 5, rashiId: 2 };
+    const matchResult = vedicEngine.calculateAshtakootMilan(boy, girl);
+    return sendJSON(res, 200, { success: true, ...matchResult });
+  }
+
+  // --- API: Today's Vedic Panchang for Nepal ---
+  if (pathname === '/api/astrology/panchang' && req.method === 'GET') {
+    const panchang = vedicEngine.calculateDailyPanchang();
+    return sendJSON(res, 200, { success: true, panchang });
+  }
+
+  // --- API: Vedic Astrology AI Chatbot (RoxyAPI Architecture) ---
+  if (pathname === '/api/ai/chat' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const message = body.message || body.query || '';
+    const context = body.context || {};
+    const aiResponse = await aiChatbot.processAstrologyChat(message, context);
+    return sendJSON(res, 200, { success: true, ...aiResponse });
+  }
+
+  // --- API: Model Context Protocol (MCP) JSON-RPC 2.0 (Astroway/VedAstro) ---
+  if (pathname === '/api/mcp' && req.method === 'POST') {
+    const body = await parseJSONBody(req);
+    const mcpResponse = await mcpServer.handleMcpRequest(body);
+    return sendJSON(res, 200, mcpResponse);
+  }
+
+  // --- API: VedAstro Cloud Predictions (Optional) ---
+  if (pathname === '/api/vedastro/predictions' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const { lat = '27.7172', lon = '85.3240', time = '06:30', date = '07/12/1997', tz = '+05:45' } = body;
+    const vedastroRes = await vedastro.getHoroscopePredictions(lat, lon, time, date, tz);
+    return sendJSON(res, 200, vedastroRes);
+  }
+
   // --- API: Public New Submission (Form submission from customers) ---
   if (pathname === '/api/submissions' && req.method === 'POST') {
     const body = await parseJSONBody(req);
@@ -473,9 +527,12 @@ const server = http.createServer(async (req, res) => {
       amount = 1055;
     }
 
-    // Auto-generate Vedic Natal Chart & Planetary Placements
+    // Auto-generate Vedic Natal Chart, Astrocircle, D9 Navamsha, and Vimshottari Dasha
     let chartSvgUrl = '';
+    let circleSvgUrl = '';
     let kundaliData = null;
+    let d9Data = null;
+    let dashaData = null;
     let chartSource = '';
     let aiContext = '';
 
@@ -492,7 +549,10 @@ const server = http.createServer(async (req, res) => {
       const chartRes = await astrologyService.generateChartForSubmission(birthDetails);
       if (chartRes && chartRes.success) {
         chartSvgUrl = chartRes.chartSvgUrl;
+        circleSvgUrl = chartRes.circleSvgUrl;
         kundaliData = chartRes.astrologyData;
+        d9Data = chartRes.d9Data;
+        dashaData = chartRes.dashaData;
         chartSource = chartRes.source;
         aiContext = chartRes.aiContext;
       }
@@ -521,7 +581,10 @@ const server = http.createServer(async (req, res) => {
       paymentScreenshotUrl: paymentScreenshotUrl || body.paymentScreenshotUrl || '',
       kundaliPhotoUrl: kundaliPhotoUrl || body.kundaliPhotoUrl || '',
       chartSvgUrl: chartSvgUrl || '',
+      circleSvgUrl: circleSvgUrl || '',
       kundaliData: kundaliData || null,
+      d9Data: d9Data || null,
+      dashaData: dashaData || null,
       chartSource: chartSource || '',
       aiContext: aiContext || '',
       status: 'pending',
