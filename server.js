@@ -48,6 +48,10 @@ const aiChatbot = require('./services/aiChatbot');
 const mcpServer = require('./services/mcpServer');
 const roxyApi = require('./services/roxyApi');
 const astrowaySdk = require('./services/astrowaySdk');
+const gemlyService = require('./services/gemlyService');
+const dashaService = require('./services/dashaService');
+const panditAgentService = require('./services/panditAgentService');
+const poruthamService = require('./services/poruthamService');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -699,6 +703,70 @@ const server = http.createServer(async (req, res) => {
     const spreadType = body.spreadType || 'three-card';
     const result = astrowaySdk.getTarotReading(spreadType);
     return sendJSON(res, 200, { success: true, tarot: result, ...result });
+  }
+
+  // --- API: Vedic Suite (Gemly, Dasha, Agentic Pandit, 10 Poruthams) ---
+  // 1. Gemstones Catalog & Recommendation
+  if (pathname === '/api/vedic/gemstones/catalog' && req.method === 'GET') {
+    const catalog = gemlyService.getGemstoneCatalog();
+    return sendJSON(res, 200, catalog);
+  }
+
+  if (pathname === '/api/vedic/gemstones/recommend' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const result = gemlyService.recommendGemstones(body);
+    return sendJSON(res, 200, result);
+  }
+
+  // 2. Vimshottari Dasha Timeline & Current Active Dasha
+  if (pathname === '/api/vedic/dasha/timeline' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const birthDate = body.birthDate || body.dob || '1995-05-15';
+    const moonLong = Number(body.moonLongitude) || 45.5;
+    const result = dashaService.calculateVimshottariTimeline(birthDate, moonLong);
+    return sendJSON(res, 200, { success: true, ...result });
+  }
+
+  if (pathname === '/api/vedic/dasha/current' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const birthDate = body.birthDate || body.dob || '1995-05-15';
+    const moonLong = Number(body.moonLongitude) || 45.5;
+    const targetDate = body.targetDate || null;
+    const result = dashaService.getCurrentDasha(birthDate, moonLong, targetDate);
+    return sendJSON(res, 200, result);
+  }
+
+  // 3. Autonomous Multi-Agent AI Pandit Consultation
+  if (pathname === '/api/vedic/pandit/consult' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const result = await panditAgentService.consultAgenticPandit(body);
+    return sendJSON(res, 200, result);
+  }
+
+  // 4. South Indian & Sri Lankan 10 Poruthams Matchmaking
+  if (pathname === '/api/vedic/match/porutham' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const girlNak = body.girlNakshatra || body.girlNakshatraId || body.bride?.nakshatra || 1;
+    const boyNak = body.boyNakshatra || body.boyNakshatraId || body.groom?.nakshatra || 1;
+    const girlRashi = body.girlRashi || body.girlRashiId || body.bride?.rasi || body.bride?.rashi || 1;
+    const boyRashi = body.boyRashi || body.boyRashiId || body.groom?.rasi || body.groom?.rashi || 1;
+    const result = poruthamService.calculate10Poruthams(girlNak, boyNak, girlRashi, boyRashi);
+    return sendJSON(res, 200, result);
+  }
+
+  // 5. Papasamya Malefic Point Balance
+  if (pathname === '/api/vedic/match/papasamya' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const result = poruthamService.calculatePapasamya(body);
+    return sendJSON(res, 200, result);
+  }
+
+  // 6. Pancha Pakshi Bird & Compatibility
+  if (pathname === '/api/vedic/pancha-pakshi' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const nak = body.nakshatra || body.nakshatraId || 1;
+    const bird = poruthamService.getPanchaPakshiBird(nak);
+    return sendJSON(res, 200, { success: true, nakshatra: nak, pakshi: bird, ...bird });
   }
 
   // --- API: Public New Submission (Form submission from customers) ---

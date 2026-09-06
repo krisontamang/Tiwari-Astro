@@ -10,6 +10,10 @@ const aiChatbot = require('./aiChatbot');
 const vedastro = require('./vedastro');
 const roxyApi = require('./roxyApi');
 const astrowaySdk = require('./astrowaySdk');
+const gemlyService = require('./gemlyService');
+const dashaService = require('./dashaService');
+const panditAgentService = require('./panditAgentService');
+const poruthamService = require('./poruthamService');
 
 const MCP_TOOLS = [
   {
@@ -160,6 +164,71 @@ const MCP_TOOLS = [
       properties: {
         category: { type: 'string', description: 'signs, planets, houses, aspects, or nakshatras' }
       }
+    }
+  },
+  {
+    name: 'vedic_gemstone_recommendation',
+    description: 'Recommend Life Stone (जीव रत्न), Lucky Stone (भाग्य रत्न), and Benefic Stone (पुण्य रत्न) with metals, mantras, wearing fingers, and conflict cautions.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        lagnaRashi: { type: 'number', description: 'Lagna Rashi Number (1-12, 1=Aries, 2=Taurus, etc.)' },
+        dob: { type: 'string', description: 'Date of birth YYYY-MM-DD' },
+        concern: { type: 'string', description: 'career, love, wealth, health, or spiritual' }
+      }
+    }
+  },
+  {
+    name: 'vedic_vimshottari_dasha',
+    description: 'Calculate 120-year Vimshottari Mahadasha, Antardasha (Bhukti), Pratyantardasha timeline, active Dasha, and remaining duration.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        birthDate: { type: 'string', description: 'Date of birth YYYY-MM-DD' },
+        moonLongitude: { type: 'number', description: 'Moon longitude in degrees (0-360)' },
+        targetDate: { type: 'string', description: 'Target date to query active Dasha (defaults to today)' }
+      },
+      required: ['birthDate']
+    }
+  },
+  {
+    name: 'agentic_pandit_consult',
+    description: 'Autonomous Multi-Agent Vedic Pandit consultation evaluating Lagna, Dasha, and domain bhavas to provide structured Jyotish guidance and remedies.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        question: { type: 'string', description: 'Question in Nepali or English (e.g. When will I get a job?)' },
+        name: { type: 'string', description: 'Client name' },
+        dob: { type: 'string', description: 'Date of birth YYYY-MM-DD' },
+        birthTime: { type: 'string', description: 'Birth time HH:MM' },
+        lagnaRashi: { type: 'number', description: 'Lagna Rashi Number (1-12)' }
+      },
+      required: ['question']
+    }
+  },
+  {
+    name: 'porutham_matchmaking',
+    description: 'Calculate South Indian & Sri Lankan 10 Poruthams (दश पोरुथम) and Papasamya malefic balance with Rajju and Vedha veto checking.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        girlNakshatra: { type: 'number', description: 'Bride Nakshatra index (1-27)' },
+        boyNakshatra: { type: 'number', description: 'Groom Nakshatra index (1-27)' },
+        girlRashi: { type: 'number', description: 'Bride Moon Rashi index (1-12)' },
+        boyRashi: { type: 'number', description: 'Groom Moon Rashi index (1-12)' }
+      },
+      required: ['girlNakshatra', 'boyNakshatra']
+    }
+  },
+  {
+    name: 'pancha_pakshi_analysis',
+    description: 'Determine Pancha Pakshi birth bird (Vulture, Owl, Crow, Rooster, Peacock) and relationship affinity.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        nakshatra: { type: 'number', description: 'Nakshatra index (1-27)' }
+      },
+      required: ['nakshatra']
     }
   }
 ];
@@ -363,6 +432,61 @@ async function handleMcpRequest(requestBody) {
           id,
           result: {
             content: [{ type: 'text', text: JSON.stringify(ref, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'vedic_gemstone_recommendation') {
+        const res = gemlyService.recommendGemstones(args);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'vedic_vimshottari_dasha') {
+        const res = dashaService.getCurrentDasha(args.birthDate, args.moonLongitude, args.targetDate);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'agentic_pandit_consult') {
+        const res = await panditAgentService.consultAgenticPandit(args);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'porutham_matchmaking') {
+        const res = poruthamService.calculate10Poruthams(args.girlNakshatra, args.boyNakshatra, args.girlRashi, args.boyRashi);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'pancha_pakshi_analysis') {
+        const res = poruthamService.getPanchaPakshiBird(args.nakshatra);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
           }
         };
       }

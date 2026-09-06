@@ -1020,6 +1020,10 @@
               🌌 AstroWay SDK
             </button>
 
+            <button onclick="openVedicSuiteModal()" class="btn-ghost" style="border-color:rgba(46,204,113,0.5); color:#2ecc71; background:rgba(46,204,113,0.08);">
+              💎 रत्न, दशा र पण्डित
+            </button>
+
             <div class="user-pill">
               <span class="user-dot"></span>
               <span id="admin-user-display">bensartiwari@gmail.com</span>
@@ -1840,6 +1844,176 @@
                   दुई कुण्डली बीचको पश्चिमी र वैदिक दृष्टि सम्बन्ध हेर्नुहोस्।
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 10. VEDIC SUITE (GEMSTONES, DASHA, PANDIT, PORUTHAMS) MODAL -->
+    <!-- ============================================================== -->
+    <div id="vedic-suite-modal" class="custom-modal">
+      <div class="lightbox-content" style="max-width: 960px; text-align: left; max-height: 90vh; overflow-y: auto;">
+        <button class="lightbox-close" onclick="closeVedicSuiteModal()">&times;</button>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; padding-right:36px;">
+          <div>
+            <div style="font-family: var(--font-serif); font-size: 22px; color: #2ecc71; margin-bottom: 2px;">
+              💎 वैदिक सुइट (Vedic Astrology Suite)
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary);">
+              रत्न सिफारिस (Gemly) • १२० वर्षे विंशोत्तरी दशा (Dasha API) • एजेन्टिक पण्डित परामर्श (AI Pandit) • १० पोरुथम र पापसाम्य
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <span class="badge badge-paid" style="background:rgba(46,204,113,0.15); color:#2ecc71; border:1px solid rgba(46,204,113,0.3);">
+              १३ Repositories Connected
+            </span>
+          </div>
+        </div>
+
+        <!-- Vedic Suite Tab Navigation -->
+        <div class="km-tab-nav" style="margin-bottom:14px;">
+          <button class="km-tab-link active" onclick="switchVedicSuiteTab('gems', this)">
+            💎 रत्न सिफारिस (Gemstones)
+          </button>
+          <button class="km-tab-link" onclick="switchVedicSuiteTab('dasha', this)">
+            ⏳ विंशोत्तरी दशा (Dasha Timeline)
+          </button>
+          <button class="km-tab-link" onclick="switchVedicSuiteTab('pandit', this)">
+            🧙 एजेन्टिक पण्डित (AI Pandit)
+          </button>
+          <button class="km-tab-link" onclick="switchVedicSuiteTab('porutham', this)">
+            💞 १० पोरुथम र पापसाम्य (Match)
+          </button>
+        </div>
+
+        <!-- Tab 1: Gemstones & Rudraksha -->
+        <div id="pane-vedic-gems" class="km-tab-pane active">
+          <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:14px; margin-bottom:14px;">
+            <div style="font-size:12.5px; font-weight:700; color:#2ecc71; margin-bottom:10px;">
+              💎 रत्न शास्त्र अनुसार उपयुक्त रत्न निर्धारण (Lagna Based Trikona Analysis)
+            </div>
+            <div style="display:grid; grid-template-columns: 1.5fr 1.5fr auto; gap:10px; align-items:flex-end;">
+              <div>
+                <label class="form-label" style="font-size:11px;">तपाईंको लग्न राशि (Ascendant / Lagna Rashi)</label>
+                <select id="vs-gem-lagna" class="form-input" style="height:34px; font-size:11.5px;">
+                  <option value="1">१. मेष (Aries) - स्वामी: मंगल</option>
+                  <option value="2">२. वृष (Taurus) - स्वामी: शुक्र</option>
+                  <option value="3">३. मिथुन (Gemini) - स्वामी: बुध</option>
+                  <option value="4">४. कर्कट (Cancer) - स्वामी: चन्द्रमा</option>
+                  <option value="5">५. सिंह (Leo) - स्वामी: सूर्य</option>
+                  <option value="6">६. कन्या (Virgo) - स्वामी: बुध</option>
+                  <option value="7">७. तुला (Libra) - स्वामी: शुक्र</option>
+                  <option value="8">८. वृश्चिक (Scorpio) - स्वामी: मंगल</option>
+                  <option value="9">९. धनु (Sagittarius) - स्वामी: बृहस्पति</option>
+                  <option value="10">१०. मकर (Capricorn) - स्वामी: शनि</option>
+                  <option value="11">११. कुम्भ (Aquarius) - स्वामी: शनि</option>
+                  <option value="12">१२. मीन (Pisces) - स्वामी: बृहस्पति</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label" style="font-size:11px;">मुख्य उद्देश्य / चासो (Primary Concern)</label>
+                <select id="vs-gem-concern" class="form-input" style="height:34px; font-size:11.5px;">
+                  <option value="health">शारीरिक स्वास्थ्य, आरोग्य र आत्मबल</option>
+                  <option value="career">जागिर, व्यवसाय र सामाजिक प्रतिष्ठा</option>
+                  <option value="wealth">आर्थिक उन्नति, धन र समृद्धि</option>
+                  <option value="love">वैवाहिक सुख, प्रेम र पारिवारिक शान्ति</option>
+                  <option value="spiritual">अध्यात्म, मानसिक शान्ति र मोक्ष</option>
+                </select>
+              </div>
+              <button class="btn-primary" onclick="runVedicGemstoneRecommend()" style="height:34px; font-size:11.5px; padding:0 16px; background:#2ecc71; color:#0b0a14; border-color:#2ecc71;">
+                रत्न सिफारिस हेर्नुहोस्
+              </button>
+            </div>
+          </div>
+
+          <div id="vs-gem-results">
+            <div style="text-align:center; padding:24px; color:#888; font-size:12px;">
+              माथि आफ्नो लग्न राशि छानेर "रत्न सिफारिस हेर्नुहोस्" बटन थिच्नुहोस्। जीव रत्न, भाग्य रत्न र पुण्य रत्नको पूर्ण विवरण आउनेछ।
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Vimshottari Dasha Timeline -->
+        <div id="pane-vedic-dasha" class="km-tab-pane">
+          <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:14px; margin-bottom:14px;">
+            <div style="font-size:12.5px; font-weight:700; color:#f4d38c; margin-bottom:10px;">
+              ⏳ १२० वर्षे विंशोत्तरी महादशा तथा अन्तर्दशा गणना
+            </div>
+            <div style="display:grid; grid-template-columns: 1.5fr 1.5fr auto; gap:10px; align-items:flex-end;">
+              <div>
+                <label class="form-label" style="font-size:11px;">जन्म मिति (Date of Birth)</label>
+                <input type="date" id="vs-dasha-dob" class="form-input" value="1995-05-15" style="height:34px; font-size:11.5px;" />
+              </div>
+              <div>
+                <label class="form-label" style="font-size:11px;">चन्द्रमाको भोग (Moon Longitude - ऐच्छिक)</label>
+                <input type="number" id="vs-dasha-moon" class="form-input" value="45.5" step="0.1" placeholder="45.5°" style="height:34px; font-size:11.5px;" />
+              </div>
+              <button class="btn-primary" onclick="runVedicDashaCalc()" style="height:34px; font-size:11.5px; padding:0 16px;">
+                दशा गणना गर्नुहोस्
+              </button>
+            </div>
+          </div>
+
+          <div id="vs-dasha-results">
+            <div style="text-align:center; padding:24px; color:#888; font-size:12px;">
+              जन्म मिति हालेर वर्तमान सक्रिय महादशा, अन्तर्दशा, बाँकी समय र १२० वर्षे दशा चक्र हेर्नुहोस्।
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Agentic AI Pandit Consultation -->
+        <div id="pane-vedic-pandit" class="km-tab-pane">
+          <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:14px; margin-bottom:14px;">
+            <div style="font-size:12.5px; font-weight:700; color:#85c1e9; margin-bottom:8px;">
+              🧙 एजेन्टिक वैदिक पण्डितसँग प्रश्न सोध्नुहोस् (Multi-Agent Reasoning)
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+              <button class="btn-ghost" style="font-size:10.5px; padding:3px 8px;" onclick="setPanditQuery('मेरो जागिर वा सरकारी सेवामा कहिले सफलता मिल्छ?')">💼 जागिर / करियर</button>
+              <button class="btn-ghost" style="font-size:10.5px; padding:3px 8px;" onclick="setPanditQuery('मेरो विवाह कहिले हुन्छ र कस्तो जीवनसाथी मिल्ला?')">💍 विवाह / प्रेम</button>
+              <button class="btn-ghost" style="font-size:10.5px; padding:3px 8px;" onclick="setPanditQuery('मेरो आर्थिक स्थिति कहिले सुधार हुन्छ र कुन क्षेत्रमा लगानी राम्रो?')">💰 धन / आर्थिक</button>
+              <button class="btn-ghost" style="font-size:10.5px; padding:3px 8px;" onclick="setPanditQuery('मेरो विदेश यात्रा वा अध्ययनको योग कस्तो छ?')">✈️ विदेश यात्रा</button>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="vs-pandit-query" class="form-input" placeholder="तपाईंको प्रश्न यहाँ लेख्नुहोस्..." value="मेरो जागिर र भविष्य कस्तो रहनेछ?" style="height:36px; font-size:12px; flex:1;" />
+              <button class="btn-primary" onclick="runAgenticPanditConsult()" style="height:36px; font-size:12px; padding:0 18px; background:#85c1e9; color:#0b0a14; border-color:#85c1e9;">
+                परामर्श लिनुहोस्
+              </button>
+            </div>
+          </div>
+
+          <div id="vs-pandit-results">
+            <div style="text-align:center; padding:24px; color:#888; font-size:12px;">
+              कुनै पनि जीवन सम्बन्धी प्रश्न सोध्नुहोस्। लग्न, दशा, भाव र परिहार विशेषज्ञ एजेन्टहरूले संयुक्त विश्लेषण प्रदान गर्नेछन्।
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: 10 Poruthams & Papasamya -->
+        <div id="pane-vedic-porutham" class="km-tab-pane">
+          <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:14px; margin-bottom:14px;">
+            <div style="font-size:12.5px; font-weight:700; color:#e056fd; margin-bottom:10px;">
+              💞 दक्षिण भारतीय तथा श्रीलंकन १० पोरुथम र पापसाम्य मिलान
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr auto; gap:10px; align-items:flex-end;">
+              <div>
+                <label class="form-label" style="font-size:11px;">कन्याको नक्षत्र (Bride Nakshatra)</label>
+                <select id="vs-girl-nak" class="form-input" style="height:34px; font-size:11.5px;"></select>
+              </div>
+              <div>
+                <label class="form-label" style="font-size:11px;">वरको नक्षत्र (Groom Nakshatra)</label>
+                <select id="vs-boy-nak" class="form-input" style="height:34px; font-size:11.5px;"></select>
+              </div>
+              <button class="btn-primary" onclick="runVedicPoruthamMatch()" style="height:34px; font-size:11.5px; padding:0 16px; background:#e056fd; color:#0b0a14; border-color:#e056fd;">
+                १० पोरुथम मिलान गर्नुहोस्
+              </button>
+            </div>
+          </div>
+
+          <div id="vs-porutham-results">
+            <div style="text-align:center; padding:24px; color:#888; font-size:12px;">
+              कन्या र वरको नक्षत्र छानेर दिन, गण, महेन्द्र, स्त्री दीर्घ, योनि, राशि, राश्याधिपति, वश्य, र मुख्य रज्जु र वेध विचार गर्नुहोस्।
             </div>
           </div>
         </div>
@@ -3760,6 +3934,309 @@
         } catch (err) {
           resEl.innerHTML = `<div style="color:var(--accent-red); padding:8px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
         }
+      }
+
+      // ==============================================================
+      // VEDIC SUITE INTEGRATION (GEMSTONES, DASHA, PANDIT, PORUTHAM)
+      // ==============================================================
+      const vedicSuiteModal = document.getElementById('vedic-suite-modal');
+      let vedicNakshatrasPopulated = false;
+
+      const NAKSHATRAS_LIST = [
+        '१. अश्विनी (Ashwini)', '२. भरणी (Bharani)', '३. कृत्तिका (Krittika)', '४. रोहिणी (Rohini)',
+        '५. मृगशिरा (Mrigashira)', '६. आर्द्रा (Ardra)', '७. पुनर्वसु (Punarvasu)', '८. पुष्य (Pushya)',
+        '९. आश्लेषा (Ashlesha)', '१०. मघा (Magha)', '११. पूर्वा फाल्गुनी (P.Phalguni)', '१२. उत्तरा फाल्गुनी (U.Phalguni)',
+        '१३. हस्त (Hasta)', '१४. चित्रा (Chitra)', '१५. स्वाती (Swati)', '१६. विशाखा (Vishakha)',
+        '१७. अनुराधा (Anuradha)', '१८. ज्येष्ठा (Jyeshtha)', '१९. मूल (Mula)', '२०. पूर्वाषाढा (P.Ashadha)',
+        '२१. उत्तराषाढा (U.Ashadha)', '२२. श्रवण (Shravana)', '२३. धनिष्ठा (Dhanishta)', '२४. शतभिषा (Shatabhisha)',
+        '२५. पूर्वाभाद्रपदा (P.Bhadrapada)', '२६. उत्तराभाद्रपदा (U.Bhadrapada)', '२७. रेवती (Revati)'
+      ];
+
+      function populateVedicNakshatras() {
+        if (vedicNakshatrasPopulated) return;
+        const gSelect = document.getElementById('vs-girl-nak');
+        const bSelect = document.getElementById('vs-boy-nak');
+        if (!gSelect || !bSelect) return;
+
+        const options = NAKSHATRAS_LIST.map((name, idx) => `<option value="${idx + 1}">${name}</option>`).join('');
+        gSelect.innerHTML = options;
+        bSelect.innerHTML = options;
+        gSelect.value = '4'; // Rohini
+        bSelect.value = '14'; // Chitra
+        vedicNakshatrasPopulated = true;
+      }
+
+      function openVedicSuiteModal() {
+        populateVedicNakshatras();
+        if (vedicSuiteModal) vedicSuiteModal.style.display = 'flex';
+        runVedicGemstoneRecommend();
+      }
+
+      function closeVedicSuiteModal() {
+        if (vedicSuiteModal) vedicSuiteModal.style.display = 'none';
+      }
+
+      function switchVedicSuiteTab(tabKey, btnEl) {
+        const modal = document.getElementById('vedic-suite-modal');
+        if (!modal) return;
+        modal.querySelectorAll('.km-tab-link').forEach(b => b.classList.remove('active'));
+        modal.querySelectorAll('.km-tab-pane').forEach(p => p.classList.remove('active'));
+
+        if (btnEl) btnEl.classList.add('active');
+        const targetPane = document.getElementById(`pane-vedic-${tabKey}`);
+        if (targetPane) targetPane.classList.add('active');
+      }
+
+      function setPanditQuery(text) {
+        const input = document.getElementById('vs-pandit-query');
+        if (input) input.value = text;
+      }
+
+      async function runVedicGemstoneRecommend() {
+        const lagnaRashi = Number(document.getElementById('vs-gem-lagna')?.value || 1);
+        const concern = document.getElementById('vs-gem-concern')?.value || 'health';
+        const resEl = document.getElementById('vs-gem-results');
+        if (!resEl) return;
+
+        resEl.innerHTML = `<div style="text-align:center; padding:20px; color:#2ecc71;">⏳ रत्न शास्त्र अनुसार रत्न विश्लेषण हुँदैछ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/vedic/gemstones/recommend`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ lagnaRashi, concern })
+          });
+          const data = await res.json();
+          if (data && data.success && data.recommendations) {
+            const { lifeStone, luckyStone, beneficStone } = data.recommendations;
+
+            const renderCard = (item, borderCol) => {
+              const g = item.gemstone;
+              return `
+                <div style="background:rgba(255,255,255,0.02); border:1px solid ${borderCol}; border-radius:0.75rem; padding:12px;">
+                  <div style="font-size:11px; text-transform:uppercase; color:${borderCol}; font-weight:700; margin-bottom:4px;">${escapeHtml(item.category)}</div>
+                  <div style="font-size:16px; font-weight:700; color:#fff; font-family:var(--font-serif); margin-bottom:2px;">${escapeHtml(g.name)} (${escapeHtml(g.sanskrit)})</div>
+                  <div style="font-size:11px; color:#aaa; margin-bottom:6px;">ग्रह: <b>${escapeHtml(g.planet)}</b> | धातु: <b>${escapeHtml(g.metal)}</b></div>
+                  <div style="font-size:11px; color:#ccc; line-height:1.4; margin-bottom:6px;">${escapeHtml(g.tagline)}</div>
+                  <div style="font-size:10.5px; color:#ddd; border-top:1px solid rgba(255,255,255,0.06); padding-top:6px;">
+                    • <b>औंला:</b> ${escapeHtml(g.finger)}<br/>
+                    • <b>वार:</b> ${escapeHtml(g.day)}<br/>
+                    • <b>मन्त्र:</b> <span style="color:#f4d38c;">${escapeHtml(g.mantra)}</span><br/>
+                    • <b>रुद्राक्ष:</b> <span style="color:#2ecc71;">${escapeHtml(g.rudraksha)}</span>
+                  </div>
+                </div>
+              `;
+            };
+
+            resEl.innerHTML = `
+              <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-bottom:12px;">
+                ${renderCard(lifeStone, '#2ecc71')}
+                ${renderCard(luckyStone, '#f4d38c')}
+                ${renderCard(beneficStone, '#85c1e9')}
+              </div>
+              <div style="background:rgba(231,76,60,0.08); border:1px solid rgba(231,76,60,0.25); border-radius:0.75rem; padding:10px; font-size:11px; color:#e74c3c; line-height:1.5;">
+                ⚠️ <b>महत्वपूर्ण सावधानी (Gemstone Conflict Rules):</b><br/>
+                ${(data.cautions || []).map(c => `• ${escapeHtml(c)}`).join('<br/>')}
+              </div>
+            `;
+          } else {
+            resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">रत्न सिफारिस प्राप्त गर्न सकिएन।</div>`;
+          }
+        } catch (err) {
+          resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      async function runVedicDashaCalc() {
+        const dob = document.getElementById('vs-dasha-dob')?.value || '1995-05-15';
+        const moonLong = parseFloat(document.getElementById('vs-dasha-moon')?.value) || 45.5;
+        const resEl = document.getElementById('vs-dasha-results');
+        if (!resEl) return;
+
+        resEl.innerHTML = `<div style="text-align:center; padding:20px; color:#f4d38c;">⏳ १२० वर्षे विंशोत्तरी दशा चक्र गणना हुँदैछ...</div>`;
+
+        try {
+          const [currRes, timeRes] = await Promise.all([
+            fetch(`${API_BASE}/api/vedic/dasha/current`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ birthDate: dob, moonLongitude: moonLong })
+            }).then(r => r.json()),
+            fetch(`${API_BASE}/api/vedic/dasha/timeline`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ birthDate: dob, moonLongitude: moonLong })
+            }).then(r => r.json())
+          ]);
+
+          if (currRes && currRes.success && currRes.currentMahadasha) {
+            const m = currRes.currentMahadasha;
+            const a = currRes.currentAntardasha;
+            const rem = currRes.remainingInMahadasha;
+            const timeline = timeRes.timeline || [];
+
+            const timelineRows = timeline.map(d => `
+              <tr>
+                <td style="font-weight:700; color:#f4d38c;">${escapeHtml(d.sanskrit)} (${escapeHtml(d.planet)})</td>
+                <td>${d.totalYears} वर्ष</td>
+                <td>${escapeHtml(d.startDate)}</td>
+                <td>${escapeHtml(d.endDate)}</td>
+                <td style="font-size:10.5px; color:#bbb;">${escapeHtml(d.description)}</td>
+              </tr>
+            `).join('');
+
+            resEl.innerHTML = `
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:14px;">
+                <div style="background:rgba(216,176,106,0.06); border:1px solid rgba(216,176,106,0.3); border-radius:0.75rem; padding:12px;">
+                  <div style="font-size:11px; text-transform:uppercase; color:#f4d38c; font-weight:700;">वर्तमान सक्रिय महादशा</div>
+                  <div style="font-size:22px; font-weight:800; color:#fff; font-family:var(--font-serif); margin:4px 0;">${escapeHtml(m.sanskrit)} (${escapeHtml(m.planet)})</div>
+                  <div style="font-size:11.5px; color:#ccc;">अवधि: ${escapeHtml(m.startDate)} देखि ${escapeHtml(m.endDate)} सम्म</div>
+                  <div style="margin-top:6px; font-size:11px; color:#2ecc71; font-weight:700;">बाँकी समय: ${escapeHtml(rem.formatted)}</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px;">
+                  <div style="font-size:11px; text-transform:uppercase; color:#85c1e9; font-weight:700;">वर्तमान अन्तर्दशा (Bhukti)</div>
+                  <div style="font-size:22px; font-weight:800; color:#fff; font-family:var(--font-serif); margin:4px 0;">${escapeHtml(a ? a.sanskrit : m.sanskrit)} (${escapeHtml(a ? a.planet : m.planet)})</div>
+                  <div style="font-size:11.5px; color:#ccc;">अवधि: ${escapeHtml(a ? a.startDate : m.startDate)} देखि ${escapeHtml(a ? a.endDate : m.endDate)} सम्म</div>
+                  <div style="margin-top:6px; font-size:11px; color:#aaa;">जन्म नक्षत्र: <b>${escapeHtml(currRes.birthNakshatra)}</b> (स्वामी: ${escapeHtml(currRes.nakshatraLord)})</div>
+                </div>
+              </div>
+              <div style="background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:10px; max-height:180px; overflow-y:auto; margin-bottom:10px;">
+                <table class="km-table" style="font-size:11px;">
+                  <thead><tr><th>ग्रह</th><th>अवधि</th><th>सुरु मिति</th><th>अन्त्य मिति</th><th>विशेष प्रभाव</th></tr></thead>
+                  <tbody>${timelineRows}</tbody>
+                </table>
+              </div>
+              <div style="font-size:11px; color:#bbb; line-height:1.5; background:rgba(255,255,255,0.02); padding:8px 12px; border-radius:6px;">
+                💡 <b>ज्योतिषीय मार्गदर्शन:</b> ${escapeHtml(currRes.astrologicalGuidance)}
+              </div>
+            `;
+          } else {
+            resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">दशा गणना हुन सकेन।</div>`;
+          }
+        } catch (err) {
+          resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      async function runAgenticPanditConsult() {
+        const query = document.getElementById('vs-pandit-query')?.value || '';
+        const resEl = document.getElementById('vs-pandit-results');
+        if (!resEl) return;
+        if (!query.trim()) {
+          showToast('कृपया प्रश्न लेख्नुहोस्', '⚠️');
+          return;
+        }
+
+        resEl.innerHTML = `<div style="text-align:center; padding:24px; color:#85c1e9;">⏳ एजेन्टिक पण्डितजीले लग्न, दशा र भावको विश्लेषण गर्दै हुनुहुन्छ...</div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/vedic/pandit/consult`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question: query })
+          });
+          const data = await res.json();
+          if (data && data.success) {
+            const v = data.astrologicalVerdict;
+            const rems = data.prescribedRemedies || [];
+            const ag = data.agentVerdicts || {};
+
+            resEl.innerHTML = `
+              <div style="background:rgba(133,193,233,0.05); border:1px solid rgba(133,193,233,0.25); border-radius:0.75rem; padding:14px; margin-bottom:12px;">
+                <div style="font-size:11px; text-transform:uppercase; color:#85c1e9; font-weight:700; margin-bottom:4px;">पण्डितजीको ज्योतिषीय निर्णय (Astrological Verdict)</div>
+                <div style="font-size:13px; color:#fff; line-height:1.6; margin-bottom:8px;">${escapeHtml(v.summary)}</div>
+                <div style="display:flex; gap:16px; font-size:11px; color:#ddd; border-top:1px solid rgba(255,255,255,0.06); padding-top:6px;">
+                  <div>⏳ <b>अनुकूल समय:</b> <span style="color:#2ecc71;">${escapeHtml(v.favorableTiming)}</span></div>
+                  <div>🌟 <b>सक्रिय दशा:</b> <span style="color:#f4d38c;">${escapeHtml(data.currentDasha?.activeMahadasha)} / ${escapeHtml(data.currentDasha?.activeAntardasha)}</span></div>
+                </div>
+              </div>
+              <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:12px;">
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px;">
+                  <div style="font-size:11.5px; font-weight:700; color:#f4d38c; margin-bottom:6px;">📿 शास्त्रीय वैदिक परिहार (Recommended Remedies)</div>
+                  <div style="font-size:11px; color:#ccc; line-height:1.6;">
+                    ${rems.map(r => `<div>• <b>${escapeHtml(r.type)}:</b> ${escapeHtml(r.instruction)}</div>`).join('')}
+                  </div>
+                </div>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:12px;">
+                  <div style="font-size:11.5px; font-weight:700; color:#2ecc71; margin-bottom:6px;">🤖 एजेन्ट मूल्याङ्कन (Multi-Agent Consensus)</div>
+                  <div style="font-size:10.5px; color:#aaa; line-height:1.5;">
+                    • <b>Lagna Expert:</b> ${escapeHtml(ag.lagnaExpert?.verdict || '')}<br/>
+                    • <b>Dasha Expert:</b> ${escapeHtml(ag.dashaExpert?.verdict || '')}
+                  </div>
+                </div>
+              </div>
+            `;
+          } else {
+            resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">परामर्श लिन सकिएन।</div>`;
+          }
+        } catch (err) {
+          resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      async function runVedicPoruthamMatch() {
+        const girlNak = Number(document.getElementById('vs-girl-nak')?.value || 1);
+        const boyNak = Number(document.getElementById('vs-boy-nak')?.value || 1);
+        const resEl = document.getElementById('vs-porutham-results');
+        if (!resEl) return;
+
+        resEl.innerHTML = `<div style="text-align:center; padding:20px; color:#e056fd;">⏳ १० पोरुथम र पापसाम्य गणना हुँदैछ...</div>`;
+
+        try {
+          const [porRes, papaRes] = await Promise.all([
+            fetch(`${API_BASE}/api/vedic/match/porutham`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ girlNakshatra: girlNak, boyNakshatra: boyNak })
+            }).then(r => r.json()),
+            fetch(`${API_BASE}/api/vedic/match/papasamya`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({})
+            }).then(r => r.json())
+          ]);
+
+          if (porRes && porRes.success && Array.isArray(porRes.poruthams)) {
+            const rows = porRes.poruthams.map(p => `
+              <tr style="${p.isVeto && !p.isPassed ? 'background:rgba(231,76,60,0.1);' : ''}">
+                <td style="font-weight:700; color:${p.isVeto ? '#f4d38c' : '#ddd'};">${escapeHtml(p.name)}</td>
+                <td><span class="badge ${p.isPassed ? 'badge-paid' : 'badge-pending'}">${escapeHtml(p.status)}</span></td>
+                <td style="font-size:10.5px; color:#aaa;">${escapeHtml(p.significance)}</td>
+              </tr>
+            `).join('');
+
+            resEl.innerHTML = `
+              <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.02); border:1px solid ${porRes.isVetoViolated ? '#e74c3c' : '#2ecc71'}; border-radius:0.75rem; padding:12px; margin-bottom:12px;">
+                <div>
+                  <div style="font-size:16px; font-weight:700; color:${porRes.isVetoViolated ? '#e74c3c' : '#2ecc71'};">${escapeHtml(porRes.overallVerdict)}</div>
+                  <div style="font-size:11px; color:#ccc;">१० मध्ये <b>${porRes.passedPoruthams}</b> पोरुथम अनुकूल • कन्या: <b>${escapeHtml(porRes.girlNakshatra)}</b> | वर: <b>${escapeHtml(porRes.boyNakshatra)}</b></div>
+                </div>
+                <div style="text-align:right; font-size:11px;">
+                  <span class="badge ${papaRes.isBalanced ? 'badge-paid' : 'badge-pending'}">${escapeHtml(papaRes.status || 'पापसाम्य')}</span>
+                </div>
+              </div>
+              <div style="background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:10px; max-height:220px; overflow-y:auto; margin-bottom:10px;">
+                <table class="km-table" style="font-size:11px;">
+                  <thead><tr><th>पोरुथम</th><th>स्थिति</th><th>शास्त्रीय महत्व</th></tr></thead>
+                  <tbody>${rows}</tbody>
+                </table>
+              </div>
+              <div style="font-size:11px; color:#bbb; background:rgba(255,255,255,0.02); padding:8px 12px; border-radius:6px;">
+                ⚖️ <b>पापसाम्य सल्लाह:</b> ${escapeHtml(papaRes.guidance || '')}
+              </div>
+            `;
+          } else {
+            resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">पोरुथम मिलान हुन सकेन।</div>`;
+          }
+        } catch (err) {
+          resEl.innerHTML = `<div style="color:var(--accent-red); padding:16px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+
+      if (vedicSuiteModal) {
+        vedicSuiteModal.addEventListener('click', (e) => {
+          if (e.target === vedicSuiteModal) closeVedicSuiteModal();
+        });
       }
 
       // Start application
