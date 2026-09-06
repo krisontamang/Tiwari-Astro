@@ -83,6 +83,42 @@
 
     <!-- Interactive Scripts: QR Lightbox & Form Submission Capture -->
     <script>
+      // Move Packages section to top right after Hero
+      function placePackagesAtTop() {
+        const packages = document.getElementById('packages');
+        if (!packages) return;
+        const main = document.querySelector('main') || document.querySelector('#root > div');
+        if (!main) return;
+
+        const hero = main.querySelector('.cosmic-card')?.closest('section') || main.querySelector('section');
+        if (hero && hero !== packages && packages.previousElementSibling !== hero) {
+          hero.after(packages);
+        }
+      }
+
+      // Wire package buttons directly to 3-step checkout
+      document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.package-button, button');
+        if (!btn) return;
+        const txt = btn.innerText || '';
+        if (txt.includes('Basic रोज्नुहोस्')) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = '/pay?plan=basic';
+        } else if (txt.includes('Standard रोज्नुहोस्')) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = '/pay?plan=standard';
+        } else if (txt.includes('VIP रोज्नुहोस्')) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = '/pay?plan=vip';
+        }
+      }, true);
+
+      const topObserver = new MutationObserver(placePackagesAtTop);
+      topObserver.observe(document.body, { childList: true, subtree: true });
+
       // 1. QR Code Click-to-Zoom Lightbox
       document.addEventListener('click', function(e) {
         const img = e.target.closest('.qr-payment-wrap img, .qr-frame img, img[alt*="eSewa"]');

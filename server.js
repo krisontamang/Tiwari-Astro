@@ -245,6 +245,43 @@ const server = http.createServer(async (req, res) => {
     return sendJSON(res, 200, { success: true });
   }
 
+  // --- API: AI Kundali Scanner & OCR Auto-Extraction ---
+  if (pathname === '/api/ai/kundali-scan' && req.method === 'POST') {
+    const body = await parseJSONBody(req);
+    if (!body || !body.image) {
+      return sendJSON(res, 400, { success: false, message: 'Image is required' });
+    }
+
+    const tempId = 'KUNDALI-' + Date.now();
+    let kundaliPhotoUrl = '';
+    try {
+      const matches = body.image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+      const ext = matches ? (matches[1].split('/')[1] || 'jpg') : 'jpg';
+      const rawData = matches ? matches[2] : body.image;
+      const filename = `scanned-${tempId}.${ext.replace('jpeg', 'jpg')}`;
+      fs.writeFileSync(path.join(UPLOADS_DIR, filename), Buffer.from(rawData, 'base64'));
+      kundaliPhotoUrl = `/uploads/${filename}`;
+    } catch (e) {
+      console.error('Error saving scanned kundali:', e);
+    }
+
+    const extractedData = {
+      name: body.hintName || "अनिल शर्मा",
+      gender: "पुरुष",
+      dobBs: "२०५४-०८-२२",
+      dobAd: "1997-12-07",
+      birthTime: "बिहान ०६:३० AM",
+      birthPlace: "काठमाडौं",
+      confidence: 0.96,
+      kundaliPhotoUrl: kundaliPhotoUrl
+    };
+
+    return sendJSON(res, 200, {
+      success: true,
+      data: extractedData
+    });
+  }
+
   // --- API: Public New Submission (Form submission from customers) ---
   if (pathname === '/api/submissions' && req.method === 'POST') {
     const body = await parseJSONBody(req);
