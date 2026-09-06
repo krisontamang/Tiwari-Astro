@@ -3,28 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <meta name="theme-color" content="#08060f" />
-  <meta name="description" content="Astro Tiwari — सरल, व्यक्तिगत र संवेदनशील वैदिक ज्योतिष मार्गदर्शन। आजको राशिफल, परम्परागत कुण्डली चक्र र नित्य शान्ति मन्त्रहरू।" />
-  <meta property="og:title" content="Astro Tiwari — वैदिक ज्योतिष तथा कुण्डली मार्गदर्शन" />
+  <meta name="theme-color" content="#07040e" />
+  <meta name="description" content="Astro Tiwari — सरल, व्यक्तिगत र संवेदनशील वैदिक ज्योतिष मार्गदर्शन। आजको, साप्ताहिक, मासिक र वार्षिक राशिफल, परम्परागत कुण्डली चक्र र नित्य शान्ति मन्त्रहरू।" />
+  <meta property="og:title" content="Astro Tiwari — वैदिक ज्योतिष, राशिफल र कुण्डली मार्गदर्शन" />
   <meta property="og:description" content="जन्मकुण्डली, विवाह मिलान र व्यक्तिगत ज्योतिषीय मार्गदर्शनका लागि Astro Tiwari।" />
   <meta property="og:type" content="website" />
   <title>Astro Tiwari — वैदिक ज्योतिष, राशिफल र कुण्डली मार्गदर्शन</title>
 
-  <!-- Clean Devanagari & Modern Sans Fonts -->
+  <!-- Typography: Noto Serif Devanagari (Sacred Headings) + Outfit & Noto Sans (Clean Modern Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ════════════════════════════════════════════════════════════════
-       VEDIC LUXURY DESIGN SYSTEM (NO AI SLOP, NO DASHES, AMPLE SPACING)
+       COSMIC GALAXY & VEDIC LUXURY DESIGN SYSTEM
        ════════════════════════════════════════════════════════════════ */
     :root {
-      --bg-base: #08060f;
-      --bg-surface: #100b1d;
-      --bg-card: rgba(18, 14, 30, 0.78);
-      --bg-card-hover: rgba(26, 20, 44, 0.92);
-      --bg-input: #0c0817;
+      --bg-base: #06030c;
+      --bg-card: rgba(18, 13, 32, 0.78);
+      --bg-card-hover: rgba(28, 20, 48, 0.9);
+      --bg-input: #0b0716;
 
       --gold-100: #fef7e6;
       --gold-200: #fde8b8;
@@ -33,9 +32,9 @@
       --gold-500: #d8a846;
       --gold-600: #b88628;
 
-      --gold-border: rgba(216, 168, 70, 0.26);
-      --gold-border-focus: rgba(244, 194, 86, 0.6);
-      --gold-glow: rgba(216, 168, 70, 0.18);
+      --gold-border: rgba(216, 168, 70, 0.28);
+      --gold-border-focus: rgba(244, 194, 86, 0.65);
+      --gold-glow: rgba(216, 168, 70, 0.22);
 
       --text-primary: #fbf9f5;
       --text-secondary: #c9bed2;
@@ -49,7 +48,7 @@
       --radius-lg: 24px;
       --radius-full: 9999px;
 
-      --shadow-card: 0 10px 30px -4px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      --shadow-card: 0 12px 36px -4px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.09);
     }
 
     *, *::before, *::after {
@@ -64,6 +63,7 @@
       color-scheme: dark;
     }
 
+    /* ── DYNAMIC GALAXY & ASTROLOGY WALLPAPER ── */
     body {
       background-color: var(--bg-base);
       color: var(--text-primary);
@@ -72,10 +72,33 @@
       line-height: 1.7;
       overflow-x: hidden;
       padding-bottom: 120px;
-      background-image:
-        radial-gradient(ellipse 70% 40% at 50% -10%, rgba(139, 92, 246, 0.14), transparent 70%),
-        radial-gradient(circle 500px at 90% 25%, rgba(216, 168, 70, 0.08), transparent 60%),
-        radial-gradient(circle 600px at 50% 100%, rgba(216, 168, 70, 0.06), transparent 70%);
+      position: relative;
+    }
+
+    /* Multi-layered cosmic galaxy backdrop */
+    .cosmic-galaxy-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        /* Starfield dots pattern */
+        radial-gradient(1.5px 1.5px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 100px 150px, rgba(255,230,170,0.8), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 240px 80px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 320px 220px, rgba(216,168,70,0.9), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 450px 120px, rgba(167,139,250,0.8), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 580px 280px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 720px 90px, rgba(255,220,130,0.9), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 850px 320px, rgba(192,132,252,0.7), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 960px 180px, #ffffff, rgba(0,0,0,0)),
+        /* Dynamic flowing nebulas */
+        radial-gradient(circle 800px at 50% 0%, rgba(139, 92, 246, 0.16), transparent 70%),
+        radial-gradient(circle 700px at 85% 30%, rgba(216, 168, 70, 0.11), transparent 60%),
+        radial-gradient(circle 900px at 15% 65%, rgba(124, 58, 237, 0.13), transparent 65%),
+        radial-gradient(circle 800px at 80% 90%, rgba(217, 119, 6, 0.12), transparent 70%),
+        #06030c;
+      background-size: 600px 600px, 700px 700px, 800px 800px, 650px 650px, 900px 900px, 750px 750px, 850px 850px, 950px 950px, 1000px 1000px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
       background-attachment: fixed;
     }
 
@@ -92,12 +115,13 @@
     .section {
       padding-top: clamp(52px, 8vw, 84px);
       padding-bottom: clamp(52px, 8vw, 84px);
+      position: relative;
     }
 
     .section-header {
       text-align: center;
       max-width: 680px;
-      margin: 0 auto clamp(36px, 5vw, 54px);
+      margin: 0 auto clamp(36px, 5vw, 52px);
     }
 
     .section-tag {
@@ -144,7 +168,7 @@
       position: sticky;
       top: 0;
       z-index: 200;
-      background: rgba(8, 6, 15, 0.88);
+      background: rgba(8, 5, 16, 0.9);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--gold-border);
@@ -197,14 +221,14 @@
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .nav-link-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 10px 18px;
+      padding: 9px 16px;
       font-family: var(--font-sans);
       font-size: 13.5px;
       font-weight: 600;
@@ -218,7 +242,7 @@
       transition: all 0.2s ease;
     }
     .nav-link-btn:hover {
-      background: rgba(216, 168, 70, 0.18);
+      background: rgba(216, 168, 70, 0.2);
       color: #fff;
       transform: translateY(-1px);
     }
@@ -258,8 +282,8 @@
        HERO SECTION
        ════════════════════════════════════════════════════════════════ */
     .hero-section {
-      padding-top: clamp(48px, 8vw, 80px);
-      padding-bottom: clamp(40px, 6vw, 68px);
+      padding-top: clamp(48px, 8vw, 76px);
+      padding-bottom: clamp(36px, 5vw, 56px);
       text-align: center;
     }
 
@@ -283,7 +307,7 @@
       font-size: clamp(34px, 6vw, 56px);
       font-weight: 700;
       line-height: 1.25;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       max-width: 820px;
       margin-left: auto;
       margin-right: auto;
@@ -301,7 +325,7 @@
       color: var(--text-secondary);
       line-height: 1.8;
       max-width: 640px;
-      margin: 0 auto 36px;
+      margin: 0 auto 32px;
     }
 
     .hero-btn-group {
@@ -310,7 +334,6 @@
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: 44px;
     }
 
     .btn-main {
@@ -360,8 +383,188 @@
     }
 
     /* ════════════════════════════════════════════════════════════════
-       1. आजको राशिफल
+       PLANS & PRICING SECTION (CLEAR & TOP LEVEL)
        ════════════════════════════════════════════════════════════════ */
+    .pricing-section {
+      padding-top: 36px;
+      padding-bottom: 56px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(16px);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold-border-focus);
+      background: var(--bg-card-hover);
+    }
+    .pricing-card.featured {
+      border-color: var(--gold-400);
+      background: rgba(28, 20, 48, 0.88);
+      box-shadow: 0 16px 44px -4px rgba(0, 0, 0, 0.75), 0 0 20px var(--gold-glow);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      right: 24px;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+      color: #100b1a;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pricing-tier {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold-100);
+      margin-bottom: 6px;
+    }
+
+    .pricing-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .pricing-cost {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .price-currency {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold-300);
+    }
+    .price-number {
+      font-family: var(--font-serif);
+      font-size: 38px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .price-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pricing-features li {
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .pricing-features li span {
+      color: var(--gold-400);
+      flex-shrink: 0;
+    }
+
+    .btn-choose-plan {
+      width: 100%;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--gold-border);
+      background: rgba(216, 168, 70, 0.12);
+      color: var(--gold-200);
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-choose-plan:hover {
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+      color: #100b1a;
+      border-color: transparent;
+    }
+    .pricing-card.featured .btn-choose-plan {
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+      color: #100b1a;
+      border-color: transparent;
+    }
+    .pricing-card.featured .btn-choose-plan:hover {
+      background: linear-gradient(135deg, #ffe08a, var(--gold-500));
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       RASHIFAL WITH 4 TIME TABS (DAILY, WEEKLY, MONTHLY, YEARLY)
+       ════════════════════════════════════════════════════════════════ */
+    .time-tabs-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .time-tab {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--gold-border);
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .time-tab:hover {
+      background: rgba(216, 168, 70, 0.15);
+      color: #fff;
+    }
+    .time-tab.active {
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+      color: #100b1a;
+      font-weight: 700;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(216, 168, 70, 0.35);
+    }
+
     .rashi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
@@ -461,7 +664,7 @@
     }
 
     /* ════════════════════════════════════════════════════════════════
-       2. सरल कुण्डली निर्माता & ACCURATE DIAMOND CHART
+       KUNDALI GENERATOR WITH 2-WAY BS & AD AUTO-FILL
        ════════════════════════════════════════════════════════════════ */
     .kundali-layout {
       display: grid;
@@ -483,11 +686,13 @@
     }
 
     .input-group {
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .input-label {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       font-size: 13.5px;
       font-weight: 600;
       color: var(--gold-300);
@@ -516,6 +721,19 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 12px;
+    }
+
+    .sync-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      color: var(--gold-400);
+      background: rgba(216, 168, 70, 0.08);
+      border: 1px solid rgba(216, 168, 70, 0.2);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      margin-top: 6px;
     }
 
     /* Scrollable Nepal Location Selector */
@@ -595,7 +813,7 @@
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
     }
-    .location-item:hover, .location-item.selected {
+    .location-item:hover {
       background: rgba(216, 168, 70, 0.2);
       color: #fff;
     }
@@ -768,10 +986,10 @@
     }
 
     /* ════════════════════════════════════════════════════════════════
-       4. CONSULTATION & BOOKING SECTION (CLEAN NATIVE NEPALI)
+       4. CONSULTATION & BOOKING SECTION
        ════════════════════════════════════════════════════════════════ */
     .booking-section {
-      background: linear-gradient(180deg, transparent 0%, rgba(16, 11, 26, 0.7) 100%);
+      background: linear-gradient(180deg, transparent 0%, rgba(16, 11, 26, 0.75) 100%);
     }
 
     .booking-card {
@@ -782,38 +1000,6 @@
       box-shadow: var(--shadow-card);
       max-width: 820px;
       margin: 0 auto;
-    }
-
-    .booking-services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-
-    .service-option {
-      background: rgba(10, 7, 18, 0.6);
-      border: 1px solid var(--gold-border);
-      border-radius: var(--radius-sm);
-      padding: 16px 18px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .service-option:hover, .service-option.active {
-      background: rgba(216, 168, 70, 0.15);
-      border-color: var(--gold-400);
-    }
-    .service-option-title {
-      font-family: var(--font-serif);
-      font-size: 16.5px;
-      font-weight: 700;
-      color: var(--gold-200);
-      margin-bottom: 4px;
-    }
-    .service-option-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.5;
     }
 
     .btn-whatsapp-booking {
@@ -879,11 +1065,6 @@
       white-space: nowrap;
     }
 
-    .dock-btn-auth {
-      background: rgba(216, 168, 70, 0.12);
-      border-color: rgba(216, 168, 70, 0.3);
-      color: var(--gold-300);
-    }
     .dock-btn-ghost {
       background: rgba(255, 255, 255, 0.05);
       border-color: rgba(255, 255, 255, 0.1);
@@ -946,6 +1127,9 @@
 </head>
 <body>
 
+  <!-- Dynamic Cosmic Wallpaper Backdrop -->
+  <div class="cosmic-galaxy-bg"></div>
+
   <!-- ════════════════════════════════════════════════════════════════
        NAVBAR
        ════════════════════════════════════════════════════════════════ -->
@@ -961,14 +1145,17 @@
         </a>
 
         <div class="nav-actions">
+          <button class="nav-link-btn hide-mobile" onclick="scrollToId('pricing-section')">
+            💰 योजना र शुल्क
+          </button>
           <button class="nav-link-btn hide-mobile" onclick="scrollToId('rashifal-section')">
-            🌅 आजको राशिफल
+            🌅 राशिफल
           </button>
           <button class="nav-link-btn hide-mobile" onclick="scrollToId('kundali-section')">
-            📿 कुण्डली चक्र
+            📿 कुण्डली
           </button>
           <button class="nav-link-btn hide-mobile" onclick="scrollToId('mantra-section')">
-            🕉️ शान्ति मन्त्र
+            🕉️ मन्त्र
           </button>
           <button class="nav-cta-btn" onclick="scrollToId('booking-section')">
             परामर्श लिनुहोस् ➔
@@ -994,8 +1181,8 @@
       </p>
 
       <div class="hero-btn-group">
-        <button class="btn-main" onclick="scrollToId('booking-section')">
-          🙏 व्यक्तिगत परामर्श बुक गर्नुहोस्
+        <button class="btn-main" onclick="scrollToId('pricing-section')">
+          💰 परामर्श शुल्क तथा योजना हेर्नुहोस्
         </button>
         <button class="btn-outline" onclick="scrollToId('kundali-section')">
           📿 आफ्नो कुण्डली चक्र बनाउनुहोस्
@@ -1005,19 +1192,120 @@
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════
-       1. आजको राशिफल
+       PLANS & PRICING (CLEAR, TOP OF PAGE)
+       ════════════════════════════════════════════════════════════════ -->
+  <section class="section pricing-section" id="pricing-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">स्पष्ट र पारदर्शी शुल्क</div>
+        <h2 class="section-title">परामर्श योजना तथा शुल्क</h2>
+        <p class="section-desc">आफ्नो आवश्यकता अनुसार उचित योजना छान्नुहोस् र पण्डितजीसँग प्रत्यक्ष मार्गदर्शन प्राप्त गर्नुहोस्</p>
+        <div class="ornament">✦ ॐ ✦</div>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Plan 1: Basic -->
+        <div class="pricing-card">
+          <div>
+            <div class="pricing-tier">Basic Package</div>
+            <div class="pricing-desc">सामान्य ग्रहदशा, मुख्य प्रश्नको उत्तर र छोटो मार्गदर्शन।</div>
+            <div class="pricing-cost">
+              <span class="price-currency">रू</span>
+              <span class="price-number">२९९</span>
+              <span class="price-sub">/ एक पटक</span>
+            </div>
+            <ul class="pricing-features">
+              <li><span>✓</span> १ वटा मुख्य समस्या वा जिज्ञासाको उत्तर</li>
+              <li><span>✓</span> वर्तमान ग्रह दशा तथा गोचर विश्लेषण</li>
+              <li><span>✓</span> सरल पूजा वा जप उपायको सुझाव</li>
+              <li><span>✓</span> WhatsApp मा अडियो सन्देश मार्गदर्शन</li>
+            </ul>
+          </div>
+          <button class="btn-choose-plan" onclick="choosePricingPlan('Basic Package', '२९९')">
+            यो योजना छान्नुहोस् ➔
+          </button>
+        </div>
+
+        <!-- Plan 2: Standard (Featured) -->
+        <div class="pricing-card featured">
+          <div class="pricing-badge">लोकप्रिय छनोट</div>
+          <div>
+            <div class="pricing-tier">Standard Package</div>
+            <div class="pricing-desc">पूर्ण जन्मकुण्डली, करियर, विवाह तथा स्वास्थ्यको गहन विश्लेषण।</div>
+            <div class="pricing-cost">
+              <span class="price-currency">रू</span>
+              <span class="price-number" style="color:var(--gold-300);">४९९</span>
+              <span class="price-sub">/ एक पटक</span>
+            </div>
+            <ul class="pricing-features">
+              <li><span>✓</span> सम्पूर्ण १२ भाव तथा नवग्रह स्थिति विश्लेषण</li>
+              <li><span>✓</span> करियर, धन, विवाह तथा स्वास्थ्य मार्गदर्शन</li>
+              <li><span>✓</span> विंशोत्तरी महादशा तथा अन्तरदशा विश्लेषण</li>
+              <li><span>✓</span> १५ मिनेट पण्डितजीसँग प्रत्यक्ष अडियो कल</li>
+              <li><span>✓</span> रत्न वा रुद्राक्ष सम्बन्धी व्यक्तिगत सल्लाह</li>
+            </ul>
+          </div>
+          <button class="btn-choose-plan" onclick="choosePricingPlan('Standard Package', '४९९')">
+            यो योजना छान्नुहोस् ➔
+          </button>
+        </div>
+
+        <!-- Plan 3: VIP Premium -->
+        <div class="pricing-card">
+          <div>
+            <div class="pricing-tier">VIP Premium Package</div>
+            <div class="pricing-desc">सम्पूर्ण कुण्डली, विवाह मिलान, २ वर्षको गोचर फल तथा विशेष उपाय।</div>
+            <div class="pricing-cost">
+              <span class="price-currency">रू</span>
+              <span class="price-number">१,०५५</span>
+              <span class="price-sub">/ एक पटक</span>
+            </div>
+            <ul class="pricing-features">
+              <li><span>✓</span> विस्तृत ५-पृष्ठ जन्मकुण्डली प्रतिवेदन</li>
+              <li><span>✓</span> विवाह गुण मिलान (३६ गुण तथा मांगलिक दोष)</li>
+              <li><span>✓</span> आगामी २ वर्षको पूर्ण गोचर तथा दशाफल</li>
+              <li><span>✓</span> ३० मिनेट पण्डितजीसँग विस्तृत प्रत्यक्ष कुराकानी</li>
+              <li><span>✓</span> विशेष वैदिक अनुष्ठान तथा शान्ति मार्गदर्शन</li>
+            </ul>
+          </div>
+          <button class="btn-choose-plan" onclick="choosePricingPlan('VIP Premium Package', '१०५५')">
+            यो योजना छान्नुहोस् ➔
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       1. राशिफल (आजको, १ हप्ता, १ महिना, १ वर्ष)
        ════════════════════════════════════════════════════════════════ -->
   <section class="section" id="rashifal-section" style="border-top:1px solid var(--gold-border);border-bottom:1px solid var(--gold-border);background:rgba(120,60,180,0.05);">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">दैनिक फलादेश</div>
-        <h2 class="section-title">आजको राशिफल</h2>
-        <p class="section-desc">आफ्नो राशि छनोट गर्नुहोस् र आजको दिनको ग्रहगोचर, कार्यक्षेत्र तथा शुभ रंग जान्नुहोस्</p>
+        <div class="section-tag">राशिफल तथा ग्रहगोचर</div>
+        <h2 class="section-title">तपाईंको राशिफल</h2>
+        <p class="section-desc">दैनिक, साप्ताहिक, मासिक वा वार्षिक समयावधि छान्नुहोस् र आफ्नो राशिको सम्पूर्ण फलादेश पढ्नुहोस्</p>
         <div class="ornament">✦ ॐ ✦</div>
       </div>
 
+      <!-- 4 Time Tabs -->
+      <div class="time-tabs-row">
+        <button class="time-tab active" id="tab-daily" onclick="switchRashifalPeriod('daily')">
+          🌅 आजको (Daily)
+        </button>
+        <button class="time-tab" id="tab-weekly" onclick="switchRashifalPeriod('weekly')">
+          📅 १ हप्ता (Weekly)
+        </button>
+        <button class="time-tab" id="tab-monthly" onclick="switchRashifalPeriod('monthly')">
+          🌙 १ महिना (Monthly)
+        </button>
+        <button class="time-tab" id="tab-yearly" onclick="switchRashifalPeriod('yearly')">
+          ☀️ १ वर्ष (Yearly)
+        </button>
+      </div>
+
       <div style="text-align:center;margin-bottom:28px;">
-        <span id="rashifal-date" style="display:inline-block;background:rgba(216,168,70,0.12);border:1px solid var(--gold-border);color:var(--gold-300);padding:6px 18px;border-radius:999px;font-size:13px;font-weight:600;">
+        <span id="rashifal-date-badge" style="display:inline-block;background:rgba(216,168,70,0.12);border:1px solid var(--gold-border);color:var(--gold-300);padding:6px 20px;border-radius:999px;font-size:13px;font-weight:600;">
           मिति लोड हुँदैछ...
         </span>
       </div>
@@ -1027,14 +1315,14 @@
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════
-       2. सरल कुण्डली निर्माता & KUNDALI CHART
+       2. सरल कुण्डली निर्माता (WITH 2-WAY BS & AD AUTO-FILL)
        ════════════════════════════════════════════════════════════════ -->
   <section class="section" id="kundali-section">
     <div class="container">
       <div class="section-header">
         <div class="section-tag">निःशुल्क सेवा</div>
         <h2 class="section-title">सरल कुण्डली निर्माता</h2>
-        <p class="section-desc">आफ्नो जन्म विवरण भर्नुहोस् र १२ भाव तथा नवग्रहको स्पष्ट परम्परागत कुण्डली चक्र हेर्नुहोस्</p>
+        <p class="section-desc">वि.सं. वा ई.सं. कुनै एकमा जन्म मिति भर्नासाथ अर्को स्वतः गणितीय हिसाबले भरिनेछ</p>
         <div class="ornament">✦ ॐ ✦</div>
       </div>
 
@@ -1042,21 +1330,51 @@
         <!-- Form -->
         <div class="form-card">
           <div class="input-group">
-            <label class="input-label" for="kf-name">पूरा नाम</label>
+            <label class="input-label" for="kf-name">
+              <span>पूरा नाम</span>
+              <span style="font-size:11px;color:var(--text-muted);">Name</span>
+            </label>
             <input class="input-field" id="kf-name" type="text" placeholder="तपाईंको पूरा नाम" />
           </div>
 
+          <!-- OPTION 1: BIKRAM SAMBAT (BS) -->
           <div class="input-group">
-            <label class="input-label">जन्म मिति (ई.सं. / AD)</label>
+            <div class="input-label">
+              <span>जन्म मिति (वि.सं. / BS)</span>
+              <span style="font-size:11.5px;color:var(--gold-400);">नेपाली क्यालेन्डर</span>
+            </div>
             <div class="grid-3">
-              <input class="input-field" id="kf-year" type="number" placeholder="वर्ष (YYYY)" min="1920" max="2035" />
-              <input class="input-field" id="kf-month" type="number" placeholder="महिना (१-१२)" min="1" max="12" />
-              <input class="input-field" id="kf-day" type="number" placeholder="दिन (१-३१)" min="1" max="31" />
+              <input class="input-field" id="bs-year" type="number" placeholder="वर्ष (२०५५)" min="1980" max="2100" oninput="onBsDateChanged()" />
+              <input class="input-field" id="bs-month" type="number" placeholder="महिना (१-१२)" min="1" max="12" oninput="onBsDateChanged()" />
+              <input class="input-field" id="bs-day" type="number" placeholder="दिन (१-३२)" min="1" max="32" oninput="onBsDateChanged()" />
+            </div>
+            <div class="sync-banner" id="bs-sync-hint">
+              <span>⚡</span> वि.सं. भर्दा ई.सं. (AD) स्वतः हिसाब हुनेछ
             </div>
           </div>
 
+          <!-- OPTION 2: GREGORIAN (AD) -->
           <div class="input-group">
-            <label class="input-label">जन्म समय</label>
+            <div class="input-label">
+              <span>जन्म मिति (ई.सं. / AD)</span>
+              <span style="font-size:11.5px;color:var(--gold-400);">English Date</span>
+            </div>
+            <div class="grid-3">
+              <input class="input-field" id="ad-year" type="number" placeholder="Year (1998)" min="1920" max="2040" oninput="onAdDateChanged()" />
+              <input class="input-field" id="ad-month" type="number" placeholder="Month (1-12)" min="1" max="12" oninput="onAdDateChanged()" />
+              <input class="input-field" id="ad-day" type="number" placeholder="Day (1-31)" min="1" max="31" oninput="onAdDateChanged()" />
+            </div>
+            <div class="sync-banner" id="ad-sync-hint">
+              <span>⚡</span> ई.सं. भर्दा वि.सं. (BS) स्वतः हिसाब हुनेछ
+            </div>
+          </div>
+
+          <!-- BIRTH TIME -->
+          <div class="input-group">
+            <label class="input-label">
+              <span>जन्म समय</span>
+              <span style="font-size:11px;color:var(--text-muted);">घण्टा : मिनेट</span>
+            </label>
             <div class="grid-3">
               <input class="input-field" id="kf-hour" type="number" placeholder="घण्टा (१-१२)" min="1" max="12" />
               <input class="input-field" id="kf-min" type="number" placeholder="मिनेट (०-५९)" min="0" max="59" />
@@ -1067,15 +1385,18 @@
             </div>
           </div>
 
-          <!-- Scrollable Nepal District / City Selector -->
+          <!-- SCROLLABLE NEPAL LOCATION SELECTOR -->
           <div class="input-group">
-            <label class="input-label">जन्मस्थान (नेपालको जिल्ला / सहर)</label>
+            <label class="input-label">
+              <span>जन्मस्थान (नेपालको जिल्ला / सहर)</span>
+              <span style="font-size:11px;color:var(--text-muted);">Scrollable List</span>
+            </label>
             <div class="location-wrapper">
               <div class="location-select-box" id="location-select-box" onclick="toggleLocationDropdown()">
-                <span id="selected-location-text">काठमाडौँ</span>
+                <span id="selected-location-text">काठमाडौँ (Kathmandu)</span>
                 <span style="color:var(--gold-400);font-size:12px;">▼</span>
               </div>
-              <input type="hidden" id="kf-place" value="काठमाडौँ" />
+              <input type="hidden" id="kf-place" value="काठमाडौँ (Kathmandu)" />
 
               <div class="location-dropdown" id="location-dropdown">
                 <input type="text" class="location-search-input" id="location-search-input" placeholder="जिल्ला खोज्नुहोस्..." oninput="filterLocations()" />
@@ -1125,7 +1446,7 @@
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════
-       4. व्यक्तिगत परामर्श (NATIVE CONSULTATION & BOOKING)
+       4. व्यक्तिगत परामर्श (NATIVE BOOKING FORM)
        ════════════════════════════════════════════════════════════════ -->
   <section class="section booking-section" id="booking-section">
     <div class="container">
@@ -1137,25 +1458,12 @@
       </div>
 
       <div class="booking-card">
-        <!-- Service options -->
-        <label class="input-label" style="margin-bottom:12px;">परामर्श सेवा छनोट गर्नुहोस्</label>
-        <div class="booking-services-grid">
-          <div class="service-option active" onclick="selectServiceOption(this, 'सामान्य कुण्डली परामर्श')">
-            <div class="service-option-title">सामान्य कुण्डली परामर्श</div>
-            <div class="service-option-desc">वर्तमान ग्रहदशा, मुख्य समस्या र सरल उपाय सम्बन्धी कुराकानी</div>
-          </div>
-          <div class="service-option" onclick="selectServiceOption(this, 'विस्तृत जीवन फलादेश')">
-            <div class="service-option-title">विस्तृत जीवन फलादेश</div>
-            <div class="service-option-desc">करियर, धन, स्वास्थ्य, पारिवारिक जीवन र वर्षफलको पूर्ण विश्लेषण</div>
-          </div>
-          <div class="service-option" onclick="selectServiceOption(this, 'विवाह गुण मिलान')">
-            <div class="service-option-title">विवाह गुण मिलान</div>
-            <div class="service-option-desc">वर-वधुको ३६ गुण, मांगलिक दोष तथा दाम्पत्य जीवन तालमेल</div>
-          </div>
-        </div>
-
-        <!-- Consultation Form -->
         <form id="consultation-form" onsubmit="handleConsultationSubmit(event)">
+          <div class="input-group">
+            <label class="input-label" for="booking-plan">छनोट गरिएको योजना</label>
+            <input class="input-field" id="booking-plan" type="text" value="Standard Package (रू ४९९)" readonly style="background:rgba(216,168,70,0.1);color:var(--gold-200);font-weight:700;" />
+          </div>
+
           <div class="grid-3" style="grid-template-columns:1fr 1fr;margin-bottom:18px;">
             <div>
               <label class="input-label" for="booking-name">तपाईंको पूरा नाम *</label>
@@ -1169,7 +1477,7 @@
 
           <div class="input-group">
             <label class="input-label" for="booking-question">तपाईंको मुख्य जिज्ञासा वा प्रश्न (ऐच्छिक)</label>
-            <textarea class="input-field" id="booking-question" rows="3" style="height:auto;padding:14px 16px;resize:vertical;" placeholder="करियर, वैवाहिक जीवन वा कुनै खास समस्याबारे खुलाउनुहोस्..."></textarea>
+            <textarea class="input-field" id="booking-question" rows="3" style="height:auto;padding:14px 16px;resize:vertical;" placeholder="करियर, वैवाहिक जीवन, स्वास्थ्य वा कुनै खास समस्याबारे खुलाउनुहोस्..."></textarea>
           </div>
 
           <button type="submit" class="btn-whatsapp-booking">
@@ -1177,7 +1485,7 @@
           </button>
         </form>
 
-        <p style="text-align:center;font-size:12.5px;color:var(--text-muted);margin-top:16px;">
+        <p style="text-align:center;font-size:12.5px;color:var(--text-muted);margin-top:18px;">
           * सन्देश पठाएपछि पण्डितजीले तपाईंको समय मिलाएर WhatsApp मा सम्पर्क गर्नुहुनेछ।
         </p>
       </div>
@@ -1196,7 +1504,8 @@
       <p>© २०८३ BS &nbsp;·&nbsp; Astro Tiwari &nbsp;·&nbsp; काठमाडौँ, नेपाल</p>
       <p style="margin-top:12px;">
         <a href="/admin">🔐 Admin Portal</a> &nbsp;|&nbsp;
-        <a href="#rashifal-section">आजको राशिफल</a> &nbsp;|&nbsp;
+        <a href="#pricing-section">योजना र शुल्क</a> &nbsp;|&nbsp;
+        <a href="#rashifal-section">राशिफल</a> &nbsp;|&nbsp;
         <a href="#kundali-section">कुण्डली चक्र</a> &nbsp;|&nbsp;
         <a href="#mantra-section">शान्ति मन्त्र</a>
       </p>
@@ -1207,6 +1516,9 @@
        FLOATING DOCK
        ════════════════════════════════════════════════════════════════ -->
   <nav class="floating-dock">
+    <button class="dock-btn dock-btn-ghost dock-hide-mobile" onclick="scrollToId('pricing-section')">
+      <span>💰</span> शुल्क
+    </button>
     <button class="dock-btn dock-btn-ghost dock-hide-mobile" onclick="scrollToId('rashifal-section')">
       <span>🌅</span> राशिफल
     </button>
@@ -1221,7 +1533,7 @@
   <div id="toast" class="toast-box"></div>
 
   <!-- ════════════════════════════════════════════════════════════════
-       JAVASCRIPT: DATA & INTERACTION
+       JAVASCRIPT LOGIC
        ════════════════════════════════════════════════════════════════ -->
   <script>
     function scrollToId(id) {
@@ -1237,88 +1549,119 @@
       setTimeout(() => { t.style.display = 'none'; }, 2600);
     }
 
-    // ── Nepal Districts & Cities List (77 Districts + Major Cities) ──
+    function choosePricingPlan(planName, price) {
+      document.getElementById('booking-plan').value = `${planName} (रू ${price})`;
+      scrollToId('booking-section');
+      showToast(`✅ ${planName} छनोट गरियो`);
+    }
+
+    // ── MATHEMATICAL BS <-> AD TWO-WAY CONVERTER ──
+    let isConverting = false;
+
+    // Mathematical epoch base: 2055-01-31 BS = 1998-05-14 AD
+    // Average days per BS year = 365.25. 1 BS month ≈ 30.4375 days
+    function approximateBsToAd(y, m, d) {
+      const estYear = y - 57;
+      let estMonth = m + 3;
+      let estDay = d - 14;
+      if (estDay <= 0) { estDay += 30; estMonth--; }
+      if (estMonth > 12) { estMonth -= 12; }
+      return { year: estYear, month: estMonth, day: estDay };
+    }
+
+    function approximateAdToBs(y, m, d) {
+      const estYear = y + 57;
+      let estMonth = m - 3;
+      let estDay = d + 14;
+      if (estDay > 30) { estDay -= 30; estMonth++; }
+      if (estMonth <= 0) { estMonth += 12; }
+      return { year: estYear, month: estMonth, day: estDay };
+    }
+
+    async function onBsDateChanged() {
+      if (isConverting) return;
+      const by = parseInt(document.getElementById('bs-year').value);
+      const bm = parseInt(document.getElementById('bs-month').value);
+      const bd = parseInt(document.getElementById('bs-day').value);
+
+      if (!by || !bm || !bd || by < 1980 || by > 2100 || bm < 1 || bm > 12 || bd < 1 || bd > 32) return;
+
+      isConverting = true;
+      // Instant mathematical fast update
+      const approx = approximateBsToAd(by, bm, bd);
+      document.getElementById('ad-year').value = approx.year;
+      document.getElementById('ad-month').value = approx.month;
+      document.getElementById('ad-day').value = approx.day;
+      document.getElementById('bs-sync-hint').innerHTML = '<span>⚡</span> गणितीय रूपान्तरण भयो (AD auto-filled)';
+
+      // Precise API server calculation
+      try {
+        const res = await fetch(`/api/patro/convert?bs=${by}-${String(bm).padStart(2,'0')}-${String(bd).padStart(2,'0')}`);
+        const data = await res.json();
+        if (data && data.success && data.year) {
+          document.getElementById('ad-year').value = data.year;
+          document.getElementById('ad-month').value = data.month;
+          document.getElementById('ad-day').value = data.day;
+          document.getElementById('bs-sync-hint').innerHTML = `<span>✓</span> ई.सं. <strong>${data.year}/${data.month}/${data.day}</strong> (${data.weekdayNp || ''}) मा रूपान्तरण भयो`;
+        }
+      } catch (err) {}
+      finally { isConverting = false; }
+    }
+
+    async function onAdDateChanged() {
+      if (isConverting) return;
+      const ay = parseInt(document.getElementById('ad-year').value);
+      const am = parseInt(document.getElementById('ad-month').value);
+      const ad = parseInt(document.getElementById('ad-day').value);
+
+      if (!ay || !am || !ad || ay < 1920 || ay > 2045 || am < 1 || am > 12 || ad < 1 || ad > 31) return;
+
+      isConverting = true;
+      // Instant mathematical fast update
+      const approx = approximateAdToBs(ay, am, ad);
+      document.getElementById('bs-year').value = approx.year;
+      document.getElementById('bs-month').value = approx.month;
+      document.getElementById('bs-day').value = approx.day;
+      document.getElementById('ad-sync-hint').innerHTML = '<span>⚡</span> गणितीय रूपान्तरण भयो (BS auto-filled)';
+
+      // Precise API server calculation
+      try {
+        const res = await fetch(`/api/patro/convert?ad=${ay}-${String(am).padStart(2,'0')}-${String(ad).padStart(2,'0')}`);
+        const data = await res.json();
+        if (data && data.success && data.year) {
+          document.getElementById('bs-year').value = data.year;
+          document.getElementById('bs-month').value = data.month;
+          document.getElementById('bs-day').value = data.day;
+          document.getElementById('ad-sync-hint').innerHTML = `<span>✓</span> वि.सं. <strong>${data.year} ${data.monthNameNp || ''} ${data.day}</strong> मा रूपान्तरण भयो`;
+        }
+      } catch (err) {}
+      finally { isConverting = false; }
+    }
+
+    // ── Nepal Locations Scrollable List ──
     const NEPAL_LOCATIONS = [
-      'काठमाडौँ (Kathmandu)',
-      'ललितपुर (Lalitpur)',
-      'भक्तपुर (Bhaktapur)',
-      'पोखरा, कास्की (Pokhara)',
-      'भरतपुर / चितवन (Chitwan)',
-      'विराटनगर, मोरङ (Biratnagar)',
-      'बुटवल, रूपन्देही (Butwal)',
-      'भैरहवा, रूपन्देही (Bhairahawa)',
-      'धरान, सुनसरी (Dharan)',
-      'इटहरी, सुनसरी (Itahari)',
-      'नेपालगञ्ज, बाँके (Nepalgunj)',
-      'धनगढी, कैलाली (Dhangadhi)',
-      'विर्तामोड / झापा (Jhapa)',
-      'हेटौँडा, मकवानपुर (Hetauda)',
-      'दाङ (घोराही / तुलसीपुर)',
-      'बनेपा / धुलिखेल (काभ्रे)',
-      'वीरगञ्ज, पर्सा (Birgunj)',
-      'जनकपुर, धनुषा (Janakpur)',
-      'सिद्धिचरण / ओखलढुङ्गा',
-      'इलाम (Ilam)',
-      'पाँचथर (Panchthar)',
-      'ताप्लेजुङ (Taplejung)',
-      'धनकुटा (Dhankuta)',
-      'तेह्रथुम (Tehrathum)',
-      'सङ्खुवासभा (Sankhuwasabha)',
-      'भोजपुर (Bhojpur)',
-      'खोटाङ (Khotang)',
-      'सोलुखुम्बु (Solukhumbu)',
-      'उदयपुर (Udayapur)',
-      'सिरहा (Siraha)',
-      'सप्तरी (Saptari)',
-      'महोत्तरी (Mahottari)',
-      'सर्लाही (Sarlahi)',
-      'रौतहट (Rautahat)',
-      'बारा (Bara)',
-      'दोलखा (Dolakha)',
-      'रामेछाप (Ramechhap)',
-      'सिन्धुली (Sindhuli)',
-      'सिन्धुपाल्चोक (Sindhupalchok)',
-      'रसुवा (Rasuwa)',
-      'नुवाकोट (Nuwakot)',
-      'धादिङ (Dhading)',
-      'गोरखा (Gorkha)',
-      'मनाङ (Manang)',
-      'मुस्ताङ (Mustang)',
-      'म्याग्दी (Myagdi)',
-      'लमजुङ (Lamjung)',
-      'तनहुँ (Tanahun)',
-      'स्याङ्जा (Syangja)',
-      'पर्वत (Parbat)',
-      'बागलुङ (Baglung)',
-      'पाल्पा (Palpa)',
-      'गुल्मी (Gulmi)',
-      'अर्घाखाँची (Arghakhanchi)',
-      'प्युठान (Pyuthan)',
-      'रोल्पा (Rolpa)',
-      'रुकुम पूर्व (Rukum East)',
-      'रुकुम पश्चिम (Rukum West)',
-      'सल्यान (Salyan)',
-      'नवलपरासी पूर्व (Nawalpur)',
-      'नवलपरासी पश्चिम (Parasi)',
-      'कपिलवस्तु (Kapilvastu)',
-      'बर्दिया (Bardiya)',
-      'सुर्खेत (Surkhet)',
-      'दैलेख (Dailekh)',
-      'जाजरकोट (Jajarkot)',
-      'डोल्पा (Dolpa)',
-      'जुम्ला (Jumla)',
-      'कालिकोट (Kalikot)',
-      'मुगु (Mugu)',
-      'हुम्ला (Humla)',
-      'बाजुरा (Bajura)',
-      'बझाङ (Bajhang)',
-      'अछाम (Achham)',
-      'डोटी (Doti)',
-      'डडेल्धुरा (Dadeldhura)',
-      'बैतडी (Baitadi)',
-      'दार्चुला (Darchula)',
-      'कञ्चनपुर (Kanchanpur)',
-      'अन्य (नेपाल बाहिर / विदेश)'
+      'काठमाडौँ (Kathmandu)', 'ललितपुर (Lalitpur)', 'भक्तपुर (Bhaktapur)',
+      'पोखरा, कास्की (Pokhara)', 'भरतपुर / चितवन (Chitwan)', 'विराटनगर, मोरङ (Biratnagar)',
+      'बुटवल, रूपन्देही (Butwal)', 'भैरहवा, रूपन्देही (Bhairahawa)', 'धरान, सुनसरी (Dharan)',
+      'इटहरी, सुनसरी (Itahari)', 'नेपालगञ्ज, बाँके (Nepalgunj)', 'धनगढी, कैलाली (Dhangadhi)',
+      'विर्तामोड / झापा (Jhapa)', 'हेटौँडा, मकवानपुर (Hetauda)', 'दाङ (घोराही / तुलसीपुर)',
+      'बनेपा / धुलिखेल (काभ्रे)', 'वीरगञ्ज, पर्सा (Birgunj)', 'जनकपुर, धनुषा (Janakpur)',
+      'इलाम (Ilam)', 'पाँचथर (Panchthar)', 'ताप्लेजुङ (Taplejung)', 'धनकुटा (Dhankuta)',
+      'तेह्रथुम (Tehrathum)', 'सङ्खुवासभा (Sankhuwasabha)', 'भोजपुर (Bhojpur)',
+      'खोटाङ (Khotang)', 'सोलुखुम्बु (Solukhumbu)', 'उदयपुर (Udayapur)', 'सिरहा (Siraha)',
+      'सप्तरी (Saptari)', 'महोत्तरी (Mahottari)', 'सर्लाही (Sarlahi)', 'रौतहट (Rautahat)',
+      'बारा (Bara)', 'दोलखा (Dolakha)', 'रामेछाप (Ramechhap)', 'सिन्धुली (Sindhuli)',
+      'सिन्धुपाल्चोक (Sindhupalchok)', 'रसुवा (Rasuwa)', 'नुवाकोट (Nuwakot)', 'धादिङ (Dhading)',
+      'गोरखा (Gorkha)', 'मनाङ (Manang)', 'मुस्ताङ (Mustang)', 'म्याग्दी (Myagdi)',
+      'लमजुङ (Lamjung)', 'तनहुँ (Tanahun)', 'स्याङ्जा (Syangja)', 'पर्वत (Parbat)',
+      'बागलुङ (Baglung)', 'पाल्पा (Palpa)', 'गुल्मी (Gulmi)', 'अर्घाखाँची (Arghakhanchi)',
+      'प्युठान (Pyuthan)', 'रोल्पा (Rolpa)', 'रुकुम पूर्व (Rukum East)', 'रुकुम पश्चिम (Rukum West)',
+      'सल्यान (Salyan)', 'नवलपरासी पूर्व (Nawalpur)', 'नवलपरासी पश्चिम (Parasi)',
+      'कपिलवस्तु (Kapilvastu)', 'बर्दिया (Bardiya)', 'सुर्खेत (Surkhet)', 'दैलेख (Dailekh)',
+      'जाजरकोट (Jajarkot)', 'डोल्पा (Dolpa)', 'जुम्ला (Jumla)', 'कालिकोट (Kalikot)',
+      'मुगु (Mugu)', 'हुम्ला (Humla)', 'बाजुरा (Bajura)', 'बझाङ (Bajhang)',
+      'अछाम (Achham)', 'डोटी (Doti)', 'डडेल्धुरा (Dadeldhura)', 'बैतडी (Baitadi)',
+      'दार्चुला (Darchula)', 'कञ्चनपुर (Kanchanpur)', 'अन्य (नेपाल बाहिर / विदेश)'
     ];
 
     function initLocationDropdown() {
@@ -1338,9 +1681,7 @@
       const dd = document.getElementById('location-dropdown');
       const isVisible = dd.style.display === 'block';
       dd.style.display = isVisible ? 'none' : 'block';
-      if (!isVisible) {
-        document.getElementById('location-search-input').focus();
-      }
+      if (!isVisible) document.getElementById('location-search-input').focus();
     }
 
     function selectLocation(loc) {
@@ -1353,8 +1694,7 @@
       const q = document.getElementById('location-search-input').value.toLowerCase().trim();
       const items = document.querySelectorAll('.location-item');
       items.forEach(item => {
-        const txt = item.textContent.toLowerCase();
-        item.style.display = txt.includes(q) ? 'block' : 'none';
+        item.style.display = item.textContent.toLowerCase().includes(q) ? 'block' : 'none';
       });
     }
 
@@ -1368,97 +1708,135 @@
 
     initLocationDropdown();
 
-    // ── Nepali Date ──
-    function getNepaliDate() {
-      const now = new Date();
-      const bsMonths = ['बैशाख','जेठ','असार','श्रावण','भाद्र','आश्विन','कार्तिक','मंसिर','पौष','माघ','फाल्गुन','चैत्र'];
-      const days = ['आइतबार','सोमबार','मङ्गलबार','बुधबार','बिहीबार','शुक्रबार','शनिबार'];
-      const bsYear = now.getFullYear() + 57 - (now.getMonth() < 3 ? 1 : 0);
-      let bsMonth = (now.getMonth() + 9) % 12;
-      let bsDay = now.getDate() + 15;
-      if (bsDay > 30) { bsDay -= 30; bsMonth = (bsMonth + 1) % 12; }
-      const toNep = n => String(n).replace(/\d/g, d => '०१२३४५६७८९'[d]);
-      return `${days[now.getDay()]}, ${bsMonths[bsMonth]} ${toNep(bsDay)}, ${toNep(bsYear)} BS`;
-    }
-    document.getElementById('rashifal-date').textContent = 'आज: ' + getNepaliDate();
+    // ── RASHIFAL DATA ACROSS 4 PERIODS (DAILY, WEEKLY, MONTHLY, YEARLY) ──
+    let currentRashifalPeriod = 'daily';
 
-    // ── 1. Rashifal Data ──
-    const RASHIS = [
-      { sym:'♈', name:'मेष', en:'Aries (चू, चे, चो, ला, ली)',
-        preview:'आज नयाँ थालनीको लागि शुभ ऊर्जा छ। कार्यक्षेत्रमा नेतृत्व क्षमताको कदर हुनेछ।',
-        full:'कार्यक्षेत्र: नयाँ जिम्मेवारी र योजना सफल हुनेछन्।\nप्रेम: जीवनसाथीसँग आपसी समझदारी वृद्धि हुनेछ।\nधन: वित्तीय लगानीमा सावधानी अपनाउनुहोस्।\nस्वास्थ्य: शारीरिक स्फूर्ति कायम रहनेछ।\nशुभ अंक: ७, शुभ रंग: रातो' },
-      { sym:'♉', name:'वृष', en:'Taurus (ई, ऊ, ए, ओ, वा)',
-        preview:'धैर्य र एकाग्रताले आज ठूलो सफलता दिलाउनेछ। पारिवारिक सद्भाव कायम रहनेछ।',
-        full:'कार्यक्षेत्र: निरन्तरको मेहनतले उचित फल दिनेछ।\nप्रेम: पारिवारिक सम्बन्धमा न्यानोपन आउनेछ।\nधन: पुरानो लगानीबाट फाइदा हुने संकेत।\nस्वास्थ्य: खानपानमा सात्विक सन्तुलन राख्नुहोस्।\nशुभ अंक: ५, शुभ रंग: हरियो' },
-      { sym:'♊', name:'मिथुन', en:'Gemini (का, की, कू, घ, ङ)',
-        preview:'बुद्धि र संवादकलाको पूर्ण उपयोग हुनेछ। नयाँ व्यावसायिक सम्पर्क विस्तार हुनेछ।',
-        full:'कार्यक्षेत्र: बैठक र वार्तामा तपाईंको प्रस्ताव स्वीकृत हुनेछ।\nप्रेम: मनका भावना स्पष्टसँग व्यक्त गर्नुहोस्।\nधन: आयआर्जनका नयाँ बाटोहरू खुल्नेछन्।\nस्वास्थ्य: मानसिक विश्राम र ध्यानलाई समय दिनुहोस्।\nशुभ अंक: ३, शुभ रंग: पहेँलो' },
-      { sym:'♋', name:'कर्कट', en:'Cancer (ही, हू, हे, हो, डा)',
-        preview:'घरायसी वातावरण सुखद रहनेछ। परोपकारी कार्यमा मन आकर्षित हुनेछ।',
-        full:'कार्यक्षेत्र: सहकर्मीको साथ र सहयोग प्राप्त हुनेछ।\nप्रेम: पारिवारिक जमघटले खुशी प्रदान गर्नेछ।\nधन: अनावश्यक खर्च नियन्त्रण गर्नुपर्ने दिन।\nस्वास्थ्य: पानी पर्याप्त पिउनुहोस्, मौसमी सतर्कता राख्नुहोस्।\nशुभ अंक: २, शुभ रंग: सेतो' },
-      { sym:'♌', name:'सिंह', en:'Leo (मा, मी, मू, मे, मो)',
-        preview:'आत्मविश्वास र पराक्रम उच्च रहनेछ। समाज वा कार्यस्थलमा प्रतिष्ठा बढ्नेछ।',
-        full:'कार्यक्षेत्र: महत्त्वपूर्ण निर्णय लिन उपयुक्त समय।\nप्रेम: प्रेम सम्बन्धमा रोमाञ्चक मोड आउन सक्छ।\nधन: आर्थिक स्थिति सबल रहनेछ।\nस्वास्थ्य: रक्तचाप र नियमित व्यायाममा ध्यान दिनुहोस्।\nशुभ अंक: १, शुभ रंग: सुनौलो' },
-      { sym:'♍', name:'कन्या', en:'Virgo (टो, पा, पी, पू, ष)',
-        preview:'व्यवस्थापन र विश्लेषण कौशलले काम सहज बनाउनेछ। योजनाबद्ध रूपमा अघि बढ्नुहोस्।',
-        full:'कार्यक्षेत्र: अधुरा रहेका कामहरू कुशलतापूर्वक सम्पन्न हुनेछन्।\nप्रेम: सम्बन्धमा स-साना कुरामा बहस नगर्नुहोस्।\nधन: बचत योजनाहरूमा ध्यान केन्द्रित गर्नुहोस्।\nस्वास्थ्य: पाचन प्रणालीको ख्याल राख्नुहोस्।\nशुभ अंक: ५, शुभ रंग: गाढा हरियो' },
-      { sym:'♎', name:'तुला', en:'Libra (रा, री, रु, रे, रो)',
-        preview:'सन्तुलित दृष्टिकोणले जटिल समस्या सुल्झाउनेछ। साझेदारी कार्यमा सफलता मिल्नेछ।',
-        full:'कार्यक्षेत्र: कानुनी वा साझेदारी सम्बन्धी काम सकारात्मक हुनेछन्।\nप्रेम: जोडीसँग मिठासपूर्ण संवाद हुनेछ।\nधन: विलासिताका साधनमा सन्तुलित खर्च गर्नुहोस्।\nस्वास्थ्य: ढाड र शारीरिक लचकतामा ध्यान दिनुहोस्।\nशुभ अंक: ६, शुभ रंग: गुलाबी' },
-      { sym:'♏', name:'वृश्चिक', en:'Scorpio (तो, ना, नी, नू, ने)',
-        preview:'अनुसन्धान र गूढ विषयमा रुचि बढ्नेछ। गोप्य योजनाहरू कार्यान्वयनमा आउनेछन्।',
-        full:'कार्यक्षेत्र: चुनौतीपूर्ण जिम्मेवारी सफलतापूर्वक पूरा हुनेछ।\nप्रेम: भावनात्मक सम्बन्ध प्रगाढ हुनेछ।\nधन: आकस्मिक लाभको सम्भावना रहेको छ।\nस्वास्थ्य: नियमित ध्यान र योग लाभदायक हुनेछ।\nशुभ अंक: ९, शुभ रंग: रातो' },
-      { sym:'♐', name:'धनु', en:'Sagittarius (ये, यो, भा, भी, भू)',
-        preview:'आध्यात्मिक चिन्तन र उच्च शिक्षामा प्रगति हुनेछ। यात्रा लाभदायक बन्न सक्छ।',
-        full:'कार्यक्षेत्र: गुरुजन वा वरिष्ठ व्यक्तिको मार्गदर्शन प्राप्त हुनेछ।\nप्रेम: सम्बन्धमा पारस्परिक आदर र विश्वास कायम रहनेछ।\nधन: दीर्घकालीन लगानीको लागि अनुकूल अवसर।\nस्वास्थ्य: मांसपेशी र जोर्नीहरूको ख्याल राख्नुहोस्।\nशुभ अंक: ३, शुभ रंग: पहेँलो' },
-      { sym:'♑', name:'मकर', en:'Capricorn (भो, जा, जी, खी, खू)',
-        preview:'कडा परिश्रम र अनुशासनले नयाँ उचाइ दिलाउनेछ। जिम्मेवारी कुशलतापूर्वक निभाउनुहुनेछ।',
-        full:'कार्यक्षेत्र: पदोन्नति वा नयाँ परियोजनाको अवसर आउन सक्छ।\nप्रेम: पारिवारिक दायित्व प्रति सचेत रहनुहोस्।\nधन: अचल सम्पत्ति विस्तारको विचार आउनेछ।\nस्वास्थ्य: घुँडा र हाडजोर्नीको नियमित हेरचाह गर्नुहोस्।\nशुभ अंक: ८, शुभ रंग: कालो' },
-      { sym:'♒', name:'कुम्भ', en:'Aquarius (गू, गे, गो, सा, सी)',
-        preview:'नवीन विचार र सिर्जनशीलताले सबैको ध्यान खिच्नेछ। सामाजिक कार्यमा प्रतिष्ठा बढ्नेछ।',
-        full:'कार्यक्षेत्र: प्राविधिक र रचनात्मक क्षेत्रमा सफलता।\nप्रेम: मित्रवत र खुला सम्बन्धले खुशी दिनेछ।\n💰 धन: समूहगत कामबाट आर्थिक लाभ हुनेछ।\nस्वास्थ्य: आँखा र पर्याप्त निद्रामा ध्यान दिनुहोस्।\nशुभ अंक: ४, शुभ रंग: आकाशी नीलो' },
-      { sym:'♓', name:'मीन', en:'Pisces (दी, दू, थ, झ, ञ)',
-        preview:'कला, साहित्य र सेवामूलक कार्यमा मन लाग्नेछ। आध्यात्मिक आनन्दको अनुभूति हुनेछ।',
-        full:'कार्यक्षेत्र: रचनात्मक सोचले कार्यस्थलमा प्रशंसा दिलाउनेछ।\nप्रेम: एकअर्काको भावनाको कदर हुनेछ।\nधन: धर्मकर्म तथा शुभ कार्यमा खर्च हुनेछ।\nस्वास्थ्य: खुट्टाको हेरचाह र विश्राम आवश्यक छ।\nशुभ अंक: ७, शुभ रंग: समुद्री हरियो' }
-    ];
+    const RASHIFAL_DATA = {
+      daily: {
+        badge: 'आजको दैनिक फलादेश (आज: भदौ २१, २०८३ BS)',
+        rashis: [
+          { sym:'♈', name:'मेष', en:'Aries', preview:'आज नयाँ थालनीको लागि शुभ ऊर्जा छ। कार्यक्षेत्रमा नेतृत्व क्षमताको कदर हुनेछ।', full:'कार्यक्षेत्र: नयाँ जिम्मेवारी र योजना सफल हुनेछन्।\nप्रेम: जीवनसाथीसँग आपसी समझदारी वृद्धि हुनेछ।\nधन: वित्तीय लगानीमा सावधानी अपनाउनुहोस्।\nस्वास्थ्य: शारीरिक स्फूर्ति कायम रहनेछ।\nशुभ अंक: ७, शुभ रंग: रातो' },
+          { sym:'♉', name:'वृष', en:'Taurus', preview:'धैर्य र एकाग्रताले आज ठूलो सफलता दिलाउनेछ। पारिवारिक सद्भाव कायम रहनेछ।', full:'कार्यक्षेत्र: निरन्तरको मेहनतले उचित फल दिनेछ।\nप्रेम: पारिवारिक सम्बन्धमा न्यानोपन आउनेछ।\nधन: पुरानो लगानीबाट फाइदा हुने संकेत।\nस्वास्थ्य: खानपानमा सात्विक सन्तुलन राख्नुहोस्।\nशुभ अंक: ५, शुभ रंग: हरियो' },
+          { sym:'♊', name:'मिथुन', en:'Gemini', preview:'बुद्धि र संवादकलाको पूर्ण उपयोग हुनेछ। नयाँ व्यावसायिक सम्पर्क विस्तार हुनेछ।', full:'कार्यक्षेत्र: बैठक र वार्तामा तपाईंको प्रस्ताव स्वीकृत हुनेछ।\nप्रेम: मनका भावना स्पष्टसँग व्यक्त गर्नुहोस्।\nधन: आयआर्जनका नयाँ बाटोहरू खुल्नेछन्।\nस्वास्थ्य: मानसिक विश्राम र ध्यानलाई समय दिनुहोस्।\nशुभ अंक: ३, शुभ रंग: पहेँलो' },
+          { sym:'♋', name:'कर्कट', en:'Cancer', preview:'घरायसी वातावरण सुखद रहनेछ। परोपकारी कार्यमा मन आकर्षित हुनेछ।', full:'कार्यक्षेत्र: सहकर्मीको साथ र सहयोग प्राप्त हुनेछ।\nप्रेम: पारिवारिक जमघटले खुशी प्रदान गर्नेछ।\nधन: अनावश्यक खर्च नियन्त्रण गर्नुपर्ने दिन।\nस्वास्थ्य: पानी पर्याप्त पिउनुहोस्।\nशुभ अंक: २, शुभ रंग: सेतो' },
+          { sym:'♌', name:'सिंह', en:'Leo', preview:'आत्मविश्वास र पराक्रम उच्च रहनेछ। समाज वा कार्यस्थलमा प्रतिष्ठा बढ्नेछ।', full:'कार्यक्षेत्र: महत्त्वपूर्ण निर्णय लिन उपयुक्त समय।\nप्रेम: प्रेम सम्बन्धमा रोमाञ्चक मोड आउन सक्छ।\nधन: आर्थिक स्थिति सबल रहनेछ।\nस्वास्थ्य: रक्तचाप र नियमित व्यायाममा ध्यान दिनुहोस्।\nशुभ अंक: १, शुभ रंग: सुनौलो' },
+          { sym:'♍', name:'कन्या', en:'Virgo', preview:'व्यवस्थापन र विश्लेषण कौशलले काम सहज बनाउनेछ। योजनाबद्ध रूपमा अघि बढ्नुहोस्।', full:'कार्यक्षेत्र: अधुरा रहेका कामहरू कुशलतापूर्वक सम्पन्न हुनेछन्।\nप्रेम: सम्बन्धमा स-साना कुरामा बहस नगर्नुहोस्।\nधन: बचत योजनाहरूमा ध्यान केन्द्रित गर्नुहोस्।\nस्वास्थ्य: पाचन प्रणालीको ख्याल राख्नुहोस्।\nशुभ अंक: ५, शुभ रंग: गाढा हरियो' },
+          { sym:'♎', name:'तुला', en:'Libra', preview:'सन्तुलित दृष्टिकोणले जटिल समस्या सुल्झाउनेछ। साझेदारी कार्यमा सफलता मिल्नेछ।', full:'कार्यक्षेत्र: कानुनी वा साझेदारी सम्बन्धी काम सकारात्मक हुनेछन्।\nप्रेम: जोडीसँग मिठासपूर्ण संवाद हुनेछ।\nधन: विलासिताका साधनमा सन्तुलित खर्च गर्नुहोस्।\nस्वास्थ्य: ढाड र शारीरिक लचकतामा ध्यान दिनुहोस्।\nशुभ अंक: ६, शुभ रंग: गुलाबी' },
+          { sym:'♏', name:'वृश्चिक', en:'Scorpio', preview:'अनुसन्धान र गूढ विषयमा रुचि बढ्नेछ। गोप्य योजनाहरू कार्यान्वयनमा आउनेछन्।', full:'कार्यक्षेत्र: चुनौतीपूर्ण जिम्मेवारी सफलतापूर्वक पूरा हुनेछ।\nप्रेम: भावनात्मक सम्बन्ध प्रगाढ हुनेछ।\nधन: आकस्मिक लाभको सम्भावना रहेको छ।\nस्वास्थ्य: नियमित ध्यान र योग लाभदायक हुनेछ।\nशुभ अंक: ९, शुभ रंग: रातो' },
+          { sym:'♐', name:'धनु', en:'Sagittarius', preview:'आध्यात्मिक चिन्तन र उच्च शिक्षामा प्रगति हुनेछ। यात्रा लाभदायक बन्न सक्छ।', full:'कार्यक्षेत्र: गुरुजन वा वरिष्ठ व्यक्तिको मार्गदर्शन प्राप्त हुनेछ।\nप्रेम: सम्बन्धमा पारस्परिक आदर र विश्वास कायम रहनेछ।\nधन: दीर्घकालीन लगानीको लागि अनुकूल अवसर।\nस्वास्थ्य: मांसपेशी र जोर्नीहरूको ख्याल राख्नुहोस्।\nशुभ अंक: ३, शुभ रंग: पहेँलो' },
+          { sym:'♑', name:'मकर', en:'Capricorn', preview:'कडा परिश्रम र अनुशासनले नयाँ उचाइ दिलाउनेछ। जिम्मेवारी कुशलतापूर्वक निभाउनुहुनेछ।', full:'कार्यक्षेत्र: पदोन्नति वा नयाँ परियोजनाको अवसर आउन सक्छ।\nप्रेम: पारिवारिक दायित्व प्रति सचेत रहनुहोस्।\nधन: अचल सम्पत्ति विस्तारको विचार आउनेछ।\nस्वास्थ्य: घुँडा र हाडजोर्नीको नियमित हेरचाह गर्नुहोस्।\nशुभ अंक: ८, शुभ रंग: कालो' },
+          { sym:'♒', name:'कुम्भ', en:'Aquarius', preview:'नवीन विचार र सिर्जनशीलताले सबैको ध्यान खिच्नेछ। सामाजिक कार्यमा प्रतिष्ठा बढ्नेछ।', full:'कार्यक्षेत्र: प्राविधिक र रचनात्मक क्षेत्रमा सफलता।\nप्रेम: मित्रवत र खुला सम्बन्धले खुशी दिनेछ।\nधन: समूहगत कामबाट आर्थिक लाभ हुनेछ।\nस्वास्थ्य: आँखा र पर्याप्त निद्रामा ध्यान दिनुहोस्।\nशुभ अंक: ४, शुभ रंग: आकाशी नीलो' },
+          { sym:'♓', name:'मीन', en:'Pisces', preview:'कला, साहित्य र सेवामूलक कार्यमा मन लाग्नेछ। आध्यात्मिक आनन्दको अनुभूति हुनेछ।', full:'कार्यक्षेत्र: रचनात्मक सोचले कार्यस्थलमा प्रशंसा दिलाउनेछ।\nप्रेम: एकअर्काको भावनाको कदर हुनेछ।\nधन: धर्मकर्म तथा शुभ कार्यमा खर्च हुनेछ।\nस्वास्थ्य: खुट्टाको हेरचाह र विश्राम आवश्यक छ।\nशुभ अंक: ७, शुभ रंग: समुद्री हरियो' }
+        ]
+      },
+      weekly: {
+        badge: 'यस १ हप्ताको साप्ताहिक राशिफल (भदौ २१ देखि २७ सम्म)',
+        rashis: [
+          { sym:'♈', name:'मेष', en:'Aries', preview:'साताको सुरुवाती दिनहरूमा कार्य व्यस्तता बढ्नेछ। बिहीबार र शुक्रबार आर्थिक लाभका योग छन्।', full:'व्यापार/व्यवसाय: मध्य सातामा नयाँ लगानीको अवसर आउनेछ।\nपारिवारिक: शुभ समाचार सुन्न पाइनेछ।\nसावधानी: मंगलबार अनावश्यक वादविवादबाट बच्नुहोस्।\nशुभ दिन: आइतबार र बिहीबार' },
+          { sym:'♉', name:'वृष', en:'Taurus', preview:'यो साता रोकिएका कामहरूले गति लिनेछन्। मित्र तथा अग्रजहरूको सहयोग निरन्तर रहनेछ।', full:'व्यापार/व्यवसाय: नयाँ ग्राहक र स्थिर आम्दानीको स्रोत बन्नेछ।\nपारिवारिक: आफन्तसँग आत्मीय भेटघाट हुनेछ।\nसावधानी: खानपानमा लापरवाही नगर्नुहोस्।\nशुभ दिन: सोमबार र शुक्रबार' },
+          { sym:'♊', name:'मिथुन', en:'Gemini', preview:'यात्रा र नयाँ योजना बनाउन अनुकूल साता। संवादमा मधुरता राख्नाले ठूला काम बन्नेछन्।', full:'व्यापार/व्यवसाय: प्रविधि र सञ्चार क्षेत्रका लागि असाध्यै फलदायी।\nपारिवारिक: दाजुभाइ तथा दिदीबहिनीको सहयोग मिल्नेछ।\nसावधानी: कागजपत्रमा हस्ताक्षर गर्दा ध्यान दिनुहोस्।\nशुभ दिन: बुधबार र शनिबार' },
+          { sym:'♋', name:'कर्कट', en:'Cancer', preview:'मानसिक शान्ति र आत्मिक सन्तुष्टि मिल्ने साता छ। धार्मिक कार्यमा संलग्नता बढ्नेछ।', full:'व्यापार/व्यवसाय: साझेदारी व्यवसायमा पारदर्शिता राख्नुहोस्।\nपारिवारिक: घरजग्गा वा वाहन सम्बन्धी कुरा अघि बढ्नेछ।\nसावधानी: अरूको बहकाउमा नलाग्नुहोस्।\nशुभ दिन: सोमबार र बिहीबार' },
+          { sym:'♌', name:'सिंह', en:'Leo', preview:'पराक्रम र प्रतिष्ठा बढ्नेछ। प्रतिस्पर्धीहरू पछि हट्नेछन्, लक्ष्य प्राप्ति सहज हुनेछ।', full:'व्यापार/व्यवसाय: सरकारी तथा प्रशासनिक कार्य सुल्झिनेछ।\nपारिवारिक: सन्तान पक्षबाट सन्तोषजनक खबर आउनेछ।\nसावधानी: अहंकारबाट टाढा रहनुहोस्।\nशुभ दिन: आइतबार र मंगलबार' },
+          { sym:'♍', name:'कन्या', en:'Virgo', preview:'आर्थिक योजना सफल हुने साता छ। बचतमा वृद्धि हुनेछ र कार्यक्षेत्रमा नयाँ सम्मान मिल्नेछ।', full:'व्यापार/व्यवसाय: हिसाबकिताब चुस्त राख्नुपर्ने समय।\nपारिवारिक: पारिवारिक वातावरण शान्त रहनेछ।\nसावधानी: स्वास्थ्यमा मौसमी समस्या आउन सक्छ।\nशुभ दिन: बुधबार र शुक्रबार' },
+          { sym:'♎', name:'तुला', en:'Libra', preview:'सामाजिक सम्बन्ध बलियो हुनेछ। कला र सृजनात्मक काममा उत्कृष्ट नतिजा हात लाग्नेछ।', full:'व्यापार/व्यवसाय: विलासिता र फेसन क्षेत्रमा लाभ।\nपारिवारिक: दाम्पत्य जीवनमा प्रेमभाव बढ्नेछ।\nसावधानी: ऋण लिने दिने काममा सतर्क रहनुहोस्।\nशुभ दिन: शुक्रबार र शनिबार' },
+          { sym:'♏', name:'वृश्चिक', en:'Scorpio', preview:'साहसिक निर्णयहरू सफल हुनेछन्। अनुसन्धान र प्राविधिक काममा विशेष उपलब्धि।', full:'व्यापार/व्यवसाय: गोप्य स्रोतबाट आयको सम्भावना।\nपारिवारिक: घरमा मांगलिक कार्यको चर्चा हुनेछ।\nसावधानी: सवारी चलाउँदा गति नियन्त्रण गर्नुहोस्।\nशुभ दिन: मंगलबार र आइतबार' },
+          { sym:'♐', name:'धनु', en:'Sagittarius', preview:'भाग्यले साथ दिने साता छ। वैदेशिक सम्पर्क वा अध्ययनमा उल्लेखनीय सफलता मिल्नेछ।', full:'व्यापार/व्यवसाय: परामर्श तथा शिक्षण पेशामा लाभ।\nपारिवारिक: गुरुजनको आशिर्वाद मिल्नेछ।\nसावधानी: अत्यधिक खर्चबाट जोगिनुहोस्।\nशुभ दिन: बिहीबार र सोमबार' },
+          { sym:'♑', name:'मकर', en:'Capricorn', preview:'धैर्य र लगनशीलताको उचित मूल्यांकन हुनेछ। पुराना समस्याहरू समाधानतर्फ जानेछन्।', full:'व्यापार/व्यवसाय: स्थायी प्रकृतिको काममा प्रगति।\nपारिवारिक: ज्येष्ठ सदस्यको स्वास्थ्यमा सुधार।\nसावधानी: नकारात्मक सोचलाई हावी हुन नदिनुहोस्।\nशुभ दिन: शनिबार र बुधबार' },
+          { sym:'♒', name:'कुम्भ', en:'Aquarius', preview:'सहकार्य र मित्रता फस्टाउनेछ। सामाजिक क्षेत्रमा नेतृत्वदायी भूमिका निर्वाह गर्न सकिनेछ।', full:'व्यापार/व्यवसाय: सामूहिक परियोजनाबाट राम्रो नाफा।\nपारिवारिक: रमाइलो यात्राको योग बन्नेछ।\nसावधानी: आँखाको थकानमा ध्यान दिनुहोस्।\nशुभ दिन: शनिबार र शुक्रबार' },
+          { sym:'♓', name:'मीन', en:'Pisces', preview:'आध्यात्मिक चिन्तन र आन्तरिक सुख मिल्नेछ। रोकिएका पुराना कामहरू सुचारु हुनेछन्।', full:'व्यापार/व्यवसाय: लगानीको प्रतिफल सकारात्मक आउनेछ।\nपारिवारिक: पारिवारिक एकता बलियो हुनेछ।\nसावधानी: समय व्यवस्थापनमा चनाखो रहनुहोस्।\nशुभ दिन: बिहीबार र मंगलबार' }
+        ]
+      },
+      monthly: {
+        badge: 'यस १ महिनाको मासिक राशिफल (भदौ महिना २०८३ BS)',
+        rashis: [
+          { sym:'♈', name:'मेष', en:'Aries', preview:'यो महिना सूर्य र मंगलको अनुकूल प्रभावले व्यावसायिक उन्नति र आत्मविश्वासमा वृद्धि हुनेछ।', full:'करियर: पदोन्नति वा नयाँ कार्यक्षेत्र विस्तारको अवसर।\nधन: महिनाको दोस्रो आधामा राम्रो आर्थिक लाभ।\nपारिवारिक: शुभ कार्यमा सहभागिता।\nविशेष उपाय: सूर्यलाई नित्य जल अर्पण गर्नुहोस्।' },
+          { sym:'♉', name:'वृष', en:'Taurus', preview:'शुक्रको शुभ गोचरले सुख, ऐश्वर्य र पारिवारिक सम्बन्धमा प्रगाढता ल्याउनेछ।', full:'करियर: कार्यस्थलमा सहकर्मीको पूर्ण सहयोग।\nधन: सम्पत्ति वा गहना खरिदको योग।\nपारिवारिक: घरमा रमाइलो वातावरण रहनेछ।\nविशेष उपाय: शुक्रबार सेतो वस्तु दान गर्नुहोस्।' },
+          { sym:'♊', name:'मिथुन', en:'Gemini', preview:'बुधको अनुकूलताले बौद्धिक प्रतिस्पर्धामा विजय र विदेश यात्राको ढोका खोल्नेछ।', full:'करियर: मिडिया, प्रविधि तथा व्यापारमा ठूलो सफलता।\nधन: बहुआयामिक स्रोतबाट धन आर्जन।\nपारिवारिक: नयाँ मित्रहरूको संगत लाभदायक।\nविशेष उपाय: गणेशजीलाई दुबो चढाउनुहोस्।' },
+          { sym:'♋', name:'कर्कट', en:'Cancer', preview:'यो महिना मानसिक सन्तुलन र परिवारको सुरक्षामा केन्द्रित रहनु उत्तम हुनेछ।', full:'करियर: नयाँ जिम्मेवारीले व्यस्तता बढाउनेछ।\nधन: अनावश्यक खर्च घटाउन बजेट बनाउनुहोस्।\nपारिवारिक: माताको स्वास्थ्यमा विशेष ख्याल राख्नुहोस्।\nविशेष उपाय: शिवजीको जलधारा गर्नुहोस्।' },
+          { sym:'♌', name:'सिंह', en:'Leo', preview:'सूर्य आफ्नै राशिमा गोचर गर्दा मान-प्रतिष्ठा, राज्यपक्षबाट लाभ र नेतृत्व शक्ति चम्किनेछ।', full:'करियर: सरकारी तथा उच्च पदस्थ व्यक्तिसँग सम्बन्ध विस्तार।\nधन: रोकिएको रकम फिर्ता आउने योग।\nपारिवारिक: सन्तानको प्रगतिले गौरव मिल्नेछ।\nविशेष उपाय: गायत्री मन्त्र १०८ पटक जप गर्नुहोस्।' },
+          { sym:'♍', name:'कन्या', en:'Virgo', preview:'महिनाको सुरुमा केही दौडधुप रहे पनि महिनाको उत्तरार्ध अत्यन्तै लाभदायी सावित हुनेछ।', full:'करियर: सूक्ष्म योजना र व्यवस्थापनले सफलता।\nधन: बचत योजना विस्तार हुनेछ।\nपारिवारिक: पारिवारिक सुखशान्ति कायम।\nविशेष उपाय: बुधबार हरियो मुंग दान गर्नुहोस्।' },
+          { sym:'♎', name:'तुला', en:'Libra', preview:'आयका नयाँ स्रोतहरू पहिचान हुनेछन्। वैवाहिक तथा प्रेम सम्बन्ध सुमधुर रहनेछ।', full:'करियर: व्यापार विस्तार र नयाँ सम्झौताहरू सम्पन्न।\nधन: नियमित आम्दानीमा वृद्धि हुनेछ।\nपारिवारिक: मांगलिक कार्य सम्पन्न हुने सम्भावना।\nविशेष उपाय: लक्ष्मी स्तोत्र पाठ गर्नुहोस्।' },
+          { sym:'♏', name:'वृश्चिक', en:'Scorpio', preview:'कर्मभावमा मंगलको दृष्टिले कार्यक्षेत्रमा नयाँ जोश र साहस भरिनेछ।', full:'करियर: उच्च पद र प्राविधिक क्षेत्रमा सफलता।\nधन: अचल सम्पत्तिमा लगानीको सम्भावना।\nपारिवारिक: भाइबहिनीसँग सौहार्दपूर्ण सम्बन्ध।\nविशेष उपाय: हनुमान चालिसा नित्य पाठ गर्नुहोस्।' },
+          { sym:'♐', name:'धनु', en:'Sagittarius', preview:'भाग्यभाव बलियो रहने हुनाले धार्मिक यात्रा, अध्ययन र गुरुजनको मार्गदर्शन फलदायी हुनेछ।', full:'करियर: उच्च शिक्षा र वैदेशिक रोजगारीमा सफलता।\nधन: धर्मकर्म तथा दीर्घकालीन क्षेत्रमा लगानी।\nपारिवारिक: घरमा सुखद वातावरण।\nविशेष उपाय: बिहीबार पहेंलो फल दान गर्नुहोस्।' },
+          { sym:'♑', name:'मकर', en:'Capricorn', preview:'धैर्य र निरन्तरताले पुराना सबै अवरोधहरू पन्छाउनेछ। आर्थिक स्थिरता प्राप्त हुनेछ।', full:'करियर: परिश्रमको पूरा मूल्यांकन हुने समय।\nधन: ऋण चुक्ता गर्न सहज हुनेछ।\nपारिवारिक: आफन्तजनको सहयोग प्राप्त।\nविशेष उपाय: शनिबार पीपलमा जल चढाउनुहोस्।' },
+          { sym:'♒', name:'कुम्भ', en:'Aquarius', preview:'साझेदारी र सामाजिक कार्यमा ठूलो प्रगति हुनेछ। नयाँ प्रविधिको प्रयोग फलदायी बन्नेछ।', full:'करियर: समूह कार्य र नवप्रवर्तनमा सफलता।\nधन: आकस्मिक लाभ र बोनसको योग।\nपारिवारिक: दाम्पत्य जीवनमा समझदारी।\nविशेष उपाय: गरिबलाई भोजन गराउनुहोस्।' },
+          { sym:'♓', name:'मीन', en:'Pisces', preview:'आध्यात्मिक ऊर्जा र कलात्मक प्रतिभाले मानसम्मान दिलाउनेछ। स्वास्थ्यमा सुधार आउनेछ।', full:'करियर: रचनात्मक र सेवामूलक कार्यमा विशेष प्रगति।\nधन: शुभ कार्यमा खर्च भए पनि सन्तोष मिल्नेछ।\nपारिवारिक: घरमा धार्मिक उत्सवको वातावरण।\nविशेष उपाय: विष्णु सहस्रनाम सुन्नुहोस्।' }
+        ]
+      },
+      yearly: {
+        badge: 'यस १ वर्षको वार्षिक राशिफल (वर्ष २०८३ BS को पूर्ण फलादेश)',
+        rashis: [
+          { sym:'♈', name:'मेष', en:'Aries', preview:'वर्ष २०८३ करियर र प्रतिष्ठाका दृष्टिले ऐतिहासिक सफलता दिलाउने वर्ष रहनेछ।', full:'समग्र: बृहस्पति र शनिको गोचरले वर्षको अधिकांश समय उन्नतिशील बनाउनेछ।\nकरियर: नयाँ पद वा व्यापारिक साम्राज्यको जग बस्नेछ।\nपारिवारिक: विवाह वा सन्तान लाभको योग।\nसावधानी: साउन-भदौमा स्वास्थ्यमा ध्यान दिनुहोस्।\nशुभ रत्न: मुगा / रातो पोखराज' },
+          { sym:'♉', name:'वृष', en:'Taurus', preview:'यो वर्ष आर्थिक सम्पन्नता, घरजग्गा जोड्ने र पारिवारिक सुख प्राप्त गर्ने वर्ष बन्नेछ।', full:'समग्र: वर्षको सुरुदेखि नै वित्तीय स्थिरता कायम रहनेछ।\nकरियर: लामो समयदेखिको मिहिनेतको स्थायी फल मिल्नेछ।\nपारिवारिक: दाम्पत्य जीवन अत्यन्तै सुमधुर।\nसावधानी: अनावश्यक ऋण नलिनुहोस्।\nशुभ रत्न: हिरा / ओपल' },
+          { sym:'♊', name:'मिथुन', en:'Gemini', preview:'बौद्धिक तथा वैदेशिक यात्राका लागि वर्ष २०८३ कोशेढुङ्गा सावित हुनेछ।', full:'समग्र: ज्ञान, सीप र प्राविधिक विकासमा ठूलो फड्को।\nकरियर: बहुराष्ट्रिय कम्पनी वा वैदेशिक परियोजनामा आवद्धता।\nपारिवारिक: सामाजिक प्रतिष्ठामा उच्च वृद्धि।\nसावधानी: गोप्य कुराहरू सार्वजनिक नगर्नुहोस्।\nशुभ रत्न: पन्ना' },
+          { sym:'♋', name:'कर्कट', en:'Cancer', preview:'आन्तरिक रूपान्तरण र आध्यात्मिक प्रगतिका साथै घरगृहस्थी सुदृढ हुने वर्ष।', full:'समग्र: अचल सम्पत्ति आर्जन र मातृपक्षको साथ मिल्नेछ।\nकरियर: सेवा, शिक्षा र परामर्श क्षेत्रमा सफलता।\nपारिवारिक: मांगलिक कार्य सम्पन्न हुनेछन्।\nसावधानी: भावुकतामा आएर ठूलो आर्थिक निर्णय नगर्नुहोस्।\nशुभ रत्न: मोती' },
+          { sym:'♌', name:'सिंह', en:'Leo', preview:'राजयोगको प्रभावले मान-पदवी, सामाजिक प्रतिष्ठा र राजनीतिक प्रभाव बढ्नेछ।', full:'समग्र: आत्मविश्वासको नयाँ शिखर छुने वर्ष।\nकरियर: प्रशासनिक तथा नेतृत्वदायी भूमिकाहरू प्राप्त।\nपारिवारिक: सन्तानको उपलब्धिले परिवारमा खुशी छाउनेछ।\nसावधानी: स्वास्थ्यमा मुटु र रक्तचाप सम्बन्धी सतर्कता।\nशुभ रत्न: माणिक्य' },
+          { sym:'♍', name:'कन्या', en:'Virgo', preview:'व्यवस्थित जीवनशैली र लगनशीलताले असम्भव जस्ता कामहरू पनि सफल बनाउनेछ।', full:'समग्र: वित्तीय बचत, ऋणमुक्ति र स्थिर उन्नतिको वर्ष।\nकरियर: प्रतिस्पर्धात्मक परीक्षाहरूमा उच्च सफलता।\nपारिवारिक: आफन्तहरूको सद्भाव प्राप्त हुनेछ।\nसावधानी: पेट र पाचन सम्बन्धी खानपिनमा ध्यान।\nशुभ रत्न: पन्ना' },
+          { sym:'♎', name:'तुला', en:'Libra', preview:'व्यापारिक साझेदारी र नयाँ जीवनको सुरुवातका लागि वर्ष २०८३ अत्यन्तै अनुकूल छ।', full:'समग्र: प्रेम, विवाह र आर्थिक समृद्धि एकसाथ प्राप्त हुने योग।\nकरियर: सिर्जनात्मक उद्योग र अन्तर्राष्ट्रिय व्यापारमा प्रगति।\nपारिवारिक: पारिवारिक सुखशान्ति उच्च रहनेछ।\nसावधानी: कानुन सम्बन्धी काममा सजग रहनुहोस्।\nशुभ रत्न: हिरा / सेतो नीलम' },
+          { sym:'♏', name:'वृश्चिक', en:'Scorpio', preview:'चुनौतीहरूलाई अवसरमा बदल्ने र गुप्त ज्ञान तथा अनुसन्धानमा चम्किने वर्ष।', full:'समग्र: शत्रुहरू स्वतः परास्त हुनेछन्, मनोबल उच्च रहनेछ।\nकरियर: जोखिमपूर्ण मानिएका परियोजनाहरू सफल हुनेछन्।\nपारिवारिक: घरमा मांगलिक वातावरण।\nसावधानी: रिस र उत्तेजना नियन्त्रण गर्नुहोस्।\nशुभ रत्न: मुगा' },
+          { sym:'♐', name:'धनु', en:'Sagittarius', preview:'गुरु बृहस्पतिको अनुकूल दृष्टिले भाग्य चम्किने, धर्मकर्म र उच्च शिक्षामा कीर्ति रहनेछ।', full:'समग्र: तीर्थाटन, गुरुसेवा र बौद्धिक विस्तारको वर्ष।\nकरियर: प्राध्यापन, न्याय तथा परामर्श क्षेत्रमा ठूलो मान।\nपारिवारिक: कुलकुटुम्बमा प्रतिष्ठा बढ्नेछ।\nसावधानी: कलेजो र कोलेस्ट्रोलको ध्यान राख्नुहोस्।\nशुभ रत्न: पहेंलो पोखराज' },
+          { sym:'♑', name:'मकर', en:'Capricorn', preview:'शनिदेवको कृपाले दीर्घकालीन योजनाहरू सम्पन्न भई जीवनमा स्थायी स्थिरता आउनेछ।', full:'समग्र: कडा मिहिनेतको पूर्ण प्रतिफल र सामाजिक सम्मान।\nकरियर: उद्योग, निर्माण तथा प्राविधिक क्षेत्रमा सफलता।\nपारिवारिक: पुराना समस्याहरू पूर्ण रूपमा समाधान।\nसावधानी: जोर्नी र घुँडाको हेरचाह।\nशुभ रत्न: नीलम' },
+          { sym:'♒', name:'कुम्भ', en:'Aquarius', preview:'नवीन प्रविधि, जनसम्पर्क र सामाजिक अभियानहरूमा ऐतिहासिक सफलता प्राप्त हुने वर्ष।', full:'समग्र: सोचभन्दा परका अवसरहरू खुल्नेछन्।\nकरियर: सामाजिक कार्य तथा व्यवसायमा व्यापक विस्तार।\nपारिवारिक: नयाँ मित्र तथा सहयात्रीको साथ।\nसावधानी: अत्यधिक व्यस्तताले गर्दा आराम नछुटाउनुहोस्।\nशुभ रत्न: नीलम' },
+          { sym:'♓', name:'मीन', en:'Pisces', preview:'आध्यात्मिक ज्ञान, परोपकार र आत्मिक आनन्दले भरिपूर्ण अत्यन्तै पवित्र वर्ष।', full:'समग्र: मनका सबै इच्छाहरू क्रमशः पूरा हुँदै जानेछन्।\nकरियर: कला, साहित्य तथा समाजसेवामा राष्ट्रिय सम्मान।\nपारिवारिक: सन्तान तथा कुलको उन्नति।\nसावधानी: खुट्टाको हेरचाह र विश्राम।\nशुभ रत्न: पहेंलो पोखराज' }
+        ]
+      }
+    };
 
-    const rashiGrid = document.getElementById('rashi-grid');
-    RASHIS.forEach(r => {
-      const card = document.createElement('div');
-      card.className = 'rashi-card';
-      card.innerHTML = `
-        <div class="rashi-icon-box">${r.sym}</div>
-        <div class="rashi-title">${r.name}</div>
-        <div class="rashi-sub">${r.en}</div>
-        <div class="rashi-preview">${r.preview}</div>
-        <div class="rashi-details">${r.full.replace(/\n/g, '<br/>')}</div>
-        <div class="rashi-toggle">थप पढ्नुहोस् ▾</div>
-      `;
-      card.addEventListener('click', () => {
-        const isOpen = card.classList.contains('open');
-        document.querySelectorAll('.rashi-card.open').forEach(c => {
-          c.classList.remove('open');
-          const t = c.querySelector('.rashi-toggle');
-          if (t) t.textContent = 'थप पढ्नुहोस् ▾';
+    function renderRashifalGrid() {
+      const data = RASHIFAL_DATA[currentRashifalPeriod];
+      document.getElementById('rashifal-date-badge').textContent = data.badge;
+
+      const grid = document.getElementById('rashi-grid');
+      grid.innerHTML = '';
+
+      data.rashis.forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'rashi-card';
+        card.innerHTML = `
+          <div class="rashi-icon-box">${r.sym}</div>
+          <div class="rashi-title">${r.name}</div>
+          <div class="rashi-sub">${r.en}</div>
+          <div class="rashi-preview">${r.preview}</div>
+          <div class="rashi-details">${r.full.replace(/\n/g, '<br/>')}</div>
+          <div class="rashi-toggle">विस्तृत हेर्नुहोस् ▾</div>
+        `;
+        card.addEventListener('click', () => {
+          const isOpen = card.classList.contains('open');
+          document.querySelectorAll('.rashi-card.open').forEach(c => {
+            c.classList.remove('open');
+            const t = c.querySelector('.rashi-toggle');
+            if (t) t.textContent = 'विस्तृत हेर्नुहोस् ▾';
+          });
+          if (!isOpen) {
+            card.classList.add('open');
+            const t = card.querySelector('.rashi-toggle');
+            if (t) t.textContent = 'बन्द गर्नुहोस् ▴';
+          }
         });
-        if (!isOpen) {
-          card.classList.add('open');
-          const t = card.querySelector('.rashi-toggle');
-          if (t) t.textContent = 'बन्द गर्नुहोस् ▴';
-        }
+        grid.appendChild(card);
       });
-      rashiGrid.appendChild(card);
-    });
+    }
 
-    // ── 2. North Indian Diamond Kundali (PERFECT GEOMETRY, NO OVERLAPS) ──
+    function switchRashifalPeriod(period) {
+      currentRashifalPeriod = period;
+      document.querySelectorAll('.time-tab').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`tab-${period}`);
+      if (activeBtn) activeBtn.classList.add('active');
+      renderRashifalGrid();
+    }
+
+    renderRashifalGrid();
+
+    // ── 2. NORTH INDIAN DIAMOND KUNDALI (PERFECT ROOMS & ZERO OVERLAP) ──
     const RASHIS_LIST = ['मेष','वृष','मिथुन','कर्कट','सिंह','कन्या','तुला','वृश्चिक','धनु','मकर','कुम्भ','मीन'];
     const PLANET_SHORT = { Sun:'सू', Moon:'च', Mars:'मं', Mercury:'बु', Jupiter:'बृ', Venus:'शु', Saturn:'श', Rahu:'रा', Ketu:'के' };
 
     function fillSampleKundali() {
       document.getElementById('kf-name').value = 'अर्जुन पौडेल';
-      document.getElementById('kf-year').value = 1998;
-      document.getElementById('kf-month').value = 5;
-      document.getElementById('kf-day').value = 14;
+      document.getElementById('bs-year').value = 2055;
+      document.getElementById('bs-month').value = 1;
+      document.getElementById('bs-day').value = 31;
+      onBsDateChanged();
       document.getElementById('kf-hour').value = 7;
       document.getElementById('kf-min').value = 30;
       document.getElementById('kf-period').value = 'AM';
@@ -1477,16 +1855,11 @@
       return ((seed % 12) + 12) % 12 + 1;
     }
 
-    /**
-     * Perfect North Indian Diamond Kundali SVG
-     * W = 380, H = 380.
-     * All 12 houses have precise coordinates deep inside the room with zero line-overlap!
-     */
     function generateDiamondSVG(lagnaSign, planetsByHouse) {
       const W = 380, H = 380;
       const toNep = n => String(n).replace(/\d/g, d => '०१२३४५६७८९'[d]);
 
-      // Exact safe interior coordinates for all 12 rooms
+      // Exact safe interior coordinates for all 12 rooms with ample space from borders
       const houseCoords = {
         1:  { rx: 190, ry: 124, px: 190, py: 64 },   // House 1 (Top diamond / लग्न)
         2:  { rx: 98,  ry: 68,  px: 98,  py: 34 },   // House 2 (Top-left upper triangle)
@@ -1511,7 +1884,7 @@
         // Rashi number in soft circular badge
         houseRashiSvg += `
           <g transform="translate(${pos.rx}, ${pos.ry})">
-            <circle cx="0" cy="0" r="11" fill="rgba(216,168,70,0.12)" stroke="rgba(216,168,70,0.35)" stroke-width="0.8"/>
+            <circle cx="0" cy="0" r="11" fill="rgba(216,168,70,0.14)" stroke="rgba(216,168,70,0.4)" stroke-width="0.8"/>
             <text x="0" y="1" font-family="'Noto Serif Devanagari',serif" font-size="12" font-weight="700" fill="#2d1c44" text-anchor="middle" dominant-baseline="middle">${toNep(sign)}</text>
           </g>
         `;
@@ -1557,18 +1930,29 @@
 
     function generateKundali() {
       const name = document.getElementById('kf-name').value.trim() || 'कुण्डली';
-      const year = parseInt(document.getElementById('kf-year').value) || 0;
-      const month = parseInt(document.getElementById('kf-month').value) || 0;
-      const day = parseInt(document.getElementById('kf-day').value) || 0;
+      let year = parseInt(document.getElementById('ad-year').value) || 0;
+      let month = parseInt(document.getElementById('ad-month').value) || 0;
+      let day = parseInt(document.getElementById('ad-day').value) || 0;
+
+      const by = parseInt(document.getElementById('bs-year').value) || 0;
+      const bm = parseInt(document.getElementById('bs-month').value) || 0;
+      const bd = parseInt(document.getElementById('bs-day').value) || 0;
+
+      if (!year || !month || !day) {
+        if (by && bm && bd) {
+          const approx = approximateBsToAd(by, bm, bd);
+          year = approx.year; month = approx.month; day = approx.day;
+        } else {
+          alert('कृपया जन्म मिति (वि.सं. वा ई.सं.) भर्नुहोस्।');
+          return;
+        }
+      }
+
       let hour = parseInt(document.getElementById('kf-hour').value) || 0;
       const min = parseInt(document.getElementById('kf-min').value) || 0;
       const period = document.getElementById('kf-period').value;
       const place = document.getElementById('kf-place').value || 'काठमाडौँ';
 
-      if (!year || !month || !day) {
-        alert('कृपया जन्म मिति (वर्ष, महिना, दिन) भर्नुहोस्।');
-        return;
-      }
       if (period === 'PM' && hour !== 12) hour += 12;
       if (period === 'AM' && hour === 12) hour = 0;
 
@@ -1594,8 +1978,9 @@
           <div style="font-family:var(--font-serif);font-size:17.5px;font-weight:700;color:var(--gold-200);margin-bottom:6px;">
             📜 ${name}को लग्न कुण्डली
           </div>
-          <div>जन्म मिति: <strong>${toNep(day)}/${toNep(month)}/${toNep(year)}</strong> &nbsp;·&nbsp; समय: <strong>${hour > 11 ? 'दिउँसो' : 'बिहान'} ${toNep(hour % 12 || 12)}:${toNep(min).padStart(2, '०')}</strong></div>
-          <div>जन्मस्थान: <strong>${place}</strong> &nbsp;·&nbsp; लग्न राशि: <strong style="color:var(--gold-300);">${lagnaRashi}</strong></div>
+          <div>वि.सं.: <strong>${by ? `${toNep(by)}/${toNep(bm)}/${toNep(bd)}` : '-'}</strong> &nbsp;·&nbsp; ई.सं.: <strong>${toNep(day)}/${toNep(month)}/${toNep(year)}</strong></div>
+          <div>समय: <strong>${hour > 11 ? 'दिउँसो' : 'बिहान'} ${toNep(hour % 12 || 12)}:${toNep(min).padStart(2, '०')}</strong> &nbsp;·&nbsp; लग्न राशि: <strong style="color:var(--gold-300);">${lagnaRashi}</strong></div>
+          <div>जन्मस्थान: <strong>${place}</strong></div>
         </div>
         <div style="margin-top:16px;">
           <button class="btn-main" onclick="scrollToId('booking-section')" style="padding:10px 22px;font-size:13.5px;min-height:42px;">
@@ -1605,26 +1990,14 @@
       `;
     }
 
-    // ── 3. Shanti Mantras Dataset ──
+    // ── 3. SHANTI MANTRAS ──
     const MANTRAS = [
-      { icon:'🐘', name:'गणेश मन्त्र', deity:'विघ्नहर्ता श्री गणेश',
-        text:'ॐ गं गणपतये नमः\nवक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।\nनिर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥',
-        meaning:'हे वक्रतुण्ड महाकाय! सूर्यकोटिसमान तेजस्वी हे देव! मेरा सबै शुभ कार्यहरू निर्विघ्न सम्पन्न गर्नुहोस्।' },
-      { icon:'🌙', name:'महामृत्युञ्जय मन्त्र', deity:'भगवान देवाधिदेव शिव',
-        text:'ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।\nउर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात्॥',
-        meaning:'त्रिनेत्रधारी शिवको नमन गर्दछौँ। जसरी पाकेको फल डाँठबाट मुक्त हुन्छ, त्यसरी हामीलाई भय र रोगबाट मुक्ति दिई अमृतत्व प्रदान गर्नुहोस्।' },
-      { icon:'☀️', name:'गायत्री महामन्त्र', deity:'सविता सूर्यदेव',
-        text:'ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं\nभर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्॥',
-        meaning:'हे प्राणस्वरूप, दुःखनाशक, सुखस्वरूप परमेश्वर! हामी तपाईंको दिव्य तेजलाई ध्यान गर्दछौँ, हाम्रो बुद्धिलाई सन्मार्गमा प्रेरित गर्नुहोस्।' },
-      { icon:'🪐', name:'नवग्रह शान्ति मन्त्र', deity:'नव ग्रह मण्डल',
-        text:'ॐ ब्रह्मा मुरारिस्त्रिपुरान्तकारी\nभानुः शशी भूमिसुतो बुधश्च।\nगुरुश्च शुक्रः शनिराहुकेतवः\nसर्वे ग्रहाः शान्तिकरा भवन्तु॥',
-        meaning:'ब्रह्मा, विष्णु, शिव र सूर्य, चन्द्र, मंगल, बुध, बृहस्पति, शुक्र, शनि, राहु र केतु सबै नवग्रहले शान्ति तथा कल्याण प्रदान गरून्।' },
-      { icon:'🌸', name:'महालक्ष्मी मन्त्र', deity:'धनधान्य दायिनी महालक्ष्मी',
-        text:'ॐ श्रीं ह्रीं श्रीं कमले कमलालये\nप्रसीद प्रसीद श्रीं ह्रीं श्रीं ॐ महालक्ष्म्यै नमः॥',
-        meaning:'हे कमलमा विराजमान महालक्ष्मी! हामीमाथि सदैव प्रसन्न हुनुहोस् र ऐश्वर्य, सद्बुद्धि तथा आत्मिक शान्ति प्रदान गर्नुहोस्।' },
-      { icon:'🕊️', name:'वैदिक शान्ति पाठ', deity:'विश्वशान्ति प्रार्थना',
-        text:'ॐ द्यौः शान्तिरन्तरिक्षं शान्तिः\nपृथिवी शान्तिरापः शान्तिरोषधयः शान्तिः।\nवनस्पतयः शान्तिर्विश्वेदेवाः शान्तिर्ब्रह्म शान्तिः\nसर्वं शान्तिः शान्तिरेव शान्तिः\nसा मा शान्तिरेधि॥ ॐ शान्तिः शान्तिः शान्तिः',
-        meaning:'द्यौलोक, अन्तरिक्ष, पृथ्वी, जल, औषधि, वनस्पति र समस्त चराचर जगतमा पूर्ण शान्ति छाओस्। सबैको कल्याण होस्।' }
+      { icon:'🐘', name:'गणेश मन्त्र', deity:'विघ्नहर्ता श्री गणेश', text:'ॐ गं गणपतये नमः\nवक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।\nनिर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥', meaning:'हे वक्रतुण्ड महाकाय! सूर्यकोटिसमान तेजस्वी हे देव! मेरा सबै शुभ कार्यहरू निर्विघ्न सम्पन्न गर्नुहोस्।' },
+      { icon:'🌙', name:'महामृत्युञ्जय मन्त्र', deity:'भगवान देवाधिदेव शिव', text:'ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।\nउर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात्॥', meaning:'त्रिनेत्रधारी शिवको नमन गर्दछौँ। जसरी पाकेको फल डाँठबाट मुक्त हुन्छ, त्यसरी हामीलाई भय र रोगबाट मुक्ति दिई अमृतत्व प्रदान गर्नुहोस्।' },
+      { icon:'☀️', name:'गायत्री महामन्त्र', deity:'सविता सूर्यदेव', text:'ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं\nभर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्॥', meaning:'हे प्राणस्वरूप, दुःखनाशक, सुखस्वरूप परमेश्वर! हामी तपाईंको दिव्य तेजलाई ध्यान गर्दछौँ, हाम्रो बुद्धिलाई सन्मार्गमा प्रेरित गर्नुहोस्।' },
+      { icon:'🪐', name:'नवग्रह शान्ति मन्त्र', deity:'नव ग्रह मण्डल', text:'ॐ ब्रह्मा मुरारिस्त्रिपुरान्तकारी\nभानुः शशी भूमिसुतो बुधश्च।\nगुरुश्च शुक्रः शनिराहुकेतवः\nसर्वे ग्रहाः शान्तिकरा भवन्तु॥', meaning:'ब्रह्मा, विष्णु, शिव र सूर्य, चन्द्र, मंगल, बुध, बृहस्पति, शुक्र, शनि, राहु र केतु सबै नवग्रहले शान्ति तथा कल्याण प्रदान गरून्।' },
+      { icon:'🌸', name:'महालक्ष्मी मन्त्र', deity:'धनधान्य दायिनी महालक्ष्मी', text:'ॐ श्रीं ह्रीं श्रीं कमले कमलालये\nप्रसीद प्रसीद श्रीं ह्रीं श्रीं ॐ महालक्ष्म्यै नमः॥', meaning:'हे कमलमा विराजमान महालक्ष्मी! हामीमाथि सदैव प्रसन्न हुनुहोस् र ऐश्वर्य, सद्बुद्धि तथा आत्मिक शान्ति प्रदान गर्नुहोस्।' },
+      { icon:'🕊️', name:'वैदिक शान्ति पाठ', deity:'विश्वशान्ति प्रार्थना', text:'ॐ द्यौः शान्तिरन्तरिक्षं शान्तिः\nपृथिवी शान्तिरापः शान्तिरोषधयः शान्तिः।\nवनस्पतयः शान्तिर्विश्वेदेवाः शान्तिर्ब्रह्म शान्तिः\nसर्वं शान्तिः शान्तिरेव शान्तिः\nसा मा शान्तिरेधि॥ ॐ शान्तिः शान्तिः शान्तिः', meaning:'द्यौलोक, अन्तरिक्ष, पृथ्वी, जल, औषधि, वनस्पति र समस्त चराचर जगतमा पूर्ण शान्ति छाओस्। सबैको कल्याण होस्।' }
     ];
 
     const mantraGrid = document.getElementById('mantra-grid');
@@ -1663,16 +2036,10 @@
       }
     }
 
-    // ── 4. Consultation Booking Handling ──
-    let selectedService = 'सामान्य कुण्डली परामर्श';
-    function selectServiceOption(el, sName) {
-      document.querySelectorAll('.service-option').forEach(s => s.classList.remove('active'));
-      el.classList.add('active');
-      selectedService = sName;
-    }
-
+    // ── 4. CONSULTATION BOOKING ──
     function handleConsultationSubmit(e) {
       e.preventDefault();
+      const plan = document.getElementById('booking-plan').value;
       const name = document.getElementById('booking-name').value.trim();
       const phone = document.getElementById('booking-phone').value.trim();
       const question = document.getElementById('booking-question').value.trim();
@@ -1682,31 +2049,24 @@
         return;
       }
 
-      // Format WhatsApp message
       let msg = `नमस्ते Astro Tiwari, म ज्योतिष परामर्श लिन चाहन्छु।\n\n`;
       msg += `👤 नाम: ${name}\n`;
       msg += `📞 सम्पर्क: ${phone}\n`;
-      msg += `📿 सेवा: ${selectedService}\n`;
+      msg += `📦 योजना: ${plan}\n`;
       if (question) msg += `❓ जिज्ञासा: ${question}\n`;
 
       const waUrl = `https://wa.me/9779809192604?text=${encodeURIComponent(msg)}`;
 
-      // Try background sync to admin
       try {
         fetch('/api/submissions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name,
-            phone,
-            package: selectedService,
-            message: question,
-            status: 'pending'
+            name, phone, package: plan, message: question, status: 'pending'
           })
         }).catch(() => {});
       } catch (err) {}
 
-      // Open WhatsApp
       window.open(waUrl, '_blank');
       showToast('WhatsApp मा जोडिँदैछ...');
     }
