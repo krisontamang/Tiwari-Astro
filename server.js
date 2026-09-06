@@ -18,6 +18,30 @@ if (!fs.existsSync(UPLOADS_DIR)) {
 if (!fs.existsSync(DATA_FILE)) {
   fs.writeFileSync(DATA_FILE, '[]', 'utf8');
 }
+// Native .env file loader
+const envPath = path.join(__dirname, '.env');
+if (fs.existsSync(envPath)) {
+  try {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split(/\r?\n/).forEach(line => {
+      const trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith('#')) {
+        const idx = trimmed.indexOf('=');
+        if (idx > 0) {
+          const key = trimmed.slice(0, idx).trim();
+          const val = trimmed.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
+          if (!process.env[key]) {
+            process.env[key] = val;
+          }
+        }
+      }
+    });
+  } catch (e) {
+    console.warn('Could not read .env file:', e.message);
+  }
+}
+
+const astrologyService = require('./services/astrology');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -380,6 +404,27 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
+  // --- API: Astrologer API Status ---
+  if (pathname === '/api/astrology/status' && req.method === 'GET') {
+    const status = astrologyService.getAstrologerApiStatus();
+    return sendJSON(res, 200, { success: true, ...status });
+  }
+
+  // --- API: Generate Astrological Chart & Kundali ---
+  if (pathname === '/api/astrology/chart' && req.method === 'POST') {
+    const body = await parseJSONBody(req);
+    if (!body) {
+      return sendJSON(res, 400, { success: false, message: 'Invalid payload' });
+    }
+    try {
+      const chartResult = await astrologyService.generateChartForSubmission(body);
+      return sendJSON(res, 200, chartResult);
+    } catch (e) {
+      console.error('Error generating astrology chart:', e);
+      return sendJSON(res, 500, { success: false, message: 'Chart generation failed', error: e.message });
+    }
+  }
+
   // --- API: Public New Submission (Form submission from customers) ---
   if (pathname === '/api/submissions' && req.method === 'POST') {
     const body = await parseJSONBody(req);
@@ -428,6 +473,33 @@ const server = http.createServer(async (req, res) => {
       amount = 1055;
     }
 
+    // Auto-generate Vedic Natal Chart & Planetary Placements
+    let chartSvgUrl = '';
+    let kundaliData = null;
+    let chartSource = '';
+    let aiContext = '';
+
+    try {
+      const birthDetails = {
+        id,
+        name: body.name || 'Anonymous',
+        dobAd: body.dobAd || body.dob_ad || '',
+        dobBs: body.dobBs || body.dob_bs || '',
+        birthTime: body.birthTime || (body.birth_hour ? `${body.birth_hour}:${body.birth_minute || '00'} ${body.birth_period || ''}`.trim() : ''),
+        birthPlace: body.birthPlace || body.birth_place || ''
+      };
+
+      const chartRes = await astrologyService.generateChartForSubmission(birthDetails);
+      if (chartRes && chartRes.success) {
+        chartSvgUrl = chartRes.chartSvgUrl;
+        kundaliData = chartRes.astrologyData;
+        chartSource = chartRes.source;
+        aiContext = chartRes.aiContext;
+      }
+    } catch (chartErr) {
+      console.warn('[Astrology] Auto chart generation failed, continuing:', chartErr.message);
+    }
+
     const newSubmission = {
       id: body.orderId || id,
       orderId: body.orderId || ('AT-' + Date.now().toString().slice(-6)),
@@ -448,6 +520,10 @@ const server = http.createServer(async (req, res) => {
       rectification: body.rectification || '',
       paymentScreenshotUrl: paymentScreenshotUrl || body.paymentScreenshotUrl || '',
       kundaliPhotoUrl: kundaliPhotoUrl || body.kundaliPhotoUrl || '',
+      chartSvgUrl: chartSvgUrl || '',
+      kundaliData: kundaliData || null,
+      chartSource: chartSource || '',
+      aiContext: aiContext || '',
       status: 'pending',
       verifiedAt: null,
       verifiedBy: null,
@@ -458,7 +534,7 @@ const server = http.createServer(async (req, res) => {
     submissions.unshift(newSubmission);
     writeSubmissions(submissions);
 
-    console.log(`[Submission] New customer submission: ${newSubmission.name} (${newSubmission.phone}), Package: ${newSubmission.package}, Trx: ${newSubmission.transactionId}`);
+    console.log(`[Submission] New customer submission: ${newSubmission.name} (${newSubmission.phone}), Package: ${newSubmission.package}, Trx: ${newSubmission.transactionId}, Chart: ${chartSvgUrl || 'None'}`);
     return sendJSON(res, 200, { success: true, id, submission: newSubmission });
   }
 
@@ -609,12 +685,51 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
+// Backfill any missing Kundali charts in submissions.json
+async function backfillMissingKundalis() {
+  try {
+    const list = readSubmissions();
+    let updated = false;
+    for (const item of list) {
+      if (!item.chartSvgUrl && (item.dobAd || item.dobBs)) {
+        try {
+          const res = await astrologyService.generateChartForSubmission({
+            id: item.id,
+            name: item.name,
+            dobAd: item.dobAd,
+            dobBs: item.dobBs,
+            birthTime: item.birthTime,
+            birthPlace: item.birthPlace
+          });
+          if (res && res.success) {
+            item.chartSvgUrl = res.chartSvgUrl;
+            item.kundaliData = res.astrologyData;
+            item.chartSource = res.source;
+            item.aiContext = res.aiContext;
+            updated = true;
+          }
+        } catch (e) {
+          // ignore single item fail
+        }
+      }
+    }
+    if (updated) {
+      writeSubmissions(list);
+      console.log('🔮 [Astrology Engine] Backfilled missing Kundali charts for submissions');
+    }
+  } catch (err) {
+    console.warn('Backfill error:', err.message);
+  }
+}
+
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`\n======================================================`);
   console.log(`🌟 Astro Tiwari is running locally!`);
   console.log(`📡 Local Site:  http://localhost:${PORT}`);
   console.log(`🔐 Admin Panel: http://localhost:${PORT}/admin`);
+  console.log(`🔮 Astrology:   http://localhost:${PORT}/api/astrology/status`);
   console.log(`======================================================\n`);
+  backfillMissingKundalis();
 });
 
 server.on('error', (err) => {

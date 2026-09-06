@@ -1,5 +1,154 @@
 [
   {
+    "id": "SUB-1788688038534",
+    "orderId": "AT-038535",
+    "transactionId": "TEST-ASTRO-TRX-101",
+    "createdAt": "2026-09-06T09:47:18.535Z",
+    "name": "???? ????????",
+    "phone": "9841556677",
+    "email": "deepak@example.com",
+    "gender": "?????",
+    "dobBs": "2053-10-15",
+    "dobAd": "1997-01-28",
+    "birthTime": "08:15 AM",
+    "birthPeriod": "",
+    "birthPlace": "?????",
+    "package": "Standard Package (??. ???)",
+    "amount": 499,
+    "message": "??????? ?????? ? ????? ??? ???? ????? ????????",
+    "rectification": "",
+    "paymentScreenshotUrl": "",
+    "kundaliPhotoUrl": "",
+    "chartSvgUrl": "/uploads/chart-SUB-1788688038534.svg",
+    "kundaliData": {
+      "ayanamsa": "23° 48' (Lahiri)",
+      "lagna": {
+        "signNumber": 11,
+        "rashiName": "कुम्भ",
+        "degreeFormatted": "8° 50'",
+        "lord": "शनि (Saturn)"
+      },
+      "moonSign": {
+        "signNumber": 6,
+        "rashiName": "कन्या",
+        "degreeFormatted": "2° 36'",
+        "lord": "बुध (Mercury)"
+      },
+      "nakshatra": {
+        "name": "उत्तराफाल्गुनी (Uttara Phalguni)",
+        "pada": 2
+      },
+      "planets": [
+        {
+          "key": "Ascendant",
+          "nepaliName": "लग्न (Ascendant)",
+          "dev": "ल",
+          "signNumber": 11,
+          "rashiName": "कुम्भ",
+          "bhava": 1,
+          "degreeFormatted": "8° 50'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Sun",
+          "nepaliName": "सूर्य (Sun)",
+          "dev": "सू",
+          "signNumber": 10,
+          "rashiName": "मकर",
+          "bhava": 12,
+          "degreeFormatted": "14° 24'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Moon",
+          "nepaliName": "चन्द्र (Moon)",
+          "dev": "चं",
+          "signNumber": 6,
+          "rashiName": "कन्या",
+          "bhava": 8,
+          "degreeFormatted": "2° 36'",
+          "lord": "बुध (Mercury)"
+        },
+        {
+          "key": "Mars",
+          "nepaliName": "मंगल (Mars)",
+          "dev": "मं",
+          "signNumber": 5,
+          "rashiName": "सिंह",
+          "bhava": 7,
+          "degreeFormatted": "11° 44'",
+          "lord": "सूर्य (Sun)"
+        },
+        {
+          "key": "Mercury",
+          "nepaliName": "बुध (Mercury)",
+          "dev": "बु",
+          "signNumber": 10,
+          "rashiName": "मकर",
+          "bhava": 12,
+          "degreeFormatted": "28° 41'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Jupiter",
+          "nepaliName": "बृहस्पति (Guru)",
+          "dev": "गु",
+          "signNumber": 10,
+          "rashiName": "मकर",
+          "bhava": 12,
+          "degreeFormatted": "11° 46'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Venus",
+          "nepaliName": "शुक्र (Venus)",
+          "dev": "शु",
+          "signNumber": 11,
+          "rashiName": "कुम्भ",
+          "bhava": 1,
+          "degreeFormatted": "13° 36'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Saturn",
+          "nepaliName": "शनि (Saturn)",
+          "dev": "श",
+          "signNumber": 12,
+          "rashiName": "मीन",
+          "bhava": 2,
+          "degreeFormatted": "20° 31'",
+          "lord": "बृहस्पति (Jupiter)"
+        },
+        {
+          "key": "Rahu",
+          "nepaliName": "राहु (Rahu)",
+          "dev": "रा",
+          "signNumber": 6,
+          "rashiName": "कन्या",
+          "bhava": 8,
+          "degreeFormatted": "7° 48'",
+          "lord": "बुध (Mercury)"
+        },
+        {
+          "key": "Ketu",
+          "nepaliName": "केतु (Ketu)",
+          "dev": "के",
+          "signNumber": 12,
+          "rashiName": "मीन",
+          "bhava": 2,
+          "degreeFormatted": "7° 48'",
+          "lord": "बृहस्पति (Jupiter)"
+        }
+      ]
+    },
+    "chartSource": "Astro Tiwari Vedic Engine",
+    "aiContext": "=============================================\n🌟 ASTRO TIWARI — वैदिक जन्म कुण्डली विश्लेषण\n=============================================\nजातकको नाम: ???? ????????\nजन्म विवरण: 1997-01-28 08:15 | ?????, Nepal\n\n[आधारभूत ज्योतिष विवरण]\n- लग्न (Ascendant): कुम्भ (8° 50') — स्वामी: शनि (Saturn)\n- जन्म राशि (Moon Sign): कन्या (2° 36') — स्वामी: बुध (Mercury)\n- जन्म नक्षत्र: उत्तराफाल्गुनी (Uttara Phalguni) (चरण: 2)\n- अयनांश: 23° 48' (Lahiri)\n\n[ग्रहहरूको भावगत स्थिति]\n- लग्न (Ascendant) (ल): 1 औं भावमा, कुम्भ राशि (8° 50')\n- सूर्य (Sun) (सू): 12 औं भावमा, मकर राशि (14° 24')\n- चन्द्र (Moon) (चं): 8 औं भावमा, कन्या राशि (2° 36')\n- मंगल (Mars) (मं): 7 औं भावमा, सिंह राशि (11° 44')\n- बुध (Mercury) (बु): 12 औं भावमा, मकर राशि (28° 41')\n- बृहस्पति (Guru) (गु): 12 औं भावमा, मकर राशि (11° 46')\n- शुक्र (Venus) (शु): 1 औं भावमा, कुम्भ राशि (13° 36')\n- शनि (Saturn) (श): 2 औं भावमा, मीन राशि (20° 31')\n- राहु (Rahu) (रा): 8 औं भावमा, कन्या राशि (7° 48')\n- केतु (Ketu) (के): 2 औं भावमा, मीन राशि (7° 48')\n\n[पण्डितजी तथा AI का लागि विशेष मार्गदर्शन]\n१. लग्न र लग्नेशको बल तथा स्वास्थ्य/व्यक्तित्व प्रभाव।\n२. चन्द्रमा र मानसिक शान्ति, भाग्य र पेशागत स्थिति।\n३. महादशा, अन्तर्दशा तथा वर्तमान गोचरको प्रभाव।\n४. शुभ रत्न, रुद्राक्ष तथा वैदिक शान्ति उपायहरू।\n=============================================",
+    "status": "pending",
+    "verifiedAt": null,
+    "verifiedBy": null,
+    "adminNote": ""
+  },
+  {
     "id": "AT-260906-88899",
     "orderId": "AT-260906-88899",
     "transactionId": "9X2L81920",
@@ -44,7 +193,131 @@
     "status": "pending",
     "verifiedAt": null,
     "verifiedBy": null,
-    "adminNote": "eSewa मा 9809192604 मा रु. ४९९ प्राप्त भएको जाँच गर्न बाँकी।"
+    "adminNote": "eSewa मा 9809192604 मा रु. ४९९ प्राप्त भएको जाँच गर्न बाँकी।",
+    "chartSvgUrl": "/uploads/chart-SUB-1741258901.svg",
+    "kundaliData": {
+      "ayanamsa": "23° 49' (Lahiri)",
+      "lagna": {
+        "signNumber": 6,
+        "rashiName": "कन्या",
+        "degreeFormatted": "28° 01'",
+        "lord": "बुध (Mercury)"
+      },
+      "moonSign": {
+        "signNumber": 5,
+        "rashiName": "सिंह",
+        "degreeFormatted": "1° 44'",
+        "lord": "सूर्य (Sun)"
+      },
+      "nakshatra": {
+        "name": "मघा (Magha)",
+        "pada": 1
+      },
+      "planets": [
+        {
+          "key": "Ascendant",
+          "nepaliName": "लग्न (Ascendant)",
+          "dev": "ल",
+          "signNumber": 6,
+          "rashiName": "कन्या",
+          "bhava": 1,
+          "degreeFormatted": "28° 01'",
+          "lord": "बुध (Mercury)"
+        },
+        {
+          "key": "Sun",
+          "nepaliName": "सूर्य (Sun)",
+          "dev": "सू",
+          "signNumber": 6,
+          "rashiName": "कन्या",
+          "bhava": 1,
+          "degreeFormatted": "11° 09'",
+          "lord": "बुध (Mercury)"
+        },
+        {
+          "key": "Moon",
+          "nepaliName": "चन्द्र (Moon)",
+          "dev": "चं",
+          "signNumber": 5,
+          "rashiName": "सिंह",
+          "bhava": 12,
+          "degreeFormatted": "1° 44'",
+          "lord": "सूर्य (Sun)"
+        },
+        {
+          "key": "Mars",
+          "nepaliName": "मंगल (Mars)",
+          "dev": "मं",
+          "signNumber": 9,
+          "rashiName": "धनु",
+          "bhava": 4,
+          "degreeFormatted": "19° 03'",
+          "lord": "बृहस्पति (Jupiter)"
+        },
+        {
+          "key": "Mercury",
+          "nepaliName": "बुध (Mercury)",
+          "dev": "बु",
+          "signNumber": 6,
+          "rashiName": "कन्या",
+          "bhava": 1,
+          "degreeFormatted": "22° 59'",
+          "lord": "बुध (Mercury)"
+        },
+        {
+          "key": "Jupiter",
+          "nepaliName": "बृहस्पति (Guru)",
+          "dev": "गु",
+          "signNumber": 11,
+          "rashiName": "कुम्भ",
+          "bhava": 6,
+          "degreeFormatted": "1° 56'",
+          "lord": "शनि (Saturn)"
+        },
+        {
+          "key": "Venus",
+          "nepaliName": "शुक्र (Venus)",
+          "dev": "शु",
+          "signNumber": 7,
+          "rashiName": "तुला",
+          "bhava": 2,
+          "degreeFormatted": "10° 21'",
+          "lord": "शुक्र (Venus)"
+        },
+        {
+          "key": "Saturn",
+          "nepaliName": "शनि (Saturn)",
+          "dev": "श",
+          "signNumber": 12,
+          "rashiName": "मीन",
+          "bhava": 7,
+          "degreeFormatted": "28° 38'",
+          "lord": "बृहस्पति (Jupiter)"
+        },
+        {
+          "key": "Rahu",
+          "nepaliName": "राहु (Rahu)",
+          "dev": "रा",
+          "signNumber": 5,
+          "rashiName": "सिंह",
+          "bhava": 12,
+          "degreeFormatted": "24° 55'",
+          "lord": "सूर्य (Sun)"
+        },
+        {
+          "key": "Ketu",
+          "nepaliName": "केतु (Ketu)",
+          "dev": "के",
+          "signNumber": 11,
+          "rashiName": "कुम्भ",
+          "bhava": 6,
+          "degreeFormatted": "24° 55'",
+          "lord": "शनि (Saturn)"
+        }
+      ]
+    },
+    "chartSource": "Astro Tiwari Vedic Engine",
+    "aiContext": "=============================================\n🌟 ASTRO TIWARI — वैदिक जन्म कुण्डली विश्लेषण\n=============================================\nजातकको नाम: सुमन थापा\nजन्म विवरण: 1997-09-28 07:15 | Kathmandu, Nepal\n\n[आधारभूत ज्योतिष विवरण]\n- लग्न (Ascendant): कन्या (28° 01') — स्वामी: बुध (Mercury)\n- जन्म राशि (Moon Sign): सिंह (1° 44') — स्वामी: सूर्य (Sun)\n- जन्म नक्षत्र: मघा (Magha) (चरण: 1)\n- अयनांश: 23° 49' (Lahiri)\n\n[ग्रहहरूको भावगत स्थिति]\n- लग्न (Ascendant) (ल): 1 औं भावमा, कन्या राशि (28° 01')\n- सूर्य (Sun) (सू): 1 औं भावमा, कन्या राशि (11° 09')\n- चन्द्र (Moon) (चं): 12 औं भावमा, सिंह राशि (1° 44')\n- मंगल (Mars) (मं): 4 औं भावमा, धनु राशि (19° 03')\n- बुध (Mercury) (बु): 1 औं भावमा, कन्या राशि (22° 59')\n- बृहस्पति (Guru) (गु): 6 औं भावमा, कुम्भ राशि (1° 56')\n- शुक्र (Venus) (शु): 2 औं भावमा, तुला राशि (10° 21')\n- शनि (Saturn) (श): 7 औं भावमा, मीन राशि (28° 38')\n- राहु (Rahu) (रा): 12 औं भावमा, सिंह राशि (24° 55')\n- केतु (Ketu) (के): 6 औं भावमा, कुम्भ राशि (24° 55')\n\n[पण्डितजी तथा AI का लागि विशेष मार्गदर्शन]\n१. लग्न र लग्नेशको बल तथा स्वास्थ्य/व्यक्तित्व प्रभाव।\n२. चन्द्रमा र मानसिक शान्ति, भाग्य र पेशागत स्थिति।\n३. महादशा, अन्तर्दशा तथा वर्तमान गोचरको प्रभाव।\n४. शुभ रत्न, रुद्राक्ष तथा वैदिक शान्ति उपायहरू।\n============================================="
   },
   {
     "id": "SUB-1741258902",
@@ -88,6 +361,130 @@
     "status": "pending",
     "verifiedAt": null,
     "verifiedBy": null,
-    "adminNote": ""
+    "adminNote": "",
+    "chartSvgUrl": "/uploads/chart-SUB-1741258903.svg",
+    "kundaliData": {
+      "ayanamsa": "23° 52' (Lahiri)",
+      "lagna": {
+        "signNumber": 6,
+        "rashiName": "कन्या",
+        "degreeFormatted": "7° 26'",
+        "lord": "बुध (Mercury)"
+      },
+      "moonSign": {
+        "signNumber": 9,
+        "rashiName": "धनु",
+        "degreeFormatted": "15° 01'",
+        "lord": "बृहस्पति (Jupiter)"
+      },
+      "nakshatra": {
+        "name": "पूर्वाषाढा (Purva Ashadha)",
+        "pada": 1
+      },
+      "planets": [
+        {
+          "key": "Ascendant",
+          "nepaliName": "लग्न (Ascendant)",
+          "dev": "ल",
+          "signNumber": 6,
+          "rashiName": "कन्या",
+          "bhava": 1,
+          "degreeFormatted": "7° 26'",
+          "lord": "बुध (Mercury)"
+        },
+        {
+          "key": "Sun",
+          "nepaliName": "सूर्य (Sun)",
+          "dev": "सू",
+          "signNumber": 3,
+          "rashiName": "मिथुन",
+          "bhava": 10,
+          "degreeFormatted": "19° 24'",
+          "lord": "बुध (Mercury)"
+        },
+        {
+          "key": "Moon",
+          "nepaliName": "चन्द्र (Moon)",
+          "dev": "चं",
+          "signNumber": 9,
+          "rashiName": "धनु",
+          "bhava": 4,
+          "degreeFormatted": "15° 01'",
+          "lord": "बृहस्पति (Jupiter)"
+        },
+        {
+          "key": "Mars",
+          "nepaliName": "मंगल (Mars)",
+          "dev": "मं",
+          "signNumber": 9,
+          "rashiName": "धनु",
+          "bhava": 4,
+          "degreeFormatted": "20° 09'",
+          "lord": "बृहस्पति (Jupiter)"
+        },
+        {
+          "key": "Mercury",
+          "nepaliName": "बुध (Mercury)",
+          "dev": "बु",
+          "signNumber": 3,
+          "rashiName": "मिथुन",
+          "bhava": 10,
+          "degreeFormatted": "18° 21'",
+          "lord": "बुध (Mercury)"
+        },
+        {
+          "key": "Jupiter",
+          "nepaliName": "बृहस्पति (Guru)",
+          "dev": "गु",
+          "signNumber": 2,
+          "rashiName": "वृष",
+          "bhava": 9,
+          "degreeFormatted": "26° 14'",
+          "lord": "शुक्र (Venus)"
+        },
+        {
+          "key": "Venus",
+          "nepaliName": "शुक्र (Venus)",
+          "dev": "शु",
+          "signNumber": 4,
+          "rashiName": "कर्क",
+          "bhava": 11,
+          "degreeFormatted": "5° 25'",
+          "lord": "चन्द्र (Moon)"
+        },
+        {
+          "key": "Saturn",
+          "nepaliName": "शनि (Saturn)",
+          "dev": "श",
+          "signNumber": 2,
+          "rashiName": "वृष",
+          "bhava": 9,
+          "degreeFormatted": "14° 38'",
+          "lord": "शुक्र (Venus)"
+        },
+        {
+          "key": "Rahu",
+          "nepaliName": "राहु (Rahu)",
+          "dev": "रा",
+          "signNumber": 3,
+          "rashiName": "मिथुन",
+          "bhava": 10,
+          "degreeFormatted": "12° 00'",
+          "lord": "बुध (Mercury)"
+        },
+        {
+          "key": "Ketu",
+          "nepaliName": "केतु (Ketu)",
+          "dev": "के",
+          "signNumber": 9,
+          "rashiName": "धनु",
+          "bhava": 4,
+          "degreeFormatted": "12° 00'",
+          "lord": "बृहस्पति (Jupiter)"
+        }
+      ]
+    },
+    "chartSource": "Astro Tiwari Vedic Engine",
+    "aiContext": "=============================================\n🌟 ASTRO TIWARI — वैदिक जन्म कुण्डली विश्लेषण\n=============================================\nजातकको नाम: प्रवीण अधिकारी\nजन्म विवरण: 2001-07-05 11:20 | Chitwan, Nepal\n\n[आधारभूत ज्योतिष विवरण]\n- लग्न (Ascendant): कन्या (7° 26') — स्वामी: बुध (Mercury)\n- जन्म राशि (Moon Sign): धनु (15° 01') — स्वामी: बृहस्पति (Jupiter)\n- जन्म नक्षत्र: पूर्वाषाढा (Purva Ashadha) (चरण: 1)\n- अयनांश: 23° 52' (Lahiri)\n\n[ग्रहहरूको भावगत स्थिति]\n- लग्न (Ascendant) (ल): 1 औं भावमा, कन्या राशि (7° 26')\n- सूर्य (Sun) (सू): 10 औं भावमा, मिथुन राशि (19° 24')\n- चन्द्र (Moon) (चं): 4 औं भावमा, धनु राशि (15° 01')\n- मंगल (Mars) (मं): 4 औं भावमा, धनु राशि (20° 09')\n- बुध (Mercury) (बु): 10 औं भावमा, मिथुन राशि (18° 21')\n- बृहस्पति (Guru) (गु): 9 औं भावमा, वृष राशि (26° 14')\n- शुक्र (Venus) (शु): 11 औं भावमा, कर्क राशि (5° 25')\n- शनि (Saturn) (श): 9 औं भावमा, वृष राशि (14° 38')\n- राहु (Rahu) (रा): 10 औं भावमा, मिथुन राशि (12° 00')\n- केतु (Ketu) (के): 4 औं भावमा, धनु राशि (12° 00')\n\n[पण्डितजी तथा AI का लागि विशेष मार्गदर्शन]\n१. लग्न र लग्नेशको बल तथा स्वास्थ्य/व्यक्तित्व प्रभाव।\n२. चन्द्रमा र मानसिक शान्ति, भाग्य र पेशागत स्थिति।\n३. महादशा, अन्तर्दशा तथा वर्तमान गोचरको प्रभाव।\n४. शुभ रत्न, रुद्राक्ष तथा वैदिक शान्ति उपायहरू।\n============================================="
   }
 ]

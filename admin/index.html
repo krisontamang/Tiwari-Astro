@@ -651,6 +651,115 @@
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       }
 
+      /* Kundali Modal & Calculator */
+      .custom-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(9, 7, 16, 0.92);
+        backdrop-filter: blur(10px);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .kundali-modal-content {
+        background: #140f23;
+        border: 1px solid var(--gold-border);
+        border-radius: 1.5rem;
+        max-width: 1050px;
+        width: 100%;
+        max-height: 94vh;
+        overflow-y: auto;
+        padding: 26px;
+        position: relative;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+      }
+      .kundali-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-bottom: 14px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        margin-bottom: 18px;
+        padding-right: 40px;
+      }
+      .kundali-body-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+      @media (max-width: 860px) {
+        .kundali-body-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .kundali-svg-wrap {
+        background: #0d0918;
+        border: 1px solid var(--gold-border);
+        border-radius: 1rem;
+        overflow: hidden;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      }
+      .kundali-svg-wrap svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .kundali-meta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .km-stat-box {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 0.6rem;
+        padding: 8px 12px;
+      }
+      .km-stat-title {
+        display: block;
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        margin-bottom: 2px;
+      }
+      .km-table-wrap {
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 0.6rem;
+        overflow: hidden;
+        background: rgba(13, 9, 24, 0.6);
+        max-height: 220px;
+        overflow-y: auto;
+      }
+      .km-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11.5px;
+        text-align: left;
+      }
+      .km-table th {
+        background: rgba(216,176,106,0.12);
+        color: var(--gold-light);
+        padding: 6px 10px;
+        font-weight: 600;
+        font-size: 10.5px;
+        border-bottom: 1px solid rgba(216,176,106,0.2);
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+      .km-table td {
+        padding: 6px 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        color: var(--text-primary);
+      }
+      .km-table tr:last-child td {
+        border-bottom: none;
+      }
+
       /* Empty State */
       .empty-state {
         text-align: center;
@@ -762,6 +871,16 @@
           </div>
 
           <div class="nav-actions">
+            <!-- Astrology API Status Indicator -->
+            <div id="astrology-status-badge" class="api-status-pill" onclick="openCalculatorModal()" style="display:inline-flex; align-items:center; gap:6px; background:rgba(216,176,106,0.1); border:1px solid rgba(216,176,106,0.3); border-radius:999px; padding:5px 12px; font-size:11.5px; color:#f4d38c; cursor:pointer;" title="Astrologer API स्थिति">
+              <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#2ecc71; box-shadow:0 0 8px #2ecc71;"></span>
+              <span id="astrology-status-label">Astrologer API: Active</span>
+            </div>
+
+            <button onclick="openCalculatorModal()" class="btn-ghost" style="border-color:rgba(216,176,106,0.35); color:#f4d38c;">
+              🔮 कुण्डली क्याल्कुलेटर
+            </button>
+
             <div class="user-pill">
               <span class="user-dot"></span>
               <span id="admin-user-display">bensartiwari@gmail.com</span>
@@ -852,6 +971,176 @@
             ✅ भुक्तानी प्रमाणित गर्नुहोस्
           </button>
         </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 4. KUNDALI NATAL CHART MODAL -->
+    <!-- ============================================================== -->
+    <div id="kundali-modal" class="custom-modal">
+      <div class="kundali-modal-content">
+        <button class="lightbox-close" id="kundali-close-btn" onclick="closeKundaliModal()">&times;</button>
+        
+        <div class="kundali-header">
+          <div>
+            <div style="font-family: var(--font-serif); font-size: 24px; color: var(--gold);" id="km-name">
+              श्री जन्म कुण्डली (Natal Chart)
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 3px;" id="km-details">
+              जन्म विवरण...
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span id="km-source-badge" style="background:rgba(216,176,106,0.15); border:1px solid rgba(216,176,106,0.3); color:#f4d38c; font-size:11px; font-weight:700; padding:4px 10px; border-radius:999px;">
+              Vedic Engine
+            </span>
+          </div>
+        </div>
+
+        <div class="kundali-body-grid">
+          <!-- Left: SVG Chart Wheel -->
+          <div class="kundali-chart-area">
+            <div id="km-svg-container" class="kundali-svg-wrap">
+              <!-- SVG is injected here -->
+            </div>
+            <div style="display:flex; justify-content:center; gap:10px; margin-top:12px; flex-wrap:wrap;">
+              <a id="km-download-btn" href="" download="kundali-chart.svg" class="btn-ghost" style="font-size:11.5px;">
+                ⬇️ SVG डाउनलोड गर्नुहोस्
+              </a>
+              <button onclick="printKundali()" class="btn-ghost" style="font-size:11.5px; border-color:rgba(216,176,106,0.4); color:var(--gold-light);">
+                🖨️ कुण्डली प्रिन्ट गर्नुहोस्
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Detailed Planetary Positions & AI Context -->
+          <div class="kundali-info-panel">
+            <div class="kundali-meta-grid">
+              <div class="km-stat-box">
+                <span class="km-stat-title">लग्न (Ascendant)</span>
+                <strong id="km-lagna-val" style="color:var(--gold-light);">—</strong>
+              </div>
+              <div class="km-stat-box">
+                <span class="km-stat-title">जन्म राशि (Moon)</span>
+                <strong id="km-moon-val" style="color:#d4a5ff;">—</strong>
+              </div>
+              <div class="km-stat-box">
+                <span class="km-stat-title">जन्म नक्षत्र (Nakshatra)</span>
+                <strong id="km-nakshatra-val" style="color:#85c1e9;">—</strong>
+              </div>
+              <div class="km-stat-box">
+                <span class="km-stat-title">अयनांश (Ayanamsa)</span>
+                <strong id="km-ayanamsa-val" style="color:#a2e8bc;">—</strong>
+              </div>
+            </div>
+
+            <!-- Planetary Positions Table -->
+            <div style="margin-top:14px;">
+              <div style="font-size:11.5px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">
+                🪐 ग्रह स्थिति तथा भाव (Planetary Placements)
+              </div>
+              <div class="km-table-wrap">
+                <table class="km-table">
+                  <thead>
+                    <tr>
+                      <th>ग्रह</th>
+                      <th>राशि</th>
+                      <th>भाव</th>
+                      <th>अंश (Degree)</th>
+                      <th>स्वामी</th>
+                    </tr>
+                  </thead>
+                  <tbody id="km-planets-tbody">
+                    <!-- Planet rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- AI Astrological Context & Actions -->
+            <div style="margin-top:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <span style="font-size:11.5px; font-weight:700; color:var(--text-secondary);">
+                  📋 AI / पण्डितजी रिडिङ प्रम्प्ट (Astrology Prompt)
+                </span>
+                <button onclick="copyAiContext()" class="btn-ghost" style="padding:3px 8px; font-size:10.5px;">
+                  📋 Copy Text
+                </button>
+              </div>
+              <textarea id="km-ai-context" class="admin-note-area" rows="4" readonly style="font-size:11px; font-family:monospace; line-height:1.4; color:#ad9eb2;"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 5. KUNDALI CALCULATOR / GENERATOR MODAL -->
+    <!-- ============================================================== -->
+    <div id="calculator-modal" class="custom-modal">
+      <div class="lightbox-content" style="max-width: 580px; text-align: left;">
+        <button class="lightbox-close" onclick="closeCalculatorModal()">&times;</button>
+        <div style="font-family: var(--font-serif); font-size: 22px; color: var(--gold); margin-bottom: 4px;">
+          🔮 कुण्डली क्याल्कुलेटर (Astrology Engine)
+        </div>
+        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 18px;">
+          कुनै पनि व्यक्तिको जन्म विवरण राखेर तत्काल लग्न कुण्डली र ग्रह स्थिति निकाल्नुहोस्।
+        </div>
+
+        <form id="calculator-form" onsubmit="handleManualCalculate(event)">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>जातकको नाम (Full Name)</label>
+              <input type="text" id="calc-name" class="form-input" placeholder="जस्तै: अनिल शर्मा" required />
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>लिङ्ग (Gender)</label>
+              <select id="calc-gender" class="form-input" style="height:44px;">
+                <option value="पुरुष">पुरुष (Male)</option>
+                <option value="महिला">महिला (Female)</option>
+                <option value="अन्य">अन्य (Other)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>जन्म मिति (ई.सं. वा वि.सं.)</label>
+              <input type="text" id="calc-dob" class="form-input" placeholder="1997-12-07 वा 2054-08-22" required />
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>जन्म समय (Birth Time)</label>
+              <input type="text" id="calc-time" class="form-input" placeholder="06:30 AM" required />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:18px;">
+            <label>जन्म स्थान / जिल्ला (Birth Place)</label>
+            <input type="text" id="calc-place" class="form-input" placeholder="काठमाडौं, पोखरा, चितवन, बुटवल..." list="nepal-cities-list" required />
+            <datalist id="nepal-cities-list">
+              <option value="काठमाडौं"></option>
+              <option value="ललितपुर"></option>
+              <option value="भक्तपुर"></option>
+              <option value="पोखरा"></option>
+              <option value="बुटवल"></option>
+              <option value="चितवन"></option>
+              <option value="विराटनगर"></option>
+              <option value="धरान"></option>
+              <option value="वीरगञ्ज"></option>
+              <option value="झापा"></option>
+              <option value="हेटौंडा"></option>
+              <option value="जनकपुर"></option>
+              <option value="नेपालगञ्ज"></option>
+              <option value="दाङ"></option>
+              <option value="धनगढी"></option>
+            </datalist>
+          </div>
+
+          <button type="submit" id="calc-submit-btn" class="login-btn" style="margin-top:0;">
+            <span>🔮 कुण्डली निकाल्नुहोस् (Generate Natal Chart)</span>
+            <span id="calc-spinner" style="display:none;">⏳</span>
+          </button>
+        </form>
       </div>
     </div>
 
@@ -1236,6 +1525,20 @@
                   ` : ''}
                 </div>
 
+                ${item.kundaliData ? `
+                  <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
+                    <span style="background:rgba(216,176,106,0.15); color:#f4d38c; border:1px solid rgba(216,176,106,0.3); font-size:11px; font-weight:700; padding:2.5px 8px; border-radius:6px;">
+                      🔮 लग्न: ${escapeHtml(item.kundaliData.lagna?.rashiName || '—')} (${escapeHtml(item.kundaliData.lagna?.degreeFormatted || '')})
+                    </span>
+                    <span style="background:rgba(120,60,180,0.15); color:#d4a5ff; border:1px solid rgba(120,60,180,0.3); font-size:11px; font-weight:700; padding:2.5px 8px; border-radius:6px;">
+                      🌙 राशि: ${escapeHtml(item.kundaliData.moonSign?.rashiName || '—')}
+                    </span>
+                    <span style="background:rgba(52,152,219,0.15); color:#85c1e9; border:1px solid rgba(52,152,219,0.3); font-size:11px; font-weight:700; padding:2.5px 8px; border-radius:6px;">
+                      ⭐ नक्षत्र: ${escapeHtml(item.kundaliData.nakshatra?.name ? item.kundaliData.nakshatra.name.split(' ')[0] : '—')}
+                    </span>
+                  </div>
+                ` : ''}
+
                 <div class="details-grid">
                   <div class="detail-item">
                     <span>सम्पर्क नम्बर:</span>
@@ -1286,7 +1589,7 @@
                 </div>
               </div>
 
-              <!-- Col 2: Payment Screenshot Inspection -->
+              <!-- Col 2: Payment Screenshot & Kundali Chart Inspection -->
               <div class="screenshot-box">
                 <div class="screenshot-label">
                   📸 Payment Screenshot
@@ -1301,10 +1604,32 @@
                     eSewa ID: <b>9809192604</b><br />नाम: <b>Ayush Tiwari</b>
                   </div>
                 ` : `
-                  <div style="padding: 30px 10px; color: var(--text-muted); font-size: 12px;">
+                  <div style="padding: 20px 10px; color: var(--text-muted); font-size: 12px;">
                     🚫 Screenshot अपलोड भएको छैन
                   </div>
                 `}
+
+                ${item.chartSvgUrl ? `
+                  <div style="margin-top: 14px; border-top: 1px dashed rgba(216,176,106,0.25); padding-top: 10px; width: 100%;">
+                    <div style="font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 6px; display:flex; justify-content:space-between; align-items:center;">
+                      <span>🔮 जन्म कुण्डली (Natal Chart)</span>
+                      <span style="font-size:9.5px; color:#ad9eb2;">${escapeHtml(item.chartSource ? item.chartSource.split(' ')[0] : 'Vedic')}</span>
+                    </div>
+                    <div class="thumb-wrap" style="aspect-ratio: 1/1; max-width: 115px; margin: 0 auto; background:#0b0816; border:1px solid rgba(216,176,106,0.3);" onclick="openKundaliModal('${item.id}')">
+                      <img src="${item.chartSvgUrl}" alt="Kundali Chart" />
+                      <div class="thumb-overlay">🔍 कुण्डली हेर्नुहोस्</div>
+                    </div>
+                    <button class="btn-ghost" style="margin-top:8px; width:100%; font-size:10.5px; justify-content:center; border-color:rgba(216,176,106,0.3); color:var(--gold-light); padding:4px 8px;" onclick="openKundaliModal('${item.id}')">
+                      🔮 पूर्ण कुण्डली र ग्रह स्थिति
+                    </button>
+                  </div>
+                ` : (item.dobAd || item.dobBs ? `
+                  <div style="margin-top: 14px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px; width: 100%;">
+                    <button class="btn-ghost" style="width:100%; font-size:10.5px; justify-content:center; border-color:rgba(216,176,106,0.3); color:var(--gold-light);" onclick="generateKundaliForSubmissionUI('${item.id}')">
+                      ⚡ कुण्डली निकाल्नुहोस्
+                    </button>
+                  </div>
+                ` : '')}
 
                 ${item.kundaliPhotoUrl ? `
                   <div style="margin-top: 14px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 10px; width: 100%;">
@@ -1512,8 +1837,283 @@
           .replace(/'/g, '&#039;');
       }
 
+      // --- Astrologer API & Kundali Modal Logic ---
+      const kundaliModal = document.getElementById('kundali-modal');
+      const calculatorModal = document.getElementById('calculator-modal');
+      let activeKundaliData = null;
+
+      async function checkAstrologyApiStatus() {
+        try {
+          const res = await fetch(`${API_BASE}/api/astrology/status`);
+          const json = await res.json();
+          if (json && json.success) {
+            const badge = document.getElementById('astrology-status-badge');
+            const label = document.getElementById('astrology-status-label');
+            if (badge && label) {
+              label.textContent = json.activeEngine ? json.activeEngine.split('(')[0].trim() : 'Astrologer API Active';
+              badge.title = `Engine: ${json.activeEngine} | Version: ${json.version}`;
+            }
+          }
+        } catch (e) {
+          console.warn('Could not check astrology status:', e.message);
+        }
+      }
+
+      async function openKundaliModal(id) {
+        let item = currentSubmissions.find(s => s.id === id);
+        if (!item) return;
+
+        // If chart is not generated yet, generate it on demand
+        if (!item.chartSvgUrl && (item.dobAd || item.dobBs)) {
+          showToast('कुण्डली गणना गर्दै...', '⏳');
+          try {
+            const res = await fetch(`${API_BASE}/api/astrology/chart`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                id: item.id,
+                name: item.name,
+                dobAd: item.dobAd,
+                dobBs: item.dobBs,
+                birthTime: item.birthTime,
+                birthPlace: item.birthPlace
+              })
+            });
+            const chartResult = await res.json();
+            if (chartResult && chartResult.success) {
+              item.chartSvgUrl = chartResult.chartSvgUrl;
+              item.kundaliData = chartResult.astrologyData;
+              item.chartSource = chartResult.source;
+              item.aiContext = chartResult.aiContext;
+              localStorage.setItem(SUBMISSIONS_CACHE_KEY, JSON.stringify(currentSubmissions));
+              renderSubmissions();
+            }
+          } catch (err) {
+            showToast('कुण्डली गणना असफल भयो', '❌');
+            return;
+          }
+        }
+
+        activeKundaliData = item;
+        const k = item.kundaliData || {};
+
+        document.getElementById('km-name').textContent = `श्री जन्म कुण्डली: ${item.name}`;
+        document.getElementById('km-details').textContent = 
+          `${item.dobBs ? item.dobBs + ' (वि.सं.)' : ''} ${item.dobAd ? item.dobAd + ' (ई.सं.)' : ''} | ${item.birthTime || '—'} | ${item.birthPlace || 'नेपाल'}`;
+        document.getElementById('km-source-badge').textContent = item.chartSource || 'Astro Tiwari Vedic Engine';
+
+        // Load SVG into container
+        const svgContainer = document.getElementById('km-svg-container');
+        if (item.chartSvgUrl) {
+          svgContainer.innerHTML = `<img src="${item.chartSvgUrl}?t=${Date.now()}" style="width:100%; height:auto; display:block;" alt="Kundali Chart" />`;
+          document.getElementById('km-download-btn').href = item.chartSvgUrl;
+        } else {
+          svgContainer.innerHTML = `<div style="padding:60px 20px; text-align:center; color:var(--text-muted);">कुण्डली चार्ट उपलब्ध छैन</div>`;
+        }
+
+        // Stats summary
+        document.getElementById('km-lagna-val').textContent = k.lagna ? `${k.lagna.rashiName} (${k.lagna.degreeFormatted})` : '—';
+        document.getElementById('km-moon-val').textContent = k.moonSign ? `${k.moonSign.rashiName} (${k.moonSign.degreeFormatted})` : '—';
+        document.getElementById('km-nakshatra-val').textContent = k.nakshatra ? `${k.nakshatra.name.split(' ')[0]} (चरण ${k.nakshatra.pada})` : '—';
+        document.getElementById('km-ayanamsa-val').textContent = k.ayanamsa || 'Lahiri';
+
+        // Planets Table
+        const tbody = document.getElementById('km-planets-tbody');
+        const planets = k.planets || [];
+        tbody.innerHTML = planets.map(p => `
+          <tr>
+            <td><b>${escapeHtml(p.nepaliName || p.name)}</b> <span style="color:var(--gold); font-weight:bold; margin-left:4px;">${escapeHtml(p.dev || '')}</span></td>
+            <td>${escapeHtml(p.rashiName || '—')}</td>
+            <td><span style="background:rgba(216,176,106,0.15); color:#f4d38c; padding:2px 7px; border-radius:4px; font-weight:bold;">${p.bhava || '—'}</span></td>
+            <td>${escapeHtml(p.degreeFormatted || '—')}</td>
+            <td style="color:var(--text-secondary); font-size:10.5px;">${escapeHtml(p.lord ? p.lord.split(' ')[0] : '—')}</td>
+          </tr>
+        `).join('');
+
+        // AI Context
+        document.getElementById('km-ai-context').value = item.aiContext || '';
+
+        kundaliModal.style.display = 'flex';
+      }
+
+      function closeKundaliModal() {
+        kundaliModal.style.display = 'none';
+        activeKundaliData = null;
+      }
+
+      function copyAiContext() {
+        const text = document.getElementById('km-ai-context').value;
+        if (!text) return;
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('AI ज्योतिष प्रम्प्ट क्लिपबोर्डमा कपी भयो! 📋');
+        }).catch(() => {
+          showToast('कपी गर्न सकिएन');
+        });
+      }
+
+      function printKundali() {
+        if (!activeKundaliData) return;
+        const printWindow = window.open('', '_blank');
+        const k = activeKundaliData.kundaliData || {};
+        const planetsRows = (k.planets || []).map(p => `
+          <tr>
+            <td style="padding:6px; border:1px solid #ddd;"><b>${p.nepaliName || p.name} (${p.dev})</b></td>
+            <td style="padding:6px; border:1px solid #ddd;">${p.rashiName}</td>
+            <td style="padding:6px; border:1px solid #ddd; text-align:center;"><b>${p.bhava}</b></td>
+            <td style="padding:6px; border:1px solid #ddd;">${p.degreeFormatted}</td>
+          </tr>
+        `).join('');
+
+        printWindow.document.write(`
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>जन्म कुण्डली — ${escapeHtml(activeKundaliData.name)}</title>
+            <style>
+              body { font-family: sans-serif; color: #222; margin: 30px; }
+              .header { text-align: center; border-bottom: 2px solid #b88840; padding-bottom: 12px; margin-bottom: 20px; }
+              .chart-wrap { text-align: center; margin: 20px 0; }
+              .chart-wrap img { max-width: 480px; width: 100%; border-radius: 8px; }
+              table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
+              th { background: #f5eedc; color: #5a3c10; padding: 8px; border: 1px solid #ddd; text-align: left; }
+            </style>
+          </head>
+          <body>
+            <div class="header">
+              <h2>🕉️ Astro Tiwari — वैदिक जन्म कुण्डली</h2>
+              <p><b>जातक:</b> ${escapeHtml(activeKundaliData.name)} | <b>जन्म विवरण:</b> ${escapeHtml(activeKundaliData.dobBs || '')} (${escapeHtml(activeKundaliData.dobAd || '')}) ${escapeHtml(activeKundaliData.birthTime || '')} ${escapeHtml(activeKundaliData.birthPlace || '')}</p>
+              <p><b>लग्न:</b> ${k.lagna?.rashiName || '—'} | <b>राशि:</b> ${k.moonSign?.rashiName || '—'} | <b>नक्षत्र:</b> ${k.nakshatra?.name || '—'}</p>
+            </div>
+            <div class="chart-wrap">
+              <img src="${activeKundaliData.chartSvgUrl}" />
+            </div>
+            <h3>ग्रह स्थिति तथा भाव विवरण</h3>
+            <table>
+              <thead>
+                <tr><th>ग्रह (Planet)</th><th>राशि (Sign)</th><th>भाव (House)</th><th>अंश (Degree)</th></tr>
+              </thead>
+              <tbody>${planetsRows}</tbody>
+            </table>
+            <div style="margin-top:30px; text-align:center; font-size:11px; color:#888;">
+              ज्योतिष परामर्श सेवा: Astro Tiwari | Phone: +977 9809192604 | astrologer-api
+            </div>
+          </body>
+          </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        setTimeout(() => printWindow.print(), 500);
+      }
+
+      function openCalculatorModal() {
+        calculatorModal.style.display = 'flex';
+      }
+
+      function closeCalculatorModal() {
+        calculatorModal.style.display = 'none';
+      }
+
+      async function handleManualCalculate(e) {
+        e.preventDefault();
+        const name = document.getElementById('calc-name').value.trim();
+        const gender = document.getElementById('calc-gender').value;
+        const dob = document.getElementById('calc-dob').value.trim();
+        const time = document.getElementById('calc-time').value.trim();
+        const place = document.getElementById('calc-place').value.trim();
+
+        const btn = document.getElementById('calc-submit-btn');
+        const spinner = document.getElementById('calc-spinner');
+        btn.disabled = true;
+        spinner.style.display = 'inline';
+
+        try {
+          const res = await fetch(`${API_BASE}/api/astrology/chart`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name,
+              gender,
+              dobAd: dob.match(/^\d{4}/) && parseInt(dob.slice(0,4)) < 2010 ? dob : '',
+              dobBs: dob.match(/^(?:२०|20)/) ? dob : '',
+              birthTime: time,
+              birthPlace: place
+            })
+          });
+          const result = await res.json();
+          if (result && result.success) {
+            closeCalculatorModal();
+            showToast('कुण्डली सफलतापूर्वक तयार भयो! 🔮');
+            const tempItem = {
+              id: result.id,
+              name,
+              dobAd: result.subject.year + '-' + result.subject.month + '-' + result.subject.day,
+              dobBs: '',
+              birthTime: time,
+              birthPlace: place,
+              chartSvgUrl: result.chartSvgUrl,
+              kundaliData: result.astrologyData,
+              chartSource: result.source,
+              aiContext: result.aiContext
+            };
+            currentSubmissions.unshift(tempItem);
+            renderSubmissions();
+            openKundaliModal(tempItem.id);
+          } else {
+            showToast('गणना हुन सकेन: ' + (result.message || 'त्रुटि'), '❌');
+          }
+        } catch (err) {
+          showToast('गणना त्रुटि: ' + err.message, '❌');
+        } finally {
+          btn.disabled = false;
+          spinner.style.display = 'none';
+        }
+      }
+
+      async function generateKundaliForSubmissionUI(id) {
+        const item = currentSubmissions.find(s => s.id === id);
+        if (!item) return;
+        showToast('कुण्डली गणना गर्दै...', '⏳');
+        try {
+          const res = await fetch(`${API_BASE}/api/astrology/chart`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: item.id,
+              name: item.name,
+              dobAd: item.dobAd,
+              dobBs: item.dobBs,
+              birthTime: item.birthTime,
+              birthPlace: item.birthPlace
+            })
+          });
+          const result = await res.json();
+          if (result && result.success) {
+            item.chartSvgUrl = result.chartSvgUrl;
+            item.kundaliData = result.astrologyData;
+            item.chartSource = result.source;
+            item.aiContext = result.aiContext;
+            localStorage.setItem(SUBMISSIONS_CACHE_KEY, JSON.stringify(currentSubmissions));
+            renderSubmissions();
+            showToast('कुण्डली तयार भयो! ✅');
+          } else {
+            showToast('कुण्डली गणना हुन सकेन', '❌');
+          }
+        } catch (e) {
+          showToast('नेटवर्क त्रुटि', '❌');
+        }
+      }
+
+      // Close modals on backdrop click
+      kundaliModal.addEventListener('click', (e) => {
+        if (e.target === kundaliModal) closeKundaliModal();
+      });
+      calculatorModal.addEventListener('click', (e) => {
+        if (e.target === calculatorModal) closeCalculatorModal();
+      });
+
       // Start application
       initAuth();
+      checkAstrologyApiStatus();
     </script>
   </body>
 </html>
