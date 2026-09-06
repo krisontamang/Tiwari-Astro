@@ -20,7 +20,7 @@
        COSMIC GALAXY & VEDIC LUXURY DESIGN SYSTEM
        ════════════════════════════════════════════════════════════════ */
     :root {
-      /* Default / Halka Dark Mode (मन्द आध्यात्मिक ब्रह्माण्डीय रङ्ग - gentle indigo/violet aura) */
+      /* Default / Dark Mode (मन्द आध्यात्मिक ब्रह्माण्डीय रङ्ग - gentle indigo/violet aura) */
       --bg-base: #1c1333;
       --bg-card: rgba(42, 28, 74, 0.85);
       --bg-card-hover: rgba(58, 38, 98, 0.95);
@@ -338,70 +338,88 @@
       position: sticky;
       top: 0;
       z-index: 200;
-      background: rgba(8, 5, 16, 0.9);
+      background: var(--navbar-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--gold-border);
+      transition: background 0.25s ease, border-color 0.25s ease;
     }
 
     .navbar-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 72px;
-      gap: 16px;
+      min-height: 64px;
+      padding: 8px 0;
+      gap: 12px;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
       color: var(--text-primary);
+      flex-shrink: 0;
+      white-space: nowrap !important;
     }
 
     .brand-icon {
-      width: 44px;
-      height: 44px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffe6a3, var(--gold-600) 80%);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #100b1a;
-      font-size: 22px;
+      font-size: 19px;
       font-weight: 800;
-      box-shadow: 0 0 20px rgba(216, 168, 70, 0.35);
+      box-shadow: 0 0 16px rgba(216, 168, 70, 0.35);
       flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
     }
 
     .brand-title {
       font-family: var(--font-serif);
-      font-size: 21px;
+      font-size: 19px;
       font-weight: 700;
       color: var(--gold-200);
-      line-height: 1.1;
+      line-height: 1.15;
+      white-space: nowrap !important;
+      letter-spacing: 0.02em;
     }
 
     .brand-subtitle {
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--text-muted);
+      line-height: 1.2;
+      white-space: nowrap !important;
+      margin-top: 1px;
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-shrink: 0;
     }
 
     .nav-link-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 5px;
-      padding: 0 13px;
-      height: 35px;
+      padding: 0 12px;
+      height: 34px;
       font-family: var(--font-sans);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       border-radius: var(--radius-full);
       text-decoration: none;
@@ -422,11 +440,12 @@
     .nav-cta-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
-      padding: 0 16px;
-      height: 35px;
+      padding: 0 15px;
+      height: 34px;
       font-family: var(--font-sans);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       border-radius: var(--radius-full);
       background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
@@ -444,14 +463,27 @@
       box-shadow: 0 4px 16px rgba(245, 158, 11, 0.5);
     }
 
+    @media (max-width: 880px) {
+      .brand-subtitle { display: none !important; }
+    }
+
     @media (max-width: 768px) {
-      .navbar-inner { height: 56px; }
-      .brand-title { font-size: 16px; }
-      .brand-icon { width: 32px; height: 32px; font-size: 16px; }
+      .navbar-inner { min-height: 56px; padding: 6px 0; gap: 8px; }
+      .brand-title { font-size: 16.5px; }
+      .brand-icon { width: 34px; height: 34px; font-size: 17px; }
       .hide-mobile { display: none !important; }
       .nav-actions { gap: 6px; }
       .nav-link-btn { height: 32px; padding: 0 10px; font-size: 11.5px; }
       .nav-cta-btn { height: 32px; padding: 0 12px; font-size: 11.5px; }
+    }
+
+    @media (max-width: 480px) {
+      .navbar-inner { min-height: 52px; padding: 4px 0; gap: 6px; }
+      .brand-title { font-size: 15px; }
+      .brand-icon { width: 30px; height: 30px; font-size: 15px; }
+      .nav-actions { gap: 4px; }
+      .nav-link-btn { height: 30px; padding: 0 8px; font-size: 11px; }
+      .nav-cta-btn { height: 30px; padding: 0 10px; font-size: 11px; }
     }
 
     /* ════════════════════════════════════════════════════════════════
@@ -1725,7 +1757,7 @@
       <div class="navbar-inner">
         <a class="brand" href="/">
           <div class="brand-icon">🕉️</div>
-          <div>
+          <div class="brand-text">
             <div class="brand-title">Astro Tiwari</div>
             <div class="brand-subtitle">वैदिक ज्योतिष तथा जीवन मार्गदर्शन</div>
           </div>
@@ -2236,7 +2268,7 @@
        JAVASCRIPT LOGIC
        ════════════════════════════════════════════════════════════════ -->
   <script>
-    // ── THEME TOGGLE (LIGHT MODE / HALKA DARK MODE) ──
+    // ── THEME TOGGLE (LIGHT / DARK MODE) ──
     function initTheme() {
       const savedTheme = localStorage.getItem('astro_theme') || 'dark';
       applyTheme(savedTheme);
@@ -2253,7 +2285,7 @@
 
       const navBtn = document.getElementById('theme-toggle-btn');
       const dockBtn = document.getElementById('dock-theme-btn');
-      const label = isLight ? '🌙 Halka Dark' : '☀️ Light';
+      const label = isLight ? '🌙 Dark' : '☀️ Light';
       if (navBtn) navBtn.innerHTML = label;
       if (dockBtn) dockBtn.innerHTML = label;
     }
@@ -2262,7 +2294,7 @@
       const isCurrentLight = document.body.classList.contains('light-mode');
       const newTheme = isCurrentLight ? 'dark' : 'light';
       applyTheme(newTheme);
-      showToast(newTheme === 'light' ? '☀️ उज्यालो Light Mode सक्रिय' : '🌙 मन्द Dark Mode सक्रिय');
+      showToast(newTheme === 'light' ? '☀️ Light Mode' : '🌙 Dark Mode');
     }
 
     // Initialize theme immediately
