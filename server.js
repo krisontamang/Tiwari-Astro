@@ -127,7 +127,9 @@ const server = http.createServer(async (req, res) => {
     }
 
     const { email, password } = body;
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const cleanPassword = (password || '').trim();
+    if (cleanEmail === ADMIN_EMAIL.toLowerCase() && cleanPassword === ADMIN_PASSWORD) {
       res.setHeader('Set-Cookie', `admin_token=${ADMIN_TOKEN}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400`);
       return sendJSON(res, 200, {
         success: true,
