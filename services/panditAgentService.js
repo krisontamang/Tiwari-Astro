@@ -116,6 +116,34 @@ async function consultAgenticPandit(payload = {}) {
 
   const agentsInvolved = ['LagnaExpert', 'DashaExpert', 'DomainExpert', 'RemedyExpert'];
 
+  // Optional: Enhance final verdict with OpenRouter AI if configured
+  let aiSummary = domainAnalysis;
+  let openRouterMeta = null;
+  try {
+    const openRouter = require('./openRouterService');
+    if (openRouter.getApiKey()) {
+      const promptText = `जातकको नाम: ${name}, प्रश्न: "${question}", विषय: ${domain}, महादशा: ${activeMaha}, अन्तर्दशा: ${activeAntar}। 
+पण्डितजी, माथिका वैदिक तथ्यका आधारमा जातकलाई आत्मीय, स्पष्ट र प्रेरणादायी ज्योतिषीय निष्कर्ष र मार्गदर्शन प्रदान गर्नुहोस् (२-३ अनुच्छेदमा)।`;
+      const aiRes = await openRouter.chatCompletion({
+        messages: [
+          { role: 'system', content: openRouter.VEDIC_SYSTEM_PROMPT },
+          { role: 'user', content: promptText }
+        ],
+        maxTokens: 400
+      });
+      if (aiRes && aiRes.content) {
+        aiSummary = aiRes.content;
+        openRouterMeta = {
+          model: aiRes.model,
+          provider: aiRes.provider,
+          source: `OpenRouter AI (${aiRes.model})`
+        };
+      }
+    }
+  } catch (e) {
+    // Graceful fallback to deterministic analysis
+  }
+
   return {
     success: true,
     consultationId: 'PANDIT-' + Date.now().toString(36).toUpperCase(),
@@ -123,17 +151,20 @@ async function consultAgenticPandit(payload = {}) {
     question,
     domain,
     agentsInvolved,
+    aiPowered: !!openRouterMeta,
+    aiSource: openRouterMeta?.source || 'Deterministic Vedic Rules',
     consultation: {
       domain,
       agentsInvolved,
-      summary: domainAnalysis,
+      summary: aiSummary,
       favorableTiming,
       remedies
     },
     astrologicalVerdict: {
-      summary: domainAnalysis,
+      summary: aiSummary,
       favorableTiming,
-      keyInfluences
+      keyInfluences,
+      aiMeta: openRouterMeta
     },
     currentDasha: {
       activeMahadasha: activeMaha,

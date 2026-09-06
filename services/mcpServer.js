@@ -14,6 +14,7 @@ const gemlyService = require('./gemlyService');
 const dashaService = require('./dashaService');
 const panditAgentService = require('./panditAgentService');
 const poruthamService = require('./poruthamService');
+const openRouterService = require('./openRouterService');
 
 const MCP_TOOLS = [
   {
@@ -229,6 +230,108 @@ const MCP_TOOLS = [
         nakshatra: { type: 'number', description: 'Nakshatra index (1-27)' }
       },
       required: ['nakshatra']
+    }
+  },
+  {
+    name: 'openrouter_ai_consult',
+    description: 'Consult state-of-the-art AI models (GPT-4o-mini, DeepSeek, Llama 3.3 70B) via OpenRouter for conversational Vedic astrology and remedies.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        query: { type: 'string', description: 'Astrological question in Nepali or English' },
+        model: { type: 'string', description: 'Model ID (e.g. openai/gpt-4o-mini, deepseek/deepseek-chat, meta-llama/llama-3.3-70b-instruct)' },
+        context: { type: 'object', description: 'Optional chart context (dob, lagna, moonSign, dasha)' }
+      },
+      required: ['query']
+    }
+  },
+  {
+    name: 'openrouter_get_status',
+    description: 'Check OpenRouter AI Gateway account status, active API key verification, credits, and available models.',
+    inputSchema: {
+      type: 'object',
+      properties: {}
+    }
+  },
+  {
+    name: 'vedastro_horoscope_predictions',
+    description: 'Calculate 100+ Vedic horoscope life predictions and event trends using VedAstro engine (Parashari rules, Swiss Ephemeris precision).',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        date: { type: 'string', description: 'Date of birth DD/MM/YYYY or YYYY-MM-DD' },
+        time: { type: 'string', description: 'Time of birth HH:mm' },
+        lat: { type: 'number', description: 'Latitude' },
+        lon: { type: 'number', description: 'Longitude' },
+        tz: { type: 'string', description: 'Timezone offset e.g. +05:45' },
+        ayanamsa: { type: 'string', description: 'Ayanamsha (LAHIRI, RAMAN, KRISHNAMURTI)' }
+      }
+    }
+  },
+  {
+    name: 'vedastro_all_planet_data',
+    description: 'Get planetary positions, signs, nakshatras, retrogression, combustion, and 6-fold Shadbala strengths using VedAstro.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        planet: { type: 'string', description: 'Planet name (All, Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu)' },
+        date: { type: 'string', description: 'Date DD/MM/YYYY or YYYY-MM-DD' },
+        time: { type: 'string', description: 'Time HH:mm' },
+        lat: { type: 'number', description: 'Latitude' },
+        lon: { type: 'number', description: 'Longitude' }
+      }
+    }
+  },
+  {
+    name: 'vedastro_house_data',
+    description: 'Calculate 12 Vedic Bhavas (Houses), signs, lordships, and occupying planets.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        date: { type: 'string', description: 'Date DD/MM/YYYY' },
+        time: { type: 'string', description: 'Time HH:mm' },
+        lat: { type: 'number', description: 'Latitude' },
+        lon: { type: 'number', description: 'Longitude' }
+      }
+    }
+  },
+  {
+    name: 'vedastro_ashtakavarga',
+    description: 'Calculate Sarvashtakavarga 337-bindu distribution matrix across 12 signs using VedAstro.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        date: { type: 'string', description: 'Date DD/MM/YYYY' },
+        time: { type: 'string', description: 'Time HH:mm' },
+        lat: { type: 'number', description: 'Latitude' },
+        lon: { type: 'number', description: 'Longitude' }
+      }
+    }
+  },
+  {
+    name: 'vedastro_kuta_score',
+    description: 'Calculate 10 Kuta marriage compatibility score between male and female charts using VedAstro.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        maleDate: { type: 'string', description: 'Groom birth date DD/MM/YYYY' },
+        maleTime: { type: 'string', description: 'Groom birth time HH:mm' },
+        femaleDate: { type: 'string', description: 'Bride birth date DD/MM/YYYY' },
+        femaleTime: { type: 'string', description: 'Bride birth time HH:mm' }
+      }
+    }
+  },
+  {
+    name: 'vedastro_yogas',
+    description: 'Detect classical Vedic Yogas (Gajakesari, Budhaditya, Ruchaka, Hamsa, Chandra-Mangal, etc.) using VedAstro.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        date: { type: 'string', description: 'Date DD/MM/YYYY' },
+        time: { type: 'string', description: 'Time HH:mm' },
+        lat: { type: 'number', description: 'Latitude' },
+        lon: { type: 'number', description: 'Longitude' }
+      }
     }
   }
 ];
@@ -482,6 +585,101 @@ async function handleMcpRequest(requestBody) {
 
       if (toolName === 'pancha_pakshi_analysis') {
         const res = poruthamService.getPanchaPakshiBird(args.nakshatra);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'openrouter_ai_consult') {
+        const res = await openRouterService.generateVedicAstrologyResponse({
+          userMessage: args.query,
+          contextData: args.context || {},
+          model: args.model
+        });
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'openrouter_get_status') {
+        const res = await openRouterService.getAccountStatus();
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'vedastro_horoscope_predictions') {
+        const res = await vedastro.getHoroscopePredictions(args.lat, args.lon, args.time, args.date, args.tz, args.ayanamsa);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'vedastro_all_planet_data') {
+        const res = await vedastro.getAllPlanetData(args.planet || 'All', args.lat, args.lon, args.time, args.date, args.tz, args.ayanamsa);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'vedastro_house_data') {
+        const res = await vedastro.getAllHouseData(args.lat, args.lon, args.time, args.date, args.tz, args.ayanamsa);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'vedastro_ashtakavarga') {
+        const res = await vedastro.getAshtakvarga(args.lat, args.lon, args.time, args.date, args.tz, args.ayanamsa);
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'vedastro_kuta_score') {
+        const res = await vedastro.getMatchReport(
+          args.maleLat || 27.7172, args.maleLon || 85.3240, args.maleTime || '08:30', args.maleDate || '15/05/1995', args.maleTz || '+05:45',
+          args.femaleLat || 27.7172, args.femaleLon || 85.3240, args.femaleTime || '10:15', args.femaleDate || '20/08/1997', args.femaleTz || '+05:45'
+        );
+        return {
+          jsonrpc: '2.0',
+          id,
+          result: {
+            content: [{ type: 'text', text: JSON.stringify(res, null, 2) }]
+          }
+        };
+      }
+
+      if (toolName === 'vedastro_yogas') {
+        const res = await vedastro.getAllYogas(args.lat, args.lon, args.time, args.date, args.tz, args.ayanamsa);
         return {
           jsonrpc: '2.0',
           id,

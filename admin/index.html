@@ -1024,6 +1024,10 @@
               💎 रत्न, दशा र पण्डित
             </button>
 
+            <button onclick="openOpenRouterModal()" class="btn-ghost" style="border-color:rgba(168,85,247,0.5); color:#c084fc; background:rgba(168,85,247,0.08);">
+              ⚡ OpenRouter AI
+            </button>
+
             <div class="user-pill">
               <span class="user-dot"></span>
               <span id="admin-user-display">bensartiwari@gmail.com</span>
@@ -2015,6 +2019,114 @@
             <div style="text-align:center; padding:24px; color:#888; font-size:12px;">
               कन्या र वरको नक्षत्र छानेर दिन, गण, महेन्द्र, स्त्री दीर्घ, योनि, राशि, राश्याधिपति, वश्य, र मुख्य रज्जु र वेध विचार गर्नुहोस्।
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- MODAL: OPENROUTER AI GATEWAY & MULTI-MODEL HUB -->
+    <!-- ============================================================== -->
+    <div id="openrouter-modal" class="kundali-modal-backdrop" style="display:none;">
+      <div class="kundali-modal-card" style="max-width:850px; border-color:rgba(168,85,247,0.4); box-shadow:0 0 50px rgba(168,85,247,0.15);">
+        <div class="kundali-modal-header" style="border-bottom-color:rgba(168,85,247,0.3);">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:36px; height:36px; border-radius:10px; background:rgba(168,85,247,0.15); display:flex; align-items:center; justify-content:center; font-size:20px; border:1px solid rgba(168,85,247,0.3);">
+              ⚡
+            </div>
+            <div>
+              <h3 style="font-family:var(--font-serif); font-size:18px; color:#fff; margin:0;">
+                OpenRouter AI गेटवे <span style="font-size:12px; color:#c084fc; font-weight:normal;">(Multi-Model Vedic AI)</span>
+              </h3>
+              <p style="font-size:11.5px; color:#aaa; margin:2px 0 0;">
+                GPT-4o-mini, DeepSeek V3 र Llama 3.3 70B मोडेलहरूसँग प्रत्यक्ष सम्प्रेषण र ज्योतिषीय परामर्श
+              </p>
+            </div>
+          </div>
+          <button class="km-close-btn" onclick="closeOpenRouterModal()">✕</button>
+        </div>
+
+        <div class="kundali-modal-body" style="padding:16px;">
+          <!-- Live API Status Card -->
+          <div id="or-status-card" style="background:rgba(168,85,247,0.05); border:1px solid rgba(168,85,247,0.25); border-radius:0.75rem; padding:14px; margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-size:11px; text-transform:uppercase; color:#c084fc; font-weight:700;">OpenRouter API स्थिति</div>
+                <div style="font-size:16px; font-weight:700; color:#fff; margin-top:2px;">
+                  <span id="or-status-badge" class="badge badge-paid">जाँच हुँदैछ...</span>
+                  <span id="or-key-preview" style="font-size:11px; color:#aaa; margin-left:8px; font-family:monospace;">sk-or-v1-f18...514</span>
+                </div>
+              </div>
+              <div style="text-align:right; font-size:11.5px; color:#ddd;">
+                <div>सक्रिय मोडेल: <b id="or-active-model-name" style="color:#f4d38c;">openai/gpt-4o-mini</b></div>
+                <div style="font-size:10.5px; color:#aaa;">Tier: <span id="or-tier-type">Free Tier</span> • Usage: <span id="or-usage-count">0</span> calls</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Model Switcher -->
+          <div style="margin-bottom:14px;">
+            <label class="form-label" style="font-size:11.5px; margin-bottom:6px; color:#c084fc;">
+              🎯 AI मोडेल चयन गर्नुहोस् (Select Active LLM):
+            </label>
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px;">
+              <div id="or-card-gpt" class="or-model-card active" onclick="selectOpenRouterModel('openai/gpt-4o-mini', this)" style="cursor:pointer; background:rgba(255,255,255,0.02); border:1px solid rgba(168,85,247,0.6); border-radius:0.75rem; padding:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <b style="color:#fff; font-size:12px;">GPT-4o Mini</b>
+                  <span style="font-size:9.5px; background:rgba(46,204,113,0.15); color:#2ecc71; border:1px solid rgba(46,204,113,0.3); border-radius:4px; padding:1px 5px;">Recommended</span>
+                </div>
+                <div style="font-size:10.5px; color:#aaa; margin-top:4px;">OpenAI द्वारा निर्मित • अत्यन्त द्रुत गति र सटीक नेपाली संवाद</div>
+              </div>
+
+              <div id="or-card-deepseek" class="or-model-card" onclick="selectOpenRouterModel('deepseek/deepseek-chat', this)" style="cursor:pointer; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <b style="color:#fff; font-size:12px;">DeepSeek V3</b>
+                  <span style="font-size:9.5px; background:rgba(133,193,233,0.15); color:#85c1e9; border:1px solid rgba(133,193,233,0.3); border-radius:4px; padding:1px 5px;">Reasoning</span>
+                </div>
+                <div style="font-size:10.5px; color:#aaa; margin-top:4px;">गहन तर्क, दशा विश्लेषण र विस्तृत फलित विचारको लागि उत्तम</div>
+              </div>
+
+              <div id="or-card-llama" class="or-model-card" onclick="selectOpenRouterModel('meta-llama/llama-3.3-70b-instruct', this)" style="cursor:pointer; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <b style="color:#fff; font-size:12px;">Llama 3.3 70B</b>
+                  <span style="font-size:9.5px; background:rgba(216,176,106,0.15); color:#f4d38c; border:1px solid rgba(216,176,106,0.3); border-radius:4px; padding:1px 5px;">Open Weights</span>
+                </div>
+                <div style="font-size:10.5px; color:#aaa; margin-top:4px;">Meta को शक्तिशाली खुला भाषा मोडेल, द्विभाषिक सम्प्रेषण</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Astrology AI Console -->
+          <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:0.75rem; padding:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-size:11.5px; font-weight:700; color:#f4d38c;">🔮 प्रत्यक्ष वैदिक AI संवाद (Live Consultation Console):</span>
+              <span style="font-size:10.5px; color:#aaa;">System: महर्षि पराशर वैदिक परम्परा</span>
+            </div>
+
+            <div style="display:flex; gap:6px; margin-bottom:10px; flex-wrap:wrap;">
+              <button type="button" class="btn-ghost" onclick="setOpenRouterPrompt('बृहस्पति ग्रहको कृपा पाउन कुन मन्त्र र उपाय फलदायी हुन्छ?')" style="font-size:10.5px; padding:3px 8px; border-color:rgba(255,255,255,0.15);">
+                ✨ बृहस्पतिको मन्त्र
+              </button>
+              <button type="button" class="btn-ghost" onclick="setOpenRouterPrompt('शनिको साढेसाती चलिरहेको बेला के-कस्ता सावधानी अपनाउनुपर्छ?')" style="font-size:10.5px; padding:3px 8px; border-color:rgba(255,255,255,0.15);">
+                🪐 साढेसाती सावधानी
+              </button>
+              <button type="button" class="btn-ghost" onclick="setOpenRouterPrompt('मेष लग्नको जातकका लागि कुन रत्न सर्वाधिक भाग्यशाली मानिन्छ?')" style="font-size:10.5px; padding:3px 8px; border-color:rgba(255,255,255,0.15);">
+                💎 भाग्य रत्न परामर्श
+              </button>
+              <button type="button" class="btn-ghost" onclick="setOpenRouterPrompt('कुण्डलीमा १०औं भावको सूर्यले करियरमा कस्तो प्रभाव पार्छ?')" style="font-size:10.5px; padding:3px 8px; border-color:rgba(255,255,255,0.15);">
+                💼 करियर र १०औं भाव
+              </button>
+            </div>
+
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="or-user-prompt" class="form-input" placeholder="ज्योतिष सम्बन्धी कुनै पनि प्रश्न यहाँ लेख्नुहोस्..." style="height:40px; font-size:12.5px;" onkeydown="if(event.key==='Enter') runOpenRouterChat()" />
+              <button id="or-submit-btn" class="btn-primary" onclick="runOpenRouterChat()" style="height:40px; padding:0 20px; background:#c084fc; border-color:#c084fc; color:#0b0a14; font-weight:700; white-space:nowrap;">
+                AI सोध्नुहोस् 🚀
+              </button>
+            </div>
+
+            <!-- Response Container -->
+            <div id="or-chat-response" style="margin-top:14px; display:none;"></div>
           </div>
         </div>
       </div>
@@ -4240,9 +4352,135 @@
         });
       }
 
+      // ==============================================================
+      // OPENROUTER AI GATEWAY JAVASCRIPT CONTROLLERS
+      // ==============================================================
+      const openRouterModal = document.getElementById('openrouter-modal');
+      let currentOpenRouterModel = 'openai/gpt-4o-mini';
+
+      function openOpenRouterModal() {
+        if (openRouterModal) openRouterModal.style.display = 'flex';
+        fetchOpenRouterStatus();
+      }
+
+      function closeOpenRouterModal() {
+        if (openRouterModal) openRouterModal.style.display = 'none';
+      }
+
+      function selectOpenRouterModel(modelId, el) {
+        currentOpenRouterModel = modelId;
+        document.querySelectorAll('.or-model-card').forEach(c => {
+          c.style.borderColor = 'rgba(255,255,255,0.08)';
+          c.classList.remove('active');
+        });
+        if (el) {
+          el.style.borderColor = 'rgba(168,85,247,0.7)';
+          el.classList.add('active');
+        }
+        const activeNameEl = document.getElementById('or-active-model-name');
+        if (activeNameEl) activeNameEl.textContent = modelId;
+        showToast(`AI Model: ${modelId} चयन भयो`, '🤖');
+      }
+
+      function setOpenRouterPrompt(text) {
+        const inp = document.getElementById('or-user-prompt');
+        if (inp) {
+          inp.value = text;
+          inp.focus();
+        }
+      }
+
+      async function fetchOpenRouterStatus() {
+        const badgeEl = document.getElementById('or-status-badge');
+        const keyEl = document.getElementById('or-key-preview');
+        const tierEl = document.getElementById('or-tier-type');
+        const usageEl = document.getElementById('or-usage-count');
+        const modelEl = document.getElementById('or-active-model-name');
+
+        try {
+          const res = await fetch(`${API_BASE}/api/openrouter/status`);
+          const data = await res.json();
+          if (data && data.connected) {
+            if (badgeEl) {
+              badgeEl.textContent = 'सक्रिय (Connected)';
+              badgeEl.className = 'badge badge-paid';
+            }
+            if (keyEl) keyEl.textContent = data.label || 'sk-or-v1-f18...514';
+            if (tierEl) tierEl.textContent = data.isFreeTier ? 'Free Tier' : 'Pay-as-you-go';
+            if (usageEl) usageEl.textContent = data.usage || '0';
+            if (modelEl) modelEl.textContent = data.configuredModel || currentOpenRouterModel;
+          } else {
+            if (badgeEl) {
+              badgeEl.textContent = 'निष्क्रिय (Check Key)';
+              badgeEl.className = 'badge badge-rejected';
+            }
+          }
+        } catch (e) {
+          console.warn('OpenRouter status fetch failed:', e);
+        }
+      }
+
+      async function runOpenRouterChat() {
+        const input = document.getElementById('or-user-prompt');
+        const resBox = document.getElementById('or-chat-response');
+        const btn = document.getElementById('or-submit-btn');
+        if (!input || !resBox) return;
+
+        const prompt = input.value.trim();
+        if (!prompt) {
+          showToast('कृपया कुनै प्रश्न सोध्नुहोस्', '⚠️');
+          return;
+        }
+
+        resBox.style.display = 'block';
+        resBox.innerHTML = `<div style="text-align:center; padding:16px; color:#c084fc;">⏳ OpenRouter AI (${escapeHtml(currentOpenRouterModel)}) ले वैदिक उत्तर तयार गर्दैछ...</div>`;
+        if (btn) btn.disabled = true;
+
+        try {
+          const start = Date.now();
+          const res = await fetch(`${API_BASE}/api/openrouter/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              message: prompt,
+              model: currentOpenRouterModel
+            })
+          });
+          const data = await res.json();
+          const elapsed = ((Date.now() - start) / 1000).toFixed(2);
+
+          if (data && data.success) {
+            resBox.innerHTML = `
+              <div style="background:rgba(168,85,247,0.06); border:1px solid rgba(168,85,247,0.3); border-radius:0.75rem; padding:14px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span style="font-size:11px; font-weight:700; color:#c084fc;">
+                    🤖 ${escapeHtml(data.source || 'OpenRouter AI')}
+                  </span>
+                  <span style="font-size:10.5px; color:#aaa;">समय: ${elapsed}s</span>
+                </div>
+                <div style="font-size:13px; color:#fff; line-height:1.7; white-space:pre-wrap; font-family:var(--font-sans);">${escapeHtml(data.reply)}</div>
+              </div>
+            `;
+          } else {
+            resBox.innerHTML = `<div style="color:var(--accent-red); padding:12px;">त्रुटि: ${escapeHtml(data.error || 'AI उत्तर दिन असफल भयो')}</div>`;
+          }
+        } catch (err) {
+          resBox.innerHTML = `<div style="color:var(--accent-red); padding:12px;">त्रुटि: ${escapeHtml(err.message)}</div>`;
+        } finally {
+          if (btn) btn.disabled = false;
+        }
+      }
+
+      if (openRouterModal) {
+        openRouterModal.addEventListener('click', (e) => {
+          if (e.target === openRouterModal) closeOpenRouterModal();
+        });
+      }
+
       // Start application
       initAuth();
       checkAstrologyApiStatus();
+      fetchOpenRouterStatus();
     </script>
   </body>
 </html>

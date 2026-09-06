@@ -52,6 +52,7 @@ const gemlyService = require('./services/gemlyService');
 const dashaService = require('./services/dashaService');
 const panditAgentService = require('./services/panditAgentService');
 const poruthamService = require('./services/poruthamService');
+const openRouterService = require('./services/openRouterService');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Astro@369';
@@ -476,6 +477,37 @@ const server = http.createServer(async (req, res) => {
     });
   }
 
+  // --- API: OpenRouter AI Gateway (Multi-Model LLMs: GPT-4o-mini, DeepSeek, Llama 3.3) ---
+  if (pathname === '/api/openrouter/status' && req.method === 'GET') {
+    const status = await openRouterService.getAccountStatus();
+    return sendJSON(res, 200, status);
+  }
+
+  if (pathname === '/api/openrouter/models' && req.method === 'GET') {
+    return sendJSON(res, 200, {
+      success: true,
+      models: openRouterService.RECOMMENDED_MODELS,
+      defaultModel: openRouterService.getDefaultModel()
+    });
+  }
+
+  if (pathname === '/api/openrouter/chat' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    const message = body.message || body.query || '';
+    const context = body.context || {};
+    const model = body.model || null;
+    try {
+      const result = await openRouterService.generateVedicAstrologyResponse({
+        userMessage: message,
+        contextData: context,
+        model
+      });
+      return sendJSON(res, 200, { success: true, ...result });
+    } catch (err) {
+      return sendJSON(res, 500, { success: false, error: err.message });
+    }
+  }
+
   // --- API: Model Context Protocol (MCP) JSON-RPC 2.0 (Astroway/VedAstro) ---
   if (pathname === '/api/mcp' && req.method === 'POST') {
     const body = await parseJSONBody(req);
@@ -483,12 +515,79 @@ const server = http.createServer(async (req, res) => {
     return sendJSON(res, 200, mcpResponse);
   }
 
-  // --- API: VedAstro Cloud Predictions (Optional) ---
-  if (pathname === '/api/vedastro/predictions' && req.method === 'POST') {
-    const body = await parseJSONBody(req) || {};
-    const { lat = '27.7172', lon = '85.3240', time = '06:30', date = '07/12/1997', tz = '+05:45' } = body;
-    const vedastroRes = await vedastro.getHoroscopePredictions(lat, lon, time, date, tz);
-    return sendJSON(res, 200, vedastroRes);
+  // --- API: VedAstro Vedic Engine Suite (VedAstro/VedAstro Cloud & Local Engine) ---
+  if (pathname === '/api/vedastro/status' && req.method === 'GET') {
+    const status = await vedastro.checkStatus();
+    return sendJSON(res, 200, status);
+  }
+
+  if (pathname === '/api/vedastro/predictions' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const { lat = 27.7172, lon = 85.3240, time = '08:30', date = '15/05/1995', tz = '+05:45', ayanamsa = 'LAHIRI' } = body;
+    const result = await vedastro.getHoroscopePredictions(lat, lon, time, date, tz, ayanamsa);
+    return sendJSON(res, 200, result);
+  }
+
+  if (pathname === '/api/vedastro/all-planet-data' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const { planet = 'All', planetName = 'All', lat = 27.7172, lon = 85.3240, time = '08:30', date = '15/05/1995', tz = '+05:45', ayanamsa = 'LAHIRI' } = body;
+    const p = planetName !== 'All' ? planetName : planet;
+    const result = await vedastro.getAllPlanetData(p, lat, lon, time, date, tz, ayanamsa);
+    return sendJSON(res, 200, result);
+  }
+
+  if (pathname === '/api/vedastro/all-planet-positions' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const { lat = 27.7172, lon = 85.3240, time = '08:30', date = '15/05/1995', tz = '+05:45', ayanamsa = 'LAHIRI' } = body;
+    const result = await vedastro.getAllPlanetPositions(lat, lon, time, date, tz, ayanamsa);
+    return sendJSON(res, 200, result);
+  }
+
+  if (pathname === '/api/vedastro/house-data' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const { lat = 27.7172, lon = 85.3240, time = '08:30', date = '15/05/1995', tz = '+05:45', ayanamsa = 'LAHIRI' } = body;
+    const result = await vedastro.getAllHouseData(lat, lon, time, date, tz, ayanamsa);
+    return sendJSON(res, 200, result);
+  }
+
+  if (pathname === '/api/vedastro/ashtakavarga' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const { lat = 27.7172, lon = 85.3240, time = '08:30', date = '15/05/1995', tz = '+05:45', ayanamsa = 'LAHIRI' } = body;
+    const result = await vedastro.getAshtakvarga(lat, lon, time, date, tz, ayanamsa);
+    return sendJSON(res, 200, result);
+  }
+
+  if (pathname === '/api/vedastro/match-report' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const mLat = body.mLat || body.maleLat || body.groomLat || 27.7172;
+    const mLon = body.mLon || body.maleLon || body.groomLon || 85.3240;
+    const mTime = body.mTime || body.maleTime || body.groomTime || '08:30';
+    const mDate = body.mDate || body.maleDate || body.groomDate || '15/05/1995';
+    const mTz = body.mTz || body.maleTz || body.groomTz || '+05:45';
+
+    const fLat = body.fLat || body.femaleLat || body.brideLat || 27.7172;
+    const fLon = body.fLon || body.femaleLon || body.brideLon || 85.3240;
+    const fTime = body.fTime || body.femaleTime || body.brideTime || '10:15';
+    const fDate = body.fDate || body.femaleDate || body.brideDate || '20/08/1997';
+    const fTz = body.fTz || body.femaleTz || body.brideTz || '+05:45';
+
+    const ayanamsa = body.ayanamsa || 'LAHIRI';
+    const result = await vedastro.getMatchReport(mLat, mLon, mTime, mDate, mTz, fLat, fLon, fTime, fDate, fTz, ayanamsa);
+    return sendJSON(res, 200, result);
+  }
+
+  if (pathname === '/api/vedastro/panchang' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const { lat = 27.7172, lon = 85.3240, time = '08:30', date = '15/05/1995', tz = '+05:45' } = body;
+    const result = await vedastro.getPanchanga(lat, lon, time, date, tz);
+    return sendJSON(res, 200, result);
+  }
+
+  if (pathname === '/api/vedastro/yogas' && (req.method === 'POST' || req.method === 'GET')) {
+    const body = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    const { lat = 27.7172, lon = 85.3240, time = '08:30', date = '15/05/1995', tz = '+05:45', ayanamsa = 'LAHIRI' } = body;
+    const result = await vedastro.getAllYogas(lat, lon, time, date, tz, ayanamsa);
+    return sendJSON(res, 200, result);
   }
 
   // --- API: RoxyAPI Postman Collections & OpenAPI Endpoints ---
