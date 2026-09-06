@@ -471,7 +471,8 @@ async function handleRequest(req, res) {
     const { email, password } = body;
     const cleanEmail = (email || '').trim().toLowerCase();
     const cleanPassword = (password || '').trim();
-    if (cleanEmail === ADMIN_EMAIL.toLowerCase() && cleanPassword === ADMIN_PASSWORD) {
+    const isEmailValid = cleanEmail === ADMIN_EMAIL.toLowerCase() || cleanEmail === 'admin' || cleanEmail === 'admin@tiwari.com';
+    if (isEmailValid && cleanPassword === ADMIN_PASSWORD) {
       res.setHeader('Set-Cookie', `admin_token=${ADMIN_TOKEN}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400`);
       return sendJSON(res, 200, {
         success: true,

@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "USR-1788702397463",
+    "name": "Kirtiman Tamang",
+    "email": "krisonstores@gmail.com",
+    "phone": "9821828807",
+    "passwordHash": "cb0309ca176f1712c96604ccad606d54024f3e12dfc12e1ac5f9f3979e51aa83",
+    "status": "pending",
+    "role": "user",
+    "createdAt": "2026-09-06T13:46:37.463Z",
+    "verifiedAt": null,
+    "verifiedBy": null
+  }
+]

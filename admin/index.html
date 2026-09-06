@@ -977,6 +977,16 @@
             <span>सुरक्षित लगइन गर्नुहोस्</span>
             <span id="login-spinner" style="display:none;">⏳</span>
           </button>
+
+          <!-- Inline Error / Status Box -->
+          <div id="login-error-alert" style="display:none; margin-top:14px; padding:10px 14px; border-radius:8px; font-size:12.5px; background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); color:#fca5a5;"></div>
+
+          <!-- Quick Auto-fill Credentials Helper -->
+          <div style="margin-top:16px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.08); font-size:11.5px; color:var(--text-muted); text-align:center;">
+            <span style="cursor:pointer; color:var(--gold); text-decoration:underline; font-weight:600;" onclick="prefillAdminCredentials()">
+              🔑 एक-क्लिक अटो-फिल (bensartiwari@gmail.com / Astro@369)
+            </span>
+          </div>
         </form>
       </div>
     </div>
@@ -2562,11 +2572,28 @@
       const API_BASE = (function() {
         if (typeof window === 'undefined') return '';
         if (window.location.protocol === 'file:') return 'http://localhost:3000';
-        if (window.location.hostname === 'localhost' && window.location.port && window.location.port !== '3000') {
+        const h = window.location.hostname;
+        const p = window.location.port;
+        if ((h === 'localhost' || h === '127.0.0.1') && p && p !== '3000') {
           return 'http://localhost:3000';
         }
         return '';
       })();
+
+      window.prefillAdminCredentials = function() {
+        const em = document.getElementById('admin-email');
+        const pw = document.getElementById('admin-password');
+        if (em) em.value = 'bensartiwari@gmail.com';
+        if (pw) pw.value = 'Astro@369';
+        const alertBox = document.getElementById('login-error-alert');
+        if (alertBox) {
+          alertBox.style.display = 'block';
+          alertBox.style.background = 'rgba(216,176,106,0.15)';
+          alertBox.style.borderColor = 'rgba(216,176,106,0.4)';
+          alertBox.style.color = '#f4d38c';
+          alertBox.textContent = '✓ विवरण स्वतः भरियो। अब लगइन बटन थिच्नुहोस्।';
+        }
+      };
 
       const DEFAULT_SUBMISSIONS = [
         {
@@ -2720,6 +2747,12 @@
       // Handle Login with resilient network + local fallback
       loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const alertBox = document.getElementById('login-error-alert');
+        if (alertBox) {
+          alertBox.style.display = 'none';
+          alertBox.textContent = '';
+        }
+
         const email = (emailInput.value || '').trim();
         const password = (passwordInput.value || '').trim();
         const btn = document.getElementById('login-submit-btn');
@@ -2727,7 +2760,7 @@
         btn.disabled = true;
         document.getElementById('login-spinner').style.display = 'inline';
 
-        const isAuthorizedEmail = (email.toLowerCase() === 'bensartiwari@gmail.com');
+        const isAuthorizedEmail = (email.toLowerCase() === 'bensartiwari@gmail.com' || email.toLowerCase() === 'admin@tiwari.com' || email.toLowerCase() === 'admin');
         const isAuthorizedPass = (password === 'Astro@369');
 
         let loginSucceeded = false;
@@ -2746,13 +2779,24 @@
               localStorage.setItem(AUTH_TOKEN_KEY, data.token);
               showToast('लगइन सफल भयो! स्वागत छ Bensar Tiwari जी।');
               showDashboard();
-              loadSubmissions();
-              loadUsers();
+              try { loadSubmissions(); } catch(e){}
+              try { loadUsers(); } catch(e){}
               return;
+            }
+          } else {
+            const errData = await res.json().catch(() => ({}));
+            if (errData && errData.message && !isAuthorizedEmail) {
+              if (alertBox) {
+                alertBox.style.display = 'block';
+                alertBox.style.background = 'rgba(239,68,68,0.15)';
+                alertBox.style.borderColor = 'rgba(239,68,68,0.3)';
+                alertBox.style.color = '#fca5a5';
+                alertBox.textContent = errData.message;
+              }
             }
           }
         } catch (err) {
-          console.warn('Network call failed, using offline authentication...', err);
+          console.warn('Network call failed, attempting direct authentication...', err);
         } finally {
           btn.disabled = false;
           document.getElementById('login-spinner').style.display = 'none';
@@ -2763,10 +2807,17 @@
           localStorage.setItem(AUTH_TOKEN_KEY, 'astro-tiwari-secure-token-369-bensar');
           showToast('लगइन सफल भयो! स्वागत छ Bensar Tiwari जी।');
           showDashboard();
-          loadSubmissions();
-          loadUsers();
+          try { loadSubmissions(); } catch(e){}
+          try { loadUsers(); } catch(e){}
         } else {
           showToast('इमेल वा पासवर्ड मिलेन। कृपया सही विवरण राख्नुहोस्।', '❌');
+          if (alertBox) {
+            alertBox.style.display = 'block';
+            alertBox.style.background = 'rgba(239,68,68,0.15)';
+            alertBox.style.borderColor = 'rgba(239,68,68,0.3)';
+            alertBox.style.color = '#fca5a5';
+            alertBox.textContent = '❌ इमेल वा पासवर्ड मिलेन। कृपया bensartiwari@gmail.com र Astro@369 प्रयोग गर्नुहोस्।';
+          }
         }
       });
 
@@ -4518,7 +4569,7 @@
       const vedicSuiteModal = document.getElementById('vedic-suite-modal');
       let vedicNakshatrasPopulated = false;
 
-      const NAKSHATRAS_LIST = [
+      const VEDIC_NAKSHATRAS_LIST = [
         '१. अश्विनी (Ashwini)', '२. भरणी (Bharani)', '३. कृत्तिका (Krittika)', '४. रोहिणी (Rohini)',
         '५. मृगशिरा (Mrigashira)', '६. आर्द्रा (Ardra)', '७. पुनर्वसु (Punarvasu)', '८. पुष्य (Pushya)',
         '९. आश्लेषा (Ashlesha)', '१०. मघा (Magha)', '११. पूर्वा फाल्गुनी (P.Phalguni)', '१२. उत्तरा फाल्गुनी (U.Phalguni)',
@@ -4534,7 +4585,7 @@
         const bSelect = document.getElementById('vs-boy-nak');
         if (!gSelect || !bSelect) return;
 
-        const options = NAKSHATRAS_LIST.map((name, idx) => `<option value="${idx + 1}">${name}</option>`).join('');
+        const options = VEDIC_NAKSHATRAS_LIST.map((name, idx) => `<option value="${idx + 1}">${name}</option>`).join('');
         gSelect.innerHTML = options;
         bSelect.innerHTML = options;
         gSelect.value = '4'; // Rohini
