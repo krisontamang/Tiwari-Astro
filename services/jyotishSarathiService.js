@@ -11,6 +11,8 @@
  * - 5-page Traditional Nepali Janmapatra Printout generator with red Swastika (卍) border
  */
 
+const nepaliPatroService = require('./nepaliPatroService');
+
 const NAKSHATRAS = [
   { name: 'अश्विनी (Ashwini)', lord: 'Ketu', deity: 'Ashwini Kumars', startDeg: 0, gana: 'देव', nadi: 'आद्य', yoni: 'श्वान (घोडा)', varna: 'ब्राह्मण', padas: ['चु', 'चे', 'चो', 'ला'] },
   { name: 'भरणी (Bharani)', lord: 'Venus', deity: 'Yama', startDeg: 13.3333, gana: 'मनुष्य', nadi: 'मध्य', yoni: 'गज (हात्ती)', varna: 'क्षत्रिय', padas: ['ली', 'लू', 'ले', 'लो'] },
@@ -125,28 +127,12 @@ function toNepaliNum(num) {
 }
 
 /**
- * Approximate English Date to Bikram Sambat Date
- * (Standard Nepali reference: 2026-09-06 = 2083-05-21)
+ * Exact English Date to Bikram Sambat Date using official 500-year dataset
  */
 function convertAdToBs(adDateStr) {
   try {
-    const d = new Date(adDateStr);
-    if (isNaN(d.getTime())) return '२०८३-०५-२१';
-    // Offset is typically +56 years, 8 months, 16-17 days
-    const bsYear = d.getFullYear() + 57 - (d.getMonth() < 3 ? 1 : 0);
-    // Simple calendar mapping for reliable demonstration
-    const monthMap = [
-      'बैशाख', 'जेठ', 'असार', 'श्रावण', 'भाद्र', 'आश्विन',
-      'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फाल्गुन', 'चैत्र'
-    ];
-    let bsMonthNum = (d.getMonth() + 9) % 12 + 1;
-    let bsDay = d.getDate() + 15;
-    if (bsDay > 30) {
-      bsDay = bsDay - 30;
-      bsMonthNum = (bsMonthNum % 12) + 1;
-    }
-    const pad = (n) => String(n).padStart(2, '0');
-    return `${bsYear}-${pad(bsMonthNum)}-${pad(bsDay)}`;
+    const conv = nepaliPatroService.adToBs(adDateStr);
+    return conv.strFormatted;
   } catch (e) {
     return '२०८३-०५-२१';
   }

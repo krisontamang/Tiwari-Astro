@@ -155,21 +155,42 @@ function getMonthStarts() {
  * Convert Gregorian (AD) Date to Bikram Sambat (BS) Date
  */
 function adToBs(dateInput) {
-  const dt = dateInput ? new Date(dateInput) : new Date();
+  let dt;
+  if (!dateInput) {
+    dt = new Date();
+  } else if (dateInput instanceof Date) {
+    dt = dateInput;
+  } else if (typeof dateInput === 'string') {
+    const clean = fromNepaliDigits(dateInput).trim().replace(/[/.]/g, '-');
+    dt = new Date(clean.includes('T') ? clean : `${clean}T00:00:00Z`);
+    if (isNaN(dt.getTime())) {
+      const parts = clean.split('-').map(Number);
+      if (parts.length >= 3) {
+        dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+      } else {
+        dt = new Date();
+      }
+    }
+  } else {
+    dt = new Date();
+  }
+
   const targetMs = Date.UTC(dt.getUTCFullYear(), dt.getUTCMonth(), dt.getUTCDate());
   const starts = getMonthStarts();
 
   if (starts.length === 0) {
-    // Basic approximate fallback if dataset missing
-    const bsYear = dt.getFullYear() + 57;
-    const bsMonth = ((dt.getMonth() + 9) % 12) + 1;
+    const bsYear = dt.getUTCFullYear() + 57;
+    const bsMonth = ((dt.getUTCMonth() + 9) % 12) + 1;
     return {
       year: bsYear,
       month: bsMonth,
-      day: dt.getDate(),
+      day: dt.getUTCDate(),
       monthNameNp: BS_MONTH_NAMES_NP[bsMonth - 1],
       monthNameEn: BS_MONTH_NAMES_EN[bsMonth - 1],
-      strFormatted: `${toNepaliDigits(bsYear)}-${toNepaliDigits(String(bsMonth).padStart(2, '0'))}-${toNepaliDigits(String(dt.getDate()).padStart(2, '0'))}`
+      weekdayNp: WEEKDAYS_NP[dt.getUTCDay()],
+      weekdayEn: WEEKDAYS_EN[dt.getUTCDay()],
+      strFormatted: `${toNepaliDigits(bsYear)}-${toNepaliDigits(String(bsMonth).padStart(2, '0'))}-${toNepaliDigits(String(dt.getUTCDate()).padStart(2, '0'))}`,
+      strRaw: `${bsYear}-${String(bsMonth).padStart(2, '0')}-${String(dt.getUTCDate()).padStart(2, '0')}`
     };
   }
 
@@ -184,7 +205,7 @@ function adToBs(dateInput) {
   }
 
   if (!matched) {
-    matched = starts[starts.length - 1];
+    matched = targetMs < starts[0].adMs ? starts[0] : starts[starts.length - 1];
   }
 
   const dayOffset = Math.floor((targetMs - matched.adMs) / 86400000);
@@ -206,24 +227,41 @@ function adToBs(dateInput) {
 
 /**
  * Convert Bikram Sambat (BS) Date to Gregorian (AD) Date
+ * Accepts either (year, month, day) or a string like "2054-08-22" / "२०५४-०८-२२"
  */
 function bsToAd(bsYear, bsMonth, bsDay) {
-  const y = Number(bsYear);
-  const m = Number(bsMonth);
-  const d = Number(bsDay);
+  let y, m, d;
+  if (arguments.length === 1 && typeof bsYear === 'string') {
+    const clean = fromNepaliDigits(bsYear).trim().replace(/[/.]/g, '-');
+    const parts = clean.split('-').map(Number);
+    y = parts[0];
+    m = parts[1];
+    d = parts[2];
+  } else {
+    y = Number(fromNepaliDigits(String(bsYear)));
+    m = Number(fromNepaliDigits(String(bsMonth)));
+    d = Number(fromNepaliDigits(String(bsDay)));
+  }
 
   const starts = getMonthStarts();
   const matched = starts.find(s => s.year === y && s.month === m);
   if (!matched) {
     // Fallback approximate conversion
     const estYear = y - 57;
-    const estMonth = ((m + 3) % 12);
-    const fallbackDate = new Date(estYear, estMonth, d);
+    const estMonth = ((m + 8) % 12);
+    const fallbackDate = new Date(Date.UTC(estYear, estMonth, d || 1));
+    const pad = (n) => String(n).padStart(2, '0');
+    const iso = `${fallbackDate.getUTCFullYear()}-${pad(fallbackDate.getUTCMonth() + 1)}-${pad(fallbackDate.getUTCDate())}`;
     return {
       adDate: fallbackDate,
-      iso: fallbackDate.toISOString().split('T')[0],
-      weekdayNp: WEEKDAYS_NP[fallbackDate.getDay()],
-      weekdayEn: WEEKDAYS_EN[fallbackDate.getDay()]
+      iso: iso,
+      ad: iso,
+      strFormatted: iso,
+      year: fallbackDate.getUTCFullYear(),
+      month: fallbackDate.getUTCMonth() + 1,
+      day: fallbackDate.getUTCDate(),
+      weekdayNp: WEEKDAYS_NP[fallbackDate.getUTCDay()],
+      weekdayEn: WEEKDAYS_EN[fallbackDate.getUTCDay()]
     };
   }
 
@@ -242,6 +280,65 @@ function bsToAd(bsYear, bsMonth, bsDay) {
     day: adDate.getUTCDate(),
     weekdayNp: WEEKDAYS_NP[adDate.getUTCDay()],
     weekdayEn: WEEKDAYS_EN[adDate.getUTCDay()]
+  };
+}
+
+/**
+ * Calculate exact Age in Nepali: X वर्ष, Y महिना, Z दिन
+ */
+function calculateAge(birthDateAd, targetDateAd = new Date()) {
+  const b = new Date(birthDateAd);
+  const t = new Date(targetDateAd);
+
+  let years = t.getFullYear() - b.getFullYear();
+  let months = t.getMonth() - b.getMonth();
+  let days = t.getDate() - b.getDate();
+
+  if (days < 0) {
+    months--;
+    // Days in previous month of target date
+    const prevMonthDays = new Date(t.getFullYear(), t.getMonth(), 0).getDate();
+    days += prevMonthDays;
+  }
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  return {
+    years,
+    months,
+    days,
+    strNepali: `${toNepaliDigits(years)} वर्ष, ${toNepaliDigits(months)} महिना, ${toNepaliDigits(days)} दिन`,
+    strEnglish: `${years} years, ${months} months, ${days} days`
+  };
+}
+
+/**
+ * Convert Birth Time to Vedic Ishtakaal (घटी, पला, विपला from Sunrise)
+ * 1 day = 60 Ghati = 3600 Pala = 216000 Vipala
+ * 1 Ghati = 24 minutes, 1 Pala = 24 seconds, 1 Vipala = 0.4 seconds
+ */
+function calculateIshtakaal(hour = 6, minute = 0, second = 0, sunriseMinutes = 364) {
+  const birthMins = hour * 60 + minute + (second / 60);
+  let elapsedMins = birthMins - sunriseMinutes;
+  if (elapsedMins < 0) {
+    elapsedMins += 1440; // Next morning / night after midnight
+  }
+
+  const totalGhatiFloat = elapsedMins / 24;
+  const ghati = Math.floor(totalGhatiFloat);
+  const remGhati = totalGhatiFloat - ghati;
+  const totalPalaFloat = remGhati * 60;
+  const pala = Math.floor(totalPalaFloat);
+  const remPala = totalPalaFloat - pala;
+  const vipala = Math.round(remPala * 60);
+
+  return {
+    ghati,
+    pala,
+    vipala,
+    strFormatted: `${toNepaliDigits(ghati)}घ, ${toNepaliDigits(pala)}प, ${toNepaliDigits(vipala)}वि`
   };
 }
 
@@ -662,6 +759,10 @@ async function getForexRates() {
 module.exports = {
   adToBs,
   bsToAd,
+  calculateAge,
+  calculateIshtakaal,
+  toNepaliDigits,
+  fromNepaliDigits,
   calculatePanchanga,
   getBsMonthCalendar,
   getTodayPatro,
@@ -674,3 +775,4 @@ module.exports = {
   WEEKDAYS_NP,
   RASHI_NAMES_NP
 };
+

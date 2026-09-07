@@ -73,6 +73,7 @@ const iztroService = require('./services/iztroService');
 const jyotishSarathiService = require('./services/jyotishSarathiService');
 const mantrasData = require('./data/mantrasData');
 const nepaliPatroService = require('./services/nepaliPatroService');
+const kpAstrologyEngine = require('./services/kpAstrologyEngine');
 const supabaseClient = require('./services/supabaseClient');
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bensartiwari@gmail.com';
@@ -783,6 +784,151 @@ async function handleRequest(req, res) {
     } catch (e) {
       console.error('Error generating astrology chart:', e);
       return sendJSON(res, 500, { success: false, message: 'Chart generation failed', error: e.message });
+    }
+  }
+
+  // --- API: Authoritative BS <-> AD Nepali Patro Date Converter ---
+  if (pathname === '/api/patro/convert' && (req.method === 'GET' || req.method === 'POST')) {
+    const params = req.method === 'POST' ? (await parseJSONBody(req) || {}) : parsedUrl.query;
+    try {
+      if (params.bs || (params.bsYear && params.bsMonth && params.bsDay)) {
+        const bsStr = params.bs || `${params.bsYear}-${params.bsMonth}-${params.bsDay}`;
+        const adResult = nepaliPatroService.bsToAd(bsStr);
+        return sendJSON(res, 200, {
+          success: true,
+          direction: 'BS_TO_AD',
+          bsInput: bsStr,
+          year: adResult.year,
+          month: adResult.month,
+          day: adResult.day,
+          iso: adResult.iso,
+          strFormatted: adResult.strFormatted,
+          weekdayNp: adResult.weekdayNp
+        });
+      } else if (params.ad || (params.adYear && params.adMonth && params.adDay)) {
+        const adStr = params.ad || `${params.adYear}-${params.adMonth}-${params.adDay}`;
+        const bsResult = nepaliPatroService.adToBs(adStr);
+        return sendJSON(res, 200, {
+          success: true,
+          direction: 'AD_TO_BS',
+          adInput: adStr,
+          year: bsResult.year,
+          month: bsResult.month,
+          day: bsResult.day,
+          strFormatted: bsResult.strFormatted,
+          strRaw: bsResult.strRaw,
+          monthNameNp: bsResult.monthNameNp,
+          weekdayNp: bsResult.weekdayNp
+        });
+      } else {
+        return sendJSON(res, 400, { success: false, message: 'Provide bs=YYYY-MM-DD or ad=YYYY-MM-DD' });
+      }
+    } catch (e) {
+      return sendJSON(res, 400, { success: false, error: e.message });
+    }
+  }
+
+  // --- API: Complete Astro Darshan-grade KP Kundali Engine ---
+  if (pathname === '/api/kp/calculate' && req.method === 'POST') {
+    const body = await parseJSONBody(req);
+    if (!body) {
+      return sendJSON(res, 400, { success: false, message: 'Invalid payload' });
+    }
+    try {
+      const result = kpAstrologyEngine.calculateCompleteKundali({
+        name: body.name || 'जातक',
+        gender: body.gender || 'पुरुष',
+        dobType: body.dobType || 'AD',
+        dob: body.dob || '1997-12-07',
+        time: body.time || '06:30:00',
+        place: body.place || 'Kathmandu, Nepal',
+        lat: Number(body.lat !== undefined ? body.lat : 27.7172),
+        lon: Number(body.lon !== undefined ? body.lon : 85.3240),
+        ayanamsaType: body.ayanamsaType || 'KP_NEW',
+        horaryNumber: body.horaryNumber ? Number(body.horaryNumber) : null,
+        isHorary: Boolean(body.isHorary)
+      });
+      return sendJSON(res, 200, { success: true, ...result });
+    } catch (e) {
+      console.error('Error in KP calculate endpoint:', e);
+      return sendJSON(res, 500, { success: false, message: 'KP Calculation failed', error: e.message });
+    }
+  }
+
+  // --- API: Live Transit (गोचर) Chart ---
+  if (pathname === '/api/kp/transit' && req.method === 'GET') {
+    try {
+      const now = new Date();
+      const q = parsedUrl.query || {};
+      const lat = Number(q.lat || 27.7172);
+      const lon = Number(q.lon || 85.3240);
+      const isoDate = now.toISOString().split('T')[0];
+      const hours = String(now.getHours()).padStart(2, '0');
+      const mins = String(now.getMinutes()).padStart(2, '0');
+      const secs = String(now.getSeconds()).padStart(2, '0');
+
+      const transitRes = kpAstrologyEngine.calculateCompleteKundali({
+        name: 'गोचर',
+        gender: 'अन्य',
+        dobType: 'AD',
+        dob: isoDate,
+        time: `${hours}:${mins}:${secs}`,
+        place: q.place || 'Kathmandu, Nepal',
+        lat,
+        lon,
+        ayanamsaType: 'KP_NEW'
+      });
+      return sendJSON(res, 200, { success: true, ...transitRes });
+    } catch (e) {
+      return sendJSON(res, 500, { success: false, error: e.message });
+    }
+  }
+
+  // --- API: Birth Time Rectification (जन्म समय परिवर्तन - Sub Lord Step Shifts) ---
+  if (pathname === '/api/kp/time-rectification' && req.method === 'POST') {
+    const body = await parseJSONBody(req) || {};
+    try {
+      const dob = body.dob || '1997-12-07';
+      const baseTime = body.time || '06:30:00';
+      const lat = Number(body.lat || 27.7172);
+      const lon = Number(body.lon || 85.3240);
+      const ayanamsaType = body.ayanamsaType || 'KP_NEW';
+
+      const parts = baseTime.split(':').map(Number);
+      const baseH = parts[0] || 0;
+      const baseM = parts[1] || 0;
+      const baseS = parts[2] || 0;
+      const baseTotalSecs = baseH * 3600 + baseM * 60 + baseS;
+
+      const results = [];
+      // Generate 25 time steps around base time (-12 min to +12 min in 60s steps)
+      for (let offsetSec = -720; offsetSec <= 720; offsetSec += 60) {
+        const curSec = (baseTotalSecs + offsetSec + 86400) % 86400;
+        const h = Math.floor(curSec / 3600);
+        const m = Math.floor((curSec % 3600) / 60);
+        const s = curSec % 60;
+        const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+
+        const jd = kpAstrologyEngine.getJulianDay(new Date(`${dob}T00:00:00Z`), h, m, s, 5.75);
+        const ay = kpAstrologyEngine.getAyanamsha(jd, ayanamsaType);
+        const cusps = kpAstrologyEngine.calculatePlacidusCusps(jd, lat, lon, ay);
+        const asc = cusps[0];
+
+        results.push({
+          time: timeStr,
+          dateTimeStr: `${dob} ${timeStr}`,
+          dateTimeDev: `${dob} ${kpAstrologyEngine.toNep(timeStr)}`,
+          signLord: asc.signLord,
+          starLord: asc.starLord,
+          subLord: asc.subLord,
+          subSubLord: asc.subSubLord,
+          degreeDMS: asc.degreeDMS
+        });
+      }
+
+      return sendJSON(res, 200, { success: true, count: results.length, steps: results });
+    } catch (e) {
+      return sendJSON(res, 500, { success: false, error: e.message });
     }
   }
 

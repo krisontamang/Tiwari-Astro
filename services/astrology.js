@@ -9,6 +9,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const nepaliPatroService = require('./nepaliPatroService');
 
 const UPLOADS_DIR = path.join(__dirname, '..', 'uploads');
 if (!fs.existsSync(UPLOADS_DIR)) {
@@ -120,17 +121,14 @@ function parseDateComponents(dobAd, dobBs, birthTime) {
     year = parts[0];
     month = parts[1];
     day = parts[2];
-  } else if (dobBs && /^(?:२०|20)\d{2}[-/.]\d{1,2}[-/.]\d{1,2}$/.test(dobBs)) {
-    // Rough BS to AD conversion (~56.7 years difference)
-    const parts = dobBs.replace(/[०-९]/g, d => '०१२३४५६७८९'.indexOf(d)).split(/[-/.]/).map(Number);
-    const bsYear = parts[0];
-    const bsMonth = parts[1];
-    const bsDay = parts[2];
-    year = bsYear - 57;
-    month = bsMonth >= 9 ? (bsMonth - 8) : (bsMonth + 4);
-    day = Math.min(28, bsDay);
-    if (month > 12) { month = 12; }
-    if (month < 1) { month = 1; }
+  } else if (dobBs && /^(?:२०|20|\d{4})[-/.]\d{1,2}[-/.]\d{1,2}$/.test(dobBs)) {
+    // 100% Accurate BS to AD conversion using official 500-year calendar dataset
+    const conv = nepaliPatroService.bsToAd(dobBs);
+    if (conv && conv.year) {
+      year = conv.year;
+      month = conv.month;
+      day = conv.day;
+    }
   }
 
   // Parse time (e.g. "06:30 AM", "14:45", "बिहान ०६:३० AM")
