@@ -2886,6 +2886,12 @@
     // Initialize theme immediately
     initTheme();
 
+    function toNep(n) {
+      if (n === null || n === undefined) return '';
+      const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+      return String(n).replace(/[0-9]/g, d => nepDigits[Number(d)]);
+    }
+
     function scrollToId(id) {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
