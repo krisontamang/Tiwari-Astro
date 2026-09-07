@@ -480,7 +480,7 @@ async function handleRequest(req, res) {
         token: ADMIN_TOKEN,
         user: {
           email: ADMIN_EMAIL,
-          name: 'Bensar Tiwari',
+          name: 'Astro Ayush Tiwari',
           role: 'admin'
         }
       });
@@ -497,7 +497,7 @@ async function handleRequest(req, res) {
     if (checkAdminAuth(req)) {
       return sendJSON(res, 200, {
         authenticated: true,
-        user: { email: ADMIN_EMAIL, name: 'Bensar Tiwari', role: 'admin' }
+        user: { email: ADMIN_EMAIL, name: 'Astro Ayush Tiwari', role: 'admin' }
       });
     }
     return sendJSON(res, 401, { authenticated: false });

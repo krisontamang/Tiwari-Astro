@@ -1,4 +1,4 @@
-# Astro Tiwari (तपाईंको भविष्य, तपाईंको रोजाइमा)
+# Astro Ayush Tiwari (तपाईंको भविष्य, तपाईंको रोजाइमा)
 
 A modern, responsive Vedic Astrology consultation web application built with React 19, Tailwind CSS, and Devanagari typography.
 
